@@ -1,5 +1,5 @@
 import Fastify from 'fastify';
-import fastifyCors from 'fastify-cors';
+import cors from '@fastify/cors';
 import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 
@@ -15,7 +15,7 @@ async function buildServer() {
   });
 
   // 注册 CORS
-  await fastify.register(fastifyCors, {
+  await fastify.register(cors, {
     origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
   });
 
@@ -35,7 +35,7 @@ async function buildServer() {
         const { id } = request.params;
         const person = await prisma.person.findUnique({
           where: { id },
-          include: { sources: true },
+          include: { personSources: true },
         });
         if (!person) {
           return reply.code(404).send({ error: 'Person not found' });
@@ -46,7 +46,7 @@ async function buildServer() {
 
     fastify.get('/persons', async () => {
       return await prisma.person.findMany({
-        include: { sources: true },
+        include: { personSources: true },
         take: 100,
       });
     });
@@ -66,13 +66,13 @@ async function buildServer() {
               ],
             },
             orderBy: { startYear: 'asc' },
-            include: { sources: true },
+            include: { eventSources: true },
             take: 100,
           });
         }
 
         return await prisma.event.findMany({
-          include: { sources: true },
+          include: { eventSources: true },
           take: 100,
         });
       }
@@ -81,7 +81,7 @@ async function buildServer() {
     // 地点路由
     fastify.get('/places', async () => {
       return await prisma.place.findMany({
-        include: { sources: true },
+        include: { placeSources: true },
         take: 100,
       });
     });
@@ -101,7 +101,7 @@ async function buildServer() {
           },
           orderBy: { startYear: 'asc' },
           include: {
-            sources: true,
+            eventSources: true,
             participants: { include: { person: true } },
             locations: { include: { place: true } },
           },

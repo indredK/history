@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+*.lock
+yarn.lock
+package-lock.json
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build & Distribution
+dist/
+.vite/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store

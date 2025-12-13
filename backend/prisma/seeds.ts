@@ -13,19 +13,17 @@ async function main() {
 
   // 1. 创建来源记录
   const sources = [
-    { title: '史记', author: '司马迁', license: 'CC0', confidence: 0.95 },
-    { title: '《资治通鉴》', author: '司马光', license: 'CC0', confidence: 0.90 },
-    { title: 'CHGIS v6.0', license: 'CC-BY-4.0', confidence: 0.95 },
+    { title: '史记', author: '司马迁', license: 'CC0' },
+    { title: '《资治通鉴》', author: '司马光', license: 'CC0' },
+    { title: 'CHGIS v6.0', license: 'CC-BY-4.0' },
   ];
 
   const createdSources = [];
   for (const source of sources) {
-    const s = await prisma.source.upsert({
-      where: { title: source.title },
-      update: {},
-      create: source,
-    });
-    createdSources.push(s);
+    const s = await prisma.source.create({
+      data: source,
+    }).catch(() => null); // 避免重复创建
+    if (s) createdSources.push(s);
   }
   console.log(`✅ 来源 (Sources): ${createdSources.length} 条`);
 
@@ -38,19 +36,24 @@ async function main() {
     let count = 0;
     for (const row of persons) {
       try {
-        await prisma.person.create({
+        const person = await prisma.person.create({
           data: {
             name: row.name,
-            nameEn: row.name_en || undefined,
             birthYear: row.birth_year ? parseInt(row.birth_year) : null,
-            birthMonth: row.birth_month ? parseInt(row.birth_month) : null,
             deathYear: row.death_year ? parseInt(row.death_year) : null,
-            deathMonth: row.death_month ? parseInt(row.death_month) : null,
             biography: row.biography || undefined,
-            roles: row.roles ? row.roles.split(',').map(r => r.trim()) : [],
-            sourceIds: createdSources[0]?.id ? [createdSources[0].id] : [],
           },
         });
+        
+        // 创建来源关联
+        if (createdSources.length > 0) {
+          await prisma.personSource.create({
+            data: {
+              personId: person.id,
+              sourceId: createdSources[0].id,
+            },
+          }).catch(() => null);
+        }
         count++;
       } catch (e) {
         console.error(`❌ 人物导入失败: ${row.name}`, e);
@@ -68,19 +71,25 @@ async function main() {
     let count = 0;
     for (const row of events) {
       try {
-        await prisma.event.create({
+        const event = await prisma.event.create({
           data: {
             title: row.title,
-            titleEn: row.title_en || undefined,
             startYear: parseInt(row.start_year),
-            startMonth: row.start_month ? parseInt(row.start_month) : null,
-            endYear: parseInt(row.end_year),
-            endMonth: row.end_month ? parseInt(row.end_month) : null,
+            endYear: parseInt(row.end_year) || parseInt(row.start_year),
             description: row.description || undefined,
             eventType: row.event_type || 'other',
-            sourceIds: createdSources[1]?.id ? [createdSources[1].id] : [],
           },
         });
+
+        // 创建来源关联
+        if (createdSources.length > 1) {
+          await prisma.eventSource.create({
+            data: {
+              eventId: event.id,
+              sourceId: createdSources[1].id,
+            },
+          }).catch(() => null);
+        }
         count++;
       } catch (e) {
         console.error(`❌ 事件导入失败: ${row.title}`, e);
@@ -98,19 +107,26 @@ async function main() {
     let count = 0;
     for (const row of places) {
       try {
-        await prisma.place.create({
+        const place = await prisma.place.create({
           data: {
-            canonicalName: row.canonical_name,
-            altNames: row.alt_names ? row.alt_names.split(',').map(n => n.trim()) : [],
-            description: row.description || undefined,
+            name: row.canonical_name || row.name,
             latitude: row.latitude ? parseFloat(row.latitude) : null,
             longitude: row.longitude ? parseFloat(row.longitude) : null,
-            sourceIds: createdSources[2]?.id ? [createdSources[2].id] : [],
           },
         });
+
+        // 创建来源关联
+        if (createdSources.length > 2) {
+          await prisma.placeSource.create({
+            data: {
+              placeId: place.id,
+              sourceId: createdSources[2].id,
+            },
+          }).catch(() => null);
+        }
         count++;
       } catch (e) {
-        console.error(`❌ 地点导入失败: ${row.canonical_name}`, e);
+        console.error(`❌ 地点导入失败: ${row.canonical_name || row.name}`, e);
       }
     }
     console.log(`✅ 地点 (Places): ${count} 条`);

@@ -1,195 +1,125 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
+// Prisma Schema for Chinese Historical Panorama
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
-// 来源表：所有数据的原始来源
 model Source {
   id         String   @id @default(uuid())
-  title      String   @db.VarChar(255)
-  author     String?  @db.VarChar(255)
+  title      String
+  author     String?
   url        String?
-  license    String?  @db.VarChar(50)
-  confidence Float    @default(0.8)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  persons    Person[]
-  events     Event[]
-  places     Place[]
-  adminUnits AdminUnit[]
-  boundaries MapBoundaryVersion[]
+  personSources PersonSource[]
+  eventSources  EventSource[]
+  placeSources  PlaceSource[]
 
-  @@index([title])
   @@map("sources")
 }
 
-// 人物表：历史人物信息
 model Person {
   id           String   @id @default(uuid())
-  name         String   @db.VarChar(100)
-  nameEn       String?  @db.VarChar(200)
+  name         String
   birthYear    Int?
-  birthMonth   Int?
   deathYear    Int?
-  deathMonth   Int?
-  biography    String?  @db.Text
-  roles        String[]
-  confidence   Float    @default(0.8)
-  contributors String[]
+  biography    String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  sourceIds String[]
-  sources   Source[]      @relation(fields: [sourceIds], references: [id])
-  events    EventParticipant[]
+  personSources PersonSource[]
+  events        EventParticipant[]
 
   @@index([name])
-  @@index([birthYear])
-  @@index([deathYear])
   @@map("persons")
 }
 
-// 事件表：历史事件
-model Event {
-  id           String   @id @default(uuid())
-  title        String   @db.VarChar(200)
-  titleEn      String?  @db.VarChar(300)
-  startYear    Int
-  startMonth   Int?
-  endYear      Int
-  endMonth     Int?
-  description  String?  @db.Text
-  eventType    String   @db.VarChar(50)
-  confidence   Float    @default(0.8)
-  contributors String[]
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+model PersonSource {
+  id        String @id @default(uuid())
+  personId  String
+  sourceId  String
+  person    Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+  source    Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
 
-  sourceIds String[]
-  sources   Source[] @relation(fields: [sourceIds], references: [id])
+  @@unique([personId, sourceId])
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  title       String
+  startYear   Int
+  endYear     Int?
+  description String?
+  eventType   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  eventSources EventSource[]
   participants EventParticipant[]
   locations    EventLocation[]
 
   @@index([startYear])
-  @@index([endYear])
-  @@index([eventType])
   @@map("events")
 }
 
-// 事件-人物关联
-model EventParticipant {
-  id       String @id @default(uuid())
-  eventId  String
-  personId String
-  role     String? @db.VarChar(100)
+model EventSource {
+  id        String @id @default(uuid())
+  eventId   String
+  sourceId  String
+  event     Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  source    Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
 
-  event  Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  person Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+  @@unique([eventId, sourceId])
+}
+
+model EventParticipant {
+  id        String @id @default(uuid())
+  eventId   String
+  personId  String
+  role      String?
+  event     Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  person    Person @relation(fields: [personId], references: [id], onDelete: Cascade)
 
   @@unique([eventId, personId])
-  @@map("event_participants")
 }
 
-// 地点表：历史地名
 model Place {
-  id            String   @id @default(uuid())
-  canonicalName String   @db.VarChar(100)
-  altNames      String[]
-  description   String?  @db.Text
-  latitude      Float?
-  longitude     Float?
-  confidence    Float    @default(0.8)
-  contributors  String[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  sourceIds String[]
-  sources   Source[] @relation(fields: [sourceIds], references: [id])
-  events    EventLocation[]
-
-  @@index([canonicalName])
-  @@map("places")
-}
-
-// 事件-地点关联
-model EventLocation {
-  id      String @id @default(uuid())
-  eventId String
-  placeId String
-  role    String? @db.VarChar(100)
-
-  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  place Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
-
-  @@unique([eventId, placeId])
-  @@map("event_locations")
-}
-
-// 行政单元：朝代、省份等
-model AdminUnit {
   id        String   @id @default(uuid())
-  name      String   @db.VarChar(100)
-  nameEn    String?  @db.VarChar(200)
-  type      String   @db.VarChar(50)
-  parentId  String?
-  validFrom Int
-  validTo   Int?
-  confidence Float   @default(0.8)
+  name      String
+  latitude  Float?
+  longitude Float?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  sourceIds String[]
-  sources   Source[] @relation(fields: [sourceIds], references: [id])
-  boundaries AdminUnitBoundary[]
+  placeSources PlaceSource[]
+  events       EventLocation[]
 
-  parent   AdminUnit?  @relation("AdminUnitHierarchy", fields: [parentId], references: [id])
-  children AdminUnit[] @relation("AdminUnitHierarchy")
-
-  @@index([validFrom])
-  @@index([validTo])
-  @@map("admin_units")
+  @@index([name])
+  @@map("places")
 }
 
-// 地图边界版本：地理边界数据
-model MapBoundaryVersion {
-  id           String   @id @default(uuid())
-  name         String?  @db.VarChar(200)
-  validFrom    Int
-  validTo      Int?
-  geometryType String?  @db.VarChar(50)
-  geometryUrl  String?
-  geometryHash String?  @db.VarChar(64)
-  confidence   Float    @default(0.8)
-  contributors String[]
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+model PlaceSource {
+  id        String @id @default(uuid())
+  placeId   String
+  sourceId  String
+  place     Place  @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  source    Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
 
-  sourceIds String[]
-  sources   Source[] @relation(fields: [sourceIds], references: [id])
-  adminUnits AdminUnitBoundary[]
-
-  @@index([validFrom])
-  @@index([validTo])
-  @@map("map_boundary_versions")
+  @@unique([placeId, sourceId])
 }
 
-// 行政单元-边界关联
-model AdminUnitBoundary {
-  id                  String @id @default(uuid())
-  adminUnitId         String
-  boundaryVersionId   String
+model EventLocation {
+  id        String @id @default(uuid())
+  eventId   String
+  placeId   String
+  role      String?
+  event     Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  place     Place  @relation(fields: [placeId], references: [id], onDelete: Cascade)
 
-  adminUnit       AdminUnit @relation(fields: [adminUnitId], references: [id], onDelete: Cascade)
-  boundaryVersion MapBoundaryVersion @relation(fields: [boundaryVersionId], references: [id], onDelete: Cascade)
-
-  @@unique([adminUnitId, boundaryVersionId])
-  @@map("admin_unit_boundaries")
+  @@unique([eventId, placeId])
 }
