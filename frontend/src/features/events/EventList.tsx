@@ -3,8 +3,7 @@ import { useTimelineStore } from '../../store';
 import { useEffect, useRef, useState } from 'react';
 import { getEvents } from '../../services/dataClient';
 import '../../components/EventList.css';
-import { SearchBar } from './components/SearchBar';
-import { DynastyDisplay } from './components/DynastyDisplay';
+
 import { Dynasty3DWheel } from './components/Dynasty3DWheel';
 import { useEventFilter } from './hooks/useEventFilter';
 import { useHoverScroll } from './hooks/useHoverScroll';
@@ -15,7 +14,7 @@ import type { Event } from '../../types/models';
 const { Title, Text, Paragraph } = Typography;
 
 export function EventList() {
-  const { loading, setEvents, favorites, toggleFavorite } = useEventsStore();
+  const { loading, setEvents, favorites, toggleFavorite, searchQuery, setSearchQuery } = useEventsStore();
   const { startYear, endYear, setYears } = useTimelineStore();
   const timelineRef = useRef<HTMLDivElement>(null);
   const [showControls, setShowControls] = useState(false);
@@ -99,30 +98,43 @@ export function EventList() {
 
   return (
     <Card className="event-list-container" title={
-      <Space style={{ width: '100%', justifyContent: 'space-between' }}>
-        <Space>
-          <Title level={3} style={{ margin: 0 }}>历史事件</Title>
+      <Space style={{ width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Space style={{ alignItems: 'center' }}>
+          <Title level={4} style={{ margin: 0 }}>历史事件</Title>
           <Badge count={filtered.length} style={{ backgroundColor: '#8c1c13' }} />
         </Space>
-        <Popover
-          content={content}
-          title="年份设置"
-          trigger="click"
-          placement="bottomRight"
-          open={showControls}
-          onOpenChange={setShowControls}
-        >
-          <Button
-            type="primary"
-            icon={showControls ? <CloseOutlined /> : <SettingOutlined />}
-            size="small"
+        <Space style={{ alignItems: 'center' }}>
+          <input
+            placeholder="搜索事件..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{ 
+              padding: '6px 10px', 
+              border: '1px solid #d9d9d9',
+              borderRadius: '4px',
+              width: '160px',
+              marginRight: '8px'
+            }}
+          />
+          <Popover
+            content={content}
+            title="年份设置"
+            trigger="click"
+            placement="bottomRight"
+            open={showControls}
+            onOpenChange={setShowControls}
           >
-            {startYear} - {endYear}
-          </Button>
-        </Popover>
+            <Button
+              type="primary"
+              icon={showControls ? <CloseOutlined /> : <SettingOutlined />}
+              size="small"
+            >
+              {startYear} - {endYear}
+            </Button>
+          </Popover>
+        </Space>
       </Space>
     }>
-      <SearchBar />
       
       <Dynasty3DWheel />
       

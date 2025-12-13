@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
@@ -22,25 +22,15 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
   
   return (
     <div className={className} style={{
-      padding: '20px',
+      padding: '8px',
       backgroundColor: '#f8f9fa',
-      borderRadius: '12px',
-      margin: '12px 0',
+      borderRadius: '8px',
+      margin: '8px 0',
       border: '1px solid #e9ecef'
     }}>
       <div style={{
-        fontSize: '16px',
-        color: '#495057',
-        marginBottom: '20px',
-        fontWeight: 700,
-        textAlign: 'center'
-      }}>
-        历史朝代 3D 选择器
-      </div>
-      
-      <div style={{
         width: '100%',
-        height: '300px',
+        height: '180px',
         position: 'relative'
       }}>
         <Swiper
@@ -48,10 +38,11 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
           grabCursor={true}
           centeredSlides={true}
           slidesPerView={'auto'}
+          spaceBetween={20}
           coverflowEffect={{
-            rotate: 50,
+            rotate: 0,
             stretch: 0,
-            depth: 200,
+            depth: 150,
             modifier: 1,
             slideShadows: true,
           }}
@@ -70,17 +61,16 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
             <SwiperSlide
               key={dynasty.name}
               style={{
-                width: dynasty.isMultiPeriod ? '220px' : '180px',
-                height: '280px',
+                width: dynasty.isMultiPeriod ? '180px' : '140px',
+                height: '160px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderRadius: '12px',
+                borderRadius: '8px',
                 overflow: 'hidden',
                 position: 'relative',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.2)'
-              }}
-            >
+                boxShadow: '0 6px 16px rgba(0,0,0,0.15)'
+              }}>
               <div
                 style={{
                   width: '100%',
@@ -110,9 +100,9 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
                 }} />
                 
                 <div style={{
-                  fontSize: '24px',
+                  fontSize: '18px',
                   fontWeight: 'bold',
-                  marginBottom: '8px',
+                  marginBottom: '4px',
                   zIndex: 1,
                   textShadow: '0 2px 4px rgba(0,0,0,0.3)'
                 }}>
@@ -120,29 +110,29 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
                 </div>
                 
                 <div style={{
-                  fontSize: '12px',
+                  fontSize: '10px',
                   opacity: 0.9,
-                  marginBottom: '12px',
+                  marginBottom: '8px',
                   zIndex: 1
                 }}>
                   {dynasty.nameEn}
                 </div>
                 
                 <div style={{
-                  fontSize: '14px',
+                  fontSize: '11px',
                   backgroundColor: 'rgba(255,255,255,0.2)',
-                  padding: '4px 12px',
-                  borderRadius: '12px',
-                  marginBottom: '16px',
+                  padding: '2px 8px',
+                  borderRadius: '10px',
+                  marginBottom: '8px',
                   zIndex: 1
                 }}>
                   {dynasty.startYear} - {dynasty.endYear}
                 </div>
                 
                 <div style={{
-                  fontSize: '12px',
-                  lineHeight: '1.5',
-                  maxHeight: '80px',
+                  fontSize: '10px',
+                  lineHeight: '1.4',
+                  maxHeight: '40px',
                   overflow: 'hidden',
                   zIndex: 1
                 }}>
@@ -167,15 +157,6 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
-      
-      <div style={{
-        fontSize: '12px',
-        color: '#6c757d',
-        textAlign: 'center',
-        marginTop: '12px'
-      }}>
-        💡 使用鼠标滚轮滚动查看更多朝代
       </div>
     </div>
   );
