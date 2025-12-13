@@ -326,14 +326,24 @@ function App() {
         </Drawer>
 
         {/* 主内容区域 */}
-        <Box component="main" sx={{ 
-          flex: 1, 
-          overflow: 'hidden', 
-          padding: '16px', 
-          marginTop: 0, 
-          background: selectedDynasty ? `url(${selectedDynasty.backgroundImage}) no-repeat center center fixed` : 'var(--color-bg-gradient)',
+        <Box component="main" sx={{
+          flex: 1,
+          overflow: 'hidden',
+          padding: '16px',
+          marginTop: 0,
+          background: selectedDynasty ?
+            `linear-gradient(
+              to bottom right,
+              ${selectedDynasty.color}10,
+              ${selectedDynasty.color}05,
+              transparent 50%
+            ),
+            url(${selectedDynasty.backgroundImage}) no-repeat center center fixed,
+            var(--color-bg-gradient)`
+            : 'var(--color-bg-gradient)',
           backgroundSize: 'cover',
-          transition: 'background-image 0.5s ease-in-out'
+          transition: 'all 0.5s ease-in-out, background-color 0.5s ease-in-out',
+          backgroundColor: selectedDynasty ? `${selectedDynasty.color}10` : 'transparent',
         }} >
           <div className="content" style={{ height: '100%', position: 'relative' }}>
             {activeTab === 'map' ? (
