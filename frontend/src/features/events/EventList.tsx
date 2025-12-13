@@ -1,23 +1,19 @@
 import { useEventsStore } from '../../store';
-import { useTimelineStore } from '../../store';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { getEvents } from '../../services/dataClient';
 import '../../components/EventList.css';
 
 import { Dynasty3DWheel } from './components/Dynasty3DWheel';
 import { useEventFilter } from './hooks/useEventFilter';
 import { useHoverScroll } from './hooks/useHoverScroll';
-import { Timeline, Card, Button, Badge, Space, Typography, Spin, Empty, InputNumber, Popover } from 'antd';
-import { StarOutlined, StarFilled, ShareAltOutlined, InfoCircleOutlined, SettingOutlined, CloseOutlined } from '@ant-design/icons';
+import { Box, Paper, Button, Badge, Typography, CircularProgress } from '@mui/material';
+import { StarOutline, Star, Share, Info } from '@mui/icons-material';
+import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/lab';
 import type { Event } from '../../types/models';
 
-const { Title, Text, Paragraph } = Typography;
-
 export function EventList() {
-  const { loading, setEvents, favorites, toggleFavorite, searchQuery, setSearchQuery } = useEventsStore();
-  const { startYear, endYear, setYears } = useTimelineStore();
+  const { loading, setEvents, favorites, toggleFavorite } = useEventsStore();
   const timelineRef = useRef<HTMLDivElement>(null);
-  const [showControls, setShowControls] = useState(false);
 
   useEffect(() => {
     getEvents().then((res) => {
@@ -30,15 +26,14 @@ export function EventList() {
   
   // 使用自定义Hook处理悬停滚动，只在有数据且加载完成后启用
   useHoverScroll<HTMLDivElement>(timelineRef, {
-    easing: 0.1,
+    easing: 0.08,
     enabled: !loading && filtered.length > 0,
-    onScrollChange: (currentScroll, targetScroll) => {
-      // 调试信息
-      console.log('鼠标悬停滚动:', {
-        currentScroll,
-        targetScroll,
-        progress: (currentScroll / (timelineRef.current?.scrollWidth || 1)) * 100
-      });
+    scrollbarAreaHeight: 30,
+    showScrollbarArea: process.env.NODE_ENV === 'development',
+    onScrollChange: (current, target) => {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('useHoverScroll: 滚动位置变化', { current, target });
+      }
     }
   });
   
@@ -55,138 +50,79 @@ export function EventList() {
     }
   };
 
-  const handleDateChange = async (start: number, end: number) => {
-    setYears(start, end);
-    // 这里可以添加重新获取数据的逻辑
-  };
-
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
-        <div>
-          <Spin size="large" />
-          <div style={{ marginTop: 16, textAlign: 'center' }}>加载历史事件中...</div>
-        </div>
-      </div>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px', flexDirection: 'column' }}>
+        <CircularProgress size="large" sx={{ color: '#8c1c13' }} />
+        <Typography sx={{ marginTop: 2, textAlign: 'center' }}>加载历史事件中...</Typography>
+      </Box>
     );
   }
 
-  const content = (
-    <Space style={{ width: '100%' }} vertical>
-      <Space style={{ width: '100%' }} vertical>
-        <Text strong>开始年份 (Start)</Text>
-        <InputNumber
-          min={1000}
-          max={2025}
-          value={startYear}
-          onChange={(value) => value && handleDateChange(value, endYear)}
-          style={{ width: '100%' }}
-        />
-      </Space>
-      <Space style={{ width: '100%' }} vertical>
-        <Text strong>结束年份 (End)</Text>
-        <InputNumber
-          min={startYear}
-          max={2025}
-          value={endYear}
-          onChange={(value) => value && handleDateChange(startYear, value)}
-          style={{ width: '100%' }}
-        />
-      </Space>
-    </Space>
-  );
-
   return (
-    <Card className="event-list-container" title={
-      <Space style={{ width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Space style={{ alignItems: 'center' }}>
-          <Title level={4} style={{ margin: 0 }}>历史事件</Title>
-          <Badge count={filtered.length} style={{ backgroundColor: '#8c1c13' }} />
-        </Space>
-        <Space style={{ alignItems: 'center' }}>
-          <input
-            placeholder="搜索事件..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            style={{ 
-              padding: '6px 10px', 
-              border: '1px solid #d9d9d9',
-              borderRadius: '4px',
-              width: '160px',
-              marginRight: '8px'
-            }}
-          />
-          <Popover
-            content={content}
-            title="年份设置"
-            trigger="click"
-            placement="bottomRight"
-            open={showControls}
-            onOpenChange={setShowControls}
-          >
-            <Button
-              type="primary"
-              icon={showControls ? <CloseOutlined /> : <SettingOutlined />}
-              size="small"
-            >
-              {startYear} - {endYear}
-            </Button>
-          </Popover>
-        </Space>
-      </Space>
-    }>
+    <Paper className="event-list-container" sx={{ padding: 2, overflow: 'visible' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography variant="h5" sx={{ margin: 0 }}>历史事件</Typography>
+          <Badge badgeContent={filtered.length} color="error" sx={{ marginLeft: 1 }} />
+        </Box>
+      </Box>
       
       <Dynasty3DWheel />
       
       <div className="event-list">
         {filtered.length === 0 ? (
-          <Empty description="暂无匹配的历史事件" />
+          <Box sx={{ textAlign: 'center', padding: 4, color: '#666' }}>暂无匹配的历史事件</Box>
         ) : (
           <div ref={timelineRef} className="timeline-container">
-            <Timeline orientation="horizontal">
+            <Timeline position="alternate" sx={{ flexDirection: 'row', display: 'flex' }}>
               {filtered.map((event) => (
-                  <Timeline.Item
-                    key={event.id}
-                    style={{ marginBottom: '24px' }}
-                  >
-                    <div style={{ marginBottom: '8px' }}>
-                      <Space style={{ width: '100%' }} vertical align="start">
-                        <Text strong style={{ fontSize: '16px' }}>
+                  <TimelineItem key={event.id} sx={{ flexShrink: 0, minWidth: '250px' }}>
+                    <TimelineSeparator>
+                      <TimelineDot sx={{ bgcolor: '#8c1c13' }} />
+                      <TimelineConnector sx={{ bgcolor: '#8c1c13', height: '2px' }} />
+                    </TimelineSeparator>
+                    <TimelineContent sx={{ padding: '0 16px', textAlign: 'center' }}>
+                      <Box sx={{ marginBottom: '8px' }}>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>
                           {event.startYear}{event.endYear !== event.startYear && ` - ${event.endYear}`}
-                        </Text>
-                      </Space>
-                    </div>
-                    <Card size="small" title={event.title} extra={
-                      <Space>
-                        <Button
-                          type="text"
-                          icon={favorites.includes(event.id) ? <StarFilled style={{ color: '#ffd700' }} /> : <StarOutlined />}
-                          onClick={() => toggleFavorite(event.id)}
-                          size="small"
-                        />
-                        <Button
-                          type="text"
-                          icon={<ShareAltOutlined />}
-                          onClick={() => handleShare(event)}
-                          size="small"
-                        />
-                      </Space>
-                    }>
-                      <Paragraph ellipsis={{ rows: 3 }}>{event.description}</Paragraph>
-                      {event.startDate && (
-                        <Text type="secondary" style={{ fontSize: '12px' }}>
-                          <InfoCircleOutlined style={{ marginRight: '4px' }} />{event.startDate}
-                        </Text>
-                      )}
-                    </Card>
-                  </Timeline.Item>
+                        </Typography>
+                      </Box>
+                      <Paper elevation={2} sx={{ padding: 2, minWidth: '200px', position: 'relative', zIndex: 0 }}>
+                        <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginBottom: 1, textAlign: 'center' }}>
+                          {event.title}
+                        </Typography>
+                        <Typography variant="body2" sx={{ marginBottom: 2, textAlign: 'center', minHeight: '40px' }}>
+                          {event.description}
+                        </Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, marginTop: 1 }}>
+                          <Button
+                            size="small"
+                            startIcon={favorites.includes(event.id) ? <Star sx={{ color: '#ffd700' }} /> : <StarOutline />}
+                            onClick={() => toggleFavorite(event.id)}
+                            sx={{ minWidth: 'auto', padding: '4px' }}
+                          />
+                          <Button
+                            size="small"
+                            startIcon={<Share />}
+                            onClick={() => handleShare(event)}
+                            sx={{ minWidth: 'auto', padding: '4px' }}
+                          />
+                        </Box>
+                        {event.startDate && (
+                          <Typography variant="caption" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5, justifyContent: 'center', marginTop: 1 }}>
+                            <Info fontSize="small" />
+                            {event.startDate}
+                          </Typography>
+                        )}
+                      </Paper>
+                    </TimelineContent>
+                  </TimelineItem>
                 ))}
             </Timeline>
           </div>
         )}
       </div>
-      
-
-    </Card>
+    </Paper>
   );
 }

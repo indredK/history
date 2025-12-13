@@ -9,78 +9,26 @@
   animation: fadeIn 0.5s ease-out;
 }
 
-/* 头部样式 - 保留渐变背景和装饰效果 */
-.app-header {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-  color: var(--color-text-inverse);
-  position: relative;
-  overflow: hidden;
-  animation: fadeInDown 0.6s ease-out;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80px;
-  padding: 20px;
-}
-
-.app-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E") repeat;
-  opacity: 0.4;
-}
-
-.app-header-content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-}
-
-/* 优化标题显示效果 */
-.app-header-content h2 {
-  font-size: 32px;
-  line-height: 1.2;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  width: 100%;
-  white-space: nowrap;
-  overflow: visible;
-}
-
-/* 主内容区域 - 保留基础布局 */
-.app-main {
-  flex: 1;
-  max-width: 1400px;
-  margin: 0 auto;
-  width: 100%;
-  overflow: hidden;
-}
-
 /* 平滑滚动效果 */
 html {
   scroll-behavior: smooth;
 }
 
 /* 滚动条美化 */
-.app-main::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 8px;
 }
 
-.app-main::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: var(--color-gray-100);
 }
 
-.app-main::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: var(--color-gray-300);
   border-radius: var(--radius-full);
 }
 
-.app-main::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background: var(--color-gray-400);
 }
 

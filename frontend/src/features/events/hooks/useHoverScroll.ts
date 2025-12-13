@@ -139,10 +139,23 @@ export const useHoverScroll = <T extends HTMLElement>(
   // 只在滚动轴区域监听鼠标事件
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || !hasScrollableContentRef.current) return;
+    if (!container || !hasScrollableContentRef.current) {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('useHoverScroll: 容器不存在或无滚动内容', { 
+          hasContainer: !!container, 
+          hasScrollableContent: hasScrollableContentRef.current 
+        });
+      }
+      return;
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isEnabledRef.current) return;
+      if (!isEnabledRef.current) {
+        if (process.env.NODE_ENV === 'development') {
+          console.log('useHoverScroll: 未启用');
+        }
+        return;
+      }
 
       const containerRect = container.getBoundingClientRect();
       const mouseX = e.clientX;
@@ -158,11 +171,26 @@ export const useHoverScroll = <T extends HTMLElement>(
                                  mouseY >= scrollbarTop &&
                                  mouseY <= containerRect.bottom;
 
+      if (process.env.NODE_ENV === 'development') {
+        console.log('useHoverScroll: 鼠标移动检测', {
+          mouseX,
+          mouseY,
+          containerRect,
+          scrollbarTop,
+          scrollbarAreaHeight,
+          isInScrollbarArea
+        });
+      }
+
       if (isInScrollbarArea) {
         // 计算鼠标在滚动轴内的相对位置 (0-1)
         const mouseRatio = Math.max(0, Math.min(1, (mouseX - containerRect.left) / containerRect.width));
         // 计算最大可滚动距离
         const maxScroll = container.scrollWidth - container.clientWidth;
+        
+        if (process.env.NODE_ENV === 'development') {
+          console.log('useHoverScroll: 在滚动区域内', { mouseRatio, maxScroll, targetScroll: mouseRatio * maxScroll });
+        }
         
         if (maxScroll > 0) {
           targetScrollRef.current = mouseRatio * maxScroll;

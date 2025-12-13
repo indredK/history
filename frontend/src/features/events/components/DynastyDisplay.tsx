@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
-import { Tag, Tooltip } from 'antd';
+import { Chip, Tooltip } from '@mui/material';
 import { getDynastiesFromEvents, getDynastiesInRange } from '../utils/dynastyUtils';
 import { useTimelineStore, useEventsStore } from '../../../store';
-import { DownOutlined, RightOutlined } from '@ant-design/icons';
+import { KeyboardArrowDown, KeyboardArrowRight } from '@mui/icons-material';
 
 interface DynastyDisplayProps {
   className?: string;
@@ -112,9 +112,27 @@ export function DynastyDisplay({ className }: DynastyDisplayProps) {
                 </div>
               }
             >
-              <Tag
-                color={dynasty.color}
-                style={{
+              <Chip
+                label={
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'space-between', 
+                    gap: '6px',
+                    width: '100%',
+                    fontSize: '12px'
+                  }}>
+                    <span style={{ fontWeight: 500, flex: 1 }}>{dynasty.name}</span>
+                    {dynasty.isMultiPeriod && (
+                      <span style={{ fontSize: '10px' }}>
+                        {expandedDynasties.has(dynasty.name) ? 
+                          <KeyboardArrowDown /> : <KeyboardArrowRight />
+                        }
+                      </span>
+                    )}
+                  </div>
+                }
+                sx={{
                   fontSize: '13px',
                   padding: '6px 10px',
                   borderRadius: '6px',
@@ -128,28 +146,15 @@ export function DynastyDisplay({ className }: DynastyDisplayProps) {
                   display: 'block',
                   height: '100%',
                   minHeight: '36px',
-                  boxSizing: 'border-box'
+                  boxSizing: 'border-box',
+                  '& .MuiChip-label': {
+                    width: '100%',
+                    height: '100%',
+                    padding: 0
+                  }
                 }}
                 onClick={() => dynasty.isMultiPeriod && toggleExpanded(dynasty.name)}
-              >
-                <div style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'space-between', 
-                  gap: '6px',
-                  height: '100%',
-                  fontSize: '12px'
-                }}>
-                  <span style={{ fontWeight: 500, flex: 1 }}>{dynasty.name}</span>
-                  {dynasty.isMultiPeriod && (
-                    <span style={{ fontSize: '10px' }}>
-                      {expandedDynasties.has(dynasty.name) ? 
-                        <DownOutlined /> : <RightOutlined />
-                      }
-                    </span>
-                  )}
-                </div>
-              </Tag>
+              />
             </Tooltip>
             
             {/* 多时期展开详情 */}
