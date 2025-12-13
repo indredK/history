@@ -29,11 +29,8 @@ export function EventList() {
     easing: 0.08,
     enabled: !loading && filtered.length > 0,
     scrollbarAreaHeight: 30,
-    showScrollbarArea: process.env.NODE_ENV === 'development',
     onScrollChange: (current, target) => {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('useHoverScroll: 滚动位置变化', { current, target });
-      }
+      console.log('滚动检测:', current, target);
     }
   });
   

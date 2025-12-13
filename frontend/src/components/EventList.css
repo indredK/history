@@ -40,21 +40,7 @@
   flex: 1;
   display: flex;
   align-items: center;
-  position: relative;
-}
-
-/* 调试用：显示滚动区域 */
-.timeline-container::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 30px;
-  background: rgba(59, 130, 246, 0.1);
-  border-top: 1px dashed rgba(59, 130, 246, 0.3);
-  pointer-events: none;
-  z-index: 10;
+    position: relative;
 }
 
 .timeline-container::-webkit-scrollbar {
