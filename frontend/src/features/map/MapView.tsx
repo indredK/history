@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
-import { useMapStore } from '../store';
-import './MapView.css';
+import { useMapStore } from '../../store';
+import '../../components/MapView.css';
 
 export function MapView() {
   const { latitude, longitude, zoom, setLocation } = useMapStore();
 
   useEffect(() => {
-    // MapLibre GL 地图初始化逻辑
-    // 这里暂时显示地图容器
+    // Map placeholder
   }, []);
 
   return (
@@ -28,3 +27,4 @@ export function MapView() {
     </div>
   );
 }
+

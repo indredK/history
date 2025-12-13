@@ -1,20 +1,21 @@
 /* 中国历史全景 - 主应用样式 */
 
+/* 主应用容器 */
 .app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
   background-color: var(--color-bg-primary);
+  animation: fadeIn 0.5s ease-out;
 }
 
-/* 头部样式 */
+/* 头部样式 - 保留渐变背景和装饰效果 */
 .app-header {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   color: var(--color-text-inverse);
-  padding: var(--space-10) var(--space-6);
-  text-align: center;
   position: relative;
   overflow: hidden;
+  animation: fadeInDown 0.6s ease-out;
 }
 
 .app-header::before {
@@ -35,153 +36,18 @@
   margin: 0 auto;
 }
 
-.app-header h1 {
-  margin: 0 0 var(--space-3) 0;
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  font-family: var(--font-family-serif);
-  letter-spacing: 0.05em;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.app-header p {
-  margin: 0;
-  font-size: var(--font-size-lg);
-  opacity: 0.9;
-  font-weight: var(--font-weight-light);
-  letter-spacing: 0.1em;
-}
-
-/* 主内容区域 */
+/* 主内容区域 - 保留基础布局 */
 .app-main {
   flex: 1;
-  padding: var(--space-8) var(--space-6);
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
-}
-
-.layout {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: var(--space-8);
-}
-
-/* 侧边栏样式 */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-/* 内容区域样式 */
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
-}
-
-/* 底部样式 */
-.app-footer {
-  background-color: var(--color-gray-800);
-  color: var(--color-gray-300);
-  text-align: center;
-  padding: var(--space-8) var(--space-6);
-  margin-top: var(--space-12);
-  border-top: 1px solid var(--color-gray-700);
-}
-
-.app-footer p {
-  margin: 0;
-  font-size: var(--font-size-sm);
-}
-
-/* 响应式设计 */
-@media (max-width: 1024px) {
-  .layout {
-    grid-template-columns: 280px 1fr;
-    gap: var(--space-6);
-  }
-}
-
-@media (max-width: 768px) {
-  .app-header {
-    padding: var(--space-8) var(--space-4);
-  }
-  
-  .app-header h1 {
-    font-size: var(--font-size-3xl);
-  }
-  
-  .app-header p {
-    font-size: var(--font-size-base);
-  }
-  
-  .app-main {
-    padding: var(--space-6) var(--space-4);
-  }
-  
-  .layout {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-  
-  .sidebar {
-    order: 2;
-  }
-  
-  .content {
-    order: 1;
-  }
-}
-
-@media (max-width: 480px) {
-  .app-header {
-    padding: var(--space-6) var(--space-4);
-  }
-  
-  .app-header h1 {
-    font-size: var(--font-size-2xl);
-  }
-  
-  .app-main {
-    padding: var(--space-4) var(--space-3);
-  }
-}
-
-/* 页面加载动画 */
-.app {
-  animation: fadeIn 0.5s ease-out;
-}
-
-/* 组件动画 */
-.app-header {
-  animation: fadeInDown 0.6s ease-out;
-}
-
-.sidebar {
-  animation: slideInLeft 0.5s ease-out 0.1s both;
-}
-
-.content {
-  animation: slideInRight 0.5s ease-out 0.2s both;
+  overflow: hidden;
 }
 
 /* 平滑滚动效果 */
 html {
   scroll-behavior: smooth;
-}
-
-/* 滚动进度指示器 */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 3px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-  z-index: var(--z-fixed);
-  transition: width 0.1s ease;
 }
 
 /* 滚动条美化 */
@@ -200,4 +66,21 @@ html {
 
 .app-main::-webkit-scrollbar-thumb:hover {
   background: var(--color-gray-400);
+}
+
+/* 动画效果 - 保留基础动画 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import type { Event } from './types/models';
 
 interface TimelineState {
   startYear: number;
@@ -14,10 +15,14 @@ interface MapState {
 }
 
 interface EventsState {
-  events: any[];
-  setEvents: (events: any[]) => void;
+  events: Event[];
+  setEvents: (events: Event[]) => void;
   loading: boolean;
   setLoading: (loading: boolean) => void;
+  favorites: string[];
+  toggleFavorite: (id: string) => void;
+  searchQuery: string;
+  setSearchQuery: (q: string) => void;
 }
 
 export const useTimelineStore = create<TimelineState>((set) => ({
@@ -38,4 +43,13 @@ export const useEventsStore = create<EventsState>((set) => ({
   setEvents: (events) => set({ events }),
   loading: false,
   setLoading: (loading) => set({ loading }),
+  favorites: [],
+  toggleFavorite: (id) =>
+    set((state) => ({
+      favorites: state.favorites.includes(id)
+        ? state.favorites.filter((x) => x !== id)
+        : [...state.favorites, id],
+    })),
+  searchQuery: '',
+  setSearchQuery: (q) => set({ searchQuery: q }),
 }));

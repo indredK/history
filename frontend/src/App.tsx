@@ -1,80 +1,74 @@
-import { useEffect, useState } from 'react';
-import { Timeline } from './components/Timeline';
-import { MapView } from './components/MapView';
-import { EventList } from './components/EventList';
+import { useState } from 'react';
+import { Timeline } from './features/timeline/Timeline';
+import { MapView } from './features/map/MapView';
+import { EventList } from './features/events/EventList';
 import './App.css';
+import './styles/ui.css';
+import { getDataSource } from './config/env';
+import { Layout, Button, Badge, Typography, Space } from 'antd';
+import { HistoryOutlined, EnvironmentOutlined } from '@ant-design/icons';
+
+const { Header, Content, Footer } = Layout;
+const { Title, Text } = Typography;
 
 function App() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  // 滚动进度指示器逻辑
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollTop;
-      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrollPercentage = (totalScroll / windowHeight) * 100;
-      setScrollProgress(scrollPercentage);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // 滚动时元素渐显效果
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    const elementsToAnimate = document.querySelectorAll('.scroll-fade');
-    elementsToAnimate.forEach(element => observer.observe(element));
-
-    return () => {
-      elementsToAnimate.forEach(element => observer.unobserve(element));
-    };
-  }, []);
+  const [activeTab, setActiveTab] = useState<'timeline' | 'map'>('timeline');
 
   return (
-    <div className="app">
-      {/* 滚动进度指示器 */}
-      <div 
-        className="scroll-progress" 
-        style={{ width: `${scrollProgress}%` }}
-      />
-
-      <header className="app-header">
+    <Layout className="app">
+      <Header className="app-header">
+        <Space
+          style={{
+            position: 'absolute',
+            top: '16px',
+            right: '16px',
+            zIndex: 2,
+          }}
+        >
+          <Badge
+            status={getDataSource() === 'mock' ? 'processing' : 'default'}
+            text={getDataSource() === 'mock' ? 'Mock 模式' : 'API 模式'}
+          />
+        </Space>
         <div className="app-header-content">
-          <h1>中国历史全景</h1>
-          <p>Chinese Historical Panorama</p>
+          <Title level={2} style={{ color: '#fff', margin: 0 }}>中国历史全景</Title>
+          <Text style={{ color: '#fff', opacity: 0.8 }}>Chinese Historical Panorama</Text>
         </div>
-      </header>
+      </Header>
 
-      <main className="app-main">
-        <div className="layout">
-          <aside className="sidebar">
-            <Timeline />
-          </aside>
-
-          <section className="content">
+      <Content className="app-main">
+        <Space style={{ padding: '16px' }}>
+          <Button
+            type={activeTab === 'timeline' ? 'primary' : 'default'}
+            icon={<HistoryOutlined />}
+            onClick={() => setActiveTab('timeline')}
+          >
+            时间轴
+          </Button>
+          <Button
+            type={activeTab === 'map' ? 'primary' : 'default'}
+            icon={<EnvironmentOutlined />}
+            onClick={() => setActiveTab('map')}
+          >
+            地图
+          </Button>
+        </Space>
+        <div className="content" style={{ flex: 1, overflow: 'hidden', padding: '0 16px 16px 16px' }}>
+          {activeTab === 'map' ? (
             <MapView />
-            <EventList />
-          </section>
+          ) : (
+            <>
+              <Timeline />
+              <EventList />
+            </>
+          )}
         </div>
-      </main>
+      </Content>
 
-      <footer className="app-footer">
-        <p>&copy; 2025 中国历史全景 | Chinese Historical Panorama | MIT License</p>
-      </footer>
-    </div>
+      <Footer className="app-footer">
+        <Text>&copy; 2025 中国历史全景 | Chinese Historical Panorama | MIT License</Text>
+      </Footer>
+    </Layout>
   );
 }
 
