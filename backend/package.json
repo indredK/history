@@ -15,23 +15,28 @@
     "test:watch": "jest --watch",
     "lint": "tsc --noEmit"
   },
-  "keywords": ["history", "timeline", "gis", "chinese-history"],
+  "keywords": [
+    "history",
+    "timeline",
+    "gis",
+    "chinese-history"
+  ],
   "author": "Contributors",
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "^5.22.0",
-    "csv-parse": "^5.5.6",
+    "@fastify/cors": "^11.2.0",
+    "@prisma/client": "^7.1.0",
+    "csv-parse": "^6.1.0",
     "dotenv": "^17.2.3",
     "fastify": "^5.6.2",
-    "@fastify/cors": "^11.2.0",
-    "zod": "^3.23.8"
+    "zod": "^4.1.13"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "@types/node": "^20.14.14",
-    "jest": "^29.7.0",
-    "prisma": "^5.22.0",
-    "ts-jest": "^29.1.5",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.0.1",
+    "jest": "^30.2.0",
+    "prisma": "^7.1.0",
+    "ts-jest": "^29.4.6",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
