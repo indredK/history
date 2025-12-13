@@ -69,7 +69,6 @@ function App() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }} className="app">
 
-
       <Box sx={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         {/* 左侧边栏 */}
         <Drawer
@@ -329,14 +328,14 @@ function App() {
         {/* 主内容区域 */}
         <Box component="main" sx={{ 
           flex: 1, 
-          overflow: 'auto', 
+          overflow: 'hidden', 
           padding: '16px', 
           marginTop: 0, 
           background: selectedDynasty ? `url(${selectedDynasty.backgroundImage}) no-repeat center center fixed` : 'var(--color-bg-gradient)',
           backgroundSize: 'cover',
           transition: 'background-image 0.5s ease-in-out'
-        }} className="app-main">
-          <div className="content" style={{ height: '100%' }}>
+        }} >
+          <div className="content" style={{ height: '100%', position: 'relative' }}>
             {activeTab === 'map' ? (
               <MapView />
             ) : (

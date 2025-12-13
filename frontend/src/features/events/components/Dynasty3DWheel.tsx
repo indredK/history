@@ -74,7 +74,7 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
           thresholdDelta: 10
         }}
         modules={[EffectCoverflow, Mousewheel]}
-        className="dynasty-3d-wheel"
+        className="animate__animated animate__zoomIn"
         style={{
           width: '100%',
           height: '100%'
@@ -110,9 +110,8 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
                   border: `3px solid ${dynasty.color}`,
                   position: 'relative',
                   overflow: 'hidden',
-                  transition: 'all var(--transition-normal)',
-                  animation: 'fadeIn 0.5s ease-out'
-                }}
+                  transition: 'all var(--transition-normal)'
+                }} 
               >
                 {/* 装饰背景 */}
                 <div style={{

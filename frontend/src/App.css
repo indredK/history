@@ -16,26 +16,20 @@ html {
   scroll-behavior: smooth;
 }
 
-/* 动画效果 - 增强版 */
-@keyframes fadeIn {
-  from { 
-    opacity: 0; 
-    transform: translateY(20px);
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0);
-  }
-}
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
+
+/* 边框发光流动动画 */
+@keyframes borderGlow {
+  0% {
+    background-position: -100% 0;
+    opacity: 0.8;
   }
-  to {
+  50% {
     opacity: 1;
-    transform: translateY(0);
+  }
+  100% {
+    background-position: 100% 0;
+    opacity: 0.8;
   }
 }
 

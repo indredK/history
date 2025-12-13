@@ -10,7 +10,7 @@ export function MapView() {
   }, []);
 
   return (
-    <div className="map-container">
+    <div  >
       <div className="map-header">
         <h2>历史地图 (Historical Map)</h2>
       </div>

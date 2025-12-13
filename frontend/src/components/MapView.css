@@ -7,7 +7,7 @@
   overflow: hidden;
   transition: all var(--transition-normal);
   margin-bottom: var(--space-6);
-  animation: slideInRight 0.5s ease-out, gradientShift 3s ease infinite;
+  animation: gradientShift 3s ease infinite;
   background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-secondary) 100%);
   background-size: 200% 200%;
   border: 2px solid transparent;

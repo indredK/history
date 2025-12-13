@@ -57,7 +57,7 @@ export function EventList() {
   }
 
   return (
-    <Paper className="event-list-container" sx={{ padding: 2, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: 'rgba(255, 255, 255, 0)', backdropFilter: 'blur(10px)', boxShadow: 'none' }}>
+    <Paper className="event-list-container animate__animated animate__fadeIn" sx={{ padding: 2, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: 'rgba(255, 255, 255, 0)', backdropFilter: 'blur(10px)', boxShadow: 'none' }}>
 
       
       {/* 上下布局容器 */}
@@ -88,7 +88,7 @@ export function EventList() {
                             {event.startYear}{event.endYear !== event.startYear && ` - ${event.endYear}`}
                           </Typography>
                         </Box>
-                        <Paper elevation={2} sx={{ padding: 2, minWidth: '200px', position: 'relative', zIndex: 0, backgroundColor: 'rgba(255, 255, 255, 0.6)', backdropFilter: 'blur(10px)' }}>
+                        <Paper elevation={2} sx={{ padding: 2, minWidth: '200px', position: 'relative', zIndex: 0, backgroundColor: 'rgba(255, 255, 255, 0.6)', backdropFilter: 'blur(10px)' }} className="animate__animated animate__fadeInLeft">
                           <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginBottom: 1, textAlign: 'center' }}>
                             {event.title}
                           </Typography>
