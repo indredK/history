@@ -23,10 +23,12 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
   return (
     <div className={className} style={{
       padding: '8px',
-      backgroundColor: '#f8f9fa',
-      borderRadius: '8px',
+      backgroundColor: 'var(--color-bg-card)',
+      borderRadius: 'var(--radius-xl)',
       margin: '8px 0',
-      border: '1px solid #e9ecef'
+      border: '1px solid var(--color-border-medium)',
+      boxShadow: 'var(--shadow-md)',
+      transition: 'all var(--transition-normal)'
     }}>
       <div style={{
         width: '100%',
@@ -66,10 +68,11 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderRadius: '8px',
+                borderRadius: 'var(--radius-xl)',
                 overflow: 'hidden',
                 position: 'relative',
-                boxShadow: '0 6px 16px rgba(0,0,0,0.15)'
+                boxShadow: 'var(--shadow-md)',
+                transition: 'all var(--transition-normal)'
               }}>
               <div
                 style={{
@@ -81,11 +84,13 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
                   alignItems: 'center',
                   justifyContent: 'center',
                   padding: '20px',
-                  color: 'white',
+                  color: 'var(--color-text-inverse)',
                   textAlign: 'center',
                   border: `3px solid ${dynasty.color}`,
                   position: 'relative',
-                  overflow: 'hidden'
+                  overflow: 'hidden',
+                  transition: 'all var(--transition-normal)',
+                  animation: 'fadeIn 0.5s ease-out'
                 }}
               >
                 {/* 装饰背景 */}
@@ -104,7 +109,8 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
                   fontWeight: 'bold',
                   marginBottom: '4px',
                   zIndex: 1,
-                  textShadow: '0 2px 4px rgba(0,0,0,0.3)'
+                  textShadow: '0 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(255,255,255,0.3)',
+                  transition: 'all var(--transition-normal)'
                 }}>
                   {dynasty.name}
                 </div>
@@ -122,9 +128,11 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
                   fontSize: '11px',
                   backgroundColor: 'rgba(255,255,255,0.2)',
                   padding: '2px 8px',
-                  borderRadius: '10px',
+                  borderRadius: 'var(--radius-full)',
                   marginBottom: '8px',
-                  zIndex: 1
+                  zIndex: 1,
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                  backdropFilter: 'blur(5px)'
                 }}>
                   {dynasty.startYear} - {dynasty.endYear}
                 </div>

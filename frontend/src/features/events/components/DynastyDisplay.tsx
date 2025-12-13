@@ -41,23 +41,26 @@ export function DynastyDisplay({ className }: DynastyDisplayProps) {
   return (
     <div className={className} style={{ 
       padding: '16px', 
-      backgroundColor: '#f8f9fa', 
-      borderRadius: '8px',
+      backgroundColor: 'var(--color-bg-secondary)', 
+      borderRadius: 'var(--radius-xl)',
       margin: '8px 0',
-      border: '1px solid #e9ecef',
-      overflow: 'hidden'
+      border: '1px solid var(--color-border-medium)',
+      overflow: 'hidden',
+      boxShadow: 'var(--shadow-md)',
+      position: 'relative',
+      zIndex: 1
     }}>
       <div style={{ 
-        fontSize: '14px', 
-        color: '#495057', 
+        fontSize: 'var(--font-size-sm)', 
+        color: 'var(--color-text-primary)', 
         marginBottom: '8px',
-        fontWeight: 600,
+        fontWeight: 'var(--font-weight-semibold)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between'
       }}>
         <span>历史时期</span>
-        <span style={{ fontSize: '12px', fontWeight: 'normal', color: '#6c757d' }}>
+        <span style={{ fontSize: 'var(--font-size-xs)', fontWeight: 'normal', color: 'var(--color-text-tertiary)' }}>
           点击朝代查看详情
         </span>
       </div>
@@ -71,7 +74,7 @@ export function DynastyDisplay({ className }: DynastyDisplayProps) {
         overflowX: 'auto',
         paddingBottom: '8px',
         scrollbarWidth: 'thin',
-        scrollbarColor: '#ccc #f1f1f1'
+        scrollbarColor: 'var(--color-primary) var(--color-bg-tertiary)'
       }}>
         <style>
           {`
@@ -79,15 +82,17 @@ export function DynastyDisplay({ className }: DynastyDisplayProps) {
               height: 6px;
             }
             div::-webkit-scrollbar-track {
-              background: #f1f1f1;
-              border-radius: 3px;
+              background: var(--color-bg-tertiary);
+              border-radius: var(--radius-full);
             }
             div::-webkit-scrollbar-thumb {
-              background: #ccc;
-              border-radius: 3px;
+              background: var(--color-primary);
+              border-radius: var(--radius-full);
+              transition: all var(--transition-normal);
             }
             div::-webkit-scrollbar-thumb:hover {
-              background: #999;
+              background: var(--color-primary-light);
+              box-shadow: 0 0 10px rgba(255, 61, 0, 0.5);
             }
           `}
         </style>
@@ -133,13 +138,13 @@ export function DynastyDisplay({ className }: DynastyDisplayProps) {
                   </div>
                 }
                 sx={{
-                  fontSize: '13px',
-                  padding: '6px 10px',
-                  borderRadius: '6px',
+                  fontSize: 'var(--font-size-sm)',
+                  padding: '8px 12px',
+                  borderRadius: 'var(--radius-lg)',
                   border: `2px solid ${dynasty.color}`,
                   backgroundColor: `${dynasty.color}15`,
                   cursor: dynasty.isMultiPeriod ? 'pointer' : 'default',
-                  transition: 'all 0.3s ease',
+                  transition: 'all var(--transition-normal)',
                   position: 'relative',
                   width: '100%',
                   textAlign: 'center',
@@ -147,10 +152,18 @@ export function DynastyDisplay({ className }: DynastyDisplayProps) {
                   height: '100%',
                   minHeight: '36px',
                   boxSizing: 'border-box',
+                  boxShadow: `0 0 0 rgba(${parseInt(dynasty.color.slice(1,3),16)}, ${parseInt(dynasty.color.slice(3,5),16)}, ${parseInt(dynasty.color.slice(5,7),16)}, 0)`,
+                  '&:hover': {
+                    backgroundColor: `${dynasty.color}25`,
+                    transform: 'translateY(-2px)',
+                    boxShadow: `0 4px 12px rgba(${parseInt(dynasty.color.slice(1,3),16)}, ${parseInt(dynasty.color.slice(3,5),16)}, ${parseInt(dynasty.color.slice(5,7),16)}, 0.3), 0 0 20px rgba(${parseInt(dynasty.color.slice(1,3),16)}, ${parseInt(dynasty.color.slice(3,5),16)}, ${parseInt(dynasty.color.slice(5,7),16)}, 0.2)`
+                  },
                   '& .MuiChip-label': {
                     width: '100%',
                     height: '100%',
-                    padding: 0
+                    padding: 0,
+                    color: 'var(--color-text-primary)',
+                    fontWeight: 'var(--font-weight-medium)'
                   }
                 }}
                 onClick={() => dynasty.isMultiPeriod && toggleExpanded(dynasty.name)}
@@ -164,17 +177,18 @@ export function DynastyDisplay({ className }: DynastyDisplayProps) {
                 top: '100%',
                 left: '0',
                 zIndex: 1000,
-                backgroundColor: 'white',
-                border: '1px solid #ddd',
-                borderRadius: '6px',
-                padding: '12px',
+                backgroundColor: 'var(--color-bg-card)',
+                border: '1px solid var(--color-border-medium)',
+                borderRadius: 'var(--radius-xl)',
+                padding: '16px',
                 marginTop: '8px',
                 minWidth: '200px',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+                boxShadow: 'var(--shadow-xl), 0 0 20px rgba(255, 61, 0, 0.15)',
+                animation: 'fadeInUp 0.3s ease-out'
               }}>
                 <div style={{
-                  fontSize: '12px',
-                  fontWeight: 600,
+                  fontSize: 'var(--font-size-xs)',
+                  fontWeight: 'var(--font-weight-semibold)',
                   color: dynasty.color,
                   marginBottom: '8px',
                   paddingBottom: '4px',
@@ -188,10 +202,14 @@ export function DynastyDisplay({ className }: DynastyDisplayProps) {
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      fontSize: '12px'
+                      fontSize: 'var(--font-size-xs)',
+                      padding: '4px 8px',
+                      borderRadius: 'var(--radius-md)',
+                      backgroundColor: 'var(--color-bg-tertiary)',
+                      transition: 'all var(--transition-fast)'
                     }}>
-                      <span style={{ fontWeight: 500 }}>{period.name}</span>
-                      <span style={{ color: '#666', fontSize: '11px' }}>
+                      <span style={{ fontWeight: 'var(--font-weight-medium)', color: 'var(--color-text-primary)' }}>{period.name}</span>
+                      <span style={{ color: 'var(--color-text-tertiary)', fontSize: 'var(--font-size-xs)' }}>
                         {period.startYear}-{period.endYear}
                       </span>
                     </div>

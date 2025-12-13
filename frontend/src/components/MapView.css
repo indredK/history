@@ -3,15 +3,41 @@
 .map-container {
   background-color: var(--color-bg-card);
   border-radius: var(--radius-xl);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-lg), var(--shadow-glow-blue);
   overflow: hidden;
-  transition: box-shadow var(--transition-normal);
+  transition: all var(--transition-normal);
   margin-bottom: var(--space-6);
-  animation: slideInRight 0.5s ease-out;
+  animation: slideInRight 0.5s ease-out, gradientShift 3s ease infinite;
+  background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-secondary) 100%);
+  background-size: 200% 200%;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.map-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #03A9F4, #9C27B0, #FF3D00, #FFEA00, #03A9F4);
+  background-size: 300% 300%;
+  border-radius: var(--radius-xl);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: rotateBorder 3s linear infinite;
+}
+
+.map-container:hover::before {
+  opacity: 1;
 }
 
 .map-container:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-xl), var(--shadow-glow-blue);
+  transform: translateY(-2px);
+  border-color: transparent;
 }
 
 .map-header {
@@ -101,7 +127,7 @@
   background-color: var(--color-primary-dark);
   border-color: var(--color-primary-dark);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
 }
 
 .map-placeholder button:active {
@@ -136,6 +162,8 @@
   background-color: var(--color-primary);
   color: var(--color-text-inverse);
   border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
 }
 
 /* 响应式设计 */

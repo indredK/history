@@ -57,69 +57,73 @@ export function EventList() {
   }
 
   return (
-    <Paper className="event-list-container" sx={{ padding: 2, overflow: 'visible' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography variant="h5" sx={{ margin: 0 }}>历史事件</Typography>
-          <Badge badgeContent={filtered.length} color="error" sx={{ marginLeft: 1 }} />
-        </Box>
-      </Box>
+    <Paper className="event-list-container" sx={{ padding: 2, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
+
       
-      <Dynasty3DWheel />
-      
-      <div className="event-list">
-        {filtered.length === 0 ? (
-          <Box sx={{ textAlign: 'center', padding: 4, color: '#666' }}>暂无匹配的历史事件</Box>
-        ) : (
-          <div ref={timelineRef} className="timeline-container">
-            <Timeline position="alternate" sx={{ flexDirection: 'row', display: 'flex' }}>
-              {filtered.map((event) => (
-                  <TimelineItem key={event.id} sx={{ flexShrink: 0, minWidth: '250px' }}>
-                    <TimelineSeparator>
-                      <TimelineDot sx={{ bgcolor: '#8c1c13' }} />
-                      <TimelineConnector sx={{ bgcolor: '#8c1c13', height: '2px' }} />
-                    </TimelineSeparator>
-                    <TimelineContent sx={{ padding: '0 16px', textAlign: 'center' }}>
-                      <Box sx={{ marginBottom: '8px' }}>
-                        <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>
-                          {event.startYear}{event.endYear !== event.startYear && ` - ${event.endYear}`}
-                        </Typography>
-                      </Box>
-                      <Paper elevation={2} sx={{ padding: 2, minWidth: '200px', position: 'relative', zIndex: 0 }}>
-                        <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginBottom: 1, textAlign: 'center' }}>
-                          {event.title}
-                        </Typography>
-                        <Typography variant="body2" sx={{ marginBottom: 2, textAlign: 'center', minHeight: '40px' }}>
-                          {event.description}
-                        </Typography>
-                        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, marginTop: 1 }}>
-                          <Button
-                            size="small"
-                            startIcon={favorites.includes(event.id) ? <Star sx={{ color: '#ffd700' }} /> : <StarOutline />}
-                            onClick={() => toggleFavorite(event.id)}
-                            sx={{ minWidth: 'auto', padding: '4px' }}
-                          />
-                          <Button
-                            size="small"
-                            startIcon={<Share />}
-                            onClick={() => handleShare(event)}
-                            sx={{ minWidth: 'auto', padding: '4px' }}
-                          />
-                        </Box>
-                        {event.startDate && (
-                          <Typography variant="caption" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5, justifyContent: 'center', marginTop: 1 }}>
-                            <Info fontSize="small" />
-                            {event.startDate}
+      {/* 上下布局容器 */}
+      <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 2, overflow: 'hidden' }}>
+        {/* 朝代选择区域 */}
+        <Paper sx={{ padding: 2, overflow: 'hidden', maxHeight: '30vh' }}>
+          <Dynasty3DWheel />
+        </Paper>
+        
+        {/* 事件时间轴区域 */}
+        <Paper sx={{ flex: 1, padding: 2, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          {filtered.length === 0 ? (
+            <Box sx={{ textAlign: 'center', padding: 4, color: '#666', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              暂无匹配的历史事件
+            </Box>
+          ) : (
+            <div ref={timelineRef} className="timeline-container">
+              <Timeline position="alternate" sx={{ flexDirection: 'row', display: 'flex' }}>
+                {filtered.map((event) => (
+                    <TimelineItem key={event.id} sx={{ flexShrink: 0, minWidth: '250px' }}>
+                      <TimelineSeparator>
+                        <TimelineDot sx={{ bgcolor: '#8c1c13' }} />
+                        <TimelineConnector sx={{ bgcolor: '#8c1c13', height: '2px' }} />
+                      </TimelineSeparator>
+                      <TimelineContent sx={{ padding: '0 16px', textAlign: 'center' }}>
+                        <Box sx={{ marginBottom: '8px' }}>
+                          <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>
+                            {event.startYear}{event.endYear !== event.startYear && ` - ${event.endYear}`}
                           </Typography>
-                        )}
-                      </Paper>
-                    </TimelineContent>
-                  </TimelineItem>
-                ))}
-            </Timeline>
-          </div>
-        )}
-      </div>
+                        </Box>
+                        <Paper elevation={2} sx={{ padding: 2, minWidth: '200px', position: 'relative', zIndex: 0 }}>
+                          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginBottom: 1, textAlign: 'center' }}>
+                            {event.title}
+                          </Typography>
+                          <Typography variant="body2" sx={{ marginBottom: 2, textAlign: 'center', minHeight: '40px' }}>
+                            {event.description}
+                          </Typography>
+                          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, marginTop: 1 }}>
+                            <Button
+                              size="small"
+                              startIcon={favorites.includes(event.id) ? <Star sx={{ color: '#ffd700' }} /> : <StarOutline />}
+                              onClick={() => toggleFavorite(event.id)}
+                              sx={{ minWidth: 'auto', padding: '4px' }}
+                            />
+                            <Button
+                              size="small"
+                              startIcon={<Share />}
+                              onClick={() => handleShare(event)}
+                              sx={{ minWidth: 'auto', padding: '4px' }}
+                            />
+                          </Box>
+                          {event.startDate && (
+                            <Typography variant="caption" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5, justifyContent: 'center', marginTop: 1 }}>
+                              <Info fontSize="small" />
+                              {event.startDate}
+                            </Typography>
+                          )}
+                        </Paper>
+                      </TimelineContent>
+                    </TimelineItem>
+                  ))}
+              </Timeline>
+            </div>
+          )}
+        </Paper>
+      </Box>
     </Paper>
   );
 }

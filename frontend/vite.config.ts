@@ -13,7 +13,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ['axios'],
   },
   define: {
     'import.meta.env.VITE_DATA_SOURCE': JSON.stringify(process.env.VITE_DATA_SOURCE || 'mock'),
