@@ -158,15 +158,7 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
                   {dynasty.startYear} - {dynasty.endYear}
                 </div>
                 
-                <div style={{
-                  fontSize: '10px',
-                  lineHeight: '1.4',
-                  maxHeight: '40px',
-                  overflow: 'hidden',
-                  zIndex: 1
-                }}>
-                  {dynasty.description}
-                </div>
+
                 
                 {dynasty.isMultiPeriod && (
                   <div style={{

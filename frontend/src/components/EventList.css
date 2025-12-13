@@ -245,19 +245,21 @@
 }
 
 .css-1q2qef8-MuiTimeline-root .MuiTimelineSeparator-root {
-  height: auto !important;
   display: flex !important;
-  flex-direction: column !important;
+  flex-direction: row !important;
   align-items: center !important;
+  min-height: 2px;
 }
 
 .css-1q2qef8-MuiTimeline-root .MuiTimelineConnector-root {
   width: 100% !important;
-  height: 4px !important;
+  height: 2px !important;
   background: var(--color-primary-gradient) !important;
-  border-radius: 2px !important;
+  border-radius: 1px !important;
   transition: all 0.3s ease !important;
   box-shadow: 0 0 10px rgba(255, 61, 0, 0.5) !important;
+  min-width: 50px;
+  flex-grow: 1;
 }
 
 .css-1q2qef8-MuiTimeline-root .MuiTimelineDot-root {

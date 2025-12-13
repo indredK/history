@@ -6,7 +6,7 @@
   flex-direction: column;
   height: 100vh;
   background: var(--color-bg-gradient);
-  animation: fadeIn 0.5s ease-out, backgroundShift 15s ease infinite;
+  /* animation: fadeIn 0.5s ease-out, backgroundShift 15s ease infinite; */
   position: relative;
   overflow: hidden;
 }
