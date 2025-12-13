@@ -11,14 +11,18 @@ export function EventList() {
   return (
     <div className="event-list-container">
       <div className="event-list-header">
-        <h2>历史事件 ({events.length})</h2>
+        <h2>历史事件 <span className="event-count">{events.length}</span></h2>
       </div>
       <div className="event-list">
         {events.length === 0 ? (
-          <div className="event-list-empty">暂无事件</div>
+          <div className="event-list-empty scroll-fade">暂无事件</div>
         ) : (
-          events.map((event) => (
-            <div key={event.id} className="event-item">
+          events.map((event, index) => (
+            <div 
+              key={event.id} 
+              className="event-item scroll-fade"
+              style={{ animationDelay: `${index * 0.05}s` }}
+            >
               <div className="event-year">
                 {event.startYear}
                 {event.endYear !== event.startYear && ` - ${event.endYear}`}
