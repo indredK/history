@@ -6,7 +6,7 @@ import '../../components/EventList.css';
 import { Dynasty3DWheel } from './components/Dynasty3DWheel';
 import { useEventFilter } from './hooks/useEventFilter';
 import { useHoverScroll } from './hooks/useHoverScroll';
-import { Box, Paper, Button, Badge, Typography, CircularProgress } from '@mui/material';
+import { Box, Paper, Button, Typography, CircularProgress } from '@mui/material';
 import { StarOutline, Star, Share, Info } from '@mui/icons-material';
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/lab';
 import type { Event } from '../../types/models';
@@ -57,18 +57,18 @@ export function EventList() {
   }
 
   return (
-    <Paper className="event-list-container" sx={{ padding: 2, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <Paper className="event-list-container" sx={{ padding: 2, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: 'rgba(255, 255, 255, 0)', backdropFilter: 'blur(10px)', boxShadow: 'none' }}>
 
       
       {/* 上下布局容器 */}
       <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 2, overflow: 'hidden' }}>
         {/* 朝代选择区域 */}
-        <Paper sx={{ padding: 2, overflow: 'hidden', maxHeight: '30vh' }}>
+        <Paper sx={{ padding: 2, overflow: 'hidden', maxHeight: '30vh', backgroundColor: 'rgba(255, 255, 255, 0)', backdropFilter: 'blur(10px)', boxShadow: 'none' }}>
           <Dynasty3DWheel />
         </Paper>
         
         {/* 事件时间轴区域 */}
-        <Paper sx={{ flex: 1, padding: 2, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        <Paper sx={{ flex: 1, padding: 2, overflow: 'hidden', display: 'flex', flexDirection: 'column', backgroundColor: 'rgba(255, 255, 255, 0)', backdropFilter: 'blur(10px)', boxShadow: 'none' }}>
           {filtered.length === 0 ? (
             <Box sx={{ textAlign: 'center', padding: 4, color: '#666', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               暂无匹配的历史事件
@@ -88,7 +88,7 @@ export function EventList() {
                             {event.startYear}{event.endYear !== event.startYear && ` - ${event.endYear}`}
                           </Typography>
                         </Box>
-                        <Paper elevation={2} sx={{ padding: 2, minWidth: '200px', position: 'relative', zIndex: 0 }}>
+                        <Paper elevation={2} sx={{ padding: 2, minWidth: '200px', position: 'relative', zIndex: 0, backgroundColor: 'rgba(255, 255, 255, 0.6)', backdropFilter: 'blur(10px)' }}>
                           <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginBottom: 1, textAlign: 'center' }}>
                             {event.title}
                           </Typography>

@@ -1,5 +1,11 @@
 import { create } from 'zustand';
 import type { Event } from './types/models';
+import type { Dynasty } from './features/events/utils/dynastyUtils';
+
+interface DynastyState {
+  selectedDynasty: Dynasty | null;
+  setSelectedDynasty: (dynasty: Dynasty | null) => void;
+}
 
 interface TimelineState {
   startYear: number;
@@ -53,3 +59,9 @@ export const useEventsStore = create<EventsState>((set) => ({
   searchQuery: '',
   setSearchQuery: (q) => set({ searchQuery: q }),
 }));
+
+export const useDynastyStore = create<DynastyState>((set) => ({
+  selectedDynasty: null,
+  setSelectedDynasty: (dynasty) => set({ selectedDynasty: dynasty }),
+}));
+

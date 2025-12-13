@@ -1,9 +1,10 @@
 
+import React, { useMemo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
-import { useTimelineStore } from '../../../store';
+import { useTimelineStore, useDynastyStore } from '../../../store';
 import { getDynastiesInRange } from '../utils/dynastyUtils';
 
 interface Dynasty3DWheelProps {
@@ -12,9 +13,28 @@ interface Dynasty3DWheelProps {
 
 export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
   const { startYear, endYear } = useTimelineStore();
+  const { setSelectedDynasty } = useDynastyStore();
   
-  // 获取当前年份范围内的朝代
-  const dynasties = getDynastiesInRange(startYear, endYear);
+  // 获取当前年份范围内的朝代，使用useMemo缓存结果避免每次渲染创建新数组
+  const dynasties = useMemo(() => {
+    return getDynastiesInRange(startYear, endYear);
+  }, [startYear, endYear]);
+  
+  // 处理朝代选择
+  const handleSlideChange = (swiper: any) => {
+    const activeIndex = swiper.activeIndex;
+    const selectedDynasty = dynasties[activeIndex];
+    if (selectedDynasty) {
+      setSelectedDynasty(selectedDynasty);
+    }
+  };
+  
+  // 初始加载时默认选择第一个朝代
+  React.useEffect(() => {
+    if (dynasties.length > 0) {
+      setSelectedDynasty(dynasties[0]);
+    }
+  }, [dynasties, setSelectedDynasty]);
   
   if (dynasties.length === 0) {
     return null;
@@ -23,11 +43,11 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
   return (
     <div className={className} style={{
       padding: '8px',
-      backgroundColor: 'var(--color-bg-card)',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
       borderRadius: 'var(--radius-xl)',
       margin: '8px 0',
       border: '1px solid var(--color-border-medium)',
-      boxShadow: 'var(--shadow-md)',
+      boxShadow: 'none',
       transition: 'all var(--transition-normal)'
     }}>
       <div style={{
@@ -36,30 +56,31 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
         position: 'relative'
       }}>
         <Swiper
-          effect={'coverflow'}
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView={'auto'}
-          spaceBetween={20}
-          coverflowEffect={{
-            rotate: 0,
-            stretch: 0,
-            depth: 150,
-            modifier: 1,
-            slideShadows: true,
-          }}
-          mousewheel={{
-            invert: false,
-            thresholdDelta: 10
-          }}
-          modules={[EffectCoverflow, Mousewheel]}
-          className="dynasty-3d-wheel"
-          style={{
-            width: '100%',
-            height: '100%'
-          }}
-        >
-          {dynasties.map((dynasty) => (
+        effect={'coverflow'}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={'auto'}
+        spaceBetween={20}
+        autoplay={false}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 150,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        mousewheel={{
+          invert: false,
+          thresholdDelta: 10
+        }}
+        modules={[EffectCoverflow, Mousewheel]}
+        className="dynasty-3d-wheel"
+        style={{
+          width: '100%',
+          height: '100%'
+        }}
+        onSlideChange={handleSlideChange}>
+        {dynasties.map((dynasty) => (
             <SwiperSlide
               key={dynasty.name}
               style={{

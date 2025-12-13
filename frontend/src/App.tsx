@@ -4,12 +4,11 @@ import { MapView } from './features/map/MapView';
 import { EventList } from './features/events/EventList';
 import './App.css';
 import './styles/ui.css';
-import { getDataSource } from './config/env';
+
 import {
   Box,
   Drawer,
   Button,
-  Badge,
   Stack,
   TextField,
   Divider,
@@ -21,8 +20,7 @@ import {
   MapOutlined,
   Settings
 } from '@mui/icons-material';
-import { useEventsStore } from './store';
-import { useTimelineStore } from './store';
+import { useEventsStore, useTimelineStore, useDynastyStore } from './store';
 
 function App() {
   const [activeTab, setActiveTab] = useState<'timeline' | 'map'>('timeline');
@@ -33,6 +31,7 @@ function App() {
   // 获取搜索和时间选择相关的store
   const { searchQuery, setSearchQuery } = useEventsStore();
   const { startYear, endYear, setYears } = useTimelineStore();
+  const { selectedDynasty } = useDynastyStore();
   
   // 当startYear或endYear变化时，更新临时值
   useEffect(() => {
@@ -328,7 +327,15 @@ function App() {
         </Drawer>
 
         {/* 主内容区域 */}
-        <Box component="main" sx={{ flex: 1, overflow: 'auto', padding: '16px', marginTop: 0 }} className="app-main">
+        <Box component="main" sx={{ 
+          flex: 1, 
+          overflow: 'auto', 
+          padding: '16px', 
+          marginTop: 0, 
+          background: selectedDynasty ? `url(${selectedDynasty.backgroundImage}) no-repeat center center fixed` : 'var(--color-bg-gradient)',
+          backgroundSize: 'cover',
+          transition: 'background-image 0.5s ease-in-out'
+        }} className="app-main">
           <div className="content" style={{ height: '100%' }}>
             {activeTab === 'map' ? (
               <MapView />
