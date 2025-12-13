@@ -32,7 +32,6 @@ function App() {
         </Space>
         <div className="app-header-content">
           <Title level={2} style={{ color: '#fff', margin: 0 }}>中国历史全景</Title>
-          <Text style={{ color: '#fff', opacity: 0.8 }}>Chinese Historical Panorama</Text>
         </div>
       </Header>
 
