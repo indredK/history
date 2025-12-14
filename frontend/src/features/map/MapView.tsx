@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useMapStore } from '../../store';
-import '../../components/MapView.css';
+import './MapView.css';
 
 export function MapView() {
   const { latitude, longitude, zoom, setLocation } = useMapStore();

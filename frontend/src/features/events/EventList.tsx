@@ -1,18 +1,18 @@
 import { useEventsStore } from '../../store';
 import { useEffect, useRef } from 'react';
 import { getEvents } from '../../services/dataClient';
-import '../../components/EventList.css';
+import './EventList.css';
 
 import { Dynasty3DWheel } from './components/Dynasty3DWheel';
 import { useEventFilter } from './hooks/useEventFilter';
 import { useHoverScroll } from './hooks/useHoverScroll';
-import { Box, Paper, Button, Typography, CircularProgress } from '@mui/material';
+import { Box, Paper, Button, Typography } from '@mui/material';
 import { StarOutline, Star, Share, Info } from '@mui/icons-material';
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/lab';
 import type { Event } from '../../types/models';
 
 export function EventList() {
-  const { loading, setEvents, favorites, toggleFavorite } = useEventsStore();
+  const { setEvents, favorites, toggleFavorite } = useEventsStore();
   const timelineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,10 +24,10 @@ export function EventList() {
 
   const filtered = useEventFilter();
   
-  // 使用自定义Hook处理悬停滚动，只在有数据且加载完成后启用
+  // 使用自定义Hook处理悬停滚动
   useHoverScroll<HTMLDivElement>(timelineRef, {
     easing: 0.08,
-    enabled: !loading && filtered.length > 0,
+    enabled: filtered.length > 0,
     scrollbarAreaHeight: 30,
     onScrollChange: (current, target) => {
       console.log('滚动检测:', current, target);
@@ -46,15 +46,6 @@ export function EventList() {
       navigator.clipboard.writeText(`${event.title} - ${location.href}`);
     }
   };
-
-  if (loading) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px', flexDirection: 'column' }}>
-        <CircularProgress size="large" sx={{ color: '#8c1c13' }} />
-        <Typography sx={{ marginTop: 2, textAlign: 'center' }}>加载历史事件中...</Typography>
-      </Box>
-    );
-  }
 
   return (
     <Paper className="event-list-container animate__animated animate__fadeIn" sx={{ padding: 2, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: 'rgba(255, 255, 255, 0)', backdropFilter: 'blur(10px)', boxShadow: 'none' }}>

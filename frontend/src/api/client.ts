@@ -10,5 +10,6 @@ export const getEvents = () => api.get('/events');
 export const getEventsByRange = (startYear: number, endYear: number) =>
   api.get('/timeline', { params: { startYear, endYear } });
 export const getPlaces = () => api.get('/places');
+export const getDynasties = () => api.get('/dynasties');
 
 export default api;

@@ -4,18 +4,15 @@ import { useEffect } from 'react';
 
 export function Timeline() {
   const { startYear, endYear, setYears } = useTimelineStore();
-  const { setEvents, setLoading } = useEventsStore();
+  const { setEvents } = useEventsStore();
 
   const handleDateChange = async (start: number, end: number) => {
     setYears(start, end);
-    setLoading(true);
     try {
       const res = await getEventsByRange(start, end);
       setEvents(res.data);
     } catch (err) {
       console.error('Failed to fetch events', err);
-    } finally {
-      setLoading(false);
     }
   };
 
