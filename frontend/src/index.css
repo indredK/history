@@ -288,27 +288,70 @@ input:hover, textarea:hover, select:hover {
   box-shadow: 0 0 0 2px rgba(255, 61, 0, 0.1);
 }
 
-/* 滚动条样式 */
+/* 炫酷滚动条样式 - 全局 */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-tertiary);
+  background: linear-gradient(180deg, 
+    var(--color-bg-tertiary) 0%, 
+    rgba(255, 61, 0, 0.15) 25%,
+    var(--color-bg-secondary) 50%, 
+    rgba(156, 39, 176, 0.15) 75%,
+    var(--color-bg-tertiary) 100%);
+  background-size: 100% 200%;
   border-radius: var(--radius-full);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  margin: 4px 0;
+  animation: scrollbarTrackFlowVertical 4s ease-in-out infinite;
+}
+
+@keyframes scrollbarTrackFlowVertical {
+  0%, 100% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
+  background: var(--color-primary-gradient);
   border-radius: var(--radius-full);
-  transition: all var(--transition-normal);
+  border: 2px solid var(--color-bg-secondary);
+  box-shadow: 
+    0 0 10px rgba(255, 61, 0, 0.5),
+    0 0 20px rgba(255, 61, 0, 0.3),
+    inset 0 0 6px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-gradient);
-  box-shadow: 0 0 10px rgba(255, 61, 0, 0.5);
+  background: linear-gradient(180deg, #FF6F3D 0%, #FF3D00 50%, #FF6F3D 100%);
+  box-shadow: 
+    0 0 15px rgba(255, 61, 0, 0.8),
+    0 0 30px rgba(255, 61, 0, 0.5),
+    0 0 45px rgba(255, 61, 0, 0.3),
+    inset 0 0 8px rgba(255, 255, 255, 0.3);
+  transform: scale(1.15);
+  border-color: var(--color-bg-card);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--color-primary);
+  box-shadow: 
+    0 0 20px rgba(255, 61, 0, 1),
+    0 0 40px rgba(255, 61, 0, 0.7),
+    inset 0 0 10px rgba(255, 255, 255, 0.4);
   transform: scale(1.1);
+}
+
+/* 滚动条角落样式 */
+::-webkit-scrollbar-corner {
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
 }
 
 /* 选择文本样式 */

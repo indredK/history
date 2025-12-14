@@ -191,36 +191,7 @@
   transform: scale(1.02);
 }
 
-/* 横向时间轴容器样式 */
-.timeline-container {
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 16px 0;
-  min-height: 300px;
-  flex: 1;
-  display: flex;
-  align-items: center;
-    position: relative;
-}
 
-.timeline-container::-webkit-scrollbar {
-  height: 8px;
-}
-
-.timeline-container::-webkit-scrollbar-track {
-  background-color: var(--color-gray-100);
-  border-radius: var(--radius-full);
-}
-
-.timeline-container::-webkit-scrollbar-thumb {
-  background-color: var(--color-border-medium);
-  border-radius: var(--radius-full);
-  transition: background-color 0.3s ease;
-}
-
-.timeline-container::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-primary);
-}
 
 /* Material UI Timeline 横向布局样式 */
 .css-1q2qef8-MuiTimeline-root {

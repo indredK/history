@@ -1,11 +1,11 @@
 import { useEventsStore } from '../../store';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { getEvents } from '../../services/dataClient';
 import './EventList.css';
 
 import { Dynasty3DWheel } from './components/Dynasty3DWheel';
 import { useEventFilter } from './hooks/useEventFilter';
-import { useHoverScroll } from './hooks/useHoverScroll';
+import { HoverScrollContainer } from '../../components/HoverScrollContainer';
 import { Box, Paper, Button, Typography } from '@mui/material';
 import { StarOutline, Star, Share, Info } from '@mui/icons-material';
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/lab';
@@ -13,7 +13,6 @@ import type { Event } from '../../types/models';
 
 export function EventList() {
   const { setEvents, favorites, toggleFavorite } = useEventsStore();
-  const timelineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     getEvents().then((res) => {
@@ -23,16 +22,6 @@ export function EventList() {
   }, []);
 
   const filtered = useEventFilter();
-  
-  // 使用自定义Hook处理悬停滚动
-  useHoverScroll<HTMLDivElement>(timelineRef, {
-    easing: 0.08,
-    enabled: filtered.length > 0,
-    scrollbarAreaHeight: 30,
-    onScrollChange: (current, target) => {
-      console.log('滚动检测:', current, target);
-    }
-  });
   
   const handleShare = (event: Event) => {
     const data = {
@@ -65,53 +54,60 @@ export function EventList() {
               暂无匹配的历史事件
             </Box>
           ) : (
-            <div ref={timelineRef} className="timeline-container">
+            <HoverScrollContainer
+              containerClassName="timeline-container"
+              hoverScrollOptions={{
+                easing: 0.08,
+                enabled: filtered.length > 0,
+                scrollbarAreaHeight: 16
+              }}
+            >
               <Timeline position="alternate" sx={{ flexDirection: 'row', display: 'flex' }}>
                 {filtered.map((event) => (
-                    <TimelineItem key={event.id} sx={{ flexShrink: 0, minWidth: '250px' }}>
-                      <TimelineSeparator>
-                        <TimelineDot sx={{ bgcolor: '#8c1c13' }} />
-                        <TimelineConnector sx={{ bgcolor: '#8c1c13', height: '2px' }} />
-                      </TimelineSeparator>
-                      <TimelineContent sx={{ padding: '0 16px', textAlign: 'center' }}>
-                        <Box sx={{ marginBottom: '8px' }}>
-                          <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>
-                            {event.startYear}{event.endYear !== event.startYear && ` - ${event.endYear}`}
-                          </Typography>
+                  <TimelineItem key={event.id} sx={{ flexShrink: 0, minWidth: '250px' }}>
+                    <TimelineSeparator>
+                      <TimelineDot sx={{ bgcolor: '#8c1c13' }} />
+                      <TimelineConnector sx={{ bgcolor: '#8c1c13', height: '2px' }} />
+                    </TimelineSeparator>
+                    <TimelineContent sx={{ padding: '0 16px', textAlign: 'center' }}>
+                      <Box sx={{ marginBottom: '8px' }}>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>
+                          {event.startYear}{event.endYear !== event.startYear && ` - ${event.endYear}`}
+                        </Typography>
+                      </Box>
+                      <Paper elevation={2} sx={{ padding: 2, minWidth: '200px', position: 'relative', zIndex: 0, backgroundColor: 'rgba(255, 255, 255, 0.6)', backdropFilter: 'blur(10px)' }} className="animate__animated animate__fadeInLeft">
+                        <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginBottom: 1, textAlign: 'center' }}>
+                          {event.title}
+                        </Typography>
+                        <Typography variant="body2" sx={{ marginBottom: 2, textAlign: 'center', minHeight: '40px' }}>
+                          {event.description}
+                        </Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, marginTop: 1 }}>
+                          <Button
+                            size="small"
+                            startIcon={favorites.includes(event.id) ? <Star sx={{ color: '#ffd700' }} /> : <StarOutline />}
+                            onClick={() => toggleFavorite(event.id)}
+                            sx={{ minWidth: 'auto', padding: '4px' }}
+                          />
+                          <Button
+                            size="small"
+                            startIcon={<Share />}
+                            onClick={() => handleShare(event)}
+                            sx={{ minWidth: 'auto', padding: '4px' }}
+                          />
                         </Box>
-                        <Paper elevation={2} sx={{ padding: 2, minWidth: '200px', position: 'relative', zIndex: 0, backgroundColor: 'rgba(255, 255, 255, 0.6)', backdropFilter: 'blur(10px)' }} className="animate__animated animate__fadeInLeft">
-                          <Typography variant="subtitle1" sx={{ fontWeight: 'bold', marginBottom: 1, textAlign: 'center' }}>
-                            {event.title}
+                        {event.startDate && (
+                          <Typography variant="caption" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5, justifyContent: 'center', marginTop: 1 }}>
+                            <Info fontSize="small" />
+                            {event.startDate}
                           </Typography>
-                          <Typography variant="body2" sx={{ marginBottom: 2, textAlign: 'center', minHeight: '40px' }}>
-                            {event.description}
-                          </Typography>
-                          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, marginTop: 1 }}>
-                            <Button
-                              size="small"
-                              startIcon={favorites.includes(event.id) ? <Star sx={{ color: '#ffd700' }} /> : <StarOutline />}
-                              onClick={() => toggleFavorite(event.id)}
-                              sx={{ minWidth: 'auto', padding: '4px' }}
-                            />
-                            <Button
-                              size="small"
-                              startIcon={<Share />}
-                              onClick={() => handleShare(event)}
-                              sx={{ minWidth: 'auto', padding: '4px' }}
-                            />
-                          </Box>
-                          {event.startDate && (
-                            <Typography variant="caption" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5, justifyContent: 'center', marginTop: 1 }}>
-                              <Info fontSize="small" />
-                              {event.startDate}
-                            </Typography>
-                          )}
-                        </Paper>
-                      </TimelineContent>
-                    </TimelineItem>
-                  ))}
+                        )}
+                      </Paper>
+                    </TimelineContent>
+                  </TimelineItem>
+                ))}
               </Timeline>
-            </div>
+            </HoverScrollContainer>
           )}
         </Paper>
       </Box>
