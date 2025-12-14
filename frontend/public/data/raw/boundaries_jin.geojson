@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "name": "晋朝疆域 (265-420)",
+  "period": "晋朝",
+  "valid_from": 265,
+  "valid_to": 420,
+  "description": "西晋统一后及东晋时期的疆域",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "jin_empire",
+      "properties": {
+        "name": "晋帝国",
+        "admin_level": "empire",
+        "year": 300,
+        "source": "CHGIS"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[
+          [100, 28], [108, 24], [120, 24], [122, 32],
+          [120, 40], [112, 42], [104, 40], [98, 36], [100, 28]
+        ]]]
+      }
+    }
+  ]
+}

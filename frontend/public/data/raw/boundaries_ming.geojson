@@ -1,0 +1,28 @@
+{
+  "type": "FeatureCollection",
+  "name": "明朝疆域 (1368-1644)",
+  "period": "明朝",
+  "valid_from": 1368,
+  "valid_to": 1644,
+  "description": "明朝的疆域范围",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "ming_empire",
+      "properties": {
+        "name": "明帝国",
+        "admin_level": "empire",
+        "year": 1450,
+        "source": "CHGIS"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[
+          [98, 22], [108, 18], [120, 22], [124, 32],
+          [122, 42], [115, 48], [105, 48], [95, 44],
+          [92, 36], [98, 22]
+        ]]]
+      }
+    }
+  ]
+}

@@ -1,0 +1,341 @@
+/* 功能面板容器样式 */
+.function-panel-container {
+  /* 确保容器正确处理flex布局 */
+  min-height: 0;
+  max-height: 100%;
+}
+
+/* 功能面板内容区域 */
+.function-panel-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  padding-right: 4px;
+  
+  /* 平滑滚动 */
+  scroll-behavior: smooth;
+  
+  /* 自定义滚动条样式 - 炫酷多彩流光效果 */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 61, 0, 0.6) var(--color-bg-tertiary);
+}
+
+/* WebKit 滚动条样式 */
+.function-panel-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.function-panel-content::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, 
+    rgba(255, 61, 0, 0.1) 0%,
+    rgba(156, 39, 176, 0.1) 25%,
+    rgba(3, 169, 244, 0.1) 50%,
+    rgba(76, 175, 80, 0.1) 75%,
+    rgba(255, 234, 0, 0.1) 100%);
+  background-size: 100% 200%;
+  border-radius: 4px;
+  margin: 2px 0;
+  animation: trackGradientFlow 4s linear infinite;
+}
+
+@keyframes trackGradientFlow {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 0% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.function-panel-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, 
+    #FF3D00 0%,
+    #FF6F3D 15%,
+    #9C27B0 30%,
+    #03A9F4 45%,
+    #FFEA00 60%,
+    #4CAF50 75%,
+    #FF6F3D 90%,
+    #FF3D00 100%);
+  background-size: 100% 300%;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 0 8px rgba(255, 61, 0, 0.4),
+    0 0 12px rgba(255, 61, 0, 0.2),
+    inset 0 0 4px rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: thumbGradientFlow 3s linear infinite;
+}
+
+@keyframes thumbGradientFlow {
+  0% { 
+    background-position: 0% 0%;
+    box-shadow: 
+      0 0 8px rgba(255, 61, 0, 0.4),
+      0 0 12px rgba(255, 61, 0, 0.2),
+      inset 0 0 4px rgba(255, 255, 255, 0.3);
+  }
+  33% { 
+    background-position: 0% 50%;
+    box-shadow: 
+      0 0 8px rgba(156, 39, 176, 0.4),
+      0 0 12px rgba(156, 39, 176, 0.2),
+      inset 0 0 4px rgba(255, 255, 255, 0.3);
+  }
+  66% { 
+    background-position: 0% 100%;
+    box-shadow: 
+      0 0 8px rgba(3, 169, 244, 0.4),
+      0 0 12px rgba(3, 169, 244, 0.2),
+      inset 0 0 4px rgba(255, 255, 255, 0.3);
+  }
+  100% { 
+    background-position: 0% 0%;
+    box-shadow: 
+      0 0 8px rgba(255, 61, 0, 0.4),
+      0 0 12px rgba(255, 61, 0, 0.2),
+      inset 0 0 4px rgba(255, 255, 255, 0.3);
+  }
+}
+
+.function-panel-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, 
+    #FF3D00 0%,
+    #9C27B0 20%,
+    #03A9F4 40%,
+    #FFEA00 60%,
+    #4CAF50 80%,
+    #FF3D00 100%);
+  background-size: 100% 400%;
+  box-shadow: 
+    0 0 12px rgba(255, 61, 0, 0.6),
+    0 0 18px rgba(255, 61, 0, 0.4),
+    0 0 24px rgba(156, 39, 176, 0.3),
+    inset 0 0 6px rgba(255, 255, 255, 0.4);
+  transform: scaleX(1.2);
+  animation: thumbGradientFlowFast 2s linear infinite;
+}
+
+@keyframes thumbGradientFlowFast {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 400%; }
+}
+
+.function-panel-content::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, 
+    #FF3D00 0%,
+    #FFEA00 25%,
+    #4CAF50 50%,
+    #03A9F4 75%,
+    #FF3D00 100%);
+  background-size: 100% 500%;
+  box-shadow: 
+    0 0 15px rgba(255, 61, 0, 0.8),
+    0 0 25px rgba(255, 234, 0, 0.6),
+    0 0 35px rgba(3, 169, 244, 0.4),
+    inset 0 0 8px rgba(255, 255, 255, 0.5);
+  transform: scaleX(1.3);
+  animation: thumbPulse 1s linear infinite;
+}
+
+@keyframes thumbPulse {
+  0%, 100% { 
+    background-position: 0% 0%;
+    transform: scaleX(1.3);
+  }
+  50% { 
+    background-position: 0% 500%;
+    transform: scaleX(1.4);
+  }
+}
+
+/* 优化 Accordion 组件在功能面板中的显示 */
+.function-panel-content .MuiAccordion-root {
+  margin: 0 0 10px 0 !important;
+  box-shadow: var(--shadow-sm) !important;
+  border: 1px solid var(--color-border-medium) !important;
+  border-radius: var(--radius-lg) !important;
+  background: var(--color-bg-tertiary) !important;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 优化 Accordion 标题文字大小 */
+.function-panel-content .MuiAccordionSummary-content .MuiTypography-root {
+  font-size: 0.8125rem !important;
+  line-height: 1.4 !important;
+}
+
+.function-panel-content .MuiAccordion-root:hover {
+  box-shadow: var(--shadow-md) !important;
+  transform: translateY(-1px);
+}
+
+.function-panel-content .MuiAccordion-root:before {
+  display: none !important;
+}
+
+.function-panel-content .MuiAccordionSummary-root {
+  padding: 4px 8px !important;
+  min-height: 32px !important;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.05) 0%, 
+    rgba(255, 255, 255, 0.02) 100%) !important;
+  border-bottom: 1px solid var(--color-border-light) !important;
+}
+
+.function-panel-content .MuiAccordionSummary-root:hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 61, 0, 0.08) 0%, 
+    rgba(3, 169, 244, 0.08) 100%) !important;
+}
+
+.function-panel-content .MuiAccordionDetails-root {
+  padding: 12px !important;
+  background: var(--color-bg-card) !important;
+}
+
+/* 优化 FormControlLabel 样式 */
+.function-panel-content .MuiFormControlLabel-root {
+  margin: 4px 0 !important;
+  padding: 4px 8px !important;
+  border-radius: var(--radius-md) !important;
+  transition: all 0.2s ease !important;
+}
+
+.function-panel-content .MuiFormControlLabel-root:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  transform: translateX(2px);
+}
+
+/* 优化 Chip 组件样式 */
+.function-panel-content .MuiChip-root {
+  margin: 2px 4px 2px 0 !important;
+  font-size: 0.75rem !important;
+  height: 24px !important;
+  border-radius: var(--radius-md) !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+}
+
+.function-panel-content .MuiChip-root:hover {
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: var(--shadow-sm);
+}
+
+.function-panel-content .MuiChip-outlined {
+  border-color: var(--color-border-medium) !important;
+}
+
+.function-panel-content .MuiChip-outlined:hover {
+  border-color: var(--color-primary) !important;
+  background: rgba(255, 61, 0, 0.1) !important;
+}
+
+/* 优化 Slider 组件样式 */
+.function-panel-content .MuiSlider-root {
+  margin: 12px 0 !important;
+  color: var(--color-primary) !important;
+}
+
+.function-panel-content .MuiSlider-thumb {
+  box-shadow: 
+    0 0 8px rgba(255, 61, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.2s ease !important;
+}
+
+.function-panel-content .MuiSlider-thumb:hover {
+  box-shadow: 
+    0 0 12px rgba(255, 61, 0, 0.6),
+    0 4px 8px rgba(0, 0, 0, 0.3) !important;
+  transform: scale(1.1);
+}
+
+/* 优化 TextField 样式 */
+.function-panel-content .MuiTextField-root {
+  margin-bottom: 12px !important;
+}
+
+.function-panel-content .MuiOutlinedInput-root {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.function-panel-content .MuiOutlinedInput-root:hover {
+  transform: translateY(-1px);
+}
+
+/* 优化 Button 样式 */
+.function-panel-content .MuiButton-root {
+  border-radius: var(--radius-lg) !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.function-panel-content .MuiButton-contained {
+  box-shadow: var(--shadow-md) !important;
+}
+
+.function-panel-content .MuiButton-contained:hover {
+  box-shadow: var(--shadow-lg) !important;
+  transform: translateY(-2px);
+}
+
+/* 优化 ToggleButtonGroup 样式 */
+.function-panel-content .MuiToggleButtonGroup-root {
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.function-panel-content .MuiToggleButton-root {
+  border-radius: 0 !important;
+  transition: all 0.2s ease !important;
+  font-size: 0.75rem !important;
+  padding: 6px 12px !important;
+}
+
+.function-panel-content .MuiToggleButton-root:hover {
+  background: rgba(255, 61, 0, 0.1) !important;
+  transform: scale(1.02);
+}
+
+.function-panel-content .MuiToggleButton-root.Mui-selected {
+  background: var(--color-primary-gradient) !important;
+  color: white !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 响应式优化 */
+@media (max-height: 600px) {
+  .function-panel-content .MuiAccordionSummary-root {
+    min-height: 36px !important;
+    padding: 6px 10px !important;
+  }
+  
+  .function-panel-content .MuiAccordionDetails-root {
+    padding: 12px !important;
+  }
+  
+  .function-panel-content .MuiFormControlLabel-root {
+    margin: 2px 0 !important;
+    padding: 2px 6px !important;
+  }
+}
+
+/* 滚动性能优化 */
+.function-panel-content {
+  /* 启用硬件加速 */
+  transform: translateZ(0);
+  will-change: scroll-position;
+  
+  /* 优化滚动性能 */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* 焦点状态优化 */
+.function-panel-content:focus-within {
+  outline: none;
+  outline-offset: 0;
+  border-radius: var(--radius-md);
+}

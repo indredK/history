@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "name": "秦朝疆域 (前221-前206)",
+  "period": "秦朝",
+  "valid_from": -221,
+  "valid_to": -206,
+  "description": "秦始皇统一六国后的疆域范围",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "qin_empire",
+      "properties": {
+        "name": "秦帝国",
+        "admin_level": "empire",
+        "year": -220,
+        "source": "CHGIS"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[
+          [104, 34], [110, 32], [118, 32], [121, 35],
+          [119, 40], [114, 42], [108, 40], [104, 38], [104, 34]
+        ]]]
+      }
+    }
+  ]
+}

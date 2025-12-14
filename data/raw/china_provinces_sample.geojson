@@ -1,0 +1,75 @@
+{
+  "type": "FeatureCollection",
+  "name": "中国省级行政区域示例",
+  "description": "中华人民共和国省级行政区域边界示例数据",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "beijing",
+      "properties": {
+        "name": "北京市",
+        "name_en": "Beijing",
+        "admin_level": "province",
+        "type": "municipality",
+        "population": 21540000,
+        "area_km2": 16410.54,
+        "capital": "北京"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[115.7, 39.4], [117.4, 39.4], [117.4, 41.6], [115.7, 41.6], [115.7, 39.4]]]
+      }
+    },
+    {
+      "type": "Feature", 
+      "id": "tianjin",
+      "properties": {
+        "name": "天津市",
+        "name_en": "Tianjin",
+        "admin_level": "province",
+        "type": "municipality",
+        "population": 13866000,
+        "area_km2": 11966.45,
+        "capital": "天津"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[116.7, 38.8], [118.4, 38.8], [118.4, 40.3], [116.7, 40.3], [116.7, 38.8]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "hebei", 
+      "properties": {
+        "name": "河北省",
+        "name_en": "Hebei",
+        "admin_level": "province",
+        "type": "province",
+        "population": 74610000,
+        "area_km2": 188800,
+        "capital": "石家庄"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[113.4, 36.1], [119.8, 36.1], [119.8, 42.6], [113.4, 42.6], [113.4, 36.1]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "shanxi",
+      "properties": {
+        "name": "山西省", 
+        "name_en": "Shanxi",
+        "admin_level": "province",
+        "type": "province",
+        "population": 34915000,
+        "area_km2": 156700,
+        "capital": "太原"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[110.3, 34.6], [114.6, 34.6], [114.6, 40.7], [110.3, 40.7], [110.3, 34.6]]]
+      }
+    }
+  ]
+}

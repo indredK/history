@@ -1,0 +1,173 @@
+/* 侧边栏样式优化 */
+.app-sider {
+  /* 确保侧边栏不会出现滚动条 */
+  overflow: hidden !important;
+  position: relative;
+}
+
+.app-sider .MuiDrawer-paper {
+  /* 防止整个侧边栏滚动 */
+  overflow: hidden !important;
+  height: 100% !important;
+  position: relative;
+  
+  /* 添加微妙的边框光效 */
+  border-right: 2px solid transparent !important;
+  background-image: 
+    linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-card) 100%),
+    linear-gradient(90deg, 
+      rgba(255, 61, 0, 0.1) 0%,
+      rgba(3, 169, 244, 0.1) 50%,
+      rgba(76, 175, 80, 0.1) 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  
+  /* 添加整体阴影效果 */
+  box-shadow: 
+    var(--shadow-md),
+    inset -1px 0 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 侧边栏标题区域优化 */
+.app-sider .MuiTypography-h6 {
+  position: relative;
+  overflow: hidden;
+}
+
+.app-sider .MuiTypography-h6::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.2) 50%, 
+    transparent 100%);
+  animation: titleShimmer 4s ease-in-out infinite;
+}
+
+@keyframes titleShimmer {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+/* 导航区域优化 */
+.app-sider .MuiDivider-root {
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    var(--color-border-medium) 20%,
+    var(--color-border-medium) 80%,
+    transparent 100%) !important;
+  height: 1px !important;
+  margin: 16px 0 !important;
+}
+
+/* 兼容旧的滚动样式（向后兼容） */
+.function-panel-scroll {
+  /* 自定义滚动条 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-medium) var(--color-bg-tertiary);
+  
+  /* 确保滚动行为正确 */
+  scroll-behavior: smooth;
+  
+  /* 强制显示滚动条以便测试 */
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+}
+
+.function-panel-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.function-panel-scroll::-webkit-scrollbar-track {
+  background: var(--color-bg-tertiary);
+  border-radius: 4px;
+  margin: 2px;
+}
+
+.function-panel-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-border-medium);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  min-height: 20px;
+}
+
+.function-panel-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+.function-panel-scroll::-webkit-scrollbar-corner {
+  background: var(--color-bg-tertiary);
+}
+
+/* Accordion 组件优化 */
+.function-panel-scroll .MuiAccordion-root {
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+
+.function-panel-scroll .MuiAccordion-root:before {
+  display: none !important;
+}
+
+/* 确保 Accordion 内容不会过度撑开 */
+.function-panel-scroll .MuiAccordionDetails-root {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+/* 优化 Chip 组件在小空间内的显示 */
+.function-panel-scroll .MuiChip-root {
+  margin: 2px !important;
+  font-size: 0.75rem !important;
+}
+
+/* 优化 FormControlLabel 间距 */
+.function-panel-scroll .MuiFormControlLabel-root {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 4px !important;
+}
+
+/* 优化 Slider 组件 */
+.function-panel-scroll .MuiSlider-root {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+/* 侧边栏整体动画效果 */
+.app-sider {
+  animation: sidebarSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes sidebarSlideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* 响应式优化 */
+@media (max-height: 700px) {
+  .app-sider .MuiTypography-h6 {
+    font-size: 1.1rem !important;
+    margin-bottom: 16px !important;
+    padding: 6px !important;
+  }
+}
+
+@media (max-height: 600px) {
+  .app-sider .MuiTypography-h6 {
+    font-size: 1rem !important;
+    margin-bottom: 12px !important;
+    padding: 4px !important;
+  }
+}

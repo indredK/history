@@ -1,12 +1,15 @@
 import { Box } from '@mui/material';
 import { Timeline } from '../features/timeline/Timeline';
 import { MapView } from '../features/map/MapView';
+import { MapErrorBoundary } from '../features/map/components/MapErrorBoundary';
 import { EventList } from '../features/events/EventList';
+import { PeoplePage } from '../features/people/PeoplePage';
+import { CulturePage } from '../features/culture/CulturePage';
 import { useDynastyStore } from '../store';
 import { useDynastyImage } from '../hooks/useDynastyImage';
 
 interface MainContentProps {
-  activeTab: 'timeline' | 'map';
+  activeTab: 'timeline' | 'map' | 'people' | 'culture';
 }
 
 export function MainContent({ activeTab }: MainContentProps) {
@@ -56,7 +59,13 @@ export function MainContent({ activeTab }: MainContentProps) {
     }}>
       <div className="content" style={{ height: '100%', position: 'relative' }}>
         {activeTab === 'map' ? (
-          <MapView />
+          <MapErrorBoundary>
+            <MapView />
+          </MapErrorBoundary>
+        ) : activeTab === 'people' ? (
+          <PeoplePage />
+        ) : activeTab === 'culture' ? (
+          <CulturePage />
         ) : (
           <>
             <Timeline />

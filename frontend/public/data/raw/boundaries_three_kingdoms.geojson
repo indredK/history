@@ -1,0 +1,61 @@
+{
+  "type": "FeatureCollection",
+  "name": "三国疆域 (220-280)",
+  "period": "三国",
+  "valid_from": 220,
+  "valid_to": 280,
+  "description": "魏蜀吴三国鼎立时期",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "wei",
+      "properties": {
+        "name": "曹魏",
+        "admin_level": "empire",
+        "year": 250,
+        "source": "CHGIS"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[
+          [105, 34], [112, 32], [118, 34], [120, 38],
+          [116, 42], [108, 42], [102, 40], [105, 34]
+        ]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "shu",
+      "properties": {
+        "name": "蜀汉",
+        "admin_level": "empire",
+        "year": 250,
+        "source": "CHGIS"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[
+          [100, 28], [108, 26], [110, 30], [108, 34],
+          [102, 34], [98, 32], [100, 28]
+        ]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "wu",
+      "properties": {
+        "name": "东吴",
+        "admin_level": "empire",
+        "year": 250,
+        "source": "CHGIS"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[
+          [110, 26], [120, 24], [122, 30], [120, 34],
+          [114, 34], [110, 32], [110, 26]
+        ]]]
+      }
+    }
+  ]
+}

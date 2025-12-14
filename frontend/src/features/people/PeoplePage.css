@@ -1,0 +1,14 @@
+.people-page {
+  padding: 24px;
+  min-height: 100vh;
+  background: var(--color-bg-primary);
+}
+
+.people-page .MuiCard-root {
+  cursor: pointer;
+}
+
+.people-page .MuiAvatar-root {
+  font-size: 1.5rem;
+  font-weight: bold;
+}

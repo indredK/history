@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "name": "隋朝疆域 (581-618)",
+  "period": "隋朝",
+  "valid_from": 581,
+  "valid_to": 618,
+  "description": "隋朝统一南北后的疆域",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "sui_empire",
+      "properties": {
+        "name": "隋帝国",
+        "admin_level": "empire",
+        "year": 600,
+        "source": "CHGIS"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[
+          [100, 28], [110, 24], [122, 26], [124, 34],
+          [120, 42], [110, 45], [100, 42], [95, 36], [100, 28]
+        ]]]
+      }
+    }
+  ]
+}
