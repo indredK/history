@@ -1,4 +1,5 @@
 import { Box, Popover, Stack, Typography, FormControlLabel, Checkbox, Slider, Button, Divider } from '@mui/material';
+import { popoverProps, popoverContentStyles, getThemedCheckboxStyles, formControlLabelStyles, dividerStyles, captionStyles, getThemedSliderStyles, getThemedButtonStyles, getThemedPrimaryButtonStyles } from '../popoverStyles';
 
 interface PersonalizationSettingsPopoverProps {
   anchorEl: HTMLButtonElement | null;
@@ -15,46 +16,32 @@ export function PersonalizationSettingsPopover({ anchorEl, onClose }: Personaliz
       open={open}
       anchorEl={anchorEl}
       onClose={onClose}
-      anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'center', horizontal: 'left' }}
-      disableScrollLock
-      elevation={8}
-      slotProps={{
-        paper: {
-          sx: {
-            borderRadius: 'var(--radius-xl)',
-            background: 'linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-secondary) 100%)',
-            border: '1px solid var(--color-border-medium)',
-            boxShadow: 'var(--shadow-xl), var(--shadow-glow)',
-            backdropFilter: 'blur(10px)'
-          }
-        }
-      }}
+      {...popoverProps}
     >
-      <Box sx={{ p: 3, minWidth: 280 }}>
+      <Box sx={popoverContentStyles}>
         <Typography variant="subtitle1" gutterBottom>
           个性化设置
         </Typography>
         <Stack spacing={2}>
           <Stack spacing={1}>
             <FormControlLabel
-              control={<Checkbox />}
+              control={<Checkbox sx={getThemedCheckboxStyles('timeline')} />}
               label="深色主题"
-              sx={{ margin: 0 }}
+              sx={formControlLabelStyles}
             />
             <FormControlLabel
-              control={<Checkbox />}
+              control={<Checkbox sx={getThemedCheckboxStyles('timeline')} />}
               label="自动保存设置"
-              sx={{ margin: 0 }}
+              sx={formControlLabelStyles}
             />
             <FormControlLabel
-              control={<Checkbox />}
+              control={<Checkbox sx={getThemedCheckboxStyles('timeline')} />}
               label="记住上次浏览位置"
-              sx={{ margin: 0 }}
+              sx={formControlLabelStyles}
             />
           </Stack>
           
-          <Divider sx={{ my: 1 }} />
+          <Divider sx={dividerStyles} />
           
           <Box sx={{ mt: 1 }}>
             <Typography variant="body2" gutterBottom>
@@ -63,55 +50,28 @@ export function PersonalizationSettingsPopover({ anchorEl, onClose }: Personaliz
             <Slider
               defaultValue={50}
               valueLabelDisplay="auto"
-              sx={{
-                color: 'var(--color-primary)',
-                '& .MuiSlider-thumb': {
-                  backgroundColor: 'var(--color-primary)',
-                },
-                '& .MuiSlider-track': {
-                  backgroundColor: 'var(--color-primary)',
-                },
-                '& .MuiSlider-rail': {
-                  backgroundColor: 'var(--color-border-medium)',
-                }
-              }}
+              sx={getThemedSliderStyles('timeline')}
             />
           </Box>
           
-          <Divider sx={{ my: 1 }} />
+          <Divider sx={dividerStyles} />
           
           <Box sx={{ mt: 1 }}>
             <Typography variant="body2" gutterBottom>
               界面语言
             </Typography>
-            <Stack direction="row" spacing={1} flexWrap="wrap">
+            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
               <Button
                 variant="outlined"
                 size="small"
-                sx={{
-                  borderRadius: 'var(--radius-md)',
-                  borderColor: 'var(--color-border-medium)',
-                  color: 'var(--color-text-primary)',
-                  '&:hover': {
-                    borderColor: 'var(--color-primary)',
-                    backgroundColor: 'var(--color-bg-tertiary)'
-                  }
-                }}
+                sx={getThemedButtonStyles('timeline')}
               >
                 简体中文
               </Button>
               <Button
                 variant="outlined"
                 size="small"
-                sx={{
-                  borderRadius: 'var(--radius-md)',
-                  borderColor: 'var(--color-border-medium)',
-                  color: 'var(--color-text-primary)',
-                  '&:hover': {
-                    borderColor: 'var(--color-primary)',
-                    backgroundColor: 'var(--color-bg-tertiary)'
-                  }
-                }}
+                sx={getThemedButtonStyles('timeline')}
               >
                 English
               </Button>
@@ -122,14 +82,7 @@ export function PersonalizationSettingsPopover({ anchorEl, onClose }: Personaliz
             <Button
               variant="contained"
               fullWidth
-              sx={{
-                backgroundColor: 'var(--color-primary)',
-                borderRadius: 'var(--radius-md)',
-                '&:hover': {
-                  backgroundColor: 'var(--color-primary-dark)',
-                  boxShadow: 'var(--shadow-md)'
-                }
-              }}
+              sx={getThemedPrimaryButtonStyles('timeline')}
             >
               保存设置
             </Button>

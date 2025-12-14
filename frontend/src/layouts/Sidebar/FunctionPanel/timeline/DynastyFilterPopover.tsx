@@ -1,4 +1,5 @@
 import { Box, Popover, Stack, Typography, Chip } from '@mui/material';
+import { popoverProps, popoverContentStyles, getThemedChipStyles } from '../popoverStyles';
 
 interface DynastyFilterPopoverProps {
   anchorEl: HTMLButtonElement | null;
@@ -15,34 +16,50 @@ export function DynastyFilterPopover({ anchorEl, onClose }: DynastyFilterPopover
       open={open}
       anchorEl={anchorEl}
       onClose={onClose}
-      anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'center', horizontal: 'left' }}
-      disableScrollLock
-      elevation={8}
-      slotProps={{
-        paper: {
-          sx: {
-            borderRadius: 'var(--radius-xl)',
-            background: 'linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-secondary) 100%)',
-            border: '1px solid var(--color-border-medium)',
-            boxShadow: 'var(--shadow-xl), var(--shadow-glow)',
-            backdropFilter: 'blur(10px)'
-          }
-        }
-      }}
+      {...popoverProps}
     >
-      <Box sx={{ p: 3, minWidth: 280 }}>
+      <Box sx={popoverContentStyles}>
         <Typography variant="subtitle1" gutterBottom>
           朝代筛选
         </Typography>
         <Stack spacing={1}>
-          <Stack direction="row" spacing={1} flexWrap="wrap">
-            <Chip label="秦朝" size="small" variant="outlined" />
-            <Chip label="汉朝" size="small" variant="outlined" />
-            <Chip label="唐朝" size="small" variant="outlined" />
-            <Chip label="宋朝" size="small" variant="outlined" />
-            <Chip label="明朝" size="small" variant="outlined" />
-            <Chip label="清朝" size="small" variant="outlined" />
+          <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+            <Chip 
+              label="秦朝" 
+              size="small" 
+              variant="outlined"
+              sx={getThemedChipStyles('timeline')}
+            />
+            <Chip 
+              label="汉朝" 
+              size="small" 
+              variant="outlined"
+              sx={getThemedChipStyles('timeline')}
+            />
+            <Chip 
+              label="唐朝" 
+              size="small" 
+              variant="outlined"
+              sx={getThemedChipStyles('timeline')}
+            />
+            <Chip 
+              label="宋朝" 
+              size="small" 
+              variant="outlined"
+              sx={getThemedChipStyles('timeline')}
+            />
+            <Chip 
+              label="明朝" 
+              size="small" 
+              variant="outlined"
+              sx={getThemedChipStyles('timeline')}
+            />
+            <Chip 
+              label="清朝" 
+              size="small" 
+              variant="outlined"
+              sx={getThemedChipStyles('timeline')}
+            />
           </Stack>
         </Stack>
       </Box>

@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import './CulturePage.css';
 
-export function CulturePage() {
+function CulturePage() {
   return (
     <Box className="culture-page">
       <Typography variant="h4" component="h1" sx={{
@@ -19,3 +19,4 @@ export function CulturePage() {
     </Box>
   );
 }
+export default CulturePage;

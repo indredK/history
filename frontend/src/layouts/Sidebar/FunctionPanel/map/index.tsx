@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { LayerControlPopover } from './LayerControlPopover';
 import { TimeControlPopover } from './TimeControlPopover';
 import { MapSettingsPopover } from './MapSettingsPopover';
+import { functionButtonStyles } from '../popoverStyles';
 
 export function MapFunctions() {
   // 图层控制 Popover 状态
@@ -57,17 +58,7 @@ export function MapFunctions() {
         fullWidth
         size="small"
         onClick={handleLayerControlClick}
-        sx={{
-          backgroundColor: 'var(--color-bg-tertiary)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '6px 12px',
-          borderColor: 'var(--color-border-medium)',
-          '&:hover': {
-            backgroundColor: 'var(--color-bg-quaternary)',
-            borderColor: 'var(--color-primary)',
-            boxShadow: 'var(--shadow-md)'
-          }
-        }}
+        sx={functionButtonStyles}
       >
         图层控制
       </Button>
@@ -83,17 +74,7 @@ export function MapFunctions() {
         fullWidth
         size="small"
         onClick={handleTimeControlClick}
-        sx={{
-          backgroundColor: 'var(--color-bg-tertiary)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '6px 12px',
-          borderColor: 'var(--color-border-medium)',
-          '&:hover': {
-            backgroundColor: 'var(--color-bg-quaternary)',
-            borderColor: 'var(--color-primary)',
-            boxShadow: 'var(--shadow-md)'
-          }
-        }}
+        sx={functionButtonStyles}
       >
         时间控制
       </Button>
@@ -109,17 +90,7 @@ export function MapFunctions() {
         fullWidth
         size="small"
         onClick={handleMapSettingsClick}
-        sx={{
-          backgroundColor: 'var(--color-bg-tertiary)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '6px 12px',
-          borderColor: 'var(--color-border-medium)',
-          '&:hover': {
-            backgroundColor: 'var(--color-bg-quaternary)',
-            borderColor: 'var(--color-primary)',
-            boxShadow: 'var(--shadow-md)'
-          }
-        }}
+        sx={functionButtonStyles}
       >
         地图设置
       </Button>

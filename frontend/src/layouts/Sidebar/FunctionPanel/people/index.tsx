@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { PeopleDynastyFilterPopover } from './PeopleDynastyFilterPopover';
 import { OccupationFilterPopover } from './OccupationFilterPopover';
 import { RelationshipMapSettingsPopover } from './RelationshipMapSettingsPopover';
+import { functionButtonStyles, getThemedSearchFieldStyles } from '../popoverStyles';
 
 export function PeopleFunctions() {
   // 朝代筛选 Popover 状态
@@ -55,22 +56,7 @@ export function PeopleFunctions() {
           fullWidth
           placeholder="搜索历史人物..."
           size="small"
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              borderRadius: 'var(--radius-lg)',
-              backgroundColor: 'var(--color-bg-tertiary)',
-              border: '2px solid var(--color-border-medium)',
-              '&:hover': {
-                borderColor: '#4CAF50',
-                boxShadow: '0 0 10px rgba(76, 175, 80, 0.2)'
-              },
-              '&.Mui-focused': {
-                borderColor: '#4CAF50',
-                boxShadow: '0 0 20px rgba(76, 175, 80, 0.3)'
-              },
-              transition: 'all var(--transition-normal)'
-            }
-          }}
+          sx={getThemedSearchFieldStyles('people')}
         />
 
       {/* 朝代筛选 */}
@@ -80,17 +66,7 @@ export function PeopleFunctions() {
         fullWidth
         size="small"
         onClick={handleDynastyFilterClick}
-        sx={{
-          backgroundColor: 'var(--color-bg-tertiary)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '6px 12px',
-          borderColor: 'var(--color-border-medium)',
-          '&:hover': {
-            backgroundColor: 'var(--color-bg-quaternary)',
-            borderColor: 'var(--color-primary)',
-            boxShadow: 'var(--shadow-md)'
-          }
-        }}
+        sx={functionButtonStyles}
       >
         朝代筛选
       </Button>
@@ -106,17 +82,7 @@ export function PeopleFunctions() {
         fullWidth
         size="small"
         onClick={handleOccupationFilterClick}
-        sx={{
-          backgroundColor: 'var(--color-bg-tertiary)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '6px 12px',
-          borderColor: 'var(--color-border-medium)',
-          '&:hover': {
-            backgroundColor: 'var(--color-bg-quaternary)',
-            borderColor: 'var(--color-primary)',
-            boxShadow: 'var(--shadow-md)'
-          }
-        }}
+        sx={functionButtonStyles}
       >
         职业分类
       </Button>
@@ -132,17 +98,7 @@ export function PeopleFunctions() {
         fullWidth
         size="small"
         onClick={handleRelationshipMapSettingsClick}
-        sx={{
-          backgroundColor: 'var(--color-bg-tertiary)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '6px 12px',
-          borderColor: 'var(--color-border-medium)',
-          '&:hover': {
-            backgroundColor: 'var(--color-bg-quaternary)',
-            borderColor: 'var(--color-primary)',
-            boxShadow: 'var(--shadow-md)'
-          }
-        }}
+        sx={functionButtonStyles}
       >
         关系图设置
       </Button>

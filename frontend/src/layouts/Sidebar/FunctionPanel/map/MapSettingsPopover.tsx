@@ -1,4 +1,5 @@
 import { Popover, Stack, Typography, Box, FormControlLabel, Checkbox, Slider } from '@mui/material';
+import { popoverProps, popoverContentStyles, getThemedCheckboxStyles, formControlLabelStyles, captionStyles, getThemedSliderStyles } from '../popoverStyles';
 
 interface MapSettingsPopoverProps {
   anchorEl: HTMLButtonElement | null;
@@ -15,54 +16,61 @@ export function MapSettingsPopover({ anchorEl, onClose }: MapSettingsPopoverProp
       open={open}
       anchorEl={anchorEl}
       onClose={onClose}
-      anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'center', horizontal: 'left' }}
-      disableScrollLock
-      elevation={8}
-      slotProps={{
-        paper: {
-          sx: {
-            borderRadius: 'var(--radius-xl)',
-            background: 'linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-secondary) 100%)',
-            border: '1px solid var(--color-border-medium)',
-            boxShadow: 'var(--shadow-xl), var(--shadow-glow)',
-            backdropFilter: 'blur(10px)',
-            p: 2
-          }
-        }
-      }}
+      {...popoverProps}
     >
-      <Typography variant="subtitle1" gutterBottom sx={{ fontWeight: 600 }}>
-        地图设置
-      </Typography>
-      <Stack spacing={2}>
-        <FormControlLabel
-          control={<Checkbox size="small" defaultChecked />}
-          label={<Typography variant="body2">显示地名标注</Typography>}
-        />
-        <FormControlLabel
-          control={<Checkbox size="small" defaultChecked />}
-          label={<Typography variant="body2">显示河流</Typography>}
-        />
-        <FormControlLabel
-          control={<Checkbox size="small" />}
-          label={<Typography variant="body2">卫星地图</Typography>}
-        />
-        
-        {/* 整体透明度 */}
-        <Box>
-          <Typography variant="caption" sx={{ color: 'var(--color-text-tertiary)' }}>
-            地图透明度
-          </Typography>
-          <Slider
-            defaultValue={100}
-            min={0}
-            max={100}
-            size="small"
-            sx={{ color: 'var(--color-secondary)', mt: 1 }}
+      <Box sx={popoverContentStyles}>
+        <Typography variant="subtitle1" gutterBottom>
+          地图设置
+        </Typography>
+        <Stack spacing={2}>
+          <FormControlLabel
+            control={
+              <Checkbox 
+                size="small" 
+                defaultChecked 
+                sx={getThemedCheckboxStyles('map')}
+              />
+            }
+            label={<Typography variant="body2">显示地名标注</Typography>}
+            sx={formControlLabelStyles}
           />
-        </Box>
-      </Stack>
+          <FormControlLabel
+            control={
+              <Checkbox 
+                size="small" 
+                defaultChecked 
+                sx={getThemedCheckboxStyles('map')}
+              />
+            }
+            label={<Typography variant="body2">显示河流</Typography>}
+            sx={formControlLabelStyles}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox 
+                size="small" 
+                sx={getThemedCheckboxStyles('map')}
+              />
+            }
+            label={<Typography variant="body2">卫星地图</Typography>}
+            sx={formControlLabelStyles}
+          />
+          
+          {/* 整体透明度 */}
+          <Box>
+            <Typography variant="caption" sx={captionStyles}>
+              地图透明度
+            </Typography>
+            <Slider
+              defaultValue={100}
+              min={0}
+              max={100}
+              size="small"
+              sx={getThemedSliderStyles('map')}
+            />
+          </Box>
+        </Stack>
+      </Box>
     </Popover>
   );
 }

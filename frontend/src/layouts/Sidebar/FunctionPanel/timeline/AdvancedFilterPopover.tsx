@@ -1,4 +1,5 @@
 import { Box, Popover, Stack, Typography, FormControlLabel, Checkbox, Slider } from '@mui/material';
+import { popoverProps, popoverContentStyles, getThemedCheckboxStyles, formControlLabelStyles, getThemedSliderStyles } from '../popoverStyles';
 
 interface AdvancedFilterPopoverProps {
   anchorEl: HTMLButtonElement | null;
@@ -15,42 +16,28 @@ export function AdvancedFilterPopover({ anchorEl, onClose }: AdvancedFilterPopov
       open={open}
       anchorEl={anchorEl}
       onClose={onClose}
-      anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'center', horizontal: 'left' }}
-      disableScrollLock
-      elevation={8}
-      slotProps={{
-        paper: {
-          sx: {
-            borderRadius: 'var(--radius-xl)',
-            background: 'linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-secondary) 100%)',
-            border: '1px solid var(--color-border-medium)',
-            boxShadow: 'var(--shadow-xl), var(--shadow-glow)',
-            backdropFilter: 'blur(10px)'
-          }
-        }
-      }}
+      {...popoverProps}
     >
-      <Box sx={{ p: 3, minWidth: 280 }}>
+      <Box sx={popoverContentStyles}>
         <Typography variant="subtitle1" gutterBottom>
           高级筛选
         </Typography>
         <Stack spacing={2}>
           <Stack spacing={1}>
             <FormControlLabel
-              control={<Checkbox />}
+              control={<Checkbox sx={getThemedCheckboxStyles('timeline')} />}
               label="重要事件"
-              sx={{ margin: 0 }}
+              sx={formControlLabelStyles}
             />
             <FormControlLabel
-              control={<Checkbox />}
+              control={<Checkbox sx={getThemedCheckboxStyles('timeline')} />}
               label="地方事件"
-              sx={{ margin: 0 }}
+              sx={formControlLabelStyles}
             />
             <FormControlLabel
-              control={<Checkbox />}
+              control={<Checkbox sx={getThemedCheckboxStyles('timeline')} />}
               label="国际事件"
-              sx={{ margin: 0 }}
+              sx={formControlLabelStyles}
             />
           </Stack>
           
@@ -61,18 +48,7 @@ export function AdvancedFilterPopover({ anchorEl, onClose }: AdvancedFilterPopov
             <Slider
               defaultValue={50}
               valueLabelDisplay="auto"
-              sx={{
-                color: 'var(--color-primary)',
-                '& .MuiSlider-thumb': {
-                  backgroundColor: 'var(--color-primary)',
-                },
-                '& .MuiSlider-track': {
-                  backgroundColor: 'var(--color-primary)',
-                },
-                '& .MuiSlider-rail': {
-                  backgroundColor: 'var(--color-border-medium)',
-                }
-              }}
+              sx={getThemedSliderStyles('timeline')}
             />
           </Box>
         </Stack>

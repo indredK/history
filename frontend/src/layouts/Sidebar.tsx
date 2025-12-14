@@ -10,10 +10,9 @@ import './Sidebar/Sidebar.css';
 
 interface SidebarProps {
   activeTab: string;
-  onTabChange: (tab: string) => void;
 }
 
-export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
+export function Sidebar({ activeTab }: SidebarProps) {
   const drawerWidth = 240;
 
   return (
@@ -68,7 +67,6 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
         }}>
           <NavigationSection 
             activeTab={activeTab} 
-            onTabChange={onTabChange} 
           />
           <Divider sx={{ my: 3 }} />
         </Box>

@@ -1,4 +1,5 @@
 import { Box, Popover, Stack, Typography, FormControlLabel, Checkbox, Slider } from '@mui/material';
+import { popoverProps, popoverContentStyles, getThemedCheckboxStyles, formControlLabelStyles, captionStyles, getThemedSliderStyles } from '../popoverStyles';
 
 interface DisplaySettingsPopoverProps {
   anchorEl: HTMLButtonElement | null;
@@ -15,33 +16,26 @@ export function DisplaySettingsPopover({ anchorEl, onClose }: DisplaySettingsPop
       open={open}
       anchorEl={anchorEl}
       onClose={onClose}
-      anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'center', horizontal: 'left' }}
-      disableScrollLock
-      elevation={8}
-      slotProps={{
-        paper: {
-          sx: {
-            borderRadius: 'var(--radius-xl)',
-            background: 'linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-secondary) 100%)',
-            border: '1px solid var(--color-border-medium)',
-            boxShadow: 'var(--shadow-xl), var(--shadow-glow)',
-            backdropFilter: 'blur(10px)'
-          }
-        }
-      }}
+      {...popoverProps}
     >
-      <Box sx={{ p: 3, minWidth: 250 }}>
+      <Box sx={{ ...popoverContentStyles, minWidth: 250 }}>
         <Typography variant="subtitle1" gutterBottom>
           显示设置
         </Typography>
         <Stack spacing={2}>
           <FormControlLabel
-            control={<Checkbox size="small" defaultChecked />}
+            control={
+              <Checkbox 
+                size="small" 
+                defaultChecked 
+                sx={getThemedCheckboxStyles('timeline')}
+              />
+            }
             label={<Typography variant="body2">3D效果</Typography>}
+            sx={formControlLabelStyles}
           />
           <Box>
-            <Typography variant="caption" sx={{ color: 'var(--color-text-tertiary)' }}>
+            <Typography variant="caption" sx={captionStyles}>
               动画速度
             </Typography>
             <Slider
@@ -49,12 +43,19 @@ export function DisplaySettingsPopover({ anchorEl, onClose }: DisplaySettingsPop
               min={0}
               max={100}
               size="small"
-              sx={{ color: 'var(--color-primary)' }}
+              sx={getThemedSliderStyles('timeline')}
             />
           </Box>
           <FormControlLabel
-            control={<Checkbox size="small" defaultChecked />}
+            control={
+              <Checkbox 
+                size="small" 
+                defaultChecked 
+                sx={getThemedCheckboxStyles('timeline')}
+              />
+            }
             label={<Typography variant="body2">显示详细信息</Typography>}
+            sx={formControlLabelStyles}
           />
         </Stack>
       </Box>

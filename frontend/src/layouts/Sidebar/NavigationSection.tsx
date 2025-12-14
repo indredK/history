@@ -1,4 +1,5 @@
 import { Stack, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import {
   History,
   MapOutlined,
@@ -10,37 +11,47 @@ interface NavigationItem {
   key: string;
   label: string;
   icon: React.ReactNode;
+  path: string;
 }
 
 interface NavigationSectionProps {
   activeTab: string;
-  onTabChange: (tab: string) => void;
 }
 
 const navigationItems: NavigationItem[] = [
   {
     key: 'timeline',
     label: '时间轴',
-    icon: <History />
+    icon: <History />,
+    path: '/timeline'
   },
   {
     key: 'map',
     label: '地图',
-    icon: <MapOutlined />
+    icon: <MapOutlined />,
+    path: '/map'
   },
   {
     key: 'people',
     label: '人物',
-    icon: <People />
+    icon: <People />,
+    path: '/people'
   },
   {
     key: 'culture',
     label: '文化',
-    icon: <Palette />
+    icon: <Palette />,
+    path: '/culture'
   }
 ];
 
-export function NavigationSection({ activeTab, onTabChange }: NavigationSectionProps) {
+export function NavigationSection({ activeTab }: NavigationSectionProps) {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
   return (
     <Stack spacing={2}>
       {navigationItems.map((item) => (
@@ -48,7 +59,7 @@ export function NavigationSection({ activeTab, onTabChange }: NavigationSectionP
           key={item.key}
           variant={activeTab === item.key ? 'contained' : 'outlined'}
           startIcon={item.icon}
-          onClick={() => onTabChange(item.key)}
+          onClick={() => handleNavigation(item.path)}
           fullWidth
           sx={{
             borderRadius: 'var(--radius-lg)',

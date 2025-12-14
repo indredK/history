@@ -34,7 +34,7 @@ const mockPeople: Person[] = [
   }
 ];
 
-export function PeoplePage() {
+function PeoplePage() {
   return (
     <Box className="people-page">
       <Typography variant="h4" component="h1" sx={{ 
@@ -109,3 +109,5 @@ export function PeoplePage() {
     </Box>
   );
 }
+
+export default PeoplePage;

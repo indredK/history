@@ -14,6 +14,7 @@ import { AdvancedFilterPopover } from './AdvancedFilterPopover';
 import { ExportSettingsPopover } from './ExportSettingsPopover';
 import { DataAnalysisPopover } from './DataAnalysisPopover';
 import { PersonalizationSettingsPopover } from './PersonalizationSettingsPopover';
+import { functionButtonStyles } from '../popoverStyles';
 
 export function TimelineFunctions() {
   // 朝代筛选 Popover 状态
@@ -104,17 +105,7 @@ export function TimelineFunctions() {
         fullWidth
         size="small"
         onClick={handleDynastyClick}
-        sx={{
-          backgroundColor: 'var(--color-bg-tertiary)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '6px 12px',
-          borderColor: 'var(--color-border-medium)',
-          '&:hover': {
-            backgroundColor: 'var(--color-bg-quaternary)',
-            borderColor: 'var(--color-primary)',
-            boxShadow: 'var(--shadow-md)'
-          }
-        }}
+        sx={functionButtonStyles}
       >
         朝代筛选
       </Button>
@@ -130,17 +121,7 @@ export function TimelineFunctions() {
         fullWidth
         size="small"
         onClick={handleEventTypeClick}
-        sx={{
-          backgroundColor: 'var(--color-bg-tertiary)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '6px 12px',
-          borderColor: 'var(--color-border-medium)',
-          '&:hover': {
-            backgroundColor: 'var(--color-bg-quaternary)',
-            borderColor: 'var(--color-primary)',
-            boxShadow: 'var(--shadow-md)'
-          }
-        }}
+        sx={functionButtonStyles}
       >
         事件类型
       </Button>
@@ -156,17 +137,7 @@ export function TimelineFunctions() {
         fullWidth
         size="small"
         onClick={handleDisplaySettingsClick}
-        sx={{
-          backgroundColor: 'var(--color-bg-tertiary)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '6px 12px',
-          borderColor: 'var(--color-border-medium)',
-          '&:hover': {
-            backgroundColor: 'var(--color-bg-quaternary)',
-            borderColor: 'var(--color-primary)',
-            boxShadow: 'var(--shadow-md)'
-          }
-        }}
+        sx={functionButtonStyles}
       >
         显示设置
       </Button>
@@ -182,17 +153,7 @@ export function TimelineFunctions() {
         fullWidth
         size="small"
         onClick={handleAdvancedFilterClick}
-        sx={{
-          backgroundColor: 'var(--color-bg-tertiary)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '6px 12px',
-          borderColor: 'var(--color-border-medium)',
-          '&:hover': {
-            backgroundColor: 'var(--color-bg-quaternary)',
-            borderColor: 'var(--color-primary)',
-            boxShadow: 'var(--shadow-md)'
-          }
-        }}
+        sx={functionButtonStyles}
       >
         高级筛选
       </Button>
@@ -208,17 +169,7 @@ export function TimelineFunctions() {
         fullWidth
         size="small"
         onClick={handleExportSettingsClick}
-        sx={{
-          backgroundColor: 'var(--color-bg-tertiary)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '6px 12px',
-          borderColor: 'var(--color-border-medium)',
-          '&:hover': {
-            backgroundColor: 'var(--color-bg-quaternary)',
-            borderColor: 'var(--color-primary)',
-            boxShadow: 'var(--shadow-md)'
-          }
-        }}
+        sx={functionButtonStyles}
       >
         导出设置
       </Button>
@@ -234,17 +185,7 @@ export function TimelineFunctions() {
         fullWidth
         size="small"
         onClick={handleDataAnalysisClick}
-        sx={{
-          backgroundColor: 'var(--color-bg-tertiary)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '6px 12px',
-          borderColor: 'var(--color-border-medium)',
-          '&:hover': {
-            backgroundColor: 'var(--color-bg-quaternary)',
-            borderColor: 'var(--color-primary)',
-            boxShadow: 'var(--shadow-md)'
-          }
-        }}
+        sx={functionButtonStyles}
       >
         数据分析
       </Button>
@@ -260,17 +201,7 @@ export function TimelineFunctions() {
         fullWidth
         size="small"
         onClick={handlePersonalizationSettingsClick}
-        sx={{
-          backgroundColor: 'var(--color-bg-tertiary)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '6px 12px',
-          borderColor: 'var(--color-border-medium)',
-          '&:hover': {
-            backgroundColor: 'var(--color-bg-quaternary)',
-            borderColor: 'var(--color-primary)',
-            boxShadow: 'var(--shadow-md)'
-          }
-        }}
+        sx={functionButtonStyles}
       >
         个性化设置
       </Button>
