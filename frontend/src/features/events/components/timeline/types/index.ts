@@ -101,6 +101,10 @@ export interface TimelineConfig {
     scaleExtent: [number, number];
     factor: { in: number; out: number };
   };
+  pan: {
+    factor: number;
+    minStep: number;
+  };
 }
 
 // 时间轴引用接口
@@ -108,6 +112,8 @@ export interface TimelineChartRef {
   zoomIn: () => void;
   zoomOut: () => void;
   resetZoom: () => void;
+  panLeft: () => void;
+  panRight: () => void;
 }
 
 // 时间轴组件属性接口
@@ -119,4 +125,6 @@ export interface TimelineChartProps {
   onZoomIn: () => void;
   onZoomOut: () => void;
   onResetZoom: () => void;
+  onPanLeft: () => void;
+  onPanRight: () => void;
 }

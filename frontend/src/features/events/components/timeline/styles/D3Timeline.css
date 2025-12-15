@@ -7,10 +7,16 @@
 .d3-timeline-container svg {
   cursor: grab;
   user-select: none;
+  outline: none;
 }
 
 .d3-timeline-container svg:active {
   cursor: grabbing;
+}
+
+.d3-timeline-container svg:focus {
+  outline: 2px solid rgba(99, 102, 241, 0.3);
+  outline-offset: -2px;
 }
 
 /* 确保 SVG 可以接收鼠标事件 */

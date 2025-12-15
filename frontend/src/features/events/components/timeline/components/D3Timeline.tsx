@@ -40,6 +40,10 @@ export function D3Timeline({}: D3TimelineProps) {
   const handleZoomIn = () => chartRef.current?.zoomIn();
   const handleZoomOut = () => chartRef.current?.zoomOut();
   const handleResetZoom = () => chartRef.current?.resetZoom();
+  
+  // 滚动控制函数
+  const handlePanLeft = () => chartRef.current?.panLeft();
+  const handlePanRight = () => chartRef.current?.panRight();
 
   // 如果正在加载或没有数据，显示相应状态
   if (loading) {
@@ -72,6 +76,8 @@ export function D3Timeline({}: D3TimelineProps) {
       onZoomIn={handleZoomIn}
       onZoomOut={handleZoomOut}
       onResetZoom={handleResetZoom}
+      onPanLeft={handlePanLeft}
+      onPanRight={handlePanRight}
     />
   );
 }

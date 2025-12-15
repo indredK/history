@@ -142,6 +142,12 @@ export const TIMELINE_CONFIG: TimelineConfig = {
       in: 0.8,
       out: 1.2
     }
+  },
+  
+  // 滚动配置
+  pan: {
+    factor: 0.2, // 每次滚动移动当前视图范围的20%
+    minStep: 50   // 最小滚动步长（年）
   }
 };
 
