@@ -1,10 +1,10 @@
-import { MapView } from '../features/map/MapView';
+import { EChartsMapView } from '../features/map/EChartsMapView';
 import { MapErrorBoundary } from '../features/map/components/MapErrorBoundary';
 
 function MapPage() {
   return (
     <MapErrorBoundary>
-      <MapView />
+      <EChartsMapView />
     </MapErrorBoundary>
   );
 }
