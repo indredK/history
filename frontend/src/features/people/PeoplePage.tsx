@@ -1,40 +1,26 @@
 import { Box, Typography, Card, CardContent, Avatar, Chip } from '@mui/material';
 import './PeoplePage.css';
-
-interface Person {
-  id: string;
-  name: string;
-  dynasty: string;
-  occupation: string;
-  description: string;
-  avatar?: string;
-}
-
-const mockPeople: Person[] = [
-  {
-    id: '1',
-    name: '孔子',
-    dynasty: '春秋',
-    occupation: '思想家',
-    description: '儒家学派创始人，中国古代著名的思想家、教育家'
-  },
-  {
-    id: '2',
-    name: '李白',
-    dynasty: '唐朝',
-    occupation: '文人学者',
-    description: '唐代著名浪漫主义诗人，被誉为"诗仙"'
-  },
-  {
-    id: '3',
-    name: '岳飞',
-    dynasty: '宋朝',
-    occupation: '军事将领',
-    description: '南宋抗金名将，民族英雄'
-  }
-];
+import { usePersonsStore } from '../../store';
+import { getPersons } from '../../services/dataClient';
+import { useRequest } from 'ahooks';
+import type { Person as ServicePerson } from '../../services/person/types';
 
 function PeoplePage() {
+  const { persons, setPersons } = usePersonsStore();
+
+  // 使用ahooks的useRequest获取数据
+  useRequest(
+    async () => {
+      const result = await getPersons();
+      return result.data;
+    },
+    {
+      cacheKey: 'persons',
+      manual: false,
+      onSuccess: (data) => setPersons(data)
+    }
+  );
+
   return (
     <Box className="people-page">
       <Typography variant="h4" component="h1" sx={{ 
@@ -46,7 +32,7 @@ function PeoplePage() {
       </Typography>
       
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
-        {mockPeople.map((person) => (
+        {persons.map((person: ServicePerson) => (
           <Box sx={{ flexBasis: { xs: '100%', sm: '48%', md: '31%' } }} key={person.id}>
             <Card sx={{
               height: '100%',
@@ -77,20 +63,15 @@ function PeoplePage() {
                       {person.name}
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 1, mt: 1 }}>
-                      <Chip 
-                        label={person.dynasty} 
-                        size="small" 
-                        sx={{ 
-                          background: 'rgba(76, 175, 80, 0.1)',
-                          color: '#4CAF50'
-                        }}
-                      />
-                      <Chip 
-                        label={person.occupation} 
-                        size="small" 
-                        variant="outlined"
-                        sx={{ borderColor: '#4CAF50', color: '#4CAF50' }}
-                      />
+                      {person.roles && person.roles.map((role, index) => (
+                        <Chip 
+                          key={index}
+                          label={role} 
+                          size="small" 
+                          variant="outlined"
+                          sx={{ borderColor: '#4CAF50', color: '#4CAF50' }}
+                        />
+                      ))}
                     </Box>
                   </Box>
                 </Box>
@@ -99,7 +80,7 @@ function PeoplePage() {
                   color: 'var(--color-text-secondary)',
                   lineHeight: 1.6
                 }}>
-                  {person.description}
+                  {person.biography || '暂无详细信息'}
                 </Typography>
               </CardContent>
             </Card>

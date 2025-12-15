@@ -1,11 +1,14 @@
-export type DataSourceMode = 'mock' | 'api';
+export type DataSourceMode = 'mock' | 'api' | 'json';
 
 export function getDataSource(): DataSourceMode {
-  const mode =
+  const mode = 
     (import.meta as any).env?.VITE_DATA_SOURCE ??
     (typeof process !== 'undefined' ? process.env.VITE_DATA_SOURCE : undefined) ??
     'api';
-  return mode === 'mock' ? 'mock' : 'api';
+  
+  // 如果是json模式，也使用mock数据源
+  if (mode === 'mock' || mode === 'json') return 'mock';
+  return 'api';
 }
 
 export function getMockErrorRate(): number {
