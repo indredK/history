@@ -40,9 +40,18 @@
     "name": "秦",
     "name_en": "Qin",
     "startYear": -221,
-    "endYear": -206,
+    "endYear": -207,
     "description": "中国历史上第一个统一的中央集权制王朝",
     "color": "#2F4F4F"
+  },
+  {
+    "id": "western-chu",
+    "name": "西楚",
+    "name_en": "Western Chu",
+    "startYear": -206,
+    "endYear": -202,
+    "description": "秦朝灭亡后项羽建立的政权，楚汉之争时期",
+    "color": "#800000"
   },
   {
     "id": "western-han",
@@ -286,5 +295,32 @@
     "endYear": 1912,
     "description": "中国历史上最后一个封建王朝",
     "color": "#191970"
+  },
+  {
+    "id": "beiyang-government",
+    "name": "中华民国北洋政府",
+    "name_en": "Beiyang Government",
+    "startYear": 1912,
+    "endYear": 1928,
+    "description": "中华民国初期由北洋军阀控制的中央政府",
+    "color": "#8B0000"
+  },
+  {
+    "id": "nationalist-government",
+    "name": "中华民国国民政府",
+    "name_en": "Nationalist Government",
+    "startYear": 1928,
+    "endYear": 1949,
+    "description": "国民党统治时期的中华民国中央政府",
+    "color": "#FF0000"
+  },
+  {
+    "id": "people-republic",
+    "name": "中华人民共和国",
+    "name_en": "People's Republic of China",
+    "startYear": 1949,
+    "endYear": null,
+    "description": "中国共产党领导的社会主义国家，新中国",
+    "color": "#FF0000"
   }
 ]
