@@ -103,6 +103,10 @@ export function EChartsMap({
             map: 'china',
             roam: true,
             zoom: 1.2,
+            scaleLimit: {
+              min: 0.8,
+              max: 5
+            },
             center: [104, 35],
             label: { show: true, fontSize: 10, color: '#333' },
             itemStyle: { areaColor: '#e3f2fd', borderColor: '#1976d2', borderWidth: 1 },
@@ -177,6 +181,8 @@ export function EChartsMap({
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+
 
   return (
     <div style={{ width, height, minHeight: 400, position: 'relative' }}>

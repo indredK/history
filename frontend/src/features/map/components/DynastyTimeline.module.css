@@ -1,0 +1,146 @@
+.timelineContainer {
+  width: 100%;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.timelineHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+}
+
+.selectedInfo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.colorIndicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.selectedName {
+  font-weight: 600;
+  color: #333;
+}
+
+.selectedYears {
+  color: #666;
+}
+
+.timelineContent {
+  position: relative;
+  height: 36px;
+  padding-top: 8px;
+}
+
+.timelineTrack {
+  position: relative;
+  height: 6px;
+  background: linear-gradient(to right, #e8e8e8, #d0d0d0);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.dynastyMark {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  z-index: 1;
+}
+
+.dynastyMark:hover {
+  transform: translate(-50%, -50%) scale(1.4);
+  z-index: 5;
+}
+
+.dynastyMark.activeMark {
+  transform: translate(-50%, -50%) scale(1.5);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+  z-index: 6;
+}
+
+.slider {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  transition: left 0.1s ease;
+}
+
+.slider.dragging {
+  transition: none;
+}
+
+.sliderHandle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #1890ff;
+  border: 3px solid white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  cursor: grab;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sliderHandle:hover {
+  transform: scale(1.15);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.slider.dragging .sliderHandle {
+  cursor: grabbing;
+  transform: scale(1.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.yearMarkers {
+  position: relative;
+  height: 18px;
+  margin-top: 4px;
+}
+
+.yearMarker {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: #999;
+  white-space: nowrap;
+}
+
+.loading {
+  text-align: center;
+  padding: 12px;
+  color: #666;
+  font-size: 12px;
+}
+
+.error {
+  text-align: center;
+  padding: 12px;
+  color: #dc3545;
+  background: #f8d7da;
+  border-radius: 6px;
+  font-size: 12px;
+}

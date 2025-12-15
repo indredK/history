@@ -1,2 +1,2 @@
 export { EChartsMap } from './EChartsMap';
-export { D3ChinaMap } from './D3ChinaMap';
+export { MapErrorBoundary } from './MapErrorBoundary';
