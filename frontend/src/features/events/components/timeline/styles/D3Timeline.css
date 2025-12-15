@@ -1,0 +1,55 @@
+.d3-timeline-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.d3-timeline-container svg {
+  cursor: grab;
+  user-select: none;
+}
+
+.d3-timeline-container svg:active {
+  cursor: grabbing;
+}
+
+/* 确保 SVG 可以接收鼠标事件 */
+.d3-timeline-container svg {
+  pointer-events: all;
+}
+
+.event-dot {
+  transition: r 0.2s ease;
+}
+
+.event-dot:hover {
+  filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.6));
+}
+
+.event-label {
+  pointer-events: none;
+  user-select: none;
+}
+
+.year-label {
+  pointer-events: none;
+  user-select: none;
+}
+
+.timeline-main {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.tooltip {
+  pointer-events: none;
+}
+
+.x-axis text {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.x-axis path,
+.x-axis line {
+  stroke: rgba(71, 85, 105, 0.4);
+  stroke-width: 1;
+}
