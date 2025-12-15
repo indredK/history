@@ -1,8 +1,85 @@
-import { useEffect, useRef, forwardRef, useImperativeHandle, useState } from 'react';
+import { useEffect, useRef, forwardRef, useImperativeHandle, useState, CSSProperties } from 'react';
 import * as d3 from 'd3';
 import { TIMELINE_CONFIG } from '../config/timelineConfig';
 import { TimelineRenderer } from '../utils/timelineRenderer';
 import type { TimelineChartProps, TimelineChartRef } from '../types';
+
+// Timeline styles configuration
+const timelineStyles: Record<string, CSSProperties> = {
+  container: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden',
+    border: '1px solid rgba(99, 102, 241, 0.15)',
+    borderRadius: '8px',
+    backgroundColor: 'rgba(248, 250, 252, 0.1)',
+    backdropFilter: 'blur(2px)',
+  },
+  emptyState: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+    color: 'rgba(71, 85, 105, 0.7)',
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '12px 16px 8px 16px',
+    borderBottom: '1px solid rgba(99, 102, 241, 0.15)',
+  },
+  title: {
+    margin: 0,
+    color: '#334155',
+    fontWeight: '600',
+    fontSize: '16px',
+  },
+  controls: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px',
+  },
+  zoomText: {
+    fontSize: '12px',
+    color: 'rgba(71, 85, 105, 0.7)',
+    marginRight: '8px',
+  },
+  button: {
+    width: '28px',
+    height: '28px',
+    border: '1px solid rgba(99, 102, 241, 0.25)',
+    borderRadius: '6px',
+    backgroundColor: 'rgba(248, 250, 252, 0.9)',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '14px',
+    color: 'rgba(99, 102, 241, 0.8)',
+    transition: 'all 0.2s ease',
+  },
+  resetButton: {
+    fontSize: '12px',
+  },
+  svgContainer: {
+    flex: 1,
+    overflow: 'hidden',
+  },
+  svg: {
+    width: '100%',
+    height: '100%',
+  },
+  buttonHover: {
+    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+    borderColor: 'rgba(99, 102, 241, 0.4)',
+  },
+  buttonDefault: {
+    backgroundColor: 'rgba(248, 250, 252, 0.9)',
+    borderColor: 'rgba(99, 102, 241, 0.25)',
+  },
+};
 
 export const TimelineChart = forwardRef<TimelineChartRef, TimelineChartProps>(
   ({ events, favorites, onZoomChange, zoomLevel, onZoomIn, onZoomOut, onResetZoom }, ref) => {
@@ -156,13 +233,7 @@ export const TimelineChart = forwardRef<TimelineChartRef, TimelineChartProps>(
     // 如果正在加载或没有数据，显示相应状态
     if (events.length === 0) {
       return (
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center', 
-          height: '100%',
-          color: 'rgba(71, 85, 105, 0.7)'
-        }}>
+        <div style={timelineStyles.emptyState}>
           暂无匹配的历史事件
         </div>
       );
@@ -171,125 +242,52 @@ export const TimelineChart = forwardRef<TimelineChartRef, TimelineChartProps>(
     return (
       <div 
         className="d3-timeline-container"
-        style={{ 
-          flex: 1, 
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'hidden',
-          border: '1px solid rgba(99, 102, 241, 0.15)',
-          borderRadius: '8px',
-          backgroundColor: 'rgba(248, 250, 252, 0.1)',
-          backdropFilter: 'blur(2px)',
-        }}
+        style={timelineStyles.container}
       >
         {/* 标题和控件 */}
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center', 
-          padding: '12px 16px 8px 16px',
-          borderBottom: '1px solid rgba(99, 102, 241, 0.15)'
-        }}>
-          <h3 style={{ 
-            margin: 0,
-            color: '#334155', 
-            fontWeight: '600',
-            fontSize: '16px'
-          }}>
+        <div style={timelineStyles.header}>
+          <h3 style={timelineStyles.title}>
             历史时间轴
           </h3>
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '4px'
-          }}>
-            <span style={{ 
-              fontSize: '12px',
-              color: 'rgba(71, 85, 105, 0.7)',
-              marginRight: '8px'
-            }}>
+          <div style={timelineStyles.controls}>
+            <span style={timelineStyles.zoomText}>
               时间缩放: {zoomLevel.toFixed(1)}x
             </span>
             <button
               onClick={onZoomOut}
-              style={{
-                width: '28px',
-                height: '28px',
-                border: '1px solid rgba(99, 102, 241, 0.25)',
-                borderRadius: '6px',
-                backgroundColor: 'rgba(248, 250, 252, 0.9)',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '14px',
-                color: 'rgba(99, 102, 241, 0.8)',
-                transition: 'all 0.2s ease'
-              }}
+              style={timelineStyles.button}
               title="时间范围放大"
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.1)';
-                e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.4)';
+                Object.assign(e.currentTarget.style, timelineStyles.buttonHover);
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(248, 250, 252, 0.9)';
-                e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.25)';
+                Object.assign(e.currentTarget.style, timelineStyles.buttonDefault);
               }}
             >
               −
             </button>
             <button
               onClick={onResetZoom}
-              style={{
-                width: '28px',
-                height: '28px',
-                border: '1px solid rgba(99, 102, 241, 0.25)',
-                borderRadius: '6px',
-                backgroundColor: 'rgba(248, 250, 252, 0.9)',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '12px',
-                color: 'rgba(99, 102, 241, 0.8)',
-                transition: 'all 0.2s ease'
-              }}
+              style={{ ...timelineStyles.button, ...timelineStyles.resetButton }}
               title="重置时间范围"
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.1)';
-                e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.4)';
+                Object.assign(e.currentTarget.style, timelineStyles.buttonHover);
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(248, 250, 252, 0.9)';
-                e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.25)';
+                Object.assign(e.currentTarget.style, timelineStyles.buttonDefault);
               }}
             >
               ⌂
             </button>
             <button
               onClick={onZoomIn}
-              style={{
-                width: '28px',
-                height: '28px',
-                border: '1px solid rgba(99, 102, 241, 0.25)',
-                borderRadius: '6px',
-                backgroundColor: 'rgba(248, 250, 252, 0.9)',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '14px',
-                color: 'rgba(99, 102, 241, 0.8)',
-                transition: 'all 0.2s ease'
-              }}
+              style={timelineStyles.button}
               title="时间范围缩小"
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(99, 102, 241, 0.1)';
-                e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.4)';
+                Object.assign(e.currentTarget.style, timelineStyles.buttonHover);
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(248, 250, 252, 0.9)';
-                e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.25)';
+                Object.assign(e.currentTarget.style, timelineStyles.buttonDefault);
               }}
             >
               +
@@ -300,12 +298,9 @@ export const TimelineChart = forwardRef<TimelineChartRef, TimelineChartProps>(
         {/* SVG 容器 */}
         <div 
           ref={containerRef}
-          style={{ 
-            flex: 1,
-            overflow: 'hidden'
-          }}
+          style={timelineStyles.svgContainer}
         >
-          <svg ref={svgRef} style={{ width: '100%', height: '100%' }} />
+          <svg ref={svgRef} style={timelineStyles.svg} />
         </div>
       </div>
     );
