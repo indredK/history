@@ -4,7 +4,8 @@ import { Html, Environment, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 import { useTimelineStore, useDynastyStore } from '../../../store';
 import { getDynasties } from '../../../services/dataClient';
-import type { Dynasty } from '../../../types/models';
+import { useRequest } from 'ahooks';
+import type { Dynasty } from '../../../services/culture/types';
 import './Dynasty3DWheel.css';
 
 interface Dynasty3DWheelProps {
@@ -351,15 +352,18 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
   const isScrollingRef = useRef<boolean>(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
-  useEffect(() => {
-    getDynasties()
-      .then((response) => {
-        setAllDynasties(response.data);
-      })
-      .catch((err) => {
-        console.error('Failed to load dynasties', err);
-      });
-  }, []);
+  // 使用ahooks的useRequest获取数据
+  useRequest(
+    async () => {
+      const result = await getDynasties();
+      return result.data;
+    },
+    {
+      cacheKey: 'dynasties_all',
+      manual: false, // enabled: true -> manual: false
+      onSuccess: (dynasties: Dynasty[]) => setAllDynasties(dynasties)
+    }
+  );
 
   const dynasties = useMemo(() => {
     return allDynasties.filter(

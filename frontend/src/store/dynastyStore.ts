@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Dynasty } from '../types/models';
+import type { Dynasty } from '../services/culture/types';
 
 interface DynastyState {
   selectedDynasty: Dynasty | null;

@@ -1,0 +1,222 @@
+[
+  {
+    "name": "秦始皇",
+    "name_en": "Qin Shi Huang",
+    "birth_year": -259,
+    "birth_month": 12,
+    "death_year": -210,
+    "death_month": 9,
+    "roles": "emperor,military_leader,reformer",
+    "biography": "中国历史上第一位皇帝，完成了中国的统一，建立了秦朝。在位期间推行了郡县制、统一度量衡等重要改革，对中国历史产生了深远影响。",
+    "source": "史记"
+  },
+  {
+    "name": "汉武帝",
+    "name_en": "Han Wudi",
+    "birth_year": -156,
+    "birth_month": 6,
+    "death_year": -87,
+    "death_month": 3,
+    "roles": "emperor,military_strategist",
+    "biography": "西汉中期的皇帝，推行了对匈奴的大规模军事行动，开拓了丝绸之路，使汉朝达到了极盛。",
+    "source": "史记"
+  },
+  {
+    "name": "唐太宗",
+    "name_en": "Tang Taizong",
+    "birth_year": 599,
+    "birth_month": 1,
+    "death_year": 649,
+    "death_month": 6,
+    "roles": "emperor,military_leader,reformer",
+    "biography": "唐初杰出皇帝，开创了贞观之治。在位期间推崇文治，任用贤能的廷臣，国家政治清明，经济发展，军事力量强大。",
+    "source": "《资治通鉴》"
+  },
+  {
+    "name": "唐玄宗",
+    "name_en": "Tang Xuanzong",
+    "birth_year": 685,
+    "birth_month": 9,
+    "death_year": 762,
+    "death_month": 12,
+    "roles": "emperor,cultural_patron",
+    "biography": "唐中期皇帝，前期推行开元盛世政策，使唐朝达到鼎盛。但后期宠幸杨贵妃，导致政治腐败，最终引发安史之乱。",
+    "source": "《资治通鉴》"
+  },
+  {
+    "name": "安禄山",
+    "name_en": "An Lushan",
+    "birth_year": 703,
+    "birth_month": 1,
+    "death_year": 757,
+    "death_month": 2,
+    "roles": "general,military_leader,rebel",
+    "biography": "唐代胡人将领，因军功得宠。后起兵反唐，引发了影响深远的安史之乱，最终兵败自杀。",
+    "source": "《资治通鉴》"
+  },
+  {
+    "name": "杜甫",
+    "name_en": "Du Fu",
+    "birth_year": 712,
+    "birth_month": 2,
+    "death_year": 770,
+    "death_month": 5,
+    "roles": "poet,official,scholar",
+    "biography": "唐代伟大诗人，被誉为'诗圣'。一生经历坎坷，历经开元盛世和安史之乱，诗歌内容丰富，反映了社会现实。",
+    "source": "旧唐书"
+  },
+  {
+    "name": "李白",
+    "name_en": "Li Bai",
+    "birth_year": 701,
+    "birth_month": 2,
+    "death_year": 762,
+    "death_month": 11,
+    "roles": "poet,writer,scholar",
+    "biography": "唐代伟大诗人，被誉为'诗仙'。风格豪迈奔放，想象力丰富，是中国古代最伟大的诗人之一。",
+    "source": "旧唐书"
+  },
+  {
+    "name": "武则天",
+    "name_en": "Wu Zetian",
+    "birth_year": 624,
+    "birth_month": 2,
+    "death_year": 705,
+    "death_month": 11,
+    "roles": "emperor,empress_consort,political_leader",
+    "biography": "中国历史上唯一的女皇帝，曾为唐高宗皇后，后建立武周。推行了一系列改革，使国家富强。",
+    "source": "《资治通鉴》"
+  },
+  {
+    "name": "康熙",
+    "name_en": "Kangxi",
+    "birth_year": 1654,
+    "birth_month": 4,
+    "death_year": 1722,
+    "death_month": 11,
+    "roles": "emperor,military_strategist,patron_of_learning",
+    "biography": "清代杰出皇帝，在位 61 年。平定三藩之乱，统一台湾，对外用兵成功，对内推崇儒学，使清朝进入康乾盛世。",
+    "source": "清史稿"
+  },
+  {
+    "name": "乾隆",
+    "name_en": "Qianlong",
+    "birth_year": 1711,
+    "birth_month": 9,
+    "death_year": 1799,
+    "death_month": 2,
+    "roles": "emperor,military_strategist,cultural_patron",
+    "biography": "清代最后一位有作为的皇帝。在其统治期间，清朝领土最大，国力最强，文化艺术达到中国古代的最高成就。",
+    "source": "清史稿"
+  },
+  {
+    "name": "曾国藩",
+    "name_en": "Zeng Guofan",
+    "birth_year": 1811,
+    "birth_month": 11,
+    "death_year": 1872,
+    "death_month": 3,
+    "roles": "military_leader,official,scholar",
+    "biography": "晚清中兴名臣，军事家和政治家。组织湘军对抗太平天国，战胜后逐渐成为晚清权力中枢的重要人物。",
+    "source": "晚清人物传记"
+  },
+  {
+    "name": "李鸿章",
+    "name_en": "Li Hongzhang",
+    "birth_year": 1823,
+    "birth_month": 2,
+    "death_year": 1901,
+    "death_month": 11,
+    "roles": "military_leader,official,diplomat",
+    "biography": "晚清洋务派代表，军事家和外交家。推行洋务运动，参与多次对外谈判，对晚清政治产生了重大影响。",
+    "source": "晚清人物传记"
+  },
+  {
+    "name": "林则徐",
+    "name_en": "Lin Zexu",
+    "birth_year": 1785,
+    "birth_month": 8,
+    "death_year": 1850,
+    "death_month": 11,
+    "roles": "official,military_leader,reformer",
+    "biography": "清代中期官员，著名的禁烟运动领导者。与英军的鸦片战争中奋力抵抗，为中国早期反帝国主义斗争的先驱。",
+    "source": "清史稿"
+  },
+  {
+    "name": "孙中山",
+    "name_en": "Sun Yat-sen",
+    "birth_year": 1866,
+    "birth_month": 11,
+    "death_year": 1925,
+    "death_month": 3,
+    "roles": "revolutionary,political_leader,founder",
+    "biography": "中国近代民族民主革命的伟大先驱，中华民国的创建者。推翻了满清统治，建立了共和制政体。",
+    "source": "民国人物传记"
+  },
+  {
+    "name": "毛泽东",
+    "name_en": "Mao Zedong",
+    "birth_year": 1893,
+    "birth_month": 12,
+    "death_year": 1976,
+    "death_month": 9,
+    "roles": "military_leader,political_leader,founder",
+    "biography": "中国共产党和新中国的主要创建人。领导中国人民进行了伟大的社会主义建设，改变了中国的历史面貌。",
+    "source": "中国共产党历史"
+  },
+  {
+    "name": "周恩来",
+    "name_en": "Zhou Enlai",
+    "birth_year": 1898,
+    "birth_month": 3,
+    "death_year": 1976,
+    "death_month": 1,
+    "roles": "political_leader,diplomat,military_leader",
+    "biography": "中国共产党和新中国的重要领导人。担任总理期间，推行独立自主的外交政策，为中国国力的增强做出了巨大贡献。",
+    "source": "中国共产党历史"
+  },
+  {
+    "name": "邓小平",
+    "name_en": "Deng Xiaoping",
+    "birth_year": 1904,
+    "birth_month": 8,
+    "death_year": 1997,
+    "death_month": 2,
+    "roles": "political_leader,military_leader,reformer",
+    "biography": "中国改革开放的总设计师。推行了一系列改革开放政策，使中国开始走向现代化，成为了新时代的领路人。",
+    "source": "当代中国政治史"
+  },
+  {
+    "name": "织田信长",
+    "name_en": "Oda Nobunaga",
+    "birth_year": 1534,
+    "birth_month": 7,
+    "death_year": 1582,
+    "death_month": 6,
+    "roles": "military_leader,warlord",
+    "biography": "日本战国时代的著名将领，在日本统一战争中起了重要作用，但后来在本能寺之变中遇难身亡。",
+    "source": "日本战国史"
+  },
+  {
+    "name": "豐臣秀吉",
+    "name_en": "Toyotomi Hideyoshi",
+    "birth_year": 1537,
+    "birth_month": 1,
+    "death_year": 1598,
+    "death_month": 9,
+    "roles": "military_leader,political_leader,warlord",
+    "biography": "日本战国晚期的杰出统治者，继织田信长之后，完成了日本列岛的统一，建立了丰臣政权。",
+    "source": "日本战国史"
+  },
+  {
+    "name": "德川家康",
+    "name_en": "Tokugawa Ieyasu",
+    "birth_year": 1543,
+    "birth_month": 1,
+    "death_year": 1616,
+    "death_month": 1,
+    "roles": "military_leader,political_leader,founder",
+    "biography": "日本江户时代的创建者。战国末期建立了德川幕府，使日本进入了长期的和平与稳定时期，统治长达 265 年。",
+    "source": "日本江户史"
+  }
+]

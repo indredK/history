@@ -1,4 +1,4 @@
-import type { BoundaryMapping } from '../../../types/map';
+import type { BoundaryMapping } from '../../../services/map/types';
 
 export const BOUNDARY_MAPPINGS: Record<string, BoundaryMapping> = {
   qin: {

@@ -1,0 +1,170 @@
+[
+  {
+    "canonical_name": "长安",
+    "alt_names": "京城, 镐京, 汉长安",
+    "description": "秦汉时期的都城，今陕西西安。政治、经济、文化中心，丝绸之路的起点，是中国古代最重要的城市之一。",
+    "latitude": 34.34,
+    "longitude": 108.95,
+    "source": "CHGIS"
+  },
+  {
+    "canonical_name": "洛阳",
+    "alt_names": "豫州, 洛邑, 东京",
+    "description": "中原地区的重要城市，曾是多个朝代的都城。地处黄河流域，是商业和文化的中心，也是丝绸之路的重要节点。",
+    "latitude": 34.67,
+    "longitude": 112.45,
+    "source": "CHGIS"
+  },
+  {
+    "canonical_name": "南京",
+    "alt_names": "建邺, 建康, 应天",
+    "description": "长江下游的重要城市，曾是多个朝代的都城。地理位置优越，是南北方的分界线，历来是兵家必争之地。",
+    "latitude": 32.06,
+    "longitude": 118.8,
+    "source": "CHGIS"
+  },
+  {
+    "canonical_name": "北京",
+    "alt_names": "燕京, 大都, 北平",
+    "description": "华北平原的中心城市，明清时期的都城。地处北方交通枢纽，是中国的政治和文化中心。",
+    "latitude": 39.9,
+    "longitude": 116.41,
+    "source": "CHGIS"
+  },
+  {
+    "canonical_name": "成都",
+    "alt_names": "蜀城, 益州",
+    "description": "四川盆地的中心城市，古代重要的经济文化中心。由于地理位置的保护，在乱世中成为了避难所。",
+    "latitude": 30.57,
+    "longitude": 104.07,
+    "source": "CHGIS"
+  },
+  {
+    "canonical_name": "杭州",
+    "alt_names": "临安, 钱塘",
+    "description": "浙江地区的重要城市，南宋的都城。地处杭州湾，水运发达，是江南地区的政治、经济和文化中心。",
+    "latitude": 30.27,
+    "longitude": 120.15,
+    "source": "CHGIS"
+  },
+  {
+    "canonical_name": "开封",
+    "alt_names": "汴京, 汴梁",
+    "description": "河南中部的重要城市，北宋的都城。地处黄河流域，水陆交通便利，是中国古代最繁华的城市之一。",
+    "latitude": 34.8,
+    "longitude": 114.3,
+    "source": "CHGIS"
+  },
+  {
+    "canonical_name": "广州",
+    "alt_names": "番禺, 南海",
+    "description": "广东省的重要城市，南方最主要的港口城市。汉代起就是中外贸易的重要枢纽，对外贸易活跃。",
+    "latitude": 23.13,
+    "longitude": 113.26,
+    "source": "CHGIS"
+  },
+  {
+    "canonical_name": "福州",
+    "alt_names": "闽州, 闽中",
+    "description": "福建的重要城市，东南沿海地区的政治和经济中心。与海外贸易联系紧密，海上丝绸之路的主要起点之一。",
+    "latitude": 26.08,
+    "longitude": 119.3,
+    "source": "CHGIS"
+  },
+  {
+    "canonical_name": "大泽乡",
+    "alt_names": "大泽, 蕲县",
+    "description": "秦末陈胜、吴广起义的地点，位于今安徽阜阳地区。这次起义标志着秦朝统治开始动摇，是中国历史上第一次大规模农民起义。",
+    "latitude": 33.38,
+    "longitude": 115.8,
+    "source": "史记"
+  },
+  {
+    "canonical_name": "垓下",
+    "alt_names": "垓下古战场",
+    "description": "楚汉战争中项羽自刎的地点，位于今安徽宿州地区。这场战役标志着项羽失去了争取天下的机会，刘邦最终建立了汉朝。",
+    "latitude": 32.85,
+    "longitude": 116.58,
+    "source": "汉书"
+  },
+  {
+    "canonical_name": "彭城",
+    "alt_names": "徐州",
+    "description": "楚汉战争中的重要战役地点，位于今江苏徐州。这次战役是项羽最为辉煌的胜利，击败了刘邦。",
+    "latitude": 34.28,
+    "longitude": 117.18,
+    "source": "汉书"
+  },
+  {
+    "canonical_name": "鸿沟",
+    "alt_names": "鸿沟古迹",
+    "description": "楚汉战争中的分界线，位于今河南郑州地区。历史上有著名的'鸿沟为界'的说法，分别为楚汉两阵营的领地。",
+    "latitude": 34.73,
+    "longitude": 113.75,
+    "source": "史记"
+  },
+  {
+    "canonical_name": "大漠",
+    "alt_names": "匈奴草原, 西伯利亚南部",
+    "description": "匈奴人的活动范围，在汉代为主要的对外军事作战地点。汉朝多次派兵征伐匈奴，开拓了丝绸之路。",
+    "latitude": 45,
+    "longitude": 105,
+    "source": "汉书"
+  },
+  {
+    "canonical_name": "河西走廊",
+    "alt_names": "河西, 凉州",
+    "description": "中国西部的重要商业走廊，连接中原与西域。汉朝对匈奴作战的重要地点，也是丝绸之路的重要段落。",
+    "latitude": 39,
+    "longitude": 100,
+    "source": "汉书"
+  },
+  {
+    "canonical_name": "雁门关",
+    "alt_names": "雁门, 雁关",
+    "description": "长城上的重要关隘，位于今山西地区。是中原与匈奴的分界点，历来是重要的军事要塞。",
+    "latitude": 39.12,
+    "longitude": 112.42,
+    "source": "汉书"
+  },
+  {
+    "canonical_name": "范阳",
+    "alt_names": "幽州, 蓟城",
+    "description": "安史之乱中安禄山的根据地，位于今北京及河北地区。当时是北方地区的经济和军事中心。",
+    "latitude": 40.05,
+    "longitude": 116.4,
+    "source": "《资治通鉴》"
+  },
+  {
+    "canonical_name": "漠北",
+    "alt_names": "瀚海, 大漠北",
+    "description": "匈奴的主要活动范围，位于蒙古高原。汉朝多次派兵远征此地，最著名的是卫青和霍去病的胜利。",
+    "latitude": 48,
+    "longitude": 103,
+    "source": "汉书"
+  },
+  {
+    "canonical_name": "江南",
+    "alt_names": "江南地区, 长江以南",
+    "description": "中国南方的统称，包括今天的浙江、江苏等地。南北朝时期的重要地区，也是南宋的主要活动范围。",
+    "latitude": 32,
+    "longitude": 120,
+    "source": "历史文献"
+  },
+  {
+    "canonical_name": "中原",
+    "alt_names": "中原地区, 黄河流域",
+    "description": "中国古代最重要的文化和政治中心，包括今天的河南、陕西等地。几乎所有的大一统王朝都建立在此。",
+    "latitude": 34.73,
+    "longitude": 113.75,
+    "source": "《资治通鉴》"
+  },
+  {
+    "canonical_name": "兰州",
+    "alt_names": "金城, 凉州",
+    "description": "甘肃的重要城市，丝绸之路的重要节点。汉代起就是对西域贸易的重要枢纽。",
+    "latitude": 36.06,
+    "longitude": 103.83,
+    "source": "CHGIS"
+  }
+]

@@ -1,6 +1,6 @@
 import { useEventsStore } from '../../store';
-import { useEffect } from 'react';
 import { getEvents } from '../../services/dataClient';
+import { useRequest } from 'ahooks';
 import './EventList.css';
 
 import { Dynasty3DWheel } from './components/Dynasty3DWheel';
@@ -9,17 +9,23 @@ import { HoverScrollContainer } from '../../components/HoverScrollContainer';
 import { Box, Paper, Button, Typography } from '@mui/material';
 import { StarOutline, Star, Share, Info } from '@mui/icons-material';
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/lab';
-import type { Event } from '../../types/models';
+import type { Event } from '../../services/timeline/types';
 
 export function EventList() {
   const { setEvents, favorites, toggleFavorite } = useEventsStore();
 
-  useEffect(() => {
-    getEvents().then((res) => {
-      const items = Array.isArray(res.data) ? res.data : res.data.items;
-      if (items && items.length > 0) setEvents(items);
-    });
-  }, []);
+  // 使用ahooks的useRequest获取数据
+  useRequest(
+    async () => {
+      const result = await getEvents();
+      return result.data;
+    },
+    {
+      cacheKey: 'events_all',
+      manual: false, // enabled: true -> manual: false
+      onSuccess: (events) => setEvents(events)
+    }
+  );
 
   const filtered = useEventFilter();
   

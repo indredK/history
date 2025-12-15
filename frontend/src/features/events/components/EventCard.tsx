@@ -1,4 +1,4 @@
-import type { Event } from '../../../types/models';
+import type { Event } from '../../../services/timeline/types';
 import { useEventsStore } from '../../../store';
 
 type Props = {

@@ -1,23 +1,27 @@
 import { useTimelineStore, useEventsStore } from '../../store';
 import { getEventsByRange } from '../../services/dataClient';
 import { useEffect } from 'react';
+import { useRequest } from 'ahooks';
 
 export function Timeline() {
-  const { startYear, endYear, setYears } = useTimelineStore();
+  const { startYear, endYear } = useTimelineStore();
   const { setEvents } = useEventsStore();
 
-  const handleDateChange = async (start: number, end: number) => {
-    setYears(start, end);
-    try {
-      const res = await getEventsByRange(start, end);
-      setEvents(res.data);
-    } catch (err) {
-      console.error('Failed to fetch events', err);
+  // 使用ahooks的useRequest获取数据
+  useRequest(
+    async () => {
+      const result = await getEventsByRange(startYear, endYear);
+      return result.data;
+    },
+    {
+      cacheKey: `events_${startYear}_${endYear}`,
+      manual: false, // enabled: true -> manual: false
+      onSuccess: (data) => setEvents(data)
     }
-  };
+  );
 
   useEffect(() => {
-    handleDateChange(startYear, endYear);
+    // 初始加载已由useRequest处理
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

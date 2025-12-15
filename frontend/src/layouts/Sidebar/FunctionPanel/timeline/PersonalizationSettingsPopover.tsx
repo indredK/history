@@ -1,5 +1,5 @@
 import { Box, Popover, Stack, Typography, FormControlLabel, Checkbox, Slider, Button, Divider } from '@mui/material';
-import { popoverProps, popoverContentStyles, getThemedCheckboxStyles, formControlLabelStyles, dividerStyles, captionStyles, getThemedSliderStyles, getThemedButtonStyles, getThemedPrimaryButtonStyles } from '../popoverStyles';
+import { popoverProps, popoverContentStyles, getThemedCheckboxStyles, formControlLabelStyles, dividerStyles, getThemedSliderStyles, getThemedButtonStyles, getThemedPrimaryButtonStyles } from '../popoverStyles';
 
 interface PersonalizationSettingsPopoverProps {
   anchorEl: HTMLButtonElement | null;
