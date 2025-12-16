@@ -5,12 +5,10 @@ import {
 } from '@mui/material';
 import {
   FilterList,
-  AccountTree
 } from '@mui/icons-material';
 import { useState } from 'react';
 import { PeopleDynastyFilterPopover } from './PeopleDynastyFilterPopover';
 import { OccupationFilterPopover } from './OccupationFilterPopover';
-import { RelationshipMapSettingsPopover } from './RelationshipMapSettingsPopover';
 import { functionButtonStyles, getThemedSearchFieldStyles } from '../popoverStyles';
 
 export function PeopleFunctions() {
@@ -19,9 +17,6 @@ export function PeopleFunctions() {
 
   // 职业分类 Popover 状态
   const [occupationFilterAnchorEl, setOccupationFilterAnchorEl] = useState<HTMLButtonElement | null>(null);
-
-  // 关系图设置 Popover 状态
-  const [relationshipMapSettingsAnchorEl, setRelationshipMapSettingsAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   // 处理 Popover 打开
   const handleDynastyFilterClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,10 +27,6 @@ export function PeopleFunctions() {
     setOccupationFilterAnchorEl(event.currentTarget);
   };
 
-  const handleRelationshipMapSettingsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setRelationshipMapSettingsAnchorEl(event.currentTarget);
-  };
-
   // 处理 Popover 关闭
   const handleDynastyFilterClose = () => {
     setDynastyFilterAnchorEl(null);
@@ -43,10 +34,6 @@ export function PeopleFunctions() {
 
   const handleOccupationFilterClose = () => {
     setOccupationFilterAnchorEl(null);
-  };
-
-  const handleRelationshipMapSettingsClose = () => {
-    setRelationshipMapSettingsAnchorEl(null);
   };
 
   return (
@@ -90,26 +77,6 @@ export function PeopleFunctions() {
         anchorEl={occupationFilterAnchorEl}
         onClose={handleOccupationFilterClose}
       />
-
-      {/* 关系图设置 */}
-      <Button
-        startIcon={<AccountTree />}
-        variant="outlined"
-        fullWidth
-        size="small"
-        onClick={handleRelationshipMapSettingsClick}
-        sx={functionButtonStyles}
-      >
-        关系图设置
-      </Button>
-      <RelationshipMapSettingsPopover
-        anchorEl={relationshipMapSettingsAnchorEl}
-        onClose={handleRelationshipMapSettingsClose}
-      />
     </Stack>
   );
 }
-
-export { OccupationFilterPopover } from './OccupationFilterPopover';
-export { PeopleDynastyFilterPopover } from './PeopleDynastyFilterPopover';
-export { RelationshipMapSettingsPopover } from './RelationshipMapSettingsPopover';

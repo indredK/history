@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import type { Event } from '../../../../../services/timeline/types';
+import type { Event } from '@/services/timeline/types';
 import type { LabelLayout } from '../types';
 import { TIMELINE_CONFIG, createTimelineGradient } from '../config/timelineConfig';
 import { calculateLabelLayout, calculateYearLayout } from './layoutAlgorithms';
@@ -117,7 +117,11 @@ export class TimelineRenderer {
       .attr('x1', 0)
       .attr('x2', (d: Event) => {
         const domain = this.xScale.domain();
-        return Math.max(0, this.xScale(Math.min(d.endYear!, domain[1])) - this.xScale(Math.max(d.startYear, domain[0])));
+        const endYear = d.endYear ?? d.startYear;
+        const domainEnd = domain[1];
+        const domainStart = domain[0];
+        if (domainEnd === undefined || domainStart === undefined) return 0;
+        return Math.max(0, this.xScale(Math.min(endYear, domainEnd)) - this.xScale(Math.max(d.startYear, domainStart)));
       })
       .attr('y1', this.height / 2)
       .attr('y2', this.height / 2)

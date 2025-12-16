@@ -30,7 +30,7 @@ export function useScrollbarAreaDetect<T extends HTMLElement>(
   // 调试可视化
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || !hasScrollableContentRef.current) return;
+    if (!container || !hasScrollableContentRef.current) return undefined;
 
     if (showDebugArea && process.env.NODE_ENV === 'development') {
       const existingIndicator = container.querySelector('.hover-scroll-indicator');
@@ -64,6 +64,7 @@ export function useScrollbarAreaDetect<T extends HTMLElement>(
         }
       };
     }
+    return undefined;
   }, [containerRef, hasScrollableContentRef, showDebugArea, scrollbarAreaHeight]);
 
   // 鼠标事件监听

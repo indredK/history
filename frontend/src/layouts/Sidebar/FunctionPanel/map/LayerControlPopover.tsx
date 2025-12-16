@@ -1,5 +1,5 @@
 import { Popover, Stack, Typography, Box, FormControlLabel, Checkbox, Slider } from '@mui/material';
-import { useMapStore } from '../../../../store';
+import { useMapStore } from '@/store';
 import { popoverProps, popoverContentStyles, getThemedCheckboxStyles, formControlLabelStyles, captionStyles, getThemedSliderStyles } from '../popoverStyles';
 
 interface LayerControlPopoverProps {

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Event } from '../services/timeline/types';
+import type { Event } from '@/services/timeline/types';
 
 interface EventsState {
   events: Event[];

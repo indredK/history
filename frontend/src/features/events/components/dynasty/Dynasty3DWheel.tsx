@@ -2,10 +2,10 @@ import { useMemo, useState, useEffect, useRef, Suspense } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Html, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
-import { useDynastyStore } from '../../../../store';
-import { getDynasties } from '../../../../services/dataClient';
+import { useDynastyStore } from '@/store';
+import { getDynasties } from '@/services/dataClient';
 import { useRequest } from 'ahooks';
-import type { Dynasty } from '../../../../services/culture/types';
+import type { Dynasty } from '@/services/culture/types';
 import './Dynasty3DWheel.css';
 
 interface Dynasty3DWheelProps {

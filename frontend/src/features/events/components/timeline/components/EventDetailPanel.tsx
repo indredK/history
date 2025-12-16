@@ -1,6 +1,6 @@
 import { Box, Paper, Typography, Button } from '@mui/material';
 import { StarOutline, Star, Share, Info } from '@mui/icons-material';
-import type { Event } from '../../../../../services/timeline/types';
+import type { Event } from '@/services/timeline/types';
 
 interface EventDetailPanelProps {
   event: Event;

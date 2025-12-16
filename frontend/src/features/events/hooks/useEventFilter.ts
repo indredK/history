@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useEventsStore } from '../../../store';
+import { useEventsStore } from '@/store';
 
 export function useEventFilter() {
   const { events, searchQuery } = useEventsStore();

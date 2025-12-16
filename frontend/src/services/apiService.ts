@@ -1,11 +1,11 @@
-import type { Event } from './timeline/types';
-import type { Place } from './map/types';
-import type { Person } from './person/types';
-import type { Dynasty } from './culture/types';
-import { timelineApi } from './timeline/timelineApi';
-import { mapApi } from './map/mapApi';
-import { personApi } from './person/personApi';
-import { cultureApi } from './culture/cultureApi';
+import type { Event } from '@/services/timeline/types';
+import type { Place } from '@/services/map/types';
+import type { Person } from '@/services/person/types';
+import type { Dynasty } from '@/services/culture/types';
+import { timelineApi } from '@/services/timeline/timelineApi';
+import { mapApi } from '@/services/map/mapApi';
+import { personApi } from '@/services/person/personApi';
+import { cultureApi } from '@/services/culture/cultureApi';
 
 export interface ApiService {
   // Timeline API

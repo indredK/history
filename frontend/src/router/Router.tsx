@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { routes } from './routes';
-import { LoadingSkeleton } from '../components/ui/LoadingSkeleton';
+import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 
 export function AppRouter() {
   return (

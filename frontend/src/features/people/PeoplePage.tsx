@@ -1,9 +1,9 @@
 import { Box, Typography, Card, CardContent, Avatar, Chip, Skeleton } from '@mui/material';
 import './PeoplePage.css';
-import { usePersonsStore } from '../../store';
-import { getPersons } from '../../services/dataClient';
+import { usePersonsStore } from '@/store';
+import { getPersons } from '@/services/dataClient';
 import { useRequest } from 'ahooks';
-import type { Person as ServicePerson } from '../../services/person/types';
+import type { Person as ServicePerson } from '@/services/person/types';
 
 function PeoplePage() {
   const { persons, setPersons } = usePersonsStore();

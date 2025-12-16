@@ -1,4 +1,4 @@
-import { getDataSource } from '../config/env';
+import { getDataSource } from '@/config/env';
 import { apiService } from './apiService';
 import { mockService } from './mockService';
 

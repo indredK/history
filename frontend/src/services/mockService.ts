@@ -1,11 +1,11 @@
-import type { Event } from './timeline/types';
-import type { Place } from './map/types';
-import type { Person } from './person/types';
-import type { Dynasty } from './culture/types';
-import { timelineMock } from './timeline/timelineMock';
-import { mapMock } from './map/mapMock';
-import { personMock } from './person/personMock';
-import { cultureMock } from './culture/cultureMock';
+import type { Event } from '@/services/timeline/types';
+import type { Place } from '@/services/map/types';
+import type { Person } from '@/services/person/types';
+import type { Dynasty } from '@/services/culture/types';
+import { timelineMock } from '@/services/timeline/timelineMock';
+import { mapMock } from '@/services/map/mapMock';
+import { personMock } from '@/services/person/personMock';
+import { cultureMock } from '@/services/culture/cultureMock';
 
 export interface MockService {
   // Timeline API

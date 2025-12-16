@@ -4,8 +4,8 @@ import {
   Typography,
   Divider
 } from '@mui/material';
-import { NavigationSection } from './Sidebar/NavigationSection';
-import { FunctionPanel } from './Sidebar/FunctionPanel';
+import { NavigationSection } from '@/layouts/Sidebar/NavigationSection';
+import { FunctionPanel } from '@/layouts/Sidebar/FunctionPanel';
 import './Sidebar/Sidebar.css';
 
 interface SidebarProps {

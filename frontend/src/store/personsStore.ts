@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Person } from '../services/person/types';
+import type { Person } from '@/services/person/types';
 
 interface PersonsState {
   persons: Person[];

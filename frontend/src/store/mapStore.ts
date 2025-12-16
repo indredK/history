@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { Feature } from 'geojson';
-import type { ViewportState } from '../services/map/types';
+import type { ViewportState } from '@/services/map/types';
 
 interface MapState extends ViewportState {
   bearing: number;

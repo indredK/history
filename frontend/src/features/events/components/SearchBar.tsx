@@ -1,4 +1,4 @@
-import { useEventsStore } from '../../../store';
+import { useEventsStore } from '@/store';
 
 export function SearchBar() {
   const { searchQuery, setSearchQuery } = useEventsStore();

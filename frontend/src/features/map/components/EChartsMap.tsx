@@ -132,7 +132,7 @@ export function EChartsMap({
               type: 'scatter',
               coordinateSystem: 'geo',
               symbol: 'pin',
-              symbolSize: (val: number[]) => Math.max(val[2] / 5, 15),
+              symbolSize: (val: number[]) => Math.max((val[2] ?? 0) / 5, 15),
               label: { show: true, position: 'right', formatter: '{b}', fontSize: 10 },
               itemStyle: { color: '#f44336' },
               data: cities.map((c) => ({

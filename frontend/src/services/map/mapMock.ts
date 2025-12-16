@@ -1,6 +1,6 @@
 import type { MapService } from './mapService';
 import type { Place } from './types';
-import { loadJsonData } from '../utils/dataLoader';
+import { loadJsonData } from '@/services/utils/dataLoader';
 
 // 转换 JSON 数据为 Place 格式
 function transformJsonToPlace(jsonPlace: any, index: number): Place {
@@ -17,7 +17,7 @@ function transformJsonToPlace(jsonPlace: any, index: number): Place {
       type: 'Point',
       coordinates: [jsonPlace.longitude, jsonPlace.latitude],
     },
-    source_ids: jsonPlace.source ? [`src_${jsonPlace.source}`] : undefined,
+    source_ids: jsonPlace.source ? [`src_${jsonPlace.source}`] : [],
   };
 }
 

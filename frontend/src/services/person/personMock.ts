@@ -1,6 +1,6 @@
 import type { PersonService } from './personService';
 import type { Person } from './types';
-import { loadJsonData } from '../utils/dataLoader';
+import { loadJsonData } from '@/services/utils/dataLoader';
 
 // 转换 JSON 数据为 Person 格式
 function transformJsonToPerson(jsonPerson: any, index: number): Person {
@@ -16,7 +16,7 @@ function transformJsonToPerson(jsonPerson: any, index: number): Person {
     deathMonth: jsonPerson.death_month,
     biography: jsonPerson.biography,
     roles: roles,
-    source_ids: jsonPerson.source ? [`src_${jsonPerson.source}`] : undefined,
+    source_ids: jsonPerson.source ? [`src_${jsonPerson.source}`] : [],
   };
 }
 

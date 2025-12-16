@@ -2,9 +2,9 @@ import { useRef, useState } from 'react';
 import { useRequest } from 'ahooks';
 import { Box, Typography } from '@mui/material';
 
-import { getEvents } from '../../../../../services/dataClient';
-import { useEventsStore } from '../../../../../store';
-import { useEventFilter } from '../../../hooks/useEventFilter';
+import { getEvents } from '@/services/dataClient';
+import { useEventsStore } from '@/store';
+import { useEventFilter } from '@/features/events/hooks/useEventFilter';
 import { TimelineChart } from './TimelineChart';
 import type { TimelineChartRef } from '../types';
 import '../styles/D3Timeline.css';

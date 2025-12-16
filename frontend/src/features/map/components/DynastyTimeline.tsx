@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { getDynasties } from '../../../services/dataClient';
-import { Dynasty } from '../../../services/culture/types';
+import { getDynasties } from '@/services/dataClient';
+import { Dynasty } from '@/services/culture/types';
 import styles from './DynastyTimeline.module.css';
 
 interface DynastyTimelineProps {
   onDynastySelect?: (dynasty: Dynasty) => void;
-  selectedDynastyId?: string;
+  selectedDynastyId?: string | undefined;
 }
 
 export const DynastyTimeline: React.FC<DynastyTimelineProps> = ({
@@ -69,8 +69,8 @@ export const DynastyTimeline: React.FC<DynastyTimelineProps> = ({
   const findNearestDynasty = useCallback((year: number): Dynasty | null => {
     if (dynasties.length === 0) return null;
     
-    let nearest = dynasties[0];
-    let minDistance = Math.abs(dynasties[0].startYear - year);
+    let nearest: Dynasty | undefined = dynasties[0];
+    let minDistance = Math.abs(dynasties[0]!.startYear - year);
     
     for (const dynasty of dynasties) {
       const distance = Math.abs(dynasty.startYear - year);
@@ -79,7 +79,7 @@ export const DynastyTimeline: React.FC<DynastyTimelineProps> = ({
         nearest = dynasty;
       }
     }
-    return nearest;
+    return nearest ?? null;
   }, [dynasties]);
 
   const handleSliderMove = useCallback((clientX: number) => {
@@ -130,16 +130,17 @@ export const DynastyTimeline: React.FC<DynastyTimelineProps> = ({
         window.removeEventListener('mouseup', handleMouseUp);
       };
     }
+    return undefined;
   }, [isDragging, handleMouseMove, handleMouseUp]);
 
   // 触摸事件支持
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsDragging(true);
-    handleSliderMove(e.touches[0].clientX);
+    handleSliderMove(e.touches[0]!.clientX);
   };
 
   const handleTouchMove = useCallback((e: TouchEvent) => {
-    if (isDragging) {
+    if (isDragging && e.touches[0]) {
       handleSliderMove(e.touches[0].clientX);
     }
   }, [isDragging, handleSliderMove]);
@@ -163,6 +164,7 @@ export const DynastyTimeline: React.FC<DynastyTimelineProps> = ({
         window.removeEventListener('touchend', handleTouchEnd);
       };
     }
+    return undefined;
   }, [isDragging, handleTouchMove, handleTouchEnd]);
 
   // 获取当前朝代的索引
@@ -186,10 +188,12 @@ export const DynastyTimeline: React.FC<DynastyTimelineProps> = ({
       
       if (newIndex !== currentIndex) {
         const newDynasty = dynasties[newIndex];
-        setSelectedDynasty(newDynasty);
-        const pos = ((newDynasty.startYear - MIN_YEAR) / YEAR_RANGE) * 100;
-        setSliderPosition(pos);
-        onDynastySelect?.(newDynasty);
+        if (newDynasty) {
+          setSelectedDynasty(newDynasty);
+          const pos = ((newDynasty.startYear - MIN_YEAR) / YEAR_RANGE) * 100;
+          setSliderPosition(pos);
+          onDynastySelect?.(newDynasty);
+        }
       }
     };
 

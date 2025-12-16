@@ -5,12 +5,10 @@ import {
 import {
   Layers,
   Schedule,
-  Palette
 } from '@mui/icons-material';
 import { useState } from 'react';
 import { LayerControlPopover } from './LayerControlPopover';
 import { TimeControlPopover } from './TimeControlPopover';
-import { MapSettingsPopover } from './MapSettingsPopover';
 import { functionButtonStyles } from '../popoverStyles';
 
 export function MapFunctions() {
@@ -19,9 +17,6 @@ export function MapFunctions() {
 
   // 时间控制 Popover 状态
   const [timeControlAnchorEl, setTimeControlAnchorEl] = useState<HTMLButtonElement | null>(null);
-
-  // 地图设置 Popover 状态
-  const [mapSettingsAnchorEl, setMapSettingsAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   // 处理 Popover 打开
   const handleLayerControlClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,10 +27,6 @@ export function MapFunctions() {
     setTimeControlAnchorEl(event.currentTarget);
   };
 
-  const handleMapSettingsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setMapSettingsAnchorEl(event.currentTarget);
-  };
-
   // 处理 Popover 关闭
   const handleLayerControlClose = () => {
     setLayerControlAnchorEl(null);
@@ -43,10 +34,6 @@ export function MapFunctions() {
 
   const handleTimeControlClose = () => {
     setTimeControlAnchorEl(null);
-  };
-
-  const handleMapSettingsClose = () => {
-    setMapSettingsAnchorEl(null);
   };
 
   return (
@@ -82,26 +69,6 @@ export function MapFunctions() {
         anchorEl={timeControlAnchorEl}
         onClose={handleTimeControlClose}
       />
-
-      {/* 地图设置 */}
-      <Button
-        startIcon={<Palette />}
-        variant="outlined"
-        fullWidth
-        size="small"
-        onClick={handleMapSettingsClick}
-        sx={functionButtonStyles}
-      >
-        地图设置
-      </Button>
-      <MapSettingsPopover
-        anchorEl={mapSettingsAnchorEl}
-        onClose={handleMapSettingsClose}
-      />
     </Stack>
   );
 }
-
-export { LayerControlPopover } from './LayerControlPopover';
-export { MapSettingsPopover } from './MapSettingsPopover';
-export { TimeControlPopover } from './TimeControlPopover';

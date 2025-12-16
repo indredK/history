@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Dynasty } from '../services/culture/types';
+import type { Dynasty } from '@/services/culture/types';
 
 interface DynastyState {
   dynasties: Dynasty[];

@@ -25,7 +25,7 @@ export class MapErrorBoundary extends Component<Props, State> {
     };
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('Map error boundary caught:', error, errorInfo);
   }
 
@@ -36,7 +36,7 @@ export class MapErrorBoundary extends Component<Props, State> {
     });
   };
 
-  render() {
+  override render() {
     if (this.state.hasError) {
       return (
         <div className="map-error">

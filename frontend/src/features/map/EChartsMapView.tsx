@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { EChartsMap } from './components/EChartsMap';
 import { DynastyTimeline } from './components/DynastyTimeline';
 import { ProvinceData } from './services/mapDataService';
-import { Dynasty } from '../../services/culture/types';
+import { Dynasty } from '@/services/culture/types';
 
 export function EChartsMapView() {
   const [selectedProvince, setSelectedProvince] = useState<{

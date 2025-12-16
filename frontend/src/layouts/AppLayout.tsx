@@ -1,24 +1,12 @@
 import { Suspense } from 'react';
-import { Box, CircularProgress } from '@mui/material';
+import { Box } from '@mui/material';
 import { useLocation, Routes, Route, Navigate } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Footer } from './Footer';
-import { useDynastyStore } from '../store';
-import { useDynastyImage } from '../hooks/useDynastyImage';
-import { routes } from '../router/routes';
-
-// 加载中组件
-const LoadingFallback = () => (
-  <Box 
-    display="flex" 
-    justifyContent="center" 
-    alignItems="center" 
-    height="100%"
-    minHeight="200px"
-  >
-    <CircularProgress />
-  </Box>
-);
+import { useDynastyStore } from '@/store';
+import { useDynastyImage } from '@/hooks/useDynastyImage';
+import { routes } from '@/router/routes';
+import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 
 export function AppLayout() {
   const location = useLocation();
@@ -80,7 +68,7 @@ export function AppLayout() {
           backgroundColor: selectedDynasty ? bgColor : 'transparent',
         }}>
           <div className="content" style={{ height: '100%', position: 'relative' }}>
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={<LoadingSkeleton variant="page" />}>
               <Routes>
                 {routes.map((route) => (
                   <Route

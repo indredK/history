@@ -1,4 +1,4 @@
-import type { Event } from '../../../../../services/timeline/types';
+import type { Event } from '@/services/timeline/types';
 import type { LabelLayout, YearLayout } from '../types';
 import { TIMELINE_CONFIG } from '../config/timelineConfig';
 

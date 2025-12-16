@@ -256,6 +256,7 @@ export function useDataFetch<T>(
       const intervalId = setInterval(() => fetchData(true), refetchInterval);
       return () => clearInterval(intervalId);
     }
+    return undefined;
   }, [fetchData, refetchInterval]);
 
   // 清理函数 - 组件卸载时取消请求

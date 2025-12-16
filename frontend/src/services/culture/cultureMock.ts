@@ -1,6 +1,6 @@
 import type { CultureService } from './cultureService';
 import type { Dynasty } from './types';
-import { loadJsonData } from '../utils/dataLoader';
+import { loadJsonData } from '@/services/utils/dataLoader';
 
 // 转换 JSON 数据为 Dynasty 格式
 function transformJsonToDynasty(jsonDynasty: any): Dynasty {

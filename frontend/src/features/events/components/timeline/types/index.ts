@@ -1,4 +1,4 @@
-import type { Event } from '../../../../../services/timeline/types';
+import type { Event } from '@/services/timeline/types';
 
 // 标签布局接口
 export interface LabelLayout {

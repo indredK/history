@@ -1,6 +1,6 @@
 import type { TimelineService } from './timelineService';
 import type { Event } from './types';
-import { loadJsonData } from '../utils/dataLoader';
+import { loadJsonData } from '@/services/utils/dataLoader';
 
 // 转换 JSON 数据为 Event 格式
 function transformJsonToEvent(jsonEvent: any, index: number): Event {
@@ -16,8 +16,8 @@ function transformJsonToEvent(jsonEvent: any, index: number): Event {
     endMonth: jsonEvent.end_month,
     description: jsonEvent.description,
     eventType: eventTypes[0] || 'unknown',
-    categories: eventTypes.length > 0 ? [eventTypes] : undefined,
-    sources: jsonEvent.source ? [{ id: `src_${jsonEvent.source}`, title: jsonEvent.source }] : undefined,
+    categories: eventTypes.length > 0 ? [eventTypes] : [],
+    sources: jsonEvent.source ? [{ id: `src_${jsonEvent.source}`, title: jsonEvent.source }] : [],
   };
 }
 
