@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect, useRef, Suspense } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Html, Environment, PerspectiveCamera } from '@react-three/drei';
+import { Html, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 import { useTimelineStore, useDynastyStore } from '../../../../store';
 import { getDynasties } from '../../../../services/dataClient';
@@ -318,27 +318,12 @@ function Scene({
       
       {/* 点光源 - 跟随活跃卡片 */}
       <pointLight position={[0, 0, 0]} intensity={2} distance={10} color="#ffd700" />
-      
-      {/* 环境贴图 */}
-      <Environment preset="sunset" />
-      
+
       {/* 粒子背景 */}
       <Particles />
       
       {/* 朝代圆环 */}
       <DynastyCarousel dynasties={dynasties} activeIndex={activeIndex} onCardClick={onCardClick} />
-      
-      {/* 地面反射 */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.5, 0]} receiveShadow>
-        <planeGeometry args={[50, 20]} />
-        <meshStandardMaterial
-          color="#111"
-          metalness={0.8}
-          roughness={0.2}
-          transparent
-          opacity={0.5}
-        />
-      </mesh>
     </>
   );
 }
