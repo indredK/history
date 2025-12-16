@@ -1,25 +1,12 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Box, CircularProgress } from '@mui/material';
 import { routes } from './routes';
-
-// 加载中组件
-const LoadingFallback = () => (
-  <Box 
-    display="flex" 
-    justifyContent="center" 
-    alignItems="center" 
-    height="100%"
-    minHeight="200px"
-  >
-    <CircularProgress />
-  </Box>
-);
+import { LoadingSkeleton } from '../components/ui/LoadingSkeleton';
 
 export function AppRouter() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<LoadingFallback />}>
+      <Suspense fallback={<LoadingSkeleton variant="page" />}>
         <Routes>
           {/* 根路径重定向到时间轴 */}
           <Route path="/" element={<Navigate to="/timeline" replace />} />

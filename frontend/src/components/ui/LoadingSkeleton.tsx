@@ -1,10 +1,27 @@
-import { Box, Card, CardContent, Skeleton } from '@mui/material';
+import { Box, Card, CardContent, Skeleton, CircularProgress } from '@mui/material';
 
 interface LoadingSkeletonProps {
   count?: number;
+  variant?: 'cards' | 'page';
 }
 
-export function LoadingSkeleton({ count = 6 }: LoadingSkeletonProps) {
+export function LoadingSkeleton({ count = 6, variant = 'cards' }: LoadingSkeletonProps) {
+  // 页面级加载
+  if (variant === 'page') {
+    return (
+      <Box 
+        display="flex" 
+        justifyContent="center" 
+        alignItems="center" 
+        height="100%"
+        minHeight="200px"
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  // 卡片列表加载
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
       {Array.from({ length: count }).map((_, index) => (
