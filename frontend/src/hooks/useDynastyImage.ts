@@ -41,21 +41,24 @@ export function useDynastyImage(dynastyId: string | null): UseDynastyImageReturn
     setIsLoading(true);
     setError(null);
 
-    // Dynamic import of the image
-    import(`../assets/images/dynasties/${dynastyId}.svg`)
-      .then((module) => {
-        const url = module.default;
-        // Store in cache
-        imageCache.set(dynastyId, url);
-        setImageUrl(url);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        const error = err instanceof Error ? err : new Error(`Failed to load image for dynasty: ${dynastyId}`);
-        setError(error);
-        setImageUrl(null);
-        setIsLoading(false);
-      });
+    // Load image from public directory
+    const imageUrl = `/images/dynasties/${dynastyId}.svg`;
+    
+    // Check if image exists by creating an Image object
+    const img = new Image();
+    img.onload = () => {
+      // Store in cache
+      imageCache.set(dynastyId, imageUrl);
+      setImageUrl(imageUrl);
+      setIsLoading(false);
+    };
+    img.onerror = () => {
+      const error = new Error(`Failed to load image for dynasty: ${dynastyId}`);
+      setError(error);
+      setImageUrl(null);
+      setIsLoading(false);
+    };
+    img.src = imageUrl;
   }, [dynastyId]);
 
   return { imageUrl, isLoading, error };

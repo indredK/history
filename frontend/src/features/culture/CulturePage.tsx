@@ -1,14 +1,17 @@
-import { Box, Typography, Card, CardContent, Chip, Skeleton } from '@mui/material';
-import './CulturePage.css';
-import { useDynastyStore } from '../../store';
-import { getDynasties } from '../../services/dataClient';
+import { Box, Typography, Card, CardContent, Chip } from '@mui/material';
 import { useRequest } from 'ahooks';
-import type { Dynasty } from '../../services/culture/types';
+
+import { useDynastyStore } from '@/store';
+import { getDynasties } from '@/services/dataClient';
+import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
+import type { Dynasty } from '@/services/culture/types';
+
+import './CulturePage.css';
 
 function CulturePage() {
   const { dynasties, setDynasties, setSelectedDynasty, selectedDynasty } = useDynastyStore();
 
-  // 使用ahooks的useRequest获取数据
+  // 使用 ahooks 的 useRequest
   const { loading, error } = useRequest(
     async () => {
       const result = await getDynasties();
@@ -16,39 +19,12 @@ function CulturePage() {
     },
     {
       cacheKey: 'dynasties',
-      manual: false,
-      onSuccess: (data) => setDynasties(data)
+      onSuccess: setDynasties,
+      onError: (err) => console.error('获取朝代数据失败:', err)
     }
   );
 
-  // 加载状态组件
-  const LoadingSkeleton = () => (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
-      {Array.from({ length: 6 }).map((_, index) => (
-        <Box sx={{ flexBasis: { xs: '100%', sm: '48%', md: '31%' } }} key={index}>
-          <Card sx={{
-            height: '100%',
-            background: 'var(--color-bg-card)',
-            borderRadius: 'var(--radius-lg)',
-            boxShadow: 'var(--shadow-md)'
-          }}>
-            <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <Skeleton variant="circular" width={40} height={40} sx={{ mr: 2 }} />
-                <Box sx={{ flex: 1 }}>
-                  <Skeleton variant="text" width="60%" height={28} />
-                  <Skeleton variant="text" width="40%" height={20} sx={{ mt: 0.5 }} />
-                </Box>
-              </Box>
-              <Skeleton variant="text" width="100%" />
-              <Skeleton variant="text" width="80%" />
-              <Skeleton variant="rectangular" width="30%" height={24} sx={{ mt: 2, borderRadius: '12px' }} />
-            </CardContent>
-          </Card>
-        </Box>
-      ))}
-    </Box>
-  );
+
 
   return (
     <Box className="culture-page">

@@ -5,9 +5,9 @@ yarn.lock
 package-lock.json
 
 # Environment
-.env
 .env.local
 .env.*.local
+# 注意：.env 和 .env.production 被提交到仓库
 
 # Build & Distribution
 dist/
