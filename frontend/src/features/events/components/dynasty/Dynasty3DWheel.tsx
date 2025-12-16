@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect, useRef, Suspense } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Html, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
-import { useTimelineStore, useDynastyStore } from '../../../../store';
+import { useDynastyStore } from '../../../../store';
 import { getDynasties } from '../../../../services/dataClient';
 import { useRequest } from 'ahooks';
 import type { Dynasty } from '../../../../services/culture/types';
@@ -329,7 +329,6 @@ function Scene({
 }
 
 export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
-  const { startYear, endYear } = useTimelineStore();
   const { setSelectedDynasty } = useDynastyStore();
   const [allDynasties, setAllDynasties] = useState<Dynasty[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -351,10 +350,8 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
   );
 
   const dynasties = useMemo(() => {
-    return allDynasties.filter(
-      (dynasty) => dynasty.startYear <= endYear && (dynasty.endYear || dynasty.startYear) >= startYear
-    );
-  }, [allDynasties, startYear, endYear]);
+    return allDynasties;
+  }, [allDynasties]);
 
   useEffect(() => {
     if (dynasties.length > 0) {

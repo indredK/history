@@ -2,12 +2,46 @@
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  min-height: 100vh;
+  background: var(--color-bg-primary);
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.culture-content {
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* 自定义滚动条样式 */
+.culture-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.culture-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.culture-content::-webkit-scrollbar-thumb {
+  background: rgba(76, 175, 80, 0.6);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.culture-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(76, 175, 80, 0.8);
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
   .culture-page {
     padding: 15px;
+  }
+  
+  .culture-content {
+    max-height: calc(100vh - 100px);
   }
 }
 

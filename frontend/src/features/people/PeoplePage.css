@@ -2,6 +2,34 @@
   padding: 24px;
   min-height: 100vh;
   background: var(--color-bg-primary);
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.people-content {
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* 自定义滚动条样式 */
+.people-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.people-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.people-content::-webkit-scrollbar-thumb {
+  background: rgba(76, 175, 80, 0.6);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.people-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(76, 175, 80, 0.8);
 }
 
 .people-page .MuiCard-root {
@@ -11,4 +39,21 @@
 .people-page .MuiAvatar-root {
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .people-page {
+    padding: 16px;
+  }
+  
+  .people-content {
+    max-height: calc(100vh - 100px);
+  }
+}
+
+@media (max-width: 480px) {
+  .people-page {
+    padding: 12px;
+  }
 }
