@@ -42,6 +42,6 @@ fi
 echo "🎉 部署配置验证完成！"
 echo "📝 下一步："
 echo "1. git add ."
-echo "2. git commit -m '修复 GitHub Actions 版本'"
+echo "2. git commit -m '修复 GitHub Actions 依赖安装问题'"
 echo "3. git push origin main"
-echo "4. 在 GitHub 仓库设置中启用 Pages"
+echo "4. 在 GitHub 仓库设置中启用 Pages (Settings → Pages → Source: GitHub Actions)"
