@@ -9,6 +9,7 @@
     "build": "tsc && vite build",
     "build:analyze": "vite build --mode analyze",
     "preview": "vite preview",
+    "deploy": "node scripts/deploy.mjs",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --ext ts,tsx --fix",
     "type-check": "tsc --noEmit"

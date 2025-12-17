@@ -6,6 +6,8 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   
   return {
+  // GitHub Pages 部署配置
+  base: process.env.NODE_ENV === 'production' ? '/chinese-historical-panorama/' : '/',
   plugins: [
     react({
       // 生产环境移除 React DevTools
