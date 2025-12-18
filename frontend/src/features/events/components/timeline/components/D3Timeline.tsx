@@ -9,11 +9,7 @@ import { TimelineChart } from './TimelineChart';
 import type { TimelineChartRef } from '../types';
 import '../styles/D3Timeline.css';
 
-interface D3TimelineProps {
-  // 移除了 events 属性，组件内部自己获取数据
-}
-
-export function D3Timeline({}: D3TimelineProps) {
+export function D3Timeline() {
   const chartRef = useRef<TimelineChartRef>(null);
   const [zoomLevel, setZoomLevel] = useState(1);
 

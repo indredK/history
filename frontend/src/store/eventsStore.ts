@@ -3,23 +3,23 @@ import type { Event } from '@/services/timeline/types';
 
 interface EventsState {
   events: Event[];
-  setEvents: (events: Event[]) => void;
+  setEvents: (_events: Event[]) => void;
   favorites: string[];
-  toggleFavorite: (id: string) => void;
+  toggleFavorite: (_id: string) => void;
   searchQuery: string;
-  setSearchQuery: (q: string) => void;
+  setSearchQuery: (_q: string) => void;
 }
 
 export const useEventsStore = create<EventsState>((set) => ({
   events: [],
-  setEvents: (events) => set({ events }),
+  setEvents: (_events) => set({ events: _events }),
   favorites: [],
-  toggleFavorite: (id) =>
+  toggleFavorite: (_id) =>
     set((state) => ({
-      favorites: state.favorites.includes(id)
-        ? state.favorites.filter((x) => x !== id)
-        : [...state.favorites, id],
+      favorites: state.favorites.includes(_id)
+        ? state.favorites.filter((x) => x !== _id)
+        : [...state.favorites, _id],
     })),
   searchQuery: '',
-  setSearchQuery: (q) => set({ searchQuery: q }),
+  setSearchQuery: (_q) => set({ searchQuery: _q }),
 }));

@@ -389,17 +389,19 @@ export const TimelineChart = forwardRef<TimelineChartRef, TimelineChartProps>(
       const [originalStart, originalEnd] = originalRangeRef.current;
       
       switch (event.key) {
-        case 'ArrowLeft':
+        case 'ArrowLeft': {
           event.preventDefault();
           const newStartLeft = Math.max(originalStart, start - panStep);
           setTimeRange([newStartLeft, newStartLeft + currentRange]);
           break;
+        }
           
-        case 'ArrowRight':
+        case 'ArrowRight': {
           event.preventDefault();
           const newEndRight = Math.min(originalEnd, end + panStep);
           setTimeRange([newEndRight - currentRange, newEndRight]);
           break;
+        }
           
         case 'Home':
           event.preventDefault();

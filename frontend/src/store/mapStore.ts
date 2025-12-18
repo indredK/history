@@ -26,19 +26,19 @@ interface MapState extends ViewportState {
   eventMarkersVisible: boolean;
   
   // Actions
-  setLocation: (lat: number, lon: number, zoom: number) => void;
-  setViewport: (viewport: Partial<ViewportState>) => void;
-  setSelectedFeature: (feature: Feature | null) => void;
-  setHoveredFeature: (feature: Feature | null) => void;
-  setHoveredFeatureId: (featureId: string | null, layerType: 'admin' | 'dynasty' | null) => void;
+  setLocation: (_lat: number, _lon: number, _zoom: number) => void;
+  setViewport: (_viewport: Partial<ViewportState>) => void;
+  setSelectedFeature: (_feature: Feature | null) => void;
+  setHoveredFeature: (_feature: Feature | null) => void;
+  setHoveredFeatureId: (_featureId: string | null, _layerType: 'admin' | 'dynasty' | null) => void;
   
   // 基础行政区域层控制
   toggleAdminBoundary: () => void;
-  setAdminBoundaryOpacity: (opacity: number) => void;
+  setAdminBoundaryOpacity: (_opacity: number) => void;
   
   // 历史朝代边界层控制
   toggleDynastyBoundary: () => void;
-  setDynastyBoundaryOpacity: (opacity: number) => void;
+  setDynastyBoundaryOpacity: (_opacity: number) => void;
   
   // 事件标记控制
   toggleEventMarkers: () => void;
@@ -72,34 +72,34 @@ export const useMapStore = create<MapState>((set) => ({
   eventMarkersVisible: true,
   
   // Actions
-  setLocation: (lat, lon, zoom) => 
-    set({ latitude: lat, longitude: lon, zoom }),
+  setLocation: (_lat, _lon, _zoom) => 
+    set({ latitude: _lat, longitude: _lon, zoom: _zoom }),
   
-  setViewport: (viewport) => 
-    set((state) => ({ ...state, ...viewport })),
+  setViewport: (_viewport) => 
+    set((state) => ({ ...state, ..._viewport })),
   
-  setSelectedFeature: (feature) => 
-    set({ selectedFeature: feature }),
+  setSelectedFeature: (_feature) => 
+    set({ selectedFeature: _feature }),
   
-  setHoveredFeature: (feature) => 
-    set({ hoveredFeature: feature }),
+  setHoveredFeature: (_feature) => 
+    set({ hoveredFeature: _feature }),
   
-  setHoveredFeatureId: (featureId: string | null, layerType: 'admin' | 'dynasty' | null) =>
-    set({ hoveredFeatureId: featureId, hoveredLayerType: layerType }),
+  setHoveredFeatureId: (_featureId: string | null, _layerType: 'admin' | 'dynasty' | null) =>
+    set({ hoveredFeatureId: _featureId, hoveredLayerType: _layerType }),
   
   // 基础行政区域层控制
   toggleAdminBoundary: () => 
     set((state) => ({ adminBoundaryVisible: !state.adminBoundaryVisible })),
   
-  setAdminBoundaryOpacity: (opacity) => 
-    set({ adminBoundaryOpacity: Math.max(0, Math.min(1, opacity)) }),
+  setAdminBoundaryOpacity: (_opacity) => 
+    set({ adminBoundaryOpacity: Math.max(0, Math.min(1, _opacity)) }),
   
   // 历史朝代边界层控制
   toggleDynastyBoundary: () => 
     set((state) => ({ dynastyBoundaryVisible: !state.dynastyBoundaryVisible })),
   
-  setDynastyBoundaryOpacity: (opacity) => 
-    set({ dynastyBoundaryOpacity: Math.max(0, Math.min(1, opacity)) }),
+  setDynastyBoundaryOpacity: (_opacity) => 
+    set({ dynastyBoundaryOpacity: Math.max(0, Math.min(1, _opacity)) }),
   
   // 事件标记控制
   toggleEventMarkers: () => 

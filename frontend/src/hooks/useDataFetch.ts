@@ -4,8 +4,8 @@ export interface FetchOptions {
   cacheKey?: string;
   enabled?: boolean;
   refetchInterval?: number;
-  onSuccess?: (data: any) => void;
-  onError?: (error: any) => void;
+  onSuccess?: (_data: any) => void;
+  onError?: (_error: any) => void;
   // 新增功能
   debounceWait?: number; // 防抖等待时间
   throttleWait?: number; // 节流等待时间
@@ -37,28 +37,28 @@ interface CacheItem<T> {
 const cache = new Map<string, CacheItem<any>>();
 
 // 防抖函数
-function debounce<T extends (...args: any[]) => any>(
+function debounce<T extends (..._args: any[]) => any>(
   func: T,
   wait: number
-): (...args: Parameters<T>) => void {
+): (..._args: Parameters<T>) => void {
   let timeout: ReturnType<typeof setTimeout> | null = null;
-  return (...args: Parameters<T>) => {
+  return (..._args: Parameters<T>) => {
     if (timeout) clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
+    timeout = setTimeout(() => func(..._args), wait);
   };
 }
 
 // 节流函数
-function throttle<T extends (...args: any[]) => any>(
+function throttle<T extends (..._args: any[]) => any>(
   func: T,
   wait: number
-): (...args: Parameters<T>) => void {
+): (..._args: Parameters<T>) => void {
   let lastCall = 0;
-  return (...args: Parameters<T>) => {
+  return (..._args: Parameters<T>) => {
     const now = Date.now();
     if (now - lastCall >= wait) {
       lastCall = now;
-      func(...args);
+      func(..._args);
     }
   };
 }

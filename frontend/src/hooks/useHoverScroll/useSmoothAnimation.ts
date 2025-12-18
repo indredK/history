@@ -8,8 +8,8 @@ export interface UseSmoothAnimationOptions {
 }
 
 export interface UseSmoothAnimationReturn {
-  targetScrollRef: React.MutableRefObject<number>;
-  lastScrollLeftRef: React.MutableRefObject<number>;
+  targetScrollRef: React.RefObject<number>;
+  lastScrollLeftRef: React.RefObject<number>;
   setTarget: (position: number) => void;
   syncWithCurrent: () => void;
 }

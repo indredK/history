@@ -14,7 +14,7 @@ export function useScrollbarAreaDetect<T extends HTMLElement>(
   containerRef: React.RefObject<T | null>,
   enabledRef: React.RefObject<boolean>,
   hasScrollableContentRef: React.RefObject<boolean>,
-  isInScrollbarAreaRef: React.MutableRefObject<boolean>,
+  isInScrollbarAreaRef: React.RefObject<boolean>,
   options: UseScrollbarAreaDetectOptions = {}
 ): void {
   const { scrollbarAreaHeight = 16, showDebugArea = false, onPositionChange } = options;

@@ -3,14 +3,14 @@ import type { Dynasty } from '@/services/culture/types';
 
 interface DynastyState {
   dynasties: Dynasty[];
-  setDynasties: (dynasties: Dynasty[]) => void;
+  setDynasties: (_dynasties: Dynasty[]) => void;
   selectedDynasty: Dynasty | null;
-  setSelectedDynasty: (dynasty: Dynasty | null) => void;
+  setSelectedDynasty: (_dynasty: Dynasty | null) => void;
 }
 
 export const useDynastyStore = create<DynastyState>((set) => ({
   dynasties: [],
-  setDynasties: (dynasties) => set({ dynasties }),
+  setDynasties: (_dynasties: Dynasty[]) => set({ dynasties: _dynasties }),
   selectedDynasty: null,
-  setSelectedDynasty: (dynasty) => set({ selectedDynasty: dynasty }),
+  setSelectedDynasty: (_dynasty: Dynasty | null) => set({ selectedDynasty: _dynasty }),
 }));

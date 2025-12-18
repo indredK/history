@@ -4,7 +4,7 @@ import { Dynasty } from '@/services/culture/types';
 import styles from './DynastyTimeline.module.css';
 
 interface DynastyTimelineProps {
-  onDynastySelect?: (dynasty: Dynasty) => void;
+  onDynastySelect?: (_dynasty: Dynasty) => void;
   selectedDynastyId?: string | undefined;
 }
 

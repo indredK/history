@@ -3,18 +3,18 @@ import type { Person } from '@/services/person/types';
 
 interface PersonsState {
   persons: Person[];
-  setPersons: (persons: Person[]) => void;
+  setPersons: (_persons: Person[]) => void;
   selectedPersonId: string | null;
-  setSelectedPersonId: (id: string | null) => void;
+  setSelectedPersonId: (_id: string | null) => void;
   searchQuery: string;
-  setSearchQuery: (q: string) => void;
+  setSearchQuery: (_q: string) => void;
 }
 
 export const usePersonsStore = create<PersonsState>((set) => ({
   persons: [],
-  setPersons: (persons) => set({ persons }),
+  setPersons: (_persons) => set({ persons: _persons }),
   selectedPersonId: null,
-  setSelectedPersonId: (id) => set({ selectedPersonId: id }),
+  setSelectedPersonId: (_id) => set({ selectedPersonId: _id }),
   searchQuery: '',
-  setSearchQuery: (q) => set({ searchQuery: q }),
+  setSearchQuery: (_q) => set({ searchQuery: _q }),
 }));
