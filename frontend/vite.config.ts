@@ -53,6 +53,8 @@ export default defineConfig(({ command, mode }) => {
       'zustand',
       'ahooks'
     ],
+    // Bun compatibility
+    force: true,
   },
   build: {
     // 生产环境优化

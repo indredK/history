@@ -1,0 +1,21 @@
+# Root Bun configuration file
+
+[install]
+# Use exact versions for better reproducibility
+exact = false
+
+# Enable cache for faster installs
+cache = true
+
+# Registry configuration
+registry = "https://registry.npmjs.org/"
+
+[install.scopes]
+# Add any scoped package configurations here if needed
+
+[run]
+# Enable bun's native bundler for better performance
+bun = true
+
+# Shell configuration
+shell = "system"
