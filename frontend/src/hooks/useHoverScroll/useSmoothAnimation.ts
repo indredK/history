@@ -8,8 +8,8 @@ export interface UseSmoothAnimationOptions {
 }
 
 export interface UseSmoothAnimationReturn {
-  targetScrollRef: React.RefObject<number>;
-  lastScrollLeftRef: React.RefObject<number>;
+  targetScrollRef: React.MutableRefObject<number>;
+  lastScrollLeftRef: React.MutableRefObject<number>;
   setTarget: (position: number) => void;
   syncWithCurrent: () => void;
 }
@@ -25,9 +25,9 @@ export function useSmoothAnimation<T extends HTMLElement>(
 ): UseSmoothAnimationReturn {
   const { easing = 0.08, threshold = 0.5, onFrame } = options;
 
-  const targetScrollRef = useRef<number>(0);
-  const animationFrameRef = useRef<number>(0);
-  const lastScrollLeftRef = useRef<number>(0);
+  const targetScrollRef = useRef(0);
+  const animationFrameRef = useRef(0);
+  const lastScrollLeftRef = useRef(0);
   
   const easingRef = useRef(easing);
   const thresholdRef = useRef(threshold);

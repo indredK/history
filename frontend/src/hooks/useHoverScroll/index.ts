@@ -34,7 +34,7 @@ export const useHoverScroll = <T extends HTMLElement>(
     showScrollbarArea = false
   } = options;
 
-  const isEnabledRef = useRef<boolean>(enabled);
+  const isEnabledRef = useRef(enabled);
 
   useEffect(() => {
     isEnabledRef.current = enabled;
@@ -42,7 +42,7 @@ export const useHoverScroll = <T extends HTMLElement>(
 
   const { hasScrollableContentRef, getScrollState } = useScrollState(containerRef);
 
-  const isInScrollbarAreaRef = useRef<boolean>(false);
+  const isInScrollbarAreaRef = useRef(false);
 
   // 只在悬停区域时触发回调
   const onFrameCallback = useCallback((currentScroll: number, targetScroll: number) => {
