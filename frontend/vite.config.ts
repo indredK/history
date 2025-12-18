@@ -47,55 +47,54 @@ export default defineConfig(({ command, mode }) => {
     include: [
       'react',
       'react-dom',
+      'react/jsx-runtime',
       '@mui/material',
       '@mui/icons-material',
       'react-router-dom',
       'zustand',
       'ahooks'
     ],
-    // Bun compatibility
+    // 强制预构建，确保依赖关系正确
     force: true,
+    // 排除可能有问题的包
+    exclude: []
   },
   build: {
-    // 生产环境优化
-    minify: 'esbuild',
+    // 使用 terser 进行更稳定的压缩
+    minify: 'terser',
     // 启用 CSS 代码分割
     cssCodeSplit: true,
     // 生成 source map（可选，生产环境可关闭）
     sourcemap: mode === 'development',
     // 设置 chunk 大小限制
     chunkSizeWarningLimit: 1000,
+    // 确保模块格式兼容性
+    target: 'es2020',
     rollupOptions: {
       output: {
-        // 更细粒度的代码分割
+        // 简化代码分割，避免过度分割导致的模块依赖问题
         manualChunks: (id) => {
-          // 第三方库分组
+          // 第三方库分组 - 使用更保守的分割策略
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom')) {
+            // React 相关库保持在一起，避免符号冲突
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
               return 'react-vendor';
             }
+            // UI 库分组
             if (id.includes('@mui') || id.includes('@emotion')) {
-              return 'mui-vendor';
+              return 'ui-vendor';
             }
-            if (id.includes('deck.gl') || id.includes('maplibre') || id.includes('react-map-gl')) {
-              return 'map-vendor';
+            // 地图和可视化库
+            if (id.includes('deck.gl') || id.includes('maplibre') || id.includes('react-map-gl') || 
+                id.includes('echarts') || id.includes('d3')) {
+              return 'viz-vendor';
             }
-            if (id.includes('echarts') || id.includes('d3')) {
-              return 'chart-vendor';
-            }
+            // 3D 库
             if (id.includes('three') || id.includes('@react-three')) {
               return 'three-vendor';
             }
-            if (id.includes('zustand') || id.includes('ahooks')) {
-              return 'utils-vendor';
-            }
+            // 其他工具库
             return 'vendor';
-          }
-          
-          // 按功能模块分割
-          if (id.includes('/features/')) {
-            const feature = id.split('/features/')[1].split('/')[0];
-            return `feature-${feature}`;
           }
         },
         // 文件命名策略
