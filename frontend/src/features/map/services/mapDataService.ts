@@ -35,7 +35,11 @@ export interface GeoJsonData {
  * 获取 GeoJSON 地图数据
  */
 export async function fetchGeoJson(): Promise<GeoJsonData> {
-  const response = await fetch('/data/json/100000.geoJson');
+  // 处理部署路径，确保在 GitHub Pages 上正确加载
+  const basePath = import.meta.env.BASE_URL || '/';
+  const fullPath = `${basePath.replace(/\/$/, '')}/data/json/100000.geoJson`;
+  
+  const response = await fetch(fullPath);
   if (!response.ok) {
     throw new Error(`获取地图数据失败: ${response.status}`);
   }
