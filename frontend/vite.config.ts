@@ -72,40 +72,10 @@ export default defineConfig(({ command, mode }) => {
     chunkSizeWarningLimit: 1000,
     // 确保模块格式兼容性
     target: 'es2020',
-    // 避免模块外部化导致的问题
+    // 使用 Vite 默认的代码分割策略
     rollupOptions: {
-      // 确保关键依赖不被外部化
-      external: [],
       output: {
-        // 使用动态代码分割策略，避免包名解析问题
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            // React 生态系统保持在一起
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
-              return 'react-vendor';
-            }
-            // UI 库分组
-            if (id.includes('@mui') || id.includes('@emotion')) {
-              return 'ui-vendor';
-            }
-            // 地图和可视化库
-            if (id.includes('deck.gl') || id.includes('maplibre') || id.includes('react-map-gl') || 
-                id.includes('d3') || id.includes('echarts')) {
-              return 'viz-vendor';
-            }
-            // 3D 库
-            if (id.includes('three') || id.includes('@react-three')) {
-              return 'three-vendor';
-            }
-            // 其他工具库
-            if (id.includes('zustand') || id.includes('ahooks') || id.includes('axios') || id.includes('zod')) {
-              return 'utils-vendor';
-            }
-            // 其他第三方库
-            return 'vendor';
-          }
-        },
-        // 文件命名策略
+        // 只保留文件命名策略
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
         assetFileNames: (assetInfo) => {
