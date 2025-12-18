@@ -62,60 +62,14 @@ export default defineConfig(({ command, mode }) => {
     exclude: []
   },
   build: {
-    // 使用 esbuild 进行压缩（默认且稳定）
+    // 简化构建配置，不做代码分割
     minify: 'esbuild',
-    // 启用 CSS 代码分割
-    cssCodeSplit: true,
-    // 生成 source map（可选，生产环境可关闭）
-    sourcemap: mode === 'development',
-    // 设置 chunk 大小限制
-    chunkSizeWarningLimit: 1000,
-    // 确保模块格式兼容性
     target: 'es2020',
-    // 使用保守的代码分割策略，只分离大的第三方库
+    sourcemap: false,
+    // 禁用代码分割，所有代码打包到一个文件
     rollupOptions: {
       output: {
-        // 保守的代码分割 - 只分离最大的库，保持 React 完整
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            // 地图相关的大库单独分离
-            if (id.includes('deck.gl') || id.includes('@deck.gl') || 
-                id.includes('maplibre-gl') || id.includes('react-map-gl')) {
-              return 'map-libs';
-            }
-            // 3D 库单独分离
-            if (id.includes('three') || id.includes('@react-three')) {
-              return 'three-libs';
-            }
-            // 图表库单独分离
-            if (id.includes('echarts') || id.includes('d3')) {
-              return 'chart-libs';
-            }
-            // MUI 库分离
-            if (id.includes('@mui') || id.includes('@emotion')) {
-              return 'ui-libs';
-            }
-            // 其他所有库（包括 React）保持在默认 vendor chunk 中
-            return 'vendor';
-          }
-        },
-        // 文件命名策略
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
-        assetFileNames: (assetInfo) => {
-          const info = assetInfo.name?.split('.') || [];
-          const ext = info[info.length - 1];
-          if (/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i.test(assetInfo.name || '')) {
-            return `assets/media/[name]-[hash].${ext}`;
-          }
-          if (/\.(png|jpe?g|gif|svg|webp|avif)(\?.*)?$/i.test(assetInfo.name || '')) {
-            return `assets/img/[name]-[hash].${ext}`;
-          }
-          if (/\.(woff2?|eot|ttf|otf)(\?.*)?$/i.test(assetInfo.name || '')) {
-            return `assets/fonts/[name]-[hash].${ext}`;
-          }
-          return `assets/[ext]/[name]-[hash].${ext}`;
-        },
+        manualChunks: undefined,
       },
     },
   },
