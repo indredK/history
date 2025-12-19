@@ -13,6 +13,7 @@ import {
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import { useDynastiesExpanded } from '@/stores/dynastiesStore';
 import { DynastyRow } from './DynastyRow';
+import { loadJsonData } from '@/utils/dataLoaders';
 import { 
   columns, 
   tableStyles, 
@@ -103,11 +104,12 @@ export function DynastiesList() {
     const loadData = async () => {
       try {
         // 1. 加载主配置文件
-        const configResponse = await fetch('/data/json/chinese-dynasties.json');
-        if (!configResponse.ok) {
+        const config = await loadJsonData<DynastiesConfig>('/data/json/chinese-dynasties.json');
+        
+        // 确保config不为空
+        if (!config) {
           throw new Error('Failed to load dynasties config');
         }
-        const config: DynastiesConfig = await configResponse.json();
 
         // 2. 检查是否使用新的数据源结构
         if (config.dataSource === 'dynasties' && config.dynasties[0]?.dataFile) {
@@ -116,19 +118,9 @@ export function DynastiesList() {
           
           for (const dynastyConfig of config.dynasties) {
             try {
-              const dynastyResponse = await fetch(`/data/json/${dynastyConfig.dataFile}`);
-              if (dynastyResponse.ok) {
-                const dynastyData = await dynastyResponse.json();
+              const dynastyData = await loadJsonData<Dynasty>(`/data/json/${dynastyConfig.dataFile}`);
+              if (dynastyData) {
                 dynastiesData.push(dynastyData);
-              } else {
-                console.warn(`Failed to load dynasty data: ${dynastyConfig.dataFile}`);
-                // 如果单个文件加载失败，创建一个基本的朝代对象
-                dynastiesData.push({
-                  id: dynastyConfig.id,
-                  name: dynastyConfig.name,
-                  period: dynastyConfig.period,
-                  note: `数据文件 ${dynastyConfig.dataFile} 加载失败`
-                });
               }
             } catch (err) {
               console.warn(`Error loading dynasty data: ${dynastyConfig.dataFile}`, err);

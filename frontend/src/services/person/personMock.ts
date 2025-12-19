@@ -1,6 +1,6 @@
 import type { PersonService } from './personService';
 import type { Person } from './types';
-import { loadJsonData } from '@/services/utils/dataLoader';
+import { loadJsonArray } from '@/utils/dataLoaders';
 
 // 转换 JSON 数据为 Person 格式
 function transformJsonToPerson(jsonPerson: any, index: number): Person {
@@ -36,7 +36,7 @@ export const personMock: PersonService = {
       return { data: cachedPersons };
     }
 
-    const jsonPersons = await loadJsonData<any>('/data/json/persons.json');
+    const jsonPersons = await loadJsonArray<any>('/data/json/persons.json');
     cachedPersons = jsonPersons.map(transformJsonToPerson);
     return { data: cachedPersons };
   },
@@ -44,7 +44,7 @@ export const personMock: PersonService = {
     await delay();
     
     if (!cachedPersons) {
-      const jsonPersons = await loadJsonData<any>('/data/json/persons.json');
+      const jsonPersons = await loadJsonArray<any>('/data/json/persons.json');
       cachedPersons = jsonPersons.map(transformJsonToPerson);
     }
     

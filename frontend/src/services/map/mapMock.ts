@@ -1,6 +1,6 @@
 import type { MapService } from './mapService';
 import type { Place } from './types';
-import { loadJsonData } from '@/services/utils/dataLoader';
+import { loadJsonArray } from '@/utils/dataLoaders';
 
 // 转换 JSON 数据为 Place 格式
 function transformJsonToPlace(jsonPlace: any, index: number): Place {
@@ -37,7 +37,7 @@ export const mapMock: MapService = {
       return { data: cachedPlaces };
     }
 
-    const jsonPlaces = await loadJsonData<any>('/data/json/places.json');
+    const jsonPlaces = await loadJsonArray<any>('/data/json/places.json');
     cachedPlaces = jsonPlaces.map(transformJsonToPlace);
     return { data: cachedPlaces };
   },

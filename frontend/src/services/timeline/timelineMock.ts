@@ -1,6 +1,6 @@
 import type { TimelineService } from './timelineService';
 import type { Event } from './types';
-import { loadJsonData } from '@/services/utils/dataLoader';
+import { loadJsonArray } from '@/utils/dataLoaders';
 
 // 转换 JSON 数据为 Event 格式
 function transformJsonToEvent(jsonEvent: any, index: number): Event {
@@ -37,7 +37,7 @@ export const timelineMock: TimelineService = {
       return { data: cachedEvents };
     }
 
-    const jsonEvents = await loadJsonData<any>('/data/json/events.json');
+    const jsonEvents = await loadJsonArray<any>('/data/json/events.json');
     cachedEvents = jsonEvents.map(transformJsonToEvent);
     return { data: cachedEvents };
   },
@@ -45,7 +45,7 @@ export const timelineMock: TimelineService = {
     await delay();
     
     if (!cachedEvents) {
-      const jsonEvents = await loadJsonData<any>('/data/json/events.json');
+      const jsonEvents = await loadJsonArray<any>('/data/json/events.json');
       cachedEvents = jsonEvents.map(transformJsonToEvent);
     }
     
