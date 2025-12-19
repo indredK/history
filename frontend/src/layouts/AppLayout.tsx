@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { Box } from '@mui/material';
 import { useLocation, Routes, Route, Navigate } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
@@ -12,10 +12,12 @@ export function AppLayout() {
   const location = useLocation();
   const { selectedDynasty } = useDynastyStore();
   const { imageUrl: dynastyBackgroundUrl } = useDynastyImage(selectedDynasty?.id ?? null);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   // 根据路径确定当前活跃的标签
   const getActiveTabFromPath = (pathname: string): string => {
     if (pathname === '/timeline') return 'timeline';
+    if (pathname === '/dynasties') return 'dynasties';
     if (pathname === '/map') return 'map';
     if (pathname === '/people') return 'people';
     if (pathname === '/culture') return 'culture';
@@ -46,10 +48,14 @@ export function AppLayout() {
   const gradientColor2 = getDynastyColorWithAlpha(dynastyColor, 0.08);
   const bgColor = getDynastyColorWithAlpha(dynastyColor, 0.12);
 
+  const toggleSidebar = () => {
+    setSidebarCollapsed(!sidebarCollapsed);
+  };
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }} className="app">
       <Box sx={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-        <Sidebar activeTab={activeTab} />
+        <Sidebar activeTab={activeTab} collapsed={sidebarCollapsed} onToggle={toggleSidebar} />
         <Box component="main" sx={{
           flex: 1,
           overflow: 'hidden',

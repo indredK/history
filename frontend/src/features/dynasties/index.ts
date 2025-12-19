@@ -1,0 +1,1 @@
+export { DynastiesList } from './DynastiesList';

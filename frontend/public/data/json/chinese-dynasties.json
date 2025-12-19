@@ -1,0 +1,2298 @@
+{
+  "title": "中国历代纪元表",
+  "subtitle": "歷史地圖",
+  "dynasties": [
+    {
+      "id": "wudi",
+      "name": "五帝",
+      "period": "约前26世纪初-约前2070年",
+      "rulers": [
+        {
+          "title": "黄帝",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": [
+            {
+              "description": "中国原始人群,氏族公社遗址分布",
+              "mapUrl": "hstrymap/bc99bc67.jpg"
+            }
+          ]
+        },
+        {
+          "title": "颛顼",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": [
+            {
+              "description": "原始社会部落分布",
+              "mapUrl": "hstrymap/bc26bc21.jpg"
+            }
+          ]
+        },
+        {
+          "title": "帝喾",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "尧",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "舜",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "xia",
+      "name": "夏",
+      "period": "约前2070年-约前1600年",
+      "rulers": [
+        {
+          "title": "禹",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": [
+            {
+              "description": "夏朝形势",
+              "mapUrl": "hstrymap/bc22bc11.jpg"
+            }
+          ]
+        },
+        {
+          "title": "启",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "太康",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "仲康",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "相",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "少康",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "杼",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "槐",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "芒",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "泄",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "不降",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "扃",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "廑",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "孔甲",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "皋",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "发",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "(履)癸",
+          "name": "桀",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "shang",
+      "name": "商",
+      "period": "约前1600年-前1046年",
+      "rulers": [
+        {
+          "title": "汤",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": [
+            {
+              "description": "商朝形势",
+              "mapUrl": "hstrymap/bc22bc11.jpg"
+            }
+          ]
+        },
+        {
+          "title": "太丁",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "外丙",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "仲壬",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "太甲",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "沃丁",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "太庚",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "小甲",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "雍己",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "太戊",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "仲丁",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "外壬",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "河亶甲",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "祖乙",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "祖辛",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "沃甲",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "祖丁",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "南庚",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "阳甲",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "盘庚",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": [
+            {
+              "description": "约前1300年迁都至殷"
+            }
+          ]
+        },
+        {
+          "title": "小辛",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "小乙",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "武丁",
+          "name": "",
+          "yearName": "",
+          "duration": "59",
+          "ganZhi": "辛未",
+          "changeMonth": "",
+          "startYear": "前1250年",
+          "events": [
+            {
+              "description": "甲骨文",
+              "mapUrl": "zi1liao4/jiaguw24.jpg"
+            }
+          ]
+        },
+        {
+          "title": "祖庚",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "庚午",
+          "changeMonth": "",
+          "startYear": "前1191年",
+          "events": []
+        },
+        {
+          "title": "祖甲",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "廪辛",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "康丁",
+          "name": "",
+          "yearName": "",
+          "duration": "",
+          "ganZhi": "",
+          "changeMonth": "",
+          "startYear": "",
+          "events": []
+        },
+        {
+          "title": "武乙",
+          "name": "",
+          "yearName": "",
+          "duration": "35",
+          "ganZhi": "甲寅",
+          "changeMonth": "",
+          "startYear": "前1147年",
+          "events": []
+        },
+        {
+          "title": "文丁",
+          "name": "",
+          "yearName": "",
+          "duration": "11",
+          "ganZhi": "己丑",
+          "changeMonth": "",
+          "startYear": "前1112年",
+          "events": []
+        },
+        {
+          "title": "帝乙",
+          "name": "",
+          "yearName": "",
+          "duration": "26",
+          "ganZhi": "庚子",
+          "changeMonth": "",
+          "startYear": "前1101年",
+          "events": []
+        },
+        {
+          "title": "帝辛",
+          "name": "纣",
+          "yearName": "",
+          "duration": "30",
+          "ganZhi": "丙寅",
+          "changeMonth": "",
+          "startYear": "前1075年",
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "zhou",
+      "name": "周",
+      "period": "前1046年-前256年",
+      "subDynasties": [
+        {
+          "id": "xizhou",
+          "name": "西周",
+          "period": "前1046年-前771年",
+          "rulers": [
+            {
+              "title": "武王",
+              "name": "姬发",
+              "yearName": "",
+              "duration": "4",
+              "ganZhi": "乙未",
+              "changeMonth": "",
+              "startYear": "前1046年",
+              "events": [
+                {
+                  "description": "西周初期形势及主要诸侯国",
+                  "mapUrl": "hstrymap/bc11b771.jpg"
+                }
+              ]
+            },
+            {
+              "title": "成王",
+              "name": "姬诵",
+              "yearName": "",
+              "duration": "22",
+              "ganZhi": "己亥",
+              "changeMonth": "",
+              "startYear": "前1042年",
+              "events": []
+            },
+            {
+              "title": "康王",
+              "name": "姬钊",
+              "yearName": "",
+              "duration": "25",
+              "ganZhi": "辛酉",
+              "changeMonth": "",
+              "startYear": "前1020年",
+              "events": []
+            },
+            {
+              "title": "昭王",
+              "name": "姬瑕",
+              "yearName": "",
+              "duration": "19",
+              "ganZhi": "丙戌",
+              "changeMonth": "",
+              "startYear": "前995年",
+              "events": []
+            },
+            {
+              "title": "穆王",
+              "name": "姬满",
+              "yearName": "",
+              "duration": "55",
+              "ganZhi": "乙巳",
+              "changeMonth": "",
+              "startYear": "前976年",
+              "events": []
+            },
+            {
+              "title": "共王",
+              "name": "姬繄扈",
+              "yearName": "",
+              "duration": "23",
+              "ganZhi": "已亥",
+              "changeMonth": "",
+              "startYear": "前922年",
+              "events": []
+            },
+            {
+              "title": "懿王",
+              "name": "姬囏",
+              "yearName": "",
+              "duration": "8",
+              "ganZhi": "壬戌",
+              "changeMonth": "",
+              "startYear": "前899年",
+              "events": []
+            },
+            {
+              "title": "孝王",
+              "name": "姬辟方",
+              "yearName": "",
+              "duration": "6",
+              "ganZhi": "庚午",
+              "changeMonth": "",
+              "startYear": "前891年",
+              "events": []
+            },
+            {
+              "title": "夷王",
+              "name": "姬夑",
+              "yearName": "",
+              "duration": "8",
+              "ganZhi": "丙子",
+              "changeMonth": "",
+              "startYear": "前885年",
+              "events": []
+            },
+            {
+              "title": "厉王",
+              "name": "姬胡",
+              "yearName": "",
+              "duration": "37",
+              "ganZhi": "甲申",
+              "changeMonth": "",
+              "startYear": "前877年",
+              "events": []
+            },
+            {
+              "title": "共和",
+              "name": "",
+              "yearName": "",
+              "duration": "14",
+              "ganZhi": "庚申",
+              "changeMonth": "",
+              "startYear": "前841年",
+              "events": []
+            },
+            {
+              "title": "宣王",
+              "name": "姬静",
+              "yearName": "",
+              "duration": "46",
+              "ganZhi": "甲戌",
+              "changeMonth": "",
+              "startYear": "前827年",
+              "events": []
+            },
+            {
+              "title": "幽王",
+              "name": "姬宫湦",
+              "yearName": "",
+              "duration": "11",
+              "ganZhi": "庚申",
+              "changeMonth": "",
+              "startYear": "前781年",
+              "events": []
+            }
+          ]
+        },
+        {
+          "id": "dongzhou",
+          "name": "东周",
+          "period": "前770年-前256年",
+          "rulers": [
+            {
+              "title": "平王",
+              "name": "姬宜臼",
+              "yearName": "",
+              "duration": "51",
+              "ganZhi": "辛未",
+              "changeMonth": "",
+              "startYear": "前770年",
+              "events": [
+                {
+                  "description": "春秋列国形势",
+                  "mapUrl": "hstrymap/b770b476.jpg"
+                }
+              ]
+            },
+            {
+              "title": "桓王",
+              "name": "姬林",
+              "yearName": "",
+              "duration": "23",
+              "ganZhi": "壬戌",
+              "changeMonth": "",
+              "startYear": "前719年",
+              "events": []
+            },
+            {
+              "title": "庄王",
+              "name": "姬佗",
+              "yearName": "",
+              "duration": "15",
+              "ganZhi": "乙酉",
+              "changeMonth": "",
+              "startYear": "前696年",
+              "events": []
+            },
+            {
+              "title": "釐王",
+              "name": "姬胡齐",
+              "yearName": "",
+              "duration": "5",
+              "ganZhi": "庚子",
+              "changeMonth": "",
+              "startYear": "前681年",
+              "events": []
+            },
+            {
+              "title": "惠王",
+              "name": "姬阆",
+              "yearName": "",
+              "duration": "25",
+              "ganZhi": "乙巳",
+              "changeMonth": "",
+              "startYear": "前676年",
+              "events": []
+            },
+            {
+              "title": "襄王",
+              "name": "姬郑",
+              "yearName": "",
+              "duration": "33",
+              "ganZhi": "庚午",
+              "changeMonth": "",
+              "startYear": "前651年",
+              "events": []
+            },
+            {
+              "title": "顷王",
+              "name": "姬壬臣",
+              "yearName": "",
+              "duration": "6",
+              "ganZhi": "癸卯",
+              "changeMonth": "",
+              "startYear": "前618年",
+              "events": []
+            },
+            {
+              "title": "匡王",
+              "name": "姬班",
+              "yearName": "",
+              "duration": "6",
+              "ganZhi": "己酉",
+              "changeMonth": "",
+              "startYear": "前612年",
+              "events": []
+            },
+            {
+              "title": "定王",
+              "name": "姬瑜",
+              "yearName": "",
+              "duration": "21",
+              "ganZhi": "乙卯",
+              "changeMonth": "",
+              "startYear": "前606年",
+              "events": []
+            },
+            {
+              "title": "简王",
+              "name": "姬夷",
+              "yearName": "",
+              "duration": "14",
+              "ganZhi": "丙子",
+              "changeMonth": "",
+              "startYear": "前585年",
+              "events": []
+            },
+            {
+              "title": "灵王",
+              "name": "姬泄心",
+              "yearName": "",
+              "duration": "27",
+              "ganZhi": "庚寅",
+              "changeMonth": "",
+              "startYear": "前571年",
+              "events": []
+            },
+            {
+              "title": "景王",
+              "name": "姬贵",
+              "yearName": "",
+              "duration": "25",
+              "ganZhi": "丁巳",
+              "changeMonth": "",
+              "startYear": "前544年",
+              "events": []
+            },
+            {
+              "title": "悼王",
+              "name": "姬猛",
+              "yearName": "",
+              "duration": "1",
+              "ganZhi": "辛巳",
+              "changeMonth": "",
+              "startYear": "前520年",
+              "events": []
+            },
+            {
+              "title": "敬王",
+              "name": "姬匄",
+              "yearName": "",
+              "duration": "44",
+              "ganZhi": "壬午",
+              "changeMonth": "",
+              "startYear": "前519年",
+              "events": []
+            },
+            {
+              "title": "元王",
+              "name": "姬仁",
+              "yearName": "",
+              "duration": "7",
+              "ganZhi": "丙寅",
+              "changeMonth": "",
+              "startYear": "前475年",
+              "events": [
+                {
+                  "description": "战国时期形势",
+                  "mapUrl": "hstrymap/b475b221.jpg"
+                }
+              ]
+            },
+            {
+              "title": "贞定王",
+              "name": "姬介",
+              "yearName": "",
+              "duration": "28",
+              "ganZhi": "癸酉",
+              "changeMonth": "",
+              "startYear": "前468年",
+              "events": []
+            },
+            {
+              "title": "哀王",
+              "name": "姬去疾",
+              "yearName": "",
+              "duration": "1",
+              "ganZhi": "庚子",
+              "changeMonth": "",
+              "startYear": "前441年",
+              "events": []
+            },
+            {
+              "title": "思王",
+              "name": "姬叔",
+              "yearName": "",
+              "duration": "1",
+              "ganZhi": "庚子",
+              "changeMonth": "",
+              "startYear": "前441年",
+              "events": []
+            },
+            {
+              "title": "考王",
+              "name": "姬嵬",
+              "yearName": "",
+              "duration": "15",
+              "ganZhi": "辛丑",
+              "changeMonth": "",
+              "startYear": "前440年",
+              "events": []
+            },
+            {
+              "title": "威烈王",
+              "name": "姬午",
+              "yearName": "",
+              "duration": "24",
+              "ganZhi": "丙辰",
+              "changeMonth": "",
+              "startYear": "前425年",
+              "events": []
+            },
+            {
+              "title": "安王",
+              "name": "姬骄",
+              "yearName": "",
+              "duration": "26",
+              "ganZhi": "庚辰",
+              "changeMonth": "",
+              "startYear": "前401年",
+              "events": []
+            },
+            {
+              "title": "烈王",
+              "name": "姬喜",
+              "yearName": "",
+              "duration": "7",
+              "ganZhi": "丙午",
+              "changeMonth": "",
+              "startYear": "前375年",
+              "events": []
+            },
+            {
+              "title": "显王",
+              "name": "姬扁",
+              "yearName": "",
+              "duration": "48",
+              "ganZhi": "癸丑",
+              "changeMonth": "",
+              "startYear": "前368年",
+              "events": []
+            },
+            {
+              "title": "慎靓王",
+              "name": "姬定",
+              "yearName": "",
+              "duration": "6",
+              "ganZhi": "辛丑",
+              "changeMonth": "",
+              "startYear": "前320年",
+              "events": []
+            },
+            {
+              "title": "赧王",
+              "name": "姬延",
+              "yearName": "",
+              "duration": "59",
+              "ganZhi": "丁未",
+              "changeMonth": "",
+              "startYear": "前314年",
+              "events": [
+                {
+                  "description": "荀子32篇",
+                  "mapUrl": "zi1liao4/xunkuang.htm"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "qin",
+      "name": "秦",
+      "period": "前221年-前206年",
+      "rulers": [
+        {
+          "title": "昭襄王",
+          "name": "嬴则/稷",
+          "yearName": "",
+          "duration": "56",
+          "ganZhi": "乙卯",
+          "changeMonth": "",
+          "startYear": "前306年",
+          "events": [
+            {
+              "description": "前256年灭周"
+            }
+          ]
+        },
+        {
+          "title": "孝文王",
+          "name": "嬴柱",
+          "yearName": "",
+          "duration": "1",
+          "ganZhi": "辛亥",
+          "changeMonth": "",
+          "startYear": "前250年",
+          "events": []
+        },
+        {
+          "title": "庄襄王",
+          "name": "嬴子楚",
+          "yearName": "",
+          "duration": "3",
+          "ganZhi": "壬子",
+          "changeMonth": "",
+          "startYear": "前249年",
+          "events": [
+            {
+              "description": "秦汉关中水利",
+              "mapUrl": "hstrymap/b2210220.jpg"
+            }
+          ]
+        },
+        {
+          "title": "始皇帝",
+          "name": "嬴政",
+          "yearName": "",
+          "duration": "37",
+          "ganZhi": "乙卯",
+          "changeMonth": "",
+          "startYear": "前246年",
+          "events": [
+            {
+              "description": "秦灭六国;秦统一 前221年称帝",
+              "mapUrl": "hstrymap/b230b209.jpg"
+            }
+          ]
+        },
+        {
+          "title": "二世皇帝",
+          "name": "嬴胡亥",
+          "yearName": "",
+          "duration": "3",
+          "ganZhi": "壬辰",
+          "changeMonth": "",
+          "startYear": "前209年",
+          "events": [
+            {
+              "description": "秦末陈胜吴广起义,农民战争",
+              "mapUrl": "hstrymap/b209b207.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "han",
+      "name": "汉",
+      "period": "前206年-公元220年",
+      "subDynasties": [
+        {
+          "id": "xihan",
+          "name": "西汉",
+          "period": "前206年-公元25年",
+          "rulers": [
+            {
+              "title": "高帝",
+              "name": "刘邦",
+              "yearName": "",
+              "duration": "12",
+              "ganZhi": "乙未",
+              "changeMonth": "",
+              "startYear": "前206年",
+              "events": [
+                {
+                  "description": "项羽,刘邦楚汉战争",
+                  "mapUrl": "hstrymap/b206b202.jpg"
+                }
+              ]
+            },
+            {
+              "title": "武帝",
+              "name": "刘彻",
+              "yearName": "建元",
+              "duration": "54",
+              "ganZhi": "辛丑",
+              "changeMonth": "",
+              "startYear": "前140年",
+              "events": [
+                {
+                  "description": "西汉同匈奴的战争和张骞出使西域",
+                  "mapUrl": "hstrymap/b138b060.jpg"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "donghan",
+          "name": "东汉",
+          "period": "25年-220年",
+          "rulers": [
+            {
+              "title": "光武帝",
+              "name": "刘秀",
+              "yearName": "建武",
+              "duration": "33",
+              "ganZhi": "乙酉",
+              "changeMonth": "六月",
+              "startYear": "25年",
+              "events": []
+            },
+            {
+              "title": "献帝",
+              "name": "刘协",
+              "yearName": "建安",
+              "duration": "25",
+              "ganZhi": "丙子",
+              "changeMonth": "正月",
+              "startYear": "196年",
+              "events": [
+                {
+                  "description": "东汉末年军阀割据形势",
+                  "mapUrl": "hstrymap/01990199.jpg"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sanguo",
+      "name": "三国",
+      "period": "220年-280年",
+      "subDynasties": [
+        {
+          "id": "wei",
+          "name": "魏",
+          "period": "220年-265年",
+          "rulers": [
+            {
+              "title": "文帝",
+              "name": "曹丕",
+              "yearName": "黄初",
+              "duration": "7",
+              "ganZhi": "庚子",
+              "changeMonth": "十月",
+              "startYear": "220年",
+              "events": [
+                {
+                  "description": "三国鼎立形势",
+                  "mapUrl": "hstrymap/02290263.jpg"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "shuhan",
+          "name": "蜀汉",
+          "period": "221年-263年",
+          "rulers": [
+            {
+              "title": "昭烈帝",
+              "name": "刘备",
+              "yearName": "章武",
+              "duration": "3",
+              "ganZhi": "辛丑",
+              "changeMonth": "四月",
+              "startYear": "221年",
+              "events": []
+            }
+          ]
+        },
+        {
+          "id": "wu",
+          "name": "吴",
+          "period": "222年-280年",
+          "rulers": [
+            {
+              "title": "大帝",
+              "name": "孙权",
+              "yearName": "黄武",
+              "duration": "31",
+              "ganZhi": "壬寅",
+              "changeMonth": "十月",
+              "startYear": "222年",
+              "events": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jin_western_eastern",
+      "name": "晋",
+      "period": "265年-420年",
+      "subDynasties": [
+        {
+          "id": "xijin",
+          "name": "西晋",
+          "period": "265年-317年",
+          "rulers": [
+            {
+              "title": "武帝",
+              "name": "司马炎",
+              "yearName": "泰始",
+              "duration": "26",
+              "ganZhi": "乙酉",
+              "changeMonth": "十二月",
+              "startYear": "265年",
+              "events": []
+            }
+          ]
+        },
+        {
+          "id": "dongjin",
+          "name": "东晋",
+          "period": "317年-420年",
+          "rulers": [
+            {
+              "title": "元帝",
+              "name": "司马睿",
+              "yearName": "建武",
+              "duration": "6",
+              "ganZhi": "丁丑",
+              "changeMonth": "三月",
+              "startYear": "317年",
+              "events": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nanbei",
+      "name": "南北朝",
+      "period": "420年-589年",
+      "subDynasties": [
+        {
+          "id": "nanchao",
+          "name": "南朝",
+          "period": "420年-589年",
+          "dynasties": [
+            {
+              "id": "song_southern",
+              "name": "宋",
+              "period": "420年-479年",
+              "rulers": [
+                {
+                  "title": "武帝",
+                  "name": "刘裕",
+                  "yearName": "永初",
+                  "duration": "3",
+                  "ganZhi": "庚申",
+                  "changeMonth": "六月",
+                  "startYear": "420年",
+                  "events": [
+                    {
+                      "description": "南北朝宋,北魏",
+                      "mapUrl": "hstrymap/04200479.jpg"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "qi",
+              "name": "齐",
+              "period": "479年-502年",
+              "rulers": [
+                {
+                  "title": "高帝",
+                  "name": "萧道成",
+                  "yearName": "建元",
+                  "duration": "4",
+                  "ganZhi": "己未",
+                  "changeMonth": "四月",
+                  "startYear": "479年",
+                  "events": []
+                }
+              ]
+            },
+            {
+              "id": "liang",
+              "name": "梁",
+              "period": "502年-557年",
+              "rulers": [
+                {
+                  "title": "武帝",
+                  "name": "萧衍",
+                  "yearName": "天监",
+                  "duration": "48",
+                  "ganZhi": "壬午",
+                  "changeMonth": "四月",
+                  "startYear": "502年",
+                  "events": []
+                }
+              ]
+            },
+            {
+              "id": "chen",
+              "name": "陈",
+              "period": "557年-589年",
+              "rulers": [
+                {
+                  "title": "武帝",
+                  "name": "陈霸先",
+                  "yearName": "永定",
+                  "duration": "3",
+                  "ganZhi": "丁丑",
+                  "changeMonth": "十月",
+                  "startYear": "557年",
+                  "events": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "beichao",
+          "name": "北朝",
+          "period": "386年-581年",
+          "dynasties": [
+            {
+              "id": "beiwei",
+              "name": "北魏",
+              "period": "386年-534年",
+              "rulers": [
+                {
+                  "title": "道武帝",
+                  "name": "拓跋珪",
+                  "yearName": "登国",
+                  "duration": "24",
+                  "ganZhi": "丙戌",
+                  "changeMonth": "正月",
+                  "startYear": "386年",
+                  "events": [
+                    {
+                      "description": "初称代国,四月改国号为魏"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "dongwei",
+              "name": "东魏",
+              "period": "534年-550年",
+              "rulers": [
+                {
+                  "title": "孝静帝",
+                  "name": "元善见",
+                  "yearName": "天平",
+                  "duration": "17",
+                  "ganZhi": "甲寅",
+                  "changeMonth": "十月",
+                  "startYear": "534年",
+                  "events": []
+                }
+              ]
+            },
+            {
+              "id": "xiwei",
+              "name": "西魏",
+              "period": "535年-556年",
+              "rulers": [
+                {
+                  "title": "文帝",
+                  "name": "元宝炬",
+                  "yearName": "大统",
+                  "duration": "17",
+                  "ganZhi": "乙卯",
+                  "changeMonth": "正月",
+                  "startYear": "535年",
+                  "events": []
+                }
+              ]
+            },
+            {
+              "id": "beiqi",
+              "name": "北齐",
+              "period": "550年-577年",
+              "rulers": [
+                {
+                  "title": "文宣帝",
+                  "name": "高洋",
+                  "yearName": "天保",
+                  "duration": "10",
+                  "ganZhi": "庚午",
+                  "changeMonth": "五月",
+                  "startYear": "550年",
+                  "events": []
+                }
+              ]
+            },
+            {
+              "id": "beizhou",
+              "name": "北周",
+              "period": "557年-581年",
+              "rulers": [
+                {
+                  "title": "孝闵帝",
+                  "name": "宇文觉",
+                  "yearName": "大统",
+                  "duration": "1",
+                  "ganZhi": "丁丑",
+                  "changeMonth": "正月",
+                  "startYear": "557年",
+                  "events": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sui",
+      "name": "隋",
+      "period": "581年-618年",
+      "rulers": [
+        {
+          "title": "文帝",
+          "name": "杨坚",
+          "yearName": "开皇",
+          "duration": "20",
+          "ganZhi": "辛丑",
+          "changeMonth": "二月",
+          "startYear": "581年",
+          "events": [
+            {
+              "description": "589年灭陈,完成统一",
+              "mapUrl": "hstrymap/05890618.jpg"
+            }
+          ]
+        },
+        {
+          "title": "炀帝",
+          "name": "杨广",
+          "yearName": "大业",
+          "duration": "14",
+          "ganZhi": "乙丑",
+          "changeMonth": "正月",
+          "startYear": "605年",
+          "events": [
+            {
+              "description": "隋朝运河,广通渠",
+              "mapUrl": "hstrymap/06050618.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tang",
+      "name": "唐",
+      "period": "618年-907年",
+      "rulers": [
+        {
+          "title": "高祖",
+          "name": "李渊",
+          "yearName": "武德",
+          "duration": "9",
+          "ganZhi": "戊寅",
+          "changeMonth": "五月",
+          "startYear": "618年",
+          "events": [
+            {
+              "description": "唐长安城",
+              "mapUrl": "hstrymap/06170907.jpg"
+            }
+          ]
+        },
+        {
+          "title": "太宗",
+          "name": "李世民",
+          "yearName": "贞观",
+          "duration": "23",
+          "ganZhi": "丁亥",
+          "changeMonth": "正月",
+          "startYear": "627年",
+          "events": [
+            {
+              "description": "唐玄奘西游",
+              "mapUrl": "hstrymap/06270645.jpg"
+            }
+          ]
+        },
+        {
+          "title": "玄宗",
+          "name": "李隆基",
+          "yearName": "开元",
+          "duration": "29",
+          "ganZhi": "癸丑",
+          "changeMonth": "十二月",
+          "startYear": "713年",
+          "events": [
+            {
+              "description": "盛唐时期"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wudai",
+      "name": "五代",
+      "period": "907年-960年",
+      "note": "包含后梁、后唐、后晋、后汉、后周"
+    },
+    {
+      "id": "song",
+      "name": "宋",
+      "period": "960年-1279年",
+      "subDynasties": [
+        {
+          "id": "beisong",
+          "name": "北宋",
+          "period": "960年-1127年",
+          "rulers": [
+            {
+              "title": "太祖",
+              "name": "赵匡胤",
+              "yearName": "建隆",
+              "duration": "4",
+              "ganZhi": "庚申",
+              "changeMonth": "正月",
+              "startYear": "960年",
+              "events": [
+                {
+                  "description": "北宋东京城",
+                  "mapUrl": "hstrymap/09601127.jpg"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "nansong",
+          "name": "南宋",
+          "period": "1127年-1279年",
+          "rulers": [
+            {
+              "title": "高宗",
+              "name": "赵构",
+              "yearName": "建炎",
+              "duration": "4",
+              "ganZhi": "丁未",
+              "changeMonth": "五月",
+              "startYear": "1127年",
+              "events": [
+                {
+                  "description": "南宋,金,西夏形势",
+                  "mapUrl": "hstrymap/11271234.jpg"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "liao",
+      "name": "辽",
+      "period": "907年-1125年",
+      "note": "耶律氏,契丹族建立",
+      "rulers": [
+        {
+          "title": "太祖",
+          "name": "耶律阿保机",
+          "yearName": "神册",
+          "duration": "17",
+          "ganZhi": "丁卯",
+          "changeMonth": "正月",
+          "startYear": "907年",
+          "events": [
+            {
+              "description": "辽建国于907年, 国号契丹"
+            }
+          ]
+        },
+        {
+          "title": "太宗",
+          "name": "耶律德光",
+          "yearName": "会同",
+          "duration": "21",
+          "ganZhi": "丁亥",
+          "changeMonth": "十一月",
+          "startYear": "927年",
+          "events": [
+            {
+              "description": "938年(一说947年)改国号为辽"
+            }
+          ]
+        },
+        {
+          "title": "圣宗",
+          "name": "耶律隆绪",
+          "yearName": "统和",
+          "duration": "49",
+          "ganZhi": "壬午",
+          "changeMonth": "九月",
+          "startYear": "982年",
+          "events": [
+            {
+              "description": "983年复称契丹"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jin_dynasty",
+      "name": "金",
+      "period": "1115年-1234年",
+      "note": "完颜氏,女真族建立",
+      "rulers": [
+        {
+          "title": "太祖",
+          "name": "完颜旻(本名阿骨打)",
+          "yearName": "收国",
+          "duration": "9",
+          "ganZhi": "乙未",
+          "changeMonth": "正月",
+          "startYear": "1115年",
+          "events": []
+        },
+        {
+          "title": "太宗",
+          "name": "完颜晟",
+          "yearName": "天会",
+          "duration": "15",
+          "ganZhi": "癸卯",
+          "changeMonth": "九月",
+          "startYear": "1123年",
+          "events": []
+        },
+        {
+          "title": "世宗",
+          "name": "完颜雍",
+          "yearName": "大定",
+          "duration": "29",
+          "ganZhi": "辛巳",
+          "changeMonth": "十月",
+          "startYear": "1161年",
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "yuan",
+      "name": "元",
+      "period": "1206年-1368年",
+      "rulers": [
+        {
+          "title": "太祖",
+          "name": "孛儿只斤铁木真(成吉思汗)",
+          "yearName": "",
+          "duration": "22",
+          "ganZhi": "丙寅",
+          "changeMonth": "正月",
+          "startYear": "1206年",
+          "events": [
+            {
+              "description": "蒙古兴起;成吉思汗西征",
+              "mapUrl": "hstrymap/12051227.jpg"
+            }
+          ]
+        },
+        {
+          "title": "世祖",
+          "name": "孛儿只斤忽必烈",
+          "yearName": "至元",
+          "duration": "31",
+          "ganZhi": "甲子",
+          "changeMonth": "八月",
+          "startYear": "1264年",
+          "events": [
+            {
+              "description": "1271年忽必烈定国号为元, 1279年灭南宋"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ming",
+      "name": "明",
+      "period": "1368年-1644年",
+      "rulers": [
+        {
+          "title": "太祖",
+          "name": "朱元璋",
+          "yearName": "洪武",
+          "duration": "31",
+          "ganZhi": "戊申",
+          "changeMonth": "正月",
+          "startYear": "1368年",
+          "events": [
+            {
+              "description": "明朝疆域",
+              "mapUrl": "hstrymap/13681644.jpg"
+            }
+          ]
+        },
+        {
+          "title": "成祖",
+          "name": "朱棣",
+          "yearName": "永乐",
+          "duration": "22",
+          "ganZhi": "癸未",
+          "changeMonth": "正月",
+          "startYear": "1403年",
+          "events": [
+            {
+              "description": "郑和下西洋",
+              "mapUrl": "hstrymap/14051433.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "qing",
+      "name": "清",
+      "period": "1616年-1911年",
+      "rulers": [
+        {
+          "title": "太祖",
+          "name": "爱新觉罗努尔哈赤",
+          "yearName": "天命",
+          "duration": "11",
+          "ganZhi": "丙辰",
+          "changeMonth": "正月",
+          "startYear": "1616年",
+          "events": [
+            {
+              "description": "称后金 明初女真族分布;满族兴起",
+              "mapUrl": "hstrymap/16161644.jpg"
+            }
+          ]
+        },
+        {
+          "title": "太宗",
+          "name": "爱新觉罗皇太极",
+          "yearName": "崇德",
+          "duration": "8",
+          "ganZhi": "丙子",
+          "changeMonth": "四月",
+          "startYear": "1636年",
+          "events": [
+            {
+              "description": "始改国号为清"
+            }
+          ]
+        },
+        {
+          "title": "世祖",
+          "name": "爱新觉罗福临",
+          "yearName": "顺治",
+          "duration": "18",
+          "ganZhi": "甲申",
+          "changeMonth": "正月",
+          "startYear": "1644年",
+          "events": [
+            {
+              "description": "入关 郑成功收复台湾",
+              "mapUrl": "hstrymap/16611684.jpg"
+            }
+          ]
+        },
+        {
+          "title": "圣祖",
+          "name": "爱新觉罗玄烨",
+          "yearName": "康熙",
+          "duration": "61",
+          "ganZhi": "壬寅",
+          "changeMonth": "正月",
+          "startYear": "1662年",
+          "events": [
+            {
+              "description": "清朝疆域",
+              "mapUrl": "hstrymap/16441840.jpg"
+            },
+            {
+              "description": "清初抗击沙俄侵略;尼布楚条约",
+              "mapUrl": "hstrymap/16431689.jpg"
+            }
+          ]
+        },
+        {
+          "title": "世宗",
+          "name": "爱新觉罗胤禛",
+          "yearName": "雍正",
+          "duration": "13",
+          "ganZhi": "癸卯",
+          "changeMonth": "正月",
+          "startYear": "1723年",
+          "events": []
+        },
+        {
+          "title": "高宗",
+          "name": "爱新觉罗弘历",
+          "yearName": "乾隆",
+          "duration": "60",
+          "ganZhi": "丙辰",
+          "changeMonth": "正月",
+          "startYear": "1736年",
+          "events": []
+        },
+        {
+          "title": "仁宗",
+          "name": "爱新觉罗颙琰",
+          "yearName": "嘉庆",
+          "duration": "25",
+          "ganZhi": "丙辰",
+          "changeMonth": "正月",
+          "startYear": "1796年",
+          "events": [
+            {
+              "description": "清朝中期苗民起义和白莲教起义",
+              "mapUrl": "hstrymap/17951806.jpg"
+            }
+          ]
+        },
+        {
+          "title": "宣宗",
+          "name": "爱新觉罗旻宁",
+          "yearName": "道光",
+          "duration": "30",
+          "ganZhi": "辛巳",
+          "changeMonth": "正月",
+          "startYear": "1821年",
+          "events": []
+        },
+        {
+          "title": "文宗",
+          "name": "爱新觉罗奕苎",
+          "yearName": "咸丰",
+          "duration": "11",
+          "ganZhi": "辛亥",
+          "changeMonth": "正月",
+          "startYear": "1851年",
+          "events": []
+        },
+        {
+          "title": "穆宗",
+          "name": "爱新觉罗载淳",
+          "yearName": "同治",
+          "duration": "13",
+          "ganZhi": "壬戌",
+          "changeMonth": "正月",
+          "startYear": "1862年",
+          "events": []
+        },
+        {
+          "title": "德宗",
+          "name": "爱新觉罗载湉",
+          "yearName": "光绪",
+          "duration": "34",
+          "ganZhi": "乙亥",
+          "changeMonth": "正月",
+          "startYear": "1875年",
+          "events": []
+        },
+        {
+          "title": "末帝",
+          "name": "爱新觉罗溥仪",
+          "yearName": "宣统",
+          "duration": "3",
+          "ganZhi": "己酉",
+          "changeMonth": "正月",
+          "startYear": "1909年",
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "minguo",
+      "name": "中華民國",
+      "period": "1912年-2028年",
+      "rulers": [
+        {
+          "title": "臨時大總統",
+          "name": "孫文",
+          "yearName": "民國",
+          "duration": "1",
+          "ganZhi": "辛亥",
+          "changeMonth": "十一月",
+          "startYear": "1912年",
+          "events": []
+        },
+        {
+          "title": "臨時大總統",
+          "name": "袁世凱",
+          "yearName": "民國",
+          "duration": "1",
+          "ganZhi": "壬子",
+          "changeMonth": "正月",
+          "startYear": "1912年",
+          "events": []
+        },
+        {
+          "title": "大總統",
+          "name": "袁世凱",
+          "yearName": "民國",
+          "duration": "3",
+          "ganZhi": "癸丑",
+          "changeMonth": "九月",
+          "startYear": "1913年",
+          "events": []
+        },
+        {
+          "title": "大總統",
+          "name": "黎元洪",
+          "yearName": "民國",
+          "duration": "1",
+          "ganZhi": "丙辰",
+          "changeMonth": "五月",
+          "startYear": "1916年",
+          "events": []
+        },
+        {
+          "title": "大總統",
+          "name": "馮国璋",
+          "yearName": "民國",
+          "duration": "1",
+          "ganZhi": "丁巳",
+          "changeMonth": "五月",
+          "startYear": "1917年",
+          "events": []
+        },
+        {
+          "title": "大總統",
+          "name": "徐世昌",
+          "yearName": "民國",
+          "duration": "4",
+          "ganZhi": "戊午",
+          "changeMonth": "九月",
+          "startYear": "1918年",
+          "events": []
+        },
+        {
+          "title": "非常大總統",
+          "name": "孫文",
+          "yearName": "民國",
+          "duration": "4",
+          "ganZhi": "壬戌",
+          "changeMonth": "五月",
+          "startYear": "1921年",
+          "events": []
+        },
+        {
+          "title": "主席",
+          "name": "汪兆銘",
+          "yearName": "民國",
+          "duration": "1",
+          "ganZhi": "乙丑",
+          "changeMonth": "五月",
+          "startYear": "1925年",
+          "events": []
+        },
+        {
+          "title": "陸海軍大元帥",
+          "name": "張作霖",
+          "yearName": "民國",
+          "duration": "1",
+          "ganZhi": "丁卯",
+          "changeMonth": "五月",
+          "startYear": "1927年",
+          "events": []
+        },
+        {
+          "title": "主席",
+          "name": "蔣中正",
+          "yearName": "民國",
+          "duration": "3",
+          "ganZhi": "戊辰",
+          "changeMonth": "八月",
+          "startYear": "1928年",
+          "events": []
+        },
+        {
+          "title": "主席",
+          "name": "林森",
+          "yearName": "民國",
+          "duration": "12",
+          "ganZhi": "辛未",
+          "changeMonth": "十一月",
+          "startYear": "1931年",
+          "events": [
+            {
+              "description": "毛澤東1942《在延安文藝座談會上的講話》",
+              "mapUrl": "zi1liao4/Mao19425.htm"
+            }
+          ]
+        },
+        {
+          "title": "主席",
+          "name": "蔣中正",
+          "yearName": "民國",
+          "duration": "5",
+          "ganZhi": "癸未",
+          "changeMonth": "七月",
+          "startYear": "1943年",
+          "events": []
+        },
+        {
+          "title": "總統",
+          "name": "蔣中正",
+          "yearName": "民國",
+          "duration": "1",
+          "ganZhi": "戊子",
+          "changeMonth": "四月",
+          "startYear": "1948年",
+          "events": []
+        },
+        {
+          "title": "代總統",
+          "name": "李宗仁",
+          "yearName": "民國",
+          "duration": "1",
+          "ganZhi": "戊子",
+          "changeMonth": "十二月",
+          "startYear": "1949年",
+          "events": [
+            {
+              "description": "中華民國三十八年史事日誌",
+              "mapUrl": "zi1liao4/中華民國三十八年.txt"
+            },
+            {
+              "description": "渡江作戰示意圖",
+              "mapUrl": "hstrymap/1949djzzsyt.gif"
+            }
+          ]
+        },
+        {
+          "title": "總統",
+          "name": "蔣中正",
+          "yearName": "民國",
+          "duration": "25",
+          "ganZhi": "庚寅",
+          "changeMonth": "正月",
+          "startYear": "1950年",
+          "events": []
+        },
+        {
+          "title": "總統",
+          "name": "嚴家淦",
+          "yearName": "民國",
+          "duration": "3",
+          "ganZhi": "乙卯",
+          "changeMonth": "二月",
+          "startYear": "1975年",
+          "events": []
+        },
+        {
+          "title": "總統",
+          "name": "蔣經國",
+          "yearName": "民國",
+          "duration": "10",
+          "ganZhi": "戊午",
+          "changeMonth": "四月",
+          "startYear": "1978年",
+          "events": []
+        },
+        {
+          "title": "總統",
+          "name": "李登輝",
+          "yearName": "民國",
+          "duration": "12",
+          "ganZhi": "丁卯",
+          "changeMonth": "十一月",
+          "startYear": "1988年",
+          "events": []
+        },
+        {
+          "title": "總統",
+          "name": "陳水扁",
+          "yearName": "民國",
+          "duration": "8",
+          "ganZhi": "庚辰",
+          "changeMonth": "四月",
+          "startYear": "2000年",
+          "events": []
+        },
+        {
+          "title": "總統",
+          "name": "馬英九",
+          "yearName": "民國",
+          "duration": "8",
+          "ganZhi": "戊子",
+          "changeMonth": "四月",
+          "startYear": "2008年",
+          "events": []
+        },
+        {
+          "title": "總統",
+          "name": "蔡英文",
+          "yearName": "民國",
+          "duration": "8",
+          "ganZhi": "丙申",
+          "changeMonth": "四月",
+          "startYear": "2016年",
+          "events": []
+        },
+        {
+          "title": "總統",
+          "name": "賴清德",
+          "yearName": "民國",
+          "duration": "4",
+          "ganZhi": "甲辰",
+          "changeMonth": "四月",
+          "startYear": "2024年",
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "zhonghua",
+      "name": "中华人民共和国",
+      "period": "1949年-2028年",
+      "rulers": [
+        {
+          "title": "主席",
+          "name": "毛澤東",
+          "yearName": "改造",
+          "duration": "10",
+          "ganZhi": "己丑",
+          "changeMonth": "八月",
+          "startYear": "1949年",
+          "events": []
+        },
+        {
+          "title": "主席",
+          "name": "刘少奇",
+          "yearName": "困難",
+          "duration": "9",
+          "ganZhi": "己亥",
+          "changeMonth": "三月",
+          "startYear": "1959年",
+          "events": [
+            {
+              "description": "平定藏族地區叛亂",
+              "mapUrl": "Xu2008SuppressTibetanRebellion.txt"
+            }
+          ]
+        },
+        {
+          "title": "代主席",
+          "name": "董必武",
+          "yearName": "下鄉",
+          "duration": "7",
+          "ganZhi": "戊申",
+          "changeMonth": "九月",
+          "startYear": "1968年",
+          "events": [
+            {
+              "description": "1973年中国政区",
+              "mapUrl": "hstrymap/PocketAtlasChina1973AdministrativeDivisions.png"
+            }
+          ]
+        },
+        {
+          "title": "委员长",
+          "name": "朱德",
+          "yearName": "清明",
+          "duration": "1",
+          "ganZhi": "甲寅",
+          "changeMonth": "十二月",
+          "startYear": "1975年",
+          "events": []
+        },
+        {
+          "title": "委员长",
+          "name": "宋庆龄",
+          "yearName": "地震",
+          "duration": "2",
+          "ganZhi": "丙辰",
+          "changeMonth": "六月",
+          "startYear": "1976年",
+          "events": []
+        },
+        {
+          "title": "委员长",
+          "name": "叶剑英",
+          "yearName": "開放",
+          "duration": "5",
+          "ganZhi": "戊午",
+          "changeMonth": "正月",
+          "startYear": "1978年",
+          "events": [
+            {
+              "description": "鄧小平1980《黨和國家領導制度的改革》",
+              "mapUrl": "zi1liao4/deng8008.htm"
+            },
+            {
+              "description": "鄧小平1981《老幹部第一位的任務是選拔中青年幹部》",
+              "mapUrl": "zi1liao4/Deng8107.htm"
+            }
+          ]
+        },
+        {
+          "title": "主席",
+          "name": "李先念",
+          "yearName": "改革",
+          "duration": "5",
+          "ganZhi": "癸亥",
+          "changeMonth": "五月",
+          "startYear": "1983年",
+          "events": [
+            {
+              "description": "鄧小平1985《社會主義和市場經濟不存在根本矛盾》",
+              "mapUrl": "zi1liao4/Deng8510.htm"
+            },
+            {
+              "description": "鄧小平1987《改革的步子要加快》",
+              "mapUrl": "zi1liao4/deng8706.htm"
+            }
+          ]
+        },
+        {
+          "title": "主席",
+          "name": "杨尚昆",
+          "yearName": "清場",
+          "duration": "5",
+          "ganZhi": "戊辰",
+          "changeMonth": "二月",
+          "startYear": "1988年",
+          "events": []
+        },
+        {
+          "title": "主席",
+          "name": "江泽民",
+          "yearName": "代表",
+          "duration": "10",
+          "ganZhi": "癸酉",
+          "changeMonth": "三月",
+          "startYear": "1993年",
+          "events": [
+            {
+              "description": "江澤民2001《在慶祝建黨八十週年大會上的講話》",
+              "mapUrl": "zi1liao4/Jiang017.htm"
+            }
+          ]
+        },
+        {
+          "title": "主席",
+          "name": "胡锦涛",
+          "yearName": "和諧",
+          "duration": "10",
+          "ganZhi": "癸未",
+          "changeMonth": "二月",
+          "startYear": "2003年",
+          "events": []
+        },
+        {
+          "title": "主席",
+          "name": "習近平",
+          "yearName": "反腐",
+          "duration": "15",
+          "ganZhi": "癸巳",
+          "changeMonth": "二月",
+          "startYear": "2013年",
+          "events": []
+        }
+      ]
+    }
+  ]
+}

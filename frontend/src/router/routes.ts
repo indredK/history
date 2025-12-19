@@ -15,6 +15,7 @@ const PeoplePage = lazy(() => import('../pages/PeoplePage'));
 const CulturePage = lazy(() => import('../pages/CulturePage'));
 const MythologyPage = lazy(() => import('../pages/MythologyPage'));
 const EventsPage = lazy(() => import('../pages/EventsPage'));
+const DynastiesPage = lazy(() => import('../pages/DynastiesPage'));
 
 export const routes: RouteConfig[] = [
   {
@@ -23,6 +24,12 @@ export const routes: RouteConfig[] = [
     label: '时间轴',
     component: TimelinePage,
     index: true
+  },
+  {
+    key: 'dynasties',
+    path: '/dynasties',
+    label: '历代纪元',
+    component: DynastiesPage
   },
   {
     key: 'map',
