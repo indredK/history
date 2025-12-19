@@ -1,7 +1,7 @@
-import { EventList } from '@/features/events/EventList';
+import { TimelineList } from '@/features/timeline/TimelineList';
 
 function TimelinePage() {
-  return <EventList />;
+  return <TimelineList />;
 }
 
 export default TimelinePage;

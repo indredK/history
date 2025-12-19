@@ -4,7 +4,7 @@ import { Box, Typography } from '@mui/material';
 
 import { getEvents } from '@/services/dataClient';
 import { useEventsStore } from '@/store';
-import { useEventFilter } from '@/features/events/hooks/useEventFilter';
+import { useEventFilter } from '@/features/timeline/hooks/useEventFilter';
 import { TimelineChart } from './TimelineChart';
 import type { TimelineChartRef } from '../types';
 import '../styles/D3Timeline.css';

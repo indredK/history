@@ -1,11 +1,11 @@
-import './EventList.css';
+import './TimelineList.css';
 import { Dynasty3DWheel, D3Timeline } from './components';
 import { Box, Paper } from '@mui/material';
 
-export function EventList() {
+export function TimelineList() {
 
   return (
-    <Paper className="event-list-container animate__animated animate__fadeIn" sx={{ padding: 2, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: 'rgba(255, 255, 255, 0)', backdropFilter: 'blur(10px)', boxShadow: 'none' }}>
+    <Paper className="timeline-list-container animate__animated animate__fadeIn" sx={{ padding: 2, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: 'rgba(255, 255, 255, 0)', backdropFilter: 'blur(10px)', boxShadow: 'none' }}>
 
       
       {/* 上下布局容器 */}

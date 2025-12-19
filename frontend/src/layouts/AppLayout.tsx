@@ -19,6 +19,8 @@ export function AppLayout() {
     if (pathname === '/map') return 'map';
     if (pathname === '/people') return 'people';
     if (pathname === '/culture') return 'culture';
+    if (pathname === '/mythology') return 'mythology';
+    if (pathname === '/events') return 'events';
     return 'timeline';
   };
 

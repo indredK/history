@@ -1,0 +1,14 @@
+.major-events-page {
+  padding: 2rem 0;
+  min-height: 100vh;
+}
+
+.major-events-page .MuiContainer-root {
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .major-events-page {
+    padding: 1rem 0;
+  }
+}
