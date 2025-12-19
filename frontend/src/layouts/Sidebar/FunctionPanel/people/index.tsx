@@ -5,14 +5,11 @@ import {
 } from '@mui/material';
 import {
   FilterList,
-  UnfoldMore,
-  UnfoldLess,
 } from '@mui/icons-material';
 import { useState } from 'react';
 import { PeopleDynastyFilterPopover } from './PeopleDynastyFilterPopover';
 import { OccupationFilterPopover } from './OccupationFilterPopover';
 import { buttonConfig, uiUtils } from '@/config';
-import { useDynastiesExpanded } from '@/hooks';
 
 export function PeopleFunctions() {
   // 朝代筛选 Popover 状态
