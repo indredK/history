@@ -7,6 +7,7 @@ import { useDynastyStore } from '@/store';
 import { useDynastyImage } from '@/hooks/useDynastyImage';
 import { routes } from '@/router/routes';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
+import { dynastyUtils } from '@/config';
 
 export function AppLayout() {
   const location = useLocation();
@@ -28,25 +29,9 @@ export function AppLayout() {
 
   const activeTab = getActiveTabFromPath(location.pathname);
 
-  // 将朝代颜色转换为rgba格式
-  const getDynastyColorWithAlpha = (color: string | undefined, alpha: number) => {
-    if (!color) return `rgba(139, 69, 19, ${alpha})`;
-    
-    if (color.startsWith('#')) {
-      const hex = color.replace('#', '');
-      const r = parseInt(hex.substring(0, 2), 16);
-      const g = parseInt(hex.substring(2, 4), 16);
-      const b = parseInt(hex.substring(4, 6), 16);
-      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-    }
-    
-    return color;
-  };
-
   const dynastyColor = selectedDynasty?.color;
-  const gradientColor1 = getDynastyColorWithAlpha(dynastyColor, 0.15);
-  const gradientColor2 = getDynastyColorWithAlpha(dynastyColor, 0.08);
-  const bgColor = getDynastyColorWithAlpha(dynastyColor, 0.12);
+  const bgColor = dynastyUtils.getBackgroundColor(dynastyColor);
+  const gradientBackground = dynastyUtils.getGradientBackground(dynastyColor);
 
   const toggleSidebar = () => {
     setSidebarCollapsed(!sidebarCollapsed);
@@ -62,12 +47,7 @@ export function AppLayout() {
           padding: '16px',
           marginTop: 0,
           background: selectedDynasty && dynastyBackgroundUrl ?
-            `linear-gradient(
-              to bottom right,
-              ${gradientColor1},
-              ${gradientColor2},
-              transparent 50%
-            ),
+            `${gradientBackground},
             url(${dynastyBackgroundUrl}) no-repeat center center fixed,
             var(--color-bg-gradient)`
             : 'var(--color-bg-gradient)',

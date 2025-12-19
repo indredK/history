@@ -6,6 +6,7 @@ import { useDynastyStore } from '@/store';
 import { getDynasties } from '@/services/dataClient';
 import { useRequest } from 'ahooks';
 import type { Dynasty } from '@/services/culture/types';
+import { dynastyConfig, dynastyUtils } from '@/config';
 import './Dynasty3DWheel.css';
 
 interface Dynasty3DWheelProps {
@@ -24,22 +25,25 @@ function DynastyCard({ dynasty, position, rotation, isActive, onClick }: Dynasty
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
   
-  const dynastyColor = dynasty.color || '#8B4513';
+  const dynastyColor = dynasty.color || dynastyConfig.defaultColor;
   const color = new THREE.Color(dynastyColor);
+  const materialConfig = dynastyUtils.getMaterialConfig(dynastyColor, isActive);
 
   useFrame((state) => {
     if (meshRef.current) {
       // 活跃卡片的脉冲效果
       if (isActive) {
-        const scale = 1.15 + Math.sin(state.clock.elapsedTime * 2) * 0.03;
+        const scale = dynastyConfig.threeDConfig.cardScale.active + 
+                     Math.sin(state.clock.elapsedTime * dynastyConfig.threeDConfig.animation.pulseSpeed) * 
+                     dynastyConfig.threeDConfig.cardScale.pulseAmplitude;
         meshRef.current.scale.setScalar(scale);
       } else {
-        meshRef.current.scale.setScalar(0.85);
+        meshRef.current.scale.setScalar(dynastyConfig.threeDConfig.cardScale.default);
       }
       
       // 悬停效果
       if (hovered && !isActive) {
-        meshRef.current.scale.setScalar(0.95);
+        meshRef.current.scale.setScalar(dynastyConfig.threeDConfig.cardScale.hover);
       }
     }
   });
@@ -65,26 +69,26 @@ function DynastyCard({ dynasty, position, rotation, isActive, onClick }: Dynasty
           }
         }}
       >
-        <planeGeometry args={[2.2, 2.4]} />
+        <planeGeometry args={[dynastyConfig.threeDConfig.geometry.cardWidth, dynastyConfig.threeDConfig.geometry.cardHeight]} />
         <meshStandardMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={isActive ? 0.5 : 0.1}
-          metalness={0.3}
-          roughness={0.4}
+          emissiveIntensity={materialConfig.emissiveIntensity}
+          metalness={materialConfig.metalness}
+          roughness={materialConfig.roughness}
           side={THREE.DoubleSide}
           transparent
-          opacity={isActive ? 1 : 0.6}
+          opacity={materialConfig.opacity}
         />
       </mesh>
       
       {/* 发光边框 */}
       <mesh position={[0, 0, -0.01]}>
-        <planeGeometry args={[2.3, 2.5]} />
+        <planeGeometry args={[dynastyConfig.threeDConfig.geometry.borderWidth, dynastyConfig.threeDConfig.geometry.borderHeight]} />
         <meshBasicMaterial
           color={color}
           transparent
-          opacity={isActive ? 0.7 : 0.15}
+          opacity={isActive ? dynastyConfig.alphaLevels.border * 1.75 : dynastyConfig.alphaLevels.shimmer * 1.5}
           side={THREE.DoubleSide}
         />
       </mesh>
@@ -101,20 +105,7 @@ function DynastyCard({ dynasty, position, rotation, isActive, onClick }: Dynasty
         }}
       >
         <div
-          style={{
-            background: `linear-gradient(135deg, ${dynastyColor}cc, ${dynastyColor}88)`,
-            padding: '12px',
-            borderRadius: '10px',
-            textAlign: 'center',
-            color: 'white',
-            backdropFilter: 'blur(8px)',
-            border: `1px solid ${isActive ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.1)'}`,
-            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-            transform: `scale(${isActive ? 1 : 0.85})`,
-            transition: 'all 0.3s ease',
-            position: 'relative',
-            overflow: 'hidden',
-          }}
+          style={dynastyUtils.getCardStyle(dynastyColor, isActive)}
         >
           {/* 光影流动效果 */}
           <div
@@ -137,7 +128,7 @@ function DynastyCard({ dynasty, position, rotation, isActive, onClick }: Dynasty
           <div style={{ position: 'relative', zIndex: 1 }}>
           <div
             style={{
-              fontSize: isActive ? '18px' : '15px',
+              fontSize: isActive ? dynastyConfig.cardStyles.fontSize.title.active : dynastyConfig.cardStyles.fontSize.title.default,
               fontWeight: 'bold',
               marginBottom: '4px',
               textShadow: '0 2px 8px rgba(0,0,0,0.8)',
@@ -147,14 +138,14 @@ function DynastyCard({ dynasty, position, rotation, isActive, onClick }: Dynasty
             {dynasty.name}
           </div>
           {dynasty.name_en && (
-            <div style={{ fontSize: '9px', opacity: 0.9, marginBottom: '6px' }}>
+            <div style={{ fontSize: dynastyConfig.cardStyles.fontSize.subtitle, opacity: 0.9, marginBottom: '6px' }}>
               {dynasty.name_en}
             </div>
           )}
           <div
             style={{
-              fontSize: '10px',
-              background: 'rgba(255,255,255,0.2)',
+              fontSize: dynastyConfig.cardStyles.fontSize.period,
+              background: dynastyConfig.cardStyles.colors.periodBackground,
               padding: '3px 8px',
               borderRadius: '10px',
               display: 'inline-block',
@@ -166,7 +157,7 @@ function DynastyCard({ dynasty, position, rotation, isActive, onClick }: Dynasty
           {dynasty.description && (
             <div
               style={{
-                fontSize: '8px',
+                fontSize: dynastyConfig.cardStyles.fontSize.description,
                 opacity: 0.8,
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
@@ -250,7 +241,7 @@ function DynastyCarousel({
   const targetPosition = useRef<number>(0);
   const currentPosition = useRef<number>(0);
 
-  const spacing = 3; // 卡片之间的间距
+  const spacing = dynastyConfig.threeDConfig.spacing;
 
   useEffect(() => {
     targetPosition.current = -activeIndex * spacing;
@@ -259,7 +250,7 @@ function DynastyCarousel({
   useFrame(() => {
     if (groupRef.current) {
       // 平滑插值移动
-      currentPosition.current += (targetPosition.current - currentPosition.current) * 0.1;
+      currentPosition.current += (targetPosition.current - currentPosition.current) * dynastyConfig.threeDConfig.animation.moveSpeed;
       groupRef.current.position.x = currentPosition.current;
     }
   });

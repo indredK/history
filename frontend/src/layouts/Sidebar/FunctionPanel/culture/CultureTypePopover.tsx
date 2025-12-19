@@ -1,5 +1,5 @@
 import { Popover, Stack, Typography, FormControlLabel, Checkbox, Box } from '@mui/material';
-import { popoverProps, popoverContentStyles, getThemedCheckboxStyles, formControlLabelStyles } from '../popoverStyles';
+import { popoverConfig, formConfig, uiUtils } from '@/config';
 
 interface CultureTypePopoverProps {
   anchorEl: HTMLButtonElement | null;
@@ -16,9 +16,9 @@ export function CultureTypePopover({ anchorEl, onClose }: CultureTypePopoverProp
       open={open}
       anchorEl={anchorEl}
       onClose={onClose}
-      {...popoverProps}
+      {...uiUtils.getPopoverProps()}
     >
-      <Box sx={{ ...popoverContentStyles, minWidth: 250 }}>
+      <Box sx={{ ...popoverConfig.contentStyles, minWidth: 250 }}>
         <Typography variant="subtitle1" gutterBottom>
           文化类型
         </Typography>
@@ -28,62 +28,62 @@ export function CultureTypePopover({ anchorEl, onClose }: CultureTypePopoverProp
               <Checkbox 
                 size="small" 
                 defaultChecked 
-                sx={getThemedCheckboxStyles('culture')}
+                sx={uiUtils.getThemedCheckboxStyles('culture')}
               />
             }
             label={<Typography variant="body2">文学作品</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
           <FormControlLabel
             control={
               <Checkbox 
                 size="small" 
                 defaultChecked 
-                sx={getThemedCheckboxStyles('culture')}
+                sx={uiUtils.getThemedCheckboxStyles('culture')}
               />
             }
             label={<Typography variant="body2">艺术作品</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
           <FormControlLabel
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('culture')}
+                sx={uiUtils.getThemedCheckboxStyles('culture')}
               />
             }
             label={<Typography variant="body2">科技发明</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
           <FormControlLabel
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('culture')}
+                sx={uiUtils.getThemedCheckboxStyles('culture')}
               />
             }
             label={<Typography variant="body2">宗教思想</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
           <FormControlLabel
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('culture')}
+                sx={uiUtils.getThemedCheckboxStyles('culture')}
               />
             }
             label={<Typography variant="body2">建筑工程</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
           <FormControlLabel
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('culture')}
+                sx={uiUtils.getThemedCheckboxStyles('culture')}
               />
             }
             label={<Typography variant="body2">民俗文化</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
         </Stack>
       </Box>

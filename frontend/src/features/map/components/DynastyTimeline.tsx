@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { getDynasties } from '@/services/dataClient';
 import { Dynasty } from '@/services/culture/types';
+import { dynastyConfig } from '@/config';
 import styles from './DynastyTimeline.module.css';
 
 interface DynastyTimelineProps {
@@ -224,7 +225,7 @@ export const DynastyTimeline: React.FC<DynastyTimelineProps> = ({
           <div className={styles.selectedInfo}>
             <div 
               className={styles.colorIndicator} 
-              style={{ backgroundColor: selectedDynasty.color }} 
+              style={{ backgroundColor: selectedDynasty.color || dynastyConfig.defaultColor }} 
             />
             <span className={styles.selectedName}>{selectedDynasty.name}</span>
             <span className={styles.selectedYears}>
@@ -248,7 +249,7 @@ export const DynastyTimeline: React.FC<DynastyTimelineProps> = ({
               className={`${styles.dynastyMark} ${selectedDynasty?.id === dynasty.id ? styles.activeMark : ''}`}
               style={{ 
                 left: `${((dynasty.startYear - MIN_YEAR) / YEAR_RANGE) * 100}%`,
-                backgroundColor: dynasty.color
+                backgroundColor: dynasty.color || dynastyConfig.defaultColor
               }}
               onClick={(e) => {
                 e.stopPropagation();

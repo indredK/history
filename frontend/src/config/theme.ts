@@ -204,6 +204,62 @@ export const zIndex = {
   tooltip: 1070
 };
 
+// 朝代颜色配置
+export const dynastyColors = {
+  // 默认朝代颜色
+  default: '#8B4513',
+  
+  // 朝代颜色透明度配置
+  alphaLevels: {
+    background: 0.12,
+    gradient1: 0.15,
+    gradient2: 0.08,
+    card: 0.6,
+    cardActive: 1.0,
+    border: 0.4,
+    glow: 0.3,
+    shimmer: 0.1
+  },
+  
+  // 朝代相关的渐变配置
+  gradientSuffixes: {
+    light: 'cc', // 80% opacity
+    medium: '88', // 53% opacity
+    dark: '66'    // 40% opacity
+  }
+};
+
+// 朝代颜色工具函数
+export const dynastyColorUtils = {
+  // 将朝代颜色转换为rgba格式
+  getDynastyColorWithAlpha: (color: string | undefined, alpha: number): string => {
+    if (!color) return `rgba(139, 69, 19, ${alpha})`;
+    
+    if (color.startsWith('#')) {
+      const hex = color.replace('#', '');
+      const r = parseInt(hex.substring(0, 2), 16);
+      const g = parseInt(hex.substring(2, 4), 16);
+      const b = parseInt(hex.substring(4, 6), 16);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+    
+    return color;
+  },
+  
+  // 获取朝代渐变色
+  getDynastyGradient: (color: string | undefined, suffix: keyof typeof dynastyColors.gradientSuffixes = 'light'): string => {
+    const dynastyColor = color || dynastyColors.default;
+    const suffixValue = dynastyColors.gradientSuffixes[suffix];
+    return `linear-gradient(135deg, ${dynastyColor}${suffixValue}, ${dynastyColor}${dynastyColors.gradientSuffixes.medium})`;
+  },
+  
+  // 获取朝代发光效果
+  getDynastyGlow: (color: string | undefined, intensity: number = 0.3): string => {
+    const dynastyColor = color || dynastyColors.default;
+    return `0 0 20px ${dynastyColorUtils.getDynastyColorWithAlpha(dynastyColor, intensity)}`;
+  }
+};
+
 // 导出默认主题
 export const theme = {
   colors,
@@ -215,7 +271,9 @@ export const theme = {
   typography,
   zIndex,
   navigationThemes,
-  getNavigationTheme
+  getNavigationTheme,
+  dynastyColors,
+  dynastyColorUtils
 };
 
 export default theme;

@@ -13,3 +13,11 @@ export { default as navigation } from './navigation';
 
 // 导出导航项配置
 export * from './navigationItems';
+
+// 导出朝代配置
+export * from './dynasty';
+export { default as dynasty } from './dynasty';
+
+// 导出UI组件配置
+export * from './ui';
+export { default as ui } from './ui';

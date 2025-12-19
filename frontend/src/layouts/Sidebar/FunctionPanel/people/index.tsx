@@ -9,7 +9,7 @@ import {
 import { useState } from 'react';
 import { PeopleDynastyFilterPopover } from './PeopleDynastyFilterPopover';
 import { OccupationFilterPopover } from './OccupationFilterPopover';
-import { functionButtonStyles, getThemedSearchFieldStyles } from '../popoverStyles';
+import { buttonConfig, uiUtils } from '@/config';
 
 export function PeopleFunctions() {
   // 朝代筛选 Popover 状态
@@ -43,7 +43,7 @@ export function PeopleFunctions() {
           fullWidth
           placeholder="搜索历史人物..."
           size="small"
-          sx={getThemedSearchFieldStyles('people')}
+          sx={uiUtils.getThemedSearchFieldStyles('people')}
         />
 
       {/* 朝代筛选 */}
@@ -53,7 +53,7 @@ export function PeopleFunctions() {
         fullWidth
         size="small"
         onClick={handleDynastyFilterClick}
-        sx={functionButtonStyles}
+        sx={buttonConfig.functionButton}
       >
         朝代筛选
       </Button>
@@ -69,7 +69,7 @@ export function PeopleFunctions() {
         fullWidth
         size="small"
         onClick={handleOccupationFilterClick}
-        sx={functionButtonStyles}
+        sx={buttonConfig.functionButton}
       >
         职业分类
       </Button>

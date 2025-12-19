@@ -1,6 +1,6 @@
 import { Popover, Stack, Typography, Box, ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { PlayArrow, Pause, SkipPrevious, SkipNext } from '@mui/icons-material';
-import { popoverProps, popoverContentStyles, getThemedToggleButtonStyles, captionStyles } from '../popoverStyles';
+import { popoverConfig, commonStyles, uiUtils } from '@/config';
 
 interface TimeControlPopoverProps {
   anchorEl: HTMLButtonElement | null;
@@ -17,9 +17,9 @@ export function TimeControlPopover({ anchorEl, onClose }: TimeControlPopoverProp
       open={open}
       anchorEl={anchorEl}
       onClose={onClose}
-      {...popoverProps}
+      {...uiUtils.getPopoverProps()}
     >
-      <Box sx={{ ...popoverContentStyles, minWidth: 250 }}>
+      <Box sx={{ ...popoverConfig.contentStyles, minWidth: 250 }}>
         <Typography variant="subtitle1" gutterBottom>
           时间控制
         </Typography>
@@ -29,7 +29,7 @@ export function TimeControlPopover({ anchorEl, onClose }: TimeControlPopoverProp
             <ToggleButtonGroup 
               size="small" 
               exclusive
-              sx={getThemedToggleButtonStyles('map')}
+              sx={uiUtils.getThemedToggleButtonStyles('map')}
             >
               <ToggleButton value="previous">
                 <SkipPrevious />
@@ -48,7 +48,7 @@ export function TimeControlPopover({ anchorEl, onClose }: TimeControlPopoverProp
 
           {/* 播放速度 */}
           <Box>
-            <Typography variant="caption" sx={captionStyles}>
+            <Typography variant="caption" sx={commonStyles.caption}>
               播放速度
             </Typography>
             <Stack sx={{ mt: 1 }}>
@@ -56,7 +56,7 @@ export function TimeControlPopover({ anchorEl, onClose }: TimeControlPopoverProp
                 size="small" 
                 exclusive 
                 defaultValue="medium"
-                sx={getThemedToggleButtonStyles('map')}
+                sx={uiUtils.getThemedToggleButtonStyles('map')}
               >
                 <ToggleButton value="slow">慢速</ToggleButton>
                 <ToggleButton value="medium">中速</ToggleButton>

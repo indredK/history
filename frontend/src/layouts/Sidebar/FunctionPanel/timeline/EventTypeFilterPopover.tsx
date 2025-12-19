@@ -1,5 +1,5 @@
 import { Box, Popover, Stack, Typography, FormControlLabel, Checkbox } from '@mui/material';
-import { popoverProps, popoverContentStyles, getThemedCheckboxStyles, formControlLabelStyles } from '../popoverStyles';
+import { popoverConfig, formConfig, uiUtils } from '@/config';
 
 interface EventTypeFilterPopoverProps {
   anchorEl: HTMLButtonElement | null;
@@ -16,9 +16,9 @@ export function EventTypeFilterPopover({ anchorEl, onClose }: EventTypeFilterPop
       open={open}
       anchorEl={anchorEl}
       onClose={onClose}
-      {...popoverProps}
+      {...uiUtils.getPopoverProps()}
     >
-      <Box sx={{ ...popoverContentStyles, minWidth: 250 }}>
+      <Box sx={{ ...popoverConfig.contentStyles, minWidth: 250 }}>
         <Typography variant="subtitle1" gutterBottom>
           事件类型
         </Typography>
@@ -27,41 +27,41 @@ export function EventTypeFilterPopover({ anchorEl, onClose }: EventTypeFilterPop
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('timeline')}
+                sx={uiUtils.getThemedCheckboxStyles('timeline')}
               />
             }
             label={<Typography variant="body2">政治事件</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
           <FormControlLabel
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('timeline')}
+                sx={uiUtils.getThemedCheckboxStyles('timeline')}
               />
             }
             label={<Typography variant="body2">军事战争</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
           <FormControlLabel
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('timeline')}
+                sx={uiUtils.getThemedCheckboxStyles('timeline')}
               />
             }
             label={<Typography variant="body2">文化艺术</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
           <FormControlLabel
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('timeline')}
+                sx={uiUtils.getThemedCheckboxStyles('timeline')}
               />
             }
             label={<Typography variant="body2">科技发明</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
         </Stack>
       </Box>

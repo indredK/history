@@ -6,7 +6,7 @@ import {
 import { useState } from 'react';
 import { CultureTypePopover } from './CultureTypePopover';
 import { PeriodFilterPopover } from './PeriodFilterPopover';
-import { functionButtonStyles } from '../popoverStyles';
+import { buttonConfig } from '@/config';
 
 export function CultureFunctions() {
   // 文化类型筛选 Popover 状态
@@ -42,7 +42,7 @@ export function CultureFunctions() {
         fullWidth
         size="small"
         onClick={handleCultureTypeClick}
-        sx={functionButtonStyles}
+        sx={buttonConfig.functionButton}
       >
         文化类型
       </Button>
@@ -58,7 +58,7 @@ export function CultureFunctions() {
         fullWidth
         size="small"
         onClick={handlePeriodFilterClick}
-        sx={functionButtonStyles}
+        sx={buttonConfig.functionButton}
       >
         时期筛选
       </Button>

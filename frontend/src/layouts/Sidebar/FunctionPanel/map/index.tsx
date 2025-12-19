@@ -9,7 +9,7 @@ import {
 import { useState } from 'react';
 import { LayerControlPopover } from './LayerControlPopover';
 import { TimeControlPopover } from './TimeControlPopover';
-import { functionButtonStyles } from '../popoverStyles';
+import { buttonConfig } from '@/config';
 
 export function MapFunctions() {
   // 图层控制 Popover 状态
@@ -45,7 +45,7 @@ export function MapFunctions() {
         fullWidth
         size="small"
         onClick={handleLayerControlClick}
-        sx={functionButtonStyles}
+        sx={buttonConfig.functionButton}
       >
         图层控制
       </Button>
@@ -61,7 +61,7 @@ export function MapFunctions() {
         fullWidth
         size="small"
         onClick={handleTimeControlClick}
-        sx={functionButtonStyles}
+        sx={buttonConfig.functionButton}
       >
         时间控制
       </Button>

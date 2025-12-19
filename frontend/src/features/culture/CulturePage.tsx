@@ -5,6 +5,7 @@ import { useDynastyStore } from '@/store';
 import { getDynasties } from '@/services/dataClient';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import type { Dynasty } from '@/services/culture/types';
+import { dynastyConfig } from '@/config';
 
 import './CulturePage.css';
 
@@ -79,7 +80,7 @@ function CulturePage() {
                           width: 40,
                           height: 40,
                           borderRadius: '50%',
-                          background: dynasty.color,
+                          background: dynasty.color || dynastyConfig.defaultColor,
                           mr: 2,
                           display: 'flex',
                           alignItems: 'center',

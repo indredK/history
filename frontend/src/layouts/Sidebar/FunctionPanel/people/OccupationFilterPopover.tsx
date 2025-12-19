@@ -1,5 +1,5 @@
 import { Popover, Stack, Typography, FormControlLabel, Checkbox, Box } from '@mui/material';
-import { popoverProps, popoverContentStyles, getThemedCheckboxStyles, formControlLabelStyles } from '../popoverStyles';
+import { popoverConfig, formConfig, uiUtils } from '@/config';
 
 interface OccupationFilterPopoverProps {
   anchorEl: HTMLButtonElement | null;
@@ -16,9 +16,9 @@ export function OccupationFilterPopover({ anchorEl, onClose }: OccupationFilterP
       open={open}
       anchorEl={anchorEl}
       onClose={onClose}
-      {...popoverProps}
+      {...uiUtils.getPopoverProps()}
     >
-      <Box sx={{ ...popoverContentStyles, minWidth: 250 }}>
+      <Box sx={{ ...popoverConfig.contentStyles, minWidth: 250 }}>
         <Typography variant="subtitle1" gutterBottom>
           职业分类
         </Typography>
@@ -27,61 +27,61 @@ export function OccupationFilterPopover({ anchorEl, onClose }: OccupationFilterP
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('people')}
+                sx={uiUtils.getThemedCheckboxStyles('people')}
               />
             }
             label={<Typography variant="body2">皇帝君主</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
           <FormControlLabel
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('people')}
+                sx={uiUtils.getThemedCheckboxStyles('people')}
               />
             }
             label={<Typography variant="body2">文人学者</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
           <FormControlLabel
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('people')}
+                sx={uiUtils.getThemedCheckboxStyles('people')}
               />
             }
             label={<Typography variant="body2">军事将领</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
           <FormControlLabel
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('people')}
+                sx={uiUtils.getThemedCheckboxStyles('people')}
               />
             }
             label={<Typography variant="body2">思想家</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
           <FormControlLabel
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('people')}
+                sx={uiUtils.getThemedCheckboxStyles('people')}
               />
             }
             label={<Typography variant="body2">艺术家</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
           <FormControlLabel
             control={
               <Checkbox 
                 size="small" 
-                sx={getThemedCheckboxStyles('people')}
+                sx={uiUtils.getThemedCheckboxStyles('people')}
               />
             }
             label={<Typography variant="body2">科学家</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
         </Stack>
       </Box>

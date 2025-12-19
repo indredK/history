@@ -1,5 +1,5 @@
 import { Popover, Stack, Typography, Chip, Box } from '@mui/material';
-import { popoverProps, popoverContentStyles, getThemedChipStyles } from '../popoverStyles';
+import { popoverConfig, uiUtils } from '@/config';
 
 interface PeriodFilterPopoverProps {
   anchorEl: HTMLButtonElement | null;
@@ -16,9 +16,9 @@ export function PeriodFilterPopover({ anchorEl, onClose }: PeriodFilterPopoverPr
       open={open}
       anchorEl={anchorEl}
       onClose={onClose}
-      {...popoverProps}
+      {...uiUtils.getPopoverProps()}
     >
-      <Box sx={popoverContentStyles}>
+      <Box sx={popoverConfig.contentStyles}>
         <Typography variant="subtitle1" gutterBottom>
           时期筛选
         </Typography>
@@ -28,37 +28,37 @@ export function PeriodFilterPopover({ anchorEl, onClose }: PeriodFilterPopoverPr
               label="先秦" 
               size="small" 
               variant="outlined"
-              sx={getThemedChipStyles('culture')}
+              sx={uiUtils.getThemedChipStyles('culture')}
             />
             <Chip 
               label="秦汉" 
               size="small" 
               variant="outlined"
-              sx={getThemedChipStyles('culture')}
+              sx={uiUtils.getThemedChipStyles('culture')}
             />
             <Chip 
               label="魏晋" 
               size="small" 
               variant="outlined"
-              sx={getThemedChipStyles('culture')}
+              sx={uiUtils.getThemedChipStyles('culture')}
             />
             <Chip 
               label="隋唐" 
               size="small" 
               variant="outlined"
-              sx={getThemedChipStyles('culture')}
+              sx={uiUtils.getThemedChipStyles('culture')}
             />
             <Chip 
               label="宋元" 
               size="small" 
               variant="outlined"
-              sx={getThemedChipStyles('culture')}
+              sx={uiUtils.getThemedChipStyles('culture')}
             />
             <Chip 
               label="明清" 
               size="small" 
               variant="outlined"
-              sx={getThemedChipStyles('culture')}
+              sx={uiUtils.getThemedChipStyles('culture')}
             />
           </Stack>
         </Stack>

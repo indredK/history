@@ -1,6 +1,6 @@
 import { Popover, Stack, Typography, Box, FormControlLabel, Checkbox, Slider } from '@mui/material';
 import { useMapStore } from '@/store';
-import { popoverProps, popoverContentStyles, getThemedCheckboxStyles, formControlLabelStyles, captionStyles, getThemedSliderStyles } from '../popoverStyles';
+import { popoverConfig, formConfig, commonStyles, uiUtils } from '@/config';
 
 interface LayerControlPopoverProps {
   anchorEl: HTMLButtonElement | null;
@@ -30,9 +30,9 @@ export function LayerControlPopover({ anchorEl, onClose }: LayerControlPopoverPr
       open={open}
       anchorEl={anchorEl}
       onClose={onClose}
-      {...popoverProps}
+      {...uiUtils.getPopoverProps()}
     >
-      <Box sx={popoverContentStyles}>
+      <Box sx={popoverConfig.contentStyles}>
         <Typography variant="subtitle1" gutterBottom>
           图层控制
         </Typography>
@@ -54,11 +54,11 @@ export function LayerControlPopover({ anchorEl, onClose }: LayerControlPopoverPr
                 />
               }
               label={<Typography variant="body2">现代行政区域</Typography>}
-              sx={formControlLabelStyles}
+              sx={formConfig.controlLabel}
             />
             {adminBoundaryVisible && (
               <Box sx={{ px: 1, mt: 1 }}>
-                <Typography variant="caption" sx={captionStyles}>
+                <Typography variant="caption" sx={commonStyles.caption}>
                   透明度: {Math.round(adminBoundaryOpacity * 100)}%
                 </Typography>
                 <Slider
@@ -68,7 +68,7 @@ export function LayerControlPopover({ anchorEl, onClose }: LayerControlPopoverPr
                   max={1}
                   step={0.1}
                   size="small"
-                  sx={getThemedSliderStyles('map')}
+                  sx={uiUtils.getThemedSliderStyles('map')}
                 />
               </Box>
             )}
@@ -82,15 +82,15 @@ export function LayerControlPopover({ anchorEl, onClose }: LayerControlPopoverPr
                   checked={dynastyBoundaryVisible}
                   onChange={toggleDynastyBoundary}
                   size="small"
-                  sx={getThemedCheckboxStyles('timeline')}
+                  sx={uiUtils.getThemedCheckboxStyles('timeline')}
                 />
               }
               label={<Typography variant="body2">历史朝代疆域</Typography>}
-              sx={formControlLabelStyles}
+              sx={formConfig.controlLabel}
             />
             {dynastyBoundaryVisible && (
               <Box sx={{ px: 1, mt: 1 }}>
-                <Typography variant="caption" sx={captionStyles}>
+                <Typography variant="caption" sx={commonStyles.caption}>
                   透明度: {Math.round(dynastyBoundaryOpacity * 100)}%
                 </Typography>
                 <Slider
@@ -100,7 +100,7 @@ export function LayerControlPopover({ anchorEl, onClose }: LayerControlPopoverPr
                   max={1}
                   step={0.1}
                   size="small"
-                  sx={getThemedSliderStyles('timeline')}
+                  sx={uiUtils.getThemedSliderStyles('timeline')}
                 />
               </Box>
             )}
@@ -113,11 +113,11 @@ export function LayerControlPopover({ anchorEl, onClose }: LayerControlPopoverPr
                 checked={eventMarkersVisible}
                 onChange={toggleEventMarkers}
                 size="small"
-                sx={getThemedCheckboxStyles('timeline')}
+                sx={uiUtils.getThemedCheckboxStyles('timeline')}
               />
             }
             label={<Typography variant="body2">事件标记</Typography>}
-            sx={formControlLabelStyles}
+            sx={formConfig.controlLabel}
           />
         </Stack>
       </Box>

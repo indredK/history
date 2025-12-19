@@ -7,7 +7,7 @@ import {
 } from '@mui/icons-material';
 import { useState } from 'react';
 import { EventTypeFilterPopover } from './EventTypeFilterPopover';
-import { functionButtonStyles } from '../popoverStyles';
+import { buttonConfig } from '@/config';
 
 export function TimelineFunctions() {
   // 事件类型筛选 Popover 状态
@@ -30,7 +30,7 @@ export function TimelineFunctions() {
         fullWidth
         size="small"
         onClick={handleEventTypeClick}
-        sx={functionButtonStyles}
+        sx={buttonConfig.functionButton}
       >
         事件类型
       </Button>
