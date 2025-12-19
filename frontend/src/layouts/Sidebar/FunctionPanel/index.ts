@@ -3,6 +3,9 @@ export { FunctionPanel } from './FunctionPanel';
 // Timeline Components
 export * from './timeline';
 
+// Dynasties Components
+export * from './dynasties';
+
 // Map Components
 export * from './map';
 

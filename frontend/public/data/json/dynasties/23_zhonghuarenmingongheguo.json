@@ -1,0 +1,195 @@
+{
+  "id": "zhonghua",
+  "name": "中华人民共和国",
+  "period": "1949年-2028年",
+  "summary": "中国共产党领导建立的社会主义国家，结束了中国近代以来的分裂局面。经历改革开放，实现快速发展，成为世界第二大经济体。",
+  "rulers": [
+    {
+      "title": "主席",
+      "name": "毛澤東",
+      "yearNames": [
+        {
+          "name": "改造",
+          "duration": "10",
+          "ganZhi": "己丑",
+          "changeMonth": "八月",
+          "startYear": "1949年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "主席",
+      "name": "刘少奇",
+      "yearNames": [
+        {
+          "name": "困難",
+          "duration": "9",
+          "ganZhi": "己亥",
+          "changeMonth": "三月",
+          "startYear": "1959年"
+        }
+      ],
+      "events": [
+        {
+          "description": "平定藏族地區叛亂",
+          "mapUrl": "Xu2008SuppressTibetanRebellion.txt"
+        }
+      ]
+    },
+    {
+      "title": "代主席",
+      "name": "董必武",
+      "yearNames": [
+        {
+          "name": "下鄉",
+          "duration": "7",
+          "ganZhi": "戊申",
+          "changeMonth": "九月",
+          "startYear": "1968年"
+        }
+      ],
+      "events": [
+        {
+          "description": "1973年中国政区",
+          "mapUrl": "hstrymap/PocketAtlasChina1973AdministrativeDivisions.png"
+        }
+      ]
+    },
+    {
+      "title": "委员长",
+      "name": "朱德",
+      "yearNames": [
+        {
+          "name": "清明",
+          "duration": "1",
+          "ganZhi": "甲寅",
+          "changeMonth": "十二月",
+          "startYear": "1975年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "委员长",
+      "name": "宋庆龄",
+      "yearNames": [
+        {
+          "name": "地震",
+          "duration": "2",
+          "ganZhi": "丙辰",
+          "changeMonth": "六月",
+          "startYear": "1976年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "委员长",
+      "name": "叶剑英",
+      "yearNames": [
+        {
+          "name": "開放",
+          "duration": "5",
+          "ganZhi": "戊午",
+          "changeMonth": "正月",
+          "startYear": "1978年"
+        }
+      ],
+      "events": [
+        {
+          "description": "鄧小平1980《黨和國家領導制度的改革》",
+          "mapUrl": "zi1liao4/deng8008.htm"
+        },
+        {
+          "description": "鄧小平1981《老幹部第一位的任務是選拔中青年幹部》",
+          "mapUrl": "zi1liao4/Deng8107.htm"
+        }
+      ]
+    },
+    {
+      "title": "主席",
+      "name": "李先念",
+      "yearNames": [
+        {
+          "name": "改革",
+          "duration": "5",
+          "ganZhi": "癸亥",
+          "changeMonth": "五月",
+          "startYear": "1983年"
+        }
+      ],
+      "events": [
+        {
+          "description": "鄧小平1985《社會主義和市場經濟不存在根本矛盾》",
+          "mapUrl": "zi1liao4/Deng8510.htm"
+        },
+        {
+          "description": "鄧小平1987《改革的步子要加快》",
+          "mapUrl": "zi1liao4/deng8706.htm"
+        }
+      ]
+    },
+    {
+      "title": "主席",
+      "name": "杨尚昆",
+      "yearNames": [
+        {
+          "name": "清場",
+          "duration": "5",
+          "ganZhi": "戊辰",
+          "changeMonth": "二月",
+          "startYear": "1988年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "主席",
+      "name": "江泽民",
+      "yearNames": [
+        {
+          "name": "代表",
+          "duration": "10",
+          "ganZhi": "癸酉",
+          "changeMonth": "三月",
+          "startYear": "1993年"
+        }
+      ],
+      "events": [
+        {
+          "description": "江澤民2001《在慶祝建黨八十週年大會上的講話》",
+          "mapUrl": "zi1liao4/Jiang017.htm"
+        }
+      ]
+    },
+    {
+      "title": "主席",
+      "name": "胡锦涛",
+      "yearNames": [
+        {
+          "name": "和諧",
+          "duration": "10",
+          "ganZhi": "癸未",
+          "changeMonth": "二月",
+          "startYear": "2003年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "主席",
+      "name": "習近平",
+      "yearNames": [
+        {
+          "name": "反腐",
+          "duration": "15",
+          "ganZhi": "癸巳",
+          "changeMonth": "二月",
+          "startYear": "2013年"
+        }
+      ],
+      "events": []
+    }
+  ]
+}

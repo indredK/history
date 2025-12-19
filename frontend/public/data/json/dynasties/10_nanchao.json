@@ -1,0 +1,425 @@
+{
+  "id": "nanchao",
+  "name": "南朝",
+  "period": "420年-589年",
+  "summary": "南北朝时期南方的四个朝代：宋、齐、梁、陈。政治相对稳定，经济文化发达，佛教兴盛，文学艺术繁荣。",
+  "dynasties": [
+    {
+      "id": "song_southern",
+      "name": "宋",
+      "period": "420年-479年",
+      "rulers": [
+        {
+          "title": "武帝",
+          "name": "刘裕",
+          "yearName": "永初",
+          "duration": "3",
+          "ganZhi": "庚申",
+          "changeMonth": "六月",
+          "startYear": "420年",
+          "events": [
+            {
+              "description": "南北朝宋,北魏",
+              "mapUrl": "hstrymap/04200479.jpg"
+            }
+          ]
+        },
+        {
+          "title": "少帝",
+          "name": "刘义符",
+          "yearName": "景平",
+          "duration": "2",
+          "ganZhi": "癸亥",
+          "changeMonth": "正月",
+          "startYear": "423年",
+          "events": []
+        },
+        {
+          "title": "文帝",
+          "name": "刘义隆",
+          "yearName": "元嘉",
+          "duration": "30",
+          "ganZhi": "甲子",
+          "changeMonth": "八月",
+          "startYear": "424年",
+          "events": []
+        },
+        {
+          "title": "孝武帝",
+          "name": "刘骏",
+          "yearNames": [
+            {
+              "name": "孝建",
+              "duration": "3",
+              "ganZhi": "甲午",
+              "changeMonth": "正月",
+              "startYear": "454年"
+            },
+            {
+              "name": "大明",
+              "duration": "8",
+              "ganZhi": "丁酉",
+              "changeMonth": "正月",
+              "startYear": "457年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "前废帝",
+          "name": "刘子业",
+          "yearNames": [
+            {
+              "name": "永光",
+              "duration": "1",
+              "ganZhi": "乙巳",
+              "changeMonth": "正月",
+              "startYear": "465年"
+            },
+            {
+              "name": "景和",
+              "duration": "1",
+              "ganZhi": "乙巳",
+              "changeMonth": "八月",
+              "startYear": "465年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "明帝",
+          "name": "刘彧",
+          "yearNames": [
+            {
+              "name": "泰始",
+              "duration": "7",
+              "ganZhi": "乙巳",
+              "changeMonth": "十二月",
+              "startYear": "465年"
+            },
+            {
+              "name": "泰豫",
+              "duration": "1",
+              "ganZhi": "壬子",
+              "changeMonth": "正月",
+              "startYear": "472年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "后废帝(苍梧王)",
+          "name": "刘昱",
+          "yearName": "元徽",
+          "duration": "5",
+          "ganZhi": "癸丑",
+          "changeMonth": "正月",
+          "startYear": "473年",
+          "events": []
+        },
+        {
+          "title": "顺帝",
+          "name": "刘凖",
+          "yearName": "昇明",
+          "duration": "3",
+          "ganZhi": "丁巳",
+          "changeMonth": "七月",
+          "startYear": "477年",
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "qi",
+      "name": "齐",
+      "period": "479年-502年",
+      "rulers": [
+        {
+          "title": "高帝",
+          "name": "萧道成",
+          "yearName": "建元",
+          "duration": "4",
+          "ganZhi": "己未",
+          "changeMonth": "四月",
+          "startYear": "479年",
+          "events": [
+            {
+              "description": "南北朝齐,北魏",
+              "mapUrl": "hstrymap/04790502.jpg"
+            }
+          ]
+        },
+        {
+          "title": "武帝",
+          "name": "萧赜",
+          "yearName": "永明",
+          "duration": "11",
+          "ganZhi": "癸亥",
+          "changeMonth": "正月",
+          "startYear": "483年",
+          "events": []
+        },
+        {
+          "title": "欎林王",
+          "name": "萧昭业",
+          "yearName": "隆昌",
+          "duration": "1",
+          "ganZhi": "甲戌",
+          "changeMonth": "正月",
+          "startYear": "494年",
+          "events": []
+        },
+        {
+          "title": "海陵王",
+          "name": "萧昭文",
+          "yearName": "延兴",
+          "duration": "1",
+          "ganZhi": "甲戌",
+          "changeMonth": "七月",
+          "startYear": "494年",
+          "events": []
+        },
+        {
+          "title": "明帝",
+          "name": "萧鸾",
+          "yearNames": [
+            {
+              "name": "建武",
+              "duration": "5",
+              "ganZhi": "甲戌",
+              "changeMonth": "十月",
+              "startYear": "494年"
+            },
+            {
+              "name": "永泰",
+              "duration": "1",
+              "ganZhi": "戊寅",
+              "changeMonth": "四月",
+              "startYear": "498年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "东昏侯",
+          "name": "萧宝卷",
+          "yearName": "永元",
+          "duration": "3",
+          "ganZhi": "己卯",
+          "changeMonth": "正月",
+          "startYear": "499年",
+          "events": []
+        },
+        {
+          "title": "和帝",
+          "name": "萧宝融",
+          "yearName": "中兴",
+          "duration": "2",
+          "ganZhi": "辛巳",
+          "changeMonth": "三月",
+          "startYear": "501年",
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "liang",
+      "name": "梁",
+      "period": "502年-557年",
+      "rulers": [
+        {
+          "title": "武帝",
+          "name": "萧衍",
+          "yearNames": [
+            {
+              "name": "天监",
+              "duration": "18",
+              "ganZhi": "壬午",
+              "changeMonth": "四月",
+              "startYear": "502年"
+            },
+            {
+              "name": "普通",
+              "duration": "8",
+              "ganZhi": "庚子",
+              "changeMonth": "正月",
+              "startYear": "520年"
+            },
+            {
+              "name": "大通",
+              "duration": "3",
+              "ganZhi": "丁未",
+              "changeMonth": "三月",
+              "startYear": "527年"
+            },
+            {
+              "name": "中大通",
+              "duration": "6",
+              "ganZhi": "己酉",
+              "changeMonth": "十月",
+              "startYear": "529年"
+            },
+            {
+              "name": "大同",
+              "duration": "12",
+              "ganZhi": "乙卯",
+              "changeMonth": "正月",
+              "startYear": "535年"
+            },
+            {
+              "name": "中大同",
+              "duration": "2",
+              "ganZhi": "丙寅",
+              "changeMonth": "四月",
+              "startYear": "546年"
+            },
+            {
+              "name": "太清",
+              "duration": "3",
+              "ganZhi": "丁卯",
+              "changeMonth": "四月",
+              "startYear": "547年",
+              "note": "*有的地区用至6年"
+            }
+          ],
+          "events": [
+            {
+              "description": "南北朝梁,东魏,西魏",
+              "mapUrl": "hstrymap/05020557.jpg"
+            }
+          ]
+        },
+        {
+          "title": "简文帝",
+          "name": "萧纲",
+          "yearNames": [
+            {
+              "name": "大宝",
+              "duration": "2",
+              "ganZhi": "庚午",
+              "changeMonth": "正月",
+              "startYear": "550年",
+              "note": "*有的地区用至3年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "元帝",
+          "name": "萧绎",
+          "yearName": "承圣",
+          "duration": "4",
+          "ganZhi": "壬申",
+          "changeMonth": "十一月",
+          "startYear": "552年",
+          "events": []
+        },
+        {
+          "title": "敬帝",
+          "name": "萧方智",
+          "yearNames": [
+            {
+              "name": "绍泰",
+              "duration": "2",
+              "ganZhi": "乙亥",
+              "changeMonth": "十月",
+              "startYear": "555年"
+            },
+            {
+              "name": "太平",
+              "duration": "2",
+              "ganZhi": "丙子",
+              "changeMonth": "九月",
+              "startYear": "556年"
+            }
+          ],
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "chen",
+      "name": "陈",
+      "period": "557年-589年",
+      "rulers": [
+        {
+          "title": "武帝",
+          "name": "陈霸先",
+          "yearName": "永定",
+          "duration": "3",
+          "ganZhi": "丁丑",
+          "changeMonth": "十月",
+          "startYear": "557年",
+          "events": [
+            {
+              "description": "南北朝陈,北齐,北周",
+              "mapUrl": "hstrymap/05570589.jpg"
+            }
+          ]
+        },
+        {
+          "title": "文帝",
+          "name": "陈蒨",
+          "yearNames": [
+            {
+              "name": "天嘉",
+              "duration": "7",
+              "ganZhi": "庚辰",
+              "changeMonth": "正月",
+              "startYear": "560年"
+            },
+            {
+              "name": "天康",
+              "duration": "1",
+              "ganZhi": "丙戌",
+              "changeMonth": "二月",
+              "startYear": "566年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "废帝(临海王)",
+          "name": "陈伯宗",
+          "yearName": "光大",
+          "duration": "2",
+          "ganZhi": "丁亥",
+          "changeMonth": "正月",
+          "startYear": "567年",
+          "events": []
+        },
+        {
+          "title": "宣帝",
+          "name": "陈顼",
+          "yearName": "太建",
+          "duration": "14",
+          "ganZhi": "己丑",
+          "changeMonth": "正月",
+          "startYear": "569年",
+          "events": []
+        },
+        {
+          "title": "后主",
+          "name": "陈叔宝",
+          "yearNames": [
+            {
+              "name": "至德",
+              "duration": "4",
+              "ganZhi": "癸卯",
+              "changeMonth": "正月",
+              "startYear": "583年"
+            },
+            {
+              "name": "祯明",
+              "duration": "3",
+              "ganZhi": "丁未",
+              "changeMonth": "正月",
+              "startYear": "587年"
+            }
+          ],
+          "events": []
+        }
+      ]
+    }
+  ]
+}

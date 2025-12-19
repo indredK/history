@@ -1,0 +1,289 @@
+{
+  "id": "ming",
+  "name": "明",
+  "period": "1368年-1644年",
+  "summary": "朱元璋建立的汉族王朝，推翻蒙元统治。永乐盛世时国力强盛，郑和下西洋展现海上实力。后期政治腐败，最终被清朝取代。",
+  "rulers": [
+    {
+      "title": "太祖",
+      "name": "朱元璋",
+      "yearNames": [
+        {
+          "name": "洪武",
+          "duration": "31",
+          "ganZhi": "戊申",
+          "changeMonth": "正月",
+          "startYear": "1368年"
+        }
+      ],
+      "events": [
+        {
+          "description": "明朝疆域",
+          "mapUrl": "hstrymap/13681644.jpg"
+        }
+      ]
+    },
+    {
+      "title": "惠帝",
+      "name": "朱允炆",
+      "yearNames": [
+        {
+          "name": "建文",
+          "duration": "4",
+          "ganZhi": "己卯",
+          "changeMonth": "正月",
+          "startYear": "1399年",
+          "note": "建文4年时成祖废除建文年号, 改为洪武35年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "成祖",
+      "name": "朱棣",
+      "yearNames": [
+        {
+          "name": "永乐",
+          "duration": "22",
+          "ganZhi": "癸未",
+          "changeMonth": "正月",
+          "startYear": "1403年"
+        }
+      ],
+      "events": [
+        {
+          "description": "郑和下西洋",
+          "mapUrl": "hstrymap/14051433.jpg"
+        },
+        {
+          "description": "奴儿干都司形势;永宁寺附近",
+          "mapUrl": "hstrymap/14091644.jpg"
+        },
+        {
+          "description": "明北京城",
+          "mapUrl": "hstrymap/14201644.jpg"
+        }
+      ]
+    },
+    {
+      "title": "仁宗",
+      "name": "朱高炽",
+      "yearNames": [
+        {
+          "name": "洪熙",
+          "duration": "1",
+          "ganZhi": "乙巳",
+          "changeMonth": "正月",
+          "startYear": "1425年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "宣宗",
+      "name": "朱瞻基",
+      "yearNames": [
+        {
+          "name": "宣德",
+          "duration": "10",
+          "ganZhi": "丙午",
+          "changeMonth": "正月",
+          "startYear": "1426年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "英宗",
+      "name": "朱祁镇",
+      "yearNames": [
+        {
+          "name": "正统",
+          "duration": "14",
+          "ganZhi": "丙辰",
+          "changeMonth": "正月",
+          "startYear": "1436年"
+        }
+      ],
+      "events": [
+        {
+          "description": "明朝长城",
+          "mapUrl": "hstrymap/13981644.jpg"
+        }
+      ]
+    },
+    {
+      "title": "代宗(景帝)",
+      "name": "朱祁钰",
+      "yearNames": [
+        {
+          "name": "景泰",
+          "duration": "8",
+          "ganZhi": "庚午",
+          "changeMonth": "正月",
+          "startYear": "1450年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "英宗",
+      "name": "朱祁镇",
+      "yearNames": [
+        {
+          "name": "天顺",
+          "duration": "8",
+          "ganZhi": "丁丑",
+          "changeMonth": "一月",
+          "startYear": "1457年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "宪宗",
+      "name": "朱见深",
+      "yearNames": [
+        {
+          "name": "成化",
+          "duration": "23",
+          "ganZhi": "乙酉",
+          "changeMonth": "正月",
+          "startYear": "1465年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "孝宗",
+      "name": "朱祐樘",
+      "yearNames": [
+        {
+          "name": "弘治",
+          "duration": "18",
+          "ganZhi": "戊申",
+          "changeMonth": "正月",
+          "startYear": "1488年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "武宗",
+      "name": "朱厚燳",
+      "yearNames": [
+        {
+          "name": "正德",
+          "duration": "16",
+          "ganZhi": "丙寅",
+          "changeMonth": "正月",
+          "startYear": "1506年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "世宗",
+      "name": "朱厚熜",
+      "yearNames": [
+        {
+          "name": "嘉靖",
+          "duration": "45",
+          "ganZhi": "壬午",
+          "changeMonth": "正月",
+          "startYear": "1522年"
+        }
+      ],
+      "events": [
+        {
+          "description": "倭寇侵扰和援朝战争",
+          "mapUrl": "hstrymap/15221598.jpg"
+        }
+      ]
+    },
+    {
+      "title": "穆宗",
+      "name": "朱载垕",
+      "yearNames": [
+        {
+          "name": "隆庆",
+          "duration": "6",
+          "ganZhi": "丁卯",
+          "changeMonth": "正月",
+          "startYear": "1567年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "神宗",
+      "name": "朱翊钧",
+      "yearNames": [
+        {
+          "name": "万历",
+          "duration": "48",
+          "ganZhi": "癸酉",
+          "changeMonth": "正月",
+          "startYear": "1573年"
+        }
+      ],
+      "events": [
+        {
+          "description": "明朝中后期工商业分布",
+          "mapUrl": "hstrymap/15221644.jpg"
+        },
+        {
+          "description": "洪應明《菜根譚》",
+          "mapUrl": "zi1liao4/菜根譚.txt"
+        }
+      ]
+    },
+    {
+      "title": "光宗",
+      "name": "朱常洛",
+      "yearNames": [
+        {
+          "name": "泰昌",
+          "duration": "1",
+          "ganZhi": "庚申",
+          "changeMonth": "八月",
+          "startYear": "1620年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "熹宗",
+      "name": "朱由校",
+      "yearNames": [
+        {
+          "name": "天启",
+          "duration": "7",
+          "ganZhi": "辛酉",
+          "changeMonth": "正月",
+          "startYear": "1621年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "思宗",
+      "name": "朱由检",
+      "yearNames": [
+        {
+          "name": "崇祯",
+          "duration": "17",
+          "ganZhi": "戊辰",
+          "changeMonth": "正月",
+          "startYear": "1628年"
+        }
+      ],
+      "events": [
+        {
+          "description": "明末农民战争",
+          "mapUrl": "hstrymap/16281644.jpg"
+        }
+      ]
+    }
+  ]
+}

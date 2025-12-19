@@ -1,0 +1,216 @@
+{
+  "id": "jin",
+  "name": "晋",
+  "period": "265年-420年",
+  "summary": "司马氏建立的王朝，分为西晋和东晋两个时期。西晋短暂统一全国，东晋偏安江南，淝水之战击败前秦，维护了南方汉族政权。",
+  "subDynasties": [
+    {
+      "id": "xijin",
+      "name": "西晋",
+      "period": "265年-317年",
+      "rulers": [
+        {
+          "title": "武帝",
+          "name": "司马炎",
+          "yearNames": [
+            {
+              "name": "泰始",
+              "duration": "10",
+              "ganZhi": "乙酉",
+              "changeMonth": "十二月",
+              "startYear": "265年"
+            },
+            {
+              "name": "咸宁",
+              "duration": "6",
+              "ganZhi": "乙未",
+              "changeMonth": "正月",
+              "startYear": "275年"
+            },
+            {
+              "name": "太康",
+              "duration": "10",
+              "ganZhi": "庚子",
+              "changeMonth": "四月",
+              "startYear": "280年"
+            },
+            {
+              "name": "太熙",
+              "duration": "1",
+              "ganZhi": "庚戌",
+              "changeMonth": "正月",
+              "startYear": "290年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "惠帝",
+          "name": "司马衷",
+          "yearName": "永熙",
+          "duration": "17",
+          "ganZhi": "庚戌",
+          "changeMonth": "四月",
+          "startYear": "290年",
+          "events": [
+            {
+              "description": "西晋境内内迁各族的分布及流民起义",
+              "mapUrl": "hstrymap/03010311.jpg"
+            },
+            {
+              "description": "东晋和十六国形势",
+              "mapUrl": "hstrymap/03040439.jpg"
+            }
+          ]
+        },
+        {
+          "title": "怀帝",
+          "name": "司马炽",
+          "yearName": "永嘉",
+          "duration": "7",
+          "ganZhi": "丁卯",
+          "changeMonth": "正月",
+          "startYear": "307年",
+          "events": []
+        },
+        {
+          "title": "愍帝",
+          "name": "司马邺",
+          "yearName": "建兴",
+          "duration": "5",
+          "ganZhi": "癸酉",
+          "changeMonth": "四月",
+          "startYear": "313年",
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "dongjin",
+      "name": "东晋",
+      "period": "317年-420年",
+      "rulers": [
+        {
+          "title": "元帝",
+          "name": "司马睿",
+          "yearName": "建武",
+          "duration": "6",
+          "ganZhi": "丁丑",
+          "changeMonth": "三月",
+          "startYear": "317年",
+          "events": []
+        },
+        {
+          "title": "明帝",
+          "name": "司马绍",
+          "yearName": "永昌",
+          "duration": "3",
+          "ganZhi": "壬午",
+          "changeMonth": "闰十一月",
+          "startYear": "322年",
+          "events": []
+        },
+        {
+          "title": "成帝",
+          "name": "司马衍",
+          "yearName": "太宁",
+          "duration": "17",
+          "ganZhi": "乙酉",
+          "changeMonth": "闰八月",
+          "startYear": "325年",
+          "events": []
+        },
+        {
+          "title": "康帝",
+          "name": "司马岳",
+          "yearName": "建元",
+          "duration": "2",
+          "ganZhi": "癸卯",
+          "changeMonth": "正月",
+          "startYear": "343年",
+          "events": []
+        },
+        {
+          "title": "穆帝",
+          "name": "司马聃",
+          "yearName": "永和",
+          "duration": "17",
+          "ganZhi": "乙巳",
+          "changeMonth": "正月",
+          "startYear": "345年",
+          "events": [
+            {
+              "description": "东晋,前秦形势",
+              "mapUrl": "hstrymap/03510394.jpg"
+            }
+          ]
+        },
+        {
+          "title": "哀帝",
+          "name": "司马丕",
+          "yearName": "隆和",
+          "duration": "4",
+          "ganZhi": "壬戌",
+          "changeMonth": "正月",
+          "startYear": "362年",
+          "events": []
+        },
+        {
+          "title": "海西公",
+          "name": "司马奕",
+          "yearName": "太和",
+          "duration": "6",
+          "ganZhi": "丙寅",
+          "changeMonth": "正月",
+          "startYear": "366年",
+          "events": []
+        },
+        {
+          "title": "简文帝",
+          "name": "司马昱",
+          "yearName": "咸安",
+          "duration": "2",
+          "ganZhi": "辛未",
+          "changeMonth": "十一月",
+          "startYear": "371年",
+          "events": []
+        },
+        {
+          "title": "孝武帝",
+          "name": "司马曜",
+          "yearName": "宁康",
+          "duration": "24",
+          "ganZhi": "癸酉",
+          "changeMonth": "正月",
+          "startYear": "373年",
+          "events": [
+            {
+              "description": "383年淝水之战",
+              "mapUrl": "hstrymap/03830383.jpg"
+            }
+          ]
+        },
+        {
+          "title": "安帝",
+          "name": "司马德宗",
+          "yearName": "隆安",
+          "duration": "22",
+          "ganZhi": "丁酉",
+          "changeMonth": "正月",
+          "startYear": "397年",
+          "events": []
+        },
+        {
+          "title": "恭帝",
+          "name": "司马德文",
+          "yearName": "元熙",
+          "duration": "2",
+          "ganZhi": "己未",
+          "changeMonth": "正月",
+          "startYear": "419年",
+          "events": []
+        }
+      ]
+    }
+  ]
+}

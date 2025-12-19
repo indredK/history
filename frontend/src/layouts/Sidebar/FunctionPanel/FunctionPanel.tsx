@@ -1,5 +1,5 @@
 import { Box, Fade } from "@mui/material";
-import { TimelineFunctions, MapFunctions, PeopleFunctions, CultureFunctions } from "./";
+import { TimelineFunctions, MapFunctions, PeopleFunctions, CultureFunctions, DynastiesFunctions } from "./";
 import "./FunctionPanel.css";
 
 interface FunctionPanelProps {
@@ -11,6 +11,8 @@ export function FunctionPanel({ activeTab }: FunctionPanelProps) {
     switch (activeTab) {
       case "timeline":
         return <TimelineFunctions />;
+      case "dynasties":
+        return <DynastiesFunctions />;
       case "map":
         return <MapFunctions />;
       case "people":

@@ -1,0 +1,238 @@
+{
+  "id": "liao",
+  "name": "辽",
+  "period": "907年-1125年",
+  "note": "耶律氏,契丹族建立",
+  "summary": "契丹族建立的王朝，与北宋长期对峙。实行南北面官制，融合游牧与农耕文化，控制燕云十六州，最终被金朝所灭。",
+  "rulers": [
+    {
+      "title": "太祖",
+      "name": "耶律阿保机",
+      "yearNames": [
+        {
+          "name": "-",
+          "duration": "10",
+          "ganZhi": "丁卯",
+          "changeMonth": "正月",
+          "startYear": "907年",
+          "note": "辽建国于907年, 国号契丹"
+        },
+        {
+          "name": "神册",
+          "duration": "7",
+          "ganZhi": "丙子",
+          "changeMonth": "十二月",
+          "startYear": "916年",
+          "note": "916年始建年号"
+        },
+        {
+          "name": "天赞",
+          "duration": "5",
+          "ganZhi": "壬午",
+          "changeMonth": "二月",
+          "startYear": "922年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "太宗",
+      "name": "耶律德光",
+      "yearNames": [
+        {
+          "name": "天显",
+          "duration": "13",
+          "ganZhi": "丙戌",
+          "changeMonth": "二月",
+          "startYear": "926年"
+        },
+        {
+          "name": "会同",
+          "duration": "10",
+          "ganZhi": "戊戌",
+          "changeMonth": "十一月",
+          "startYear": "938年",
+          "note": "938年(一说947年)改国号为辽"
+        },
+        {
+          "name": "大同",
+          "duration": "1",
+          "ganZhi": "丁未",
+          "changeMonth": "二月",
+          "startYear": "947年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "世宗",
+      "name": "耶律阮",
+      "yearNames": [
+        {
+          "name": "天禄",
+          "duration": "5",
+          "ganZhi": "丁未",
+          "changeMonth": "九月",
+          "startYear": "947年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "穆宗",
+      "name": "耶律璟",
+      "yearNames": [
+        {
+          "name": "应历",
+          "duration": "19",
+          "ganZhi": "辛亥",
+          "changeMonth": "九月",
+          "startYear": "951年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "景宗",
+      "name": "耶律贤",
+      "yearNames": [
+        {
+          "name": "保宁",
+          "duration": "11",
+          "ganZhi": "己巳",
+          "changeMonth": "二月",
+          "startYear": "969年"
+        },
+        {
+          "name": "乾亨",
+          "duration": "5",
+          "ganZhi": "己卯",
+          "changeMonth": "十一月",
+          "startYear": "979年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "圣宗",
+      "name": "耶律隆绪",
+      "yearNames": [
+        {
+          "name": "统和",
+          "duration": "30",
+          "ganZhi": "癸未",
+          "changeMonth": "六月",
+          "startYear": "983年",
+          "note": "983年复称契丹"
+        },
+        {
+          "name": "开泰",
+          "duration": "10",
+          "ganZhi": "壬子",
+          "changeMonth": "十一月",
+          "startYear": "1012年"
+        },
+        {
+          "name": "太平",
+          "duration": "11",
+          "ganZhi": "辛酉",
+          "changeMonth": "十一月",
+          "startYear": "1021年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "兴宗",
+      "name": "耶律宗真",
+      "yearNames": [
+        {
+          "name": "景福",
+          "duration": "2",
+          "ganZhi": "辛未",
+          "changeMonth": "六月",
+          "startYear": "1031年"
+        },
+        {
+          "name": "重熙",
+          "duration": "24",
+          "ganZhi": "壬申",
+          "changeMonth": "十一月",
+          "startYear": "1032年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "道宗",
+      "name": "耶律洪基",
+      "yearNames": [
+        {
+          "name": "清宁",
+          "duration": "10",
+          "ganZhi": "乙未",
+          "changeMonth": "八月",
+          "startYear": "1055年"
+        },
+        {
+          "name": "咸雍",
+          "duration": "10",
+          "ganZhi": "乙巳",
+          "changeMonth": "正月",
+          "startYear": "1065年",
+          "note": "1066年仍称辽"
+        },
+        {
+          "name": "大(太)康",
+          "duration": "10",
+          "ganZhi": "乙卯",
+          "changeMonth": "正月",
+          "startYear": "1075年"
+        },
+        {
+          "name": "大安",
+          "duration": "10",
+          "ganZhi": "乙丑",
+          "changeMonth": "正月",
+          "startYear": "1085年"
+        },
+        {
+          "name": "寿昌(隆)",
+          "duration": "7",
+          "ganZhi": "乙亥",
+          "changeMonth": "正月",
+          "startYear": "1095年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "天祚帝",
+      "name": "耶律延禧",
+      "yearNames": [
+        {
+          "name": "乾统",
+          "duration": "10",
+          "ganZhi": "辛巳",
+          "changeMonth": "二月",
+          "startYear": "1101年"
+        },
+        {
+          "name": "天庆",
+          "duration": "10",
+          "ganZhi": "辛卯",
+          "changeMonth": "正月",
+          "startYear": "1111年"
+        },
+        {
+          "name": "保大",
+          "duration": "5",
+          "ganZhi": "辛丑",
+          "changeMonth": "正月",
+          "startYear": "1121年"
+        }
+      ],
+      "events": []
+    }
+  ]
+}

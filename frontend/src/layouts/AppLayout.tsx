@@ -1,10 +1,11 @@
-import { Suspense, useState } from 'react';
+import { Suspense } from 'react';
 import { Box } from '@mui/material';
 import { useLocation, Routes, Route, Navigate } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Footer } from './Footer';
 import { useDynastyStore } from '@/store';
 import { useDynastyImage } from '@/hooks/useDynastyImage';
+import { useSidebar } from '@/hooks';
 import { routes } from '@/router/routes';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import { dynastyUtils } from '@/config';
@@ -13,7 +14,7 @@ export function AppLayout() {
   const location = useLocation();
   const { selectedDynasty } = useDynastyStore();
   const { imageUrl: dynastyBackgroundUrl } = useDynastyImage(selectedDynasty?.id ?? null);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const { collapsed: sidebarCollapsed, toggle: toggleSidebar } = useSidebar();
 
   // 根据路径确定当前活跃的标签
   const getActiveTabFromPath = (pathname: string): string => {
@@ -33,9 +34,7 @@ export function AppLayout() {
   const bgColor = dynastyUtils.getBackgroundColor(dynastyColor);
   const gradientBackground = dynastyUtils.getGradientBackground(dynastyColor);
 
-  const toggleSidebar = () => {
-    setSidebarCollapsed(!sidebarCollapsed);
-  };
+
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }} className="app">

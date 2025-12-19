@@ -1,0 +1,341 @@
+{
+  "id": "xihan",
+  "name": "西汉",
+  "period": "前206年-公元25年",
+  "summary": "刘邦建立的汉朝前期，定都长安。文景之治、汉武盛世为其鼎盛时期，开辟丝绸之路，奠定了汉民族的文化基础。",
+  "rulers": [
+    {
+      "title": "高帝",
+      "name": "刘邦",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "12",
+          "ganZhi": "乙未",
+          "changeMonth": "",
+          "startYear": "前206年"
+        }
+      ],
+      "events": [
+        {
+          "description": "项羽,刘邦楚汉战争",
+          "mapUrl": "hstrymap/b206b202.jpg"
+        }
+      ]
+    },
+    {
+      "title": "惠帝",
+      "name": "刘盈",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "7",
+          "ganZhi": "丁未",
+          "changeMonth": "",
+          "startYear": "前194年"
+        }
+      ],
+      "events": [
+        {
+          "description": "西汉疆域",
+          "mapUrl": "hstrymap/b2060025.jpg"
+        }
+      ]
+    },
+    {
+      "title": "高后",
+      "name": "吕雉",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "8",
+          "ganZhi": "甲寅",
+          "changeMonth": "",
+          "startYear": "前187年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "文帝",
+      "name": "刘恒",
+      "yearNames": [
+        {
+          "name": "后元",
+          "duration": "7",
+          "ganZhi": "戊戌",
+          "changeMonth": "正月",
+          "startYear": "前163年"
+        },
+        {
+          "name": "",
+          "duration": "7",
+          "ganZhi": "乙酉",
+          "changeMonth": "",
+          "startYear": "前156年"
+        }
+      ],
+      "events": [
+        {
+          "description": "西汉前期形势,七国之乱",
+          "mapUrl": "hstrymap/b206b140.jpg"
+        }
+      ]
+    },
+    {
+      "title": "景帝",
+      "name": "刘启",
+      "yearNames": [
+        {
+          "name": "中元",
+          "duration": "6",
+          "ganZhi": "壬辰",
+          "changeMonth": "正月",
+          "startYear": "前149年"
+        },
+        {
+          "name": "后元",
+          "duration": "3",
+          "ganZhi": "戊戌",
+          "changeMonth": "正月",
+          "startYear": "前143年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "武帝",
+      "name": "刘彻",
+      "yearNames": [
+        {
+          "name": "建元",
+          "duration": "6",
+          "ganZhi": "辛丑",
+          "changeMonth": "",
+          "startYear": "前140年"
+        },
+        {
+          "name": "元光",
+          "duration": "6",
+          "ganZhi": "丁未",
+          "changeMonth": "正月",
+          "startYear": "前134年"
+        },
+        {
+          "name": "元朔",
+          "duration": "6",
+          "ganZhi": "癸丑",
+          "changeMonth": "正月",
+          "startYear": "前128年"
+        },
+        {
+          "name": "元狩",
+          "duration": "6",
+          "ganZhi": "己未",
+          "changeMonth": "正月",
+          "startYear": "前122年"
+        },
+        {
+          "name": "元鼎",
+          "duration": "6",
+          "ganZhi": "乙丑",
+          "changeMonth": "正月",
+          "startYear": "前116年"
+        },
+        {
+          "name": "元封",
+          "duration": "6",
+          "ganZhi": "辛未",
+          "changeMonth": "正月",
+          "startYear": "前110年"
+        },
+        {
+          "name": "太初",
+          "duration": "4",
+          "ganZhi": "丁丑",
+          "changeMonth": "正月",
+          "startYear": "前104年"
+        },
+        {
+          "name": "天汉",
+          "duration": "4",
+          "ganZhi": "辛巳",
+          "changeMonth": "正月",
+          "startYear": "前100年"
+        },
+        {
+          "name": "太始",
+          "duration": "4",
+          "ganZhi": "乙酉",
+          "changeMonth": "正月",
+          "startYear": "前96年"
+        },
+        {
+          "name": "征和",
+          "duration": "4",
+          "ganZhi": "己丑",
+          "changeMonth": "正月",
+          "startYear": "前92年"
+        },
+        {
+          "name": "后元",
+          "duration": "2",
+          "ganZhi": "癸巳",
+          "changeMonth": "正月",
+          "startYear": "前88年"
+        }
+      ],
+      "events": [
+        {
+          "description": "西汉同匈奴的战争和张骞出使西域",
+          "mapUrl": "hstrymap/b138b060.jpg"
+        }
+      ]
+    },
+    {
+      "title": "昭帝",
+      "name": "刘弗陵",
+      "yearNames": [
+        {
+          "name": "始元",
+          "duration": "6",
+          "ganZhi": "乙未",
+          "changeMonth": "八月",
+          "startYear": "前86年"
+        },
+        {
+          "name": "元凤",
+          "duration": "6",
+          "ganZhi": "辛丑",
+          "changeMonth": "正月",
+          "startYear": "前80年"
+        },
+        {
+          "name": "元平",
+          "duration": "1",
+          "ganZhi": "丁未",
+          "changeMonth": "正月",
+          "startYear": "前74年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "宣帝",
+      "name": "刘询",
+      "yearNames": [
+        {
+          "name": "本始",
+          "duration": "4",
+          "ganZhi": "戊申",
+          "changeMonth": "正月",
+          "startYear": "前73年"
+        },
+        {
+          "name": "地节",
+          "duration": "4",
+          "ganZhi": "壬子",
+          "changeMonth": "正月",
+          "startYear": "前69年"
+        },
+        {
+          "name": "元康",
+          "duration": "5",
+          "ganZhi": "丙辰",
+          "changeMonth": "正月",
+          "startYear": "前65年"
+        }
+      ],
+      "events": [
+        {
+          "description": "丝绸之路",
+          "mapUrl": "hstrymap/b1190220.jpg"
+        }
+      ]
+    },
+    {
+      "title": "元帝",
+      "name": "刘奭",
+      "yearName": "初元",
+      "duration": "16",
+      "ganZhi": "癸酉",
+      "changeMonth": "正月",
+      "startYear": "前48年",
+      "events": []
+    },
+    {
+      "title": "成帝",
+      "name": "刘骜",
+      "yearName": "建始",
+      "duration": "26",
+      "ganZhi": "己丑",
+      "changeMonth": "正月",
+      "startYear": "前32年",
+      "events": []
+    },
+    {
+      "title": "哀帝",
+      "name": "刘欣",
+      "yearName": "建平",
+      "duration": "6",
+      "ganZhi": "乙卯",
+      "changeMonth": "正月",
+      "startYear": "前6年",
+      "events": []
+    },
+    {
+      "title": "平帝",
+      "name": "刘衎",
+      "yearName": "元始",
+      "duration": "5",
+      "ganZhi": "辛酉",
+      "changeMonth": "正月",
+      "startYear": "公元1年",
+      "events": []
+    },
+    {
+      "title": "孺子婴",
+      "name": "",
+      "yearName": "居摄",
+      "duration": "4",
+      "ganZhi": "丙寅",
+      "changeMonth": "正月",
+      "startYear": "6年",
+      "events": [
+        {
+          "description": "王莽摄政"
+        }
+      ]
+    },
+    {
+      "title": "王莽",
+      "name": "",
+      "yearName": "始建国",
+      "duration": "15",
+      "ganZhi": "己巳",
+      "changeMonth": "正月",
+      "startYear": "9年",
+      "events": [
+        {
+          "description": "新朝 绿林赤眉起义",
+          "mapUrl": "hstrymap/00170023.jpg"
+        }
+      ]
+    },
+    {
+      "title": "更始帝",
+      "name": "刘玄",
+      "yearName": "更始",
+      "duration": "3",
+      "ganZhi": "癸未",
+      "changeMonth": "二月",
+      "startYear": "23年",
+      "events": [
+        {
+          "description": "昆阳之战",
+          "mapUrl": "hstrymap/00170023.jpg"
+        }
+      ]
+    }
+  ]
+}

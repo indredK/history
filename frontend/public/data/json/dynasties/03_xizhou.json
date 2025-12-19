@@ -1,0 +1,195 @@
+{
+  "id": "xizhou",
+  "name": "西周",
+  "period": "前1046年-前771年",
+  "summary": "周武王建立的王朝，推翻商朝统治。实行分封制和宗法制，奠定了中国古代政治制度基础。文化繁荣，青铜器制作达到高峰。",
+  "rulers": [
+    {
+      "title": "武王",
+      "name": "姬发",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "4",
+          "ganZhi": "乙未",
+          "changeMonth": "",
+          "startYear": "前1046年"
+        }
+      ],
+      "events": [
+        {
+          "description": "西周初期形势及主要诸侯国",
+          "mapUrl": "hstrymap/bc11b771.jpg"
+        }
+      ]
+    },
+    {
+      "title": "成王",
+      "name": "姬诵",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "22",
+          "ganZhi": "己亥",
+          "changeMonth": "",
+          "startYear": "前1042年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "康王",
+      "name": "姬钊",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "25",
+          "ganZhi": "辛酉",
+          "changeMonth": "",
+          "startYear": "前1020年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "昭王",
+      "name": "姬瑕",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "19",
+          "ganZhi": "丙戌",
+          "changeMonth": "",
+          "startYear": "前995年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "穆王",
+      "name": "姬满",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "55",
+          "ganZhi": "乙巳",
+          "changeMonth": "",
+          "startYear": "前976年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "共王",
+      "name": "姬繄扈",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "23",
+          "ganZhi": "已亥",
+          "changeMonth": "",
+          "startYear": "前922年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "懿王",
+      "name": "姬囏",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "8",
+          "ganZhi": "壬戌",
+          "changeMonth": "",
+          "startYear": "前899年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "孝王",
+      "name": "姬辟方",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "6",
+          "ganZhi": "庚午",
+          "changeMonth": "",
+          "startYear": "前891年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "夷王",
+      "name": "姬夑",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "8",
+          "ganZhi": "丙子",
+          "changeMonth": "",
+          "startYear": "前885年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "厉王",
+      "name": "姬胡",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "37",
+          "ganZhi": "甲申",
+          "changeMonth": "",
+          "startYear": "前877年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "共和",
+      "name": "",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "14",
+          "ganZhi": "庚申",
+          "changeMonth": "",
+          "startYear": "前841年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "宣王",
+      "name": "姬静",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "46",
+          "ganZhi": "甲戌",
+          "changeMonth": "",
+          "startYear": "前827年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "幽王",
+      "name": "姬宫湦",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "11",
+          "ganZhi": "庚申",
+          "changeMonth": "",
+          "startYear": "前781年"
+        }
+      ],
+      "events": []
+    }
+  ]
+}

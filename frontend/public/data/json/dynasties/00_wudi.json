@@ -1,0 +1,68 @@
+{
+  "id": "wudi",
+  "name": "五帝",
+  "period": "约前26世纪初-约前2070年",
+  "summary": "中国古代传说中的五位圣王：黄帝、颛顼、帝喾、尧、舜。代表中华文明的起源，奠定了华夏民族的文化基础。",
+  "rulers": [
+    {
+      "title": "黄帝",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": [
+        {
+          "description": "中国原始人群,氏族公社遗址分布",
+          "mapUrl": "hstrymap/bc99bc67.jpg"
+        }
+      ]
+    },
+    {
+      "title": "颛顼",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": [
+        {
+          "description": "原始社会部落分布",
+          "mapUrl": "hstrymap/bc26bc21.jpg"
+        }
+      ]
+    },
+    {
+      "title": "帝喾",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "尧",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "舜",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    }
+  ]
+}

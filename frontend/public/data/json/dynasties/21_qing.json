@@ -1,0 +1,215 @@
+{
+  "id": "qing",
+  "name": "清",
+  "period": "1616年-1911年",
+  "note": "爱新觉罗氏,满族建立",
+  "summary": "满族建立的最后一个封建王朝，疆域空前辽阔。康乾盛世达到鼎盛，后因闭关锁国政策落后于世界，最终在辛亥革命中覆灭。",
+  "rulers": [
+    {
+      "title": "太祖",
+      "name": "爱新觉罗努尔哈赤",
+      "yearNames": [
+        {
+          "name": "天命",
+          "duration": "11",
+          "ganZhi": "丙辰",
+          "changeMonth": "正月",
+          "startYear": "1616年",
+          "note": "称后金"
+        }
+      ],
+      "events": [
+        {
+          "description": "明初女真族分布;满族兴起",
+          "mapUrl": "hstrymap/16161644.jpg"
+        }
+      ]
+    },
+    {
+      "title": "太宗",
+      "name": "爱新觉罗皇太极",
+      "yearNames": [
+        {
+          "name": "天聪",
+          "duration": "10",
+          "ganZhi": "丁卯",
+          "changeMonth": "正月",
+          "startYear": "1627年"
+        },
+        {
+          "name": "崇德",
+          "duration": "8",
+          "ganZhi": "丙子",
+          "changeMonth": "四月",
+          "startYear": "1636年",
+          "note": "始改国号为清"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "世宗",
+      "name": "爱新觉罗福临",
+      "yearNames": [
+        {
+          "name": "顺治",
+          "duration": "18",
+          "ganZhi": "甲申",
+          "changeMonth": "正月",
+          "startYear": "1644年",
+          "note": "入关"
+        }
+      ],
+      "events": [
+        {
+          "description": "郑成功收复台湾",
+          "mapUrl": "hstrymap/16611684.jpg"
+        }
+      ]
+    },
+    {
+      "title": "圣祖",
+      "name": "爱新觉罗玄烨",
+      "yearNames": [
+        {
+          "name": "康熙",
+          "duration": "61",
+          "ganZhi": "壬寅",
+          "changeMonth": "正月",
+          "startYear": "1662年"
+        }
+      ],
+      "events": [
+        {
+          "description": "清朝疆域",
+          "mapUrl": "hstrymap/16441840.jpg"
+        },
+        {
+          "description": "清初抗击沙俄侵略;尼布楚条约",
+          "mapUrl": "hstrymap/16431689.jpg"
+        },
+        {
+          "description": "清前期巩固西北",
+          "mapUrl": "hstrymap/16901759.jpg"
+        }
+      ]
+    },
+    {
+      "title": "世宗",
+      "name": "爱新觉罗胤禛",
+      "yearNames": [
+        {
+          "name": "雍正",
+          "duration": "13",
+          "ganZhi": "癸卯",
+          "changeMonth": "正月",
+          "startYear": "1723年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "高宗",
+      "name": "爱新觉罗弘历",
+      "yearNames": [
+        {
+          "name": "乾隆",
+          "duration": "60",
+          "ganZhi": "丙辰",
+          "changeMonth": "正月",
+          "startYear": "1736年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "仁宗",
+      "name": "爱新觉罗颙琰",
+      "yearNames": [
+        {
+          "name": "嘉庆",
+          "duration": "25",
+          "ganZhi": "丙辰",
+          "changeMonth": "正月",
+          "startYear": "1796年"
+        }
+      ],
+      "events": [
+        {
+          "description": "清朝中期苗民起义和白莲教起义",
+          "mapUrl": "hstrymap/17951806.jpg"
+        }
+      ]
+    },
+    {
+      "title": "宣宗",
+      "name": "爱新觉罗旻宁",
+      "yearNames": [
+        {
+          "name": "道光",
+          "duration": "30",
+          "ganZhi": "辛巳",
+          "changeMonth": "正月",
+          "startYear": "1821年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "文宗",
+      "name": "爱新觉罗奕苎",
+      "yearNames": [
+        {
+          "name": "咸丰",
+          "duration": "11",
+          "ganZhi": "辛亥",
+          "changeMonth": "正月",
+          "startYear": "1851年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "穆宗",
+      "name": "爱新觉罗载淳",
+      "yearNames": [
+        {
+          "name": "同治",
+          "duration": "13",
+          "ganZhi": "壬戌",
+          "changeMonth": "正月",
+          "startYear": "1862年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "德宗",
+      "name": "爱新觉罗载湉",
+      "yearNames": [
+        {
+          "name": "光绪",
+          "duration": "34",
+          "ganZhi": "乙亥",
+          "changeMonth": "正月",
+          "startYear": "1875年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "末帝",
+      "name": "爱新觉罗溥仪",
+      "yearNames": [
+        {
+          "name": "宣统",
+          "duration": "3",
+          "ganZhi": "己酉",
+          "changeMonth": "正月",
+          "startYear": "1909年"
+        }
+      ],
+      "events": []
+    }
+  ]
+}

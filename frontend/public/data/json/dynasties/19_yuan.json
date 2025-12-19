@@ -1,0 +1,232 @@
+{
+  "id": "yuan",
+  "name": "元",
+  "period": "1206年-1368年",
+  "note": "孛儿只斤氏,蒙古族建立",
+  "summary": "蒙古族建立的统一王朝，疆域空前辽阔，横跨欧亚大陆。促进了东西方文化交流，但统治后期政治腐败，最终被明朝推翻。",
+  "rulers": [
+    {
+      "title": "太祖",
+      "name": "孛儿只斤铁木真(成吉思汗)",
+      "yearName": "",
+      "duration": "22",
+      "ganZhi": "丙寅",
+      "changeMonth": "正月",
+      "startYear": "1206年",
+      "events": [
+        {
+          "description": "蒙古兴起;成吉思汗西征",
+          "mapUrl": "hstrymap/12051227.jpg"
+        }
+      ]
+    },
+    {
+      "title": "拖雷",
+      "name": "监国",
+      "yearName": "",
+      "duration": "1",
+      "ganZhi": "戊子",
+      "changeMonth": "正月",
+      "startYear": "1228年",
+      "events": []
+    },
+    {
+      "title": "太宗",
+      "name": "孛儿只斤窝阔台",
+      "yearName": "",
+      "duration": "13",
+      "ganZhi": "己丑",
+      "changeMonth": "正月",
+      "startYear": "1229年",
+      "events": []
+    },
+    {
+      "title": "乃马真后",
+      "name": "称制",
+      "yearName": "",
+      "duration": "5",
+      "ganZhi": "壬寅",
+      "changeMonth": "正月",
+      "startYear": "1242年",
+      "events": []
+    },
+    {
+      "title": "定宗",
+      "name": "孛儿只斤贵由",
+      "yearName": "",
+      "duration": "3",
+      "ganZhi": "丙午",
+      "changeMonth": "七月",
+      "startYear": "1246年",
+      "events": []
+    },
+    {
+      "title": "海迷失后",
+      "name": "称制",
+      "yearName": "",
+      "duration": "3",
+      "ganZhi": "己酉",
+      "changeMonth": "三月",
+      "startYear": "1249年",
+      "events": []
+    },
+    {
+      "title": "宪宗",
+      "name": "孛儿只斤蒙哥",
+      "yearName": "",
+      "duration": "9",
+      "ganZhi": "辛亥",
+      "changeMonth": "六月",
+      "startYear": "1251年",
+      "events": []
+    },
+    {
+      "title": "世祖",
+      "name": "孛儿只斤忽必烈",
+      "yearNames": [
+        {
+          "name": "中统",
+          "duration": "5",
+          "ganZhi": "庚申",
+          "changeMonth": "五月",
+          "startYear": "1260年"
+        },
+        {
+          "name": "至元",
+          "duration": "31",
+          "ganZhi": "甲子",
+          "changeMonth": "八月",
+          "startYear": "1264年"
+        }
+      ],
+      "events": [
+        {
+          "description": "1271年忽必烈定国号为元, 1279年灭南宋"
+        }
+      ]
+    },
+    {
+      "title": "成宗",
+      "name": "孛儿只斤铁穆耳",
+      "yearName": "元贞",
+      "duration": "13",
+      "ganZhi": "乙未",
+      "changeMonth": "正月",
+      "startYear": "1295年",
+      "events": [
+        {
+          "description": "元朝疆域;岭北行省北部",
+          "mapUrl": "hstrymap/12791368.jpg"
+        },
+        {
+          "description": "元大都城",
+          "mapUrl": "hstrymap/12641368.jpg"
+        }
+      ]
+    },
+    {
+      "title": "武宗",
+      "name": "孛儿只斤海山",
+      "yearName": "至大",
+      "duration": "4",
+      "ganZhi": "戊申",
+      "changeMonth": "正月",
+      "startYear": "1308年",
+      "events": [
+        {
+          "description": "元朝运河和海运",
+          "mapUrl": "hstrymap/12801368.jpg"
+        }
+      ]
+    },
+    {
+      "title": "仁宗",
+      "name": "孛儿只斤爱力育黎拔力八达",
+      "yearName": "皇庆",
+      "duration": "9",
+      "ganZhi": "壬子",
+      "changeMonth": "正月",
+      "startYear": "1312年",
+      "events": []
+    },
+    {
+      "title": "英宗",
+      "name": "孛儿只斤硕德八剌",
+      "yearName": "至治",
+      "duration": "3",
+      "ganZhi": "辛酉",
+      "changeMonth": "正月",
+      "startYear": "1321年",
+      "events": []
+    },
+    {
+      "title": "泰定帝",
+      "name": "孛儿只斤也孙铁木儿",
+      "yearName": "泰定",
+      "duration": "5",
+      "ganZhi": "甲子",
+      "changeMonth": "正月",
+      "startYear": "1324年",
+      "events": []
+    },
+    {
+      "title": "天顺帝",
+      "name": "孛儿只斤阿速吉八",
+      "yearName": "天顺",
+      "duration": "1",
+      "ganZhi": "戊辰",
+      "changeMonth": "九月",
+      "startYear": "1328年",
+      "events": []
+    },
+    {
+      "title": "文宗",
+      "name": "孛儿只斤图帖睦尔",
+      "yearName": "天历",
+      "duration": "5",
+      "ganZhi": "戊辰",
+      "changeMonth": "九月",
+      "startYear": "1328年",
+      "events": []
+    },
+    {
+      "title": "明宗",
+      "name": "孛儿只斤和世喇",
+      "yearName": "天历",
+      "duration": "1",
+      "ganZhi": "己巳",
+      "changeMonth": "正月",
+      "startYear": "1329年",
+      "events": [
+        {
+          "description": "明宗于己巳正月即位, 以文宗为皇太子. 八月明宗暴死, 文宗复位"
+        }
+      ]
+    },
+    {
+      "title": "宁宗",
+      "name": "孛儿只斤懿璘质班",
+      "yearName": "至顺",
+      "duration": "1",
+      "ganZhi": "壬申",
+      "changeMonth": "十月",
+      "startYear": "1332年",
+      "events": []
+    },
+    {
+      "title": "顺帝",
+      "name": "孛儿只斤妥懽帖睦尔",
+      "yearName": "至顺",
+      "duration": "36",
+      "ganZhi": "癸酉",
+      "changeMonth": "六月",
+      "startYear": "1333年",
+      "events": [
+        {
+          "description": "元末农民战争",
+          "mapUrl": "hstrymap/13511368.jpg"
+        }
+      ]
+    }
+  ]
+}

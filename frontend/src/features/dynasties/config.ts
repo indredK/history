@@ -10,11 +10,11 @@ export interface ColumnConfig {
 
 // 表格列配置
 export const columns: ColumnConfig[] = [
-  { key: 'dynasty', label: '朝代/时期', width: '120px', align: 'center' },
-  { key: 'title', label: '帝王名号', width: '90px', align: 'center' },
-  { key: 'name', label: '本名姓氏', width: '110px', align: 'center' },
-  { key: 'yearName', label: '年号名称', width: '90px', align: 'center' },
-  { key: 'duration', label: '在位年数', width: '80px', align: 'center' },
+  { key: 'dynasty', label: '朝代', width: '120px', align: 'center' },
+  { key: 'title', label: '名号', width: '90px', align: 'center' },
+  { key: 'name', label: '姓名', width: '110px', align: 'center' },
+  { key: 'yearName', label: '年号', width: '90px', align: 'center' },
+  { key: 'duration', label: '使用年数', width: '80px', align: 'center' },
   { key: 'ganZhi', label: '元年干支', width: '80px', align: 'center' },
   { key: 'changeMonth', label: '改元月份', width: '90px', align: 'center' },
   { key: 'startYear', label: '公元纪年', width: '110px', align: 'center' },
@@ -113,6 +113,38 @@ export const tableStyles = {
     display: 'flex', 
     alignItems: 'center',
     gap: 0.5
+  },
+  
+  // 朝代标题行样式
+  dynastyHeaderRow: {
+    backgroundColor: '#f5f5f5',
+    borderLeft: '4px solid #1976d2',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease-in-out',
+    '&:hover': {
+      backgroundColor: '#e8f5e8',
+      borderLeftColor: '#1565c0',
+      transform: 'translateX(1px)'
+    }
+  },
+  
+  // 朝代标题单元格样式
+  dynastyHeaderCell: {
+    backgroundColor: '#e8f5e8',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    transition: 'all 0.2s ease-in-out',
+    '&:hover': {
+      backgroundColor: '#d4edda',
+      transform: 'translateX(2px)',
+      boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+    }
+  },
+  
+  // 展开/收起图标样式
+  expandIcon: {
+    transition: 'transform 0.2s ease-in-out',
+    color: '#1976d2'
   }
 };
 

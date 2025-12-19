@@ -1,0 +1,249 @@
+{
+  "id": "nansong",
+  "name": "南宋",
+  "period": "1127年-1279年",
+  "summary": "北宋灭亡后赵构建立的偏安政权，定都临安。经济繁荣，理学兴盛，科技发达，但军事上长期与金、蒙古对峙，最终被元朝所灭。",
+  "rulers": [
+    {
+      "title": "高宗",
+      "name": "赵构",
+      "yearNames": [
+        {
+          "name": "建炎",
+          "duration": "4",
+          "ganZhi": "丁未",
+          "changeMonth": "五月",
+          "startYear": "1127年"
+        },
+        {
+          "name": "绍兴",
+          "duration": "32",
+          "ganZhi": "辛亥",
+          "changeMonth": "正月",
+          "startYear": "1131年"
+        }
+      ],
+      "events": [
+        {
+          "description": "南宋,金,西夏形势",
+          "mapUrl": "hstrymap/11271234.jpg"
+        },
+        {
+          "description": "钟相,杨么起义",
+          "mapUrl": "hstrymap/11301135.jpg"
+        }
+      ]
+    },
+    {
+      "title": "孝宗",
+      "name": "赵昚",
+      "yearNames": [
+        {
+          "name": "隆兴",
+          "duration": "2",
+          "ganZhi": "癸未",
+          "changeMonth": "正月",
+          "startYear": "1163年"
+        },
+        {
+          "name": "乾道",
+          "duration": "9",
+          "ganZhi": "乙酉",
+          "changeMonth": "正月",
+          "startYear": "1165年"
+        },
+        {
+          "name": "淳熙",
+          "duration": "16",
+          "ganZhi": "甲午",
+          "changeMonth": "正月",
+          "startYear": "1174年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "光宗",
+      "name": "赵惇",
+      "yearNames": [
+        {
+          "name": "绍熙",
+          "duration": "5",
+          "ganZhi": "庚戌",
+          "changeMonth": "正月",
+          "startYear": "1190年"
+        }
+      ],
+      "events": [
+        {
+          "description": "朱熹《四書章句》",
+          "mapUrl": "zi1liao4/朱熹1190四書章句.txt"
+        }
+      ]
+    },
+    {
+      "title": "宁宗",
+      "name": "赵扩",
+      "yearNames": [
+        {
+          "name": "庆元",
+          "duration": "6",
+          "ganZhi": "乙卯",
+          "changeMonth": "正月",
+          "startYear": "1195年"
+        },
+        {
+          "name": "嘉泰",
+          "duration": "4",
+          "ganZhi": "辛酉",
+          "changeMonth": "正月",
+          "startYear": "1201年"
+        },
+        {
+          "name": "开禧",
+          "duration": "3",
+          "ganZhi": "乙丑",
+          "changeMonth": "正月",
+          "startYear": "1205年"
+        },
+        {
+          "name": "嘉定",
+          "duration": "17",
+          "ganZhi": "戊辰",
+          "changeMonth": "正月",
+          "startYear": "1208年"
+        }
+      ],
+      "events": [
+        {
+          "description": "辛棄疾詞選92首",
+          "mapUrl": "zi1liao4/xinqijic.htm"
+        }
+      ]
+    },
+    {
+      "title": "理宗",
+      "name": "赵昀",
+      "yearNames": [
+        {
+          "name": "宝庆",
+          "duration": "3",
+          "ganZhi": "乙酉",
+          "changeMonth": "正月",
+          "startYear": "1225年"
+        },
+        {
+          "name": "绍定",
+          "duration": "6",
+          "ganZhi": "戊子",
+          "changeMonth": "正月",
+          "startYear": "1228年"
+        },
+        {
+          "name": "端平",
+          "duration": "3",
+          "ganZhi": "甲午",
+          "changeMonth": "正月",
+          "startYear": "1234年"
+        },
+        {
+          "name": "嘉熙",
+          "duration": "4",
+          "ganZhi": "丁酉",
+          "changeMonth": "正月",
+          "startYear": "1237年"
+        },
+        {
+          "name": "淳祐",
+          "duration": "12",
+          "ganZhi": "辛丑",
+          "changeMonth": "正月",
+          "startYear": "1241年"
+        },
+        {
+          "name": "宝祐",
+          "duration": "6",
+          "ganZhi": "癸丑",
+          "changeMonth": "正月",
+          "startYear": "1253年"
+        },
+        {
+          "name": "开庆",
+          "duration": "1",
+          "ganZhi": "己未",
+          "changeMonth": "正月",
+          "startYear": "1259年"
+        },
+        {
+          "name": "景定",
+          "duration": "5",
+          "ganZhi": "庚申",
+          "changeMonth": "正月",
+          "startYear": "1260年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "度宗",
+      "name": "赵禥",
+      "yearNames": [
+        {
+          "name": "咸淳",
+          "duration": "10",
+          "ganZhi": "乙丑",
+          "changeMonth": "正月",
+          "startYear": "1265年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "恭帝",
+      "name": "赵韅",
+      "yearNames": [
+        {
+          "name": "德祐",
+          "duration": "2",
+          "ganZhi": "乙亥",
+          "changeMonth": "正月",
+          "startYear": "1275年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "端宗",
+      "name": "赵昰",
+      "yearNames": [
+        {
+          "name": "景炎",
+          "duration": "3",
+          "ganZhi": "丙子",
+          "changeMonth": "五月",
+          "startYear": "1276年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "帝昺",
+      "name": "赵昺",
+      "yearNames": [
+        {
+          "name": "祥兴",
+          "duration": "2",
+          "ganZhi": "戊寅",
+          "changeMonth": "五月",
+          "startYear": "1278年"
+        }
+      ],
+      "events": [
+        {
+          "description": "千家詩",
+          "mapUrl": "zi1liao4/千家詩.txt"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "id": "jin_dynasty",
+  "name": "金",
+  "period": "1115年-1234年",
+  "note": "完颜氏,女真族建立",
+  "summary": "女真族建立的王朝，灭辽灭北宋，与南宋形成南北对峙局面。推行汉化政策，文化繁荣，最终在蒙古和南宋夹击下灭亡。",
+  "rulers": [
+    {
+      "title": "太祖",
+      "name": "完颜旻(本名阿骨打)",
+      "yearNames": [
+        {
+          "name": "收国",
+          "duration": "2",
+          "ganZhi": "乙未",
+          "changeMonth": "正月",
+          "startYear": "1115年"
+        },
+        {
+          "name": "天辅",
+          "duration": "7",
+          "ganZhi": "丁酉",
+          "changeMonth": "正月",
+          "startYear": "1117年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "太宗",
+      "name": "完颜晟",
+      "yearNames": [
+        {
+          "name": "天会",
+          "duration": "15",
+          "ganZhi": "癸卯",
+          "changeMonth": "九月",
+          "startYear": "1123年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "熙宗",
+      "name": "完颜亶",
+      "yearNames": [
+        {
+          "name": "天眷",
+          "duration": "3",
+          "ganZhi": "戊午",
+          "changeMonth": "正月",
+          "startYear": "1138年",
+          "note": "熙宗即位未改元"
+        },
+        {
+          "name": "皇统",
+          "duration": "9",
+          "ganZhi": "辛酉",
+          "changeMonth": "正月",
+          "startYear": "1141年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "海陵王",
+      "name": "完颜亮",
+      "yearNames": [
+        {
+          "name": "天德",
+          "duration": "5",
+          "ganZhi": "己巳",
+          "changeMonth": "十二月",
+          "startYear": "1149年"
+        },
+        {
+          "name": "贞元",
+          "duration": "4",
+          "ganZhi": "癸酉",
+          "changeMonth": "三月",
+          "startYear": "1153年"
+        },
+        {
+          "name": "正隆",
+          "duration": "6",
+          "ganZhi": "丙子",
+          "changeMonth": "二月",
+          "startYear": "1156年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "世宗",
+      "name": "完颜雍",
+      "yearNames": [
+        {
+          "name": "大定",
+          "duration": "29",
+          "ganZhi": "辛巳",
+          "changeMonth": "十月",
+          "startYear": "1161年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "章宗",
+      "name": "完颜璟",
+      "yearNames": [
+        {
+          "name": "明昌",
+          "duration": "7",
+          "ganZhi": "庚戌",
+          "changeMonth": "正月",
+          "startYear": "1190年"
+        },
+        {
+          "name": "承安",
+          "duration": "5",
+          "ganZhi": "丙辰",
+          "changeMonth": "十一月",
+          "startYear": "1196年"
+        },
+        {
+          "name": "泰和",
+          "duration": "8",
+          "ganZhi": "辛酉",
+          "changeMonth": "正月",
+          "startYear": "1201年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "卫绍王",
+      "name": "完颜永济",
+      "yearNames": [
+        {
+          "name": "大安",
+          "duration": "3",
+          "ganZhi": "己巳",
+          "changeMonth": "正月",
+          "startYear": "1209年"
+        },
+        {
+          "name": "崇庆",
+          "duration": "2",
+          "ganZhi": "壬申",
+          "changeMonth": "正月",
+          "startYear": "1212年"
+        },
+        {
+          "name": "至宁",
+          "duration": "1",
+          "ganZhi": "癸酉",
+          "changeMonth": "五月",
+          "startYear": "1213年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "宣宗",
+      "name": "完颜珣",
+      "yearNames": [
+        {
+          "name": "贞祐",
+          "duration": "5",
+          "ganZhi": "癸酉",
+          "changeMonth": "九月",
+          "startYear": "1213年"
+        },
+        {
+          "name": "兴定",
+          "duration": "6",
+          "ganZhi": "丁丑",
+          "changeMonth": "九月",
+          "startYear": "1217年"
+        },
+        {
+          "name": "元光",
+          "duration": "2",
+          "ganZhi": "壬午",
+          "changeMonth": "八月",
+          "startYear": "1222年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "哀宗",
+      "name": "完颜守绪",
+      "yearNames": [
+        {
+          "name": "正大",
+          "duration": "9",
+          "ganZhi": "甲申",
+          "changeMonth": "正月",
+          "startYear": "1224年"
+        },
+        {
+          "name": "开兴",
+          "duration": "1",
+          "ganZhi": "壬辰",
+          "changeMonth": "一月",
+          "startYear": "1232年"
+        },
+        {
+          "name": "天兴",
+          "duration": "3",
+          "ganZhi": "壬辰",
+          "changeMonth": "四月",
+          "startYear": "1232年"
+        }
+      ],
+      "events": []
+    }
+  ]
+}
