@@ -60,6 +60,8 @@ interface DynastyRowProps {
   dynasty: Dynasty;
   isExpanded: boolean;
   onToggle: (dynastyId: string) => void;
+  isMobile?: boolean;
+  isSmallMobile?: boolean;
 }
 
 // 优化的统治者行组件
@@ -69,7 +71,9 @@ const RulerRow = memo(({
   subDynastyName, 
   yearName, 
   isFirstYearName, 
-  rowSpan 
+  rowSpan,
+  isMobile,
+  isSmallMobile
 }: {
   ruler: Ruler;
   dynastyName: string;
@@ -77,30 +81,53 @@ const RulerRow = memo(({
   yearName?: YearName;
   isFirstYearName?: boolean;
   rowSpan?: number;
+  isMobile?: boolean | undefined;
+  isSmallMobile?: boolean | undefined;
 }) => (
   <TableRow hover sx={tableStyles.tableRow}>
-    {/* 朝代列 */}
+    {/* 朝代列 - 移动端固定 */}
     {isFirstYearName && (
       <TableCell 
         sx={{ 
           ...tableStyles.dynastyCell,
           ...tableStyles.bodyCell,
-          backgroundColor: '#f8f9fa'
+          backgroundColor: '#f8f9fa',
+          ...(isMobile && {
+            position: 'sticky',
+            left: 0,
+            zIndex: 10,
+            minWidth: isSmallMobile ? '60px' : '80px',
+            maxWidth: isSmallMobile ? '80px' : '100px',
+            fontSize: isSmallMobile ? '0.65rem' : '0.7rem',
+            padding: isSmallMobile ? '4px 3px' : '6px 8px',
+          })
         }}
         rowSpan={rowSpan}
       >
-        <Typography variant="body2" sx={{ fontWeight: 'medium' }}>
+        <Typography 
+          variant="body2" 
+          sx={{ 
+            fontWeight: 'medium',
+            fontSize: 'inherit',
+            lineHeight: 1.2,
+            wordBreak: 'break-all'
+          }}
+        >
           {subDynastyName || dynastyName}
         </Typography>
       </TableCell>
     )}
     
-    {/* 名号列 */}
-    {isFirstYearName && (
+    {/* 名号列 - 小屏手机隐藏 */}
+    {!isSmallMobile && isFirstYearName && (
       <TableCell 
         sx={{
           ...tableStyles.bodyCell,
-          verticalAlign: 'top'
+          verticalAlign: 'top',
+          ...(isMobile && {
+            fontSize: '0.7rem',
+            padding: '6px 8px',
+          })
         }}
         rowSpan={rowSpan}
       >
@@ -115,7 +142,12 @@ const RulerRow = memo(({
       <TableCell 
         sx={{
           ...tableStyles.bodyCell,
-          verticalAlign: 'top'
+          verticalAlign: 'top',
+          ...(isMobile && {
+            fontSize: isSmallMobile ? '0.65rem' : '0.7rem',
+            padding: isSmallMobile ? '4px 3px' : '6px 8px',
+            minWidth: isSmallMobile ? '50px' : '70px',
+          })
         }}
         rowSpan={rowSpan}
       >
@@ -123,35 +155,65 @@ const RulerRow = memo(({
       </TableCell>
     )}
     
-    {/* 年号相关列 */}
-    <TableCell sx={tableStyles.bodyCell}>
-      {yearName ? (
-        <>
-          {yearName.name || <span style={{ color: '#999' }}>-</span>}
-          {yearName.note && (
-            <Typography variant="caption" sx={{ display: 'block', color: '#666', fontStyle: 'italic' }}>
-              {yearName.note}
-            </Typography>
-          )}
-        </>
-      ) : (
-        ruler.yearName || <span style={{ color: '#999' }}>-</span>
-      )}
-    </TableCell>
+    {/* 年号列 - 小屏手机隐藏 */}
+    {!isSmallMobile && (
+      <TableCell sx={{
+        ...tableStyles.bodyCell,
+        ...(isMobile && {
+          fontSize: '0.7rem',
+          padding: '6px 8px',
+        })
+      }}>
+        {yearName ? (
+          <>
+            {yearName.name || <span style={{ color: '#999' }}>-</span>}
+            {yearName.note && (
+              <Typography variant="caption" sx={{ 
+                display: 'block', 
+                color: '#666', 
+                fontStyle: 'italic',
+                fontSize: isMobile ? '0.6rem' : 'inherit'
+              }}>
+                {yearName.note}
+              </Typography>
+            )}
+          </>
+        ) : (
+          ruler.yearName || <span style={{ color: '#999' }}>-</span>
+        )}
+      </TableCell>
+    )}
     
-    <TableCell sx={tableStyles.bodyCell} align="center">
-      {yearName?.duration || ruler.duration || <span style={{ color: '#999' }}>-</span>}
-    </TableCell>
+    {/* 使用年数列 - 移动端隐藏 */}
+    {!isMobile && (
+      <TableCell sx={tableStyles.bodyCell} align="center">
+        {yearName?.duration || ruler.duration || <span style={{ color: '#999' }}>-</span>}
+      </TableCell>
+    )}
     
-    <TableCell sx={tableStyles.bodyCell} align="center">
-      {yearName?.ganZhi || ruler.ganZhi || <span style={{ color: '#999' }}>-</span>}
-    </TableCell>
+    {/* 元年干支列 - 移动端隐藏 */}
+    {!isMobile && (
+      <TableCell sx={tableStyles.bodyCell} align="center">
+        {yearName?.ganZhi || ruler.ganZhi || <span style={{ color: '#999' }}>-</span>}
+      </TableCell>
+    )}
     
-    <TableCell sx={tableStyles.bodyCell} align="center">
-      {yearName?.changeMonth || ruler.changeMonth || <span style={{ color: '#999' }}>-</span>}
-    </TableCell>
+    {/* 改元月份列 - 移动端隐藏 */}
+    {!isMobile && (
+      <TableCell sx={tableStyles.bodyCell} align="center">
+        {yearName?.changeMonth || ruler.changeMonth || <span style={{ color: '#999' }}>-</span>}
+      </TableCell>
+    )}
     
-    <TableCell sx={tableStyles.bodyCell} align="center">
+    {/* 公元纪年列 */}
+    <TableCell sx={{
+      ...tableStyles.bodyCell,
+      ...(isMobile && {
+        fontSize: isSmallMobile ? '0.65rem' : '0.7rem',
+        padding: isSmallMobile ? '4px 3px' : '6px 8px',
+        minWidth: isSmallMobile ? '60px' : '80px',
+      })
+    }} align="center">
       <span style={tableStyles.startYear}>
         {yearName?.startYear || ruler.startYear || <span style={{ color: '#999' }}>-</span>}
       </span>
@@ -162,16 +224,31 @@ const RulerRow = memo(({
       <TableCell 
         sx={{
           ...tableStyles.bodyCell,
-          maxWidth: '400px',
-          verticalAlign: 'top'
+          maxWidth: isMobile ? '200px' : '400px',
+          verticalAlign: 'top',
+          ...(isMobile && {
+            fontSize: isSmallMobile ? '0.6rem' : '0.7rem',
+            padding: isSmallMobile ? '4px 3px' : '6px 8px',
+            lineHeight: 1.2,
+          })
         }}
         rowSpan={rowSpan}
       >
         {ruler.events.length > 0 ? (
           <Box>
             {ruler.events.map((event, eventIndex) => (
-              <Box key={eventIndex} sx={tableStyles.eventContainer}>
-                <Typography variant="body2" sx={tableStyles.eventDescription}>
+              <Box key={eventIndex} sx={{
+                ...tableStyles.eventContainer,
+                ...(isMobile && {
+                  marginBottom: '4px',
+                  gap: '4px',
+                })
+              }}>
+                <Typography variant="body2" sx={{
+                  ...tableStyles.eventDescription,
+                  fontSize: 'inherit',
+                  lineHeight: 1.2,
+                }}>
                   • {event.description}
                 </Typography>
                 {event.mapUrl && (
@@ -182,9 +259,18 @@ const RulerRow = memo(({
                       href={event.mapUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      sx={tableStyles.mapIconButton}
+                      sx={{
+                        ...tableStyles.mapIconButton,
+                        ...(isMobile && {
+                          width: isSmallMobile ? 20 : 24,
+                          height: isSmallMobile ? 20 : 24,
+                          padding: '2px',
+                        })
+                      }}
                     >
-                      <MapIcon sx={{ fontSize: '0.9rem' }} />
+                      <MapIcon sx={{ 
+                        fontSize: isMobile ? (isSmallMobile ? '0.7rem' : '0.8rem') : '0.9rem' 
+                      }} />
                     </IconButton>
                   </Tooltip>
                 )}
@@ -202,7 +288,7 @@ const RulerRow = memo(({
 RulerRow.displayName = 'RulerRow';
 
 // 优化的朝代行组件
-export const DynastyRow = memo(({ dynasty, isExpanded, onToggle }: DynastyRowProps) => {
+export const DynastyRow = memo(({ dynasty, isExpanded, onToggle, isMobile, isSmallMobile }: DynastyRowProps) => {
   const handleToggle = () => {
     onToggle(dynasty.id);
   };
@@ -226,6 +312,8 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle }: DynastyRowPro
               yearName={yearName}
               isFirstYearName={isFirstYearName}
               rowSpan={ruler.yearNames!.length}
+              isMobile={isMobile}
+              isSmallMobile={isSmallMobile}
             />
           );
         });
@@ -239,6 +327,8 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle }: DynastyRowPro
             subDynastyName={subDynastyName}
             isFirstYearName={true}
             rowSpan={1}
+            isMobile={isMobile}
+            isSmallMobile={isSmallMobile}
           />
         );
       }
@@ -249,6 +339,13 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle }: DynastyRowPro
 
   const rows = [];
 
+  // 计算朝代标题行的列数
+  const getColSpan = () => {
+    if (isSmallMobile) return 4; // 朝代、姓名、纪年、大事记
+    if (isMobile) return 5; // 朝代、名号、姓名、纪年、大事记
+    return 8; // 桌面端全部列
+  };
+
   // 朝代标题行（始终显示）
   const dynastyHeaderRow = (
     <TableRow key={`${dynasty.id}-header`} hover sx={tableStyles.dynastyHeaderRow}>
@@ -256,7 +353,16 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle }: DynastyRowPro
         sx={{ 
           ...tableStyles.dynastyCell,
           ...tableStyles.bodyCell,
-          ...tableStyles.dynastyHeaderCell
+          ...tableStyles.dynastyHeaderCell,
+          ...(isMobile && {
+            position: 'sticky',
+            left: 0,
+            zIndex: 10,
+            fontSize: isSmallMobile ? '0.65rem' : '0.7rem',
+            padding: isSmallMobile ? '4px 3px' : '6px 8px',
+            minWidth: isSmallMobile ? '60px' : '80px',
+            maxWidth: isSmallMobile ? '80px' : '100px',
+          })
         }}
         onClick={handleToggle}
       >
@@ -266,11 +372,18 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle }: DynastyRowPro
               ...tableStyles.dynastyName,
               display: 'flex',
               alignItems: 'center',
-              gap: 1
+              gap: 1,
+              fontSize: 'inherit',
+              lineHeight: 1.2,
+              wordBreak: 'break-all'
             }}>
               {dynasty.name}
             </Typography>
-            <Typography variant="caption" sx={tableStyles.dynastyPeriod}>
+            <Typography variant="caption" sx={{
+              ...tableStyles.dynastyPeriod,
+              fontSize: isMobile ? (isSmallMobile ? '0.55rem' : '0.6rem') : 'inherit',
+              lineHeight: 1.1
+            }}>
               {dynasty.period}
             </Typography>
           </Box>
@@ -284,14 +397,14 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle }: DynastyRowPro
               sx={{ 
                 ...tableStyles.expandIcon,
                 transform: isExpanded ? 'rotate(0deg)' : 'rotate(-90deg)',
-                fontSize: '1.2rem'
+                fontSize: isMobile ? (isSmallMobile ? '1rem' : '1.1rem') : '1.2rem'
               }}
             />
           </Box>
         </Box>
       </TableCell>
       <TableCell 
-        colSpan={8} 
+        colSpan={getColSpan()} 
         sx={{ 
           ...tableStyles.bodyCell, 
           fontStyle: 'italic', 
@@ -300,7 +413,12 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle }: DynastyRowPro
           transition: 'background-color 0.2s ease-in-out',
           '&:hover': {
             backgroundColor: '#f0f0f0'
-          }
+          },
+          ...(isMobile && {
+            fontSize: isSmallMobile ? '0.6rem' : '0.7rem',
+            padding: isSmallMobile ? '4px 3px' : '6px 8px',
+            lineHeight: 1.2,
+          })
         }}
         onClick={handleToggle}
       >
@@ -309,7 +427,8 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle }: DynastyRowPro
             fontStyle: 'normal',
             color: '#555',
             lineHeight: 1.4,
-            mb: 0.5
+            mb: 0.5,
+            fontSize: 'inherit'
           }}>
             {dynasty.summary}
           </Typography>
@@ -318,7 +437,7 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle }: DynastyRowPro
           <Typography variant="body2" sx={{ 
             fontStyle: 'italic',
             color: '#777',
-            fontSize: '0.85rem'
+            fontSize: isMobile ? (isSmallMobile ? '0.55rem' : '0.65rem') : '0.85rem'
           }}>
             {dynasty.note}
           </Typography>

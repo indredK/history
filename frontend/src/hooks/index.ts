@@ -3,6 +3,13 @@ export { useHoverScroll } from './useHoverScroll';
 export { useDataFetch, clearCache, clearAllCache } from './useDataFetch';
 export { useSidebar } from './useSidebar';
 export { useDynastiesExpanded } from './useDynastiesExpanded';
+export { 
+  useResponsive, 
+  useMediaQuery, 
+  useTouchDevice, 
+  useOrientation, 
+  useViewport 
+} from './useResponsive';
 export type { 
   UseHoverScrollOptions, 
   UseHoverScrollReturn,
@@ -11,3 +18,4 @@ export type {
   SerializedScrollState
 } from './useHoverScroll';
 export type { FetchOptions, FetchResult } from './useDataFetch';
+export type { ResponsiveState, Breakpoints } from './useResponsive';

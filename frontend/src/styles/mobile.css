@@ -1,0 +1,444 @@
+/* 移动端适配样式 */
+
+/* 移动端断点定义 */
+:root {
+  --mobile-xs: 320px;  /* 小屏手机 */
+  --mobile-sm: 375px;  /* 标准手机 */
+  --mobile-md: 414px;  /* 大屏手机 */
+  --tablet-sm: 768px;  /* 小平板 */
+  --tablet-md: 1024px; /* 大平板 */
+  --desktop: 1200px;   /* 桌面 */
+  
+  /* 移动端专用间距 */
+  --mobile-padding: 12px;
+  --mobile-margin: 8px;
+  --mobile-gap: 8px;
+  
+  /* 移动端字体大小 */
+  --mobile-font-xs: 0.7rem;
+  --mobile-font-sm: 0.75rem;
+  --mobile-font-base: 0.8rem;
+  --mobile-font-lg: 0.9rem;
+  --mobile-font-xl: 1rem;
+  
+  /* 移动端触摸目标最小尺寸 */
+  --touch-target-min: 44px;
+}
+
+/* 基础移动端适配 */
+@media (max-width: 768px) {
+  /* 全局字体调整 */
+  body {
+    font-size: var(--mobile-font-base);
+    line-height: 1.4;
+    overflow-x: hidden;
+  }
+  
+  /* 应用布局调整 */
+  .app {
+    flex-direction: column;
+  }
+  
+  /* 主内容区域 */
+  main {
+    padding: var(--mobile-padding) !important;
+    margin-top: 0 !important;
+  }
+  
+  /* 内容容器 */
+  .content {
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  /* 表格容器适配 */
+  .MuiTableContainer-root {
+    max-width: 100vw;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* 表格适配 */
+  .MuiTable-root {
+    min-width: 100% !important;
+    font-size: var(--mobile-font-sm);
+  }
+  
+  /* 表格头部 */
+  .MuiTableHead-root .MuiTableCell-root {
+    padding: 6px 8px;
+    font-size: var(--mobile-font-xs);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  
+  /* 表格单元格 */
+  .MuiTableCell-root {
+    padding: 8px 6px;
+    font-size: var(--mobile-font-sm);
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  /* 朝代名称列 */
+  .MuiTableCell-root:first-child {
+    position: sticky;
+    left: 0;
+    background: var(--color-bg-card);
+    z-index: 10;
+    min-width: 80px;
+    max-width: 100px;
+  }
+  
+  /* 时期列 */
+  .MuiTableCell-root:nth-child(2) {
+    min-width: 120px;
+    font-size: var(--mobile-font-xs);
+  }
+  
+  /* 详情列 */
+  .MuiTableCell-root:last-child {
+    min-width: 200px;
+  }
+  
+  /* 按钮适配 */
+  .MuiButton-root {
+    min-height: var(--touch-target-min);
+    padding: 8px 12px;
+    font-size: var(--mobile-font-sm);
+  }
+  
+  /* 图标按钮 */
+  .MuiIconButton-root {
+    width: var(--touch-target-min);
+    height: var(--touch-target-min);
+    padding: 8px;
+  }
+  
+  /* 纸张组件 */
+  .MuiPaper-root {
+    margin: var(--mobile-margin);
+    border-radius: 8px;
+  }
+  
+  /* 排版组件 */
+  .MuiTypography-h4 {
+    font-size: 1.2rem;
+  }
+  
+  .MuiTypography-h5 {
+    font-size: 1.1rem;
+  }
+  
+  .MuiTypography-h6 {
+    font-size: 1rem;
+  }
+  
+  .MuiTypography-body1 {
+    font-size: var(--mobile-font-base);
+  }
+  
+  .MuiTypography-body2 {
+    font-size: var(--mobile-font-sm);
+  }
+  
+  .MuiTypography-caption {
+    font-size: var(--mobile-font-xs);
+  }
+}
+
+/* 小屏手机适配 (320px - 375px) */
+@media (max-width: 375px) {
+  :root {
+    --mobile-padding: 8px;
+    --mobile-margin: 4px;
+    --mobile-gap: 4px;
+  }
+  
+  body {
+    font-size: var(--mobile-font-sm);
+  }
+  
+  .MuiTableCell-root {
+    padding: 4px 3px;
+    font-size: var(--mobile-font-xs);
+  }
+  
+  .MuiTableHead-root .MuiTableCell-root {
+    padding: 4px 3px;
+    font-size: 0.65rem;
+  }
+  
+  /* 朝代名称列更窄 */
+  .MuiTableCell-root:first-child {
+    min-width: 60px;
+    max-width: 80px;
+  }
+  
+  /* 时期列更窄 */
+  .MuiTableCell-root:nth-child(2) {
+    min-width: 100px;
+  }
+}
+
+/* 平板适配 (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .MuiTableContainer-root {
+    height: 100%;
+  }
+  
+  .MuiTable-root {
+    font-size: var(--font-size-sm);
+  }
+  
+  .MuiTableCell-root {
+    padding: 12px 16px;
+  }
+}
+
+/* 横屏手机适配 */
+@media (max-height: 500px) and (orientation: landscape) {
+  .MuiTableContainer-root {
+    height: 100%;
+  }
+  
+  main {
+    padding: 8px !important;
+  }
+  
+  .MuiTableCell-root {
+    padding: 4px 6px;
+    font-size: var(--mobile-font-xs);
+  }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+  /* 移除悬停效果，使用点击效果 */
+  .MuiTableRow-root:hover {
+    background-color: transparent;
+  }
+  
+  .MuiTableRow-root:active {
+    background-color: rgba(255, 61, 0, 0.1);
+  }
+  
+  /* 增大可点击区域 */
+  .MuiTableCell-root {
+    min-height: var(--touch-target-min);
+  }
+  
+  /* 滚动条在触摸设备上隐藏 */
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  
+  /* 但保持滚动功能 */
+  .MuiTableContainer-root {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+}
+
+/* 高分辨率屏幕适配 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* 确保在高分辨率屏幕上文字清晰 */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* 调整边框宽度 */
+  .MuiTableCell-root {
+    border-width: 0.5px;
+  }
+}
+
+/* 可访问性增强 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+  /* 已在主题中处理，这里可以添加移动端特定的深色模式样式 */
+}
+
+/* 打印样式 */
+@media print {
+  .MuiTableContainer-root {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  .MuiTable-root {
+    font-size: 10px;
+  }
+  
+  .MuiTableCell-root {
+    padding: 2px 4px;
+    border: 1px solid #000;
+  }
+}
+
+/* 移动端专用工具类 */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+  
+  .desktop-only {
+    display: none;
+  }
+}
+
+/* 移动端表格优化 */
+.mobile-table-wrapper {
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-table-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(to left, rgba(0,0,0,0.1), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 移动端加载状态 */
+@media (max-width: 768px) {
+  .MuiSkeleton-root {
+    height: 40px;
+    margin: 4px 0;
+  }
+}
+
+/* 移动端错误状态 */
+@media (max-width: 768px) {
+  .error-container {
+    padding: var(--mobile-padding);
+    text-align: center;
+  }
+  
+  .error-container .MuiTypography-root {
+    font-size: var(--mobile-font-base);
+  }
+}
+
+/* 移动端滚动指示器 */
+.scroll-indicator {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .scroll-indicator {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: var(--color-primary-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+  }
+  
+  .scroll-indicator.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 移动端手势支持 */
+.swipe-container {
+  touch-action: pan-x pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 移动端性能优化 */
+@media (max-width: 768px) {
+  * {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  .MuiTableContainer-root {
+    will-change: scroll-position;
+  }
+  
+  .MuiTableRow-root {
+    will-change: background-color;
+  }
+}
+
+/* 移动端防滚动优化 */
+@media (max-width: 768px) {
+  html, body {
+    position: fixed !important;
+    overflow: hidden !important;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  #root {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+  
+  .app {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+}
+
+/* 防止页面弹性滚动 */
+@media (max-width: 768px) {
+  body {
+    -webkit-overflow-scrolling: auto !important;
+    overscroll-behavior: none !important;
+    -webkit-overscroll-behavior: none !important;
+  }
+  
+  * {
+    -webkit-overflow-scrolling: auto !important;
+    overscroll-behavior: none !important;
+    -webkit-overscroll-behavior: none !important;
+  }
+}

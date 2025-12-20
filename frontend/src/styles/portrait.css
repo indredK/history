@@ -1,0 +1,343 @@
+/* 竖屏布局优化样式 */
+
+/* 竖屏模式检测 */
+@media (orientation: portrait) {
+  /* 应用布局调整 */
+  .app {
+    flex-direction: column !important;
+  }
+  
+  /* 侧边栏在竖屏模式下的优化 */
+  .MuiDrawer-root {
+    /* 移除固定定位相关样式，因为现在由AppLayout控制 */
+    display: none !important; /* 隐藏原有的Drawer */
+  }
+  
+  .MuiDrawer-paper {
+    /* 移除固定定位相关样式 */
+    position: relative !important;
+    bottom: auto !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    height: 80px !important;
+    transform: none !important;
+    transition: none !important;
+    border-radius: 20px !important; /* 全圆角 */
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 30, 30, 0.95) 100%) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 61, 0, 0.2) !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 61, 0, 0.1) !important;
+    z-index: auto !important;
+    margin: 0 !important; /* 移除上边距 */
+  }
+  
+  /* 侧边栏内容水平排列 */
+  .sidebar-content {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important; /* 改为space-between确保均匀分布 */
+    align-items: center !important;
+    height: 100% !important;
+    padding: 4px 8px !important; /* 进一步减少内边距 */
+    overflow: hidden !important; /* 禁止横向滚动 */
+  }
+  
+  /* 导航项目样式 */
+  .nav-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 !important; /* 使用flex: 1让每个项目平均分配空间 */
+    max-width: none !important; /* 移除最大宽度限制 */
+    min-width: 0 !important; /* 允许收缩 */
+    height: 60px !important;
+    padding: 4px 2px !important; /* 减少左右内边距 */
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+  
+  .nav-item:hover,
+  .nav-item.active {
+    background: linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%) !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 15px rgba(255, 61, 0, 0.4) !important;
+  }
+  
+  .nav-item .nav-icon {
+    font-size: 18px !important;
+    margin-bottom: 2px !important;
+  }
+  
+  .nav-item .nav-label {
+    font-size: 8px !important; /* 进一步减小字体 */
+    font-weight: 500 !important;
+    text-align: center !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important; /* 使用100%而不是固定宽度 */
+  }
+  
+  /* 主内容区域调整 */
+  main {
+    /* 移除底部内边距，因为现在有专门的导航栏区域 */
+    padding-bottom: 0px !important;
+    /* 移除固定高度，让flex布局控制 */
+    overflow: hidden !important; /* 确保main不滚动 */
+  }
+  
+  /* 表格容器在竖屏模式下的优化 */
+  .MuiTableContainer-root {
+    /* 移除固定高度，使用100%高度 */
+    height: 100% !important;
+    margin-bottom: 0 !important;
+  }
+  
+  /* 隐藏桌面版侧边栏切换按钮 */
+  .sidebar-toggle-btn {
+    display: none !important;
+  }
+  
+  /* 功能面板在竖屏模式下隐藏或最小化 */
+  .function-panel {
+    display: none !important;
+  }
+  
+  /* 页面标题优化 */
+  .page-title {
+    font-size: 1.2rem !important;
+    margin-bottom: 8px !important;
+    padding: 0 16px !important;
+  }
+  
+  /* 内容区域内边距调整 */
+  .content {
+    padding: 8px !important;
+  }
+  
+  /* 表格在竖屏模式下的特殊优化 */
+  .MuiTable-root {
+    font-size: 0.7rem !important;
+  }
+  
+  .MuiTableCell-root {
+    padding: 4px 6px !important;
+    font-size: 0.65rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .MuiTableHead-root .MuiTableCell-root {
+    padding: 6px 8px !important;
+    font-size: 0.6rem !important;
+    font-weight: 600 !important;
+  }
+  
+  /* 朝代标题行优化 */
+  .dynasty-header-row .MuiTableCell-root {
+    padding: 8px 6px !important;
+    font-size: 0.7rem !important;
+  }
+  
+  /* 展开图标调整 */
+  .expand-icon {
+    font-size: 1rem !important;
+  }
+  
+  /* 地图按钮优化 */
+  .map-icon-button {
+    width: 20px !important;
+    height: 20px !important;
+    padding: 2px !important;
+  }
+  
+  .map-icon-button .MuiSvgIcon-root {
+    font-size: 0.7rem !important;
+  }
+  
+  /* 滚动指示器位置调整 */
+  .scroll-indicator {
+    bottom: 16px !important; /* 回到正常位置 */
+  }
+  
+  /* 加载状态优化 */
+  .loading-container {
+    height: 100% !important;
+  }
+  
+  /* 错误状态优化 */
+  .error-container {
+    height: 100% !important;
+    padding: 16px !important;
+  }
+}
+
+/* 小屏竖屏设备特殊优化 */
+@media (orientation: portrait) and (max-width: 375px) {
+  .MuiDrawer-paper {
+    height: 70px !important;
+    margin: 0 !important; /* 移除上边距 */
+  }
+  
+  .nav-item {
+    flex: 1 !important; /* 平均分配空间 */
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 50px !important;
+    padding: 4px 2px !important;
+  }
+  
+  .nav-item .nav-icon {
+    font-size: 16px !important; /* 减小图标尺寸 */
+  }
+  
+  .nav-item .nav-label {
+    font-size: 8px !important;
+    max-width: 100% !important;
+  }
+  
+  main {
+    padding-bottom: 0px !important;
+    /* 移除固定高度，让flex布局控制 */
+    overflow: hidden !important;
+  }
+  
+  .MuiTableContainer-root {
+    height: 100% !important;
+  }
+  
+  .scroll-indicator {
+    bottom: 16px !important; /* 回到正常位置 */
+  }
+}
+
+/* 大屏竖屏设备（平板竖屏）优化 */
+@media (orientation: portrait) and (min-width: 768px) {
+  .MuiDrawer-paper {
+    height: 90px !important;
+    margin: 0 !important; /* 移除上边距 */
+  }
+  
+  .nav-item {
+    flex: 1 !important; /* 平均分配空间 */
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 70px !important;
+    padding: 4px 2px !important;
+  }
+  
+  .nav-item .nav-icon {
+    font-size: 22px !important;
+    margin-bottom: 4px !important;
+  }
+  
+  .nav-item .nav-label {
+    font-size: 11px !important;
+    max-width: 100% !important;
+  }
+  
+  main {
+    padding-bottom: 0px !important;
+    /* 移除固定高度，让flex布局控制 */
+    overflow: hidden !important;
+  }
+  
+  .MuiTableContainer-root {
+    height: 100% !important;
+  }
+  
+  .MuiTable-root {
+    font-size: 0.8rem !important;
+  }
+  
+  .MuiTableCell-root {
+    padding: 6px 8px !important;
+    font-size: 0.75rem !important;
+  }
+  
+  .MuiTableHead-root .MuiTableCell-root {
+    padding: 8px 10px !important;
+    font-size: 0.7rem !important;
+  }
+  
+  .scroll-indicator {
+    bottom: 16px !important; /* 回到正常位置 */
+  }
+}
+
+/* 竖屏模式下的动画优化 */
+@media (orientation: portrait) {
+  .nav-item {
+    transition: all 0.2s ease !important;
+  }
+  
+  .nav-item:active {
+    transform: translateY(-1px) scale(0.95) !important;
+  }
+  
+  /* 平滑的方向切换过渡 */
+  .app,
+  main,
+  .MuiDrawer-root,
+  .MuiDrawer-paper {
+    transition: all 0.3s ease !important;
+  }
+}
+
+/* 竖屏模式下的可访问性优化 */
+@media (orientation: portrait) {
+  .nav-item:focus {
+    outline: 2px solid #FF3D00 !important;
+    outline-offset: 2px !important;
+  }
+  
+  .nav-item:focus-visible {
+    background: linear-gradient(135deg, rgba(255, 61, 0, 0.2) 0%, rgba(255, 111, 61, 0.2) 100%) !important;
+  }
+}
+
+/* 竖屏模式下的性能优化 */
+@media (orientation: portrait) {
+  .MuiDrawer-paper,
+  .nav-item,
+  main {
+    will-change: transform !important;
+    -webkit-transform: translateZ(0) !important;
+    transform: translateZ(0) !important;
+  }
+  
+  .sidebar-content {
+    -webkit-overflow-scrolling: touch !important;
+  }
+}
+
+/* 竖屏模式下的特殊状态 */
+@media (orientation: portrait) {
+  /* 当键盘弹出时的适配 */
+  @supports (-webkit-touch-callout: none) {
+    .app {
+      height: -webkit-fill-available !important;
+    }
+    
+    main {
+      /* 移除固定高度，让flex布局控制 */
+      overflow: hidden !important;
+    }
+  }
+  
+  /* 安全区域适配（刘海屏等） */
+  .MuiDrawer-paper {
+    padding-bottom: env(safe-area-inset-bottom) !important;
+  }
+  
+  main {
+    /* 移除底部内边距，让内容直接延伸到导航栏 */
+    padding-bottom: 0px !important;
+  }
+}

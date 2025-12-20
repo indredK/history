@@ -1,5 +1,10 @@
 /* 中国历史全景 - 全局设计系统 */
 
+/* 导入移动端适配样式 */
+@import './styles/mobile.css';
+/* 导入竖屏布局优化样式 */
+@import './styles/portrait.css';
+
 :root {
   /* 颜色系统 - 炫酷现代色彩 */
   --color-primary: #FF3D00; /* 炫酷橙红 */
@@ -163,8 +168,18 @@
   box-sizing: border-box;
 }
 
+/* 根元素样式 */
+#root {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  touch-action: none; /* 防止触摸滚动 */
+}
+
 html {
   scroll-behavior: smooth;
+  height: 100%; /* 确保html占满视口 */
+  overflow: hidden; /* 防止html滚动 */
 }
 
 body {
@@ -175,8 +190,15 @@ body {
   background: var(--color-bg-gradient);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
+  overflow: hidden; /* 保持页面不滚动，内容在组件内滚动 */
+  height: 100vh; /* 确保body占满视口高度 */
+  margin: 0; /* 移除默认边距 */
+  padding: 0; /* 移除默认内边距 */
   animation: backgroundShift 15s ease infinite;
+  /* 移动端防滚动 */
+  overscroll-behavior: none;
+  -webkit-overscroll-behavior: none;
+  touch-action: none; /* 防止触摸滚动 */
 }
 
 /* 链接样式 */

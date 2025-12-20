@@ -3,22 +3,24 @@ import {
   Box,
   Paper,
   Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
 } from '@mui/material';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
+import { MobileTableContainer } from '@/components/ui/MobileTableContainer';
+import {
+  ResponsiveTable,
+  ResponsiveTableHead,
+  ResponsiveTableBody,
+  ResponsiveTableRow,
+  ResponsiveTableCell,
+} from '@/components/ui/ResponsiveTable';
+import { useResponsive } from '@/hooks/useResponsive';
 import { useDynastiesExpanded } from '@/stores/dynastiesStore';
 import { DynastyRow } from './DynastyRow';
 import { loadJsonData } from '@/utils/dataLoaders';
 import { 
   columns, 
   tableStyles, 
-  tableConfig, 
-  loadingConfig
+  tableConfig
 } from './config';
 
 interface Event {
@@ -87,6 +89,7 @@ export function DynastiesList() {
   const [data, setData] = useState<DynastiesData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { isMobile, isSmallMobile } = useResponsive();
   
   // 朝代展开状态管理
   const {
@@ -166,7 +169,13 @@ export function DynastiesList() {
 
   if (loading) {
     return (
-      <Box sx={{ height: loadingConfig.containerHeight, ...loadingConfig.containerStyles }}>
+      <Box sx={{ 
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        p: 4
+      }}>
         <LoadingSkeleton />
       </Box>
     );
@@ -174,7 +183,13 @@ export function DynastiesList() {
 
   if (error) {
     return (
-      <Box sx={{ height: loadingConfig.containerHeight, ...loadingConfig.containerStyles }}>
+      <Box sx={{ 
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        p: 4
+      }}>
         <Paper sx={{ p: 4, textAlign: 'center' }}>
           <Typography color="error" variant="h6">
             加载失败: {error}
@@ -191,44 +206,59 @@ export function DynastiesList() {
 
 
   return (
-    <Box sx={{ p: 1 }}>
-      <TableContainer 
-        component={Paper} 
-        sx={{ 
-          height: tableConfig.containerHeight,
-          ...tableConfig.containerStyles
-        }}
+    <Box sx={{ 
+      height: '100%', // 使用100%高度占满父容器
+      display: 'flex',
+      flexDirection: 'column',
+      overflow: 'hidden',
+      p: isMobile ? 0.5 : 1,
+      // 竖屏模式下移除内边距，让内容更贴近边缘
+      ...(isMobile && {
+        p: 0.25,
+      })
+    }}>
+      <MobileTableContainer
+        height="100%" // 使用100%高度
+        showScrollIndicator={isMobile}
+        showSwipeHint={isMobile}
       >
-        <Table sx={{ minWidth: tableConfig.minWidth }} stickyHeader size="small">
-          <TableHead>
-            <TableRow>
+        <ResponsiveTable minWidth={tableConfig.minWidth}>
+          <ResponsiveTableHead>
+            <ResponsiveTableRow>
               {columns.map((column) => (
-                <TableCell 
+                <ResponsiveTableCell
                   key={column.key}
+                  component="th"
+                  sticky={column.key === 'dynasty'}
+                  hideOnSmallMobile={column.hideOnSmallMobile || false}
+                  hideOnMobile={column.hideOnMobile || false}
+                  priority={column.priority || 'medium'}
+                  minWidth={column.minWidth || undefined}
                   sx={{
                     ...tableStyles.headerCell,
                     ...(column.width && { width: column.width }),
-                    ...(column.minWidth && { minWidth: column.minWidth }),
                     borderRight: column.isLast ? 'none' : '1px solid rgba(255,255,255,0.2)'
                   }}
                 >
-                  {column.label}
-                </TableCell>
+                  {isMobile && column.mobileLabel ? column.mobileLabel : column.label}
+                </ResponsiveTableCell>
               ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
+            </ResponsiveTableRow>
+          </ResponsiveTableHead>
+          <ResponsiveTableBody>
             {data.dynasties.map(dynasty => (
               <DynastyRow
                 key={dynasty.id}
                 dynasty={dynasty}
                 isExpanded={isDynastyExpanded(dynasty.id)}
                 onToggle={handleToggleDynasty}
+                isMobile={isMobile}
+                isSmallMobile={isSmallMobile}
               />
             ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          </ResponsiveTableBody>
+        </ResponsiveTable>
+      </MobileTableContainer>
     </Box>
   );
 }

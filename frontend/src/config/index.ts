@@ -21,3 +21,6 @@ export { default as dynasty } from './dynasty';
 // 导出UI组件配置
 export * from './ui';
 export { default as ui } from './ui';
+
+// 导出响应式配置
+export * from './responsive';
