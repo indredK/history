@@ -91,7 +91,7 @@ const RulerRow = memo(({
         sx={{ 
           ...tableStyles.dynastyCell,
           ...tableStyles.bodyCell,
-          backgroundColor: 'rgba(248, 249, 250, 0.7)',
+          backgroundColor: 'var(--theme-glass-bg-light)',
           backdropFilter: 'blur(8px)',
           WebkitBackdropFilter: 'blur(8px)',
           ...(isMobile && {
@@ -414,11 +414,11 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle, isMobile, isSma
           cursor: 'pointer',
           backdropFilter: 'blur(8px)',
           WebkitBackdropFilter: 'blur(8px)',
-          backgroundColor: 'rgba(255, 255, 255, 0.4)',
+          backgroundColor: 'var(--theme-glass-bg-light)',
           transition: 'all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
           '&:hover': {
-            backgroundColor: 'rgba(255, 255, 255, 0.6)',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)'
+            backgroundColor: 'var(--theme-glass-bg)',
+            boxShadow: 'var(--theme-shadow-sm)'
           },
           ...(isMobile && {
             fontSize: isSmallMobile ? '0.6rem' : '0.7rem',

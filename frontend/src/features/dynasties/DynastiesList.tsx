@@ -195,10 +195,10 @@ export function DynastiesList() {
           textAlign: 'center',
           backdropFilter: 'blur(var(--glass-blur-medium, 20px))',
           WebkitBackdropFilter: 'blur(var(--glass-blur-medium, 20px))',
-          backgroundColor: 'rgba(255, 255, 255, 0.7)',
-          border: '1px solid rgba(255, 255, 255, 0.18)',
+          backgroundColor: 'var(--theme-glass-bg)',
+          border: '1px solid var(--theme-glass-border)',
           borderRadius: 'var(--glass-radius-lg, 16px)',
-          boxShadow: 'var(--glass-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12))'
+          boxShadow: 'var(--theme-shadow-md)'
         }}>
           <Typography color="error" variant="h6">
             加载失败: {error}
