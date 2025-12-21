@@ -10,9 +10,11 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { useNavigate } from 'react-router-dom';
-import { navigationItems, getNavigationItemTheme, navigationStyles, gradients } from '@/config';
+import { navigationItems, getNavigationItemTheme, navigationStyles } from '@/config';
 import { NavigationSection } from '@/layouts/Sidebar/NavigationSection';
 import { FunctionPanel } from '@/layouts/Sidebar/FunctionPanel';
+import { useResponsive } from '@/hooks';
+import { getGlassConfig } from '@/config/glassConfig';
 import './Sidebar/Sidebar.css';
 
 interface SidebarProps {
@@ -24,9 +26,23 @@ interface SidebarProps {
 export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
   const drawerWidth = collapsed ? 60 : 240;
   const navigate = useNavigate();
+  const { screenWidth } = useResponsive();
+  
+  // 获取毛玻璃配置
+  const glassConfig = getGlassConfig(screenWidth);
 
   const handleNavigation = (path: string) => {
     navigate(path);
+  };
+
+  // 毛玻璃侧边栏样式
+  const sidebarGlassStyle = {
+    backdropFilter: `blur(${glassConfig.components.navigation.blur})`,
+    WebkitBackdropFilter: `blur(${glassConfig.components.navigation.blur})`,
+    background: `linear-gradient(135deg, rgba(30, 30, 30, ${glassConfig.components.navigation.bgOpacity}) 0%, rgba(20, 20, 20, ${glassConfig.components.navigation.bgOpacity + 0.1}) 100%)`,
+    borderRight: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    boxShadow: glassConfig.shadow.md,
+    transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`
   };
 
   return (
@@ -38,13 +54,11 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
         '& .MuiDrawer-paper': { 
           width: drawerWidth, 
           boxSizing: 'border-box',
-          background: 'linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-card) 100%)',
-          borderRight: '1px solid var(--color-border-medium)',
-          boxShadow: 'var(--shadow-md)',
+          ...sidebarGlassStyle,
           top: 0
         } 
       }}
-      className="app-sider"
+      className="app-sider glass-sidebar"
     >
       <Box sx={{ 
           height: '100%',
@@ -63,17 +77,23 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
               justifyContent: 'center',
               mb: 3,
               pb: 2,
-              borderBottom: '1px solid var(--color-border-medium)'
+              borderBottom: `${glassConfig.border.width} solid ${glassConfig.border.color}`
             }}>
               <Tooltip title="展开菜单" placement="right">
                 <IconButton 
                   onClick={onToggle}
                   sx={{ 
                     color: 'var(--color-text-primary)',
-                    background: gradients.sidebar,
-                    borderRadius: 'var(--radius-lg)',
+                    backdropFilter: `blur(${glassConfig.blur.light})`,
+                    WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
+                    background: `rgba(255, 255, 255, ${glassConfig.bgOpacity.light})`,
+                    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+                    borderRadius: glassConfig.border.radius.lg,
+                    boxShadow: glassConfig.shadow.sm,
+                    transition: `all ${glassConfig.animation.hoverDuration} ${glassConfig.animation.easing}`,
                     '&:hover': {
-                      background: gradients.sidebarHover
+                      background: `rgba(255, 255, 255, ${glassConfig.bgOpacity.medium})`,
+                      boxShadow: glassConfig.shadow.glow
                     }
                   }}
                 >
@@ -88,10 +108,15 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
               justifyContent: 'space-between',
               mb: 3,
               pb: 2,
-              borderBottom: '1px solid var(--color-border-medium)',
-              background: gradients.sidebar,
-              borderRadius: 'var(--radius-lg)',
-              padding: '8px'
+              borderBottom: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+              backdropFilter: `blur(${glassConfig.blur.light})`,
+              WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
+              background: `rgba(255, 255, 255, ${glassConfig.bgOpacity.light})`,
+              border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+              borderRadius: glassConfig.border.radius.lg,
+              boxShadow: glassConfig.shadow.sm,
+              padding: '8px',
+              transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`
             }}>
               <Typography 
                 variant="h6" 
@@ -115,7 +140,11 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                   size="small"
                   sx={{ 
                     color: 'var(--color-text-primary)',
-                    ml: 1
+                    ml: 1,
+                    transition: `all ${glassConfig.animation.hoverDuration} ${glassConfig.animation.easing}`,
+                    '&:hover': {
+                      background: `rgba(255, 255, 255, ${glassConfig.bgOpacity.ultraLight})`
+                    }
                   }}
                 >
                   <MenuOpenIcon fontSize="small" />
@@ -142,12 +171,23 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                       onClick={() => handleNavigation(item.path)}
                       sx={{
                         ...navigationStyles.iconButton,
-                        background: isActive ? theme?.gradient : 'transparent',
+                        backdropFilter: `blur(${glassConfig.blur.light})`,
+                        WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
+                        background: isActive 
+                          ? theme?.gradient 
+                          : `rgba(255, 255, 255, ${glassConfig.bgOpacity.ultraLight})`,
                         color: isActive ? 'white' : 'var(--color-text-primary)',
-                        boxShadow: isActive ? 'var(--shadow-md), var(--shadow-glow)' : 'var(--shadow-sm)',
+                        border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+                        boxShadow: isActive 
+                          ? `${glassConfig.shadow.md}, ${glassConfig.components.navigation.activeGlow}` 
+                          : glassConfig.shadow.sm,
+                        transition: `all ${glassConfig.animation.hoverDuration} ${glassConfig.animation.easing}`,
                         '&:hover': {
-                          background: isActive ? undefined : theme?.hoverBackground,
-                          ...navigationStyles.iconButtonHover
+                          background: isActive 
+                            ? undefined 
+                            : `rgba(255, 255, 255, ${glassConfig.components.navigation.itemHoverOpacity})`,
+                          boxShadow: glassConfig.shadow.glow,
+                          transform: 'translateY(-2px)'
                         }
                       }}
                     >
@@ -162,7 +202,10 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
               <NavigationSection 
                 activeTab={activeTab} 
               />
-              <Divider sx={{ my: 3 }} />
+              <Divider sx={{ 
+                my: 3,
+                borderColor: glassConfig.border.color
+              }} />
             </>
           )}
         </Box>

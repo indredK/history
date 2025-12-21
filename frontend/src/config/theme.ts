@@ -1,51 +1,106 @@
 /**
  * 主题配置文件
  * 统一管理应用的颜色、渐变、阴影等主题相关配置
+ * 
+ * Requirements: 6.5, 11.3
+ * 整合毛玻璃配置到主题系统
  */
+
+import { desktopConfig, mobileConfig, getGlassConfig } from './glassConfig';
+import type { GlassConfig } from './glassConfig.types';
 
 // 导航菜单主题配置
 export interface NavigationTheme {
   key: string;
   gradient: string;
   hoverBackground: string;
+  // 毛玻璃样式扩展
+  glass: {
+    blur: string;
+    bgOpacity: number;
+    borderColor: string;
+    activeGlow: string;
+  };
 }
 
-// 导航菜单主题映射
+// 导航菜单主题映射 - 整合毛玻璃风格
 export const navigationThemes: Record<string, NavigationTheme> = {
   timeline: {
     key: 'timeline',
     gradient: 'var(--color-primary-gradient)',
-    hoverBackground: 'rgba(255, 61, 0, 0.1)'
+    hoverBackground: 'rgba(255, 61, 0, 0.15)',
+    glass: {
+      blur: '20px',
+      bgOpacity: 0.7,
+      borderColor: 'rgba(255, 61, 0, 0.2)',
+      activeGlow: '0 0 15px rgba(255, 61, 0, 0.3)'
+    }
   },
   dynasties: {
     key: 'dynasties',
     gradient: 'linear-gradient(135deg, #D32F2F 0%, #F44336 100%)',
-    hoverBackground: 'rgba(211, 47, 47, 0.1)'
+    hoverBackground: 'rgba(211, 47, 47, 0.15)',
+    glass: {
+      blur: '20px',
+      bgOpacity: 0.7,
+      borderColor: 'rgba(211, 47, 47, 0.2)',
+      activeGlow: '0 0 15px rgba(211, 47, 47, 0.3)'
+    }
   },
   map: {
     key: 'map',
     gradient: 'var(--color-secondary-gradient)',
-    hoverBackground: 'rgba(3, 169, 244, 0.1)'
+    hoverBackground: 'rgba(3, 169, 244, 0.15)',
+    glass: {
+      blur: '20px',
+      bgOpacity: 0.7,
+      borderColor: 'rgba(3, 169, 244, 0.2)',
+      activeGlow: '0 0 15px rgba(3, 169, 244, 0.3)'
+    }
   },
   people: {
     key: 'people',
     gradient: 'linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%)',
-    hoverBackground: 'rgba(76, 175, 80, 0.1)'
+    hoverBackground: 'rgba(76, 175, 80, 0.15)',
+    glass: {
+      blur: '20px',
+      bgOpacity: 0.7,
+      borderColor: 'rgba(76, 175, 80, 0.2)',
+      activeGlow: '0 0 15px rgba(76, 175, 80, 0.3)'
+    }
   },
   culture: {
     key: 'culture',
     gradient: 'linear-gradient(135deg, #9C27B0 0%, #E91E63 100%)',
-    hoverBackground: 'rgba(156, 39, 176, 0.1)'
+    hoverBackground: 'rgba(156, 39, 176, 0.15)',
+    glass: {
+      blur: '20px',
+      bgOpacity: 0.7,
+      borderColor: 'rgba(156, 39, 176, 0.2)',
+      activeGlow: '0 0 15px rgba(156, 39, 176, 0.3)'
+    }
   },
   mythology: {
     key: 'mythology',
     gradient: 'linear-gradient(135deg, #FF9800 0%, #FFC107 100%)',
-    hoverBackground: 'rgba(255, 152, 0, 0.1)'
+    hoverBackground: 'rgba(255, 152, 0, 0.15)',
+    glass: {
+      blur: '20px',
+      bgOpacity: 0.7,
+      borderColor: 'rgba(255, 152, 0, 0.2)',
+      activeGlow: '0 0 15px rgba(255, 152, 0, 0.3)'
+    }
   },
   events: {
     key: 'events',
     gradient: 'linear-gradient(135deg, #607D8B 0%, #90A4AE 100%)',
-    hoverBackground: 'rgba(96, 125, 139, 0.1)'
+    hoverBackground: 'rgba(96, 125, 139, 0.15)',
+    glass: {
+      blur: '20px',
+      bgOpacity: 0.7,
+      borderColor: 'rgba(96, 125, 139, 0.2)',
+      activeGlow: '0 0 15px rgba(96, 125, 139, 0.3)'
+    }
   }
 };
 
@@ -55,7 +110,7 @@ export const getNavigationTheme = (key: string): NavigationTheme => {
   return theme || navigationThemes['timeline']!;
 };
 
-// 颜色配置
+// 颜色配置 - 更新为毛玻璃友好的半透明色
 export const colors = {
   // 主色调
   primary: '#FF3D00',
@@ -94,24 +149,34 @@ export const colors = {
     disabled: '#BDBDBD'
   },
   
-  // 背景色
+  // 背景色 - 毛玻璃友好的半透明色
   background: {
     default: '#FAFAFA',
     paper: '#FFFFFF',
     hover: '#F8F9FA',
     evenRow: '#FAFAFA',
-    dynastyCell: '#E8F5E8'
+    dynastyCell: '#E8F5E8',
+    // 毛玻璃背景色
+    glass: 'rgba(255, 255, 255, 0.6)',
+    glassDark: 'rgba(30, 30, 30, 0.7)',
+    glassLight: 'rgba(255, 255, 255, 0.3)',
+    glassHover: 'rgba(255, 255, 255, 0.75)',
+    glassActive: 'rgba(255, 255, 255, 0.85)'
   },
   
-  // 边框色
+  // 边框色 - 毛玻璃友好的半透明色
   border: {
     light: '#E0E0E0',
     medium: '#E3F2FD',
-    dark: '#BDBDBD'
+    dark: '#BDBDBD',
+    // 毛玻璃边框色
+    glass: 'rgba(255, 255, 255, 0.18)',
+    glassDark: 'rgba(255, 255, 255, 0.1)',
+    glassLight: 'rgba(255, 255, 255, 0.25)'
   }
 };
 
-// 渐变配置
+// 渐变配置 - 整合毛玻璃风格渐变
 export const gradients = {
   primary: 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)',
   secondary: 'linear-gradient(135deg, #03A9F4 0%, #4FC3F7 100%)',
@@ -122,10 +187,15 @@ export const gradients = {
   events: 'linear-gradient(135deg, #607D8B 0%, #90A4AE 100%)',
   sidebar: 'linear-gradient(135deg, rgba(255,61,0,0.1) 0%, rgba(3,169,244,0.1) 100%)',
   sidebarHover: 'linear-gradient(135deg, rgba(255,61,0,0.2) 0%, rgba(3,169,244,0.2) 100%)',
-  tableHeader: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)'
+  tableHeader: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
+  // 毛玻璃渐变
+  glass: 'linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.3) 100%)',
+  glassDark: 'linear-gradient(135deg, rgba(30, 30, 30, 0.7) 0%, rgba(30, 30, 30, 0.5) 100%)',
+  glassShimmer: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%)',
+  glassOverlay: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%)'
 };
 
-// 阴影配置
+// 阴影配置 - 更新为毛玻璃风格
 export const shadows = {
   sm: '0 1px 2px rgba(0, 0, 0, 0.05)',
   md: '0 4px 6px rgba(0, 0, 0, 0.1)',
@@ -133,7 +203,19 @@ export const shadows = {
   xl: '0 20px 25px rgba(0, 0, 0, 0.15)',
   glow: '0 0 20px rgba(255, 61, 0, 0.5)',
   glowBlue: '0 0 20px rgba(3, 169, 244, 0.5)',
-  table: '0 4px 20px rgba(0,0,0,0.1)'
+  table: '0 4px 20px rgba(0,0,0,0.1)',
+  // 毛玻璃阴影
+  glass: {
+    sm: '0 2px 8px rgba(0, 0, 0, 0.1)',
+    md: '0 4px 16px rgba(0, 0, 0, 0.12)',
+    lg: '0 8px 32px rgba(0, 0, 0, 0.15)',
+    glow: '0 0 20px rgba(255, 255, 255, 0.1)',
+    inset: 'inset 0 1px 1px rgba(255, 255, 255, 0.1)',
+    // 组合阴影 - 毛玻璃深度效果
+    card: '0 4px 16px rgba(0, 0, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.1)',
+    button: '0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.1)',
+    nav: '0 4px 24px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.1)'
+  }
 };
 
 // 圆角配置
@@ -257,7 +339,64 @@ export const dynastyColorUtils = {
   getDynastyGlow: (color: string | undefined, intensity: number = 0.3): string => {
     const dynastyColor = color || dynastyColors.default;
     return `0 0 20px ${dynastyColorUtils.getDynastyColorWithAlpha(dynastyColor, intensity)}`;
+  },
+  
+  // 获取朝代毛玻璃背景色
+  getDynastyGlassBackground: (color: string | undefined, opacity: number = 0.6): string => {
+    return dynastyColorUtils.getDynastyColorWithAlpha(color, opacity);
   }
+};
+
+// 毛玻璃主题配置
+export const glassTheme = {
+  // 获取当前配置（根据屏幕宽度）
+  getConfig: (screenWidth?: number): GlassConfig => {
+    return getGlassConfig(screenWidth ?? (typeof window !== 'undefined' ? window.innerWidth : 1024));
+  },
+  
+  // 桌面端配置
+  desktop: desktopConfig,
+  
+  // 移动端配置
+  mobile: mobileConfig,
+  
+  // 毛玻璃背景样式
+  backgrounds: {
+    card: `rgba(255, 255, 255, ${desktopConfig.components.card.bgOpacity})`,
+    navigation: `rgba(255, 255, 255, ${desktopConfig.components.navigation.bgOpacity})`,
+    modal: `rgba(255, 255, 255, ${desktopConfig.components.modal.content.bgOpacity})`,
+    tooltip: `rgba(255, 255, 255, ${desktopConfig.components.tooltip.bgOpacity})`,
+    dropdown: `rgba(255, 255, 255, ${desktopConfig.components.dropdown.bgOpacity})`
+  },
+  
+  // 毛玻璃模糊值
+  blur: desktopConfig.blur,
+  
+  // 毛玻璃边框
+  border: desktopConfig.border,
+  
+  // 毛玻璃阴影
+  shadow: desktopConfig.shadow,
+  
+  // 毛玻璃动画
+  animation: desktopConfig.animation
+};
+
+// 获取导航项毛玻璃样式
+export const getNavigationGlassStyle = (key: string, isActive: boolean = false) => {
+  const navTheme = getNavigationTheme(key);
+  const config = glassTheme.getConfig();
+  
+  return {
+    backdropFilter: `blur(${navTheme.glass.blur})`,
+    WebkitBackdropFilter: `blur(${navTheme.glass.blur})`,
+    backgroundColor: isActive 
+      ? `rgba(255, 255, 255, ${navTheme.glass.bgOpacity + 0.1})`
+      : `rgba(255, 255, 255, ${navTheme.glass.bgOpacity})`,
+    border: `${config.border.width} solid ${navTheme.glass.borderColor}`,
+    boxShadow: isActive ? navTheme.glass.activeGlow : config.shadow.sm,
+    transition: `all ${config.animation.duration.normal} ${config.animation.easing}`
+  };
 };
 
 // 导出默认主题
@@ -273,7 +412,10 @@ export const theme = {
   navigationThemes,
   getNavigationTheme,
   dynastyColors,
-  dynastyColorUtils
+  dynastyColorUtils,
+  // 毛玻璃主题
+  glass: glassTheme,
+  getNavigationGlassStyle
 };
 
 export default theme;

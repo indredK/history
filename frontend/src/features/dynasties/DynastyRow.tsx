@@ -85,13 +85,15 @@ const RulerRow = memo(({
   isSmallMobile?: boolean | undefined;
 }) => (
   <TableRow hover sx={tableStyles.tableRow}>
-    {/* 朝代列 - 移动端固定 */}
+    {/* 朝代列 - 移动端固定，毛玻璃效果 */}
     {isFirstYearName && (
       <TableCell 
         sx={{ 
           ...tableStyles.dynastyCell,
           ...tableStyles.bodyCell,
-          backgroundColor: '#f8f9fa',
+          backgroundColor: 'rgba(248, 249, 250, 0.7)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
           ...(isMobile && {
             position: 'sticky',
             left: 0,
@@ -408,11 +410,15 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle, isMobile, isSma
         sx={{ 
           ...tableStyles.bodyCell, 
           fontStyle: 'italic', 
-          color: '#666',
+          color: '#555',
           cursor: 'pointer',
-          transition: 'background-color 0.2s ease-in-out',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          backgroundColor: 'rgba(255, 255, 255, 0.4)',
+          transition: 'all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
           '&:hover': {
-            backgroundColor: '#f0f0f0'
+            backgroundColor: 'rgba(255, 255, 255, 0.6)',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)'
           },
           ...(isMobile && {
             fontSize: isSmallMobile ? '0.6rem' : '0.7rem',

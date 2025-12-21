@@ -10,6 +10,7 @@ export {
   useOrientation, 
   useViewport 
 } from './useResponsive';
+export { useGlassStyle, useComponentGlassStyle } from './useGlassStyle';
 export type { 
   UseHoverScrollOptions, 
   UseHoverScrollReturn,
@@ -19,3 +20,4 @@ export type {
 } from './useHoverScroll';
 export type { FetchOptions, FetchResult } from './useDataFetch';
 export type { ResponsiveState, Breakpoints } from './useResponsive';
+export type { GlassStyleOptions, GlassStyleResult } from './useGlassStyle';

@@ -1,4 +1,5 @@
 /* 移动端适配样式 */
+/* Requirements: 9.1, 9.3, 9.4 - 移动端毛玻璃风格适配 */
 
 /* 移动端断点定义 */
 :root {
@@ -23,6 +24,10 @@
   
   /* 移动端触摸目标最小尺寸 */
   --touch-target-min: 44px;
+  
+  /* 移动端毛玻璃触摸反馈变量 */
+  --mobile-touch-feedback-opacity: 0.15;
+  --mobile-touch-feedback-duration: 100ms;
 }
 
 /* 基础移动端适配 */
@@ -51,11 +56,21 @@
     overflow-x: hidden;
   }
   
-  /* 表格容器适配 */
+  /* ============================================
+     移动端表格容器毛玻璃风格
+     Requirements: 9.1, 9.3
+     ============================================ */
   .MuiTableContainer-root {
     max-width: 100vw;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    /* 毛玻璃效果 */
+    backdrop-filter: blur(var(--glass-table-container-blur, 8px));
+    -webkit-backdrop-filter: blur(var(--glass-table-container-blur, 8px));
+    background-color: rgba(30, 30, 30, var(--glass-table-container-bg-opacity, 0.6));
+    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
+    border-radius: var(--glass-radius-md, 10px);
+    box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1));
   }
   
   /* 表格适配 */
@@ -64,12 +79,17 @@
     font-size: var(--mobile-font-sm);
   }
   
-  /* 表格头部 */
+  /* 表格头部 - 毛玻璃风格 */
   .MuiTableHead-root .MuiTableCell-root {
     padding: 6px 8px;
     font-size: var(--mobile-font-xs);
     font-weight: 600;
     white-space: nowrap;
+    /* 毛玻璃效果 */
+    backdrop-filter: blur(var(--glass-table-header-blur, 10px));
+    -webkit-backdrop-filter: blur(var(--glass-table-header-blur, 10px));
+    background-color: rgba(30, 30, 30, var(--glass-table-header-bg-opacity, 0.75));
+    border-bottom: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
   }
   
   /* 表格单元格 */
@@ -77,16 +97,27 @@
     padding: 8px 6px;
     font-size: var(--mobile-font-sm);
     border-right: 1px solid rgba(255,255,255,0.1);
+    /* 毛玻璃行背景 */
+    background-color: rgba(30, 30, 30, var(--glass-table-row-bg-opacity, 0.4));
+    transition: background-color var(--glass-duration-hover, 100ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
   }
   
-  /* 朝代名称列 */
+  /* 表格行悬停效果 */
+  .MuiTableRow-root:hover .MuiTableCell-root {
+    background-color: rgba(30, 30, 30, var(--glass-table-row-hover-opacity, 0.55));
+  }
+  
+  /* 朝代名称列 - 毛玻璃粘性列 */
   .MuiTableCell-root:first-child {
     position: sticky;
     left: 0;
-    background: var(--color-bg-card);
+    backdrop-filter: blur(var(--glass-table-header-blur, 10px));
+    -webkit-backdrop-filter: blur(var(--glass-table-header-blur, 10px));
+    background-color: rgba(30, 30, 30, var(--glass-table-header-bg-opacity, 0.75));
     z-index: 10;
     min-width: 80px;
     max-width: 100px;
+    border-right: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
   }
   
   /* 时期列 */
@@ -100,24 +131,72 @@
     min-width: 200px;
   }
   
-  /* 按钮适配 */
+  /* ============================================
+     移动端按钮毛玻璃风格
+     Requirements: 9.3
+     ============================================ */
   .MuiButton-root {
     min-height: var(--touch-target-min);
     padding: 8px 12px;
     font-size: var(--mobile-font-sm);
+    /* 毛玻璃效果 */
+    backdrop-filter: blur(var(--glass-btn-primary-blur, 8px));
+    -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur, 8px));
+    background-color: rgba(30, 30, 30, var(--glass-btn-primary-bg-opacity, 0.75));
+    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
+    border-radius: var(--glass-radius-md, 10px);
+    box-shadow: var(--glass-shadow-sm, 0 1px 4px rgba(0, 0, 0, 0.08));
+    transition: all var(--glass-duration-normal, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
   }
   
-  /* 图标按钮 */
+  .MuiButton-root:hover {
+    background-color: rgba(30, 30, 30, calc(var(--glass-btn-primary-bg-opacity, 0.75) + 0.1));
+    box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1));
+  }
+  
+  .MuiButton-root:active {
+    background-color: rgba(30, 30, 30, calc(var(--glass-btn-primary-bg-opacity, 0.75) - 0.05));
+    transform: scale(0.98);
+  }
+  
+  /* 图标按钮 - 毛玻璃风格 */
   .MuiIconButton-root {
     width: var(--touch-target-min);
     height: var(--touch-target-min);
     padding: 8px;
+    /* 毛玻璃效果 */
+    backdrop-filter: blur(var(--glass-btn-icon-blur, 6px));
+    -webkit-backdrop-filter: blur(var(--glass-btn-icon-blur, 6px));
+    background-color: rgba(30, 30, 30, var(--glass-btn-icon-bg-opacity, 0.5));
+    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
+    border-radius: var(--glass-radius-full, 9999px);
+    transition: all var(--glass-duration-normal, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
   }
   
-  /* 纸张组件 */
+  .MuiIconButton-root:hover {
+    background-color: rgba(30, 30, 30, calc(var(--glass-btn-icon-bg-opacity, 0.5) + 0.15));
+    box-shadow: var(--glass-shadow-glow, 0 0 12px rgba(255, 255, 255, 0.08));
+  }
+  
+  /* ============================================
+     移动端卡片毛玻璃风格
+     Requirements: 9.3
+     ============================================ */
   .MuiPaper-root {
     margin: var(--mobile-margin);
-    border-radius: 8px;
+    /* 毛玻璃效果 */
+    backdrop-filter: blur(var(--glass-card-blur, 8px));
+    -webkit-backdrop-filter: blur(var(--glass-card-blur, 8px));
+    background-color: rgba(30, 30, 30, var(--glass-card-bg-opacity, 0.7));
+    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
+    border-radius: var(--glass-radius-md, 10px);
+    box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1));
+    transition: all var(--glass-duration-normal, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
+  }
+  
+  .MuiPaper-root:hover {
+    background-color: rgba(30, 30, 30, calc(var(--glass-card-bg-opacity, 0.7) + var(--glass-card-hover-delta, 0.08)));
+    box-shadow: var(--glass-shadow-lg, 0 4px 16px rgba(0, 0, 0, 0.12));
   }
   
   /* 排版组件 */
@@ -168,15 +247,31 @@
     font-size: 0.65rem;
   }
   
-  /* 朝代名称列更窄 */
+  /* 朝代名称列更窄 - 保持毛玻璃效果 */
   .MuiTableCell-root:first-child {
     min-width: 60px;
     max-width: 80px;
+    backdrop-filter: blur(var(--glass-table-header-blur, 10px));
+    -webkit-backdrop-filter: blur(var(--glass-table-header-blur, 10px));
+    background-color: rgba(30, 30, 30, var(--glass-table-header-bg-opacity, 0.75));
   }
   
   /* 时期列更窄 */
   .MuiTableCell-root:nth-child(2) {
     min-width: 100px;
+  }
+  
+  /* 小屏卡片毛玻璃优化 */
+  .MuiPaper-root {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    background-color: rgba(30, 30, 30, 0.75);
+  }
+  
+  /* 小屏按钮毛玻璃优化 */
+  .MuiButton-root {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 }
 
@@ -211,15 +306,43 @@
   }
 }
 
-/* 触摸设备优化 */
+/* 触摸设备优化 - 毛玻璃触摸反馈 */
+/* Requirements: 9.4 */
 @media (hover: none) and (pointer: coarse) {
   /* 移除悬停效果，使用点击效果 */
   .MuiTableRow-root:hover {
     background-color: transparent;
   }
   
+  /* 毛玻璃触摸反馈效果 */
   .MuiTableRow-root:active {
-    background-color: rgba(255, 61, 0, 0.1);
+    background-color: rgba(255, 61, 0, var(--mobile-touch-feedback-opacity, 0.15));
+    transition: background-color var(--mobile-touch-feedback-duration, 100ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
+  }
+  
+  .MuiTableRow-root:active .MuiTableCell-root {
+    background-color: rgba(255, 61, 0, var(--mobile-touch-feedback-opacity, 0.15));
+  }
+  
+  /* 按钮触摸反馈 */
+  .MuiButton-root:active {
+    background-color: rgba(255, 61, 0, 0.3);
+    transform: scale(0.96);
+    box-shadow: var(--glass-shadow-sm, 0 1px 4px rgba(0, 0, 0, 0.08));
+  }
+  
+  /* 图标按钮触摸反馈 */
+  .MuiIconButton-root:active {
+    background-color: rgba(255, 61, 0, 0.25);
+    transform: scale(0.92);
+    box-shadow: 0 0 8px rgba(255, 61, 0, 0.3);
+  }
+  
+  /* 卡片触摸反馈 */
+  .MuiPaper-root:active {
+    background-color: rgba(30, 30, 30, calc(var(--glass-card-bg-opacity, 0.7) + 0.1));
+    transform: scale(0.99);
+    box-shadow: var(--glass-shadow-lg, 0 4px 16px rgba(0, 0, 0, 0.12));
   }
   
   /* 增大可点击区域 */
@@ -304,11 +427,17 @@
   }
 }
 
-/* 移动端表格优化 */
+/* 移动端表格优化 - 毛玻璃风格 */
 .mobile-table-wrapper {
   position: relative;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  /* 毛玻璃效果 */
+  backdrop-filter: blur(var(--glass-table-container-blur, 8px));
+  -webkit-backdrop-filter: blur(var(--glass-table-container-blur, 8px));
+  background-color: rgba(30, 30, 30, var(--glass-table-container-bg-opacity, 0.6));
+  border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
+  border-radius: var(--glass-radius-md, 10px);
 }
 
 .mobile-table-wrapper::before {
@@ -318,9 +447,10 @@
   right: 0;
   width: 20px;
   height: 100%;
-  background: linear-gradient(to left, rgba(0,0,0,0.1), transparent);
+  background: linear-gradient(to left, rgba(30, 30, 30, 0.6), transparent);
   pointer-events: none;
   z-index: 1;
+  border-radius: 0 var(--glass-radius-md, 10px) var(--glass-radius-md, 10px) 0;
 }
 
 /* 移动端加载状态 */
@@ -343,7 +473,7 @@
   }
 }
 
-/* 移动端滚动指示器 */
+/* 移动端滚动指示器 - 毛玻璃风格 */
 .scroll-indicator {
   display: none;
 }
@@ -356,23 +486,32 @@
     right: 20px;
     width: 40px;
     height: 40px;
-    background: var(--color-primary-gradient);
-    border-radius: 50%;
+    /* 毛玻璃效果 */
+    backdrop-filter: blur(var(--glass-btn-icon-blur, 6px));
+    -webkit-backdrop-filter: blur(var(--glass-btn-icon-blur, 6px));
+    background: linear-gradient(135deg, rgba(255, 61, 0, 0.8) 0%, rgba(255, 111, 61, 0.8) 100%);
+    border: var(--glass-border-width, 0.5px) solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--glass-radius-full, 9999px);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-size: 18px;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--glass-shadow-lg, 0 4px 16px rgba(0, 0, 0, 0.12)), 0 0 20px rgba(255, 61, 0, 0.3);
     z-index: 1000;
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.3s ease;
+    transition: all var(--glass-duration-normal, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
   }
   
   .scroll-indicator.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+  
+  .scroll-indicator:active {
+    transform: scale(0.92);
+    box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1)), 0 0 15px rgba(255, 61, 0, 0.4);
   }
 }
 
@@ -383,7 +522,7 @@
   user-select: none;
 }
 
-/* 移动端性能优化 */
+/* 移动端性能优化 - 毛玻璃优化 */
 @media (max-width: 768px) {
   * {
     -webkit-transform: translateZ(0);
@@ -394,10 +533,19 @@
   
   .MuiTableContainer-root {
     will-change: scroll-position;
+    contain: layout style;
   }
   
   .MuiTableRow-root {
     will-change: background-color;
+  }
+  
+  /* 毛玻璃组件性能优化 */
+  .MuiPaper-root,
+  .MuiButton-root,
+  .MuiIconButton-root {
+    will-change: opacity, transform;
+    contain: layout style;
   }
 }
 

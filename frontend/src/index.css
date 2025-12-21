@@ -1,5 +1,7 @@
 /* 中国历史全景 - 全局设计系统 */
 
+/* 导入毛玻璃样式系统 */
+@import './styles/glass.css';
 /* 导入移动端适配样式 */
 @import './styles/mobile.css';
 /* 导入竖屏布局优化样式 */
@@ -194,7 +196,6 @@ body {
   height: 100vh; /* 确保body占满视口高度 */
   margin: 0; /* 移除默认边距 */
   padding: 0; /* 移除默认内边距 */
-  animation: backgroundShift 15s ease infinite;
   /* 移动端防滚动 */
   overscroll-behavior: none;
   -webkit-overscroll-behavior: none;
@@ -310,70 +311,44 @@ input:hover, textarea:hover, select:hover {
   box-shadow: 0 0 0 2px rgba(255, 61, 0, 0.1);
 }
 
-/* 炫酷滚动条样式 - 全局 */
+/* 毛玻璃滚动条样式 - 全局 */
 ::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: linear-gradient(180deg, 
-    var(--color-bg-tertiary) 0%, 
-    rgba(255, 61, 0, 0.15) 25%,
-    var(--color-bg-secondary) 50%, 
-    rgba(156, 39, 176, 0.15) 75%,
-    var(--color-bg-tertiary) 100%);
-  background-size: 100% 200%;
-  border-radius: var(--radius-full);
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background: rgba(30, 30, 30, var(--glass-scrollbar-track-opacity));
+  border-radius: var(--glass-radius-full);
+  backdrop-filter: blur(var(--glass-blur-light));
+  -webkit-backdrop-filter: blur(var(--glass-blur-light));
   margin: 4px 0;
-  animation: scrollbarTrackFlowVertical 4s ease-in-out infinite;
-}
-
-@keyframes scrollbarTrackFlowVertical {
-  0%, 100% {
-    background-position: 50% 0%;
-  }
-  50% {
-    background-position: 50% 100%;
-  }
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary-gradient);
-  border-radius: var(--radius-full);
-  border: 2px solid var(--color-bg-secondary);
-  box-shadow: 
-    0 0 10px rgba(255, 61, 0, 0.5),
-    0 0 20px rgba(255, 61, 0, 0.3),
-    inset 0 0 6px rgba(255, 255, 255, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, var(--glass-scrollbar-thumb-opacity));
+  border-radius: var(--glass-radius-full);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(var(--glass-blur-medium));
+  -webkit-backdrop-filter: blur(var(--glass-blur-medium));
+  box-shadow: var(--glass-shadow-sm), var(--glass-shadow-inset);
+  transition: all var(--glass-duration-normal) var(--glass-easing);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #FF6F3D 0%, #FF3D00 50%, #FF6F3D 100%);
-  box-shadow: 
-    0 0 15px rgba(255, 61, 0, 0.8),
-    0 0 30px rgba(255, 61, 0, 0.5),
-    0 0 45px rgba(255, 61, 0, 0.3),
-    inset 0 0 8px rgba(255, 255, 255, 0.3);
-  transform: scale(1.15);
-  border-color: var(--color-bg-card);
+  background: rgba(255, 255, 255, calc(var(--glass-scrollbar-thumb-opacity) + 0.15));
+  box-shadow: var(--glass-shadow-md), var(--glass-shadow-glow);
 }
 
 ::-webkit-scrollbar-thumb:active {
-  background: var(--color-primary);
-  box-shadow: 
-    0 0 20px rgba(255, 61, 0, 1),
-    0 0 40px rgba(255, 61, 0, 0.7),
-    inset 0 0 10px rgba(255, 255, 255, 0.4);
-  transform: scale(1.1);
+  background: rgba(255, 255, 255, calc(var(--glass-scrollbar-thumb-opacity) + 0.2));
+  box-shadow: var(--glass-shadow-lg);
 }
 
 /* 滚动条角落样式 */
 ::-webkit-scrollbar-corner {
-  background: var(--color-bg-tertiary);
-  border-radius: var(--radius-md);
+  background: rgba(30, 30, 30, var(--glass-scrollbar-track-opacity));
+  border-radius: var(--glass-radius-md);
 }
 
 /* 选择文本样式 */
@@ -594,6 +569,298 @@ input:hover, textarea:hover, select:hover {
   }
 }
 
+/* ============================================
+   毛玻璃动画 (Glassmorphism Animations)
+   Requirements: 12.1, 12.2, 12.3, 12.4, 12.5
+   ============================================ */
+
+/**
+ * 模糊渐变动画 - 从无模糊到完全模糊
+ * Blur gradient animation - from no blur to full blur
+ * Requirements: 12.2
+ */
+@keyframes glassBlurIn {
+  0% {
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  100% {
+    backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    -webkit-backdrop-filter: blur(var(--glass-blur-medium, 20px));
+  }
+}
+
+@keyframes glassBlurOut {
+  0% {
+    backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    -webkit-backdrop-filter: blur(var(--glass-blur-medium, 20px));
+  }
+  100% {
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+}
+
+/**
+ * 模糊强度脉冲动画
+ * Blur intensity pulse animation
+ * Requirements: 12.2
+ */
+@keyframes glassBlurPulse {
+  0%, 100% {
+    backdrop-filter: blur(var(--glass-blur-light, 12px));
+    -webkit-backdrop-filter: blur(var(--glass-blur-light, 12px));
+  }
+  50% {
+    backdrop-filter: blur(var(--glass-blur-heavy, 32px));
+    -webkit-backdrop-filter: blur(var(--glass-blur-heavy, 32px));
+  }
+}
+
+/**
+ * 透明度过渡动画 - 淡入
+ * Opacity transition animation - fade in
+ * Requirements: 12.3
+ */
+@keyframes glassOpacityIn {
+  0% {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0);
+  }
+  100% {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, var(--glass-bg-opacity-medium, 0.5));
+  }
+}
+
+@keyframes glassOpacityOut {
+  0% {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, var(--glass-bg-opacity-medium, 0.5));
+  }
+  100% {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
+
+/**
+ * 深色毛玻璃透明度动画
+ * Dark glassmorphism opacity animation
+ * Requirements: 12.3
+ */
+@keyframes glassDarkOpacityIn {
+  0% {
+    opacity: 0;
+    background-color: rgba(30, 30, 30, 0);
+  }
+  100% {
+    opacity: 1;
+    background-color: rgba(30, 30, 30, var(--glass-bg-opacity-medium, 0.5));
+  }
+}
+
+/**
+ * 毛玻璃元素进入动画 - 组合模糊和透明度
+ * Glassmorphism element enter animation - combined blur and opacity
+ * Requirements: 12.4
+ */
+@keyframes glassEnter {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    background-color: rgba(255, 255, 255, 0);
+    transform: scale(0.95) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    -webkit-backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    background-color: rgba(255, 255, 255, var(--glass-bg-opacity-medium, 0.5));
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes glassEnterUp {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    -webkit-backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    transform: translateY(0);
+  }
+}
+
+@keyframes glassEnterDown {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    -webkit-backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    transform: translateY(0);
+  }
+}
+
+@keyframes glassEnterLeft {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    -webkit-backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    transform: translateX(0);
+  }
+}
+
+@keyframes glassEnterRight {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    -webkit-backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    transform: translateX(0);
+  }
+}
+
+/**
+ * 毛玻璃元素退出动画
+ * Glassmorphism element exit animation
+ * Requirements: 12.4
+ */
+@keyframes glassExit {
+  0% {
+    opacity: 1;
+    backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    -webkit-backdrop-filter: blur(var(--glass-blur-medium, 20px));
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transform: scale(0.95);
+  }
+}
+
+/**
+ * 毛玻璃悬停发光动画
+ * Glassmorphism hover glow animation
+ * Requirements: 12.5
+ */
+@keyframes glassGlow {
+  0%, 100% {
+    box-shadow: var(--glass-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12));
+  }
+  50% {
+    box-shadow: var(--glass-shadow-lg, 0 8px 32px rgba(0, 0, 0, 0.15)), 
+                var(--glass-shadow-glow, 0 0 20px rgba(255, 255, 255, 0.1));
+  }
+}
+
+/**
+ * 毛玻璃边框发光动画
+ * Glassmorphism border glow animation
+ * Requirements: 12.5
+ */
+@keyframes glassBorderGlow {
+  0%, 100% {
+    border-color: var(--glass-border-color, rgba(255, 255, 255, 0.18));
+  }
+  50% {
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+}
+
+/**
+ * 毛玻璃呼吸动画 - 透明度微变
+ * Glassmorphism breathing animation - subtle opacity change
+ * Requirements: 12.3, 12.5
+ */
+@keyframes glassBreathing {
+  0%, 100% {
+    background-color: rgba(255, 255, 255, var(--glass-bg-opacity-medium, 0.5));
+  }
+  50% {
+    background-color: rgba(255, 255, 255, calc(var(--glass-bg-opacity-medium, 0.5) + 0.1));
+  }
+}
+
+/**
+ * 毛玻璃模态框进入动画
+ * Glassmorphism modal enter animation
+ * Requirements: 12.4
+ */
+@keyframes glassModalEnter {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(var(--glass-modal-content-blur, 20px));
+    -webkit-backdrop-filter: blur(var(--glass-modal-content-blur, 20px));
+    transform: scale(1);
+  }
+}
+
+/**
+ * 毛玻璃背景遮罩进入动画
+ * Glassmorphism backdrop enter animation
+ * Requirements: 12.4
+ */
+@keyframes glassBackdropEnter {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(var(--glass-modal-backdrop-blur, 24px));
+    -webkit-backdrop-filter: blur(var(--glass-modal-backdrop-blur, 24px));
+  }
+}
+
+/**
+ * 毛玻璃涟漪效果动画
+ * Glassmorphism ripple effect animation
+ * Requirements: 12.5
+ */
+@keyframes glassRipple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
+
 /* 动画工具类 */
 .animate-fadeIn {
   animation: fadeIn 0.5s ease-out;
@@ -664,6 +931,237 @@ input:hover, textarea:hover, select:hover {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   background-size: 1000px 100%;
   animation: shimmer 1.5s infinite;
+}
+
+/* ============================================
+   毛玻璃动画工具类 (Glassmorphism Animation Utilities)
+   Requirements: 12.1, 12.2, 12.3, 12.4, 12.5
+   ============================================ */
+
+/**
+ * 模糊渐变动画类
+ * Blur gradient animation classes
+ * Requirements: 12.2
+ */
+.animate-glassBlurIn {
+  animation: glassBlurIn var(--glass-duration-blur, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) forwards;
+}
+
+.animate-glassBlurOut {
+  animation: glassBlurOut var(--glass-duration-blur, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) forwards;
+}
+
+.animate-glassBlurPulse {
+  animation: glassBlurPulse 3s var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) infinite;
+}
+
+/**
+ * 透明度过渡动画类
+ * Opacity transition animation classes
+ * Requirements: 12.3
+ */
+.animate-glassOpacityIn {
+  animation: glassOpacityIn var(--glass-duration-opacity, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) forwards;
+}
+
+.animate-glassOpacityOut {
+  animation: glassOpacityOut var(--glass-duration-opacity, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) forwards;
+}
+
+.animate-glassDarkOpacityIn {
+  animation: glassDarkOpacityIn var(--glass-duration-opacity, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) forwards;
+}
+
+/**
+ * 毛玻璃元素进入动画类
+ * Glassmorphism element enter animation classes
+ * Requirements: 12.4
+ */
+.animate-glassEnter {
+  animation: glassEnter var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) forwards;
+}
+
+.animate-glassEnterUp {
+  animation: glassEnterUp var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) forwards;
+}
+
+.animate-glassEnterDown {
+  animation: glassEnterDown var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) forwards;
+}
+
+.animate-glassEnterLeft {
+  animation: glassEnterLeft var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) forwards;
+}
+
+.animate-glassEnterRight {
+  animation: glassEnterRight var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) forwards;
+}
+
+.animate-glassExit {
+  animation: glassExit var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) forwards;
+}
+
+/**
+ * 毛玻璃悬停动画类
+ * Glassmorphism hover animation classes
+ * Requirements: 12.5
+ */
+.animate-glassGlow {
+  animation: glassGlow 2s var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) infinite;
+}
+
+.animate-glassBorderGlow {
+  animation: glassBorderGlow 2s var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) infinite;
+}
+
+.animate-glassBreathing {
+  animation: glassBreathing 3s var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) infinite;
+}
+
+/**
+ * 毛玻璃模态框动画类
+ * Glassmorphism modal animation classes
+ * Requirements: 12.4
+ */
+.animate-glassModalEnter {
+  animation: glassModalEnter var(--glass-duration-slow, 350ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) forwards;
+}
+
+.animate-glassBackdropEnter {
+  animation: glassBackdropEnter var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) forwards;
+}
+
+/**
+ * 毛玻璃涟漪效果类
+ * Glassmorphism ripple effect class
+ * Requirements: 12.5
+ */
+.glass-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  pointer-events: none;
+}
+
+.glass-ripple:active::after {
+  animation: glassRipple var(--glass-duration-slow, 350ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+/**
+ * 毛玻璃悬停过渡效果
+ * Glassmorphism hover transition effects
+ * Requirements: 12.1, 12.5
+ */
+.glass-hover-transition {
+  transition: 
+    backdrop-filter var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    -webkit-backdrop-filter var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    background-color var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    box-shadow var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    transform var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    border-color var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.glass-hover-transition:hover {
+  background-color: rgba(255, 255, 255, calc(var(--glass-bg-opacity-medium, 0.5) + 0.1));
+  box-shadow: var(--glass-shadow-lg, 0 8px 32px rgba(0, 0, 0, 0.15));
+  transform: translateY(-2px);
+}
+
+/**
+ * 毛玻璃模糊过渡效果
+ * Glassmorphism blur transition effects
+ * Requirements: 12.1, 12.2
+ */
+.glass-blur-transition {
+  transition: 
+    backdrop-filter var(--glass-duration-blur, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    -webkit-backdrop-filter var(--glass-duration-blur, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+/**
+ * 毛玻璃透明度过渡效果
+ * Glassmorphism opacity transition effects
+ * Requirements: 12.1, 12.3
+ */
+.glass-opacity-transition {
+  transition: 
+    background-color var(--glass-duration-opacity, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    opacity var(--glass-duration-opacity, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+/**
+ * 毛玻璃完整过渡效果（组合所有属性）
+ * Glassmorphism full transition effects (combined)
+ * Requirements: 12.1
+ */
+.glass-full-transition {
+  transition: 
+    backdrop-filter var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    -webkit-backdrop-filter var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    background-color var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    opacity var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    box-shadow var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    transform var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)),
+    border-color var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+/**
+ * 延迟动画类 - 用于交错动画效果
+ * Delay animation classes - for staggered animation effects
+ * Requirements: 12.4
+ */
+.glass-delay-100 { animation-delay: 100ms; }
+.glass-delay-200 { animation-delay: 200ms; }
+.glass-delay-300 { animation-delay: 300ms; }
+.glass-delay-400 { animation-delay: 400ms; }
+.glass-delay-500 { animation-delay: 500ms; }
+
+/**
+ * 减少动画偏好支持 - 毛玻璃动画
+ * Reduced motion support - glassmorphism animations
+ */
+@media (prefers-reduced-motion: reduce) {
+  .animate-glassBlurIn,
+  .animate-glassBlurOut,
+  .animate-glassBlurPulse,
+  .animate-glassOpacityIn,
+  .animate-glassOpacityOut,
+  .animate-glassDarkOpacityIn,
+  .animate-glassEnter,
+  .animate-glassEnterUp,
+  .animate-glassEnterDown,
+  .animate-glassEnterLeft,
+  .animate-glassEnterRight,
+  .animate-glassExit,
+  .animate-glassGlow,
+  .animate-glassBorderGlow,
+  .animate-glassBreathing,
+  .animate-glassModalEnter,
+  .animate-glassBackdropEnter {
+    animation: none;
+  }
+
+  .glass-hover-transition,
+  .glass-blur-transition,
+  .glass-opacity-transition,
+  .glass-full-transition {
+    transition: none;
+  }
+
+  .glass-ripple:active::after {
+    animation: none;
+  }
 }
 
 .animate-rotateBorder {

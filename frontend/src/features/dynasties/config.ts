@@ -112,11 +112,14 @@ export const columns: ColumnConfig[] = [
   }
 ];
 
-// 通用样式配置
+// 通用样式配置 - 毛玻璃风格
+// Requirements: 8.1, 8.2, 8.3
 export const tableStyles = {
-  // 表头样式
+  // 表头样式 - 毛玻璃效果
   headerCell: {
-    background: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
+    background: 'rgba(25, 118, 210, 0.75)',
+    backdropFilter: 'blur(var(--glass-table-header-blur, 16px))',
+    WebkitBackdropFilter: 'blur(var(--glass-table-header-blur, 16px))',
     color: 'white',
     fontWeight: 'bold',
     position: 'sticky',
@@ -124,26 +127,40 @@ export const tableStyles = {
     zIndex: 100,
     py: 0.8,
     fontSize: '0.8rem',
-    textAlign: 'center'
+    textAlign: 'center',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
   },
   
-  // 表格单元格样式
+  // 表格单元格样式 - 毛玻璃效果
   bodyCell: {
     py: 0.4,
     px: 1,
-    fontSize: '0.75rem'
+    fontSize: '0.75rem',
+    backgroundColor: 'rgba(255, 255, 255, var(--glass-table-row-bg-opacity, 0.3))',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.15)',
+    transition: 'background-color var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))'
   },
   
-  // 朝代列样式
+  // 朝代列样式 - 毛玻璃效果
   dynastyCell: {
-    borderRight: '2px solid #e3f2fd',
-    verticalAlign: 'top'
+    borderRight: '1px solid rgba(255, 255, 255, 0.2)',
+    verticalAlign: 'top',
+    backdropFilter: 'blur(8px)',
+    WebkitBackdropFilter: 'blur(8px)'
   },
   
-  // 表格行样式
+  // 表格行样式 - 毛玻璃悬停效果
   tableRow: {
-    '&:hover': { backgroundColor: '#f8f9fa' },
-    '&:nth-of-type(even)': { backgroundColor: '#fafafa' }
+    backgroundColor: 'rgba(255, 255, 255, var(--glass-table-row-bg-opacity, 0.3))',
+    transition: 'all var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
+    '&:hover': { 
+      backgroundColor: 'rgba(255, 255, 255, var(--glass-table-row-hover-opacity, 0.5))',
+      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)'
+    },
+    '&:nth-of-type(even)': { 
+      backgroundColor: 'rgba(255, 255, 255, 0.35)'
+    }
   },
   
   // 朝代名称样式
@@ -152,12 +169,13 @@ export const tableStyles = {
     mb: 0.2,
     color: '#2e7d32',
     fontSize: '0.75rem',
-    lineHeight: 1.1
+    lineHeight: 1.1,
+    textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
   },
   
   // 朝代时期样式
   dynastyPeriod: {
-    color: '#666',
+    color: '#555',
     fontSize: '0.65rem',
     fontStyle: 'italic',
     lineHeight: 1
@@ -182,19 +200,24 @@ export const tableStyles = {
     wordBreak: 'break-word'
   },
   
-  // 地图图标按钮样式
+  // 地图图标按钮样式 - 毛玻璃效果
   mapIconButton: {
     p: 0.2,
     minWidth: 'auto',
     width: 24,
     height: 24,
     color: '#1976d2',
-    backgroundColor: 'rgba(25, 118, 210, 0.1)',
-    borderRadius: '4px',
+    backgroundColor: 'rgba(25, 118, 210, 0.15)',
+    backdropFilter: 'blur(4px)',
+    WebkitBackdropFilter: 'blur(4px)',
+    borderRadius: '6px',
+    border: '1px solid rgba(25, 118, 210, 0.2)',
     flexShrink: 0,
+    transition: 'all var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
     '&:hover': {
-      backgroundColor: '#e3f2fd',
-      transform: 'scale(1.1)'
+      backgroundColor: 'rgba(25, 118, 210, 0.25)',
+      transform: 'scale(1.1)',
+      boxShadow: '0 0 12px rgba(25, 118, 210, 0.3)'
     }
   },
   
@@ -206,47 +229,56 @@ export const tableStyles = {
     gap: 0.5
   },
   
-  // 朝代标题行样式
+  // 朝代标题行样式 - 毛玻璃效果
   dynastyHeaderRow: {
-    backgroundColor: '#f5f5f5',
-    borderLeft: '4px solid #1976d2',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    backdropFilter: 'blur(12px)',
+    WebkitBackdropFilter: 'blur(12px)',
+    borderLeft: '4px solid rgba(25, 118, 210, 0.8)',
     cursor: 'pointer',
-    transition: 'all 0.2s ease-in-out',
+    transition: 'all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
     '&:hover': {
-      backgroundColor: '#e8f5e8',
-      borderLeftColor: '#1565c0',
-      transform: 'translateX(1px)'
+      backgroundColor: 'rgba(232, 245, 232, 0.7)',
+      borderLeftColor: 'rgba(21, 101, 192, 0.9)',
+      transform: 'translateX(2px)',
+      boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)'
     }
   },
   
-  // 朝代标题单元格样式
+  // 朝代标题单元格样式 - 毛玻璃效果
   dynastyHeaderCell: {
-    backgroundColor: '#e8f5e8',
+    backgroundColor: 'rgba(232, 245, 232, 0.6)',
+    backdropFilter: 'blur(8px)',
+    WebkitBackdropFilter: 'blur(8px)',
     cursor: 'pointer',
     fontWeight: 'bold',
-    transition: 'all 0.2s ease-in-out',
+    transition: 'all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
     '&:hover': {
-      backgroundColor: '#d4edda',
+      backgroundColor: 'rgba(212, 237, 218, 0.7)',
       transform: 'translateX(2px)',
-      boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
     }
   },
   
   // 展开/收起图标样式
   expandIcon: {
-    transition: 'transform 0.2s ease-in-out',
+    transition: 'transform var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
     color: '#1976d2'
   }
 };
 
-// 表格配置
+// 表格配置 - 毛玻璃风格
+// Requirements: 8.1
 export const tableConfig = {
   minWidth: 1400,
   containerStyles: {
-    boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+    boxShadow: 'var(--glass-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12))',
     overflow: 'auto',
-    borderRadius: 2,
-    border: '1px solid #e0e0e0'
+    borderRadius: 'var(--glass-radius-lg, 16px)',
+    border: '1px solid rgba(255, 255, 255, 0.18)',
+    backdropFilter: 'blur(var(--glass-table-container-blur, 12px))',
+    WebkitBackdropFilter: 'blur(var(--glass-table-container-blur, 12px))',
+    backgroundColor: 'rgba(255, 255, 255, var(--glass-table-container-bg-opacity, 0.5))'
   }
 };
 

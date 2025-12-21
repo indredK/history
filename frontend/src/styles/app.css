@@ -1,12 +1,11 @@
 /* 中国历史全景 - 主应用样式 */
 
-/* 主应用容器 */
+/* 主应用容器 - 毛玻璃风格 */
 .app {
   display: flex;
   flex-direction: column;
   height: 100vh;
   background: var(--color-bg-gradient);
-  /* animation: fadeIn 0.5s ease-out, backgroundShift 15s ease infinite; */
   position: relative;
   overflow: hidden;
 }
@@ -16,24 +15,7 @@ html {
   scroll-behavior: smooth;
 }
 
-
-
-/* 边框发光流动动画 */
-@keyframes borderGlow {
-  0% {
-    background-position: -100% 0;
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    background-position: 100% 0;
-    opacity: 0.8;
-  }
-}
-
-/* 主容器装饰效果 */
+/* 主容器毛玻璃装饰效果 */
 .app::before {
   content: '';
   position: absolute;
@@ -42,27 +24,94 @@ html {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(255, 61, 0, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(3, 169, 244, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(156, 39, 176, 0.1) 0%, transparent 50%);
-  animation: gradientShift 20s ease infinite;
-  z-index: -1;
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+  backdrop-filter: blur(var(--glass-blur-none));
+  -webkit-backdrop-filter: blur(var(--glass-blur-none));
+  pointer-events: none;
+  z-index: 0;
 }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 0%, 100% 100%, 50% 50%;
-  }
-  25% {
-    background-position: 100% 100%, 0% 0%, 0% 0%;
-  }
-  50% {
-    background-position: 50% 50%, 100% 100%, 100% 100%;
-  }
-  75% {
-    background-position: 0% 0%, 50% 50%, 0% 0%;
-  }
-  100% {
-    background-position: 100% 100%, 0% 0%, 50% 50%;
-  }
+/* 毛玻璃装饰层 - 顶部光晕 */
+.app::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.02) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 毛玻璃内容区域 */
+.app-content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 毛玻璃主内容容器 */
+.app-main {
+  flex: 1;
+  position: relative;
+  backdrop-filter: blur(var(--glass-blur-light));
+  -webkit-backdrop-filter: blur(var(--glass-blur-light));
+  background-color: rgba(30, 30, 30, var(--glass-bg-opacity-ultra-light));
+  border-radius: var(--glass-radius-lg);
+  margin: var(--space-2);
+  overflow: hidden;
+  box-shadow: var(--glass-shadow-inset);
+}
+
+/* 毛玻璃页面容器 */
+.app-page {
+  height: 100%;
+  overflow: auto;
+  padding: var(--space-4);
+  background-color: transparent;
+}
+
+/* 毛玻璃装饰元素 */
+.glass-decoration {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+.glass-decoration-1 {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  right: 10%;
+}
+
+.glass-decoration-2 {
+  width: 200px;
+  height: 200px;
+  bottom: 20%;
+  left: 5%;
+}
+
+.glass-decoration-3 {
+  width: 150px;
+  height: 150px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

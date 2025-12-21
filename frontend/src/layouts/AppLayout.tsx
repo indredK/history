@@ -10,14 +10,18 @@ import { useSidebar, useResponsive, useOrientation } from '@/hooks';
 import { routes } from '@/router/routes';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import { dynastyUtils } from '@/config';
+import { getGlassConfig } from '@/config/glassConfig';
 
 export function AppLayout() {
   const location = useLocation();
   const { selectedDynasty } = useDynastyStore();
   const { imageUrl: dynastyBackgroundUrl } = useDynastyImage(selectedDynasty?.id ?? null);
   const { collapsed: sidebarCollapsed, toggle: toggleSidebar } = useSidebar();
-  const { isMobile, isSmallMobile } = useResponsive();
+  const { isMobile, isSmallMobile, screenWidth } = useResponsive();
   const orientation = useOrientation();
+
+  // 获取毛玻璃配置
+  const glassConfig = getGlassConfig(screenWidth);
 
   // 根据路径确定当前活跃的标签
   const getActiveTabFromPath = (pathname: string): string => {
@@ -40,6 +44,27 @@ export function AppLayout() {
   const dynastyColor = selectedDynasty?.color;
   const bgColor = dynastyUtils.getBackgroundColor(dynastyColor);
   const gradientBackground = dynastyUtils.getGradientBackground(dynastyColor);
+
+  // 毛玻璃主内容区域样式
+  const mainContentGlassStyle = {
+    backdropFilter: `blur(${glassConfig.components.card.blur})`,
+    WebkitBackdropFilter: `blur(${glassConfig.components.card.blur})`,
+    backgroundColor: `rgba(30, 30, 30, ${glassConfig.components.card.bgOpacity})`,
+    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    borderRadius: glassConfig.border.radius.lg,
+    boxShadow: glassConfig.shadow.md,
+    transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`
+  };
+
+  // 毛玻璃底部导航栏样式
+  const bottomNavGlassStyle = {
+    backdropFilter: `blur(${glassConfig.components.navigation.blur})`,
+    WebkitBackdropFilter: `blur(${glassConfig.components.navigation.blur})`,
+    background: `linear-gradient(to top, rgba(0, 0, 0, ${glassConfig.components.navigation.bgOpacity}), rgba(0, 0, 0, ${glassConfig.components.navigation.bgOpacity - 0.2}))`,
+    borderTop: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    boxShadow: glassConfig.shadow.lg,
+    transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`
+  };
 
   return (
     <Box sx={{ 
@@ -84,19 +109,23 @@ export function AppLayout() {
             var(--color-bg-gradient)`
             : 'var(--color-bg-gradient)',
           backgroundSize: 'cover',
-          transition: 'all 0.5s ease-in-out, background-color 0.5s ease-in-out',
+          transition: `all ${glassConfig.animation.duration.slow} ${glassConfig.animation.easing}, background-color ${glassConfig.animation.duration.slow} ${glassConfig.animation.easing}`,
           backgroundColor: selectedDynasty ? bgColor : 'transparent',
           touchAction: 'pan-x pan-y', // 允许内部滚动
           // 移动端优化
           ...(isMobile && {
             backgroundAttachment: 'scroll', // 移动端不支持 fixed
           }),
-          // 竖屏模式下的特殊样式
+          // 竖屏模式下的特殊样式 - 应用毛玻璃效果
           ...(showPortraitSidebar && {
-            padding: '12px', // 统一内边距
-            marginBottom: '20px', // 与导航栏区域的间隔
-            borderRadius: '0 0 16px 16px', // 底部圆角
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)', // 添加阴影分离效果
+            padding: '12px',
+            marginBottom: '20px',
+            backdropFilter: mainContentGlassStyle.backdropFilter,
+            WebkitBackdropFilter: mainContentGlassStyle.WebkitBackdropFilter,
+            backgroundColor: mainContentGlassStyle.backgroundColor,
+            border: mainContentGlassStyle.border,
+            borderRadius: mainContentGlassStyle.borderRadius,
+            boxShadow: mainContentGlassStyle.boxShadow,
           })
         }}>
           <div className="content" style={{ 
@@ -122,22 +151,21 @@ export function AppLayout() {
         </Box>
       </Box>
       
-      {/* 竖屏模式的底部导航栏区域 */}
+      {/* 竖屏模式的底部导航栏区域 - 应用毛玻璃效果 */}
       {showPortraitSidebar && (
         <Box sx={{
           position: 'fixed',
           bottom: 0,
           left: 0,
           right: 0,
-          height: '120px', // 固定导航栏区域高度
-          background: 'linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7))',
-          backdropFilter: 'blur(20px)',
+          height: '120px',
+          ...bottomNavGlassStyle,
           zIndex: 1300,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          paddingTop: '20px', // 顶部间隔
-          paddingBottom: 'env(safe-area-inset-bottom)', // 安全区域适配
+          paddingTop: '20px',
+          paddingBottom: 'env(safe-area-inset-bottom)',
         }}>
           <PortraitSidebar activeTab={activeTab} />
         </Box>

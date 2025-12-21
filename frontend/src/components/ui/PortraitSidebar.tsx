@@ -1,6 +1,9 @@
 /**
  * 竖屏模式专用侧边栏组件
  * 在竖屏模式下显示为底部导航栏
+ * 
+ * 应用苹果毛玻璃风格（Glassmorphism）
+ * Requirements: 6.3, 6.4, 6.5
  */
 
 import { Box, Paper } from '@mui/material';
@@ -8,12 +11,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { navigationItems } from '@/config';
 import { useResponsive, useOrientation } from '@/hooks/useResponsive';
 import { getSidebarStyles } from '@/config/responsive';
+import { getGlassConfig } from '@/config/glassConfig';
 
 interface PortraitSidebarProps {
   activeTab: string;
+  glassEffect?: boolean;
 }
 
-export function PortraitSidebar({ activeTab: _activeTab }: PortraitSidebarProps) {
+export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: PortraitSidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const { isMobile, screenWidth } = useResponsive();
@@ -25,6 +30,10 @@ export function PortraitSidebar({ activeTab: _activeTab }: PortraitSidebarProps)
 
   // 获取响应式样式
   const sidebarStyles = getSidebarStyles(screenWidth);
+  
+  // 获取毛玻璃配置
+  const glassConfig = getGlassConfig(screenWidth);
+  const navConfig = glassConfig.components.navigation;
 
   if (!shouldShow) {
     return null;
@@ -41,18 +50,29 @@ export function PortraitSidebar({ activeTab: _activeTab }: PortraitSidebarProps)
     return '90px';
   };
 
+  // 毛玻璃容器样式
+  const glassContainerStyles = glassEffect ? {
+    backdropFilter: `blur(${navConfig.blur})`,
+    WebkitBackdropFilter: `blur(${navConfig.blur})`,
+    background: `linear-gradient(135deg, rgba(18, 18, 18, ${navConfig.bgOpacity}) 0%, rgba(30, 30, 30, ${navConfig.bgOpacity}) 100%)`,
+    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    boxShadow: `0 -4px 20px rgba(0, 0, 0, 0.3), ${navConfig.activeGlow}`,
+  } : {
+    background: 'linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 30, 30, 0.95) 100%)',
+    backdropFilter: 'blur(20px)',
+    border: '1px solid rgba(255, 61, 0, 0.2)',
+    boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 61, 0, 0.1)',
+  };
+
   return (
     <Paper
       sx={{
-        width: '90%', // 不占满整个宽度，留出边距
-        maxWidth: '400px', // 最大宽度限制
+        width: '90%',
+        maxWidth: '400px',
         height: getHeight(),
-        borderRadius: '20px', // 全圆角
-        background: 'linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 30, 30, 0.95) 100%)',
-        backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255, 61, 0, 0.2)',
-        boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 61, 0, 0.1)',
-        position: 'relative', // 改为相对定位
+        borderRadius: glassConfig.border.radius.xl,
+        position: 'relative',
+        ...glassContainerStyles,
       }}
       className="portrait-sidebar"
     >
@@ -60,16 +80,56 @@ export function PortraitSidebar({ activeTab: _activeTab }: PortraitSidebarProps)
         sx={{
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'space-between', // 改为space-between确保均匀分布
+          justifyContent: 'space-between',
           alignItems: 'center',
           height: '100%',
-          padding: '4px 8px', // 进一步减少左右内边距
-          overflow: 'hidden', // 禁止横向滚动
+          padding: '4px 8px',
+          overflow: 'hidden',
         }}
         className="sidebar-content"
       >
         {navigationItems.map((item) => {
           const isActive = location.pathname === item.path;
+          
+          // 毛玻璃导航项样式
+          const glassItemStyles = glassEffect ? {
+            background: isActive 
+              ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
+              : 'transparent',
+            boxShadow: isActive 
+              ? navConfig.activeGlow
+              : 'none',
+            transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
+            '&:hover': {
+              background: isActive 
+                ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
+                : `rgba(255, 255, 255, ${navConfig.itemHoverOpacity - navConfig.bgOpacity})`,
+              backdropFilter: isActive ? 'none' : `blur(${glassConfig.blur.light})`,
+              transform: 'translateY(-2px)',
+              color: 'white',
+            },
+            '&:active': {
+              transform: 'translateY(-1px) scale(0.95)',
+              boxShadow: glassConfig.shadow.sm,
+            },
+          } : {
+            background: isActive 
+              ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
+              : 'transparent',
+            boxShadow: isActive 
+              ? '0 4px 15px rgba(255, 61, 0, 0.4)'
+              : 'none',
+            '&:hover': {
+              background: isActive 
+                ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
+                : 'linear-gradient(135deg, rgba(255, 61, 0, 0.1) 0%, rgba(255, 111, 61, 0.1) 100%)',
+              transform: 'translateY(-2px)',
+              color: 'white',
+            },
+            '&:active': {
+              transform: 'translateY(-1px) scale(0.95)',
+            },
+          };
           
           return (
             <Box
@@ -80,33 +140,17 @@ export function PortraitSidebar({ activeTab: _activeTab }: PortraitSidebarProps)
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                flex: 1, // 使用flex: 1让每个项目平均分配空间
-                maxWidth: 'none', // 移除最大宽度限制
-                minWidth: 0, // 允许收缩
+                flex: 1,
+                maxWidth: 'none',
+                minWidth: 0,
                 height: sidebarStyles.itemSize,
-                padding: '4px 1px', // 进一步减少内边距
-                borderRadius: '12px',
+                padding: '4px 1px',
+                borderRadius: glassConfig.border.radius.md,
                 cursor: 'pointer',
-                transition: 'all 0.3s ease',
                 textDecoration: 'none',
                 color: isActive ? 'white' : 'rgba(255, 255, 255, 0.7)',
-                background: isActive 
-                  ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
-                  : 'transparent',
                 transform: isActive ? 'translateY(-2px)' : 'none',
-                boxShadow: isActive 
-                  ? '0 4px 15px rgba(255, 61, 0, 0.4)'
-                  : 'none',
-                '&:hover': {
-                  background: isActive 
-                    ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
-                    : 'linear-gradient(135deg, rgba(255, 61, 0, 0.1) 0%, rgba(255, 111, 61, 0.1) 100%)',
-                  transform: 'translateY(-2px)',
-                  color: 'white',
-                },
-                '&:active': {
-                  transform: 'translateY(-1px) scale(0.95)',
-                },
+                ...glassItemStyles,
                 '&:focus': {
                   outline: '2px solid #FF3D00',
                   outlineOffset: '2px',
@@ -144,7 +188,7 @@ export function PortraitSidebar({ activeTab: _activeTab }: PortraitSidebarProps)
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
-                  maxWidth: '100%', // 使用100%而不是固定宽度
+                  maxWidth: '100%',
                 }}
                 className="nav-label"
               >

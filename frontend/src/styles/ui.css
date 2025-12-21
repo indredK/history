@@ -1,6 +1,6 @@
-/* 通用UI组件样式 */
+/* 通用UI组件样式 - 毛玻璃风格 */
 
-/* 按钮组件 */
+/* 按钮组件 - 毛玻璃风格 */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -9,15 +9,20 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-tight);
-  border-radius: var(--radius-md);
+  border-radius: var(--glass-radius-md);
   cursor: pointer;
-  transition: all var(--transition-normal);
+  transition: all var(--glass-duration-normal) var(--glass-easing);
   text-decoration: none;
-  border: 1px solid transparent;
   white-space: nowrap;
   user-select: none;
   position: relative;
   overflow: hidden;
+  /* 毛玻璃效果 */
+  backdrop-filter: blur(var(--glass-btn-primary-blur));
+  -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur));
+  background-color: rgba(255, 255, 255, var(--glass-btn-primary-bg-opacity));
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow-sm), var(--glass-shadow-inset);
 }
 
 .btn::before {
@@ -28,119 +33,122 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left var(--transition-slow);
+  transition: left var(--glass-duration-slow) var(--glass-easing);
 }
 
 .btn:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 61, 0, 0.3), var(--shadow-glow);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2), var(--glass-shadow-glow);
 }
 
 .btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
   transform: none;
-  box-shadow: none;
+  box-shadow: var(--glass-shadow-sm);
 }
 
 .btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md), var(--shadow-glow);
+  background-color: rgba(255, 255, 255, calc(var(--glass-btn-primary-bg-opacity) + 0.1));
+  box-shadow: var(--glass-shadow-md), var(--glass-shadow-glow);
 }
 
 .btn:hover:not(:disabled)::before {
   left: 100%;
 }
 
-/* 按钮变体 */
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+  background-color: rgba(255, 255, 255, calc(var(--glass-btn-primary-bg-opacity) - 0.05));
+}
+
+/* 按钮变体 - 主要按钮 */
 .btn-primary {
-  background: var(--color-primary-gradient);
+  backdrop-filter: blur(var(--glass-btn-primary-blur));
+  -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur));
+  background-color: rgba(255, 61, 0, var(--glass-btn-primary-bg-opacity));
   color: var(--color-text-inverse);
-  border-color: var(--color-primary);
-  box-shadow: var(--shadow-sm);
+  border: var(--glass-border-width) solid rgba(255, 111, 61, 0.3);
+  box-shadow: var(--glass-shadow-sm), 0 0 10px rgba(255, 61, 0, 0.2);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: var(--color-primary-gradient);
-  border-color: var(--color-primary-light);
-  box-shadow: var(--shadow-md), var(--shadow-glow);
+  background-color: rgba(255, 61, 0, calc(var(--glass-btn-primary-bg-opacity) + 0.1));
+  border-color: rgba(255, 111, 61, 0.5);
+  box-shadow: var(--glass-shadow-md), 0 0 20px rgba(255, 61, 0, 0.3);
 }
 
+/* 按钮变体 - 次要按钮 */
 .btn-secondary {
-  background: var(--color-secondary-gradient);
+  backdrop-filter: blur(var(--glass-btn-secondary-blur));
+  -webkit-backdrop-filter: blur(var(--glass-btn-secondary-blur));
+  background-color: rgba(3, 169, 244, var(--glass-btn-secondary-bg-opacity));
   color: var(--color-text-inverse);
-  border-color: var(--color-secondary);
-  box-shadow: var(--shadow-sm);
+  border: var(--glass-border-width) solid rgba(79, 195, 247, 0.3);
+  box-shadow: var(--glass-shadow-sm), 0 0 10px rgba(3, 169, 244, 0.2);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: var(--color-secondary-gradient);
-  border-color: var(--color-secondary-light);
-  box-shadow: var(--shadow-md), var(--shadow-glow-blue);
+  background-color: rgba(3, 169, 244, calc(var(--glass-btn-secondary-bg-opacity) + 0.1));
+  border-color: rgba(79, 195, 247, 0.5);
+  box-shadow: var(--glass-shadow-md), 0 0 20px rgba(3, 169, 244, 0.3);
 }
 
+/* 按钮变体 - 轮廓按钮 */
 .btn-outline {
-  background-color: transparent;
-  color: var(--color-primary);
-  border-color: var(--color-primary);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-outline::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--color-primary-gradient);
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-  z-index: -1;
+  backdrop-filter: blur(var(--glass-btn-secondary-blur));
+  -webkit-backdrop-filter: blur(var(--glass-btn-secondary-blur));
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
+  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.3);
 }
 
 .btn-outline:hover:not(:disabled) {
-  color: var(--color-text-inverse);
-  border-color: var(--color-primary-light);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--color-text-primary);
 }
 
-.btn-outline:hover:not(:disabled)::after {
-  opacity: 1;
-}
-
+/* 按钮变体 - 幽灵按钮 */
 .btn-ghost {
+  backdrop-filter: blur(var(--glass-btn-icon-blur));
+  -webkit-backdrop-filter: blur(var(--glass-btn-icon-blur));
   background-color: transparent;
   color: var(--color-text-secondary);
-  border-color: transparent;
-  position: relative;
+  border: none;
+  box-shadow: none;
 }
 
 .btn-ghost:hover:not(:disabled) {
-  background-color: var(--color-bg-secondary);
-  color: var(--color-primary);
-  box-shadow: 0 0 15px rgba(255, 61, 0, 0.2);
+  background-color: rgba(255, 255, 255, var(--glass-btn-icon-bg-opacity));
+  color: var(--color-text-primary);
+  box-shadow: var(--glass-shadow-sm);
 }
 
 /* 按钮尺寸 */
 .btn-sm {
   padding: var(--space-1) var(--space-3);
   font-size: var(--font-size-xs);
+  border-radius: var(--glass-radius-sm);
 }
 
 .btn-lg {
   padding: var(--space-3) var(--space-6);
   font-size: var(--font-size-base);
+  border-radius: var(--glass-radius-lg);
 }
 
-/* 卡片组件 */
+/* 卡片组件 - 毛玻璃风格 */
 .card {
-  background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-secondary) 100%);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(var(--glass-card-blur));
+  -webkit-backdrop-filter: blur(var(--glass-card-blur));
+  background-color: rgba(30, 30, 30, var(--glass-card-bg-opacity));
+  border-radius: var(--glass-radius-xl);
+  box-shadow: var(--glass-shadow-md), var(--glass-shadow-inset);
   overflow: hidden;
-  transition: all var(--transition-normal);
-  border: 1px solid var(--color-border-medium);
+  transition: all var(--glass-duration-normal) var(--glass-easing);
+  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
   position: relative;
 }
 
@@ -150,16 +158,17 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
-  background: var(--color-primary-gradient);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   opacity: 0;
-  transition: opacity var(--transition-normal);
+  transition: opacity var(--glass-duration-normal) var(--glass-easing);
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-xl), var(--shadow-glow);
-  border-color: var(--color-primary);
+  background-color: rgba(30, 30, 30, calc(var(--glass-card-bg-opacity) + var(--glass-card-hover-delta)));
+  box-shadow: var(--glass-shadow-lg), var(--glass-shadow-glow);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .card:hover::before {
@@ -168,8 +177,10 @@
 
 .card-header {
   padding: var(--space-6);
-  border-bottom: 1px solid var(--color-border-light);
-  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-card) 100%);
+  border-bottom: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(var(--glass-blur-light));
+  -webkit-backdrop-filter: blur(var(--glass-blur-light));
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
 .card-title {
@@ -177,12 +188,12 @@
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
-  transition: color var(--transition-normal);
+  transition: color var(--glass-duration-normal) var(--glass-easing);
 }
 
 .card:hover .card-title {
-  color: var(--color-primary);
-  text-shadow: 0 0 10px rgba(255, 61, 0, 0.3);
+  color: var(--color-text-primary);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .card-subtitle {
@@ -197,11 +208,13 @@
 
 .card-footer {
   padding: var(--space-6);
-  border-top: 1px solid var(--color-border-light);
-  background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-secondary) 100%);
+  border-top: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(var(--glass-blur-light));
+  -webkit-backdrop-filter: blur(var(--glass-blur-light));
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
-/* 表单组件 */
+/* 表单组件 - 毛玻璃风格 */
 .form-group {
   margin-bottom: var(--space-6);
   position: relative;
@@ -213,53 +226,44 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
-  transition: color var(--transition-normal);
+  transition: color var(--glass-duration-normal) var(--glass-easing);
 }
 
 .form-group:focus-within .form-label {
-  color: var(--color-primary);
-  text-shadow: 0 0 5px rgba(255, 61, 0, 0.3);
+  color: var(--color-text-primary);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 .form-input {
   width: 100%;
   padding: var(--space-3) var(--space-4);
   font-size: var(--font-size-sm);
-  border: 2px solid var(--color-border-medium);
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-secondary) 100%);
+  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--glass-radius-lg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.1);
   color: var(--color-text-primary);
-  transition: all var(--transition-normal);
+  transition: all var(--glass-duration-normal) var(--glass-easing);
   position: relative;
   overflow: hidden;
 }
 
-.form-input::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 61, 0, 0.1), transparent);
-  transition: left var(--transition-slow);
-  z-index: -1;
+.form-input::placeholder {
+  color: var(--color-text-tertiary);
 }
 
 .form-input:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(255, 61, 0, 0.3), var(--shadow-glow);
+  border-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1), var(--glass-shadow-glow);
   outline: none;
   transform: translateY(-1px);
 }
 
-.form-input:focus::before {
-  left: 100%;
-}
-
 .form-input:hover:not(:focus) {
-  border-color: var(--color-primary-light);
-  box-shadow: 0 0 0 2px rgba(255, 61, 0, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 .form-error {
@@ -271,32 +275,46 @@
   gap: var(--space-1);
 }
 
-/* 加载状态 */
+/* 加载状态 - 毛玻璃风格 */
 .loading {
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  border-top-color: var(--color-primary);
+  border-top-color: rgba(255, 255, 255, 0.8);
   animation: spin 1s ease-in-out infinite;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  backdrop-filter: blur(var(--glass-blur-light));
+  -webkit-backdrop-filter: blur(var(--glass-blur-light));
+  background-color: rgba(30, 30, 30, 0.3);
+  border-radius: var(--glass-radius-lg);
 }
 
 
 
-/* 徽章组件 */
+/* 徽章组件 - 毛玻璃风格 */
 .badge {
   display: inline-flex;
   align-items: center;
   padding: var(--space-1) var(--space-3);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
-  border-radius: var(--radius-full);
+  border-radius: var(--glass-radius-full);
   position: relative;
   overflow: hidden;
-  transition: all var(--transition-normal);
-  border: 1px solid transparent;
-  box-shadow: var(--shadow-sm);
+  transition: all var(--glass-duration-normal) var(--glass-easing);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(255, 255, 255, 0.15);
+  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--glass-shadow-sm);
 }
 
 .badge::before {
@@ -307,12 +325,13 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left var(--transition-fast);
+  transition: left var(--glass-duration-fast) var(--glass-easing);
 }
 
 .badge:hover {
   transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: var(--glass-shadow-md);
 }
 
 .badge:hover::before {
@@ -320,42 +339,54 @@
 }
 
 .badge-primary {
-  background: linear-gradient(135deg, rgba(255, 61, 0, 0.15) 0%, rgba(255, 111, 61, 0.08) 100%);
-  color: var(--color-primary);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(255, 61, 0, 0.2);
+  color: #FF6F3D;
   border-color: rgba(255, 61, 0, 0.3);
 }
 
 .badge-secondary {
-  background: linear-gradient(135deg, rgba(3, 169, 244, 0.15) 0%, rgba(79, 195, 247, 0.08) 100%);
-  color: var(--color-secondary);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(3, 169, 244, 0.2);
+  color: #4FC3F7;
   border-color: rgba(3, 169, 244, 0.3);
 }
 
 .badge-accent {
-  background: linear-gradient(135deg, rgba(255, 234, 0, 0.15) 0%, rgba(255, 241, 118, 0.08) 100%);
-  color: var(--color-accent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(255, 234, 0, 0.2);
+  color: #FFF176;
   border-color: rgba(255, 234, 0, 0.3);
 }
 
 .badge-success {
-  background: linear-gradient(135deg, rgba(76, 175, 80, 0.15) 0%, rgba(129, 199, 132, 0.08) 100%);
-  color: var(--color-success);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(76, 175, 80, 0.2);
+  color: #81C784;
   border-color: rgba(76, 175, 80, 0.3);
 }
 
 .badge-warning {
-  background: linear-gradient(135deg, rgba(255, 152, 0, 0.15) 0%, rgba(255, 183, 77, 0.08) 100%);
-  color: var(--color-warning);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(255, 152, 0, 0.2);
+  color: #FFB74D;
   border-color: rgba(255, 152, 0, 0.3);
 }
 
 .badge-error {
-  background: linear-gradient(135deg, rgba(244, 67, 54, 0.15) 0%, rgba(239, 83, 80, 0.08) 100%);
-  color: var(--color-error);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(244, 67, 54, 0.2);
+  color: #EF5350;
   border-color: rgba(244, 67, 54, 0.3);
 }
 
-/* 工具提示 */
+/* 工具提示 - 毛玻璃风格 */
 .tooltip {
   position: relative;
   cursor: help;
@@ -369,19 +400,20 @@
   transform: translateX(-50%);
   padding: var(--space-2) var(--space-4);
   font-size: var(--font-size-xs);
-  color: var(--color-text-inverse);
-  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%);
-  border: 1px solid var(--color-primary);
-  border-radius: var(--radius-lg);
+  color: var(--color-text-primary);
+  backdrop-filter: blur(var(--glass-tooltip-blur));
+  -webkit-backdrop-filter: blur(var(--glass-tooltip-blur));
+  background-color: rgba(30, 30, 30, var(--glass-tooltip-bg-opacity));
+  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--glass-radius-md);
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
-  transition: all var(--transition-normal);
+  transition: all var(--glass-duration-normal) var(--glass-easing);
   z-index: var(--z-tooltip);
   margin-bottom: var(--space-2);
-  box-shadow: var(--shadow-md), var(--shadow-glow);
+  box-shadow: var(--glass-shadow-md);
   font-weight: var(--font-weight-medium);
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .tooltip::after {
@@ -391,10 +423,10 @@
   left: 50%;
   transform: translateX(-50%);
   border: 5px solid transparent;
-  border-top-color: var(--color-primary);
+  border-top-color: rgba(30, 30, 30, var(--glass-tooltip-bg-opacity));
   opacity: 0;
   visibility: hidden;
-  transition: all var(--transition-normal);
+  transition: all var(--glass-duration-normal) var(--glass-easing);
   z-index: var(--z-tooltip);
 }
 

@@ -1,0 +1,1013 @@
+/**
+ * 毛玻璃CSS变量和基础样式
+ * Glassmorphism CSS Variables and Base Styles
+ * 
+ * Requirements: 4.2, 4.3, 4.4, 4.5, 4.6, 9.1, 9.5
+ * 
+ * 本文件定义了毛玻璃效果所需的所有CSS变量，
+ * 与 TypeScript 配置文件 (glassConfig.ts) 保持同步
+ */
+
+/* ============================================
+   桌面端CSS变量 (Desktop CSS Variables)
+   ============================================ */
+:root {
+  /* ------------------------------------------
+     模糊级别 (Blur Levels)
+     Requirements: 4.2
+     ------------------------------------------ */
+  --glass-blur-none: 0px;
+  --glass-blur-light: 12px;
+  --glass-blur-medium: 20px;
+  --glass-blur-heavy: 32px;
+  --glass-blur-ultra: 48px;
+
+  /* ------------------------------------------
+     背景透明度 (Background Opacity)
+     Requirements: 4.3
+     ------------------------------------------ */
+  --glass-bg-opacity-ultra-light: 0.1;
+  --glass-bg-opacity-light: 0.3;
+  --glass-bg-opacity-medium: 0.5;
+  --glass-bg-opacity-high: 0.7;
+  --glass-bg-opacity-solid: 0.85;
+
+  /* 预设背景颜色 */
+  --glass-bg-white: rgba(255, 255, 255, var(--glass-bg-opacity-medium));
+  --glass-bg-dark: rgba(30, 30, 30, var(--glass-bg-opacity-medium));
+  --glass-bg-accent: rgba(100, 150, 255, var(--glass-bg-opacity-light));
+
+  /* ------------------------------------------
+     边框样式 (Border Styles)
+     Requirements: 4.4
+     ------------------------------------------ */
+  --glass-border-color: rgba(255, 255, 255, 0.18);
+  --glass-border-color-dark: rgba(0, 0, 0, 0.1);
+  --glass-border-width: 1px;
+  --glass-border: var(--glass-border-width) solid var(--glass-border-color);
+
+  /* ------------------------------------------
+     圆角 (Border Radius)
+     Requirements: 4.4
+     ------------------------------------------ */
+  --glass-radius-sm: 8px;
+  --glass-radius-md: 12px;
+  --glass-radius-lg: 16px;
+  --glass-radius-xl: 24px;
+  --glass-radius-full: 9999px;
+
+  /* ------------------------------------------
+     阴影 (Shadows)
+     Requirements: 4.5
+     ------------------------------------------ */
+  --glass-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --glass-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --glass-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);
+  --glass-shadow-glow: 0 0 20px rgba(255, 255, 255, 0.1);
+  --glass-shadow-inset: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+
+  /* ------------------------------------------
+     动画时长 (Animation Duration)
+     Requirements: 4.5
+     ------------------------------------------ */
+  --glass-duration-fast: 150ms;
+  --glass-duration-normal: 250ms;
+  --glass-duration-slow: 350ms;
+  --glass-duration-hover: 150ms;
+  --glass-duration-blur: 200ms;
+  --glass-duration-opacity: 200ms;
+
+  /* 缓动函数 */
+  --glass-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --glass-transition: all var(--glass-duration-normal) var(--glass-easing);
+
+  /* ------------------------------------------
+     动画进入配置 (Animation Enter Settings)
+     Requirements: 12.4
+     ------------------------------------------ */
+  --glass-enter-scale: 0.95;
+  --glass-enter-translate-y: 10px;
+  --glass-enter-translate-x: 20px;
+
+  /* ------------------------------------------
+     组件特定变量 (Component-specific Variables)
+     ------------------------------------------ */
+  /* 卡片 */
+  --glass-card-blur: var(--glass-blur-light);
+  --glass-card-bg-opacity: 0.6;
+  --glass-card-hover-delta: 0.1;
+
+  /* 导航 */
+  --glass-nav-blur: var(--glass-blur-medium);
+  --glass-nav-bg-opacity: 0.7;
+  --glass-nav-item-hover-opacity: 0.8;
+  --glass-nav-active-glow: 0 0 15px rgba(255, 255, 255, 0.2);
+
+  /* 按钮 */
+  --glass-btn-primary-blur: var(--glass-blur-light);
+  --glass-btn-primary-bg-opacity: 0.7;
+  --glass-btn-secondary-blur: 8px;
+  --glass-btn-secondary-bg-opacity: 0.5;
+  --glass-btn-icon-blur: 8px;
+  --glass-btn-icon-bg-opacity: 0.4;
+
+  /* 表格 */
+  --glass-table-container-blur: var(--glass-blur-light);
+  --glass-table-container-bg-opacity: 0.5;
+  --glass-table-header-blur: 16px;
+  --glass-table-header-bg-opacity: 0.7;
+  --glass-table-row-bg-opacity: 0.3;
+  --glass-table-row-hover-opacity: 0.5;
+
+  /* 模态框 */
+  --glass-modal-backdrop-blur: var(--glass-blur-xl, 24px);
+  --glass-modal-backdrop-bg-opacity: 0.6;
+  --glass-modal-content-blur: var(--glass-blur-medium);
+  --glass-modal-content-bg-opacity: 0.8;
+
+  /* 弹出层 */
+  --glass-popover-blur: 16px;
+  --glass-popover-bg-opacity: 0.7;
+  --glass-tooltip-blur: 8px;
+  --glass-tooltip-bg-opacity: 0.8;
+  --glass-dropdown-blur: 16px;
+  --glass-dropdown-bg-opacity: 0.7;
+
+  /* 滚动条 */
+  --glass-scrollbar-thumb-opacity: 0.5;
+  --glass-scrollbar-track-opacity: 0.2;
+
+  /* ------------------------------------------
+     降级配置 (Fallback Configuration)
+     ------------------------------------------ */
+  --glass-fallback-bg: rgba(30, 30, 30, 0.9);
+  --glass-fallback-border: rgba(255, 255, 255, 0.1);
+}
+
+
+/* ============================================
+   移动端CSS变量覆盖 (Mobile CSS Variables Override)
+   Requirements: 4.6, 9.1
+   ============================================ */
+@media (max-width: 768px) {
+  :root {
+    /* 模糊级别 - 减少以提升性能 */
+    --glass-blur-light: 8px;
+    --glass-blur-medium: 12px;
+    --glass-blur-heavy: 20px;
+    --glass-blur-ultra: 32px;
+
+    /* 背景透明度 - 提高以增强可读性 */
+    --glass-bg-opacity-ultra-light: 0.15;
+    --glass-bg-opacity-light: 0.4;
+    --glass-bg-opacity-medium: 0.6;
+    --glass-bg-opacity-high: 0.8;
+    --glass-bg-opacity-solid: 0.9;
+
+    /* 边框 - 更细以适应小屏幕 */
+    --glass-border-color: rgba(255, 255, 255, 0.15);
+    --glass-border-width: 0.5px;
+
+    /* 圆角 - 略微减小 */
+    --glass-radius-sm: 6px;
+    --glass-radius-md: 10px;
+    --glass-radius-lg: 14px;
+    --glass-radius-xl: 20px;
+
+    /* 阴影 - 减轻以提升性能 */
+    --glass-shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.08);
+    --glass-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --glass-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --glass-shadow-glow: 0 0 12px rgba(255, 255, 255, 0.08);
+    --glass-shadow-inset: inset 0 0.5px 0.5px rgba(255, 255, 255, 0.08);
+
+    /* 动画时长 - 缩短以提升响应速度 */
+    --glass-duration-fast: 100ms;
+    --glass-duration-normal: 200ms;
+    --glass-duration-slow: 300ms;
+    --glass-duration-hover: 100ms;
+    --glass-duration-blur: 150ms;
+    --glass-duration-opacity: 150ms;
+
+    /* 动画进入配置 - 移动端优化 */
+    --glass-enter-scale: 0.97;
+    --glass-enter-translate-y: 8px;
+    --glass-enter-translate-x: 15px;
+
+    /* 组件特定变量 - 移动端优化 */
+    --glass-card-blur: 8px;
+    --glass-card-bg-opacity: 0.7;
+    --glass-card-hover-delta: 0.08;
+
+    --glass-nav-blur: 12px;
+    --glass-nav-bg-opacity: 0.8;
+    --glass-nav-item-hover-opacity: 0.85;
+    --glass-nav-active-glow: 0 0 10px rgba(255, 255, 255, 0.15);
+
+    --glass-btn-primary-blur: 8px;
+    --glass-btn-primary-bg-opacity: 0.75;
+    --glass-btn-secondary-blur: 6px;
+    --glass-btn-secondary-bg-opacity: 0.6;
+    --glass-btn-icon-blur: 6px;
+    --glass-btn-icon-bg-opacity: 0.5;
+
+    --glass-table-container-blur: 8px;
+    --glass-table-container-bg-opacity: 0.6;
+    --glass-table-header-blur: 10px;
+    --glass-table-header-bg-opacity: 0.75;
+    --glass-table-row-bg-opacity: 0.4;
+    --glass-table-row-hover-opacity: 0.55;
+
+    --glass-modal-backdrop-blur: 16px;
+    --glass-modal-backdrop-bg-opacity: 0.7;
+    --glass-modal-content-blur: 12px;
+    --glass-modal-content-bg-opacity: 0.85;
+
+    --glass-popover-blur: 10px;
+    --glass-popover-bg-opacity: 0.8;
+    --glass-tooltip-blur: 6px;
+    --glass-tooltip-bg-opacity: 0.85;
+    --glass-dropdown-blur: 10px;
+    --glass-dropdown-bg-opacity: 0.8;
+
+    --glass-scrollbar-thumb-opacity: 0.6;
+    --glass-scrollbar-track-opacity: 0.25;
+
+    /* 降级配置 */
+    --glass-fallback-bg: rgba(30, 30, 30, 0.92);
+    --glass-fallback-border: rgba(255, 255, 255, 0.08);
+  }
+}
+
+
+/* ============================================
+   毛玻璃基础样式类 (Glassmorphism Base Style Classes)
+   Requirements: 9.5
+   ============================================ */
+
+/**
+ * 基础毛玻璃效果类
+ * Base glassmorphism effect class
+ */
+.glass-effect {
+  backdrop-filter: blur(var(--glass-blur-medium));
+  -webkit-backdrop-filter: blur(var(--glass-blur-medium));
+  background-color: rgba(255, 255, 255, var(--glass-bg-opacity-medium));
+  border: var(--glass-border);
+  border-radius: var(--glass-radius-md);
+  box-shadow: var(--glass-shadow-md);
+  transition: var(--glass-transition);
+}
+
+.glass-effect:hover {
+  background-color: rgba(255, 255, 255, calc(var(--glass-bg-opacity-medium) + 0.1));
+}
+
+/**
+ * 毛玻璃卡片
+ * Glassmorphism card component
+ */
+.glass-card {
+  backdrop-filter: blur(var(--glass-card-blur));
+  -webkit-backdrop-filter: blur(var(--glass-card-blur));
+  background-color: rgba(255, 255, 255, var(--glass-card-bg-opacity));
+  border: var(--glass-border);
+  border-radius: var(--glass-radius-lg);
+  box-shadow: var(--glass-shadow-md);
+  transition: var(--glass-transition);
+}
+
+.glass-card:hover {
+  background-color: rgba(255, 255, 255, calc(var(--glass-card-bg-opacity) + var(--glass-card-hover-delta)));
+  box-shadow: var(--glass-shadow-lg);
+}
+
+/**
+ * 毛玻璃深色卡片
+ * Dark glassmorphism card
+ */
+.glass-card-dark {
+  backdrop-filter: blur(var(--glass-card-blur));
+  -webkit-backdrop-filter: blur(var(--glass-card-blur));
+  background-color: rgba(30, 30, 30, var(--glass-card-bg-opacity));
+  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--glass-radius-lg);
+  box-shadow: var(--glass-shadow-md);
+  transition: var(--glass-transition);
+}
+
+.glass-card-dark:hover {
+  background-color: rgba(30, 30, 30, calc(var(--glass-card-bg-opacity) + var(--glass-card-hover-delta)));
+  box-shadow: var(--glass-shadow-lg);
+}
+
+/**
+ * 毛玻璃按钮 - 主要
+ * Primary glassmorphism button
+ */
+.glass-button {
+  backdrop-filter: blur(var(--glass-btn-primary-blur));
+  -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur));
+  background-color: rgba(255, 255, 255, var(--glass-btn-primary-bg-opacity));
+  border: var(--glass-border);
+  border-radius: var(--glass-radius-md);
+  box-shadow: var(--glass-shadow-sm);
+  transition: var(--glass-transition);
+  cursor: pointer;
+}
+
+.glass-button:hover {
+  background-color: rgba(255, 255, 255, calc(var(--glass-btn-primary-bg-opacity) + 0.1));
+  box-shadow: var(--glass-shadow-md);
+  transform: translateY(-1px);
+}
+
+.glass-button:active {
+  background-color: rgba(255, 255, 255, calc(var(--glass-btn-primary-bg-opacity) - 0.05));
+  transform: translateY(0);
+  box-shadow: var(--glass-shadow-sm);
+}
+
+/**
+ * 毛玻璃按钮 - 次要
+ * Secondary glassmorphism button
+ */
+.glass-button-secondary {
+  backdrop-filter: blur(var(--glass-btn-secondary-blur));
+  -webkit-backdrop-filter: blur(var(--glass-btn-secondary-blur));
+  background-color: rgba(255, 255, 255, var(--glass-btn-secondary-bg-opacity));
+  border: var(--glass-border);
+  border-radius: var(--glass-radius-md);
+  box-shadow: var(--glass-shadow-sm);
+  transition: var(--glass-transition);
+  cursor: pointer;
+}
+
+.glass-button-secondary:hover {
+  background-color: rgba(255, 255, 255, calc(var(--glass-btn-secondary-bg-opacity) + 0.1));
+}
+
+/**
+ * 毛玻璃图标按钮
+ * Icon glassmorphism button
+ */
+.glass-button-icon {
+  backdrop-filter: blur(var(--glass-btn-icon-blur));
+  -webkit-backdrop-filter: blur(var(--glass-btn-icon-blur));
+  background-color: rgba(255, 255, 255, var(--glass-btn-icon-bg-opacity));
+  border: var(--glass-border);
+  border-radius: var(--glass-radius-full);
+  box-shadow: var(--glass-shadow-sm);
+  transition: var(--glass-transition);
+  cursor: pointer;
+}
+
+.glass-button-icon:hover {
+  background-color: rgba(255, 255, 255, calc(var(--glass-btn-icon-bg-opacity) + 0.15));
+  box-shadow: var(--glass-shadow-glow);
+}
+
+/**
+ * 毛玻璃导航栏
+ * Glassmorphism navigation bar
+ */
+.glass-nav {
+  backdrop-filter: blur(var(--glass-nav-blur));
+  -webkit-backdrop-filter: blur(var(--glass-nav-blur));
+  background-color: rgba(255, 255, 255, var(--glass-nav-bg-opacity));
+  border-bottom: var(--glass-border);
+  box-shadow: var(--glass-shadow-sm);
+  transition: var(--glass-transition);
+}
+
+/**
+ * 毛玻璃导航栏 - 深色
+ * Dark glassmorphism navigation bar
+ */
+.glass-nav-dark {
+  backdrop-filter: blur(var(--glass-nav-blur));
+  -webkit-backdrop-filter: blur(var(--glass-nav-blur));
+  background-color: rgba(30, 30, 30, var(--glass-nav-bg-opacity));
+  border-bottom: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--glass-shadow-sm);
+  transition: var(--glass-transition);
+}
+
+/**
+ * 毛玻璃导航项目
+ * Glassmorphism navigation item
+ */
+.glass-nav-item {
+  background-color: transparent;
+  border-radius: var(--glass-radius-md);
+  transition: var(--glass-transition);
+}
+
+.glass-nav-item:hover {
+  background-color: rgba(255, 255, 255, var(--glass-nav-item-hover-opacity));
+}
+
+.glass-nav-item.active {
+  background-color: rgba(255, 255, 255, var(--glass-nav-item-hover-opacity));
+  box-shadow: var(--glass-nav-active-glow);
+}
+
+/**
+ * 毛玻璃侧边栏
+ * Glassmorphism sidebar
+ */
+.glass-sidebar {
+  backdrop-filter: blur(var(--glass-nav-blur));
+  -webkit-backdrop-filter: blur(var(--glass-nav-blur));
+  background-color: rgba(30, 30, 30, var(--glass-nav-bg-opacity));
+  border-right: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--glass-shadow-md);
+  transition: var(--glass-transition);
+}
+
+/**
+ * 毛玻璃表格容器
+ * Glassmorphism table container
+ */
+.glass-table {
+  backdrop-filter: blur(var(--glass-table-container-blur));
+  -webkit-backdrop-filter: blur(var(--glass-table-container-blur));
+  background-color: rgba(255, 255, 255, var(--glass-table-container-bg-opacity));
+  border: var(--glass-border);
+  border-radius: var(--glass-radius-lg);
+  box-shadow: var(--glass-shadow-md);
+  overflow: hidden;
+}
+
+/**
+ * 毛玻璃表格表头
+ * Glassmorphism table header
+ */
+.glass-table-header {
+  backdrop-filter: blur(var(--glass-table-header-blur));
+  -webkit-backdrop-filter: blur(var(--glass-table-header-blur));
+  background-color: rgba(255, 255, 255, var(--glass-table-header-bg-opacity));
+  border-bottom: var(--glass-border);
+}
+
+/**
+ * 毛玻璃表格行
+ * Glassmorphism table row
+ */
+.glass-table-row {
+  background-color: rgba(255, 255, 255, var(--glass-table-row-bg-opacity));
+  transition: background-color var(--glass-duration-hover) var(--glass-easing);
+}
+
+.glass-table-row:hover {
+  background-color: rgba(255, 255, 255, var(--glass-table-row-hover-opacity));
+}
+
+/**
+ * 毛玻璃模态框背景
+ * Glassmorphism modal backdrop
+ */
+.glass-modal-backdrop {
+  backdrop-filter: blur(var(--glass-modal-backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--glass-modal-backdrop-blur));
+  background-color: rgba(0, 0, 0, var(--glass-modal-backdrop-bg-opacity));
+}
+
+/**
+ * 毛玻璃模态框内容
+ * Glassmorphism modal content
+ */
+.glass-modal {
+  backdrop-filter: blur(var(--glass-modal-content-blur));
+  -webkit-backdrop-filter: blur(var(--glass-modal-content-blur));
+  background-color: rgba(255, 255, 255, var(--glass-modal-content-bg-opacity));
+  border: var(--glass-border);
+  border-radius: var(--glass-radius-xl);
+  box-shadow: var(--glass-shadow-lg);
+}
+
+/**
+ * 毛玻璃弹出层
+ * Glassmorphism popover
+ */
+.glass-popover {
+  backdrop-filter: blur(var(--glass-popover-blur));
+  -webkit-backdrop-filter: blur(var(--glass-popover-blur));
+  background-color: rgba(255, 255, 255, var(--glass-popover-bg-opacity));
+  border: var(--glass-border);
+  border-radius: var(--glass-radius-md);
+  box-shadow: var(--glass-shadow-md);
+}
+
+/**
+ * 毛玻璃工具提示
+ * Glassmorphism tooltip
+ */
+.glass-tooltip {
+  backdrop-filter: blur(var(--glass-tooltip-blur));
+  -webkit-backdrop-filter: blur(var(--glass-tooltip-blur));
+  background-color: rgba(30, 30, 30, var(--glass-tooltip-bg-opacity));
+  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--glass-radius-sm);
+  box-shadow: var(--glass-shadow-sm);
+  color: white;
+}
+
+/**
+ * 毛玻璃下拉菜单
+ * Glassmorphism dropdown
+ */
+.glass-dropdown {
+  backdrop-filter: blur(var(--glass-dropdown-blur));
+  -webkit-backdrop-filter: blur(var(--glass-dropdown-blur));
+  background-color: rgba(255, 255, 255, var(--glass-dropdown-bg-opacity));
+  border: var(--glass-border);
+  border-radius: var(--glass-radius-md);
+  box-shadow: var(--glass-shadow-md);
+}
+
+/**
+ * 毛玻璃徽章
+ * Glassmorphism badge
+ */
+.glass-badge {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(255, 255, 255, 0.6);
+  border: var(--glass-border);
+  border-radius: var(--glass-radius-full);
+  box-shadow: var(--glass-shadow-sm);
+  padding: 2px 8px;
+  font-size: 0.75rem;
+}
+
+/**
+ * 毛玻璃输入框
+ * Glassmorphism input
+ */
+.glass-input {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.4);
+  border: var(--glass-border);
+  border-radius: var(--glass-radius-md);
+  transition: var(--glass-transition);
+}
+
+.glass-input:focus {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: var(--glass-shadow-glow);
+  outline: none;
+}
+
+/* ============================================
+   降级处理 (Fallback for unsupported browsers)
+   Requirements: 9.5
+   ============================================ */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-effect,
+  .glass-card,
+  .glass-card-dark,
+  .glass-button,
+  .glass-button-secondary,
+  .glass-button-icon,
+  .glass-nav,
+  .glass-nav-dark,
+  .glass-sidebar,
+  .glass-table,
+  .glass-table-header,
+  .glass-modal,
+  .glass-popover,
+  .glass-tooltip,
+  .glass-dropdown,
+  .glass-badge,
+  .glass-input {
+    background-color: var(--glass-fallback-bg);
+    border-color: var(--glass-fallback-border);
+  }
+
+  .glass-modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* ============================================
+   减少动画偏好支持 (Reduced Motion Support)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .glass-effect,
+  .glass-card,
+  .glass-card-dark,
+  .glass-button,
+  .glass-button-secondary,
+  .glass-button-icon,
+  .glass-nav,
+  .glass-nav-dark,
+  .glass-nav-item,
+  .glass-sidebar,
+  .glass-table-row,
+  .glass-input {
+    transition: none;
+  }
+}
+
+/* ============================================
+   性能优化 (Performance Optimization)
+   Requirements: 13.1, 13.2, 13.3, 13.4, 13.5
+   ============================================ */
+
+/**
+ * will-change 属性优化
+ * Optimizes rendering by hinting to the browser which properties will change
+ * Requirements: 13.1
+ * 
+ * 桌面端: will-change: backdrop-filter, background-color, opacity
+ * 移动端: will-change: opacity (减少GPU内存使用)
+ */
+.glass-effect,
+.glass-card,
+.glass-card-dark,
+.glass-nav,
+.glass-nav-dark,
+.glass-sidebar,
+.glass-modal,
+.glass-modal-backdrop {
+  will-change: backdrop-filter, background-color, opacity;
+}
+
+.glass-button,
+.glass-button-secondary,
+.glass-button-icon {
+  will-change: background-color, transform, box-shadow;
+}
+
+.glass-table,
+.glass-table-header,
+.glass-table-row {
+  will-change: background-color;
+}
+
+.glass-popover,
+.glass-tooltip,
+.glass-dropdown {
+  will-change: opacity, transform;
+}
+
+/**
+ * CSS Containment 优化
+ * Isolates elements for better rendering performance
+ * Requirements: 13.5
+ * 
+ * 桌面端: contain: layout style paint
+ * 移动端: contain: layout style (减少paint开销)
+ */
+.glass-effect,
+.glass-card,
+.glass-card-dark {
+  contain: layout style paint;
+}
+
+.glass-nav,
+.glass-nav-dark,
+.glass-sidebar {
+  contain: layout style;
+}
+
+.glass-modal {
+  contain: layout style paint;
+}
+
+.glass-table {
+  contain: layout style;
+}
+
+.glass-popover,
+.glass-tooltip,
+.glass-dropdown {
+  contain: layout style paint;
+}
+
+/**
+ * 性能优化工具类
+ * Performance optimization utility classes
+ * Requirements: 13.1, 13.5
+ */
+.glass-perf-optimize {
+  will-change: backdrop-filter, background-color, opacity;
+  contain: layout style paint;
+}
+
+.glass-perf-optimize-light {
+  will-change: opacity;
+  contain: layout style;
+}
+
+/**
+ * GPU加速层提升
+ * Force GPU acceleration for smoother animations
+ * Requirements: 13.1
+ */
+.glass-gpu-accelerate {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/**
+ * 禁用模糊效果类（用于性能敏感场景）
+ * Disable blur effects for performance-sensitive scenarios
+ * Requirements: 13.2
+ */
+.glass-no-blur {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.glass-no-blur.glass-effect,
+.glass-no-blur.glass-card,
+.glass-no-blur.glass-card-dark,
+.glass-no-blur.glass-nav,
+.glass-no-blur.glass-nav-dark,
+.glass-no-blur.glass-sidebar,
+.glass-no-blur.glass-modal {
+  background-color: var(--glass-fallback-bg);
+}
+
+/* ============================================
+   移动端性能优化 (Mobile Performance Optimization)
+   Requirements: 13.4
+   ============================================ */
+@media (max-width: 768px) {
+  /**
+   * 移动端 will-change 优化
+   * Reduced will-change properties for mobile to save GPU memory
+   * Requirements: 13.1, 13.4
+   */
+  .glass-effect,
+  .glass-card,
+  .glass-card-dark,
+  .glass-nav,
+  .glass-nav-dark,
+  .glass-sidebar,
+  .glass-modal,
+  .glass-modal-backdrop {
+    will-change: opacity;
+  }
+
+  .glass-button,
+  .glass-button-secondary,
+  .glass-button-icon {
+    will-change: background-color;
+  }
+
+  .glass-table,
+  .glass-table-header,
+  .glass-table-row {
+    will-change: auto;
+  }
+
+  .glass-popover,
+  .glass-tooltip,
+  .glass-dropdown {
+    will-change: opacity;
+  }
+
+  /**
+   * 移动端 CSS Containment 优化
+   * Lighter containment for mobile devices
+   * Requirements: 13.4, 13.5
+   */
+  .glass-effect,
+  .glass-card,
+  .glass-card-dark {
+    contain: layout style;
+  }
+
+  .glass-modal {
+    contain: layout style;
+  }
+
+  .glass-popover,
+  .glass-tooltip,
+  .glass-dropdown {
+    contain: layout style;
+  }
+
+  /**
+   * 移动端触摸优化
+   * Touch optimization for mobile devices
+   * Requirements: 13.4
+   */
+  .glass-button,
+  .glass-button-secondary,
+  .glass-button-icon,
+  .glass-nav-item {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /**
+   * 移动端性能工具类
+   * Mobile performance utility class
+   * Requirements: 13.4
+   */
+  .glass-perf-optimize {
+    will-change: opacity;
+    contain: layout style;
+  }
+}
+
+/* ============================================
+   减少动画偏好支持 (Reduced Motion Support)
+   Requirements: 13.3
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  /**
+   * 禁用所有毛玻璃过渡动画
+   * Disable all glassmorphism transitions
+   * Requirements: 13.3
+   */
+  .glass-effect,
+  .glass-card,
+  .glass-card-dark,
+  .glass-button,
+  .glass-button-secondary,
+  .glass-button-icon,
+  .glass-nav,
+  .glass-nav-dark,
+  .glass-nav-item,
+  .glass-sidebar,
+  .glass-table-row,
+  .glass-input,
+  .glass-modal,
+  .glass-modal-backdrop,
+  .glass-popover,
+  .glass-tooltip,
+  .glass-dropdown,
+  .glass-badge {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /**
+   * 禁用悬停变换效果
+   * Disable hover transform effects
+   * Requirements: 13.3
+   */
+  .glass-button:hover,
+  .glass-button-secondary:hover,
+  .glass-button-icon:hover {
+    transform: none !important;
+  }
+
+  /**
+   * 减少动画时移除 will-change
+   * Remove will-change when reduced motion is preferred
+   * Requirements: 13.3
+   */
+  .glass-effect,
+  .glass-card,
+  .glass-card-dark,
+  .glass-nav,
+  .glass-nav-dark,
+  .glass-sidebar,
+  .glass-modal,
+  .glass-modal-backdrop,
+  .glass-button,
+  .glass-button-secondary,
+  .glass-button-icon,
+  .glass-popover,
+  .glass-tooltip,
+  .glass-dropdown {
+    will-change: auto !important;
+  }
+
+  /**
+   * 减少动画偏好工具类
+   * Reduced motion utility class
+   * Requirements: 13.3
+   */
+  .glass-reduced-motion {
+    transition: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+}
+
+/* ============================================
+   低端设备性能优化 (Low-End Device Optimization)
+   Requirements: 13.2, 13.4
+   ============================================ */
+
+/**
+ * 低端设备优化类
+ * Apply this class to body or root element on low-end devices
+ * Requirements: 13.2, 13.4
+ */
+.glass-low-end-device .glass-effect,
+.glass-low-end-device .glass-card,
+.glass-low-end-device .glass-card-dark,
+.glass-low-end-device .glass-nav,
+.glass-low-end-device .glass-nav-dark,
+.glass-low-end-device .glass-sidebar,
+.glass-low-end-device .glass-modal,
+.glass-low-end-device .glass-modal-backdrop,
+.glass-low-end-device .glass-popover,
+.glass-low-end-device .glass-tooltip,
+.glass-low-end-device .glass-dropdown,
+.glass-low-end-device .glass-table,
+.glass-low-end-device .glass-table-header {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--glass-fallback-bg);
+  will-change: auto;
+  contain: layout;
+}
+
+.glass-low-end-device .glass-button,
+.glass-low-end-device .glass-button-secondary,
+.glass-low-end-device .glass-button-icon {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  will-change: auto;
+}
+
+/**
+ * 省电模式优化
+ * Battery saver mode optimization
+ * Requirements: 13.4
+ */
+.glass-battery-saver .glass-effect,
+.glass-battery-saver .glass-card,
+.glass-battery-saver .glass-card-dark,
+.glass-battery-saver .glass-nav,
+.glass-battery-saver .glass-nav-dark,
+.glass-battery-saver .glass-sidebar,
+.glass-battery-saver .glass-modal {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition-duration: 100ms;
+}
+
+/* ============================================
+   滚动性能优化 (Scroll Performance Optimization)
+   Requirements: 13.4
+   ============================================ */
+
+/**
+ * 滚动时禁用复杂效果
+ * Disable complex effects during scroll
+ * Requirements: 13.4
+ */
+.glass-scrolling .glass-effect,
+.glass-scrolling .glass-card,
+.glass-scrolling .glass-card-dark {
+  will-change: auto;
+  transition: none;
+}
+
+/**
+ * 平滑滚动容器优化
+ * Smooth scroll container optimization
+ * Requirements: 13.4
+ */
+.glass-scroll-container {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-scroll-container {
+    scroll-behavior: auto;
+  }
+}
+
+/* ============================================
+   打印样式优化 (Print Style Optimization)
+   ============================================ */
+@media print {
+  .glass-effect,
+  .glass-card,
+  .glass-card-dark,
+  .glass-nav,
+  .glass-nav-dark,
+  .glass-sidebar,
+  .glass-modal,
+  .glass-modal-backdrop,
+  .glass-button,
+  .glass-button-secondary,
+  .glass-button-icon,
+  .glass-popover,
+  .glass-tooltip,
+  .glass-dropdown,
+  .glass-table,
+  .glass-table-header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: white !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+}

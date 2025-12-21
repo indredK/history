@@ -1,11 +1,15 @@
 /**
  * 响应式布局组件
  * 提供不同设备下的布局方案
+ * 
+ * 应用苹果毛玻璃风格（Glassmorphism）
+ * Requirements: 6.1, 6.2
  */
 
 import React from 'react';
 import { Box, Stack, StackProps } from '@mui/material';
 import { useResponsive } from '@/hooks/useResponsive';
+import { getGlassConfig } from '@/config/glassConfig';
 
 interface ResponsiveLayoutProps {
   children: React.ReactNode;
@@ -16,6 +20,7 @@ interface ResponsiveLayoutProps {
   wrap?: boolean;
   maxWidth?: string | number;
   centerContent?: boolean;
+  glassEffect?: boolean;
 }
 
 interface ResponsiveGridProps {
@@ -24,6 +29,7 @@ interface ResponsiveGridProps {
   tabletColumns?: number;
   desktopColumns?: number;
   spacing?: number | string;
+  glassEffect?: boolean;
 }
 
 interface ResponsiveStackProps extends StackProps {
@@ -31,6 +37,7 @@ interface ResponsiveStackProps extends StackProps {
   mobileDirection?: 'row' | 'column';
   tabletDirection?: 'row' | 'column';
   desktopDirection?: 'row' | 'column';
+  glassEffect?: boolean;
 }
 
 export function ResponsiveLayout({
@@ -42,8 +49,13 @@ export function ResponsiveLayout({
   wrap = true,
   maxWidth,
   centerContent = false,
+  glassEffect = false,
 }: ResponsiveLayoutProps) {
-  const { isMobile, isTablet } = useResponsive();
+  const { isMobile, isTablet, screenWidth } = useResponsive();
+  
+  // 获取毛玻璃配置
+  const glassConfig = getGlassConfig(screenWidth);
+  const navConfig = glassConfig.components.navigation;
 
   const getDirection = () => {
     if (direction === 'responsive') {
@@ -61,6 +73,17 @@ export function ResponsiveLayout({
     return spacing;
   };
 
+  // 毛玻璃样式
+  const glassStyles = glassEffect ? {
+    backdropFilter: `blur(${navConfig.blur})`,
+    WebkitBackdropFilter: `blur(${navConfig.blur})`,
+    backgroundColor: `rgba(30, 30, 30, ${navConfig.bgOpacity})`,
+    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    borderRadius: glassConfig.border.radius.lg,
+    boxShadow: glassConfig.shadow.md,
+    padding: isMobile ? '12px' : '16px',
+  } : {};
+
   return (
     <Box
       sx={{
@@ -75,6 +98,7 @@ export function ResponsiveLayout({
           maxWidth,
           margin: centerContent ? '0 auto' : undefined,
         }),
+        ...glassStyles,
       }}
     >
       {children}
@@ -88,9 +112,13 @@ export function ResponsiveGrid({
   tabletColumns = 2,
   desktopColumns = 3,
   spacing = 2,
+  glassEffect = false,
   ...props
 }: ResponsiveGridProps) {
-  const { isMobile, isTablet } = useResponsive();
+  const { isMobile, isTablet, screenWidth } = useResponsive();
+  
+  // 获取毛玻璃配置
+  const glassConfig = getGlassConfig(screenWidth);
 
   const getColumns = () => {
     if (isMobile) return mobileColumns;
@@ -110,6 +138,17 @@ export function ResponsiveGrid({
   const columns = getColumns();
   const gridSpacing = getSpacing();
 
+  // 毛玻璃样式
+  const glassStyles = glassEffect ? {
+    backdropFilter: `blur(${glassConfig.blur.light})`,
+    WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
+    backgroundColor: `rgba(30, 30, 30, ${glassConfig.bgOpacity.light})`,
+    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    borderRadius: glassConfig.border.radius.lg,
+    boxShadow: glassConfig.shadow.sm,
+    padding: isMobile ? '8px' : '12px',
+  } : {};
+
   return (
     <Box
       sx={{
@@ -117,6 +156,7 @@ export function ResponsiveGrid({
         gridTemplateColumns: `repeat(${columns}, 1fr)`,
         gap: gridSpacing,
         width: '100%',
+        ...glassStyles,
       }}
       {...props}
     >
@@ -131,9 +171,13 @@ export function ResponsiveStack({
   tabletDirection = 'row',
   desktopDirection = 'row',
   spacing = 2,
+  glassEffect = false,
   ...props
 }: ResponsiveStackProps) {
-  const { isMobile, isTablet } = useResponsive();
+  const { isMobile, isTablet, screenWidth } = useResponsive();
+  
+  // 获取毛玻璃配置
+  const glassConfig = getGlassConfig(screenWidth);
 
   const getDirection = () => {
     if (isMobile) return mobileDirection;
@@ -150,10 +194,25 @@ export function ResponsiveStack({
     return spacing;
   };
 
+  // 毛玻璃样式
+  const glassStyles = glassEffect ? {
+    backdropFilter: `blur(${glassConfig.blur.light})`,
+    WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
+    backgroundColor: `rgba(30, 30, 30, ${glassConfig.bgOpacity.light})`,
+    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    borderRadius: glassConfig.border.radius.md,
+    boxShadow: glassConfig.shadow.sm,
+    padding: isMobile ? '8px' : '12px',
+  } : {};
+
   return (
     <Stack
       direction={getDirection()}
       spacing={getSpacing()}
+      sx={{
+        ...glassStyles,
+        ...(props.sx || {}),
+      }}
       {...props}
     >
       {children}
