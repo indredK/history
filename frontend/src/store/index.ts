@@ -4,3 +4,4 @@ export { useMapStore } from './mapStore';
 export { useEventsStore } from './eventsStore';
 export { usePersonsStore } from './personsStore';
 export { useNavigationStore } from './navigationStore';
+export { useThemeStore, initializeTheme } from './themeStore';

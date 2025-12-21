@@ -300,3 +300,79 @@ export function removePerformanceOptimizations(): void {
     root.classList.remove(className);
   });
 }
+
+// 导入主题配置
+import type { ThemeMode } from './themeConfig';
+
+/**
+ * 根据主题获取毛玻璃背景颜色基础值
+ * Gets glass background base color based on theme
+ * Requirements: 2.1, 3.1
+ */
+export function getThemeGlassBgBase(theme: ThemeMode): string {
+  return theme === 'dark' ? '30, 30, 30' : '255, 255, 255';
+}
+
+/**
+ * 根据主题获取边框颜色
+ * Gets border color based on theme
+ * Requirements: 2.2, 3.2
+ */
+export function getThemeBorderColor(theme: ThemeMode): string {
+  return theme === 'dark' 
+    ? 'rgba(255, 255, 255, 0.15)' 
+    : 'rgba(0, 0, 0, 0.12)';
+}
+
+/**
+ * 根据主题获取文字颜色
+ * Gets text color based on theme
+ * Requirements: 2.4, 3.4
+ */
+export function getThemeTextColor(theme: ThemeMode): string {
+  return theme === 'dark' 
+    ? 'rgba(255, 255, 255, 0.95)' 
+    : 'rgba(0, 0, 0, 0.87)';
+}
+
+/**
+ * 获取主题感知的毛玻璃样式
+ * Gets theme-aware glassmorphism style object
+ * Requirements: 2.1, 2.2, 2.3, 3.1, 3.2, 3.3
+ */
+export function getThemedGlassStyle(
+  theme: ThemeMode,
+  options: GlassStyleOptions = {},
+  config?: GlassConfig
+): React.CSSProperties {
+  const glassConfig = config || getGlassConfig(
+    typeof window !== 'undefined' ? window.innerWidth : 1024
+  );
+
+  const {
+    blur = 'medium',
+    bgOpacity = 'medium',
+    borderRadius = 'md',
+    shadow = 'md'
+  } = options;
+
+  const blurValue = glassConfig.blur[blur];
+  const opacityValue = glassConfig.bgOpacity[bgOpacity];
+  const radiusValue = glassConfig.border.radius[borderRadius];
+  const shadowValue = shadow === 'none' ? 'none' : glassConfig.shadow[shadow];
+  
+  const bgBase = getThemeGlassBgBase(theme);
+  const borderColor = getThemeBorderColor(theme);
+  const textColor = getThemeTextColor(theme);
+
+  return {
+    backdropFilter: `blur(${blurValue})`,
+    WebkitBackdropFilter: `blur(${blurValue})`,
+    backgroundColor: `rgba(${bgBase}, ${opacityValue})`,
+    borderRadius: radiusValue,
+    border: `${glassConfig.border.width} solid ${borderColor}`,
+    boxShadow: shadowValue,
+    color: textColor,
+    transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`
+  };
+}

@@ -42,15 +42,15 @@ function MajorEventsPage() {
           justifyContent: 'space-between',
           mb: 2,
           p: 2,
-          backgroundColor: '#f5f5f5',
-          borderLeft: '4px solid #1976d2',
+          backgroundColor: 'var(--color-bg-tertiary)',
+          borderLeft: '4px solid var(--color-primary)',
           borderRadius: 1,
           cursor: 'pointer',
           transition: 'all 0.2s ease-in-out',
           '&:hover': {
-            backgroundColor: '#e8f5e8',
+            backgroundColor: 'var(--theme-hover-bg)',
             transform: 'translateX(2px)',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+            boxShadow: 'var(--shadow-sm)'
           }
         }}
         onClick={() => toggleDynasty(category)}
@@ -58,7 +58,7 @@ function MajorEventsPage() {
         <Box>
           <Typography variant="h6" sx={{ 
             fontWeight: 'bold',
-            color: '#1976d2',
+            color: 'var(--color-primary)',
             display: 'flex',
             alignItems: 'center',
             gap: 1
@@ -68,7 +68,7 @@ function MajorEventsPage() {
               component="span" 
               sx={{ 
                 fontSize: '0.8rem', 
-                color: '#666',
+                color: 'var(--color-text-secondary)',
                 fontWeight: 'normal'
               }}
             >
@@ -81,7 +81,7 @@ function MajorEventsPage() {
             sx={{ 
               transition: 'transform 0.2s ease-in-out',
               transform: isExpanded ? 'rotate(0deg)' : 'rotate(-90deg)',
-              color: '#1976d2'
+              color: 'var(--color-primary)'
             }}
           />
         </IconButton>
@@ -128,9 +128,9 @@ function MajorEventsPage() {
                             {event.title}
                           </Typography>
                           <Typography variant="body2" sx={{
-                            color: '#1976d2',
+                            color: 'var(--color-primary)',
                             fontWeight: 'medium',
-                            backgroundColor: 'rgba(25, 118, 210, 0.1)',
+                            backgroundColor: 'rgba(255, 61, 0, 0.1)',
                             px: 1,
                             py: 0.5,
                             borderRadius: 1,

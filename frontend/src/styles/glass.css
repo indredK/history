@@ -1011,3 +1011,134 @@
     border: 1px solid #ccc !important;
   }
 }
+
+/* ============================================
+   主题感知毛玻璃样式 (Theme-aware Glassmorphism Styles)
+   Requirements: 2.1, 2.2, 2.3, 3.1, 3.2, 3.3
+   ============================================ */
+
+/**
+ * 白天模式毛玻璃样式覆盖
+ * Light mode glassmorphism style overrides
+ * Requirements: 3.1, 3.2, 3.3
+ */
+[data-theme="light"] .glass-effect,
+[data-theme="light"] .glass-card {
+  background-color: rgba(255, 255, 255, var(--glass-bg-opacity-medium));
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .glass-effect:hover,
+[data-theme="light"] .glass-card:hover {
+  background-color: rgba(255, 255, 255, calc(var(--glass-bg-opacity-medium) + 0.1));
+}
+
+[data-theme="light"] .glass-card-dark {
+  background-color: rgba(255, 255, 255, var(--glass-card-bg-opacity));
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .glass-card-dark:hover {
+  background-color: rgba(255, 255, 255, calc(var(--glass-card-bg-opacity) + var(--glass-card-hover-delta)));
+}
+
+[data-theme="light"] .glass-button,
+[data-theme="light"] .glass-button-secondary,
+[data-theme="light"] .glass-button-icon {
+  background-color: rgba(255, 255, 255, var(--glass-btn-primary-bg-opacity));
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .glass-button:hover {
+  background-color: rgba(255, 255, 255, calc(var(--glass-btn-primary-bg-opacity) + 0.1));
+}
+
+[data-theme="light"] .glass-nav,
+[data-theme="light"] .glass-nav-dark,
+[data-theme="light"] .glass-sidebar {
+  background-color: rgba(255, 255, 255, var(--glass-nav-bg-opacity));
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .glass-nav-item:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .glass-nav-item.active {
+  background-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .glass-table {
+  background-color: rgba(255, 255, 255, var(--glass-table-container-bg-opacity));
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .glass-table-header {
+  background-color: rgba(255, 255, 255, var(--glass-table-header-bg-opacity));
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .glass-table-row {
+  background-color: rgba(255, 255, 255, var(--glass-table-row-bg-opacity));
+}
+
+[data-theme="light"] .glass-table-row:hover {
+  background-color: rgba(255, 255, 255, var(--glass-table-row-hover-opacity));
+}
+
+[data-theme="light"] .glass-modal {
+  background-color: rgba(255, 255, 255, var(--glass-modal-content-bg-opacity));
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .glass-popover,
+[data-theme="light"] .glass-dropdown {
+  background-color: rgba(255, 255, 255, var(--glass-popover-bg-opacity));
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .glass-tooltip {
+  background-color: rgba(50, 50, 50, var(--glass-tooltip-bg-opacity));
+  border-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+[data-theme="light"] .glass-input {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .glass-input:focus {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .glass-badge {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--theme-text-primary);
+}
+
+/**
+ * 白天模式阴影调整
+ * Light mode shadow adjustments
+ */
+[data-theme="light"] {
+  --glass-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --glass-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --glass-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --glass-shadow-glow: 0 0 20px rgba(0, 0, 0, 0.05);
+  --glass-shadow-inset: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  
+  --glass-fallback-bg: rgba(255, 255, 255, 0.95);
+  --glass-fallback-border: rgba(0, 0, 0, 0.1);
+}

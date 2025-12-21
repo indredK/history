@@ -1,10 +1,10 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { useLocation, Routes, Route, Navigate } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { PortraitSidebar } from '@/components/ui/PortraitSidebar';
 import { Footer } from './Footer';
-import { useDynastyStore } from '@/store';
+import { useDynastyStore, useThemeStore } from '@/store';
 import { useDynastyImage } from '@/hooks/useDynastyImage';
 import { useSidebar, useResponsive, useOrientation } from '@/hooks';
 import { routes } from '@/router/routes';
@@ -19,9 +19,20 @@ export function AppLayout() {
   const { collapsed: sidebarCollapsed, toggle: toggleSidebar } = useSidebar();
   const { isMobile, isSmallMobile, screenWidth } = useResponsive();
   const orientation = useOrientation();
+  const { theme, initializeTheme } = useThemeStore();
+
+  // 初始化主题
+  useEffect(() => {
+    initializeTheme();
+  }, [initializeTheme]);
 
   // 获取毛玻璃配置
   const glassConfig = getGlassConfig(screenWidth);
+  
+  // 根据主题获取背景色
+  const isDark = theme === 'dark';
+  const bgBase = isDark ? '30, 30, 30' : '255, 255, 255';
+  const borderColor = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.12)';
 
   // 根据路径确定当前活跃的标签
   const getActiveTabFromPath = (pathname: string): string => {
@@ -45,23 +56,23 @@ export function AppLayout() {
   const bgColor = dynastyUtils.getBackgroundColor(dynastyColor);
   const gradientBackground = dynastyUtils.getGradientBackground(dynastyColor);
 
-  // 毛玻璃主内容区域样式
+  // 毛玻璃主内容区域样式 - 使用主题变量
   const mainContentGlassStyle = {
     backdropFilter: `blur(${glassConfig.components.card.blur})`,
     WebkitBackdropFilter: `blur(${glassConfig.components.card.blur})`,
-    backgroundColor: `rgba(30, 30, 30, ${glassConfig.components.card.bgOpacity})`,
-    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    backgroundColor: `rgba(${bgBase}, ${glassConfig.components.card.bgOpacity})`,
+    border: `${glassConfig.border.width} solid ${borderColor}`,
     borderRadius: glassConfig.border.radius.lg,
     boxShadow: glassConfig.shadow.md,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`
   };
 
-  // 毛玻璃底部导航栏样式
+  // 毛玻璃底部导航栏样式 - 使用主题变量
   const bottomNavGlassStyle = {
     backdropFilter: `blur(${glassConfig.components.navigation.blur})`,
     WebkitBackdropFilter: `blur(${glassConfig.components.navigation.blur})`,
-    background: `linear-gradient(to top, rgba(0, 0, 0, ${glassConfig.components.navigation.bgOpacity}), rgba(0, 0, 0, ${glassConfig.components.navigation.bgOpacity - 0.2}))`,
-    borderTop: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    background: `linear-gradient(to top, rgba(${bgBase}, ${glassConfig.components.navigation.bgOpacity}), rgba(${bgBase}, ${glassConfig.components.navigation.bgOpacity - 0.2}))`,
+    borderTop: `${glassConfig.border.width} solid ${borderColor}`,
     boxShadow: glassConfig.shadow.lg,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`
   };

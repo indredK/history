@@ -134,7 +134,7 @@ const RulerRow = memo(({
         rowSpan={rowSpan}
       >
         <span style={tableStyles.rulerTitle}>
-          {ruler.title || <span style={{ color: '#999' }}>-</span>}
+          {ruler.title || <span style={{ color: 'var(--color-text-muted)' }}>-</span>}
         </span>
       </TableCell>
     )}
@@ -153,7 +153,7 @@ const RulerRow = memo(({
         }}
         rowSpan={rowSpan}
       >
-        {ruler.name || <span style={{ color: '#999' }}>-</span>}
+        {ruler.name || <span style={{ color: 'var(--color-text-muted)' }}>-</span>}
       </TableCell>
     )}
     
@@ -168,11 +168,11 @@ const RulerRow = memo(({
       }}>
         {yearName ? (
           <>
-            {yearName.name || <span style={{ color: '#999' }}>-</span>}
+            {yearName.name || <span style={{ color: 'var(--color-text-muted)' }}>-</span>}
             {yearName.note && (
               <Typography variant="caption" sx={{ 
                 display: 'block', 
-                color: '#666', 
+                color: 'var(--color-text-secondary)', 
                 fontStyle: 'italic',
                 fontSize: isMobile ? '0.6rem' : 'inherit'
               }}>
@@ -181,7 +181,7 @@ const RulerRow = memo(({
             )}
           </>
         ) : (
-          ruler.yearName || <span style={{ color: '#999' }}>-</span>
+          ruler.yearName || <span style={{ color: 'var(--color-text-muted)' }}>-</span>
         )}
       </TableCell>
     )}
@@ -189,21 +189,21 @@ const RulerRow = memo(({
     {/* 使用年数列 - 移动端隐藏 */}
     {!isMobile && (
       <TableCell sx={tableStyles.bodyCell} align="center">
-        {yearName?.duration || ruler.duration || <span style={{ color: '#999' }}>-</span>}
+        {yearName?.duration || ruler.duration || <span style={{ color: 'var(--color-text-muted)' }}>-</span>}
       </TableCell>
     )}
     
     {/* 元年干支列 - 移动端隐藏 */}
     {!isMobile && (
       <TableCell sx={tableStyles.bodyCell} align="center">
-        {yearName?.ganZhi || ruler.ganZhi || <span style={{ color: '#999' }}>-</span>}
+        {yearName?.ganZhi || ruler.ganZhi || <span style={{ color: 'var(--color-text-muted)' }}>-</span>}
       </TableCell>
     )}
     
     {/* 改元月份列 - 移动端隐藏 */}
     {!isMobile && (
       <TableCell sx={tableStyles.bodyCell} align="center">
-        {yearName?.changeMonth || ruler.changeMonth || <span style={{ color: '#999' }}>-</span>}
+        {yearName?.changeMonth || ruler.changeMonth || <span style={{ color: 'var(--color-text-muted)' }}>-</span>}
       </TableCell>
     )}
     
@@ -217,7 +217,7 @@ const RulerRow = memo(({
       })
     }} align="center">
       <span style={tableStyles.startYear}>
-        {yearName?.startYear || ruler.startYear || <span style={{ color: '#999' }}>-</span>}
+        {yearName?.startYear || ruler.startYear || <span style={{ color: 'var(--color-text-muted)' }}>-</span>}
       </span>
     </TableCell>
     
@@ -280,7 +280,7 @@ const RulerRow = memo(({
             ))}
           </Box>
         ) : (
-          <span style={{ color: '#999' }}>-</span>
+          <span style={{ color: 'var(--color-text-muted)' }}>-</span>
         )}
       </TableCell>
     )}
@@ -392,7 +392,7 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle, isMobile, isSma
           <Box sx={{ 
             display: 'flex', 
             alignItems: 'center',
-            color: '#1976d2',
+            color: 'var(--color-primary)',
             fontSize: '0.8rem'
           }}>
             <ExpandLessIcon 
@@ -410,7 +410,7 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle, isMobile, isSma
         sx={{ 
           ...tableStyles.bodyCell, 
           fontStyle: 'italic', 
-          color: '#555',
+          color: 'var(--color-text-secondary)',
           cursor: 'pointer',
           backdropFilter: 'blur(8px)',
           WebkitBackdropFilter: 'blur(8px)',
@@ -431,7 +431,7 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle, isMobile, isSma
         {dynasty.summary && (
           <Typography variant="body2" sx={{ 
             fontStyle: 'normal',
-            color: '#555',
+            color: 'var(--color-text-secondary)',
             lineHeight: 1.4,
             mb: 0.5,
             fontSize: 'inherit'
@@ -442,7 +442,7 @@ export const DynastyRow = memo(({ dynasty, isExpanded, onToggle, isMobile, isSma
         {dynasty.note && (
           <Typography variant="body2" sx={{ 
             fontStyle: 'italic',
-            color: '#777',
+            color: 'var(--color-text-tertiary)',
             fontSize: isMobile ? (isSmallMobile ? '0.55rem' : '0.65rem') : '0.85rem'
           }}>
             {dynasty.note}

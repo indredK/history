@@ -101,7 +101,7 @@ export function EChartsMapView() {
                 borderRadius: 'var(--glass-radius-full, 9999px)',
                 cursor: 'pointer',
                 fontSize: '18px',
-                color: '#555',
+                color: 'var(--color-text-secondary)',
                 width: '28px',
                 height: '28px',
                 display: 'flex',
@@ -113,7 +113,7 @@ export function EChartsMapView() {
               ×
             </button>
           </div>
-          <div style={{ fontSize: '14px', color: '#555' }}>
+          <div style={{ fontSize: '14px', color: 'var(--color-text-secondary)' }}>
             <p style={{ 
               margin: '8px 0',
               padding: '8px 12px',
@@ -122,7 +122,7 @@ export function EChartsMapView() {
               backdropFilter: 'blur(4px)',
               WebkitBackdropFilter: 'blur(4px)'
             }}>
-              <span style={{ color: '#777' }}>数值：</span>
+              <span style={{ color: 'var(--color-text-tertiary)' }}>数值：</span>
               {selectedProvince.data.value}
             </p>
             <p style={{ 
@@ -133,7 +133,7 @@ export function EChartsMapView() {
               backdropFilter: 'blur(4px)',
               WebkitBackdropFilter: 'blur(4px)'
             }}>
-              <span style={{ color: '#777' }}>行政代码：</span>
+              <span style={{ color: 'var(--color-text-tertiary)' }}>行政代码：</span>
               {selectedProvince.data.adcode || '-'}
             </p>
           </div>

@@ -1,0 +1,955 @@
+/**
+ * 主题 CSS 变量
+ * Theme CSS Variables
+ * 
+ * Requirements: 8.1, 8.2, 8.3, 7.1, 7.2
+ * 
+ * 定义暗黑模式和白天模式的 CSS 变量
+ */
+
+/* ============================================
+   主题过渡动画
+   Theme Transition Animation
+   Requirements: 7.1, 7.2
+   ============================================ */
+:root {
+  --theme-transition-duration: 250ms;
+  --theme-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --theme-transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-easing),
+    border-color var(--theme-transition-duration) var(--theme-transition-easing),
+    color var(--theme-transition-duration) var(--theme-transition-easing),
+    box-shadow var(--theme-transition-duration) var(--theme-transition-easing);
+}
+
+/* ============================================
+   暗黑模式 CSS 变量
+   Dark Mode CSS Variables
+   Requirements: 2.1, 2.2, 2.4, 8.1, 8.2, 8.3
+   ============================================ */
+[data-theme="dark"],
+:root {
+  /* 毛玻璃背景 */
+  --theme-glass-bg-base: 30, 30, 30;
+  --theme-glass-bg: rgba(var(--theme-glass-bg-base), 0.7);
+  --theme-glass-bg-light: rgba(var(--theme-glass-bg-base), 0.5);
+  --theme-glass-bg-heavy: rgba(var(--theme-glass-bg-base), 0.85);
+  
+  /* 毛玻璃边框 */
+  --theme-glass-border: rgba(255, 255, 255, 0.15);
+  --theme-glass-border-light: rgba(255, 255, 255, 0.1);
+  --theme-glass-border-heavy: rgba(255, 255, 255, 0.2);
+  
+  /* UI 背景色 */
+  --theme-bg-primary: rgba(20, 20, 20, 1);
+  --theme-bg-secondary: rgba(30, 30, 30, 1);
+  --theme-bg-surface: rgba(40, 40, 40, 1);
+  --theme-bg-elevated: rgba(50, 50, 50, 1);
+  
+  /* 文字颜色 */
+  --theme-text-primary: rgba(255, 255, 255, 0.95);
+  --theme-text-secondary: rgba(255, 255, 255, 0.7);
+  --theme-text-muted: rgba(255, 255, 255, 0.5);
+  --theme-text-disabled: rgba(255, 255, 255, 0.3);
+  
+  /* 边框和分割线 */
+  --theme-border-color: rgba(255, 255, 255, 0.15);
+  --theme-border-light: rgba(255, 255, 255, 0.1);
+  --theme-divider: rgba(255, 255, 255, 0.1);
+  
+  /* 阴影 */
+  --theme-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --theme-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --theme-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --theme-shadow-glow: 0 0 20px rgba(255, 255, 255, 0.1);
+  
+  /* 悬停效果 */
+  --theme-hover-bg: rgba(255, 255, 255, 0.1);
+  --theme-active-bg: rgba(255, 255, 255, 0.15);
+  
+  /* 图标颜色 */
+  --theme-icon-primary: rgba(255, 255, 255, 0.9);
+  --theme-icon-secondary: rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================
+   白天模式 CSS 变量
+   Light Mode CSS Variables
+   Requirements: 3.1, 3.2, 3.4, 8.1, 8.2, 8.3
+   ============================================ */
+[data-theme="light"] {
+  /* 毛玻璃背景 */
+  --theme-glass-bg-base: 255, 255, 255;
+  --theme-glass-bg: rgba(var(--theme-glass-bg-base), 0.7);
+  --theme-glass-bg-light: rgba(var(--theme-glass-bg-base), 0.5);
+  --theme-glass-bg-heavy: rgba(var(--theme-glass-bg-base), 0.85);
+  
+  /* 毛玻璃边框 */
+  --theme-glass-border: rgba(0, 0, 0, 0.12);
+  --theme-glass-border-light: rgba(0, 0, 0, 0.08);
+  --theme-glass-border-heavy: rgba(0, 0, 0, 0.18);
+  
+  /* UI 背景色 */
+  --theme-bg-primary: rgba(245, 245, 245, 1);
+  --theme-bg-secondary: rgba(255, 255, 255, 1);
+  --theme-bg-surface: rgba(250, 250, 250, 1);
+  --theme-bg-elevated: rgba(255, 255, 255, 1);
+  
+  /* 文字颜色 */
+  --theme-text-primary: rgba(0, 0, 0, 0.87);
+  --theme-text-secondary: rgba(0, 0, 0, 0.6);
+  --theme-text-muted: rgba(0, 0, 0, 0.38);
+  --theme-text-disabled: rgba(0, 0, 0, 0.26);
+  
+  /* 边框和分割线 */
+  --theme-border-color: rgba(0, 0, 0, 0.12);
+  --theme-border-light: rgba(0, 0, 0, 0.08);
+  --theme-divider: rgba(0, 0, 0, 0.08);
+  
+  /* 阴影 */
+  --theme-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --theme-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --theme-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --theme-shadow-glow: 0 0 20px rgba(0, 0, 0, 0.05);
+  
+  /* 悬停效果 */
+  --theme-hover-bg: rgba(0, 0, 0, 0.04);
+  --theme-active-bg: rgba(0, 0, 0, 0.08);
+  
+  /* 图标颜色 */
+  --theme-icon-primary: rgba(0, 0, 0, 0.8);
+  --theme-icon-secondary: rgba(0, 0, 0, 0.54);
+}
+
+/* ============================================
+   减少动画偏好支持
+   Reduced Motion Support
+   Requirements: 7.3
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  [data-theme="dark"],
+  [data-theme="light"] {
+    --theme-transition-duration: 0ms;
+    --theme-transition: none;
+  }
+}
+
+/* ============================================
+   主题感知的毛玻璃样式覆盖
+   Theme-aware Glassmorphism Style Overrides
+   ============================================ */
+
+/* 基础毛玻璃效果 - 使用主题变量 */
+.glass-effect-themed {
+  backdrop-filter: blur(var(--glass-blur-medium));
+  -webkit-backdrop-filter: blur(var(--glass-blur-medium));
+  background-color: var(--theme-glass-bg);
+  border: 1px solid var(--theme-glass-border);
+  color: var(--theme-text-primary);
+  transition: var(--theme-transition);
+}
+
+.glass-effect-themed:hover {
+  background-color: var(--theme-glass-bg-heavy);
+}
+
+/* 毛玻璃卡片 - 使用主题变量 */
+.glass-card-themed {
+  backdrop-filter: blur(var(--glass-card-blur));
+  -webkit-backdrop-filter: blur(var(--glass-card-blur));
+  background-color: var(--theme-glass-bg);
+  border: 1px solid var(--theme-glass-border);
+  border-radius: var(--glass-radius-lg);
+  box-shadow: var(--theme-shadow-md);
+  color: var(--theme-text-primary);
+  transition: var(--theme-transition);
+}
+
+.glass-card-themed:hover {
+  background-color: var(--theme-glass-bg-heavy);
+  box-shadow: var(--theme-shadow-lg);
+}
+
+/* 毛玻璃按钮 - 使用主题变量 */
+.glass-button-themed {
+  backdrop-filter: blur(var(--glass-btn-primary-blur));
+  -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur));
+  background-color: var(--theme-glass-bg-light);
+  border: 1px solid var(--theme-glass-border);
+  border-radius: var(--glass-radius-md);
+  box-shadow: var(--theme-shadow-sm);
+  color: var(--theme-text-primary);
+  transition: var(--theme-transition);
+  cursor: pointer;
+}
+
+.glass-button-themed:hover {
+  background-color: var(--theme-glass-bg);
+  box-shadow: var(--theme-shadow-md);
+  transform: translateY(-1px);
+}
+
+.glass-button-themed:active {
+  background-color: var(--theme-glass-bg-light);
+  transform: translateY(0);
+}
+
+/* 毛玻璃图标按钮 - 使用主题变量 */
+.glass-icon-button-themed {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: var(--theme-glass-bg-light);
+  border: 1px solid var(--theme-glass-border);
+  border-radius: var(--glass-radius-full);
+  box-shadow: var(--theme-shadow-sm);
+  color: var(--theme-icon-primary);
+  transition: var(--theme-transition);
+  cursor: pointer;
+}
+
+.glass-icon-button-themed:hover {
+  background-color: var(--theme-glass-bg);
+  box-shadow: var(--theme-shadow-glow);
+}
+
+/* 毛玻璃侧边栏 - 使用主题变量 */
+.glass-sidebar-themed {
+  backdrop-filter: blur(var(--glass-nav-blur));
+  -webkit-backdrop-filter: blur(var(--glass-nav-blur));
+  background-color: var(--theme-glass-bg);
+  border-right: 1px solid var(--theme-glass-border);
+  box-shadow: var(--theme-shadow-md);
+  color: var(--theme-text-primary);
+  transition: var(--theme-transition);
+}
+
+/* 设置面板样式 */
+.settings-panel {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: var(--theme-glass-bg-light);
+  border: 1px solid var(--theme-glass-border);
+  border-radius: var(--glass-radius-lg);
+  padding: 8px;
+  transition: var(--theme-transition);
+}
+
+.settings-panel-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--glass-radius-md);
+  background-color: transparent;
+  border: none;
+  color: var(--theme-text-primary);
+  cursor: pointer;
+  transition: var(--theme-transition);
+  width: 100%;
+  text-align: left;
+}
+
+.settings-panel-button:hover {
+  background-color: var(--theme-hover-bg);
+}
+
+.settings-panel-button:active {
+  background-color: var(--theme-active-bg);
+}
+
+.settings-panel-button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--glass-radius-md);
+  background-color: var(--theme-glass-bg-light);
+  color: var(--theme-icon-primary);
+  transition: var(--theme-transition);
+}
+
+.settings-panel-button:hover .settings-panel-button-icon {
+  background-color: var(--theme-glass-bg);
+}
+
+.settings-panel-button-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--theme-text-primary);
+}
+
+/* 折叠状态的设置面板 */
+.settings-panel-collapsed {
+  padding: 4px;
+}
+
+.settings-panel-collapsed .settings-panel-button {
+  padding: 8px;
+  justify-content: center;
+}
+
+/* ============================================
+   全局主题样式
+   Global Theme Styles
+   ============================================ */
+
+/* 全局文字颜色 */
+[data-theme="dark"] body,
+[data-theme="dark"] .app {
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] body,
+[data-theme="light"] .app {
+  color: var(--theme-text-primary);
+}
+
+/* MUI 组件主题覆盖 */
+[data-theme="light"] .MuiTypography-root {
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .MuiIconButton-root {
+  color: var(--theme-icon-primary);
+}
+
+[data-theme="light"] .MuiSvgIcon-root {
+  color: inherit;
+}
+
+[data-theme="light"] .MuiDivider-root {
+  border-color: var(--theme-divider);
+}
+
+/* 白天模式下的文字阴影增强可读性 */
+[data-theme="light"] .MuiTypography-root {
+  text-shadow: none;
+}
+
+/* 白天模式下侧边栏文字 */
+[data-theme="light"] .app-sider .MuiTypography-root,
+[data-theme="light"] .glass-sidebar .MuiTypography-root {
+  color: var(--theme-text-primary);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* 白天模式下导航项目 */
+[data-theme="light"] .MuiListItemText-primary {
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .MuiListItemText-secondary {
+  color: var(--theme-text-secondary);
+}
+
+/* 白天模式下按钮文字 */
+[data-theme="light"] .MuiButton-root {
+  color: var(--theme-text-primary);
+}
+
+/* 白天模式下输入框 */
+[data-theme="light"] .MuiInputBase-root {
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .MuiInputBase-root .MuiInputBase-input {
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .MuiInputLabel-root {
+  color: var(--theme-text-secondary);
+}
+
+/* 白天模式下表格 */
+[data-theme="light"] .MuiTableCell-root {
+  color: var(--theme-text-primary);
+  border-color: var(--theme-divider);
+}
+
+[data-theme="light"] .MuiTableCell-head {
+  color: var(--theme-text-primary);
+  font-weight: 600;
+}
+
+/* 白天模式下卡片内容 */
+[data-theme="light"] .MuiCardContent-root {
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .MuiCardHeader-title {
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .MuiCardHeader-subheader {
+  color: var(--theme-text-secondary);
+}
+
+/* 白天模式下 Tooltip */
+[data-theme="light"] .MuiTooltip-tooltip {
+  background-color: rgba(50, 50, 50, 0.9);
+  color: white;
+}
+
+/* 白天模式下 Chip */
+[data-theme="light"] .MuiChip-root {
+  color: var(--theme-text-primary);
+  border-color: var(--theme-border-color);
+}
+
+/* 白天模式下 Tab */
+[data-theme="light"] .MuiTab-root {
+  color: var(--theme-text-secondary);
+}
+
+[data-theme="light"] .MuiTab-root.Mui-selected {
+  color: var(--theme-text-primary);
+}
+
+/* 白天模式下 Accordion */
+[data-theme="light"] .MuiAccordionSummary-content {
+  color: var(--theme-text-primary);
+}
+
+[data-theme="light"] .MuiAccordionDetails-root {
+  color: var(--theme-text-primary);
+}
+
+/* ============================================
+   高可读性文字样式
+   High Readability Text Styles
+   ============================================ */
+
+/* 白天模式下增强文字对比度 */
+[data-theme="light"] {
+  /* 更深的主文字颜色 */
+  --theme-text-primary: rgba(0, 0, 0, 0.9);
+  --theme-text-secondary: rgba(0, 0, 0, 0.7);
+  
+  /* 毛玻璃背景更不透明以提高可读性 */
+  --theme-glass-bg: rgba(255, 255, 255, 0.85);
+  --theme-glass-bg-light: rgba(255, 255, 255, 0.7);
+  --theme-glass-bg-heavy: rgba(255, 255, 255, 0.95);
+}
+
+/* 暗黑模式下增强文字对比度 */
+[data-theme="dark"] {
+  /* 更亮的主文字颜色 */
+  --theme-text-primary: rgba(255, 255, 255, 0.95);
+  --theme-text-secondary: rgba(255, 255, 255, 0.75);
+}
+
+/* 文字背景增强 - 确保在任何背景上都可读 */
+.text-readable {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .text-readable {
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+/* 卡片内文字确保可读 */
+.glass-card-themed .card-title,
+.glass-card-themed .card-content {
+  color: var(--theme-text-primary);
+}
+
+/* 导航文字确保可读 */
+.nav-text {
+  color: var(--theme-text-primary);
+  font-weight: 500;
+}
+
+/* ============================================
+   页面背景主题
+   Page Background Theme
+   ============================================ */
+
+/* 白天模式页面背景 */
+[data-theme="light"] .app {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+}
+
+[data-theme="light"] main {
+  background-color: rgba(245, 245, 245, 0.3);
+}
+
+/* 暗黑模式页面背景保持原样 */
+[data-theme="dark"] .app {
+  background: var(--color-bg-gradient, linear-gradient(135deg, #1a1a2e 0%, #16213e 100%));
+}
+
+/* ============================================
+   页面内容组件主题适配
+   Page Content Components Theme Adaptation
+   ============================================ */
+
+/* 分类标题区域 - 暗黑模式 */
+[data-theme="dark"] .category-header,
+[data-theme="dark"] .period-header {
+  background-color: rgba(30, 30, 30, 0.8) !important;
+  border-left-color: var(--color-primary) !important;
+}
+
+[data-theme="dark"] .category-header:hover,
+[data-theme="dark"] .period-header:hover {
+  background-color: rgba(40, 40, 40, 0.9) !important;
+}
+
+/* 分类标题区域 - 白天模式 */
+[data-theme="light"] .category-header,
+[data-theme="light"] .period-header {
+  background-color: rgba(245, 245, 245, 0.9) !important;
+  border-left-color: var(--color-primary) !important;
+}
+
+[data-theme="light"] .category-header:hover,
+[data-theme="light"] .period-header:hover {
+  background-color: rgba(232, 245, 232, 0.9) !important;
+}
+
+/* MUI Card 主题适配 */
+[data-theme="dark"] .MuiCard-root {
+  background-color: var(--color-bg-card) !important;
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .MuiCard-root {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: var(--color-text-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="light"] .MuiCard-root:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* MUI Paper 主题适配 */
+[data-theme="dark"] .MuiPaper-root {
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .MuiPaper-root {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: var(--color-text-primary);
+}
+
+/* 页面容器主题适配 */
+[data-theme="dark"] .people-page,
+[data-theme="dark"] .culture-page,
+[data-theme="dark"] .major-events-page,
+[data-theme="dark"] .mythology-page,
+[data-theme="dark"] .timeline-page,
+[data-theme="dark"] .map-page,
+[data-theme="dark"] .dynasties-page {
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .people-page,
+[data-theme="light"] .culture-page,
+[data-theme="light"] .major-events-page,
+[data-theme="light"] .mythology-page,
+[data-theme="light"] .timeline-page,
+[data-theme="light"] .map-page,
+[data-theme="light"] .dynasties-page {
+  color: var(--color-text-primary);
+}
+
+/* 内联样式覆盖 - 分类标题背景色 */
+[data-theme="dark"] [style*="background-color: rgb(245, 245, 245)"],
+[data-theme="dark"] [style*="backgroundColor: rgb(245, 245, 245)"],
+[data-theme="dark"] [style*="background-color: #f5f5f5"],
+[data-theme="dark"] [style*="backgroundColor: #f5f5f5"] {
+  background-color: rgba(40, 40, 40, 0.9) !important;
+}
+
+/* 内联样式覆盖 - 悬停背景色 */
+[data-theme="dark"] [style*="background-color: rgb(232, 245, 232)"],
+[data-theme="dark"] [style*="backgroundColor: rgb(232, 245, 232)"],
+[data-theme="dark"] [style*="background-color: #e8f5e8"],
+[data-theme="dark"] [style*="backgroundColor: #e8f5e8"] {
+  background-color: rgba(50, 60, 50, 0.9) !important;
+}
+
+/* 内联样式覆盖 - 文字颜色 */
+[data-theme="dark"] [style*="color: rgb(102, 102, 102)"],
+[data-theme="dark"] [style*="color: #666"] {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme="light"] [style*="color: rgb(102, 102, 102)"],
+[data-theme="light"] [style*="color: #666"] {
+  color: var(--color-text-secondary) !important;
+}
+
+/* MUI Box 内联样式覆盖 */
+[data-theme="dark"] .MuiBox-root[style*="background-color: rgb(245, 245, 245)"],
+[data-theme="dark"] .MuiBox-root[style*="backgroundColor: rgb(245, 245, 245)"] {
+  background-color: rgba(40, 40, 40, 0.9) !important;
+}
+
+[data-theme="light"] .MuiBox-root[style*="background-color: rgb(245, 245, 245)"],
+[data-theme="light"] .MuiBox-root[style*="backgroundColor: rgb(245, 245, 245)"] {
+  background-color: rgba(245, 245, 245, 0.95) !important;
+}
+
+/* Avatar 主题适配 */
+[data-theme="dark"] .MuiAvatar-root {
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .MuiAvatar-root {
+  border: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Skeleton 加载状态主题适配 */
+[data-theme="dark"] .MuiSkeleton-root {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="light"] .MuiSkeleton-root {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Container 主题适配 */
+[data-theme="dark"] .MuiContainer-root {
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .MuiContainer-root {
+  color: var(--color-text-primary);
+}
+
+/* 时间线组件主题适配 */
+[data-theme="dark"] .timeline-item,
+[data-theme="dark"] .timeline-card {
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-light);
+}
+
+[data-theme="light"] .timeline-item,
+[data-theme="light"] .timeline-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-light);
+}
+
+/* 地图组件主题适配 */
+[data-theme="dark"] .map-container {
+  background-color: var(--color-bg-secondary);
+}
+
+[data-theme="light"] .map-container {
+  background-color: rgba(250, 250, 250, 0.95);
+}
+
+/* 搜索栏主题适配 */
+[data-theme="dark"] .search-bar,
+[data-theme="dark"] .MuiOutlinedInput-root {
+  background-color: rgba(30, 30, 30, 0.8);
+  border-color: var(--color-border-medium);
+}
+
+[data-theme="light"] .search-bar,
+[data-theme="light"] .MuiOutlinedInput-root {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: var(--color-border-medium);
+}
+
+/* 下拉菜单主题适配 */
+[data-theme="dark"] .MuiMenu-paper,
+[data-theme="dark"] .MuiPopover-paper {
+  background-color: rgba(40, 40, 40, 0.95) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .MuiMenu-paper,
+[data-theme="light"] .MuiPopover-paper {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* MenuItem 主题适配 */
+[data-theme="dark"] .MuiMenuItem-root {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .MuiMenuItem-root:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .MuiMenuItem-root {
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .MuiMenuItem-root:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Select 主题适配 */
+[data-theme="dark"] .MuiSelect-select {
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .MuiSelect-select {
+  color: var(--color-text-primary);
+}
+
+/* Dialog 主题适配 */
+[data-theme="dark"] .MuiDialog-paper {
+  background-color: rgba(30, 30, 30, 0.95) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .MuiDialog-paper {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--color-text-primary);
+}
+
+/* Snackbar 主题适配 */
+[data-theme="dark"] .MuiSnackbarContent-root {
+  background-color: rgba(50, 50, 50, 0.95);
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .MuiSnackbarContent-root {
+  background-color: rgba(50, 50, 50, 0.95);
+  color: white;
+}
+
+/* Alert 主题适配 */
+[data-theme="dark"] .MuiAlert-root {
+  background-color: rgba(40, 40, 40, 0.9);
+}
+
+[data-theme="light"] .MuiAlert-root {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Drawer 主题适配 */
+[data-theme="dark"] .MuiDrawer-paper {
+  background-color: rgba(25, 25, 25, 0.95) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+[data-theme="light"] .MuiDrawer-paper {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* List 主题适配 */
+[data-theme="dark"] .MuiList-root {
+  background-color: transparent;
+}
+
+[data-theme="dark"] .MuiListItem-root {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .MuiListItem-root:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] .MuiList-root {
+  background-color: transparent;
+}
+
+[data-theme="light"] .MuiListItem-root {
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .MuiListItem-root:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Breadcrumbs 主题适配 */
+[data-theme="dark"] .MuiBreadcrumbs-root {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="light"] .MuiBreadcrumbs-root {
+  color: var(--color-text-secondary);
+}
+
+/* Pagination 主题适配 */
+[data-theme="dark"] .MuiPaginationItem-root {
+  color: var(--color-text-primary);
+  border-color: var(--color-border-light);
+}
+
+[data-theme="light"] .MuiPaginationItem-root {
+  color: var(--color-text-primary);
+  border-color: var(--color-border-light);
+}
+
+/* Badge 主题适配 */
+[data-theme="dark"] .MuiBadge-badge {
+  background-color: var(--color-primary);
+}
+
+[data-theme="light"] .MuiBadge-badge {
+  background-color: var(--color-primary);
+}
+
+/* Switch 主题适配 */
+[data-theme="dark"] .MuiSwitch-track {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="light"] .MuiSwitch-track {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* Slider 主题适配 */
+[data-theme="dark"] .MuiSlider-rail {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="light"] .MuiSlider-rail {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* LinearProgress 主题适配 */
+[data-theme="dark"] .MuiLinearProgress-root {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .MuiLinearProgress-root {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* CircularProgress 主题适配 */
+[data-theme="dark"] .MuiCircularProgress-root {
+  color: var(--color-primary);
+}
+
+[data-theme="light"] .MuiCircularProgress-root {
+  color: var(--color-primary);
+}
+
+/* Fab 主题适配 */
+[data-theme="dark"] .MuiFab-root {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+[data-theme="light"] .MuiFab-root {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* SpeedDial 主题适配 */
+[data-theme="dark"] .MuiSpeedDialAction-fab {
+  background-color: rgba(50, 50, 50, 0.95);
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .MuiSpeedDialAction-fab {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: var(--color-text-primary);
+}
+
+/* BottomNavigation 主题适配 */
+[data-theme="dark"] .MuiBottomNavigation-root {
+  background-color: rgba(25, 25, 25, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+[data-theme="light"] .MuiBottomNavigation-root {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+[data-theme="dark"] .MuiBottomNavigationAction-root {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .MuiBottomNavigationAction-root.Mui-selected {
+  color: var(--color-primary);
+}
+
+[data-theme="light"] .MuiBottomNavigationAction-root {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="light"] .MuiBottomNavigationAction-root.Mui-selected {
+  color: var(--color-primary);
+}
+
+/* AppBar 主题适配 */
+[data-theme="dark"] .MuiAppBar-root {
+  background-color: rgba(25, 25, 25, 0.9) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+[data-theme="light"] .MuiAppBar-root {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--color-text-primary);
+}
+
+/* Toolbar 主题适配 */
+[data-theme="light"] .MuiToolbar-root {
+  color: var(--color-text-primary);
+}
+
+/* 表单控件主题适配 */
+[data-theme="dark"] .MuiFormLabel-root {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="light"] .MuiFormLabel-root {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .MuiFormHelperText-root {
+  color: var(--color-text-muted);
+}
+
+[data-theme="light"] .MuiFormHelperText-root {
+  color: var(--color-text-muted);
+}
+
+/* Checkbox 和 Radio 主题适配 */
+[data-theme="dark"] .MuiCheckbox-root,
+[data-theme="dark"] .MuiRadio-root {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="light"] .MuiCheckbox-root,
+[data-theme="light"] .MuiRadio-root {
+  color: var(--color-text-secondary);
+}
+
+/* 过渡动画 - 所有主题相关元素 */
+.MuiCard-root,
+.MuiPaper-root,
+.MuiDrawer-paper,
+.MuiDialog-paper,
+.MuiMenu-paper,
+.MuiPopover-paper,
+.MuiAppBar-root,
+.MuiBottomNavigation-root {
+  transition: 
+    background-color var(--theme-transition-duration) var(--theme-transition-easing),
+    color var(--theme-transition-duration) var(--theme-transition-easing),
+    border-color var(--theme-transition-duration) var(--theme-transition-easing),
+    box-shadow var(--theme-transition-duration) var(--theme-transition-easing);
+}

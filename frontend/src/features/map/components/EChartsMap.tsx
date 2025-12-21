@@ -67,14 +67,14 @@ export function EChartsMap({
 
         // 配置项
         const option: echarts.EChartsOption = {
-          backgroundColor: '#f0f8ff',
+          backgroundColor: 'transparent',
           title: {
             text: '中国地图',
             subtext: '数据来源：模拟数据',
             left: 'center',
             top: 10,
-            textStyle: { color: '#333', fontSize: 18 },
-            subtextStyle: { color: '#666', fontSize: 12 }
+            textStyle: { color: 'var(--color-text-primary, #333)', fontSize: 18 },
+            subtextStyle: { color: 'var(--color-text-secondary, #666)', fontSize: 12 }
           },
           tooltip: {
             trigger: 'item',
@@ -97,7 +97,7 @@ export function EChartsMap({
             text: ['高', '低'],
             calculable: true,
             inRange: { color: ['#e0f3f8', '#abd9e9', '#74add1', '#4575b4', '#313695'] },
-            textStyle: { color: '#333' }
+            textStyle: { color: 'var(--color-text-primary, #333)' }
           },
           geo: {
             map: 'china',
@@ -108,15 +108,15 @@ export function EChartsMap({
               max: 5
             },
             center: [104, 35],
-            label: { show: true, fontSize: 10, color: '#333' },
-            itemStyle: { areaColor: '#e3f2fd', borderColor: '#1976d2', borderWidth: 1 },
+            label: { show: true, fontSize: 10, color: 'var(--color-text-primary, #333)' },
+            itemStyle: { areaColor: 'var(--color-bg-surface, #e3f2fd)', borderColor: 'var(--color-primary, #FF3D00)', borderWidth: 1 },
             emphasis: {
-              label: { show: true, fontSize: 12, color: '#000' },
-              itemStyle: { areaColor: '#bbdefb', shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.3)' }
+              label: { show: true, fontSize: 12, color: 'var(--color-text-primary, #000)' },
+              itemStyle: { areaColor: 'var(--color-bg-elevated, #bbdefb)', shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.3)' }
             },
             select: {
-              label: { show: true, color: '#fff' },
-              itemStyle: { areaColor: '#1976d2' }
+              label: { show: true, color: 'var(--color-text-inverse, #fff)' },
+              itemStyle: { areaColor: 'var(--color-primary, #FF3D00)' }
             }
           },
           series: [
@@ -134,7 +134,7 @@ export function EChartsMap({
               symbol: 'pin',
               symbolSize: (val: number[]) => Math.max((val[2] ?? 0) / 5, 15),
               label: { show: true, position: 'right', formatter: '{b}', fontSize: 10 },
-              itemStyle: { color: '#f44336' },
+              itemStyle: { color: 'var(--color-error, #f44336)' },
               data: cities.map((c) => ({
                 name: c.name,
                 value: [...(c.coord || [0, 0]), c.value]
@@ -207,19 +207,19 @@ export function EChartsMap({
           display: 'flex', 
           alignItems: 'center', 
           justifyContent: 'center',
-          background: '#f5f5f5'
+          background: 'var(--color-bg-tertiary, #f5f5f5)'
         }}>
           <div style={{ textAlign: 'center' }}>
             <div style={{ 
               width: 40, 
               height: 40, 
-              border: '4px solid #f3f3f3',
-              borderTop: '4px solid #1976d2',
+              border: '4px solid var(--color-border-light, #f3f3f3)',
+              borderTop: '4px solid var(--color-primary, #FF3D00)',
               borderRadius: '50%',
               animation: 'spin 1s linear infinite',
               margin: '0 auto 10px'
             }} />
-            <div>加载地图中...</div>
+            <div style={{ color: 'var(--color-text-primary)' }}>加载地图中...</div>
           </div>
           <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
         </div>
@@ -236,8 +236,8 @@ export function EChartsMap({
           display: 'flex', 
           alignItems: 'center', 
           justifyContent: 'center',
-          background: '#ffebee',
-          color: '#d32f2f'
+          background: 'var(--color-bg-tertiary, #ffebee)',
+          color: 'var(--color-error, #d32f2f)'
         }}>
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: 24, marginBottom: 10 }}>⚠️</div>
@@ -248,8 +248,8 @@ export function EChartsMap({
               style={{ 
                 marginTop: 10, 
                 padding: '8px 16px', 
-                background: '#1976d2', 
-                color: '#fff', 
+                background: 'var(--color-primary, #FF3D00)', 
+                color: 'var(--color-text-inverse, #fff)', 
                 border: 'none', 
                 borderRadius: 4, 
                 cursor: 'pointer' 

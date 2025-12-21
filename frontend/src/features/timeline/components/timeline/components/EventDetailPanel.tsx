@@ -28,7 +28,7 @@ export function EventDetailPanel({ event, isFavorite, onToggleFavorite, onShare 
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Button
             size="small"
-            startIcon={isFavorite ? <Star sx={{ color: '#ffd700' }} /> : <StarOutline />}
+            startIcon={isFavorite ? <Star sx={{ color: 'var(--color-accent, #ffd700)' }} /> : <StarOutline />}
             onClick={() => onToggleFavorite(event.id)}
           />
           <Button

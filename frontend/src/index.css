@@ -2,12 +2,15 @@
 
 /* 导入毛玻璃样式系统 */
 @import './styles/glass.css';
+/* 导入主题样式系统 */
+@import './styles/theme.css';
 /* 导入移动端适配样式 */
 @import './styles/mobile.css';
 /* 导入竖屏布局优化样式 */
 @import './styles/portrait.css';
 
-:root {
+:root,
+[data-theme="dark"] {
   /* 颜色系统 - 炫酷现代色彩 */
   --color-primary: #FF3D00; /* 炫酷橙红 */
   --color-primary-light: #FF6F3D;
@@ -52,14 +55,14 @@
   --color-bg-overlay: rgba(0, 0, 0, 0.8);
   --color-bg-gradient: linear-gradient(135deg, #121212 0%, #1E1E1E 100%);
   
-  /* 文字颜色 */
+  /* 文字颜色 - 暗黑模式 */
   --color-text-primary: #FFFFFF;
   --color-text-secondary: #E0E0E0;
   --color-text-tertiary: #BDBDBD;
   --color-text-inverse: #121212;
   --color-text-accent: #FF3D00;
   
-  /* 边框颜色 */
+  /* 边框颜色 - 暗黑模式 */
   --color-border-light: #3D3D3D;
   --color-border-medium: #4A4A4A;
   --color-border-dark: #616161;
@@ -161,6 +164,42 @@
   --z-popover: 1060;
   --z-tooltip: 1070;
   --z-toast: 1080;
+}
+
+/* ============================================
+   白天模式颜色覆盖
+   Light Mode Color Overrides
+   ============================================ */
+[data-theme="light"] {
+  /* 背景色 - 白天模式 */
+  --color-bg-primary: #F5F5F5;
+  --color-bg-secondary: #FFFFFF;
+  --color-bg-tertiary: #FAFAFA;
+  --color-bg-card: #FFFFFF;
+  --color-bg-overlay: rgba(255, 255, 255, 0.9);
+  --color-bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+  
+  /* 文字颜色 - 白天模式 (高对比度) */
+  --color-text-primary: rgba(0, 0, 0, 0.9);
+  --color-text-secondary: rgba(0, 0, 0, 0.7);
+  --color-text-tertiary: rgba(0, 0, 0, 0.5);
+  --color-text-inverse: #FFFFFF;
+  --color-text-accent: #E63900;
+  
+  /* 边框颜色 - 白天模式 */
+  --color-border-light: rgba(0, 0, 0, 0.08);
+  --color-border-medium: rgba(0, 0, 0, 0.12);
+  --color-border-dark: rgba(0, 0, 0, 0.2);
+  
+  /* 阴影 - 白天模式 (更柔和) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 10px rgba(0, 0, 0, 0.02);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 0 20px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 16px -3px rgba(0, 0, 0, 0.1), 0 0 30px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 15px 30px -5px rgba(0, 0, 0, 0.12), 0 0 40px rgba(0, 0, 0, 0.06);
+  --shadow-xl: 0 25px 50px -10px rgba(0, 0, 0, 0.15), 0 0 60px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 0 30px rgba(255, 61, 0, 0.15), 0 0 60px rgba(255, 61, 0, 0.08);
+  --shadow-glow-blue: 0 0 30px rgba(3, 169, 244, 0.15), 0 0 60px rgba(3, 169, 244, 0.08);
+  --shadow-glow-purple: 0 0 30px rgba(156, 39, 176, 0.15), 0 0 60px rgba(156, 39, 176, 0.08);
 }
 
 /* 全局重置与基础样式 */
@@ -349,6 +388,28 @@ input:hover, textarea:hover, select:hover {
 ::-webkit-scrollbar-corner {
   background: rgba(30, 30, 30, var(--glass-scrollbar-track-opacity));
   border-radius: var(--glass-radius-md);
+}
+
+/* 白天模式滚动条样式 */
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: rgba(200, 200, 200, var(--glass-scrollbar-track-opacity));
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, var(--glass-scrollbar-thumb-opacity));
+  border: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(80, 80, 80, calc(var(--glass-scrollbar-thumb-opacity) + 0.15));
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:active {
+  background: rgba(60, 60, 60, calc(var(--glass-scrollbar-thumb-opacity) + 0.2));
+}
+
+[data-theme="light"] ::-webkit-scrollbar-corner {
+  background: rgba(200, 200, 200, var(--glass-scrollbar-track-opacity));
 }
 
 /* 选择文本样式 */

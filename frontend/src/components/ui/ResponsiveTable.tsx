@@ -64,10 +64,10 @@ export function ResponsiveTable({
   const glassHeaderStyles = glassEffect ? {
     backdropFilter: `blur(${tableConfig.header.blur})`,
     WebkitBackdropFilter: `blur(${tableConfig.header.blur})`,
-    backgroundColor: `rgba(25, 118, 210, ${tableConfig.header.bgOpacity})`,
+    backgroundColor: `rgba(255, 61, 0, ${tableConfig.header.bgOpacity})`,
     borderBottom: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
   } : {
-    background: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
+    background: 'var(--color-primary-gradient, linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%))',
   };
 
   // 毛玻璃行样式
@@ -201,7 +201,7 @@ export function ResponsiveTableCell({
           ...glassStickyStyles,
           ...(!glassEffect && {
             backgroundColor: component === 'th' 
-              ? 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)'
+              ? 'var(--color-primary-gradient, linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%))'
               : 'var(--color-bg-card)',
             borderRight: '1px solid rgba(255,255,255,0.2)',
             boxShadow: '2px 0 4px rgba(0,0,0,0.1)',
@@ -225,12 +225,12 @@ export function ResponsiveTableCell({
               backdropFilter: `blur(${tableConfig.container.blur})`,
               WebkitBackdropFilter: `blur(${tableConfig.container.blur})`,
               backgroundColor: component === 'th' 
-                ? `rgba(25, 118, 210, ${tableConfig.header.bgOpacity})`
+                ? `rgba(255, 61, 0, ${tableConfig.header.bgOpacity})`
                 : `rgba(30, 30, 30, ${tableConfig.container.bgOpacity})`,
               boxShadow: '2px 0 8px rgba(0,0,0,0.15)',
             } : {
               backgroundColor: component === 'th' 
-                ? 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)'
+                ? 'var(--color-primary-gradient, linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%))'
                 : 'var(--color-bg-card)',
               boxShadow: '2px 0 4px rgba(0,0,0,0.1)',
             }),

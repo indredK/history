@@ -13,8 +13,10 @@ import { useNavigate } from 'react-router-dom';
 import { navigationItems, getNavigationItemTheme, navigationStyles } from '@/config';
 import { NavigationSection } from '@/layouts/Sidebar/NavigationSection';
 import { FunctionPanel } from '@/layouts/Sidebar/FunctionPanel';
+import { SettingsPanel } from '@/layouts/Sidebar/SettingsPanel';
 import { useResponsive } from '@/hooks';
 import { getGlassConfig } from '@/config/glassConfig';
+import { useThemeStore } from '@/store';
 import './Sidebar/Sidebar.css';
 
 interface SidebarProps {
@@ -27,20 +29,26 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
   const drawerWidth = collapsed ? 60 : 240;
   const navigate = useNavigate();
   const { screenWidth } = useResponsive();
+  const { theme } = useThemeStore();
   
   // 获取毛玻璃配置
   const glassConfig = getGlassConfig(screenWidth);
+  
+  // 根据主题获取背景色
+  const isDark = theme === 'dark';
+  const bgBase = isDark ? '30, 30, 30' : '255, 255, 255';
+  const borderColor = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.12)';
 
   const handleNavigation = (path: string) => {
     navigate(path);
   };
 
-  // 毛玻璃侧边栏样式
+  // 毛玻璃侧边栏样式 - 使用主题变量
   const sidebarGlassStyle = {
     backdropFilter: `blur(${glassConfig.components.navigation.blur})`,
     WebkitBackdropFilter: `blur(${glassConfig.components.navigation.blur})`,
-    background: `linear-gradient(135deg, rgba(30, 30, 30, ${glassConfig.components.navigation.bgOpacity}) 0%, rgba(20, 20, 20, ${glassConfig.components.navigation.bgOpacity + 0.1}) 100%)`,
-    borderRight: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    background: `linear-gradient(135deg, rgba(${bgBase}, ${glassConfig.components.navigation.bgOpacity}) 0%, rgba(${bgBase}, ${glassConfig.components.navigation.bgOpacity + 0.1}) 100%)`,
+    borderRight: `${glassConfig.border.width} solid ${borderColor}`,
     boxShadow: glassConfig.shadow.md,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`
   };
@@ -210,16 +218,27 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
           )}
         </Box>
         
-        {/* 功能面板区域 - 贴近下方 */}
+        {/* 功能面板区域 */}
         {!collapsed && (
           <Box sx={{ 
-            padding: '0 16px 16px 16px',
-            marginTop: 'auto', // 将功能面板推到下方
+            padding: '0 16px 8px 16px',
+            flex: 1,
+            overflow: 'auto',
             width: '100%'
           }}>
             <FunctionPanel activeTab={activeTab} />
           </Box>
         )}
+        
+        {/* 设置面板区域 - 固定在底部 */}
+        <Box sx={{ 
+          padding: collapsed ? '8px' : '8px 16px 16px 16px',
+          marginTop: 'auto',
+          width: '100%',
+          flexShrink: 0,
+        }}>
+          <SettingsPanel collapsed={collapsed} />
+        </Box>
       </Box>
     </Drawer>
   );

@@ -32,7 +32,7 @@ const timelineStyles: Record<string, CSSProperties> = {
   },
   title: {
     margin: 0,
-    color: '#334155',
+    color: 'var(--color-text-primary)',
     fontWeight: '600',
     fontSize: '16px',
   },

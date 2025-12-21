@@ -117,7 +117,7 @@ export const columns: ColumnConfig[] = [
 export const tableStyles = {
   // 表头样式 - 毛玻璃效果
   headerCell: {
-    background: 'rgba(25, 118, 210, 0.75)',
+    background: 'rgba(255, 61, 0, 0.85)',
     backdropFilter: 'blur(var(--glass-table-header-blur, 16px))',
     WebkitBackdropFilter: 'blur(var(--glass-table-header-blur, 16px))',
     color: 'white',
@@ -137,14 +137,15 @@ export const tableStyles = {
     py: 0.4,
     px: 1,
     fontSize: '0.75rem',
-    backgroundColor: 'rgba(255, 255, 255, var(--glass-table-row-bg-opacity, 0.3))',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.15)',
-    transition: 'background-color var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))'
+    backgroundColor: 'var(--theme-glass-bg-light)',
+    borderBottom: '1px solid var(--theme-glass-border)',
+    transition: 'background-color var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
+    color: 'var(--color-text-primary)'
   },
   
   // 朝代列样式 - 毛玻璃效果
   dynastyCell: {
-    borderRight: '1px solid rgba(255, 255, 255, 0.2)',
+    borderRight: '1px solid var(--theme-glass-border)',
     verticalAlign: 'top',
     backdropFilter: 'blur(8px)',
     WebkitBackdropFilter: 'blur(8px)'
@@ -152,14 +153,14 @@ export const tableStyles = {
   
   // 表格行样式 - 毛玻璃悬停效果
   tableRow: {
-    backgroundColor: 'rgba(255, 255, 255, var(--glass-table-row-bg-opacity, 0.3))',
+    backgroundColor: 'var(--theme-glass-bg-light)',
     transition: 'all var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
     '&:hover': { 
-      backgroundColor: 'rgba(255, 255, 255, var(--glass-table-row-hover-opacity, 0.5))',
-      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)'
+      backgroundColor: 'var(--theme-glass-bg)',
+      boxShadow: 'var(--theme-shadow-sm)'
     },
     '&:nth-of-type(even)': { 
-      backgroundColor: 'rgba(255, 255, 255, 0.35)'
+      backgroundColor: 'var(--theme-glass-bg)'
     }
   },
   
@@ -167,7 +168,7 @@ export const tableStyles = {
   dynastyName: {
     fontWeight: 'bold', 
     mb: 0.2,
-    color: '#2e7d32',
+    color: 'var(--color-primary)',
     fontSize: '0.75rem',
     lineHeight: 1.1,
     textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
@@ -175,7 +176,7 @@ export const tableStyles = {
   
   // 朝代时期样式
   dynastyPeriod: {
-    color: '#555',
+    color: 'var(--color-text-secondary)',
     fontSize: '0.65rem',
     fontStyle: 'italic',
     lineHeight: 1
@@ -184,7 +185,7 @@ export const tableStyles = {
   // 帝王名号样式
   rulerTitle: {
     fontWeight: 'bold',
-    color: '#1565c0'
+    color: 'var(--color-primary)'
   },
   
   // 公元纪年样式
@@ -206,18 +207,18 @@ export const tableStyles = {
     minWidth: 'auto',
     width: 24,
     height: 24,
-    color: '#1976d2',
-    backgroundColor: 'rgba(25, 118, 210, 0.15)',
+    color: 'var(--color-primary)',
+    backgroundColor: 'rgba(255, 61, 0, 0.15)',
     backdropFilter: 'blur(4px)',
     WebkitBackdropFilter: 'blur(4px)',
     borderRadius: '6px',
-    border: '1px solid rgba(25, 118, 210, 0.2)',
+    border: '1px solid rgba(255, 61, 0, 0.2)',
     flexShrink: 0,
     transition: 'all var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
     '&:hover': {
-      backgroundColor: 'rgba(25, 118, 210, 0.25)',
+      backgroundColor: 'rgba(255, 61, 0, 0.25)',
       transform: 'scale(1.1)',
-      boxShadow: '0 0 12px rgba(25, 118, 210, 0.3)'
+      boxShadow: '0 0 12px rgba(255, 61, 0, 0.3)'
     }
   },
   
@@ -231,39 +232,39 @@ export const tableStyles = {
   
   // 朝代标题行样式 - 毛玻璃效果
   dynastyHeaderRow: {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    backgroundColor: 'var(--theme-glass-bg)',
     backdropFilter: 'blur(12px)',
     WebkitBackdropFilter: 'blur(12px)',
-    borderLeft: '4px solid rgba(25, 118, 210, 0.8)',
+    borderLeft: '4px solid var(--color-primary)',
     cursor: 'pointer',
     transition: 'all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
     '&:hover': {
-      backgroundColor: 'rgba(232, 245, 232, 0.7)',
-      borderLeftColor: 'rgba(21, 101, 192, 0.9)',
+      backgroundColor: 'var(--theme-glass-bg-heavy)',
+      borderLeftColor: 'var(--color-primary-dark)',
       transform: 'translateX(2px)',
-      boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)'
+      boxShadow: 'var(--theme-shadow-md)'
     }
   },
   
   // 朝代标题单元格样式 - 毛玻璃效果
   dynastyHeaderCell: {
-    backgroundColor: 'rgba(232, 245, 232, 0.6)',
+    backgroundColor: 'var(--theme-glass-bg-light)',
     backdropFilter: 'blur(8px)',
     WebkitBackdropFilter: 'blur(8px)',
     cursor: 'pointer',
     fontWeight: 'bold',
     transition: 'all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
     '&:hover': {
-      backgroundColor: 'rgba(212, 237, 218, 0.7)',
+      backgroundColor: 'var(--theme-glass-bg)',
       transform: 'translateX(2px)',
-      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+      boxShadow: 'var(--theme-shadow-sm)'
     }
   },
   
   // 展开/收起图标样式
   expandIcon: {
     transition: 'transform var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
-    color: '#1976d2'
+    color: 'var(--color-primary)'
   }
 };
 

@@ -12,6 +12,7 @@ import { navigationItems } from '@/config';
 import { useResponsive, useOrientation } from '@/hooks/useResponsive';
 import { getSidebarStyles } from '@/config/responsive';
 import { getGlassConfig } from '@/config/glassConfig';
+import { useThemeStore } from '@/store';
 
 interface PortraitSidebarProps {
   activeTab: string;
@@ -23,6 +24,7 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
   const location = useLocation();
   const { isMobile, screenWidth } = useResponsive();
   const orientation = useOrientation();
+  const { theme } = useThemeStore();
   
   // 只在移动端竖屏模式下显示
   const isPortrait = orientation.type.includes('portrait') || window.innerHeight > window.innerWidth;
@@ -34,6 +36,13 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
   // 获取毛玻璃配置
   const glassConfig = getGlassConfig(screenWidth);
   const navConfig = glassConfig.components.navigation;
+  
+  // 根据主题获取背景色
+  const isDark = theme === 'dark';
+  const bgBase = isDark ? '18, 18, 18' : '255, 255, 255';
+  const bgSecondary = isDark ? '30, 30, 30' : '245, 245, 245';
+  const textColor = isDark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)';
+  const borderColor = isDark ? 'rgba(255, 61, 0, 0.2)' : 'rgba(255, 61, 0, 0.15)';
 
   if (!shouldShow) {
     return null;
@@ -54,14 +63,14 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
   const glassContainerStyles = glassEffect ? {
     backdropFilter: `blur(${navConfig.blur})`,
     WebkitBackdropFilter: `blur(${navConfig.blur})`,
-    background: `linear-gradient(135deg, rgba(18, 18, 18, ${navConfig.bgOpacity}) 0%, rgba(30, 30, 30, ${navConfig.bgOpacity}) 100%)`,
-    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
-    boxShadow: `0 -4px 20px rgba(0, 0, 0, 0.3), ${navConfig.activeGlow}`,
+    background: `linear-gradient(135deg, rgba(${bgBase}, ${navConfig.bgOpacity}) 0%, rgba(${bgSecondary}, ${navConfig.bgOpacity}) 100%)`,
+    border: `${glassConfig.border.width} solid ${borderColor}`,
+    boxShadow: `0 -4px 20px rgba(0, 0, 0, ${isDark ? 0.3 : 0.1}), ${navConfig.activeGlow}`,
   } : {
-    background: 'linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 30, 30, 0.95) 100%)',
+    background: `linear-gradient(135deg, rgba(${bgBase}, 0.95) 0%, rgba(${bgSecondary}, 0.95) 100%)`,
     backdropFilter: 'blur(20px)',
-    border: '1px solid rgba(255, 61, 0, 0.2)',
-    boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 61, 0, 0.1)',
+    border: `1px solid ${borderColor}`,
+    boxShadow: `0 -4px 20px rgba(0, 0, 0, ${isDark ? 0.3 : 0.1}), 0 0 40px rgba(255, 61, 0, 0.1)`,
   };
 
   return (
@@ -148,7 +157,7 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
                 borderRadius: glassConfig.border.radius.md,
                 cursor: 'pointer',
                 textDecoration: 'none',
-                color: isActive ? 'white' : 'rgba(255, 255, 255, 0.7)',
+                color: isActive ? 'white' : textColor,
                 transform: isActive ? 'translateY(-2px)' : 'none',
                 ...glassItemStyles,
                 '&:focus': {

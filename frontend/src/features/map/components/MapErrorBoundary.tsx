@@ -48,7 +48,7 @@ export class MapErrorBoundary extends Component<Props, State> {
             style={{
               marginTop: '1rem',
               padding: '0.5rem 1rem',
-              background: '#1976d2',
+              background: 'var(--color-primary, #FF3D00)',
               color: 'white',
               border: 'none',
               borderRadius: '4px',
