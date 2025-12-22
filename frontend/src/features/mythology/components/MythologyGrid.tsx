@@ -48,11 +48,11 @@ export function MythologyGrid({ mythologies, onCardClick }: MythologyGridProps) 
         display: 'grid',
         gridTemplateColumns: {
           xs: '1fr',              // 手机: 1列
-          sm: '1fr',              // 小平板: 1列
-          md: 'repeat(2, 1fr)',   // 平板: 2列
-          lg: 'repeat(3, 1fr)',   // 桌面: 3列
+          sm: 'repeat(2, 1fr)',   // 小平板: 2列
+          md: 'repeat(3, 1fr)',   // 平板: 3列
+          lg: 'repeat(4, 1fr)',   // 桌面: 4列
         },
-        gap: { xs: 2, sm: 2, md: 3 },
+        gap: { xs: 1.5, sm: 1.5, md: 2 },
         transition: 'all 0.3s ease-in-out',
       }}
     >

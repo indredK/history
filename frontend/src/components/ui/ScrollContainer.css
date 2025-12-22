@@ -1,0 +1,107 @@
+/**
+ * 滚动容器样式
+ * Scroll Container Styles
+ * 
+ * Requirements: 2.2, 2.3
+ */
+
+.scroll-container {
+  /* 平滑滚动 */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  
+  /* 滚动条基础样式 */
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  
+  /* 过渡效果 */
+  transition: scrollbar-color 0.3s ease;
+}
+
+/* 滚动时显示滚动条 */
+.scroll-container.scrolling {
+  scrollbar-color: var(--glass-scrollbar-thumb, rgba(255, 255, 255, 0.5)) transparent;
+}
+
+/* Webkit 浏览器滚动条样式 */
+.scroll-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+/* 滚动时显示滚动条滑块 */
+.scroll-container.scrolling::-webkit-scrollbar-thumb {
+  background: var(--glass-scrollbar-thumb, rgba(255, 255, 255, 0.5));
+}
+
+/* 悬停时显示滚动条 */
+.scroll-container:hover::-webkit-scrollbar-thumb {
+  background: var(--glass-scrollbar-thumb, rgba(255, 255, 255, 0.4));
+}
+
+.scroll-container:hover::-webkit-scrollbar-thumb:hover {
+  background: var(--glass-scrollbar-thumb-hover, rgba(255, 255, 255, 0.6));
+}
+
+/* 白天模式滚动条 */
+[data-theme="light"] .scroll-container.scrolling::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .scroll-container:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .scroll-container:hover::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+  .scroll-container::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  
+  .scroll-container {
+    /* 移动端始终显示细滚动条 */
+    scrollbar-width: thin;
+  }
+}
+
+/* 底部指示器动画 */
+.scroll-end-indicator {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-container {
+    scroll-behavior: auto;
+  }
+  
+  .scroll-end-indicator {
+    animation: none;
+  }
+}

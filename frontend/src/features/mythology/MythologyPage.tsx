@@ -2,16 +2,20 @@
  * 神话页面
  * Mythology Page
  * 
- * Requirements: 5.1, 5.2, 5.3, 5.4
+ * Requirements: 1.1-1.5, 2.1-2.6, 3.1-3.5, 5.1
  */
 
+import { useState, useCallback } from 'react';
 import { Box, Typography, Skeleton } from '@mui/material';
 import { useRequest } from 'ahooks';
 import { useMythologyStore } from '@/store/mythologyStore';
 import { getMythologies } from '@/services/mythology';
+import { ScrollContainer } from '@/components/ui/ScrollContainer';
+import { CategoryTabs, type MythologyViewType } from './components/CategoryTabs';
 import { CategoryFilter } from './components/CategoryFilter';
 import { MythologyGrid } from './components/MythologyGrid';
 import { MythologyDetailModal } from './components/MythologyDetailModal';
+import { ReligionGraph } from './components/ReligionGraph';
 import './MythologyPage.css';
 
 /**
@@ -34,10 +38,11 @@ function LoadingSkeleton() {
       {Array.from({ length: 6 }).map((_, index) => (
         <Box
           key={index}
+          className="glass-card-dark"
           sx={{
             p: 2,
-            background: 'var(--color-bg-card)',
             borderRadius: 'var(--radius-lg)',
+            animation: `fadeIn 0.3s ease-out ${index * 0.1}s both`,
           }}
         >
           <Skeleton variant="text" width="60%" height={32} sx={{ mb: 1 }} />
@@ -60,6 +65,8 @@ function LoadingSkeleton() {
  * 神话页面组件
  */
 function MythologyPage() {
+  const [activeTab, setActiveTab] = useState<MythologyViewType>('mythology');
+  
   const {
     mythologies,
     setMythologies,
@@ -89,78 +96,88 @@ function MythologyPage() {
   // 获取筛选后的神话列表
   const filteredMythologies = getFilteredMythologies();
 
+  // 处理标签页切换
+  const handleTabChange = useCallback((tab: MythologyViewType) => {
+    setActiveTab(tab);
+  }, []);
+
   // 处理卡片点击
-  const handleCardClick = (mythology: typeof mythologies[0]) => {
+  const handleCardClick = useCallback((mythology: typeof mythologies[0]) => {
     setSelectedMythology(mythology);
-  };
+  }, [setSelectedMythology]);
 
   // 处理弹窗关闭
-  const handleModalClose = () => {
+  const handleModalClose = useCallback(() => {
     setSelectedMythology(null);
-  };
+  }, [setSelectedMythology]);
 
   return (
-    <Box className="mythology-page">
-      {/* 页面标题 */}
-      <Typography
-        variant="h4"
-        component="h1"
-        sx={{
-          mb: 2,
-          color: 'var(--color-text-primary)',
-          fontWeight: 'bold',
-        }}
-      >
-        中国神话
-      </Typography>
-
-      {/* 页面介绍 */}
-      <Typography
-        variant="body1"
-        sx={{
-          mb: 3,
-          color: 'var(--color-text-secondary)',
-          lineHeight: 1.6,
-          maxWidth: '800px',
-        }}
-      >
-        中国神话是中华民族智慧的结晶，蕴含着先民对自然、社会和人生的深刻思考。
-        这里收录了流传千年的经典神话故事，从创世传说到英雄史诗，带你领略华夏文明的瑰丽想象。
-      </Typography>
-
-      {/* 分类筛选器 */}
-      <CategoryFilter
-        activeCategory={activeCategory}
-        onCategoryChange={setActiveCategory}
-      />
+    <Box className={`mythology-page ${activeTab === 'religion' ? 'religion-view' : ''}`}>
+      {/* 分类标签页 */}
+      <Box className="mythology-tabs">
+        <CategoryTabs
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+        />
+      </Box>
 
       {/* 内容区域 */}
-      {loading ? (
-        <LoadingSkeleton />
-      ) : error ? (
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '200px',
-            color: 'var(--color-text-secondary)',
-          }}
-        >
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            加载失败
-          </Typography>
-          <Typography variant="body2">
-            {error.message || '请检查网络连接后重试'}
-          </Typography>
-        </Box>
-      ) : (
-        <MythologyGrid
-          mythologies={filteredMythologies}
-          onCardClick={handleCardClick}
-        />
-      )}
+      <Box className="mythology-content">
+        {activeTab === 'mythology' ? (
+          // 神话故事视图
+          <Box className="mythology-stories-view">
+            {/* 分类筛选器 - 固定在顶部 */}
+            <Box className="mythology-filter-bar">
+              <CategoryFilter
+                activeCategory={activeCategory}
+                onCategoryChange={setActiveCategory}
+              />
+            </Box>
+
+            {/* 卡片滚动区域 */}
+            <ScrollContainer 
+              className="mythology-scroll-view"
+              preserveScrollKey="mythology-stories"
+              showEndIndicator
+            >
+              <Box className="mythology-view-enter">
+                {/* 神话卡片网格 */}
+                {loading ? (
+                  <LoadingSkeleton />
+                ) : error ? (
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      minHeight: '200px',
+                      color: 'var(--color-text-secondary)',
+                    }}
+                  >
+                    <Typography variant="h6" sx={{ mb: 2 }}>
+                      加载失败
+                    </Typography>
+                    <Typography variant="body2">
+                      {error.message || '请检查网络连接后重试'}
+                    </Typography>
+                  </Box>
+                ) : (
+                  <MythologyGrid
+                    mythologies={filteredMythologies}
+                    onCardClick={handleCardClick}
+                  />
+                )}
+              </Box>
+            </ScrollContainer>
+          </Box>
+        ) : (
+          // 宗教关系视图 - 直接渲染，不使用滚动容器
+          <Box className="mythology-view-enter religion-graph-view">
+            <ReligionGraph />
+          </Box>
+        )}
+      </Box>
 
       {/* 详情弹窗 */}
       <MythologyDetailModal

@@ -22,6 +22,8 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
   '英雄神话': { bg: 'rgba(244, 67, 54, 0.15)', text: '#f44336' },
   '自然神话': { bg: 'rgba(76, 175, 80, 0.15)', text: '#4caf50' },
   '爱情神话': { bg: 'rgba(233, 30, 99, 0.15)', text: '#e91e63' },
+  '神仙传说': { bg: 'rgba(33, 150, 243, 0.15)', text: '#2196f3' },
+  '民间传说': { bg: 'rgba(255, 152, 0, 0.15)', text: '#ff9800' },
 };
 
 /**
@@ -50,11 +52,12 @@ export function MythologyCard({ mythology, onClick }: MythologyCardProps) {
       sx={{
         cursor: 'pointer',
         height: '100%',
+        minHeight: '160px',
         display: 'flex',
         flexDirection: 'column',
         transition: 'all 0.3s ease-in-out',
         '&:hover': {
-          transform: 'translateY(-4px)',
+          transform: 'translateY(-3px)',
           boxShadow: 'var(--shadow-lg)',
         },
         '&:focus-visible': {
@@ -63,16 +66,18 @@ export function MythologyCard({ mythology, onClick }: MythologyCardProps) {
         },
       }}
     >
-      <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', p: 1.5, '&:last-child': { pb: 1.5 } }}>
         {/* 标题和分类 */}
-        <Box sx={{ mb: 2 }}>
+        <Box sx={{ mb: 1 }}>
           <Typography
-            variant="h6"
+            variant="subtitle1"
             component="h3"
             sx={{
               fontWeight: 'bold',
               color: 'var(--color-text-primary)',
-              mb: 1,
+              mb: 0.5,
+              fontSize: '0.95rem',
+              lineHeight: 1.3,
             }}
           >
             {mythology.title}
@@ -86,7 +91,8 @@ export function MythologyCard({ mythology, onClick }: MythologyCardProps) {
               backgroundColor: categoryColor.bg,
               color: categoryColor.text,
               fontWeight: 500,
-              fontSize: '0.75rem',
+              fontSize: '0.65rem',
+              height: '20px',
             }}
           />
         </Box>
@@ -96,14 +102,15 @@ export function MythologyCard({ mythology, onClick }: MythologyCardProps) {
           variant="body2"
           sx={{
             color: 'var(--color-text-secondary)',
-            lineHeight: 1.6,
-            mb: 2,
+            lineHeight: 1.5,
+            mb: 1,
             flex: 1,
             display: '-webkit-box',
-            WebkitLineClamp: 3,
+            WebkitLineClamp: 2,
             WebkitBoxOrient: 'vertical',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
+            fontSize: '0.8rem',
           }}
         >
           {mythology.description}
@@ -112,28 +119,28 @@ export function MythologyCard({ mythology, onClick }: MythologyCardProps) {
         {/* 相关人物标签 */}
         {mythology.characters && mythology.characters.length > 0 && (
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-            {mythology.characters.slice(0, 4).map((character, index) => (
+            {mythology.characters.slice(0, 3).map((character, index) => (
               <Chip
                 key={index}
                 label={character}
                 size="small"
                 variant="outlined"
                 sx={{
-                  fontSize: '0.7rem',
-                  height: '24px',
+                  fontSize: '0.65rem',
+                  height: '20px',
                   borderColor: 'var(--color-border)',
                   color: 'var(--color-text-secondary)',
                 }}
               />
             ))}
-            {mythology.characters.length > 4 && (
+            {mythology.characters.length > 3 && (
               <Chip
-                label={`+${mythology.characters.length - 4}`}
+                label={`+${mythology.characters.length - 3}`}
                 size="small"
                 variant="outlined"
                 sx={{
-                  fontSize: '0.7rem',
-                  height: '24px',
+                  fontSize: '0.65rem',
+                  height: '20px',
                   borderColor: 'var(--color-border)',
                   color: 'var(--color-text-secondary)',
                 }}

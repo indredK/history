@@ -39,8 +39,11 @@ export function CategoryFilter({ activeCategory, onCategoryChange }: CategoryFil
         sx={{
           fontWeight: activeCategory === null ? 600 : 400,
           transition: 'all 0.2s ease-in-out',
+          color: activeCategory === null ? undefined : 'var(--color-text-primary)',
+          borderColor: activeCategory === null ? undefined : 'var(--color-border)',
           '&:hover': {
             transform: 'scale(1.05)',
+            borderColor: 'var(--color-primary)',
           },
         }}
         aria-pressed={activeCategory === null}
@@ -57,8 +60,11 @@ export function CategoryFilter({ activeCategory, onCategoryChange }: CategoryFil
           sx={{
             fontWeight: activeCategory === category ? 600 : 400,
             transition: 'all 0.2s ease-in-out',
+            color: activeCategory === category ? undefined : 'var(--color-text-primary)',
+            borderColor: activeCategory === category ? undefined : 'var(--color-border)',
             '&:hover': {
               transform: 'scale(1.05)',
+              borderColor: 'var(--color-primary)',
             },
           }}
           aria-pressed={activeCategory === category}

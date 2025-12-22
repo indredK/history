@@ -2,19 +2,152 @@
  * 神话页面样式
  * Mythology Page Styles
  * 
- * Requirements: 5.3, 5.4
+ * Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 5.3, 5.4
  */
 
 .mythology-page {
-  padding: 1.5rem;
-  min-height: 100%;
+  padding: 1rem;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  animation: pageEnter 0.5s ease-out;
+  overflow: hidden;
+}
+
+/* 页面进入动画 */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 页面标题样式 */
+.mythology-page-header {
+  margin-bottom: 1.5rem;
+  animation: fadeInDown 0.6s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* 响应式标题 */
 .mythology-page h1 {
   font-size: 1.8rem;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary, #ff6b6b) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 页面介绍文字 */
+.mythology-page-intro {
+  position: relative;
+  padding-left: 1rem;
+  border-left: 3px solid var(--color-primary);
+  animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 内容区域 */
+.mythology-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  animation: contentEnter 0.6s ease-out 0.3s both;
+}
+
+@keyframes contentEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 标签页容器 */
+.mythology-tabs {
+  margin-bottom: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* 视图切换动画 */
+.mythology-view-enter {
+  animation: viewEnter 0.4s ease-out;
+}
+
+@keyframes viewEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 卡片悬停效果增强 */
+.mythology-page .MuiCard-root {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mythology-page .MuiCard-root:hover {
+  transform: translateY(-6px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(var(--color-primary-rgb, 100, 150, 255), 0.1);
+}
+
+/* 古典中国风装饰 */
+.mythology-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(var(--color-primary-rgb, 100, 150, 255), 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 分隔线样式 */
+.mythology-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border),
+    transparent
+  );
+  margin: 1.5rem 0;
 }
 
 /* 平板适配 */
@@ -25,6 +158,10 @@
   
   .mythology-page h1 {
     font-size: 1.5rem;
+  }
+  
+  .mythology-page-intro {
+    padding-left: 0.75rem;
   }
 }
 
@@ -38,6 +175,20 @@
     font-size: 1.3rem;
     text-align: center;
   }
+  
+  .mythology-page-intro {
+    border-left: none;
+    padding-left: 0;
+    text-align: center;
+  }
+  
+  .mythology-page::before {
+    display: none;
+  }
+  
+  .mythology-tabs {
+    margin-bottom: 1rem;
+  }
 }
 
 /* 小屏手机适配 */
@@ -48,5 +199,97 @@
   
   .mythology-page h1 {
     font-size: 1.2rem;
+  }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .mythology-page,
+  .mythology-page-header,
+  .mythology-page-intro,
+  .mythology-content,
+  .mythology-view-enter {
+    animation: none;
+  }
+  
+  .mythology-page .MuiCard-root:hover {
+    transform: none;
+  }
+}
+
+/* 关系图视图 - 占据剩余全部空间 */
+.religion-graph-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 关系图内部包装器 */
+.religion-graph-view .religion-graph-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 关系图 SVG 容器 */
+.religion-graph-view .religion-graph-container {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+/* 神话故事滚动视图 */
+.mythology-scroll-view {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+}
+
+/* 神话故事视图容器 */
+.mythology-stories-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* 筛选栏 - 固定在顶部 */
+.mythology-filter-bar {
+  flex-shrink: 0;
+  margin-bottom: 1rem;
+}
+
+/* 关系图加载状态 */
+.religion-graph-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--color-text-secondary);
+}
+
+/* 关系图工具栏 */
+.religion-graph-toolbar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .religion-graph-view {
+    min-height: 400px;
+  }
+  
+  .religion-graph-toolbar {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
