@@ -6,8 +6,8 @@
  * 整合毛玻璃配置到主题系统
  */
 
-import { desktopConfig, mobileConfig, getGlassConfig } from './glassConfig';
-import type { GlassConfig } from './glassConfig.types';
+import { glassDesktopConfig as desktopConfig, glassMobileConfig as mobileConfig, getGlassConfig } from './styles';
+import type { GlassConfig } from './styles';
 
 // 导航菜单主题配置
 export interface NavigationTheme {

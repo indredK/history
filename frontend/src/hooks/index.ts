@@ -11,6 +11,15 @@ export {
   useViewport 
 } from './useResponsive';
 export { useGlassStyle, useComponentGlassStyle } from './useGlassStyle';
+export { 
+  useStyleAwareGlass, 
+  useIsClassicStyle, 
+  useCurrentStyle 
+} from './useStyleAwareGlass';
+export { 
+  useDynastyBackground, 
+  useHasSelectedDynasty 
+} from './useDynastyBackground';
 export type { 
   UseHoverScrollOptions, 
   UseHoverScrollReturn,

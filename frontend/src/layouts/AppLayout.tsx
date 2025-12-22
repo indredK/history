@@ -4,30 +4,31 @@ import { useLocation, Routes, Route, Navigate } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { PortraitSidebar } from '@/components/ui/PortraitSidebar';
 import { Footer } from './Footer';
-import { useDynastyStore, useThemeStore } from '@/store';
-import { useDynastyImage } from '@/hooks/useDynastyImage';
+import { useThemeStore, useStyleStore } from '@/store';
 import { useSidebar, useResponsive, useOrientation } from '@/hooks';
 import { routes } from '@/router/routes';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
-import { dynastyUtils } from '@/config';
 import { getGlassConfig } from '@/config/glassConfig';
 
 export function AppLayout() {
   const location = useLocation();
-  const { selectedDynasty } = useDynastyStore();
-  const { imageUrl: dynastyBackgroundUrl } = useDynastyImage(selectedDynasty?.id ?? null);
   const { collapsed: sidebarCollapsed, toggle: toggleSidebar } = useSidebar();
   const { isMobile, isSmallMobile, screenWidth } = useResponsive();
   const orientation = useOrientation();
   const { theme, initializeTheme } = useThemeStore();
+  const { style, initializeStyle } = useStyleStore();
 
-  // 初始化主题
+  // 初始化主题和样式
   useEffect(() => {
     initializeTheme();
-  }, [initializeTheme]);
+    initializeStyle();
+  }, [initializeTheme, initializeStyle]);
 
   // 获取毛玻璃配置
   const glassConfig = getGlassConfig(screenWidth);
+  
+  // 检查是否为经典样式模式
+  const isClassicStyle = style === 'classic';
   
   // 根据主题获取背景色
   const isDark = theme === 'dark';
@@ -52,12 +53,13 @@ export function AppLayout() {
   const isPortrait = orientation.type.includes('portrait') || window.innerHeight > window.innerWidth;
   const showPortraitSidebar = isMobile && isPortrait;
 
-  const dynastyColor = selectedDynasty?.color;
-  const bgColor = dynastyUtils.getBackgroundColor(dynastyColor);
-  const gradientBackground = dynastyUtils.getGradientBackground(dynastyColor);
-
-  // 毛玻璃主内容区域样式 - 使用主题变量
-  const mainContentGlassStyle = {
+  // 毛玻璃主内容区域样式 - 仅在毛玻璃模式下使用
+  const mainContentGlassStyle = isClassicStyle ? {
+    backgroundColor: isDark ? 'var(--classic-bg-surface)' : 'var(--classic-bg-surface)',
+    border: `1px solid ${isDark ? 'var(--classic-border-color)' : 'var(--classic-border-color)'}`,
+    borderRadius: glassConfig.border.radius.lg,
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.12)',
+  } : {
     backdropFilter: `blur(${glassConfig.components.card.blur})`,
     WebkitBackdropFilter: `blur(${glassConfig.components.card.blur})`,
     backgroundColor: `rgba(${bgBase}, ${glassConfig.components.card.bgOpacity})`,
@@ -67,8 +69,12 @@ export function AppLayout() {
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`
   };
 
-  // 毛玻璃底部导航栏样式 - 使用主题变量
-  const bottomNavGlassStyle = {
+  // 毛玻璃底部导航栏样式 - 仅在毛玻璃模式下使用
+  const bottomNavGlassStyle = isClassicStyle ? {
+    backgroundColor: isDark ? 'var(--classic-nav-bg)' : 'var(--classic-nav-bg)',
+    borderTop: `1px solid ${isDark ? 'var(--classic-border-color)' : 'var(--classic-border-color)'}`,
+    boxShadow: '0 -2px 8px rgba(0, 0, 0, 0.1)',
+  } : {
     backdropFilter: `blur(${glassConfig.components.navigation.blur})`,
     WebkitBackdropFilter: `blur(${glassConfig.components.navigation.blur})`,
     background: `linear-gradient(to top, rgba(${bgBase}, ${glassConfig.components.navigation.bgOpacity}), rgba(${bgBase}, ${glassConfig.components.navigation.bgOpacity - 0.2}))`,
@@ -114,14 +120,10 @@ export function AppLayout() {
           overflow: 'hidden',
           padding: isMobile ? (isSmallMobile ? '8px' : '12px') : '16px',
           marginTop: 0,
-          background: selectedDynasty && dynastyBackgroundUrl ?
-            `${gradientBackground},
-            url(${dynastyBackgroundUrl}) no-repeat center center fixed,
-            var(--color-bg-gradient)`
-            : 'var(--color-bg-gradient)',
+          // 移除朝代背景颜色，使用默认背景
+          background: 'var(--color-bg-gradient)',
           backgroundSize: 'cover',
-          transition: `all ${glassConfig.animation.duration.slow} ${glassConfig.animation.easing}, background-color ${glassConfig.animation.duration.slow} ${glassConfig.animation.easing}`,
-          backgroundColor: selectedDynasty ? bgColor : 'transparent',
+          transition: `all ${glassConfig.animation.duration.slow} ${glassConfig.animation.easing}`,
           touchAction: 'pan-x pan-y', // 允许内部滚动
           // 移动端优化
           ...(isMobile && {

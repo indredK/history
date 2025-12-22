@@ -17,8 +17,8 @@
   transition: var(--glass-transition, all 250ms cubic-bezier(0.4, 0, 0.2, 1));
 }
 
+/* 移除悬停时的背景颜色变化 */
 .timeline-list-container:hover {
-  background: rgba(255, 255, 255, calc(var(--glass-card-bg-opacity, 0.6) + var(--glass-card-hover-delta, 0.1)));
   box-shadow: var(--glass-shadow-lg, 0 8px 32px rgba(0, 0, 0, 0.15));
 }
 
@@ -308,4 +308,27 @@
   transform: scale(1.1) !important;
   text-shadow: 0 0 10px rgba(255, 61, 0, 0.3) !important;
   transition: all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) !important;
+}
+
+
+/* ============================================
+   时间轴内容区域 - 朝代背景颜色
+   Timeline Content Area - Dynasty Background Color
+   ============================================ */
+
+.timeline-content-area {
+  /* 基础样式 */
+  backdrop-filter: blur(var(--glass-blur-light, 12px));
+  -webkit-backdrop-filter: blur(var(--glass-blur-light, 12px));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--glass-radius-lg, 16px);
+  box-shadow: var(--glass-shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.1));
+  transition: background-color 350ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 禁用悬停时的背景颜色变化，保持朝代背景颜色 */
+.timeline-content-area:hover {
+  box-shadow: var(--glass-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12));
+  /* 不改变背景颜色，由内联样式控制 */
 }

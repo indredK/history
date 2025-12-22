@@ -16,7 +16,7 @@ import { FunctionPanel } from '@/layouts/Sidebar/FunctionPanel';
 import { SettingsPanel } from '@/layouts/Sidebar/SettingsPanel';
 import { useResponsive } from '@/hooks';
 import { getGlassConfig } from '@/config/glassConfig';
-import { useThemeStore } from '@/store';
+import { useThemeStore, useStyleStore } from '@/store';
 import './Sidebar/Sidebar.css';
 
 interface SidebarProps {
@@ -30,9 +30,13 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
   const navigate = useNavigate();
   const { screenWidth } = useResponsive();
   const { theme } = useThemeStore();
+  const { style } = useStyleStore();
   
   // 获取毛玻璃配置
   const glassConfig = getGlassConfig(screenWidth);
+  
+  // 检查是否为经典样式模式
+  const isClassicStyle = style === 'classic';
   
   // 根据主题获取背景色
   const isDark = theme === 'dark';
@@ -43,8 +47,9 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
     navigate(path);
   };
 
-  // 毛玻璃侧边栏样式 - 使用主题变量
-  const sidebarGlassStyle = {
+  // 毛玻璃侧边栏样式 - 仅在毛玻璃模式下使用
+  // 经典模式下使用 CSS 类样式
+  const sidebarGlassStyle = isClassicStyle ? {} : {
     backdropFilter: `blur(${glassConfig.components.navigation.blur})`,
     WebkitBackdropFilter: `blur(${glassConfig.components.navigation.blur})`,
     background: `linear-gradient(135deg, rgba(${bgBase}, ${glassConfig.components.navigation.bgOpacity}) 0%, rgba(${bgBase}, ${glassConfig.components.navigation.bgOpacity + 0.1}) 100%)`,
@@ -85,23 +90,30 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
               justifyContent: 'center',
               mb: 3,
               pb: 2,
-              borderBottom: `${glassConfig.border.width} solid ${glassConfig.border.color}`
+              borderBottom: `${glassConfig.border.width} solid ${isClassicStyle ? 'var(--classic-border-color)' : glassConfig.border.color}`
             }}>
               <Tooltip title="展开菜单" placement="right">
                 <IconButton 
                   onClick={onToggle}
                   sx={{ 
                     color: 'var(--color-text-primary)',
-                    backdropFilter: `blur(${glassConfig.blur.light})`,
-                    WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
-                    background: `rgba(255, 255, 255, ${glassConfig.bgOpacity.light})`,
-                    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+                    ...(isClassicStyle ? {
+                      background: isDark ? 'var(--classic-btn-icon-bg)' : 'var(--classic-btn-icon-bg)',
+                      border: `1px solid ${isDark ? 'var(--classic-border-color)' : 'var(--classic-border-color)'}`,
+                    } : {
+                      backdropFilter: `blur(${glassConfig.blur.light})`,
+                      WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
+                      background: `rgba(255, 255, 255, ${glassConfig.bgOpacity.light})`,
+                      border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+                    }),
                     borderRadius: glassConfig.border.radius.lg,
-                    boxShadow: glassConfig.shadow.sm,
+                    boxShadow: isClassicStyle ? '0 1px 3px rgba(0, 0, 0, 0.12)' : glassConfig.shadow.sm,
                     transition: `all ${glassConfig.animation.hoverDuration} ${glassConfig.animation.easing}`,
                     '&:hover': {
-                      background: `rgba(255, 255, 255, ${glassConfig.bgOpacity.medium})`,
-                      boxShadow: glassConfig.shadow.glow
+                      background: isClassicStyle 
+                        ? (isDark ? 'var(--classic-nav-item-hover)' : 'var(--classic-nav-item-hover)')
+                        : `rgba(255, 255, 255, ${glassConfig.bgOpacity.medium})`,
+                      boxShadow: isClassicStyle ? '0 2px 6px rgba(0, 0, 0, 0.15)' : glassConfig.shadow.glow
                     }
                   }}
                 >
@@ -116,13 +128,18 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
               justifyContent: 'space-between',
               mb: 3,
               pb: 2,
-              borderBottom: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
-              backdropFilter: `blur(${glassConfig.blur.light})`,
-              WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
-              background: `rgba(255, 255, 255, ${glassConfig.bgOpacity.light})`,
-              border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+              borderBottom: `${glassConfig.border.width} solid ${isClassicStyle ? 'var(--classic-border-color)' : glassConfig.border.color}`,
+              ...(isClassicStyle ? {
+                background: isDark ? 'var(--classic-bg-elevated)' : 'var(--classic-bg-elevated)',
+                border: `1px solid ${isDark ? 'var(--classic-border-color)' : 'var(--classic-border-color)'}`,
+              } : {
+                backdropFilter: `blur(${glassConfig.blur.light})`,
+                WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
+                background: `rgba(255, 255, 255, ${glassConfig.bgOpacity.light})`,
+                border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+              }),
               borderRadius: glassConfig.border.radius.lg,
-              boxShadow: glassConfig.shadow.sm,
+              boxShadow: isClassicStyle ? '0 1px 3px rgba(0, 0, 0, 0.12)' : glassConfig.shadow.sm,
               padding: '8px',
               transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`
             }}>
@@ -179,22 +196,31 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                       onClick={() => handleNavigation(item.path)}
                       sx={{
                         ...navigationStyles.iconButton,
-                        backdropFilter: `blur(${glassConfig.blur.light})`,
-                        WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
-                        background: isActive 
-                          ? theme?.gradient 
-                          : `rgba(255, 255, 255, ${glassConfig.bgOpacity.ultraLight})`,
+                        ...(isClassicStyle ? {
+                          background: isActive 
+                            ? theme?.gradient 
+                            : (isDark ? 'var(--classic-btn-icon-bg)' : 'var(--classic-btn-icon-bg)'),
+                          border: `1px solid ${isDark ? 'var(--classic-border-color)' : 'var(--classic-border-color)'}`,
+                        } : {
+                          backdropFilter: `blur(${glassConfig.blur.light})`,
+                          WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
+                          background: isActive 
+                            ? theme?.gradient 
+                            : `rgba(255, 255, 255, ${glassConfig.bgOpacity.ultraLight})`,
+                          border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+                        }),
                         color: isActive ? 'white' : 'var(--color-text-primary)',
-                        border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
                         boxShadow: isActive 
-                          ? `${glassConfig.shadow.md}, ${glassConfig.components.navigation.activeGlow}` 
-                          : glassConfig.shadow.sm,
+                          ? (isClassicStyle ? '0 2px 8px rgba(255, 61, 0, 0.3)' : `${glassConfig.shadow.md}, ${glassConfig.components.navigation.activeGlow}`)
+                          : (isClassicStyle ? '0 1px 3px rgba(0, 0, 0, 0.12)' : glassConfig.shadow.sm),
                         transition: `all ${glassConfig.animation.hoverDuration} ${glassConfig.animation.easing}`,
                         '&:hover': {
                           background: isActive 
                             ? undefined 
-                            : `rgba(255, 255, 255, ${glassConfig.components.navigation.itemHoverOpacity})`,
-                          boxShadow: glassConfig.shadow.glow,
+                            : (isClassicStyle 
+                                ? (isDark ? 'var(--classic-nav-item-hover)' : 'var(--classic-nav-item-hover)')
+                                : `rgba(255, 255, 255, ${glassConfig.components.navigation.itemHoverOpacity})`),
+                          boxShadow: isClassicStyle ? '0 2px 6px rgba(0, 0, 0, 0.15)' : glassConfig.shadow.glow,
                           transform: 'translateY(-2px)'
                         }
                       }}
@@ -212,7 +238,7 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
               />
               <Divider sx={{ 
                 my: 3,
-                borderColor: glassConfig.border.color
+                borderColor: isClassicStyle ? 'var(--classic-border-color)' : glassConfig.border.color
               }} />
             </>
           )}

@@ -5,3 +5,5 @@ export { useEventsStore } from './eventsStore';
 export { usePersonsStore } from './personsStore';
 export { useNavigationStore } from './navigationStore';
 export { useThemeStore, initializeTheme } from './themeStore';
+export { useStyleStore, initializeStyle } from './styleStore';
+export { useDynastiesStore, useDynastiesExpanded } from './dynastiesExpandedStore';

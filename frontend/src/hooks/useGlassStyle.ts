@@ -18,12 +18,12 @@ import {
   isLowEndDevice,
   shouldEnableBlur,
   getPerformanceClasses
-} from '../config/glassConfig';
+} from '../config/styles';
 import type { 
   GlassStyleOptions, 
   GlassStyleResult,
   GlassConfig
-} from '../config/glassConfig.types';
+} from '../config/styles';
 
 /**
  * 性能优化选项接口

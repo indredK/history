@@ -14,7 +14,7 @@ import {
   ResponsiveTableCell,
 } from '@/components/ui/ResponsiveTable';
 import { useResponsive } from '@/hooks/useResponsive';
-import { useDynastiesExpanded } from '@/stores/dynastiesStore';
+import { useDynastiesExpanded } from '@/store/dynastiesExpandedStore';
 import { DynastyRow } from './DynastyRow';
 import { loadJsonData } from '@/utils/dataLoaders';
 import { 

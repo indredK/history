@@ -12,7 +12,7 @@ import { navigationItems } from '@/config';
 import { useResponsive, useOrientation } from '@/hooks/useResponsive';
 import { getSidebarStyles } from '@/config/responsive';
 import { getGlassConfig } from '@/config/glassConfig';
-import { useThemeStore } from '@/store';
+import { useThemeStore, useStyleStore } from '@/store';
 
 interface PortraitSidebarProps {
   activeTab: string;
@@ -25,6 +25,7 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
   const { isMobile, screenWidth } = useResponsive();
   const orientation = useOrientation();
   const { theme } = useThemeStore();
+  const { style } = useStyleStore();
   
   // 只在移动端竖屏模式下显示
   const isPortrait = orientation.type.includes('portrait') || window.innerHeight > window.innerWidth;
@@ -36,6 +37,9 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
   // 获取毛玻璃配置
   const glassConfig = getGlassConfig(screenWidth);
   const navConfig = glassConfig.components.navigation;
+  
+  // 检查是否为经典样式模式
+  const isClassicStyle = style === 'classic';
   
   // 根据主题获取背景色
   const isDark = theme === 'dark';
@@ -59,8 +63,13 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
     return '90px';
   };
 
-  // 毛玻璃容器样式
-  const glassContainerStyles = glassEffect ? {
+  // 毛玻璃容器样式 - 根据样式模式选择
+  const glassContainerStyles = isClassicStyle ? {
+    // 经典样式 - 无模糊效果
+    background: isDark ? 'var(--classic-nav-bg)' : 'var(--classic-nav-bg)',
+    border: `1px solid ${isDark ? 'var(--classic-border-color)' : 'var(--classic-border-color)'}`,
+    boxShadow: '0 -2px 8px rgba(0, 0, 0, 0.1)',
+  } : glassEffect ? {
     backdropFilter: `blur(${navConfig.blur})`,
     WebkitBackdropFilter: `blur(${navConfig.blur})`,
     background: `linear-gradient(135deg, rgba(${bgBase}, ${navConfig.bgOpacity}) 0%, rgba(${bgSecondary}, ${navConfig.bgOpacity}) 100%)`,
@@ -100,8 +109,27 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
         {navigationItems.map((item) => {
           const isActive = location.pathname === item.path;
           
-          // 毛玻璃导航项样式
-          const glassItemStyles = glassEffect ? {
+          // 毛玻璃导航项样式 - 根据样式模式选择
+          const glassItemStyles = isClassicStyle ? {
+            // 经典样式 - 无模糊效果
+            background: isActive 
+              ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
+              : 'transparent',
+            boxShadow: isActive 
+              ? '0 2px 8px rgba(255, 61, 0, 0.3)'
+              : 'none',
+            transition: 'all 200ms ease',
+            '&:hover': {
+              background: isActive 
+                ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
+                : isDark ? 'var(--classic-nav-item-hover)' : 'var(--classic-nav-item-hover)',
+              transform: 'translateY(-2px)',
+              color: isActive ? 'white' : textColor,
+            },
+            '&:active': {
+              transform: 'translateY(-1px) scale(0.95)',
+            },
+          } : glassEffect ? {
             background: isActive 
               ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
               : 'transparent',

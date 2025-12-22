@@ -6,3 +6,4 @@
 export { SettingsPanel } from './SettingsPanel';
 export { ThemeToggleButton } from './ThemeToggleButton';
 export { LanguageSwitcherButton } from './LanguageSwitcherButton';
+export { StyleSwitcherButton } from './StyleSwitcherButton';

@@ -1,7 +1,35 @@
 /**
- * 毛玻璃配置类型定义
- * Glass Configuration Type Definitions
+ * 样式配置类型定义
+ * Style Configuration Type Definitions
+ * 
+ * 包含毛玻璃样式和经典样式的类型定义
  */
+
+// ============================================
+// 样式模式类型 (Style Mode Types)
+// ============================================
+
+/** 样式模式类型 */
+export type StyleMode = 'glass' | 'classic';
+
+/** 默认样式 */
+export const DEFAULT_STYLE: StyleMode = 'glass';
+
+/** localStorage 存储键 */
+export const STYLE_STORAGE_KEY = 'app-style';
+
+/**
+ * 验证样式值是否有效
+ * @param value - 要验证的值
+ * @returns 是否为有效的样式模式
+ */
+export function isValidStyle(value: unknown): value is StyleMode {
+  return value === 'glass' || value === 'classic';
+}
+
+// ============================================
+// 通用类型定义 (Common Type Definitions)
+// ============================================
 
 /**
  * 模糊级别配置
@@ -51,7 +79,7 @@ export interface BorderConfig {
 
 /**
  * 阴影配置
- * Shadow styles for glassmorphism depth
+ * Shadow styles for depth
  */
 export interface ShadowConfig {
   sm: string;
@@ -87,7 +115,6 @@ export interface AnimationConfig {
 /**
  * 动画进入配置
  * Animation enter settings for element appearance
- * Requirements: 12.4
  */
 export interface AnimationEnterConfig {
   scale: number;            // Initial scale (e.g., 0.95)
@@ -95,9 +122,12 @@ export interface AnimationEnterConfig {
   translateX: string;       // Initial X translation (e.g., '20px')
 }
 
+// ============================================
+// 毛玻璃样式类型 (Glass Style Types)
+// ============================================
 
 /**
- * 卡片组件配置
+ * 卡片组件配置 - 毛玻璃
  */
 export interface CardComponentConfig {
   blur: string;
@@ -106,7 +136,7 @@ export interface CardComponentConfig {
 }
 
 /**
- * 导航组件配置
+ * 导航组件配置 - 毛玻璃
  */
 export interface NavigationComponentConfig {
   blur: string;
@@ -166,7 +196,7 @@ export interface ScrollbarComponentConfig {
 }
 
 /**
- * 组件特定配置
+ * 组件特定配置 - 毛玻璃
  * Component-specific glassmorphism configurations
  */
 export interface ComponentConfig {
@@ -184,7 +214,6 @@ export interface ComponentConfig {
 /**
  * 性能配置
  * Performance optimization settings
- * Requirements: 13.1, 13.2, 13.3, 13.4, 13.5
  */
 export interface PerformanceConfig {
   enableBlur: boolean;
@@ -195,7 +224,6 @@ export interface PerformanceConfig {
 /**
  * 减少动画配置
  * Reduced motion settings for accessibility
- * Requirements: 13.3
  */
 export interface ReducedMotionConfig {
   disableTransitions: boolean;
@@ -246,6 +274,138 @@ export interface GlassStyleOptions {
  * Result from useGlassStyle hook
  */
 export interface GlassStyleResult {
+  style: React.CSSProperties;
+  className: string;
+  hoverStyle?: React.CSSProperties | undefined;
+}
+
+// ============================================
+// 经典样式类型 (Classic Style Types)
+// ============================================
+
+/**
+ * 经典样式背景配置
+ * Classic style background configuration (solid colors, no blur)
+ */
+export interface ClassicBackground {
+  /** 主背景色 */
+  primary: string;
+  /** 次要背景色 */
+  secondary: string;
+  /** 表面颜色 */
+  surface: string;
+  /** 提升层颜色 */
+  elevated: string;
+}
+
+/**
+ * 经典样式卡片组件配置
+ */
+export interface ClassicCardConfig {
+  background: string;
+  hoverBackground: string;
+}
+
+/**
+ * 经典样式导航组件配置
+ */
+export interface ClassicNavigationConfig {
+  background: string;
+  itemHoverBackground: string;
+  activeBackground: string;
+}
+
+/**
+ * 经典样式按钮配置
+ */
+export interface ClassicButtonStyleConfig {
+  background: string;
+}
+
+/**
+ * 经典样式按钮组件配置
+ */
+export interface ClassicButtonComponentConfig {
+  primary: ClassicButtonStyleConfig;
+  secondary: ClassicButtonStyleConfig;
+  icon: ClassicButtonStyleConfig;
+}
+
+/**
+ * 经典样式表格行配置
+ */
+export interface ClassicTableRowConfig {
+  background: string;
+  hoverBackground: string;
+}
+
+/**
+ * 经典样式表格组件配置
+ */
+export interface ClassicTableComponentConfig {
+  container: ClassicButtonStyleConfig;
+  header: ClassicButtonStyleConfig;
+  row: ClassicTableRowConfig;
+}
+
+/**
+ * 经典样式模态框组件配置
+ */
+export interface ClassicModalComponentConfig {
+  backdrop: ClassicButtonStyleConfig;
+  content: ClassicButtonStyleConfig;
+}
+
+/**
+ * 经典样式组件配置
+ * Component-specific classic style configurations
+ */
+export interface ClassicComponentConfig {
+  card: ClassicCardConfig;
+  navigation: ClassicNavigationConfig;
+  button: ClassicButtonComponentConfig;
+  table: ClassicTableComponentConfig;
+  modal: ClassicModalComponentConfig;
+  popover: ClassicButtonStyleConfig;
+  tooltip: ClassicButtonStyleConfig;
+  dropdown: ClassicButtonStyleConfig;
+}
+
+/**
+ * 完整的经典样式配置
+ * Complete classic style configuration interface
+ */
+export interface ClassicConfig {
+  /** 背景配置 */
+  background: ClassicBackground;
+  /** 边框配置 */
+  border: BorderConfig;
+  /** 阴影配置 */
+  shadow: ShadowConfig;
+  /** 动画配置 */
+  animation: AnimationConfig;
+  /** 组件特定配置 */
+  components: ClassicComponentConfig;
+  /** 性能配置 */
+  performance: PerformanceConfig;
+}
+
+/**
+ * 经典样式选项
+ * Options for classic style
+ */
+export interface ClassicStyleOptions {
+  bgColor?: string;
+  borderRadius?: keyof BorderRadius;
+  shadow?: keyof ShadowConfig | 'none';
+  hover?: boolean;
+}
+
+/**
+ * 经典样式结果
+ * Result from classic style functions
+ */
+export interface ClassicStyleResult {
   style: React.CSSProperties;
   className: string;
   hoverStyle?: React.CSSProperties | undefined;

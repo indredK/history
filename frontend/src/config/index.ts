@@ -25,6 +25,5 @@ export { default as ui } from './ui';
 // 导出响应式配置
 export * from './responsive';
 
-// 导出毛玻璃配置
-export * from './glassConfig';
-export * from './glassConfig.types';
+// 导出样式配置（包含毛玻璃和经典样式）
+export * from './styles';

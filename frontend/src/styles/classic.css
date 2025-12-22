@@ -1,0 +1,364 @@
+/**
+ * 经典样式CSS变量和基础样式
+ * Classic Style CSS Variables and Base Styles
+ * 
+ * 本文件定义了经典样式所需的所有CSS变量，
+ * 与 TypeScript 配置文件 (classicConfig.ts) 保持同步
+ */
+
+/* ============================================
+   经典样式CSS变量 - 暗黑模式 (Dark Mode)
+   ============================================ */
+[data-style="classic"][data-theme="dark"],
+[data-style="classic"] [data-theme="dark"] {
+  /* 背景颜色 */
+  --classic-bg-primary: #121212;
+  --classic-bg-secondary: #1e1e1e;
+  --classic-bg-surface: #252525;
+  --classic-bg-elevated: #2d2d2d;
+  
+  /* 边框颜色 */
+  --classic-border-color: rgba(255, 255, 255, 0.12);
+  
+  /* 焦点环 */
+  --classic-focus-ring: rgba(100, 150, 255, 0.4);
+  
+  /* 卡片 */
+  --classic-card-bg: #252525;
+  --classic-card-hover-bg: #2d2d2d;
+  
+  /* 导航 */
+  --classic-nav-bg: #1e1e1e;
+  --classic-nav-item-hover: rgba(255, 255, 255, 0.08);
+  --classic-nav-item-active: rgba(255, 255, 255, 0.12);
+  
+  /* 按钮 */
+  --classic-btn-primary-bg: #3b82f6;
+  --classic-btn-secondary-bg: #374151;
+  --classic-btn-icon-bg: rgba(255, 255, 255, 0.08);
+  
+  /* 表格 */
+  --classic-table-bg: #1e1e1e;
+  --classic-table-header-bg: #252525;
+  --classic-table-row-bg: transparent;
+  --classic-table-row-hover: rgba(255, 255, 255, 0.04);
+  
+  /* 模态框 */
+  --classic-modal-backdrop: rgba(0, 0, 0, 0.75);
+  --classic-modal-bg: #252525;
+  
+  /* 弹出层 */
+  --classic-popover-bg: #2d2d2d;
+  --classic-tooltip-bg: #374151;
+  --classic-dropdown-bg: #2d2d2d;
+}
+
+/* ============================================
+   经典样式CSS变量 - 白天模式 (Light Mode)
+   ============================================ */
+[data-style="classic"][data-theme="light"],
+[data-style="classic"] [data-theme="light"] {
+  /* 背景颜色 */
+  --classic-bg-primary: #ffffff;
+  --classic-bg-secondary: #f5f5f5;
+  --classic-bg-surface: #fafafa;
+  --classic-bg-elevated: #ffffff;
+  
+  /* 边框颜色 */
+  --classic-border-color: rgba(0, 0, 0, 0.12);
+  
+  /* 焦点环 */
+  --classic-focus-ring: rgba(59, 130, 246, 0.4);
+  
+  /* 卡片 */
+  --classic-card-bg: #ffffff;
+  --classic-card-hover-bg: #f5f5f5;
+  
+  /* 导航 */
+  --classic-nav-bg: #ffffff;
+  --classic-nav-item-hover: rgba(0, 0, 0, 0.04);
+  --classic-nav-item-active: rgba(0, 0, 0, 0.08);
+  
+  /* 按钮 */
+  --classic-btn-primary-bg: #3b82f6;
+  --classic-btn-secondary-bg: #e5e7eb;
+  --classic-btn-icon-bg: rgba(0, 0, 0, 0.04);
+  
+  /* 表格 */
+  --classic-table-bg: #ffffff;
+  --classic-table-header-bg: #f5f5f5;
+  --classic-table-row-bg: transparent;
+  --classic-table-row-hover: rgba(0, 0, 0, 0.02);
+  
+  /* 模态框 */
+  --classic-modal-backdrop: rgba(0, 0, 0, 0.5);
+  --classic-modal-bg: #ffffff;
+  
+  /* 弹出层 */
+  --classic-popover-bg: #ffffff;
+  --classic-tooltip-bg: #374151;
+  --classic-dropdown-bg: #ffffff;
+}
+
+/* ============================================
+   默认经典样式变量（暗黑模式为默认）
+   ============================================ */
+[data-style="classic"] {
+  --classic-bg-primary: #121212;
+  --classic-bg-secondary: #1e1e1e;
+  --classic-bg-surface: #252525;
+  --classic-bg-elevated: #2d2d2d;
+  --classic-border-color: rgba(255, 255, 255, 0.12);
+  --classic-focus-ring: rgba(100, 150, 255, 0.4);
+  --classic-card-bg: #252525;
+  --classic-card-hover-bg: #2d2d2d;
+  --classic-nav-bg: #1e1e1e;
+  --classic-nav-item-hover: rgba(255, 255, 255, 0.08);
+  --classic-nav-item-active: rgba(255, 255, 255, 0.12);
+  --classic-btn-primary-bg: #3b82f6;
+  --classic-btn-secondary-bg: #374151;
+  --classic-btn-icon-bg: rgba(255, 255, 255, 0.08);
+  --classic-table-bg: #1e1e1e;
+  --classic-table-header-bg: #252525;
+  --classic-table-row-bg: transparent;
+  --classic-table-row-hover: rgba(255, 255, 255, 0.04);
+  --classic-modal-backdrop: rgba(0, 0, 0, 0.75);
+  --classic-modal-bg: #252525;
+  --classic-popover-bg: #2d2d2d;
+  --classic-tooltip-bg: #374151;
+  --classic-dropdown-bg: #2d2d2d;
+}
+
+/* ============================================
+   经典样式基础类 (Classic Base Style Classes)
+   ============================================ */
+
+/**
+ * 经典样式效果类
+ * Classic style effect class - no blur, solid backgrounds
+ */
+[data-style="classic"] .glass-effect {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-bg-surface);
+  border: 1px solid var(--classic-border-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+[data-style="classic"] .glass-effect:hover {
+  background-color: var(--classic-bg-elevated);
+}
+
+/**
+ * 经典样式卡片
+ */
+[data-style="classic"] .glass-card,
+[data-style="classic"] .glass-card-dark {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-card-bg);
+  border: 1px solid var(--classic-border-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+[data-style="classic"] .glass-card:hover,
+[data-style="classic"] .glass-card-dark:hover {
+  background-color: var(--classic-card-hover-bg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/**
+ * 经典样式按钮
+ */
+[data-style="classic"] .glass-button {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-btn-primary-bg);
+  border: 1px solid transparent;
+  color: white;
+}
+
+[data-style="classic"] .glass-button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+[data-style="classic"] .glass-button-secondary {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-btn-secondary-bg);
+  border: 1px solid var(--classic-border-color);
+}
+
+[data-style="classic"] .glass-button-secondary:hover {
+  filter: brightness(1.05);
+}
+
+[data-style="classic"] .glass-button-icon {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-btn-icon-bg);
+  border: 1px solid var(--classic-border-color);
+}
+
+[data-style="classic"] .glass-button-icon:hover {
+  background-color: var(--classic-nav-item-hover);
+}
+
+/**
+ * 经典样式导航
+ */
+[data-style="classic"] .glass-nav,
+[data-style="classic"] .glass-nav-dark,
+[data-style="classic"] .glass-sidebar {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-nav-bg);
+  border-color: var(--classic-border-color);
+}
+
+[data-style="classic"] .glass-nav-item:hover {
+  background-color: var(--classic-nav-item-hover);
+}
+
+[data-style="classic"] .glass-nav-item.active {
+  background-color: var(--classic-nav-item-active);
+  box-shadow: none;
+}
+
+/**
+ * 经典样式表格
+ */
+[data-style="classic"] .glass-table {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-table-bg);
+  border: 1px solid var(--classic-border-color);
+}
+
+[data-style="classic"] .glass-table-header {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-table-header-bg);
+}
+
+[data-style="classic"] .glass-table-row {
+  background-color: var(--classic-table-row-bg);
+}
+
+[data-style="classic"] .glass-table-row:hover {
+  background-color: var(--classic-table-row-hover);
+}
+
+/**
+ * 经典样式模态框
+ */
+[data-style="classic"] .glass-modal-backdrop {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-modal-backdrop);
+}
+
+[data-style="classic"] .glass-modal {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-modal-bg);
+  border: 1px solid var(--classic-border-color);
+}
+
+/**
+ * 经典样式弹出层
+ */
+[data-style="classic"] .glass-popover,
+[data-style="classic"] .glass-dropdown {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-popover-bg);
+  border: 1px solid var(--classic-border-color);
+}
+
+[data-style="classic"] .glass-tooltip {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-tooltip-bg);
+}
+
+/**
+ * 经典样式输入框
+ */
+[data-style="classic"] .glass-input {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-bg-surface);
+  border: 1px solid var(--classic-border-color);
+}
+
+[data-style="classic"] .glass-input:focus {
+  background-color: var(--classic-bg-elevated);
+  border-color: var(--classic-focus-ring);
+  box-shadow: 0 0 0 3px var(--classic-focus-ring);
+}
+
+/**
+ * 经典样式徽章
+ */
+[data-style="classic"] .glass-badge {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: var(--classic-bg-elevated);
+  border: 1px solid var(--classic-border-color);
+}
+
+/* ============================================
+   样式切换过渡效果
+   ============================================ */
+html {
+  --style-transition-duration: 200ms;
+}
+
+html.style-transitioning .glass-effect,
+html.style-transitioning .glass-card,
+html.style-transitioning .glass-card-dark,
+html.style-transitioning .glass-button,
+html.style-transitioning .glass-button-secondary,
+html.style-transitioning .glass-button-icon,
+html.style-transitioning .glass-nav,
+html.style-transitioning .glass-nav-dark,
+html.style-transitioning .glass-sidebar,
+html.style-transitioning .glass-table,
+html.style-transitioning .glass-modal,
+html.style-transitioning .glass-popover,
+html.style-transitioning .glass-tooltip,
+html.style-transitioning .glass-dropdown,
+html.style-transitioning .glass-input,
+html.style-transitioning .glass-badge {
+  transition: 
+    background-color var(--style-transition-duration) ease,
+    backdrop-filter var(--style-transition-duration) ease,
+    border-color var(--style-transition-duration) ease,
+    box-shadow var(--style-transition-duration) ease !important;
+}
+
+/* ============================================
+   减少动画偏好支持
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  html.style-transitioning .glass-effect,
+  html.style-transitioning .glass-card,
+  html.style-transitioning .glass-card-dark,
+  html.style-transitioning .glass-button,
+  html.style-transitioning .glass-button-secondary,
+  html.style-transitioning .glass-button-icon,
+  html.style-transitioning .glass-nav,
+  html.style-transitioning .glass-nav-dark,
+  html.style-transitioning .glass-sidebar,
+  html.style-transitioning .glass-table,
+  html.style-transitioning .glass-modal,
+  html.style-transitioning .glass-popover,
+  html.style-transitioning .glass-tooltip,
+  html.style-transitioning .glass-dropdown,
+  html.style-transitioning .glass-input,
+  html.style-transitioning .glass-badge {
+    transition: none !important;
+  }
+}

@@ -2,15 +2,13 @@
  * 移动端毛玻璃配置
  * Mobile Glassmorphism Configuration
  * 
- * Requirements: 3.1, 3.2, 3.3, 3.4, 3.5
- * 
  * 移动端优化：
  * - 减少模糊值以提升性能
  * - 提高透明度以增强可读性
  * - 缩短动画时长以提升响应速度
  */
 
-import type { GlassConfig } from './glassConfig.types';
+import type { GlassConfig } from './types';
 
 /**
  * 移动端毛玻璃配置

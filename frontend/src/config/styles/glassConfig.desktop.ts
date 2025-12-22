@@ -2,10 +2,10 @@
  * 桌面端毛玻璃配置
  * Desktop Glassmorphism Configuration
  * 
- * Requirements: 2.1, 2.2, 2.3, 2.4, 2.5
+ * 从原位置重新导出，保持向后兼容性
  */
 
-import type { GlassConfig } from './glassConfig.types';
+import type { GlassConfig } from './types';
 
 /**
  * 桌面端毛玻璃配置
