@@ -1,17 +1,52 @@
+/**
+ * 神话页面样式
+ * Mythology Page Styles
+ * 
+ * Requirements: 5.3, 5.4
+ */
+
 .mythology-page {
-  padding: 2rem 0;
-  height: 100%; /* 使用100%高度而不是min-height */
-  overflow: hidden; /* 确保页面不滚动 */
+  padding: 1.5rem;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.mythology-page .MuiContainer-root {
-  padding: 0 1rem;
+/* 响应式标题 */
+.mythology-page h1 {
+  font-size: 1.8rem;
 }
 
+/* 平板适配 */
+@media (max-width: 1024px) {
+  .mythology-page {
+    padding: 1.25rem;
+  }
+  
+  .mythology-page h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* 手机适配 */
 @media (max-width: 768px) {
   .mythology-page {
-    padding: 1rem 0;
+    padding: 1rem;
+  }
+  
+  .mythology-page h1 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+}
+
+/* 小屏手机适配 */
+@media (max-width: 375px) {
+  .mythology-page {
+    padding: 0.75rem;
+  }
+  
+  .mythology-page h1 {
+    font-size: 1.2rem;
   }
 }
