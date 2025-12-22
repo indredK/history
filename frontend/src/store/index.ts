@@ -8,3 +8,4 @@ export { useThemeStore, initializeTheme } from './themeStore';
 export { useStyleStore, initializeStyle } from './styleStore';
 export { useDynastiesStore, useDynastiesExpanded } from './dynastiesExpandedStore';
 export { useScholarStore } from './scholarStore';
+export { useSchoolsStore } from './schoolsStore';

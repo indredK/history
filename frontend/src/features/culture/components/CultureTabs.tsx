@@ -2,16 +2,16 @@
  * 文化页面标签切换组件
  * Culture Tabs Component
  * 
- * 在"朝代"和"文化名人"之间切换
+ * 在"思想流派"和"文化名人"之间切换
  * 
- * Requirements: 6.1, 6.2, 6.3
+ * Requirements: 2.1, 2.2, 2.3
  */
 
 import { Box, Tabs, Tab } from '@mui/material';
-import HistoryIcon from '@mui/icons-material/History';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import PersonIcon from '@mui/icons-material/Person';
 
-type TabValue = 'dynasties' | 'scholars';
+type TabValue = 'schools' | 'scholars';
 
 interface CultureTabsProps {
   activeTab: TabValue;
@@ -21,9 +21,9 @@ interface CultureTabsProps {
 /**
  * 文化页面标签切换组件
  * 
- * Requirements 6.1: 显示"朝代"和"文化名人"标签
- * Requirements 6.2: 切换标签时显示对应内容
- * Requirements 6.3: 保持标签状态
+ * Requirements 2.1: 显示"思想流派"作为第一个标签
+ * Requirements 2.2: 使用适当的图标
+ * Requirements 2.3: 保持"文化名人"作为第二个标签
  */
 export function CultureTabs({ activeTab, onTabChange }: CultureTabsProps) {
   const handleChange = (_event: React.SyntheticEvent, newValue: TabValue) => {
@@ -63,9 +63,9 @@ export function CultureTabs({ activeTab, onTabChange }: CultureTabsProps) {
         }}
       >
         <Tab
-          value="dynasties"
-          label="朝代"
-          icon={<HistoryIcon sx={{ fontSize: '1.2rem' }} />}
+          value="schools"
+          label="思想流派"
+          icon={<MenuBookIcon sx={{ fontSize: '1.2rem' }} />}
           iconPosition="start"
           sx={{ gap: 1 }}
         />
