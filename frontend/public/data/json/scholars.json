@@ -1,0 +1,286 @@
+[
+  {
+    "id": "han-yu",
+    "name": "韩愈",
+    "name_en": "Han Yu",
+    "dynasty": "唐代",
+    "birthYear": 768,
+    "deathYear": 824,
+    "schoolOfThought": "儒家",
+    "biography": "韩愈（768年—824年），字退之，河南河阳（今河南孟州）人，唐代杰出的文学家、思想家、哲学家。他是唐代古文运动的倡导者，被后人尊为「唐宋八大家」之首。韩愈主张文以载道，反对六朝以来的骈俪文风，提倡学习先秦两汉的散文，对后世散文发展产生了深远影响。",
+    "achievements": [
+      "唐代古文运动的倡导者和领袖",
+      "提出「文以载道」的文学主张",
+      "被誉为「文章巨公」和「百代文宗」",
+      "对儒学复兴做出重要贡献"
+    ],
+    "representativeWorks": [
+      {
+        "id": "han-yu-work-1",
+        "title": "师说",
+        "type": "prose",
+        "description": "论述从师学习的重要性，批判当时士大夫耻于从师的风气",
+        "contentExcerpt": "古之学者必有师。师者，所以传道受业解惑也。"
+      },
+      {
+        "id": "han-yu-work-2",
+        "title": "进学解",
+        "type": "prose",
+        "description": "以问答形式阐述治学之道，表达怀才不遇的感慨",
+        "contentExcerpt": "业精于勤，荒于嬉；行成于思，毁于随。"
+      },
+      {
+        "id": "han-yu-work-3",
+        "title": "原道",
+        "type": "essay",
+        "description": "阐述儒家道统思想，批判佛老，维护儒学正统地位",
+        "contentExcerpt": "博爱之谓仁，行而宜之之谓义，由是而之焉之谓道。"
+      }
+    ]
+  },
+  {
+    "id": "liu-zongyuan",
+    "name": "柳宗元",
+    "name_en": "Liu Zongyuan",
+    "dynasty": "唐代",
+    "birthYear": 773,
+    "deathYear": 819,
+    "schoolOfThought": "儒家",
+    "biography": "柳宗元（773年—819年），字子厚，河东解县（今山西运城）人，世称「柳河东」。唐代著名文学家、哲学家，与韩愈并称「韩柳」，同为唐代古文运动的领袖。柳宗元的山水游记独具特色，被誉为「游记之祖」。",
+    "achievements": [
+      "唐代古文运动的重要领袖",
+      "山水游记的开创者",
+      "寓言文学的杰出代表",
+      "与韩愈并称「韩柳」"
+    ],
+    "representativeWorks": [
+      {
+        "id": "liu-zongyuan-work-1",
+        "title": "永州八记",
+        "type": "prose",
+        "description": "描写永州山水的系列游记散文，开创了山水游记的新境界",
+        "contentExcerpt": "潭中鱼可百许头，皆若空游无所依，日光下澈，影布石上。"
+      },
+      {
+        "id": "liu-zongyuan-work-2",
+        "title": "捕蛇者说",
+        "type": "prose",
+        "description": "通过捕蛇者的遭遇，揭露苛政猛于虎的社会现实",
+        "contentExcerpt": "苛政猛于虎也。"
+      },
+      {
+        "id": "liu-zongyuan-work-3",
+        "title": "黔之驴",
+        "type": "prose",
+        "description": "著名寓言，讽刺外强中干、虚有其表的人",
+        "contentExcerpt": "黔无驴，有好事者船载以入。"
+      }
+    ]
+  },
+  {
+    "id": "ouyang-xiu",
+    "name": "欧阳修",
+    "name_en": "Ouyang Xiu",
+    "dynasty": "宋代",
+    "birthYear": 1007,
+    "deathYear": 1072,
+    "schoolOfThought": "儒家",
+    "biography": "欧阳修（1007年—1072年），字永叔，号醉翁，晚号六一居士，吉州永丰（今江西永丰）人。北宋政治家、文学家、史学家，唐宋八大家之一。他领导了北宋诗文革新运动，对宋代文学发展影响深远。",
+    "achievements": [
+      "北宋诗文革新运动的领袖",
+      "主持编修《新唐书》《新五代史》",
+      "提携苏轼、曾巩等后辈文人",
+      "开创宋代散文平易自然的新风格"
+    ],
+    "representativeWorks": [
+      {
+        "id": "ouyang-xiu-work-1",
+        "title": "醉翁亭记",
+        "type": "prose",
+        "description": "描写滁州山水之美和与民同乐的情怀，文风优美流畅",
+        "contentExcerpt": "醉翁之意不在酒，在乎山水之间也。"
+      },
+      {
+        "id": "ouyang-xiu-work-2",
+        "title": "秋声赋",
+        "type": "prose",
+        "description": "借秋声抒发人生感慨，是宋代赋体散文的代表作",
+        "contentExcerpt": "盖夫秋之为状也，其色惨淡，烟霏云敛。"
+      }
+    ]
+  },
+  {
+    "id": "su-xun",
+    "name": "苏洵",
+    "name_en": "Su Xun",
+    "dynasty": "宋代",
+    "birthYear": 1009,
+    "deathYear": 1066,
+    "schoolOfThought": "儒家",
+    "biography": "苏洵（1009年—1066年），字明允，号老泉，眉州眉山（今四川眉山）人。北宋文学家，与其子苏轼、苏辙并称「三苏」。苏洵二十七岁始发愤读书，以文章著称于世，尤长于策论。",
+    "achievements": [
+      "与苏轼、苏辙并称「三苏」",
+      "策论文章雄辩有力",
+      "大器晚成的典范",
+      "对北宋政论文发展有重要贡献"
+    ],
+    "representativeWorks": [
+      {
+        "id": "su-xun-work-1",
+        "title": "六国论",
+        "type": "essay",
+        "description": "分析六国灭亡原因，借古讽今，警示北宋朝廷",
+        "contentExcerpt": "六国破灭，非兵不利，战不善，弊在赂秦。"
+      },
+      {
+        "id": "su-xun-work-2",
+        "title": "管仲论",
+        "type": "essay",
+        "description": "评论管仲的功过得失，展现独到的历史见解",
+        "contentExcerpt": "管仲相桓公，霸诸侯，一匡天下。"
+      }
+    ]
+  },
+  {
+    "id": "su-shi",
+    "name": "苏轼",
+    "name_en": "Su Shi",
+    "dynasty": "宋代",
+    "birthYear": 1037,
+    "deathYear": 1101,
+    "schoolOfThought": "儒家",
+    "biography": "苏轼（1037年—1101年），字子瞻，号东坡居士，眉州眉山（今四川眉山）人。北宋著名文学家、书画家，唐宋八大家之一。苏轼才华横溢，诗词文赋书画皆精，被誉为「全才」，对后世文学艺术影响极大。",
+    "achievements": [
+      "宋代文学的最高成就代表",
+      "豪放词派的开创者",
+      "书法「宋四家」之首",
+      "诗词文赋书画皆精的全才"
+    ],
+    "representativeWorks": [
+      {
+        "id": "su-shi-work-1",
+        "title": "前赤壁赋",
+        "type": "prose",
+        "description": "游赤壁时所作，融写景、抒情、议论于一体的千古名篇",
+        "contentExcerpt": "寄蜉蝣于天地，渺沧海之一粟。"
+      },
+      {
+        "id": "su-shi-work-2",
+        "title": "念奴娇·赤壁怀古",
+        "type": "poetry",
+        "description": "豪放词的代表作，怀古伤今，气势磅礴",
+        "contentExcerpt": "大江东去，浪淘尽，千古风流人物。"
+      },
+      {
+        "id": "su-shi-work-3",
+        "title": "石钟山记",
+        "type": "prose",
+        "description": "记述考察石钟山得名由来的经过，强调实地考察的重要性",
+        "contentExcerpt": "事不目见耳闻，而臆断其有无，可乎？"
+      }
+    ]
+  },
+  {
+    "id": "su-zhe",
+    "name": "苏辙",
+    "name_en": "Su Zhe",
+    "dynasty": "宋代",
+    "birthYear": 1039,
+    "deathYear": 1112,
+    "schoolOfThought": "儒家",
+    "biography": "苏辙（1039年—1112年），字子由，号颍滨遗老，眉州眉山（今四川眉山）人。北宋文学家、政治家，与父苏洵、兄苏轼并称「三苏」。苏辙文风汪洋澹泊，与苏轼风格相近而更为平和。",
+    "achievements": [
+      "与父兄并称「三苏」",
+      "文风汪洋澹泊，自成一家",
+      "政治上多有建树",
+      "晚年著述丰富"
+    ],
+    "representativeWorks": [
+      {
+        "id": "su-zhe-work-1",
+        "title": "黄州快哉亭记",
+        "type": "prose",
+        "description": "为张梦得所建快哉亭作记，阐发「快哉」之意",
+        "contentExcerpt": "士生于世，使其中不自得，将何往而非病？"
+      },
+      {
+        "id": "su-zhe-work-2",
+        "title": "上枢密韩太尉书",
+        "type": "memorial",
+        "description": "求见韩琦的书信，表达养气为文的主张",
+        "contentExcerpt": "文者气之所形，然文不可以学而能，气可以养而致。"
+      }
+    ]
+  },
+  {
+    "id": "wang-anshi",
+    "name": "王安石",
+    "name_en": "Wang Anshi",
+    "dynasty": "宋代",
+    "birthYear": 1021,
+    "deathYear": 1086,
+    "schoolOfThought": "儒家",
+    "biography": "王安石（1021年—1086年），字介甫，号半山，抚州临川（今江西抚州）人。北宋著名政治家、文学家、思想家，唐宋八大家之一。王安石主持「熙宁变法」，是中国历史上著名的改革家。其文章论点鲜明，逻辑严密。",
+    "achievements": [
+      "主持「熙宁变法」的改革家",
+      "政论文章逻辑严密、说理透彻",
+      "诗歌清新峻拔",
+      "被列宁誉为「中国十一世纪的改革家」"
+    ],
+    "representativeWorks": [
+      {
+        "id": "wang-anshi-work-1",
+        "title": "答司马谏议书",
+        "type": "memorial",
+        "description": "回复司马光反对变法的书信，阐明变法立场",
+        "contentExcerpt": "人习于苟且非一日，士大夫多以不恤国事、同俗自媚于众为善。"
+      },
+      {
+        "id": "wang-anshi-work-2",
+        "title": "游褒禅山记",
+        "type": "prose",
+        "description": "记游褒禅山的经历，阐发治学须深入探究的道理",
+        "contentExcerpt": "世之奇伟、瑰怪、非常之观，常在于险远。"
+      },
+      {
+        "id": "wang-anshi-work-3",
+        "title": "伤仲永",
+        "type": "prose",
+        "description": "记述神童方仲永的故事，强调后天学习的重要性",
+        "contentExcerpt": "仲永之通悟，受之天也。其受之天也，贤于材人远矣。"
+      }
+    ]
+  },
+  {
+    "id": "zeng-gong",
+    "name": "曾巩",
+    "name_en": "Zeng Gong",
+    "dynasty": "宋代",
+    "birthYear": 1019,
+    "deathYear": 1083,
+    "schoolOfThought": "儒家",
+    "biography": "曾巩（1019年—1083年），字子固，建昌南丰（今江西南丰）人，世称「南丰先生」。北宋文学家、史学家，唐宋八大家之一。曾巩文风质朴自然，长于议论，为欧阳修所赏识。",
+    "achievements": [
+      "文风质朴自然，长于议论",
+      "为欧阳修所赏识和提携",
+      "整理校勘古籍有重要贡献",
+      "世称「南丰先生」"
+    ],
+    "representativeWorks": [
+      {
+        "id": "zeng-gong-work-1",
+        "title": "墨池记",
+        "type": "prose",
+        "description": "记王羲之墨池，阐发勤学苦练的道理",
+        "contentExcerpt": "羲之之书晚乃善，则其所能，盖亦以精力自致者，非天成也。"
+      },
+      {
+        "id": "zeng-gong-work-2",
+        "title": "寄欧阳舍人书",
+        "type": "memorial",
+        "description": "致欧阳修的书信，表达对欧阳修的敬仰和感激",
+        "contentExcerpt": "生而为英，死而为灵。"
+      }
+    ]
+  }
+]
