@@ -3,9 +3,9 @@
  */
 
 import { create } from 'zustand';
-import type { TangFigure, TangFigureRole } from '@/services/tangFigure/types';
-import { tangFigureService, type TangFigureSortBy } from '@/services/tangFigure';
-import { TANG_PERIODS } from '@/services/tangFigure/types';
+import type { TangFigure, TangFigureRole } from '@/services/people/tangFigure/types';
+import { tangFigureService, type TangFigureSortBy } from '@/services/people/tangFigure';
+import { TANG_PERIODS } from '@/services/people/tangFigure/types';
 
 interface TangFigureFilters {
   role: TangFigureRole | '全部';

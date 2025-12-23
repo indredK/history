@@ -27,7 +27,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import type { Scholar, LiteraryWork } from '@/services/scholar/types';
+import type { Scholar, LiteraryWork } from '@/services/people/scholars/types';
 
 interface ScholarDetailModalProps {
   scholar: Scholar | null;

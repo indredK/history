@@ -8,9 +8,9 @@
  */
 
 import { create } from 'zustand';
-import type { MingFigure, MingFigureRole } from '@/services/mingFigure/types';
-import { mingFigureService, type MingFigureSortBy } from '@/services/mingFigure';
-import { MING_PERIODS } from '@/services/mingFigure/types';
+import type { MingFigure, MingFigureRole } from '@/services/people/mingFigure/types';
+import { mingFigureService, type MingFigureSortBy } from '@/services/people/mingFigure';
+import { MING_PERIODS } from '@/services/people/mingFigure/types';
 
 interface MingFigureFilters {
   role: MingFigureRole | '全部';

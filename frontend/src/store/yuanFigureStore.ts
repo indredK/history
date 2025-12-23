@@ -3,9 +3,9 @@
  */
 
 import { create } from 'zustand';
-import type { YuanFigure, YuanFigureRole } from '@/services/yuanFigure/types';
-import { yuanFigureService, type YuanFigureSortBy } from '@/services/yuanFigure';
-import { YUAN_PERIODS } from '@/services/yuanFigure/types';
+import type { YuanFigure, YuanFigureRole } from '@/services/people/yuanFigure/types';
+import { yuanFigureService, type YuanFigureSortBy } from '@/services/people/yuanFigure';
+import { YUAN_PERIODS } from '@/services/people/yuanFigure/types';
 
 interface YuanFigureFilters {
   role: YuanFigureRole | '全部';

@@ -3,9 +3,9 @@
  */
 
 import { PersonCard, type TagColor } from '@/components/common';
-import type { YuanFigure } from '@/services/yuanFigure/types';
-import { ROLE_LABELS } from '@/services/yuanFigure/types';
-import { yuanFigureService } from '@/services/yuanFigure';
+import type { YuanFigure } from '@/services/people/yuanFigure/types';
+import { ROLE_LABELS } from '@/services/people/yuanFigure/types';
+import { yuanFigureService } from '@/services/people/yuanFigure';
 
 interface YuanFigureCardProps {
   figure: YuanFigure;

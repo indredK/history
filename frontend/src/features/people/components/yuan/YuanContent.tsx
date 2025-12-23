@@ -8,10 +8,10 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { useRequest } from 'ahooks';
 
 import { useYuanFigureStore } from '@/store/yuanFigureStore';
-import { getYuanFigures } from '@/services/yuanFigure';
-import type { YuanFigure, YuanFigureRole } from '@/services/yuanFigure/types';
-import type { YuanFigureSortBy } from '@/services/yuanFigure';
-import { ROLE_LABELS } from '@/services/yuanFigure/types';
+import { getYuanFigures } from '@/services/people/yuanFigure';
+import type { YuanFigure, YuanFigureRole } from '@/services/people/yuanFigure/types';
+import type { YuanFigureSortBy } from '@/services/people/yuanFigure';
+import { ROLE_LABELS } from '@/services/people/yuanFigure/types';
 
 import { PeopleFilter } from '../common/PeopleFilter';
 import { YuanFigureGrid } from './YuanFigureGrid';

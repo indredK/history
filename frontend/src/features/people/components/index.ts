@@ -26,3 +26,6 @@ export * from './ming';
 
 // 清朝人物组件
 export * from './qing';
+
+// 学者组件
+export * from './scholars';

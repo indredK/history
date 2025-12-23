@@ -1,10 +1,10 @@
 import type { Event } from '@/services/timeline/types';
 import type { Place } from '@/services/map/types';
-import type { Person } from '@/services/person/types';
+import type { CommonPerson } from '@/services/people/common/types';
 import type { Dynasty } from '@/services/culture/types';
 import { timelineMock } from '@/services/timeline/timelineMock';
 import { mapMock } from '@/services/map/mapMock';
-import { personMock } from '@/services/person/personMock';
+import { personMock } from '@/services/people/common/personMock';
 import { dynastiesMock } from '@/services/culture/cultureMock';
 
 export interface MockService {
@@ -15,8 +15,8 @@ export interface MockService {
   getPlaces(): Promise<{ data: Place[] }>;
   
   // Person API
-  getPersons(): Promise<{ data: Person[] }>;
-  getPerson(_id: string): Promise<{ data: Person }>;
+  getPersons(): Promise<{ data: CommonPerson[] }>;
+  getPerson(_id: string): Promise<{ data: CommonPerson }>;
   
   // Culture API
   getDynasties(): Promise<{ data: Dynasty[] }>;

@@ -3,9 +3,9 @@
  */
 
 import { PersonCard, type TagColor } from '@/components/common';
-import type { TangFigure } from '@/services/tangFigure/types';
-import { ROLE_LABELS } from '@/services/tangFigure/types';
-import { tangFigureService } from '@/services/tangFigure';
+import type { TangFigure } from '@/services/people/tangFigure/types';
+import { ROLE_LABELS } from '@/services/people/tangFigure/types';
+import { tangFigureService } from '@/services/people/tangFigure';
 
 interface TangFigureCardProps {
   figure: TangFigure;

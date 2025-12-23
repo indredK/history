@@ -10,9 +10,9 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import HistoryIcon from '@mui/icons-material/History';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import WorkIcon from '@mui/icons-material/Work';
-import type { SanguoFigure } from '@/services/sanguoFigure/types';
-import { ROLE_LABELS, KINGDOM_LABELS, KINGDOM_COLORS } from '@/services/sanguoFigure/types';
-import { sanguoFigureService } from '@/services/sanguoFigure';
+import type { SanguoFigure } from '@/services/people/sanguoFigure/types';
+import { ROLE_LABELS, KINGDOM_LABELS, KINGDOM_COLORS } from '@/services/people/sanguoFigure/types';
+import { sanguoFigureService } from '@/services/people/sanguoFigure';
 
 interface SanguoFigureDetailModalProps {
   figure: SanguoFigure | null;

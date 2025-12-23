@@ -5,7 +5,7 @@
 import { Box, Typography } from '@mui/material';
 import { SanguoFigureCard } from './SanguoFigureCard';
 import { GridSkeleton } from '../common/GridSkeleton';
-import type { SanguoFigure } from '@/services/sanguoFigure/types';
+import type { SanguoFigure } from '@/services/people/sanguoFigure/types';
 
 interface SanguoFigureGridProps {
   figures: SanguoFigure[];

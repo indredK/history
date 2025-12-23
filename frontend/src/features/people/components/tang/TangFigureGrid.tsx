@@ -5,7 +5,7 @@
 import { Box, Typography } from '@mui/material';
 import { TangFigureCard } from './TangFigureCard';
 import { GridSkeleton } from '../common/GridSkeleton';
-import type { TangFigure } from '@/services/tangFigure/types';
+import type { TangFigure } from '@/services/people/tangFigure/types';
 
 interface TangFigureGridProps {
   figures: TangFigure[];

@@ -5,7 +5,7 @@
 import { Box, Typography } from '@mui/material';
 import { SongFigureCard } from './SongFigureCard';
 import { GridSkeleton } from '../common/GridSkeleton';
-import type { SongFigure } from '@/services/songFigure/types';
+import type { SongFigure } from '@/services/people/songFigure/types';
 
 interface SongFigureGridProps {
   figures: SongFigure[];

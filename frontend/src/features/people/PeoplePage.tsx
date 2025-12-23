@@ -16,6 +16,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import TempleBuddhistIcon from '@mui/icons-material/TempleBuddhist';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import FortIcon from '@mui/icons-material/Fort';
+import PersonIcon from '@mui/icons-material/Person';
 
 import { FixedTabsPage, type FixedTabConfig } from '@/components/common';
 import { GridSkeleton } from './components';
@@ -29,6 +30,7 @@ const SongContent = lazy(() => import('./components/song/SongContent'));
 const YuanContent = lazy(() => import('./components/yuan/YuanContent'));
 const MingContent = lazy(() => import('./components/ming/MingContent'));
 const QingContent = lazy(() => import('./components/qing/QingContent'));
+const ScholarsContent = lazy(() => import('./components/scholars/ScholarsContent'));
 
 /**
  * 人物页面主组件
@@ -43,6 +45,16 @@ function PeoplePage() {
       content: (
         <Suspense fallback={<GridSkeleton />}>
           <EmperorsContent />
+        </Suspense>
+      ),
+    },
+    {
+      value: 'scholars',
+      label: '文化名人',
+      icon: <PersonIcon />,
+      content: (
+        <Suspense fallback={<GridSkeleton />}>
+          <ScholarsContent />
         </Suspense>
       ),
     },

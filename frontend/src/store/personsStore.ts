@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import type { Person } from '@/services/person/types';
+import type { CommonPerson } from '@/services/people/common/types';
 
 interface PersonsState {
-  persons: Person[];
-  setPersons: (_persons: Person[]) => void;
+  persons: CommonPerson[];
+  setPersons: (_persons: CommonPerson[]) => void;
   selectedPersonId: string | null;
   setSelectedPersonId: (_id: string | null) => void;
   searchQuery: string;

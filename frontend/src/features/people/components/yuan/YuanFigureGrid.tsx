@@ -5,7 +5,7 @@
 import { Box, Typography } from '@mui/material';
 import { YuanFigureCard } from './YuanFigureCard';
 import { GridSkeleton } from '../common/GridSkeleton';
-import type { YuanFigure } from '@/services/yuanFigure/types';
+import type { YuanFigure } from '@/services/people/yuanFigure/types';
 
 interface YuanFigureGridProps {
   figures: YuanFigure[];

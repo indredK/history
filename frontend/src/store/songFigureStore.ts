@@ -3,9 +3,9 @@
  */
 
 import { create } from 'zustand';
-import type { SongFigure, SongFigureRole } from '@/services/songFigure/types';
-import { songFigureService, type SongFigureSortBy } from '@/services/songFigure';
-import { SONG_PERIODS } from '@/services/songFigure/types';
+import type { SongFigure, SongFigureRole } from '@/services/people/songFigure/types';
+import { songFigureService, type SongFigureSortBy } from '@/services/people/songFigure';
+import { SONG_PERIODS } from '@/services/people/songFigure/types';
 
 interface SongFigureFilters {
   role: SongFigureRole | '全部';

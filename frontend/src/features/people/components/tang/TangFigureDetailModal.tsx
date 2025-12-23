@@ -10,9 +10,9 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import HistoryIcon from '@mui/icons-material/History';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import WorkIcon from '@mui/icons-material/Work';
-import type { TangFigure } from '@/services/tangFigure/types';
-import { ROLE_LABELS } from '@/services/tangFigure/types';
-import { tangFigureService } from '@/services/tangFigure';
+import type { TangFigure } from '@/services/people/tangFigure/types';
+import { ROLE_LABELS } from '@/services/people/tangFigure/types';
+import { tangFigureService } from '@/services/people/tangFigure';
 
 interface TangFigureDetailModalProps {
   figure: TangFigure | null;

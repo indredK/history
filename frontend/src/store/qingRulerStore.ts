@@ -8,9 +8,9 @@
  */
 
 import { create } from 'zustand';
-import type { QingRuler } from '@/services/qingRuler/types';
-import { qingRulerService, type QingRulerSortBy } from '@/services/qingRuler';
-import { QING_PERIODS } from '@/services/qingRuler/types';
+import type { QingRuler } from '@/services/people/qing/types';
+import { qingRulerService, type QingRulerSortBy } from '@/services/people/qing';
+import { QING_PERIODS } from '@/services/people/qing/types';
 
 interface QingRulerFilters {
   period: string;

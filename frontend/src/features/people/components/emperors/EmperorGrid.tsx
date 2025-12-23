@@ -5,7 +5,7 @@
 import { Box, Typography } from '@mui/material';
 import { EmperorCard } from './EmperorCard';
 import { GridSkeleton } from '../common/GridSkeleton';
-import type { Emperor } from '@/services/emperor/types';
+import type { Emperor } from '@/services/people/emperors/types';
 
 interface EmperorGridProps {
   emperors: Emperor[];

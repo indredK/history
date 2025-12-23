@@ -10,9 +10,9 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import HistoryIcon from '@mui/icons-material/History';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import WorkIcon from '@mui/icons-material/Work';
-import type { MingFigure } from '@/services/mingFigure/types';
-import { ROLE_LABELS } from '@/services/mingFigure/types';
-import { mingFigureService } from '@/services/mingFigure';
+import type { MingFigure } from '@/services/people/mingFigure/types';
+import { ROLE_LABELS } from '@/services/people/mingFigure/types';
+import { mingFigureService } from '@/services/people/mingFigure';
 
 interface MingFigureDetailModalProps {
   figure: MingFigure | null;

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Scholar } from '@/services/scholar/types';
+import type { Scholar } from '@/services/people/scholars/types';
 
 interface ScholarFilters {
   dynasty: string;

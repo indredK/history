@@ -8,10 +8,10 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { useRequest } from 'ahooks';
 
 import { useMingFigureStore } from '@/store';
-import { getMingFigures } from '@/services/mingFigure';
-import type { MingFigure, MingFigureRole } from '@/services/mingFigure/types';
-import type { MingFigureSortBy } from '@/services/mingFigure';
-import { ROLE_LABELS } from '@/services/mingFigure/types';
+import { getMingFigures } from '@/services/people/mingFigure';
+import type { MingFigure, MingFigureRole } from '@/services/people/mingFigure/types';
+import type { MingFigureSortBy } from '@/services/people/mingFigure';
+import { ROLE_LABELS } from '@/services/people/mingFigure/types';
 
 import { PeopleFilter } from '../common/PeopleFilter';
 import { MingFigureGrid } from './MingFigureGrid';

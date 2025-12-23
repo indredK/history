@@ -3,9 +3,9 @@
  */
 
 import { PersonCard, type TagColor } from '@/components/common';
-import type { MingFigure } from '@/services/mingFigure/types';
-import { ROLE_LABELS } from '@/services/mingFigure/types';
-import { mingFigureService } from '@/services/mingFigure';
+import type { MingFigure } from '@/services/people/mingFigure/types';
+import { ROLE_LABELS } from '@/services/people/mingFigure/types';
+import { mingFigureService } from '@/services/people/mingFigure';
 
 interface MingFigureCardProps {
   figure: MingFigure;

@@ -3,8 +3,8 @@
  */
 
 import { create } from 'zustand';
-import type { SanguoFigure, SanguoFigureRole, SanguoKingdom } from '@/services/sanguoFigure/types';
-import { sanguoFigureService, type SanguoFigureSortBy } from '@/services/sanguoFigure';
+import type { SanguoFigure, SanguoFigureRole, SanguoKingdom } from '@/services/people/sanguoFigure/types';
+import { sanguoFigureService, type SanguoFigureSortBy } from '@/services/people/sanguoFigure';
 
 interface SanguoFigureFilters {
   role: SanguoFigureRole | '全部';

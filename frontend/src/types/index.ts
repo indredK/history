@@ -1,6 +1,6 @@
 // 统一导出所有类型定义
 export type { Dynasty } from '@/services/culture/types';
-export type { Person } from '@/services/person/types';
+export type { CommonPerson } from '@/services/people/common/types';
 export type { Event } from '@/services/timeline/types';
 export type { 
   Place, 
@@ -9,6 +9,16 @@ export type {
   ViewportState,
   MapInteractionInfo 
 } from '@/services/map/types';
+
+// 人物相关类型
+export type { Emperor } from '@/services/people/emperors/types';
+export type { Scholar } from '@/services/people/scholars/types';
+export type { SanguoFigure, SanguoFigureRole, SanguoKingdom } from '@/services/people/sanguoFigure/types';
+export type { TangFigure, TangFigureRole } from '@/services/people/tangFigure/types';
+export type { SongFigure, SongFigureRole } from '@/services/people/songFigure/types';
+export type { YuanFigure, YuanFigureRole } from '@/services/people/yuanFigure/types';
+export type { MingFigure, MingFigureRole } from '@/services/people/mingFigure/types';
+export type { QingRuler } from '@/services/people/qing/types';
 
 // 通用类型
 export interface ApiResponse<T> {

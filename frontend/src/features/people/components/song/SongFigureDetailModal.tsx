@@ -10,9 +10,9 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import HistoryIcon from '@mui/icons-material/History';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import WorkIcon from '@mui/icons-material/Work';
-import type { SongFigure } from '@/services/songFigure/types';
-import { ROLE_LABELS } from '@/services/songFigure/types';
-import { songFigureService } from '@/services/songFigure';
+import type { SongFigure } from '@/services/people/songFigure/types';
+import { ROLE_LABELS } from '@/services/people/songFigure/types';
+import { songFigureService } from '@/services/people/songFigure';
 
 interface SongFigureDetailModalProps {
   figure: SongFigure | null;
