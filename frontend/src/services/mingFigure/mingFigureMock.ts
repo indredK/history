@@ -1,0 +1,492 @@
+/**
+ * 明朝人物Mock数据
+ * Ming Dynasty Figure Mock Data
+ * 
+ * 包含明朝重要政治人物数据
+ * 
+ * Requirements: 3.1, 3.2, 3.3, 3.4, 3.5
+ */
+
+import type { MingFigure } from './types';
+
+/**
+ * 明朝人物Mock数据
+ */
+export const mingFigureMockData: MingFigure[] = [
+  // 皇帝
+  {
+    id: 'zhu-yuanzhang',
+    name: '朱元璋',
+    courtesy: '国瑞',
+    birthYear: 1328,
+    deathYear: 1398,
+    role: 'emperor',
+    positions: ['明太祖', '洪武皇帝'],
+    biography: '明朝开国皇帝，出身贫农，参加红巾军起义，最终推翻元朝统治，建立明朝。在位期间大力整顿吏治，发展农业，但也大肆诛杀功臣。',
+    politicalViews: '重农抑商，加强中央集权，废除丞相制度',
+    achievements: [
+      '推翻元朝，建立明朝',
+      '制定《大明律》',
+      '实行卫所制度',
+      '发展农业生产'
+    ],
+    events: [
+      {
+        name: '鄱阳湖之战',
+        year: 1363,
+        role: '主帅',
+        description: '击败陈友谅，奠定统一基础'
+      },
+      {
+        name: '北伐灭元',
+        year: 1368,
+        role: '决策者',
+        description: '派徐达、常遇春北伐，攻克大都'
+      },
+      {
+        name: '胡惟庸案',
+        year: 1380,
+        role: '主导者',
+        description: '以谋反罪诛杀丞相胡惟庸及其党羽'
+      }
+    ],
+    evaluations: [
+      {
+        source: '《明史》',
+        content: '太祖以聪明神武之资，抱济世安民之志，乘时应运，豪杰景从。',
+        author: '张廷玉'
+      }
+    ],
+    sources: ['《明史》', '《明实录》']
+  },
+  {
+    id: 'zhu-di',
+    name: '朱棣',
+    birthYear: 1360,
+    deathYear: 1424,
+    role: 'emperor',
+    positions: ['明成祖', '永乐皇帝'],
+    biography: '明朝第三位皇帝，朱元璋第四子。通过靖难之役夺取皇位，迁都北京，派郑和下西洋，编纂《永乐大典》。',
+    politicalViews: '开疆拓土，发展海外贸易，加强中央集权',
+    achievements: [
+      '迁都北京',
+      '派郑和七下西洋',
+      '编纂《永乐大典》',
+      '五次亲征蒙古'
+    ],
+    events: [
+      {
+        name: '靖难之役',
+        year: 1399,
+        role: '发动者',
+        description: '以"清君侧"为名起兵，夺取皇位'
+      },
+      {
+        name: '郑和下西洋',
+        year: 1405,
+        role: '决策者',
+        description: '派遣郑和率船队出使西洋'
+      }
+    ],
+    evaluations: [
+      {
+        source: '《明史》',
+        content: '文皇少长习兵，据幽燕形胜之地，乘建文孱弱，长驱内向，奄有四海。',
+        author: '张廷玉'
+      }
+    ],
+    sources: ['《明史》', '《明实录》']
+  },
+  // 内阁大臣
+  {
+    id: 'zhang-juzheng',
+    name: '张居正',
+    courtesy: '叔大',
+    birthYear: 1525,
+    deathYear: 1582,
+    role: 'cabinet',
+    positions: ['内阁首辅', '太师', '中极殿大学士'],
+    faction: '改革派',
+    biography: '明朝中后期杰出的政治家、改革家。万历初年任内阁首辅，主持万历新政，推行一条鞭法等改革措施，使明朝一度中兴。',
+    politicalViews: '尊主权，课吏职，信赏罚，一号令',
+    achievements: [
+      '推行一条鞭法，简化税制',
+      '清丈全国土地',
+      '整顿吏治，考成法',
+      '加强边防，任用戚继光'
+    ],
+    events: [
+      {
+        name: '万历新政',
+        year: 1572,
+        role: '主导者',
+        description: '主持全面改革，使国库充盈'
+      },
+      {
+        name: '一条鞭法',
+        year: 1581,
+        role: '推行者',
+        description: '统一赋役，简化税制'
+      }
+    ],
+    evaluations: [
+      {
+        source: '《明史》',
+        content: '居正通识时变，勇于任事。神宗初政，起衰振隳，不可谓非干济才。',
+        author: '张廷玉'
+      }
+    ],
+    sources: ['《明史》', '《张文忠公全集》']
+  },
+  {
+    id: 'yang-tinghe',
+    name: '杨廷和',
+    courtesy: '介夫',
+    birthYear: 1459,
+    deathYear: 1529,
+    role: 'cabinet',
+    positions: ['内阁首辅', '华盖殿大学士'],
+    faction: '正统派',
+    biography: '明朝中期重臣，历仕四朝。正德末年至嘉靖初年任内阁首辅，主持朝政，在大礼议中坚持正统立场。',
+    politicalViews: '维护礼制，坚持正统',
+    achievements: [
+      '主持正德末年朝政',
+      '拥立嘉靖帝即位',
+      '革除正德弊政'
+    ],
+    events: [
+      {
+        name: '大礼议',
+        year: 1521,
+        role: '反对派领袖',
+        description: '坚持嘉靖帝应过继给孝宗为嗣'
+      }
+    ],
+    evaluations: [
+      {
+        source: '《明史》',
+        content: '廷和为人，美风姿，性沉静详审，为文简畅有法。',
+        author: '张廷玉'
+      }
+    ],
+    sources: ['《明史》']
+  },
+  {
+    id: 'yan-song',
+    name: '严嵩',
+    courtesy: '惟中',
+    birthYear: 1480,
+    deathYear: 1567,
+    role: 'cabinet',
+    positions: ['内阁首辅', '太子太师'],
+    faction: '严党',
+    biography: '明朝嘉靖年间权臣，任内阁首辅二十年。以善于揣摩圣意著称，专权误国，被列为明朝六大奸臣之一。',
+    politicalViews: '迎合皇帝，排斥异己',
+    achievements: [],
+    events: [
+      {
+        name: '庚戌之变',
+        year: 1550,
+        role: '当权者',
+        description: '蒙古俺答汗兵临北京城下'
+      }
+    ],
+    evaluations: [
+      {
+        source: '《明史》',
+        content: '嵩无他才略，惟一意媚上，窃权罔利。',
+        author: '张廷玉'
+      }
+    ],
+    sources: ['《明史》']
+  },
+  // 将领
+  {
+    id: 'xu-da',
+    name: '徐达',
+    courtesy: '天德',
+    birthYear: 1332,
+    deathYear: 1385,
+    role: 'general',
+    positions: ['中书右丞相', '魏国公', '征虏大将军'],
+    biography: '明朝开国第一功臣，朱元璋的主要军事将领。北伐灭元，攻克大都，为明朝统一立下汗马功劳。',
+    politicalViews: '忠君报国',
+    achievements: [
+      '北伐灭元，攻克大都',
+      '平定张士诚',
+      '镇守北方边疆'
+    ],
+    events: [
+      {
+        name: '北伐灭元',
+        year: 1368,
+        role: '主帅',
+        description: '率军北伐，攻克元大都'
+      },
+      {
+        name: '平定张士诚',
+        year: 1367,
+        role: '主帅',
+        description: '攻克平江，俘获张士诚'
+      }
+    ],
+    evaluations: [
+      {
+        source: '《明史》',
+        content: '达出将入相，功高不伐，善始善终，为明功臣第一。',
+        author: '张廷玉'
+      }
+    ],
+    sources: ['《明史》']
+  },
+  {
+    id: 'qi-jiguang',
+    name: '戚继光',
+    courtesy: '元敬',
+    birthYear: 1528,
+    deathYear: 1588,
+    role: 'general',
+    positions: ['蓟州总兵', '左都督'],
+    biography: '明朝杰出的军事家、民族英雄。创建戚家军，平定东南沿海倭患，后镇守北方边疆，著有《纪效新书》《练兵实纪》。',
+    politicalViews: '强军卫国',
+    achievements: [
+      '创建戚家军',
+      '平定东南倭患',
+      '镇守蓟州，加强北方边防',
+      '著《纪效新书》《练兵实纪》'
+    ],
+    events: [
+      {
+        name: '台州大捷',
+        year: 1561,
+        role: '主帅',
+        description: '九战九捷，歼灭倭寇'
+      },
+      {
+        name: '镇守蓟州',
+        year: 1568,
+        role: '总兵',
+        description: '加强长城防御，修建空心敌台'
+      }
+    ],
+    evaluations: [
+      {
+        source: '《明史》',
+        content: '继光用兵，威名震寰宇。然操行不如其父，颇以贿闻。',
+        author: '张廷玉'
+      }
+    ],
+    sources: ['《明史》', '《纪效新书》']
+  },
+  {
+    id: 'yuan-chonghuan',
+    name: '袁崇焕',
+    courtesy: '元素',
+    birthYear: 1584,
+    deathYear: 1630,
+    role: 'general',
+    positions: ['兵部尚书', '蓟辽督师'],
+    biography: '明末著名将领，抗击后金的主要军事统帅。宁远大捷击败努尔哈赤，后被崇祯帝以通敌罪处死，成为明末最具争议的人物之一。',
+    politicalViews: '主战派，坚持抗金',
+    achievements: [
+      '宁远大捷，击败努尔哈赤',
+      '宁锦大捷，击退皇太极',
+      '构建关宁锦防线'
+    ],
+    events: [
+      {
+        name: '宁远大捷',
+        year: 1626,
+        role: '主帅',
+        description: '击败后金军，努尔哈赤负伤'
+      },
+      {
+        name: '己巳之变',
+        year: 1629,
+        role: '勤王统帅',
+        description: '率军入卫北京'
+      }
+    ],
+    evaluations: [
+      {
+        source: '《明史》',
+        content: '崇焕虽有胆略，然性刚愎，好自用。',
+        author: '张廷玉'
+      }
+    ],
+    sources: ['《明史》']
+  },
+  // 官员
+  {
+    id: 'hai-rui',
+    name: '海瑞',
+    courtesy: '汝贤',
+    birthYear: 1514,
+    deathYear: 1587,
+    role: 'official',
+    positions: ['右佥都御史', '南京右都御史'],
+    biography: '明朝著名清官，以刚直不阿、清廉自守著称。曾上疏批评嘉靖帝，被誉为"海青天"。',
+    politicalViews: '清廉为政，为民请命',
+    achievements: [
+      '治理水患',
+      '打击豪强',
+      '为民伸冤'
+    ],
+    events: [
+      {
+        name: '治安疏',
+        year: 1566,
+        role: '上疏者',
+        description: '直言批评嘉靖帝，被下狱'
+      }
+    ],
+    evaluations: [
+      {
+        source: '《明史》',
+        content: '瑞生平为学，以刚为主。尝言：欲天下治安，必行井田。',
+        author: '张廷玉'
+      }
+    ],
+    sources: ['《明史》']
+  },
+  {
+    id: 'wang-yangming',
+    name: '王守仁',
+    courtesy: '伯安',
+    birthYear: 1472,
+    deathYear: 1529,
+    role: 'official',
+    positions: ['南京兵部尚书', '新建伯'],
+    biography: '明朝著名思想家、军事家、教育家，心学集大成者。创立阳明心学，提出"知行合一"、"致良知"等重要思想。',
+    politicalViews: '知行合一，致良知',
+    achievements: [
+      '创立阳明心学',
+      '平定宁王之乱',
+      '平定南方叛乱',
+      '创办书院，传播心学'
+    ],
+    events: [
+      {
+        name: '龙场悟道',
+        year: 1508,
+        role: '悟道者',
+        description: '在贵州龙场悟出心学真谛'
+      },
+      {
+        name: '平定宁王之乱',
+        year: 1519,
+        role: '主帅',
+        description: '仅用35天平定宁王朱宸濠叛乱'
+      }
+    ],
+    evaluations: [
+      {
+        source: '《明史》',
+        content: '守仁天资异敏，年十七谒上饶娄谅，与论朱子格物大旨，还家日端坐，讲读《五经》。',
+        author: '张廷玉'
+      }
+    ],
+    sources: ['《明史》', '《传习录》']
+  },
+  // 宦官
+  {
+    id: 'zheng-he',
+    name: '郑和',
+    birthYear: 1371,
+    deathYear: 1433,
+    role: 'eunuch',
+    positions: ['三保太监', '内官监太监'],
+    biography: '明朝著名航海家、外交家。七次率领船队下西洋，到达东南亚、印度、阿拉伯半岛和东非，是世界航海史上的壮举。',
+    politicalViews: '宣扬国威，和平外交',
+    achievements: [
+      '七下西洋',
+      '开辟海上丝绸之路',
+      '促进中外文化交流',
+      '绘制航海图'
+    ],
+    events: [
+      {
+        name: '第一次下西洋',
+        year: 1405,
+        role: '正使',
+        description: '率船队首次出使西洋'
+      },
+      {
+        name: '第七次下西洋',
+        year: 1431,
+        role: '正使',
+        description: '最后一次下西洋，病逝于归途'
+      }
+    ],
+    evaluations: [
+      {
+        source: '《明史》',
+        content: '和经事三朝，先后七奉使，所历凡三十余国。',
+        author: '张廷玉'
+      }
+    ],
+    sources: ['《明史》', '《瀛涯胜览》']
+  },
+  {
+    id: 'wei-zhongxian',
+    name: '魏忠贤',
+    birthYear: 1568,
+    deathYear: 1627,
+    role: 'eunuch',
+    positions: ['司礼监秉笔太监', '九千岁'],
+    biography: '明朝末年权宦，天启年间专权乱政，被称为"九千岁"。迫害东林党人，祸国殃民，是明朝灭亡的重要推手之一。',
+    politicalViews: '专权擅政，排斥异己',
+    achievements: [],
+    events: [
+      {
+        name: '迫害东林党',
+        year: 1625,
+        role: '主导者',
+        description: '大肆迫害东林党人，杨涟、左光斗等被害'
+      }
+    ],
+    evaluations: [
+      {
+        source: '《明史》',
+        content: '忠贤不识字，而猜忍阴毒，好谀喜佞。',
+        author: '张廷玉'
+      }
+    ],
+    sources: ['《明史》']
+  }
+];
+
+/**
+ * 获取所有明朝人物数据
+ */
+export async function getMingFigures(): Promise<{ data: MingFigure[] }> {
+  await new Promise(resolve => setTimeout(resolve, 300));
+  return { data: mingFigureMockData };
+}
+
+/**
+ * 根据ID获取明朝人物
+ */
+export async function getMingFigureById(id: string): Promise<{ data: MingFigure | null }> {
+  await new Promise(resolve => setTimeout(resolve, 100));
+  const figure = mingFigureMockData.find(f => f.id === id) || null;
+  return { data: figure };
+}
+
+/**
+ * 获取所有角色类型
+ */
+export function getRoleTypes(): string[] {
+  const roles = [...new Set(mingFigureMockData.map(f => f.role))];
+  return roles;
+}
+
+/**
+ * 获取所有派系
+ */
+export function getFactions(): string[] {
+  const factions = mingFigureMockData
+    .map(f => f.faction)
+    .filter((f): f is string => !!f);
+  return [...new Set(factions)];
+}

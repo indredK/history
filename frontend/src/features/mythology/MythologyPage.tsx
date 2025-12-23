@@ -8,10 +8,12 @@
 import { useState, useCallback } from 'react';
 import { Box, Typography, Skeleton } from '@mui/material';
 import { useRequest } from 'ahooks';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+
 import { useMythologyStore } from '@/store/mythologyStore';
 import { getMythologies } from '@/services/mythology';
-import { ScrollContainer } from '@/components/ui/ScrollContainer';
-import { CategoryTabs, type MythologyViewType } from './components/CategoryTabs';
+import { FixedTabsPage, type FixedTabConfig } from '@/components/common';
 import { CategoryFilter } from './components/CategoryFilter';
 import { MythologyGrid } from './components/MythologyGrid';
 import { MythologyDetailModal } from './components/MythologyDetailModal';
@@ -65,7 +67,7 @@ function LoadingSkeleton() {
  * 神话页面组件
  */
 function MythologyPage() {
-  const [activeTab, setActiveTab] = useState<MythologyViewType>('mythology');
+  const [activeTab, setActiveTab] = useState<string>('mythology');
   
   const {
     mythologies,
@@ -96,11 +98,6 @@ function MythologyPage() {
   // 获取筛选后的神话列表
   const filteredMythologies = getFilteredMythologies();
 
-  // 处理标签页切换
-  const handleTabChange = useCallback((tab: MythologyViewType) => {
-    setActiveTab(tab);
-  }, []);
-
   // 处理卡片点击
   const handleCardClick = useCallback((mythology: typeof mythologies[0]) => {
     setSelectedMythology(mythology);
@@ -111,73 +108,80 @@ function MythologyPage() {
     setSelectedMythology(null);
   }, [setSelectedMythology]);
 
-  return (
-    <Box className={`mythology-page ${activeTab === 'religion' ? 'religion-view' : ''}`}>
-      {/* 分类标签页 */}
-      <Box className="mythology-tabs">
-        <CategoryTabs
-          activeTab={activeTab}
-          onTabChange={handleTabChange}
+  // 神话故事内容
+  const renderMythologyContent = () => (
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      {/* 分类筛选器 - 固定 */}
+      <Box sx={{ flexShrink: 0 }}>
+        <CategoryFilter
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
         />
       </Box>
 
-      {/* 内容区域 */}
-      <Box className="mythology-content">
-        {activeTab === 'mythology' ? (
-          // 神话故事视图
-          <Box className="mythology-stories-view">
-            {/* 分类筛选器 - 固定在顶部 */}
-            <Box className="mythology-filter-bar">
-              <CategoryFilter
-                activeCategory={activeCategory}
-                onCategoryChange={setActiveCategory}
-              />
-            </Box>
-
-            {/* 卡片滚动区域 */}
-            <ScrollContainer 
-              className="mythology-scroll-view"
-              preserveScrollKey="mythology-stories"
-              showEndIndicator
-            >
-              <Box className="mythology-view-enter">
-                {/* 神话卡片网格 */}
-                {loading ? (
-                  <LoadingSkeleton />
-                ) : error ? (
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      minHeight: '200px',
-                      color: 'var(--color-text-secondary)',
-                    }}
-                  >
-                    <Typography variant="h6" sx={{ mb: 2 }}>
-                      加载失败
-                    </Typography>
-                    <Typography variant="body2">
-                      {error.message || '请检查网络连接后重试'}
-                    </Typography>
-                  </Box>
-                ) : (
-                  <MythologyGrid
-                    mythologies={filteredMythologies}
-                    onCardClick={handleCardClick}
-                  />
-                )}
-              </Box>
-            </ScrollContainer>
+      {/* 卡片滚动区域 */}
+      <Box sx={{ flex: 1, overflow: 'auto', pr: 1 }}>
+        {loading ? (
+          <LoadingSkeleton />
+        ) : error ? (
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: '200px',
+              color: 'var(--color-text-secondary)',
+            }}
+          >
+            <Typography variant="h6" sx={{ mb: 2 }}>
+              加载失败
+            </Typography>
+            <Typography variant="body2">
+              {error.message || '请检查网络连接后重试'}
+            </Typography>
           </Box>
         ) : (
-          // 宗教关系视图 - 直接渲染，不使用滚动容器
-          <Box className="mythology-view-enter religion-graph-view">
-            <ReligionGraph />
-          </Box>
+          <MythologyGrid
+            mythologies={filteredMythologies}
+            onCardClick={handleCardClick}
+          />
         )}
       </Box>
+    </Box>
+  );
+
+  // 宗教关系内容
+  const renderReligionContent = () => (
+    <Box sx={{ height: '100%' }}>
+      <ReligionGraph />
+    </Box>
+  );
+
+  // 定义标签页配置
+  const tabs: FixedTabConfig[] = [
+    {
+      value: 'mythology',
+      label: '神话故事',
+      icon: <AutoStoriesIcon />,
+      content: renderMythologyContent(),
+    },
+    {
+      value: 'religion',
+      label: '宗教关系',
+      icon: <AccountTreeIcon />,
+      content: renderReligionContent(),
+    },
+  ];
+
+  return (
+    <>
+      <FixedTabsPage
+        tabs={tabs}
+        defaultTab="mythology"
+        className={`mythology-page ${activeTab === 'religion' ? 'religion-view' : ''}`}
+        onTabChange={setActiveTab}
+      />
 
       {/* 详情弹窗 */}
       <MythologyDetailModal
@@ -185,7 +189,7 @@ function MythologyPage() {
         open={selectedMythology !== null}
         onClose={handleModalClose}
       />
-    </Box>
+    </>
   );
 }
 

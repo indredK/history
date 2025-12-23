@@ -1,0 +1,283 @@
+/**
+ * 三国人物Mock数据
+ * Three Kingdoms Figure Mock Data
+ */
+
+import type { SanguoFigure } from './types';
+
+export const sanguoFigureMockData: SanguoFigure[] = [
+  {
+    id: 'cao-cao',
+    name: '曹操',
+    courtesy: '孟德',
+    birthYear: 155,
+    deathYear: 220,
+    role: 'ruler',
+    kingdom: '魏',
+    positions: ['魏王', '丞相'],
+    biography: '东汉末年杰出的政治家、军事家、文学家。统一北方，奠定曹魏基业，是三国时期最具影响力的人物之一。',
+    politicalViews: '唯才是举，不拘一格',
+    achievements: [
+      '统一北方',
+      '官渡之战大败袁绍',
+      '建安文学领袖',
+      '屯田制度'
+    ],
+    events: [
+      { name: '官渡之战', year: 200, role: '主帅', description: '以少胜多，大败袁绍' },
+      { name: '赤壁之战', year: 208, role: '主帅', description: '南下失败，三分天下格局形成' }
+    ],
+    evaluations: [
+      { source: '《三国志》', content: '太祖运筹演谋，鞭挞宇内，揽申、商之法术，该韩、白之奇策。', author: '陈寿' }
+    ],
+    sources: ['《三国志》', '《后汉书》']
+  },
+  {
+    id: 'liu-bei',
+    name: '刘备',
+    courtesy: '玄德',
+    birthYear: 161,
+    deathYear: 223,
+    role: 'ruler',
+    kingdom: '蜀',
+    positions: ['蜀汉昭烈帝'],
+    biography: '蜀汉开国皇帝，汉室宗亲。以仁德著称，三顾茅庐请诸葛亮出山，建立蜀汉政权。',
+    politicalViews: '以德服人，兴复汉室',
+    achievements: [
+      '建立蜀汉政权',
+      '三顾茅庐',
+      '入主益州',
+      '汉中之战'
+    ],
+    events: [
+      { name: '三顾茅庐', year: 207, role: '求贤者', description: '三次拜访诸葛亮，请其出山' },
+      { name: '夷陵之战', year: 222, role: '主帅', description: '为关羽报仇伐吴，大败而归' }
+    ],
+    evaluations: [
+      { source: '《三国志》', content: '先主之弘毅宽厚，知人待士，盖有高祖之风，英雄之器焉。', author: '陈寿' }
+    ],
+    sources: ['《三国志》']
+  },
+  {
+    id: 'sun-quan',
+    name: '孙权',
+    courtesy: '仲谋',
+    birthYear: 182,
+    deathYear: 252,
+    role: 'ruler',
+    kingdom: '吴',
+    positions: ['吴大帝'],
+    biography: '东吴开国皇帝，孙坚之子、孙策之弟。继承父兄基业，建立东吴政权，与魏、蜀三分天下。',
+    politicalViews: '保境安民，联蜀抗魏',
+    achievements: [
+      '建立东吴政权',
+      '赤壁之战联刘抗曹',
+      '开发江南',
+      '派卫温到达夷洲'
+    ],
+    events: [
+      { name: '赤壁之战', year: 208, role: '决策者', description: '联合刘备大败曹操' },
+      { name: '夷陵之战', year: 222, role: '决策者', description: '大败刘备，巩固东吴' }
+    ],
+    evaluations: [
+      { source: '《三国志》', content: '孙权屈身忍辱，任才尚计，有勾践之奇，英人之杰矣。', author: '陈寿' }
+    ],
+    sources: ['《三国志》']
+  },
+  {
+    id: 'zhuge-liang',
+    name: '诸葛亮',
+    courtesy: '孔明',
+    birthYear: 181,
+    deathYear: 234,
+    role: 'strategist',
+    kingdom: '蜀',
+    positions: ['丞相', '武乡侯'],
+    biography: '三国时期蜀汉丞相，杰出的政治家、军事家、发明家。辅佐刘备建立蜀汉，六出祁山北伐曹魏，鞠躬尽瘁，死而后已。',
+    politicalViews: '兴复汉室，还于旧都',
+    achievements: [
+      '隆中对策',
+      '联吴抗曹',
+      '治理蜀汉',
+      '发明木牛流马、诸葛连弩'
+    ],
+    events: [
+      { name: '隆中对', year: 207, role: '献策者', description: '提出三分天下战略' },
+      { name: '北伐曹魏', year: 228, role: '主帅', description: '六出祁山，北伐曹魏' }
+    ],
+    evaluations: [
+      { source: '《三国志》', content: '诸葛亮之为相国也，抚百姓，示仪轨，约官职，从权制，开诚心，布公道。', author: '陈寿' }
+    ],
+    sources: ['《三国志》', '《出师表》']
+  },
+  {
+    id: 'guan-yu',
+    name: '关羽',
+    courtesy: '云长',
+    birthYear: 160,
+    deathYear: 220,
+    role: 'general',
+    kingdom: '蜀',
+    positions: ['前将军', '汉寿亭侯'],
+    biography: '三国时期蜀汉名将，与刘备、张飞桃园结义。以忠义著称，被后世尊为"武圣"、"关帝"。',
+    politicalViews: '忠义为本',
+    achievements: [
+      '斩颜良诛文丑',
+      '过五关斩六将',
+      '水淹七军',
+      '威震华夏'
+    ],
+    events: [
+      { name: '斩颜良', year: 200, role: '先锋', description: '官渡之战斩杀袁绍大将颜良' },
+      { name: '水淹七军', year: 219, role: '主帅', description: '大败于禁，威震华夏' }
+    ],
+    evaluations: [
+      { source: '《三国志》', content: '关羽、张飞皆称万人之敌，为世虎臣。', author: '陈寿' }
+    ],
+    sources: ['《三国志》']
+  },
+  {
+    id: 'zhang-fei',
+    name: '张飞',
+    courtesy: '益德',
+    birthYear: 167,
+    deathYear: 221,
+    role: 'general',
+    kingdom: '蜀',
+    positions: ['车骑将军', '西乡侯'],
+    biography: '三国时期蜀汉名将，与刘备、关羽桃园结义。勇猛过人，长坂坡一声怒吼吓退曹军。',
+    politicalViews: '忠义为本',
+    achievements: [
+      '长坂坡退敌',
+      '义释严颜',
+      '大败张郃'
+    ],
+    events: [
+      { name: '长坂坡', year: 208, role: '断后', description: '据水断桥，吓退曹军' },
+      { name: '入川之战', year: 214, role: '先锋', description: '义释严颜，攻取巴郡' }
+    ],
+    evaluations: [
+      { source: '《三国志》', content: '飞雄壮威猛，亚于关羽，魏谋臣程昱等咸称羽、飞万人之敌也。', author: '陈寿' }
+    ],
+    sources: ['《三国志》']
+  },
+  {
+    id: 'zhao-yun',
+    name: '赵云',
+    courtesy: '子龙',
+    birthYear: 168,
+    deathYear: 229,
+    role: 'general',
+    kingdom: '蜀',
+    positions: ['镇军将军', '永昌亭侯'],
+    biography: '三国时期蜀汉名将，以勇武和忠诚著称。长坂坡单骑救主，被誉为"常胜将军"。',
+    politicalViews: '忠君报国',
+    achievements: [
+      '长坂坡救阿斗',
+      '截江夺阿斗',
+      '汉水之战'
+    ],
+    events: [
+      { name: '长坂坡', year: 208, role: '护卫', description: '单骑救出刘禅' },
+      { name: '汉水之战', year: 219, role: '将领', description: '以少胜多，大败曹军' }
+    ],
+    evaluations: [
+      { source: '《三国志》', content: '云身长八尺，姿颜雄伟，为本郡所举。', author: '陈寿' }
+    ],
+    sources: ['《三国志》']
+  },
+  {
+    id: 'sima-yi',
+    name: '司马懿',
+    courtesy: '仲达',
+    birthYear: 179,
+    deathYear: 251,
+    role: 'strategist',
+    kingdom: '魏',
+    positions: ['太傅', '大将军'],
+    biography: '三国时期曹魏权臣，西晋王朝的奠基人。多次抵御诸葛亮北伐，后发动高平陵之变，掌控曹魏政权。',
+    politicalViews: '隐忍待时，谋定后动',
+    achievements: [
+      '抵御诸葛亮北伐',
+      '平定辽东',
+      '高平陵之变',
+      '奠定西晋基业'
+    ],
+    events: [
+      { name: '空城计', year: 228, role: '对手', description: '与诸葛亮斗智' },
+      { name: '高平陵之变', year: 249, role: '主导者', description: '发动政变，掌控曹魏' }
+    ],
+    evaluations: [
+      { source: '《三国志》', content: '宣帝之雄略内断，固非常人所及。', author: '陈寿' }
+    ],
+    sources: ['《三国志》', '《晋书》']
+  },
+  {
+    id: 'zhou-yu',
+    name: '周瑜',
+    courtesy: '公瑾',
+    birthYear: 175,
+    deathYear: 210,
+    role: 'strategist',
+    kingdom: '吴',
+    positions: ['大都督', '偏将军'],
+    biography: '三国时期东吴名将，赤壁之战的主要指挥者。精通音律，风流倜傥，被誉为"美周郎"。',
+    politicalViews: '联刘抗曹',
+    achievements: [
+      '赤壁之战大败曹操',
+      '南郡之战',
+      '精通音律'
+    ],
+    events: [
+      { name: '赤壁之战', year: 208, role: '主帅', description: '火烧赤壁，大败曹操' }
+    ],
+    evaluations: [
+      { source: '《三国志》', content: '瑜少精意于音乐，虽三爵之后，其有阙误，瑜必知之，知之必顾。', author: '陈寿' }
+    ],
+    sources: ['《三国志》']
+  },
+  {
+    id: 'lu-xun',
+    name: '陆逊',
+    courtesy: '伯言',
+    birthYear: 183,
+    deathYear: 245,
+    role: 'strategist',
+    kingdom: '吴',
+    positions: ['丞相', '大都督'],
+    biography: '三国时期东吴名将、政治家。夷陵之战大败刘备，石亭之战击退曹休，是东吴后期的中流砥柱。',
+    politicalViews: '稳健持重',
+    achievements: [
+      '夷陵之战大败刘备',
+      '石亭之战',
+      '治理荆州'
+    ],
+    events: [
+      { name: '夷陵之战', year: 222, role: '主帅', description: '火烧连营，大败刘备' },
+      { name: '石亭之战', year: 228, role: '主帅', description: '大败曹休' }
+    ],
+    evaluations: [
+      { source: '《三国志》', content: '刘备天下称雄，一世所惮，陆逊春秋方壮，威名未著，摧而克之。', author: '陈寿' }
+    ],
+    sources: ['《三国志》']
+  }
+];
+
+export async function getSanguoFigures(): Promise<{ data: SanguoFigure[] }> {
+  await new Promise(resolve => setTimeout(resolve, 300));
+  return { data: sanguoFigureMockData };
+}
+
+export async function getSanguoFigureById(id: string): Promise<{ data: SanguoFigure | null }> {
+  await new Promise(resolve => setTimeout(resolve, 100));
+  const figure = sanguoFigureMockData.find(f => f.id === id) || null;
+  return { data: figure };
+}
+
+export function getRoleTypes(): string[] {
+  return [...new Set(sanguoFigureMockData.map(f => f.role))];
+}
+
+export function getKingdoms(): string[] {
+  return [...new Set(sanguoFigureMockData.map(f => f.kingdom))];
+}

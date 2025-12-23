@@ -53,6 +53,9 @@ export function MythologyGrid({ mythologies, onCardClick }: MythologyGridProps) 
           lg: 'repeat(4, 1fr)',   // 桌面: 4列
         },
         gap: { xs: 1.5, sm: 1.5, md: 2 },
+        pt: 1, // 顶部间距
+        px: 0.5, // 左右间距
+        pb: 2, // 底部间距
         transition: 'all 0.3s ease-in-out',
       }}
     >

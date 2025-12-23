@@ -1,14 +1,11 @@
 /**
- * 分类标签页组件
+ * 神话页面分类标签组件
  * Category Tabs Component
  * 
  * Requirements: 3.1, 3.2, 3.3, 3.4, 3.5
  */
 
 import { 
-  Box, 
-  Tabs, 
-  Tab, 
   Select, 
   MenuItem, 
   FormControl,
@@ -18,6 +15,7 @@ import {
 } from '@mui/material';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import { CommonTabs, type CommonTabItem } from '@/components/common';
 
 export type MythologyViewType = 'mythology' | 'religion';
 
@@ -26,45 +24,29 @@ interface CategoryTabsProps {
   onTabChange: (tab: MythologyViewType) => void;
 }
 
-interface TabConfig {
-  id: MythologyViewType;
-  label: string;
-  icon: React.ReactElement;
-}
-
-const tabs: TabConfig[] = [
+const tabs: CommonTabItem[] = [
   {
-    id: 'mythology',
+    value: 'mythology',
     label: '神话故事',
     icon: <AutoStoriesIcon />,
   },
   {
-    id: 'religion',
+    value: 'religion',
     label: '宗教关系',
     icon: <AccountTreeIcon />,
   },
 ];
 
 /**
- * 分类标签页组件
- * 支持"神话故事"和"宗教关系"两个视图切换
+ * 神话页面分类标签组件
  */
 export function CategoryTabs({ activeTab, onTabChange }: CategoryTabsProps) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
-    const tab = tabs[newValue];
-    if (tab) {
-      onTabChange(tab.id);
-    }
-  };
-
   const handleSelectChange = (event: SelectChangeEvent<MythologyViewType>) => {
     onTabChange(event.target.value as MythologyViewType);
   };
-
-  const currentTabIndex = tabs.findIndex(tab => tab.id === activeTab);
 
   // 移动端使用下拉菜单
   if (isMobile) {
@@ -96,8 +78,8 @@ export function CategoryTabs({ activeTab, onTabChange }: CategoryTabsProps) {
         >
           {tabs.map(tab => (
             <MenuItem 
-              key={tab.id} 
-              value={tab.id}
+              key={tab.value} 
+              value={tab.value}
               sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -113,60 +95,14 @@ export function CategoryTabs({ activeTab, onTabChange }: CategoryTabsProps) {
     );
   }
 
-  // 桌面端使用标签页
+  // 桌面端使用公共标签组件
   return (
-    <Box 
-      sx={{ 
-        mb: 1,
-        borderBottom: 1,
-        borderColor: 'var(--glass-border-color, rgba(255, 255, 255, 0.18))',
-      }}
-    >
-      <Tabs
-        value={currentTabIndex}
-        onChange={handleTabChange}
-        aria-label="神话页面视图切换"
-        sx={{
-          minHeight: 36,
-          '& .MuiTabs-indicator': {
-            backgroundColor: 'var(--color-primary)',
-            height: 2,
-            borderRadius: '2px 2px 0 0',
-          },
-          '& .MuiTab-root': {
-            color: 'var(--color-text-secondary)',
-            fontWeight: 500,
-            fontSize: '0.85rem',
-            textTransform: 'none',
-            minHeight: 36,
-            padding: '6px 12px',
-            transition: 'all 0.3s ease',
-            '&:hover': {
-              color: 'var(--color-text-primary)',
-              backgroundColor: 'rgba(var(--color-primary-rgb, 100, 150, 255), 0.08)',
-            },
-            '&.Mui-selected': {
-              color: 'var(--color-primary)',
-              fontWeight: 600,
-            },
-            '& .MuiSvgIcon-root': {
-              fontSize: '1rem',
-            },
-          },
-        }}
-      >
-        {tabs.map(tab => (
-          <Tab
-            key={tab.id}
-            icon={tab.icon}
-            iconPosition="start"
-            label={tab.label}
-            id={`mythology-tab-${tab.id}`}
-            aria-controls={`mythology-tabpanel-${tab.id}`}
-          />
-        ))}
-      </Tabs>
-    </Box>
+    <CommonTabs
+      tabs={tabs}
+      value={activeTab}
+      onChange={(value) => onTabChange(value as MythologyViewType)}
+      ariaLabel="神话页面视图切换"
+    />
   );
 }
 

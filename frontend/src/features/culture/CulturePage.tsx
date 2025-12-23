@@ -3,6 +3,7 @@
  * Culture Page
  * 
  * 展示中国思想流派（诸子百家）和文化名人（唐宋八大家）
+ * 使用公共的FixedTabsPage组件
  * 
  * Requirements: 2.1, 2.2, 2.3, 3.1, 4.1, 5.1, 5.2, 5.3
  */
@@ -10,6 +11,8 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import PersonIcon from '@mui/icons-material/Person';
 import { useRequest } from 'ahooks';
 
 import { useScholarStore, useSchoolsStore } from '@/store';
@@ -18,8 +21,8 @@ import { schoolsMock } from '@/services/schools';
 import type { Scholar } from '@/services/scholar/types';
 import type { PhilosophicalSchool } from '@/services/schools/types';
 
+import { FixedTabsPage, type FixedTabConfig } from '@/components/common';
 import {
-  CultureTabs,
   ScholarFilter,
   ScholarGrid,
   ScholarDetailModal,
@@ -29,11 +32,9 @@ import {
 
 import './CulturePage.css';
 
-type TabValue = 'schools' | 'scholars';
-
 function CulturePage() {
   // Tab state - 默认显示思想流派
-  const [activeTab, setActiveTab] = useState<TabValue>('schools');
+  const [activeTab, setActiveTab] = useState<string>('schools');
   
   // Schools store
   const {
@@ -266,18 +267,29 @@ function CulturePage() {
     );
   };
 
+  // 定义标签页配置
+  const tabs: FixedTabConfig[] = [
+    {
+      value: 'schools',
+      label: '思想流派',
+      icon: <MenuBookIcon />,
+      content: renderSchoolsContent(),
+    },
+    {
+      value: 'scholars',
+      label: '文化名人',
+      icon: <PersonIcon />,
+      content: renderScholarsContent(),
+    },
+  ];
+
   return (
-    <Box className="culture-page">
-      {/* 标签切换 */}
-      <CultureTabs
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-      />
-      
-      <Box className="culture-content">
-        {activeTab === 'schools' ? renderSchoolsContent() : renderScholarsContent()}
-      </Box>
-    </Box>
+    <FixedTabsPage
+      tabs={tabs}
+      defaultTab="schools"
+      className="culture-page"
+      onTabChange={setActiveTab}
+    />
   );
 }
 

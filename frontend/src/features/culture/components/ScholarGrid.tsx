@@ -152,6 +152,9 @@ export function ScholarGrid({
           lg: 'repeat(4, 1fr)',   // 桌面: 4列
         },
         gap: { xs: 2, sm: 2, md: 2.5 },
+        pt: 1, // 顶部间距
+        px: 0.5, // 左右间距
+        pb: 2, // 底部间距
         transition: 'all 0.3s ease-in-out',
       }}
     >
