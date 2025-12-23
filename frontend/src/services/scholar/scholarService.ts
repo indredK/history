@@ -14,8 +14,7 @@ export interface ScholarService {
   /**
    * 根据 ID 获取单个学者
    * @param id - 学者的唯一标识符
-   * @returns Promise 包含学者对象的响应对象
-   * @throws Error 当学者不存在时抛出 404 错误
+   * @returns Promise 包含学者对象的响应对象，如果不存在则为null
    */
-  getScholarById(id: string): Promise<{ data: Scholar }>;
+  getScholarById(id: string): Promise<{ data: Scholar | null }>;
 }

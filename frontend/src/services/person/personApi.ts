@@ -1,18 +1,16 @@
-import axios from 'axios';
 import type { PersonService } from './personService';
 import type { Person } from './types';
+import { createApiClient, handleApiResponse, handleSingleApiResponse } from '../utils/apiResponseHandler';
 
-const api = axios.create({
-  baseURL: '/api/v1',
-});
+const api = createApiClient();
 
 export const personApi: PersonService = {
   getPersons: async () => {
-    const response = await api.get<Person[]>('/persons');
-    return { data: response.data };
+    const response = await api.get('/persons');
+    return handleApiResponse<Person>(response);
   },
   getPerson: async (id: string) => {
-    const response = await api.get<Person>(`/persons/${id}`);
-    return { data: response.data };
+    const response = await api.get(`/persons/${id}`);
+    return handleSingleApiResponse<Person>(response);
   },
 };

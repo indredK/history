@@ -31,16 +31,21 @@ export interface ClassicWork {
 export interface PhilosophicalSchool {
   id: string;
   name: string;
-  name_en: string;
-  founder: string;
-  founderEn: string;
-  foundingPeriod: string;
-  coreIdeas: string[];
-  representativeFigures: RepresentativeFigure[];
-  classicWorks: ClassicWork[];
-  description: string;
-  influence: string;
-  color: string;
+  name_en?: string;
+  founder?: string | null;
+  founderEn?: string;
+  foundingYear?: number | null;
+  foundingPeriod?: string;
+  coreBeliefs?: string[] | null;
+  coreIdeas?: string[]; // 兼容旧字段名
+  keyTexts?: string[] | null;
+  representativeFigures?: RepresentativeFigure[];
+  classicWorks?: ClassicWork[];
+  description?: string | null;
+  influence?: string;
+  color?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 /**
@@ -71,14 +76,19 @@ export const ClassicWorkSchema = z.object({
 export const PhilosophicalSchoolSchema = z.object({
   id: z.string(),
   name: z.string(),
-  name_en: z.string(),
-  founder: z.string(),
-  founderEn: z.string(),
-  foundingPeriod: z.string(),
-  coreIdeas: z.array(z.string()).min(1),
-  representativeFigures: z.array(RepresentativeFigureSchema).min(1),
-  classicWorks: z.array(ClassicWorkSchema).min(1),
-  description: z.string().min(1),
-  influence: z.string().min(1),
-  color: z.string(),
+  name_en: z.string().optional(),
+  founder: z.string().nullable().optional(),
+  founderEn: z.string().optional(),
+  foundingYear: z.number().nullable().optional(),
+  foundingPeriod: z.string().optional(),
+  coreBeliefs: z.array(z.string()).nullable().optional(),
+  coreIdeas: z.array(z.string()).optional(), // 兼容旧字段名
+  keyTexts: z.array(z.string()).nullable().optional(),
+  representativeFigures: z.array(RepresentativeFigureSchema).optional(),
+  classicWorks: z.array(ClassicWorkSchema).optional(),
+  description: z.string().nullable().optional(),
+  influence: z.string().optional(),
+  color: z.string().optional(),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional(),
 });

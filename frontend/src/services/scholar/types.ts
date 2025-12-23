@@ -22,15 +22,21 @@ export interface LiteraryWork {
 export interface Scholar {
   id: string;
   name: string;
-  name_en: string;
-  dynasty: string;
-  birthYear: number;
-  deathYear: number;
-  schoolOfThought: string;
-  biography: string;
+  name_en?: string;
+  dynasty?: string;
+  dynastyPeriod?: string; // 后端字段名
+  birthYear?: number | null;
+  deathYear?: number | null;
+  schoolOfThought?: string;
+  philosophicalSchoolId?: string; // 后端字段名
+  biography?: string | null;
   portraitUrl?: string;
-  achievements: string[];
-  representativeWorks: LiteraryWork[];
+  achievements?: string[];
+  contributions?: string[] | null; // 后端字段名
+  representativeWorks?: LiteraryWork[];
+  majorWorks?: string[] | null; // 后端字段名
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 /**
@@ -50,13 +56,19 @@ export const LiteraryWorkSchema = z.object({
 export const ScholarSchema = z.object({
   id: z.string(),
   name: z.string(),
-  name_en: z.string(),
-  dynasty: z.string(),
-  birthYear: z.number(),
-  deathYear: z.number(),
-  schoolOfThought: z.string(),
-  biography: z.string(),
+  name_en: z.string().optional(),
+  dynasty: z.string().optional(),
+  dynastyPeriod: z.string().optional(),
+  birthYear: z.number().nullable().optional(),
+  deathYear: z.number().nullable().optional(),
+  schoolOfThought: z.string().optional(),
+  philosophicalSchoolId: z.string().optional(),
+  biography: z.string().nullable().optional(),
   portraitUrl: z.string().optional(),
-  achievements: z.array(z.string()),
-  representativeWorks: z.array(LiteraryWorkSchema),
+  achievements: z.array(z.string()).optional(),
+  contributions: z.array(z.string()).nullable().optional(),
+  representativeWorks: z.array(LiteraryWorkSchema).optional(),
+  majorWorks: z.array(z.string()).nullable().optional(),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().optional(),
 });

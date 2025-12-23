@@ -20,28 +20,38 @@ interface SchoolCardProps {
  */
 export function SchoolCard({ school, onClick }: SchoolCardProps) {
   const schoolColor: ContentTagColor = {
-    bg: `${school.color}15` || 'rgba(158, 158, 158, 0.1)',
+    bg: `${school.color || '#9e9e9e'}15`,
     text: school.color || '#9e9e9e',
   };
 
+  // 获取核心思想，优先使用coreBeliefs，兼容coreIdeas
+  const coreBeliefs = school.coreBeliefs || school.coreIdeas || [];
+  
   // 核心思想标签云
-  const tagCloud = school.coreIdeas.map(idea => ({
-    label: idea,
+  const tagCloud = coreBeliefs.map(belief => ({
+    label: belief,
     color: schoolColor,
   }));
+
+  // 构建底部文本
+  const representativeCount = school.representativeFigures?.length || 0;
+  const classicWorksCount = school.classicWorks?.length || 0;
+  const keyTextsCount = school.keyTexts?.length || 0;
+  
+  const footerText = `${school.founder || '未知创始人'} · ${representativeCount}位代表 · ${classicWorksCount || keyTextsCount}部著作`;
 
   return (
     <ContentCard
       title={school.name}
-      subtitle={school.name_en}
+      subtitle={school.name_en || ''}
       icon={{
         char: school.name.charAt(0),
         color: school.color || 'var(--color-primary)',
       }}
       tagCloud={tagCloud}
       tagCloudMax={5}
-      description={school.description}
-      footerText={`${school.representativeFigures.length}位代表 · ${school.classicWorks.length}部著作`}
+      description={school.description || ''}
+      footerText={footerText}
       onClick={onClick}
       minHeight={140}
     />

@@ -1,14 +1,12 @@
-import axios from 'axios';
 import type { CultureService } from './cultureService';
 import type { Dynasty } from './types';
+import { createApiClient, handleApiResponse } from '../utils/apiResponseHandler';
 
-const api = axios.create({
-  baseURL: '/api/v1',
-});
+const api = createApiClient();
 
 export const cultureApi: CultureService = {
   getDynasties: async () => {
-    const response = await api.get<Dynasty[]>('/dynasties');
-    return { data: response.data };
+    const response = await api.get('/dynasties');
+    return handleApiResponse<Dynasty>(response);
   },
 };

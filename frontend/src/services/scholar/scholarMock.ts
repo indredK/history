@@ -73,3 +73,7 @@ export function clearScholarCache(): void {
 export function hasScholarCache(): boolean {
   return cachedScholars !== null;
 }
+
+// 导出个别函数以兼容统一数据客户端
+export const getScholars = scholarMock.getScholars;
+export const getScholarById = scholarMock.getScholarById;

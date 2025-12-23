@@ -9,7 +9,7 @@
 
 import type { QingRuler } from './types';
 import { getQingPeriod } from './types';
-import { getQingRulers, getQingRulerById } from './qingRulerMock';
+import { getQingRulers, getQingRulerById } from './qingRulerDataClient';
 
 export type QingRulerSortBy = 'reignStart' | 'name';
 

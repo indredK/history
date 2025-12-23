@@ -5,7 +5,7 @@
 
 import type { YuanFigure, YuanFigureRole } from './types';
 import { ROLE_LABELS, getYuanPeriod } from './types';
-import { getYuanFigures, getYuanFigureById, getRoleTypes, getFactions } from './yuanFigureMock';
+import { getYuanFigures, getYuanFigureById, getRoleTypes, getFactions } from './yuanFigureDataClient';
 
 export type YuanFigureSortBy = 'birthYear' | 'name' | 'role';
 

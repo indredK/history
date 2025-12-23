@@ -116,26 +116,30 @@ export function SchoolDetail({
             
             {/* 标签 */}
             <Box sx={{ display: 'flex', gap: 0.5, mt: 1, flexWrap: 'wrap' }}>
-              <Chip
-                label={`创始人: ${school.founder}`}
-                size="small"
-                sx={{
-                  backgroundColor: `${school.color}20` || 'rgba(158, 158, 158, 0.15)',
-                  color: school.color || 'var(--color-text-secondary)',
-                  fontWeight: 500,
-                  fontSize: '0.75rem',
-                }}
-              />
-              <Chip
-                label={school.foundingPeriod}
-                size="small"
-                variant="outlined"
-                sx={{
-                  fontSize: '0.75rem',
-                  borderColor: 'var(--color-border)',
-                  color: 'var(--color-text-secondary)',
-                }}
-              />
+              {school.founder && (
+                <Chip
+                  label={`创始人: ${school.founder}`}
+                  size="small"
+                  sx={{
+                    backgroundColor: `${school.color}20` || 'rgba(158, 158, 158, 0.15)',
+                    color: school.color || 'var(--color-text-secondary)',
+                    fontWeight: 500,
+                    fontSize: '0.75rem',
+                  }}
+                />
+              )}
+              {(school.foundingPeriod || school.foundingYear) && (
+                <Chip
+                  label={school.foundingPeriod || `公元${school.foundingYear}年`}
+                  size="small"
+                  variant="outlined"
+                  sx={{
+                    fontSize: '0.75rem',
+                    borderColor: 'var(--color-border)',
+                    color: 'var(--color-text-secondary)',
+                  }}
+                />
+              )}
             </Box>
           </Box>
         </Box>
@@ -199,7 +203,7 @@ export function SchoolDetail({
             核心思想
           </Typography>
           <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-            {school.coreIdeas.map((idea, index) => (
+            {(school.coreBeliefs || school.coreIdeas || []).map((idea, index) => (
               <Chip
                 key={index}
                 label={idea}
@@ -269,30 +273,36 @@ export function SchoolDetail({
                         >
                           {figure.name}
                         </Typography>
-                        <Typography
-                          variant="caption"
-                          sx={{ color: 'var(--color-text-secondary)' }}
-                        >
-                          {figure.name_en}
-                        </Typography>
-                        <Chip
-                          label={figure.period}
-                          size="small"
-                          sx={{
-                            fontSize: '0.65rem',
-                            height: '18px',
-                            backgroundColor: 'var(--color-bg-secondary)',
-                          }}
-                        />
+                        {figure.name_en && (
+                          <Typography
+                            variant="caption"
+                            sx={{ color: 'var(--color-text-secondary)' }}
+                          >
+                            {figure.name_en}
+                          </Typography>
+                        )}
+                        {figure.period && (
+                          <Chip
+                            label={figure.period}
+                            size="small"
+                            sx={{
+                              fontSize: '0.65rem',
+                              height: '18px',
+                              backgroundColor: 'var(--color-bg-secondary)',
+                            }}
+                          />
+                        )}
                       </Box>
                     }
                     secondary={
-                      <Typography
-                        variant="body2"
-                        sx={{ color: 'var(--color-text-secondary)', mt: 0.5 }}
-                      >
-                        {figure.contribution}
-                      </Typography>
+                      figure.contribution && (
+                        <Typography
+                          variant="body2"
+                          sx={{ color: 'var(--color-text-secondary)', mt: 0.5 }}
+                        >
+                          {figure.contribution}
+                        </Typography>
+                      )
                     }
                   />
                 </ListItem>
@@ -304,7 +314,7 @@ export function SchoolDetail({
         <Divider sx={{ my: 2 }} />
 
         {/* 经典著作 */}
-        {school.classicWorks && school.classicWorks.length > 0 && (
+        {((school.classicWorks && school.classicWorks.length > 0) || (school.keyTexts && school.keyTexts.length > 0)) && (
           <Box sx={{ mb: 3 }}>
             <Typography
               variant="subtitle1"
@@ -322,18 +332,78 @@ export function SchoolDetail({
             </Typography>
             
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {school.classicWorks.map((work) => (
-                <Box
-                  key={work.id}
-                  sx={{
-                    p: 2,
-                    borderRadius: 'var(--radius-md)',
-                    backgroundColor: 'var(--color-bg-tertiary)',
-                    border: '1px solid var(--color-border)',
-                  }}
-                >
-                  {/* 作品标题 */}
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+              {/* 如果有详细的classicWorks数据 */}
+              {school.classicWorks && school.classicWorks.length > 0 ? (
+                school.classicWorks.map((work) => (
+                  <Box
+                    key={work.id}
+                    sx={{
+                      p: 2,
+                      borderRadius: 'var(--radius-md)',
+                      backgroundColor: 'var(--color-bg-tertiary)',
+                      border: '1px solid var(--color-border)',
+                    }}
+                  >
+                    {/* 作品标题 */}
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                      <Typography
+                        variant="subtitle2"
+                        sx={{
+                          fontWeight: 600,
+                          color: 'var(--color-text-primary)',
+                        }}
+                      >
+                        《{work.title}》
+                      </Typography>
+                      {work.title_en && (
+                        <Typography
+                          variant="caption"
+                          sx={{ color: 'var(--color-text-secondary)' }}
+                        >
+                          {work.title_en}
+                        </Typography>
+                      )}
+                    </Box>
+                    
+                    {/* 作者 */}
+                    {work.author && (
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: school.color || 'var(--color-primary)',
+                          display: 'block',
+                          mb: 0.5,
+                        }}
+                      >
+                        作者: {work.author}
+                      </Typography>
+                    )}
+                    
+                    {/* 作品描述 */}
+                    {work.description && (
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: 'var(--color-text-secondary)',
+                        }}
+                      >
+                        {work.description}
+                      </Typography>
+                    )}
+                  </Box>
+                ))
+              ) : (
+                /* 如果只有keyTexts数据 */
+                school.keyTexts?.map((text, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      p: 2,
+                      borderRadius: 'var(--radius-md)',
+                      backgroundColor: 'var(--color-bg-tertiary)',
+                      border: '1px solid var(--color-border)',
+                    }}
+                  >
                     <Typography
                       variant="subtitle2"
                       sx={{
@@ -341,39 +411,11 @@ export function SchoolDetail({
                         color: 'var(--color-text-primary)',
                       }}
                     >
-                      《{work.title}》
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      sx={{ color: 'var(--color-text-secondary)' }}
-                    >
-                      {work.title_en}
+                      {text}
                     </Typography>
                   </Box>
-                  
-                  {/* 作者 */}
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      color: school.color || 'var(--color-primary)',
-                      display: 'block',
-                      mb: 0.5,
-                    }}
-                  >
-                    作者: {work.author}
-                  </Typography>
-                  
-                  {/* 作品描述 */}
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: 'var(--color-text-secondary)',
-                    }}
-                  >
-                    {work.description}
-                  </Typography>
-                </Box>
-              ))}
+                ))
+              )}
             </Box>
           </Box>
         )}
@@ -381,32 +423,34 @@ export function SchoolDetail({
         <Divider sx={{ my: 2 }} />
 
         {/* 历史影响 */}
-        <Box>
-          <Typography
-            variant="subtitle1"
-            sx={{
-              color: 'var(--color-text-primary)',
-              fontWeight: 600,
-              mb: 1.5,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-            }}
-          >
-            <HistoryEduIcon sx={{ fontSize: '1.2rem', color: '#9c27b0' }} />
-            历史影响
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              color: 'var(--color-text-primary)',
-              lineHeight: 1.8,
-              textAlign: 'justify',
-            }}
-          >
-            {school.influence}
-          </Typography>
-        </Box>
+        {school.influence && (
+          <Box>
+            <Typography
+              variant="subtitle1"
+              sx={{
+                color: 'var(--color-text-primary)',
+                fontWeight: 600,
+                mb: 1.5,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+              }}
+            >
+              <HistoryEduIcon sx={{ fontSize: '1.2rem', color: '#9c27b0' }} />
+              历史影响
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                color: 'var(--color-text-primary)',
+                lineHeight: 1.8,
+                textAlign: 'justify',
+              }}
+            >
+              {school.influence}
+            </Typography>
+          </Box>
+        )}
       </DialogContent>
 
       {/* 操作按钮 */}

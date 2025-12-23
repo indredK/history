@@ -5,7 +5,7 @@
 
 import type { SanguoFigure, SanguoFigureRole, SanguoKingdom } from './types';
 import { ROLE_LABELS } from './types';
-import { getSanguoFigures, getSanguoFigureById, getRoleTypes, getKingdoms } from './sanguoFigureMock';
+import { getSanguoFigures, getSanguoFigureById, getRoleTypes, getKingdoms } from './sanguoFigureDataClient';
 
 export type SanguoFigureSortBy = 'birthYear' | 'name' | 'role' | 'kingdom';
 

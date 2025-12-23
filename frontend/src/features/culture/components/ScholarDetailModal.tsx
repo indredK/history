@@ -64,7 +64,8 @@ export function ScholarDetailModal({
 }: ScholarDetailModalProps) {
   if (!scholar) return null;
 
-  const dynastyColor = dynastyColors[scholar.dynasty] || {
+  const dynasty = scholar.dynasty || scholar.dynastyPeriod || '未知朝代';
+  const dynastyColor = dynastyColors[dynasty] || {
     bg: 'rgba(158, 158, 158, 0.15)',
     text: '#9e9e9e',
   };
@@ -72,6 +73,13 @@ export function ScholarDetailModal({
   // Property 7: Portrait Fallback
   const hasPortrait = scholar.portraitUrl && scholar.portraitUrl.trim() !== '';
   const firstChar = scholar.name.charAt(0);
+
+  // 获取成就列表，优先使用achievements，兼容contributions
+  const achievements = scholar.achievements || scholar.contributions || [];
+  
+  // 获取代表作品，优先使用representativeWorks，兼容majorWorks
+  const representativeWorks = scholar.representativeWorks || [];
+  const majorWorks = scholar.majorWorks || [];
 
   return (
     <Dialog
@@ -128,20 +136,22 @@ export function ScholarDetailModal({
             >
               {scholar.name}
             </Typography>
-            <Typography
-              variant="body2"
-              sx={{
-                color: 'var(--color-text-secondary)',
-                mt: 0.5,
-              }}
-            >
-              {scholar.name_en}
-            </Typography>
+            {scholar.name_en && (
+              <Typography
+                variant="body2"
+                sx={{
+                  color: 'var(--color-text-secondary)',
+                  mt: 0.5,
+                }}
+              >
+                {scholar.name_en}
+              </Typography>
+            )}
             
             {/* 标签 */}
             <Box sx={{ display: 'flex', gap: 0.5, mt: 1, flexWrap: 'wrap' }}>
               <Chip
-                label={scholar.dynasty}
+                label={dynasty}
                 size="small"
                 sx={{
                   backgroundColor: dynastyColor.bg,
@@ -150,26 +160,30 @@ export function ScholarDetailModal({
                   fontSize: '0.75rem',
                 }}
               />
-              <Chip
-                label={scholar.schoolOfThought}
-                size="small"
-                variant="outlined"
-                sx={{
-                  fontSize: '0.75rem',
-                  borderColor: 'var(--color-border)',
-                  color: 'var(--color-text-secondary)',
-                }}
-              />
-              <Chip
-                label={`${scholar.birthYear} - ${scholar.deathYear}`}
-                size="small"
-                variant="outlined"
-                sx={{
-                  fontSize: '0.75rem',
-                  borderColor: 'var(--color-border)',
-                  color: 'var(--color-text-secondary)',
-                }}
-              />
+              {scholar.schoolOfThought && (
+                <Chip
+                  label={scholar.schoolOfThought}
+                  size="small"
+                  variant="outlined"
+                  sx={{
+                    fontSize: '0.75rem',
+                    borderColor: 'var(--color-border)',
+                    color: 'var(--color-text-secondary)',
+                  }}
+                />
+              )}
+              {(scholar.birthYear && scholar.deathYear) && (
+                <Chip
+                  label={`${scholar.birthYear} - ${scholar.deathYear}`}
+                  size="small"
+                  variant="outlined"
+                  sx={{
+                    fontSize: '0.75rem',
+                    borderColor: 'var(--color-border)',
+                    color: 'var(--color-text-secondary)',
+                  }}
+                />
+              )}
             </Box>
           </Box>
         </Box>
@@ -187,37 +201,39 @@ export function ScholarDetailModal({
       {/* 内容区域 */}
       <DialogContent dividers sx={{ py: 3 }}>
         {/* 完整传记 - Requirements 4.1 */}
-        <Box sx={{ mb: 3 }}>
-          <Typography
-            variant="subtitle1"
-            sx={{
-              color: 'var(--color-text-primary)',
-              fontWeight: 600,
-              mb: 1.5,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-            }}
-          >
-            人物传记
-          </Typography>
-          <Typography
-            id="scholar-detail-description"
-            variant="body1"
-            sx={{
-              color: 'var(--color-text-primary)',
-              lineHeight: 1.8,
-              textAlign: 'justify',
-            }}
-          >
-            {scholar.biography}
-          </Typography>
-        </Box>
+        {scholar.biography && (
+          <Box sx={{ mb: 3 }}>
+            <Typography
+              variant="subtitle1"
+              sx={{
+                color: 'var(--color-text-primary)',
+                fontWeight: 600,
+                mb: 1.5,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+              }}
+            >
+              人物传记
+            </Typography>
+            <Typography
+              id="scholar-detail-description"
+              variant="body1"
+              sx={{
+                color: 'var(--color-text-primary)',
+                lineHeight: 1.8,
+                textAlign: 'justify',
+              }}
+            >
+              {scholar.biography}
+            </Typography>
+          </Box>
+        )}
 
-        <Divider sx={{ my: 2 }} />
+        {scholar.biography && achievements.length > 0 && <Divider sx={{ my: 2 }} />}
 
         {/* 主要成就 - Requirements 4.1 */}
-        {scholar.achievements && scholar.achievements.length > 0 && (
+        {achievements.length > 0 && (
           <Box sx={{ mb: 3 }}>
             <Typography
               variant="subtitle1"
@@ -234,7 +250,7 @@ export function ScholarDetailModal({
               主要成就
             </Typography>
             <List dense disablePadding>
-              {scholar.achievements.map((achievement, index) => (
+              {achievements.map((achievement, index) => (
                 <ListItem key={index} sx={{ py: 0.5, px: 0 }}>
                   <ListItemText
                     primary={
@@ -258,10 +274,10 @@ export function ScholarDetailModal({
           </Box>
         )}
 
-        <Divider sx={{ my: 2 }} />
+        {(achievements.length > 0 && (representativeWorks.length > 0 || majorWorks.length > 0)) && <Divider sx={{ my: 2 }} />}
 
         {/* 代表作品 - Requirements 4.1, 4.2 */}
-        {scholar.representativeWorks && scholar.representativeWorks.length > 0 && (
+        {(representativeWorks.length > 0 || majorWorks.length > 0) && (
           <Box>
             <Typography
               variant="subtitle1"
@@ -279,7 +295,8 @@ export function ScholarDetailModal({
             </Typography>
             
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {scholar.representativeWorks.map((work: LiteraryWork) => (
+              {/* 详细的代表作品 */}
+              {representativeWorks.map((work: LiteraryWork) => (
                 <Box
                   key={work.id}
                   sx={{
@@ -346,6 +363,29 @@ export function ScholarDetailModal({
                       </Typography>
                     </Box>
                   )}
+                </Box>
+              ))}
+              
+              {/* 简单的主要作品列表 */}
+              {majorWorks.map((work, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    p: 2,
+                    borderRadius: 'var(--radius-md)',
+                    backgroundColor: 'var(--color-bg-tertiary)',
+                    border: '1px solid var(--color-border)',
+                  }}
+                >
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      fontWeight: 600,
+                      color: 'var(--color-text-primary)',
+                    }}
+                  >
+                    {work}
+                  </Typography>
                 </Box>
               ))}
             </Box>

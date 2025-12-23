@@ -1,14 +1,12 @@
-import axios from 'axios';
 import type { MapService } from './mapService';
 import type { Place } from './types';
+import { createApiClient, handleApiResponse } from '../utils/apiResponseHandler';
 
-const api = axios.create({
-  baseURL: '/api/v1',
-});
+const api = createApiClient();
 
 export const mapApi: MapService = {
   getPlaces: async () => {
-    const response = await api.get<Place[]>('/places');
-    return { data: response.data };
+    const response = await api.get('/places');
+    return handleApiResponse<Place>(response);
   },
 };

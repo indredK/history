@@ -5,7 +5,7 @@
 
 import type { SongFigure, SongFigureRole } from './types';
 import { ROLE_LABELS, getSongPeriod } from './types';
-import { getSongFigures, getSongFigureById, getRoleTypes, getFactions } from './songFigureMock';
+import { getSongFigures, getSongFigureById, getRoleTypes, getFactions } from './songFigureDataClient';
 
 export type SongFigureSortBy = 'birthYear' | 'name' | 'role';
 

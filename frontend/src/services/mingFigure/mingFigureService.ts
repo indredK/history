@@ -9,7 +9,7 @@
 
 import type { MingFigure, MingFigureRole } from './types';
 import { ROLE_LABELS, getMingPeriod } from './types';
-import { getMingFigures, getMingFigureById, getRoleTypes, getFactions } from './mingFigureMock';
+import { getMingFigures, getMingFigureById, getRoleTypes, getFactions } from './mingFigureDataClient';
 
 export type MingFigureSortBy = 'birthYear' | 'name' | 'role';
 

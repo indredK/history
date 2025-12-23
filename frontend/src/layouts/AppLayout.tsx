@@ -4,6 +4,7 @@ import { useLocation, Routes, Route, Navigate } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { PortraitSidebar } from '@/components/ui/PortraitSidebar';
 import { Footer } from './Footer';
+import { DataSourceIndicator } from '@/components/DataSourceIndicator';
 import { useThemeStore, useStyleStore } from '@/store';
 import { useSidebar, useResponsive, useOrientation } from '@/hooks';
 import { routes } from '@/router/routes';
@@ -92,6 +93,20 @@ export function AppLayout() {
       touchAction: 'none', // 防止触摸滚动
       overscrollBehavior: 'none', // 防止过度滚动
     }} className="app">
+      {/* 数据源指示器 - 固定在右上角 */}
+      <Box sx={{
+        position: 'fixed',
+        top: 16,
+        right: 16,
+        zIndex: 1400,
+        ...(isMobile && {
+          top: 8,
+          right: 8,
+        })
+      }}>
+        <DataSourceIndicator />
+      </Box>
+      
       {/* 主内容区域 */}
       <Box sx={{ 
         display: 'flex', 

@@ -5,7 +5,7 @@
 
 import type { TangFigure, TangFigureRole } from './types';
 import { ROLE_LABELS, getTangPeriod } from './types';
-import { getTangFigures, getTangFigureById, getRoleTypes, getFactions } from './tangFigureMock';
+import { getTangFigures, getTangFigureById, getRoleTypes, getFactions } from './tangFigureDataClient';
 
 export type TangFigureSortBy = 'birthYear' | 'name' | 'role';
 

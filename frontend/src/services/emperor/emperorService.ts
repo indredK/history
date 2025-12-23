@@ -9,7 +9,7 @@
 
 import type { Emperor } from './types';
 import { getDynastyOrder } from './types';
-import { getEmperors, getEmperorById, getDynasties } from './emperorMock';
+import { getEmperors, getEmperorById, getDynasties } from './emperorDataClient';
 
 export type EmperorSortBy = 'reignStart' | 'dynasty';
 

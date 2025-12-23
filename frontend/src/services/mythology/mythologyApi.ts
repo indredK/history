@@ -8,6 +8,8 @@
 import type { Mythology } from './types';
 import { mockMythologies } from './mythologyMock';
 import { validateMythology } from './mythologyService';
+import { getDataSourceMode } from '@/config/dataSource';
+import { createApiClient, handleApiResponse } from '../utils/apiResponseHandler';
 
 /**
  * API 响应接口
@@ -18,11 +20,33 @@ export interface MythologyApiResponse {
   message?: string;
 }
 
+// 创建API客户端
+const api = createApiClient();
+
 /**
- * 获取所有神话数据
- * 当前使用 Mock 数据，后续可替换为真实 API 调用
+ * 从真实API获取神话数据
  */
-export async function fetchMythologies(): Promise<MythologyApiResponse> {
+async function fetchMythologiesFromApi(): Promise<MythologyApiResponse> {
+  try {
+    const response = await api.get('/mythologies');
+    const result = handleApiResponse<Mythology>(response);
+    return {
+      data: result.data,
+      success: true
+    };
+  } catch (error) {
+    return {
+      data: [],
+      success: false,
+      message: error instanceof Error ? error.message : '获取神话数据失败'
+    };
+  }
+}
+
+/**
+ * 从Mock数据获取神话数据
+ */
+async function fetchMythologiesFromMock(): Promise<MythologyApiResponse> {
   // 模拟网络延迟
   await new Promise(resolve => setTimeout(resolve, 300));
   
@@ -46,6 +70,20 @@ export async function fetchMythologies(): Promise<MythologyApiResponse> {
       success: false,
       message: error instanceof Error ? error.message : '获取神话数据失败'
     };
+  }
+}
+
+/**
+ * 获取所有神话数据
+ * 根据数据源配置自动选择API或Mock数据
+ */
+export async function fetchMythologies(): Promise<MythologyApiResponse> {
+  const dataSourceMode = getDataSourceMode();
+  
+  if (dataSourceMode === 'api') {
+    return fetchMythologiesFromApi();
+  } else {
+    return fetchMythologiesFromMock();
   }
 }
 

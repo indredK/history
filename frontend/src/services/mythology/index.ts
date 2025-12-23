@@ -30,5 +30,8 @@ export type { ValidationResult } from './mythologyService';
 export { fetchMythologies, fetchMythologyById } from './mythologyApi';
 export type { MythologyApiResponse } from './mythologyApi';
 
+// 数据客户端导出
+export * from './mythologyDataClient';
+
 // Mock 数据导出（用于测试）
 export { mockMythologies } from './mythologyMock';

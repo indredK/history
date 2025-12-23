@@ -54,7 +54,8 @@ export const useScholarStore = create<ScholarState>((set, get) => ({
     
     return scholars.filter((scholar) => {
       // Check dynasty filter - must match if not "全部"
-      const dynastyMatch = filters.dynasty === '全部' || scholar.dynasty === filters.dynasty;
+      const scholarDynasty = scholar.dynasty || scholar.dynastyPeriod;
+      const dynastyMatch = filters.dynasty === '全部' || scholarDynasty === filters.dynasty;
       
       // Check school filter - must match if not "全部"
       const schoolMatch = filters.schoolOfThought === '全部' || scholar.schoolOfThought === filters.schoolOfThought;

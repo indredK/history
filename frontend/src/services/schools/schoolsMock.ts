@@ -70,3 +70,7 @@ export function clearSchoolsCache(): void {
 export function hasSchoolsCache(): boolean {
   return cachedSchools !== null;
 }
+
+// 导出个别函数以兼容统一数据客户端
+export const getSchools = schoolsMock.getSchools;
+export const getSchoolById = schoolsMock.getSchoolById;

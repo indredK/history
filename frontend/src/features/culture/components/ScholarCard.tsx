@@ -29,28 +29,37 @@ const defaultColor: TagColor = { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e
  * 学者卡片组件
  */
 export function ScholarCard({ scholar, onClick }: ScholarCardProps) {
-  const dynastyColor = dynastyColors[scholar.dynasty] || defaultColor;
+  const dynasty = scholar.dynasty || scholar.dynastyPeriod || '未知朝代';
+  const dynastyColor = dynastyColors[dynasty] || defaultColor;
 
   // 构建次标签
   const secondaryTags = [
-    { label: scholar.schoolOfThought, color: defaultColor, variant: 'outlined' as const },
-    { label: `${scholar.birthYear}-${scholar.deathYear}`, color: defaultColor, variant: 'outlined' as const },
-  ];
+    scholar.schoolOfThought && { label: scholar.schoolOfThought, color: defaultColor, variant: 'outlined' as const },
+    (scholar.birthYear && scholar.deathYear) && { 
+      label: `${scholar.birthYear}-${scholar.deathYear}`, 
+      color: defaultColor, 
+      variant: 'outlined' as const 
+    },
+  ].filter((tag): tag is { label: string; color: TagColor; variant: 'outlined' } => Boolean(tag));
 
   // 构建信息行（代表作品数量）
-  const infoLines = scholar.representativeWorks && scholar.representativeWorks.length > 0
-    ? [{ value: `代表作品: ${scholar.representativeWorks.length}篇` }]
+  const works = scholar.representativeWorks || [];
+  const majorWorks = scholar.majorWorks || [];
+  const totalWorks = works.length + majorWorks.length;
+  
+  const infoLines = totalWorks > 0
+    ? [{ value: `代表作品: ${totalWorks}篇` }]
     : [];
 
   return (
     <PersonCard
       name={scholar.name}
-      subtitle={scholar.name_en}
+      subtitle={scholar.name_en || ''}
       portraitUrl={scholar.portraitUrl}
-      primaryTag={{ label: scholar.dynasty, color: dynastyColor }}
+      primaryTag={{ label: dynasty, color: dynastyColor }}
       secondaryTags={secondaryTags}
       infoLines={infoLines}
-      biography={scholar.biography}
+      biography={scholar.biography || ''}
       biographyLines={3}
       onClick={onClick}
       minHeight={180}

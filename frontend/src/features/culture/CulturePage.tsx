@@ -16,8 +16,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import { useRequest } from 'ahooks';
 
 import { useScholarStore, useSchoolsStore } from '@/store';
-import { scholarMock } from '@/services/scholar';
-import { schoolsMock } from '@/services/schools';
+import { getScholars } from '@/services/scholar';
+import { getSchools } from '@/services/schools';
 import type { Scholar } from '@/services/scholar/types';
 import type { PhilosophicalSchool } from '@/services/schools/types';
 
@@ -67,7 +67,7 @@ function CulturePage() {
   // 加载思想流派数据
   const { run: loadSchools, loading: schoolsRequestLoading } = useRequest(
     async () => {
-      const result = await schoolsMock.getSchools();
+      const result = await getSchools();
       return result.data;
     },
     {
@@ -89,7 +89,7 @@ function CulturePage() {
   // 加载学者数据
   const { run: loadScholars, loading: scholarsRequestLoading } = useRequest(
     async () => {
-      const result = await scholarMock.getScholars();
+      const result = await getScholars();
       return result.data;
     },
     {
@@ -110,17 +110,17 @@ function CulturePage() {
 
   // 当切换到思想流派标签时加载数据
   useEffect(() => {
-    if (activeTab === 'schools' && schools.length === 0 && !schoolsLoading) {
+    if (activeTab === 'schools' && schools.length === 0 && !schoolsLoading && !schoolsRequestLoading) {
       loadSchools();
     }
-  }, [activeTab, schools.length, schoolsLoading, loadSchools]);
+  }, [activeTab, schools.length, schoolsLoading, schoolsRequestLoading, loadSchools]);
 
   // 当切换到学者标签时加载数据
   useEffect(() => {
-    if (activeTab === 'scholars' && scholars.length === 0 && !scholarLoading) {
+    if (activeTab === 'scholars' && scholars.length === 0 && !scholarLoading && !scholarsRequestLoading) {
       loadScholars();
     }
-  }, [activeTab, scholars.length, scholarLoading, loadScholars]);
+  }, [activeTab, scholars.length, scholarLoading, scholarsRequestLoading, loadScholars]);
 
   // 获取筛选后的学者列表
   const filteredScholars = useMemo(() => {
@@ -129,12 +129,20 @@ function CulturePage() {
 
   // 获取筛选选项
   const dynastyOptions = useMemo(() => {
-    const uniqueDynasties = [...new Set(scholars.map(s => s.dynasty))];
+    const uniqueDynasties = [...new Set(
+      scholars
+        .map(s => s.dynasty || s.dynastyPeriod)
+        .filter((dynasty): dynasty is string => Boolean(dynasty))
+    )];
     return ['全部', ...uniqueDynasties];
   }, [scholars]);
 
   const schoolOptions = useMemo(() => {
-    const uniqueSchools = [...new Set(scholars.map(s => s.schoolOfThought))];
+    const uniqueSchools = [...new Set(
+      scholars
+        .map(s => s.schoolOfThought)
+        .filter((school): school is string => Boolean(school))
+    )];
     return ['全部', ...uniqueSchools];
   }, [scholars]);
 

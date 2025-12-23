@@ -1,18 +1,16 @@
-import axios from 'axios';
 import type { TimelineService } from './timelineService';
 import type { Event } from './types';
+import { createApiClient, handleApiResponse } from '../utils/apiResponseHandler';
 
-const api = axios.create({
-  baseURL: '/api/v1',
-});
+const api = createApiClient();
 
 export const timelineApi: TimelineService = {
   getEvents: async () => {
-    const response = await api.get<Event[]>('/events');
-    return { data: response.data };
+    const response = await api.get('/events');
+    return handleApiResponse<Event>(response);
   },
   getEventsByRange: async (startYear: number, endYear: number) => {
-    const response = await api.get<Event[]>('/timeline', { params: { startYear, endYear } });
-    return { data: response.data };
+    const response = await api.get('/timeline', { params: { startYear, endYear } });
+    return handleApiResponse<Event>(response);
   },
 };
