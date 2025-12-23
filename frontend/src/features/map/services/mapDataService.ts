@@ -36,7 +36,7 @@ export interface GeoJsonData {
  */
 export async function fetchGeoJson(): Promise<GeoJsonData> {
   // 使用统一的数据加载工具
-  const { loadJsonData } = await import('@/utils/dataLoaders');
+  const { loadJsonData } = await import('@/utils/services/dataLoaders');
   return loadJsonData<GeoJsonData>('/data/json/100000.geoJson');
 }
 

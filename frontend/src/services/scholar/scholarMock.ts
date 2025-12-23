@@ -1,6 +1,6 @@
 import type { ScholarService } from './scholarService';
 import type { Scholar } from './types';
-import { loadJsonArray } from '@/utils/dataLoaders';
+import { loadJsonArray } from '@/utils/services/dataLoaders';
 
 // 缓存加载的学者数据
 let cachedScholars: Scholar[] | null = null;

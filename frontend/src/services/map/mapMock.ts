@@ -1,6 +1,6 @@
 import type { MapService } from './mapService';
 import type { Place } from './types';
-import { loadJsonArray } from '@/utils/dataLoaders';
+import { loadJsonArray } from '@/utils/services/dataLoaders';
 
 // 转换 JSON 数据为 Place 格式
 function transformJsonToPlace(jsonPlace: any, index: number): Place {

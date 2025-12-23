@@ -1,6 +1,6 @@
 import type { SchoolsService } from './schoolsService';
 import type { PhilosophicalSchool } from './types';
-import { loadJsonArray } from '@/utils/dataLoaders';
+import { loadJsonArray } from '@/utils/services/dataLoaders';
 
 // 缓存加载的思想流派数据
 let cachedSchools: PhilosophicalSchool[] | null = null;

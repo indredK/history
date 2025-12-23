@@ -1,6 +1,6 @@
 import type { PersonService } from './personService';
 import type { Person } from './types';
-import { loadJsonArray } from '@/utils/dataLoaders';
+import { loadJsonArray } from '@/utils/services/dataLoaders';
 
 // 转换 JSON 数据为 Person 格式
 function transformJsonToPerson(jsonPerson: any, index: number): Person {

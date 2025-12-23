@@ -1,6 +1,6 @@
 import type { TimelineService } from './timelineService';
 import type { Event } from './types';
-import { loadJsonArray } from '@/utils/dataLoaders';
+import { loadJsonArray } from '@/utils/services/dataLoaders';
 
 // 转换 JSON 数据为 Event 格式
 function transformJsonToEvent(jsonEvent: any, index: number): Event {

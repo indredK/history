@@ -16,7 +16,7 @@ import {
 import { useResponsive } from '@/hooks/useResponsive';
 import { useDynastiesExpanded } from '@/store/dynastiesExpandedStore';
 import { DynastyRow } from './DynastyRow';
-import { loadJsonData } from '@/utils/dataLoaders';
+import { loadJsonData } from '@/utils/services/dataLoaders';
 import { 
   columns, 
   tableStyles, 
