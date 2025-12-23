@@ -1,7 +1,7 @@
-import { useEventsStore } from '@/store';
+import { useState } from 'react';
 
 export function SearchBar() {
-  const { searchQuery, setSearchQuery } = useEventsStore();
+  const [searchQuery, setSearchQuery] = useState('');
   return (
     <div style={{ display: 'flex', gap: 8, alignItems: 'center', padding: 16 }}>
       <input
@@ -34,4 +34,3 @@ export function SearchBar() {
     </div>
   );
 }
-

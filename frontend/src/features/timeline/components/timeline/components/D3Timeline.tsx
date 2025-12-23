@@ -3,18 +3,16 @@ import { useRequest } from 'ahooks';
 import { Box, Typography } from '@mui/material';
 
 import { getEvents } from '@/services/dataClient';
-import { useEventsStore } from '@/store';
-import { useEventFilter } from '@/features/timeline/hooks/useEventFilter';
 import { TimelineChart } from './TimelineChart';
 import type { TimelineChartRef } from '../types';
+import type { Event } from '@/services/timeline/types';
 import '../styles/D3Timeline.css';
 
 export function D3Timeline() {
   const chartRef = useRef<TimelineChartRef>(null);
   const [zoomLevel, setZoomLevel] = useState(1);
-
-  // 从 store 获取状态和方法
-  const { setEvents, favorites } = useEventsStore();
+  const [events, setEvents] = useState<Event[]>([]);
+  const [favorites] = useState<string[]>([]);
 
   // 使用ahooks的useRequest获取数据
   const { loading } = useRequest(
@@ -25,12 +23,9 @@ export function D3Timeline() {
     {
       cacheKey: 'events_all',
       manual: false,
-      onSuccess: (events) => setEvents(events)
+      onSuccess: (data) => setEvents(data)
     }
   );
-
-  // 获取过滤后的事件数据
-  const events = useEventFilter();
 
   // 缩放控制函数
   const handleZoomIn = () => chartRef.current?.zoomIn();
