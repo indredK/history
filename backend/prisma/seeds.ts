@@ -1,12 +1,33 @@
 // This file allows you to create seed data for your database.
 // See docs for more details: https://docs.prisma.io/orm/prisma-client/setup-and-configuration/databases/seed-your-database
 
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../src/prisma/prisma.extension';
 import fs from 'fs';
 import path from 'path';
 import { parse } from 'csv-parse/sync';
 
-const prisma = new PrismaClient();
+// 类型定义
+interface PersonRow {
+  name: string;
+  birth_year?: string;
+  death_year?: string;
+  biography?: string;
+}
+
+interface EventRow {
+  title: string;
+  start_year: string;
+  end_year?: string;
+  description?: string;
+  event_type?: string;
+}
+
+interface PlaceRow {
+  name?: string;
+  canonical_name?: string;
+  latitude?: string;
+  longitude?: string;
+}
 
 async function main() {
   console.log('🌱 开始数据导入...\n');
@@ -31,7 +52,7 @@ async function main() {
   const personsPath = path.join(__dirname, '../..', 'data', 'raw', 'persons.csv');
   if (fs.existsSync(personsPath)) {
     const personsData = fs.readFileSync(personsPath, 'utf-8');
-    const persons = parse(personsData, { columns: true });
+    const persons = parse(personsData, { columns: true }) as PersonRow[];
 
     let count = 0;
     for (const row of persons) {
@@ -66,7 +87,7 @@ async function main() {
   const eventsPath = path.join(__dirname, '../..', 'data', 'raw', 'events.csv');
   if (fs.existsSync(eventsPath)) {
     const eventsData = fs.readFileSync(eventsPath, 'utf-8');
-    const events = parse(eventsData, { columns: true });
+    const events = parse(eventsData, { columns: true }) as EventRow[];
 
     let count = 0;
     for (const row of events) {
@@ -75,7 +96,7 @@ async function main() {
           data: {
             title: row.title,
             startYear: parseInt(row.start_year),
-            endYear: parseInt(row.end_year) || parseInt(row.start_year),
+            endYear: parseInt(row.end_year || row.start_year),
             description: row.description || undefined,
             eventType: row.event_type || 'other',
           },
@@ -102,14 +123,14 @@ async function main() {
   const placesPath = path.join(__dirname, '../..', 'data', 'raw', 'places.csv');
   if (fs.existsSync(placesPath)) {
     const placesData = fs.readFileSync(placesPath, 'utf-8');
-    const places = parse(placesData, { columns: true });
+    const places = parse(placesData, { columns: true }) as PlaceRow[];
 
     let count = 0;
     for (const row of places) {
       try {
         const place = await prisma.place.create({
           data: {
-            name: row.canonical_name || row.name,
+            name: row.canonical_name || row.name || 'Unknown',
             latitude: row.latitude ? parseFloat(row.latitude) : null,
             longitude: row.longitude ? parseFloat(row.longitude) : null,
           },

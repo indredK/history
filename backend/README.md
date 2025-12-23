@@ -1,146 +1,98 @@
-# History API Backend
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
 
-中国历史全景 API 服务
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-## 快速开始
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-### 前置条件
+## Description
 
-- Node.js 18+
-- Docker 和 Docker Compose
-- npm 或 yarn
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-### 设置步骤
+## Project setup
 
-1. **复制环境文件**:
 ```bash
-cp .env.example .env
+$ npm install
 ```
 
-2. **启动数据库**:
+## Compile and run the project
+
 ```bash
-cd ..
-docker-compose up -d
-cd backend
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
 ```
 
-3. **安装依赖**:
+## Run tests
+
 ```bash
-npm install
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
 ```
 
-4. **初始化数据库**:
+## Deployment
+
+When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+
+If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+
 ```bash
-npx prisma migrate dev --name init
+$ npm install -g @nestjs/mau
+$ mau deploy
 ```
 
-5. **导入样例数据**:
-```bash
-npm run db:seed
-```
+With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
-6. **启动开发服务器**:
-```bash
-npm run dev
-```
+## Resources
 
-API 将运行在 `http://localhost:3001`
+Check out a few resources that may come in handy when working with NestJS:
 
-## 可用命令
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
-| 命令 | 说明 |
-|------|------|
-| `npm run dev` | 启动开发服务器 (热重载) |
-| `npm run build` | 编译 TypeScript |
-| `npm run start` | 启动生产服务器 |
-| `npm run db:migrate` | 运行 Prisma 迁移 |
-| `npm run db:seed` | 导入样例数据 |
-| `npm run db:studio` | 打开 Prisma Studio (GUI) |
-| `npm run test` | 运行测试 |
-| `npm run lint` | 类型检查 |
+## Support
 
-## API 端点
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-### 人物 (Persons)
-- `GET /api/v1/persons` - 获取所有人物
-- `GET /api/v1/persons/:id` - 获取单个人物
+## Stay in touch
 
-### 事件 (Events)  
-- `GET /api/v1/events` - 获取所有事件
-- `GET /api/v1/events?startYear=600&endYear=800` - 时间范围查询
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
 
-### 地点 (Places)
-- `GET /api/v1/places` - 获取所有地点
+## License
 
-### 时间轴 (Timeline)
-- `GET /api/v1/timeline?startYear=600&endYear=800` - 时间范围的事件
-
-## 技术栈
-
-- **Fastify** - 高性能 HTTP 框架
-- **Prisma** - 类型安全的 ORM
-- **PostgreSQL** - 关系型数据库
-- **PostGIS** - 地理信息扩展
-- **TypeScript** - 类型安全的 JavaScript
-- **Jest** - 测试框架
-
-## 项目结构
-
-```
-src/
-  main.ts           # 应用入口
-  
-prisma/
-  schema.prisma     # 数据模型定义
-  seeds.ts          # 数据导入脚本
-  
-tests/
-  api.test.ts       # 测试文件
-  
-.env.example        # 环境变量示例
-```
-
-## 数据库架构
-
-9 个核心表：
-- `sources` - 数据来源
-- `persons` - 历史人物
-- `events` - 历史事件
-- `places` - 地点
-- `admin_units` - 行政单元
-- `map_boundary_versions` - 地图边界
-- `event_participants` - 事件-人物关联
-- `event_locations` - 事件-地点关联
-- `admin_unit_boundaries` - 行政单元-边界关联
-
-详见 [IMPLEMENTATION_GUIDE.md](../IMPLEMENTATION_GUIDE.md)
-
-## 故障排排查
-
-**数据库连接失败**:
-```bash
-# 检查容器状态
-docker-compose ps
-
-# 查看日志
-docker-compose logs postgres
-```
-
-**Prisma 迁移错误**:
-```bash
-# 删除现有迁移
-rm -rf prisma/migrations
-
-# 重新创建
-npx prisma migrate dev --name init
-```
-
-**端口被占用**:
-```bash
-# 修改 .env 中的 PORT，或关闭占用的进程
-lsof -i :3001
-```
-
-## 许可证
-
-MIT
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).

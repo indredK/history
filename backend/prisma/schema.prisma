@@ -1,11 +1,13 @@
 // Prisma Schema for Chinese Historical Panorama
 generator client {
-  provider = "prisma-client-js"
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  engineType   = "client"
+  moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
 }
 
 model Source {
@@ -122,4 +124,272 @@ model EventLocation {
   place     Place  @relation(fields: [placeId], references: [id], onDelete: Cascade)
 
   @@unique([eventId, placeId])
+}
+
+// Dynasty and Imperial Models
+model Dynasty {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  startYear   Int
+  endYear     Int?
+  capital     String?
+  founder     String?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  emperors    Emperor[]
+  tangFigures TangFigure[]
+  songFigures SongFigure[]
+  yuanFigures YuanFigure[]
+  mingFigures MingFigure[]
+  qingRulers  QingRuler[]
+
+  @@index([startYear])
+  @@map("dynasties")
+}
+
+model Emperor {
+  id                    String   @id @default(uuid())
+  name                  String
+  dynastyId             String
+  reignStart            Int
+  reignEnd              Int?
+  templeName            String?
+  posthumousName        String?
+  eraNames              Json?    // Array of era names with years
+  birthYear             Int?
+  deathYear             Int?
+  biography             String?
+  achievements          Json?    // Array of achievements
+  historicalEvaluation  Json?    // Historical evaluation object
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  dynasty Dynasty @relation(fields: [dynastyId], references: [id], onDelete: Cascade)
+
+  @@index([dynastyId])
+  @@index([reignStart])
+  @@map("emperors")
+}
+
+// Scholar and Philosophy Models
+model Scholar {
+  id                    String   @id @default(uuid())
+  name                  String
+  dynastyPeriod         String?
+  birthYear             Int?
+  deathYear             Int?
+  philosophicalSchoolId String?
+  majorWorks            Json?    // Array of major works
+  contributions         Json?    // Array of contributions
+  biography             String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  philosophicalSchool PhilosophicalSchool? @relation(fields: [philosophicalSchoolId], references: [id])
+
+  @@index([name])
+  @@index([dynastyPeriod])
+  @@map("scholars")
+}
+
+model PhilosophicalSchool {
+  id            String   @id @default(uuid())
+  name          String   @unique
+  founder       String?
+  foundingYear  Int?
+  coreBeliefs   Json?    // Array of core beliefs
+  keyTexts      Json?    // Array of key texts
+  description   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  scholars Scholar[]
+
+  @@index([name])
+  @@map("philosophical_schools")
+}
+
+// Dynasty-specific Figure Models
+model TangFigure {
+  id          String   @id @default(uuid())
+  name        String
+  dynastyId   String
+  role        String   // 'poet', 'official', 'general', 'monk', 'other'
+  birthYear   Int?
+  deathYear   Int?
+  period      String?  // 'early', 'middle', 'late'
+  achievements Json?   // Array of achievements
+  works       Json?    // Array of works/poems
+  biography   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  dynasty Dynasty @relation(fields: [dynastyId], references: [id], onDelete: Cascade)
+
+  @@index([dynastyId])
+  @@index([role])
+  @@map("tang_figures")
+}
+
+model SongFigure {
+  id          String   @id @default(uuid())
+  name        String
+  dynastyId   String
+  role        String   // 'scholar', 'poet', 'official', 'inventor', 'other'
+  birthYear   Int?
+  deathYear   Int?
+  period      String?  // 'northern_song', 'southern_song'
+  achievements Json?   // Array of achievements
+  works       Json?    // Array of works
+  biography   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  dynasty Dynasty @relation(fields: [dynastyId], references: [id], onDelete: Cascade)
+
+  @@index([dynastyId])
+  @@index([role])
+  @@map("song_figures")
+}
+
+model YuanFigure {
+  id          String   @id @default(uuid())
+  name        String
+  dynastyId   String
+  role        String   // 'playwright', 'poet', 'official', 'general', 'other'
+  birthYear   Int?
+  deathYear   Int?
+  ethnicity   String?  // 'mongol', 'han', 'semu', 'other'
+  achievements Json?   // Array of achievements
+  works       Json?    // Array of works
+  biography   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  dynasty Dynasty @relation(fields: [dynastyId], references: [id], onDelete: Cascade)
+
+  @@index([dynastyId])
+  @@index([role])
+  @@map("yuan_figures")
+}
+
+model MingFigure {
+  id          String   @id @default(uuid())
+  name        String
+  dynastyId   String
+  role        String   // 'explorer', 'official', 'scholar', 'artist', 'other'
+  birthYear   Int?
+  deathYear   Int?
+  period      String?  // 'early', 'middle', 'late'
+  achievements Json?   // Array of achievements
+  works       Json?    // Array of works
+  biography   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  dynasty Dynasty @relation(fields: [dynastyId], references: [id], onDelete: Cascade)
+
+  @@index([dynastyId])
+  @@index([role])
+  @@map("ming_figures")
+}
+
+model QingRuler {
+  id          String   @id @default(uuid())
+  name        String
+  dynastyId   String
+  role        String   // 'emperor', 'regent', 'prince', 'other'
+  reignStart  Int?
+  reignEnd    Int?
+  birthYear   Int?
+  deathYear   Int?
+  achievements Json?   // Array of achievements
+  policies    Json?    // Array of policies
+  biography   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  dynasty Dynasty @relation(fields: [dynastyId], references: [id], onDelete: Cascade)
+
+  @@index([dynastyId])
+  @@index([role])
+  @@map("qing_rulers")
+}
+
+model SanguoFigure {
+  id          String   @id @default(uuid())
+  name        String
+  role        String   // 'general', 'strategist', 'ruler', 'advisor', 'other'
+  kingdom     String   // 'wei', 'shu', 'wu'
+  birthYear   Int?
+  deathYear   Int?
+  achievements Json?   // Array of achievements
+  battles     Json?    // Array of battles participated
+  biography   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([kingdom])
+  @@index([role])
+  @@map("sanguo_figures")
+}
+
+// Mythology Model
+model Mythology {
+  id          String   @id @default(uuid())
+  name        String
+  category    String   // 'deity', 'legend', 'folklore', 'creation_myth', 'other'
+  origin      String?  // Geographic or cultural origin
+  period      String?  // Historical period
+  description String?
+  stories     Json?    // Array of related stories
+  symbolism   Json?    // Symbolic meanings
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([origin])
+  @@map("mythologies")
+}
+
+// Religion Relationship Models
+model ReligionNode {
+  id          String   @id @default(uuid())
+  name        String
+  nodeType    String   // 'sect', 'temple', 'master', 'text', 'concept'
+  tradition   String   // 'buddhism', 'taoism', 'confucianism', 'folk_religion'
+  description String?
+  period      String?  // Historical period
+  location    String?  // Geographic location
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  outgoingEdges ReligionEdge[] @relation("SourceNode")
+  incomingEdges ReligionEdge[] @relation("TargetNode")
+
+  @@index([nodeType])
+  @@index([tradition])
+  @@map("religion_nodes")
+}
+
+model ReligionEdge {
+  id           String   @id @default(uuid())
+  sourceNodeId String
+  targetNodeId String
+  relationship String   // 'founded_by', 'influenced_by', 'split_from', 'merged_with', 'located_at'
+  strength     Float?   // Relationship strength (0.0 to 1.0)
+  period       String?  // When this relationship existed
+  description  String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  sourceNode ReligionNode @relation("SourceNode", fields: [sourceNodeId], references: [id], onDelete: Cascade)
+  targetNode ReligionNode @relation("TargetNode", fields: [targetNodeId], references: [id], onDelete: Cascade)
+
+  @@unique([sourceNodeId, targetNodeId, relationship])
+  @@index([sourceNodeId])
+  @@index([targetNodeId])
+  @@map("religion_edges")
 }
