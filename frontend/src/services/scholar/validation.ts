@@ -22,7 +22,7 @@ export function validateScholar(data: unknown): ValidationResult {
     return { valid: true };
   }
   
-  const errors = result.error.errors.map(err => {
+  const errors = result.error.issues.map((err: any) => {
     const path = err.path.join('.');
     return `${path}: ${err.message}`;
   });
@@ -43,7 +43,7 @@ export function validateLiteraryWork(data: unknown): ValidationResult {
     return { valid: true };
   }
   
-  const errors = result.error.errors.map(err => {
+  const errors = result.error.issues.map((err: any) => {
     const path = err.path.join('.');
     return `${path}: ${err.message}`;
   });
