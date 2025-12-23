@@ -1,0 +1,125 @@
+// Prisma Schema for Chinese Historical Panorama
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Source {
+  id         String   @id @default(uuid())
+  title      String
+  author     String?
+  url        String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  personSources PersonSource[]
+  eventSources  EventSource[]
+  placeSources  PlaceSource[]
+
+  @@map("sources")
+}
+
+model Person {
+  id           String   @id @default(uuid())
+  name         String
+  birthYear    Int?
+  deathYear    Int?
+  biography    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  personSources PersonSource[]
+  events        EventParticipant[]
+
+  @@index([name])
+  @@map("persons")
+}
+
+model PersonSource {
+  id        String @id @default(uuid())
+  personId  String
+  sourceId  String
+  person    Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+  source    Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  @@unique([personId, sourceId])
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  title       String
+  startYear   Int
+  endYear     Int?
+  description String?
+  eventType   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  eventSources EventSource[]
+  participants EventParticipant[]
+  locations    EventLocation[]
+
+  @@index([startYear])
+  @@map("events")
+}
+
+model EventSource {
+  id        String @id @default(uuid())
+  eventId   String
+  sourceId  String
+  event     Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  source    Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, sourceId])
+}
+
+model EventParticipant {
+  id        String @id @default(uuid())
+  eventId   String
+  personId  String
+  role      String?
+  event     Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  person    Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, personId])
+}
+
+model Place {
+  id        String   @id @default(uuid())
+  name      String
+  latitude  Float?
+  longitude Float?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  placeSources PlaceSource[]
+  events       EventLocation[]
+
+  @@index([name])
+  @@map("places")
+}
+
+model PlaceSource {
+  id        String @id @default(uuid())
+  placeId   String
+  sourceId  String
+  place     Place  @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  source    Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  @@unique([placeId, sourceId])
+}
+
+model EventLocation {
+  id        String @id @default(uuid())
+  eventId   String
+  placeId   String
+  role      String?
+  event     Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  place     Place  @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, placeId])
+}
