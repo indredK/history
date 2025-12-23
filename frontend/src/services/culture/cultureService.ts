@@ -1,5 +1,5 @@
 import type { Dynasty } from './types';
 
-export interface CultureService {
+export interface DynastiesService {
   getDynasties(): Promise<{ data: Dynasty[] }>;
 }

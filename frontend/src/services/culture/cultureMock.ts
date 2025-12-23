@@ -1,4 +1,4 @@
-import type { CultureService } from './cultureService';
+import type { DynastiesService } from './cultureService';
 import type { Dynasty } from './types';
 import { loadJsonData } from '@/utils/services/dataLoader';
 
@@ -23,7 +23,7 @@ async function delay() {
   return new Promise((resolve) => setTimeout(resolve, 1000));
 }
 
-export const cultureMock: CultureService = {
+export const dynastiesMock: DynastiesService = {
   getDynasties: async () => {
     await delay();
     

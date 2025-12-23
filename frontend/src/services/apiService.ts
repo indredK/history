@@ -5,12 +5,11 @@ import type { Dynasty } from '@/services/culture/types';
 import { timelineApi } from '@/services/timeline/timelineApi';
 import { mapApi } from '@/services/map/mapApi';
 import { personApi } from '@/services/person/personApi';
-import { cultureApi } from '@/services/culture/cultureApi';
+import { dynastiesApi } from '@/services/culture/cultureApi';
 
 export interface ApiService {
   // Timeline API
   getEvents(): Promise<{ data: Event[] }>;
-  getEventsByRange(_startYear: number, _endYear: number): Promise<{ data: Event[] }>;
   
   // Map API
   getPlaces(): Promise<{ data: Place[] }>;
@@ -26,7 +25,6 @@ export interface ApiService {
 export const apiService: ApiService = {
   // Timeline API
   getEvents: () => timelineApi.getEvents(),
-  getEventsByRange: (_startYear, _endYear) => timelineApi.getEventsByRange(_startYear, _endYear),
   
   // Map API
   getPlaces: () => mapApi.getPlaces(),
@@ -36,5 +34,5 @@ export const apiService: ApiService = {
   getPerson: (_id) => personApi.getPerson(_id),
   
   // Culture API
-  getDynasties: () => cultureApi.getDynasties(),
+  getDynasties: () => dynastiesApi.getDynasties(),
 };

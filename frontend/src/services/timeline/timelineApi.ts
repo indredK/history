@@ -9,8 +9,4 @@ export const timelineApi: TimelineService = {
     const response = await api.get('/events');
     return handleApiResponse<Event>(response);
   },
-  getEventsByRange: async (startYear: number, endYear: number) => {
-    const response = await api.get('/timeline', { params: { startYear, endYear } });
-    return handleApiResponse<Event>(response);
-  },
 };

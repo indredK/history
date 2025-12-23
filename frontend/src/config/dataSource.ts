@@ -9,7 +9,7 @@
  */
 
 // 🎯 数据源开关：0=模拟数据，1=真实API
-export const DATA_SOURCE_MODE: 0 | 1 = 1;
+export const DATA_SOURCE_MODE: 0 | 1 = 1
 
 // 数据源类型定义
 export type DataSourceMode = 'mock' | 'api';
