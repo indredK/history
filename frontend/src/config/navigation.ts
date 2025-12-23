@@ -50,12 +50,6 @@ export const navigationItemsConfig: NavigationItemConfig[] = [
     label: '神话',
     path: '/mythology',
     description: '神话传说和民间故事'
-  },
-  {
-    key: 'events',
-    label: '重大事件',
-    path: '/events',
-    description: '重要历史事件'
   }
 ];
 

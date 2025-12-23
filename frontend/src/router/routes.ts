@@ -14,7 +14,6 @@ const MapPage = lazy(() => import('../pages/MapPage'));
 const PeoplePage = lazy(() => import('../pages/PeoplePage'));
 const CulturePage = lazy(() => import('../pages/CulturePage'));
 const MythologyPage = lazy(() => import('../pages/MythologyPage'));
-const EventsPage = lazy(() => import('../pages/EventsPage'));
 const DynastiesPage = lazy(() => import('../pages/DynastiesPage'));
 
 export const routes: RouteConfig[] = [
@@ -54,11 +53,5 @@ export const routes: RouteConfig[] = [
     path: '/mythology',
     label: '神话',
     component: MythologyPage
-  },
-  {
-    key: 'events',
-    path: '/events',
-    label: '重大事件',
-    component: EventsPage
   }
 ];

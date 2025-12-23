@@ -1,5 +1,5 @@
 import type { Event } from '@/services/timeline/types';
-import { useEventsStore } from '@/store';
+import { useState } from 'react';
 
 type Props = {
   event: Event;
@@ -7,8 +7,7 @@ type Props = {
 };
 
 export function EventCard({ event, index }: Props) {
-  const { favorites, toggleFavorite } = useEventsStore();
-  const isFav = favorites.includes(event.id);
+  const [isFav, setIsFav] = useState(false);
 
   const handleShare = () => {
     const data = {
@@ -38,7 +37,7 @@ export function EventCard({ event, index }: Props) {
         <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
           <button
             className={`btn glass-button ${isFav ? 'btn-primary' : 'btn-outline'}`}
-            onClick={() => toggleFavorite(event.id)}
+            onClick={() => setIsFav(!isFav)}
             style={{
               backdropFilter: 'blur(8px)',
               WebkitBackdropFilter: 'blur(8px)',
@@ -109,4 +108,3 @@ export function EventCard({ event, index }: Props) {
     </div>
   );
 }
-
