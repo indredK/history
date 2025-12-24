@@ -2,37 +2,59 @@ import type { Event } from '@/services/timeline/types';
 import type { Place } from '@/services/map/types';
 import type { CommonPerson } from '@/services/people/common/types';
 import type { Dynasty } from '@/services/culture/types';
+import type { Emperor } from '@/services/emperor/types';
+import type { Mythology } from '@/services/mythology/types';
+import type { ReligionGraphData } from '@/services/religion/types';
+import type { PhilosophicalSchool } from '@/services/schools/types';
 import { timelineApi } from '@/services/timeline/timelineApi';
 import { mapApi } from '@/services/map/mapApi';
 import { personApi } from '@/services/people/common/personApi';
 import { dynastiesApi } from '@/services/culture/cultureApi';
+import { getEmperors, getEmperorById } from '@/services/emperor/emperorApi';
+import { fetchMythologies, fetchMythologyById } from '@/services/mythology/mythologyApi';
+import { getReligionGraphData, getReligionNodeById } from '@/services/religion/religionApi';
+import { getSchools, getSchoolById } from '@/services/schools/schoolsApi';
 
-export interface ApiService {
-  // Timeline API
+export interface ServiceInterface {
   getEvents(): Promise<{ data: Event[] }>;
-  
-  // Map API
   getPlaces(): Promise<{ data: Place[] }>;
-  
-  // Person API
   getPersons(): Promise<{ data: CommonPerson[] }>;
-  getPerson(_id: string): Promise<{ data: CommonPerson }>;
-  
-  // Culture API
+  getPerson(id: string): Promise<{ data: CommonPerson }>;
   getDynasties(): Promise<{ data: Dynasty[] }>;
+  getEmperors(): Promise<{ data: Emperor[] }>;
+  getEmperor(id: string): Promise<{ data: Emperor | null }>;
+  getMythologies(): Promise<{ data: Mythology[] }>;
+  getMythology(id: string): Promise<{ data: Mythology | null }>;
+  getReligionGraph(): Promise<{ data: ReligionGraphData }>;
+  getReligionNode(id: string): Promise<{ data: ReligionGraphData['nodes'][0] | null }>;
+  getSchools(): Promise<{ data: PhilosophicalSchool[] }>;
+  getSchool(id: string): Promise<{ data: PhilosophicalSchool | null }>;
 }
 
-export const apiService: ApiService = {
-  // Timeline API
+export const apiService: ServiceInterface = {
   getEvents: () => timelineApi.getEvents(),
-  
-  // Map API
   getPlaces: () => mapApi.getPlaces(),
-  
-  // Person API
   getPersons: () => personApi.getPersons(),
-  getPerson: (_id) => personApi.getPerson(_id),
-  
-  // Culture API
+  getPerson: (id) => personApi.getPerson(id),
   getDynasties: () => dynastiesApi.getDynasties(),
+  getEmperors: () => getEmperors(),
+  getEmperor: (id) => getEmperorById(id),
+  getMythologies: async () => {
+    const result = await fetchMythologies();
+    return { data: result.data };
+  },
+  getMythology: async (id) => {
+    const result = await fetchMythologyById(id);
+    return { data: result };
+  },
+  getReligionGraph: async () => {
+    const result = await getReligionGraphData();
+    return { data: result.data };
+  },
+  getReligionNode: async (id) => {
+    const result = await getReligionNodeById(id);
+    return { data: result.data };
+  },
+  getSchools: () => getSchools(),
+  getSchool: (id) => getSchoolById(id),
 };
