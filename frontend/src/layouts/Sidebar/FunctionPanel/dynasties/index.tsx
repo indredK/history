@@ -9,7 +9,7 @@ import {
   UnfoldLess,
 } from '@mui/icons-material';
 import { buttonConfig } from '@/config';
-import { useDynastiesExpanded } from '@/store/dynastiesExpandedStore';
+import { useDynastiesExpanded } from '@/store/dynastyExpandedStore';
 
 export function DynastiesFunctions() {
   const {

@@ -2,13 +2,13 @@ export { useDynastyStore } from './dynastyStore';
 export { useTimelineStore } from './timelineStore';
 export { useMapStore } from './mapStore';
 
-export { usePersonsStore } from './personsStore';
+export { usePersonStore } from './personStore';
 export { useNavigationStore } from './navigationStore';
 export { useThemeStore, initializeTheme } from './themeStore';
 export { useStyleStore, initializeStyle } from './styleStore';
-export { useDynastiesStore, useDynastiesExpanded } from './dynastiesExpandedStore';
+export { useDynastiesStore, useDynastiesExpanded } from './dynastyExpandedStore';
 export { useScholarStore } from './scholarStore';
-export { useSchoolsStore } from './schoolsStore';
+export { useSchoolStore } from './schoolStore';
 export { useEmperorStore } from './emperorStore';
 export { useMingFigureStore } from './mingFigureStore';
 export { useQingRulerStore } from './qingRulerStore';

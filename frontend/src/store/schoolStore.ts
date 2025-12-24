@@ -14,7 +14,7 @@ interface SchoolsState {
   setError: (error: Error | null) => void;
 }
 
-export const useSchoolsStore = create<SchoolsState>((set) => ({
+export const useSchoolStore = create<SchoolsState>((set) => ({
   schools: [],
   selectedSchool: null,
   loading: false,

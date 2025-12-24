@@ -10,7 +10,7 @@ interface PersonsState {
   setSearchQuery: (_q: string) => void;
 }
 
-export const usePersonsStore = create<PersonsState>((set) => ({
+export const usePersonStore = create<PersonsState>((set) => ({
   persons: [],
   setPersons: (_persons) => set({ persons: _persons }),
   selectedPersonId: null,

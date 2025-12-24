@@ -14,7 +14,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { useRequest } from 'ahooks';
 
-import { useSchoolsStore } from '@/store';
+import { useSchoolStore } from '@/store';
 import { getSchools } from '@/services/school';
 import type { PhilosophicalSchool } from '@/services/school/types';
 
@@ -37,7 +37,7 @@ function CulturePage() {
     setSelectedSchool,
     setLoading: setSchoolsLoading,
     setError: setSchoolsError,
-  } = useSchoolsStore();
+  } = useSchoolStore();
 
   // 加载思想流派数据
   const { run: loadSchools, loading: schoolsRequestLoading } = useRequest(
