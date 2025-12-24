@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json package-lock.json* bun.lockb* ./
 
 # Install dependencies
-RUN if [ -f bun.lockb ]; then npm install -g bun && bun install; else npm install; fi
+RUN npm install
 
 # Copy source code
 COPY . .
@@ -17,7 +17,7 @@ ARG VITE_API_BASE_URL=/api/v1
 ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 
 # Build the application
-RUN npm run build
+RUN npx tsc --noEmit && npx vite build
 
 # Production stage
 FROM nginx:alpine as production-stage
