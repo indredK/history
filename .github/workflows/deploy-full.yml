@@ -21,6 +21,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Downcase REPO name
+        run: |
+          echo "REPO_LOWER=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
@@ -32,7 +36,7 @@ jobs:
         id: meta-backend
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.BACKEND_IMAGE }}
+          images: ${{ env.REGISTRY }}/${{ env.REPO_LOWER }}-backend
           tags: type=raw,value=latest
 
       - name: Build and push Backend
@@ -47,7 +51,7 @@ jobs:
         id: meta-frontend
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.FRONTEND_IMAGE }}
+          images: ${{ env.REGISTRY }}/${{ env.REPO_LOWER }}-frontend
           tags: type=raw,value=latest
 
       - name: Build and push Frontend
@@ -73,25 +77,28 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
+            # Set repo name to lowercase for docker pull
+            export REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+            
             # Login to GHCR
-            echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            echo ${{ secrets.GITHUB_TOKEN }} | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin
             
             # Pull new images
-            docker pull ${{ env.REGISTRY }}/${{ env.BACKEND_IMAGE }}:latest
-            docker pull ${{ env.REGISTRY }}/${{ env.FRONTEND_IMAGE }}:latest
+            sudo docker pull ${{ env.REGISTRY }}/$REPO_LOWER-backend:latest
+            sudo docker pull ${{ env.REGISTRY }}/$REPO_LOWER-frontend:latest
             
             # Stop keys containers
-            docker stop history-frontend history-backend || true
-            docker rm history-frontend history-backend || true
+            sudo docker stop history-frontend history-backend || true
+            sudo docker rm history-frontend history-backend || true
             
             # Create network if not exists
-            docker network create history-network || true
+            sudo docker network create history-network || true
             
             # Create volume if not exists
-            docker volume create history-data
+            sudo docker volume create history-data
             
             # Run Backend
-            docker run -d \
+            sudo docker run -d \
               --name history-backend \
               --restart always \
               --network history-network \
@@ -100,15 +107,15 @@ jobs:
               -e API_PREFIX="/api/v1" \
               -e NODE_ENV="production" \
               -e CORS_ORIGIN="*" \
-              ${{ env.REGISTRY }}/${{ env.BACKEND_IMAGE }}:latest
+              ${{ env.REGISTRY }}/$REPO_LOWER-backend:latest
             
             # Run Frontend (exposed on port 80)
-            docker run -d \
+            sudo docker run -d \
               --name history-frontend \
               --restart always \
               --network history-network \
               -p 80:80 \
-              ${{ env.REGISTRY }}/${{ env.FRONTEND_IMAGE }}:latest
+              ${{ env.REGISTRY }}/$REPO_LOWER-frontend:latest
               
             # Cleanup unused images
-            docker image prune -f
+            sudo docker image prune -f
