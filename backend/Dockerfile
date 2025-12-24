@@ -14,6 +14,7 @@ RUN if [ -f bun.lockb ]; then npm install -g bun && bun install; else npm instal
 COPY . .
 
 # Generate Prisma client
+ENV DATABASE_URL="file:./dev.db"
 RUN npx prisma generate
 
 # Build the application
