@@ -99,9 +99,9 @@ export function ReligionGraph({ width: propWidth, height: propHeight }: Religion
     async () => {
       const result = await getReligionGraphData();
       if (!result.success) {
-        throw new Error(result.message || '获取数据失败');
+        throw new Error((result as any).message || '获取数据失败');
       }
-      return result.data;
+      return result.data!;
     },
     {
       cacheKey: 'religionGraph',

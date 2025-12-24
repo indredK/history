@@ -83,9 +83,6 @@ function MythologyPage() {
   const { loading, error } = useRequest(
     async () => {
       const result = await getMythologies();
-      if (!result.success) {
-        throw new Error(result.message || '获取数据失败');
-      }
       return result.data;
     },
     {

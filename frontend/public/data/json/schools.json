@@ -1,428 +1,151 @@
 [
   {
-    "id": "confucianism",
+    "id": "school_confucianism",
     "name": "儒家",
     "name_en": "Confucianism",
     "founder": "孔子",
     "founderEn": "Confucius",
+    "foundingYear": -551,
     "foundingPeriod": "春秋时期",
-    "coreIdeas": ["仁", "义", "礼", "智", "信", "中庸", "孝悌"],
+    "coreBeliefs": ["仁", "义", "礼", "智", "信"],
+    "keyTexts": ["论语", "孟子", "大学", "中庸"],
     "representativeFigures": [
       {
-        "id": "confucius",
+        "id": "fig_confucius",
         "name": "孔子",
         "name_en": "Confucius",
-        "period": "前551年-前479年",
-        "contribution": "儒家学派创始人，提出仁、礼等核心思想，被尊为「至圣先师」"
+        "period": "春秋时期",
+        "contribution": "创立儒家思想"
       },
       {
-        "id": "mencius",
+        "id": "fig_mencius",
         "name": "孟子",
         "name_en": "Mencius",
-        "period": "前372年-前289年",
-        "contribution": "儒家学派重要代表，提出「性善论」和「仁政」思想，被尊为「亚圣」"
-      },
-      {
-        "id": "xunzi",
-        "name": "荀子",
-        "name_en": "Xunzi",
-        "period": "前313年-前238年",
-        "contribution": "儒家学派代表人物，提出「性恶论」，强调礼法并重"
+        "period": "战国时期",
+        "contribution": "发展儒家思想，提出性善论"
       }
     ],
     "classicWorks": [
       {
-        "id": "analects",
+        "id": "work_analects",
         "title": "论语",
         "title_en": "The Analects",
-        "author": "孔子弟子及再传弟子",
-        "description": "记录孔子及其弟子言行的语录体著作，儒家经典之首"
-      },
-      {
-        "id": "mencius-book",
-        "title": "孟子",
-        "title_en": "Mencius",
-        "author": "孟子及其弟子",
-        "description": "记录孟子言行和思想的著作，阐发仁政和性善论"
+        "author": "孔子弟子",
+        "description": "记录孔子言行的经典著作"
       }
     ],
-    "description": "儒家是中国古代最具影响力的思想流派，由孔子创立于春秋时期。儒家思想以「仁」为核心，强调道德修养、人伦关系和社会秩序。主张通过教育和礼乐来培养君子人格，实现社会和谐。",
-    "influence": "儒家思想深刻影响了中国两千多年的政治、文化和社会生活。汉武帝「罢黜百家，独尊儒术」后，儒学成为官方正统思想，形成了「儒家文化圈」。",
-    "color": "#8B4513"
+    "description": "以仁为核心的伦理哲学体系",
+    "influence": "对中国文化产生了深远影响，成为中国传统文化的主流思想",
+    "color": "#FF6B6B"
   },
   {
-    "id": "taoism",
+    "id": "school_taoism",
     "name": "道家",
     "name_en": "Taoism",
     "founder": "老子",
     "founderEn": "Laozi",
+    "foundingYear": -600,
     "foundingPeriod": "春秋时期",
-    "coreIdeas": ["道", "无为", "自然", "虚静", "柔弱", "返璞归真"],
+    "coreBeliefs": ["道法自然", "无为而治", "阴阳平衡"],
+    "keyTexts": ["道德经", "庄子"],
     "representativeFigures": [
       {
-        "id": "laozi",
+        "id": "fig_laozi",
         "name": "老子",
         "name_en": "Laozi",
-        "period": "约前571年-前471年",
-        "contribution": "道家学派创始人，著《道德经》，提出「道」的哲学概念"
+        "period": "春秋时期",
+        "contribution": "创立道家思想"
       },
       {
-        "id": "zhuangzi",
+        "id": "fig_zhuangzi",
         "name": "庄子",
         "name_en": "Zhuangzi",
-        "period": "约前369年-前286年",
-        "contribution": "道家学派重要代表，发展老子思想，追求精神自由和逍遥境界"
+        "period": "战国时期",
+        "contribution": "发展道家哲学，强调逍遥自在"
       }
     ],
     "classicWorks": [
       {
-        "id": "tao-te-ching",
+        "id": "work_tao_te_ching",
         "title": "道德经",
         "title_en": "Tao Te Ching",
         "author": "老子",
-        "description": "道家最重要的经典，阐述「道」的哲学和无为而治的思想"
-      },
-      {
-        "id": "zhuangzi-book",
-        "title": "庄子",
-        "title_en": "Zhuangzi",
-        "author": "庄子及其后学",
-        "description": "道家重要经典，以寓言形式阐发逍遥自由的人生哲学"
+        "description": "道家思想的根本经典"
       }
     ],
-    "description": "道家是中国古代重要的哲学流派，由老子创立于春秋时期。道家以「道」为最高哲学范畴，认为道是宇宙万物的本源和规律。主张「无为而治」、「顺应自然」，追求返璞归真的人生境界。",
-    "influence": "道家思想对中国哲学、宗教、艺术、医学等领域产生了深远影响。道教的形成直接受到道家思想的影响，道家的审美理念影响了中国传统艺术的发展。",
-    "color": "#2E8B57"
+    "description": "强调顺应自然、无为而治的哲学思想",
+    "influence": "对中国哲学、宗教、文学、艺术等领域都有重要影响",
+    "color": "#4ECDC4"
   },
   {
-    "id": "legalism",
+    "id": "school_legalism",
     "name": "法家",
     "name_en": "Legalism",
-    "founder": "管仲、李悝",
-    "founderEn": "Guan Zhong, Li Kui",
-    "foundingPeriod": "春秋战国时期",
-    "coreIdeas": ["法治", "势", "术", "刑赏", "富国强兵", "中央集权"],
+    "founder": "韩非子",
+    "founderEn": "Han Feizi",
+    "foundingYear": -280,
+    "foundingPeriod": "战国时期",
+    "coreBeliefs": ["法治", "严刑峻法", "富国强兵"],
+    "keyTexts": ["韩非子", "商君书"],
     "representativeFigures": [
       {
-        "id": "shang-yang",
-        "name": "商鞅",
-        "name_en": "Shang Yang",
-        "period": "约前390年-前338年",
-        "contribution": "法家代表人物，在秦国推行变法，奠定秦统一六国的基础"
-      },
-      {
-        "id": "han-feizi",
+        "id": "fig_hanfeizi",
         "name": "韩非子",
         "name_en": "Han Feizi",
-        "period": "约前280年-前233年",
-        "contribution": "法家思想集大成者，综合法、术、势三派学说"
+        "period": "战国时期",
+        "contribution": "集法家思想大成"
+      },
+      {
+        "id": "fig_shangjun",
+        "name": "商鞅",
+        "name_en": "Shang Yang",
+        "period": "战国时期",
+        "contribution": "推行变法，实践法家思想"
       }
     ],
     "classicWorks": [
       {
-        "id": "han-feizi-book",
+        "id": "work_hanfeizi",
         "title": "韩非子",
         "title_en": "Han Feizi",
-        "author": "韩非",
-        "description": "法家思想的集大成之作，系统阐述法、术、势的治国理论"
-      },
-      {
-        "id": "book-of-lord-shang",
-        "title": "商君书",
-        "title_en": "The Book of Lord Shang",
-        "author": "商鞅及其后学",
-        "description": "记录商鞅变法思想和实践的著作"
+        "author": "韩非子",
+        "description": "法家思想的集大成之作"
       }
     ],
-    "description": "法家是中国古代主张以法治国的思想流派，形成于春秋战国时期。法家反对儒家的礼治和德治，主张用严明的法律来治理国家。强调「法」「术」「势」三者的结合，追求富国强兵。",
-    "influence": "法家思想对中国古代政治制度产生了重大影响。秦朝采用法家思想统一六国，建立了中国历史上第一个中央集权的封建王朝。",
-    "color": "#8B0000"
+    "description": "强调法治和中央集权的政治哲学",
+    "influence": "对秦朝统一和中国古代政治制度产生重要影响",
+    "color": "#95A5A6"
   },
   {
-    "id": "mohism",
+    "id": "school_mohism",
     "name": "墨家",
     "name_en": "Mohism",
     "founder": "墨子",
     "founderEn": "Mozi",
+    "foundingYear": -470,
     "foundingPeriod": "战国时期",
-    "coreIdeas": ["兼爱", "非攻", "尚贤", "尚同", "节用", "节葬", "天志", "明鬼"],
+    "coreBeliefs": ["兼爱", "非攻", "节用", "尚贤"],
+    "keyTexts": ["墨子"],
     "representativeFigures": [
       {
-        "id": "mozi",
+        "id": "fig_mozi",
         "name": "墨子",
         "name_en": "Mozi",
-        "period": "约前468年-前376年",
-        "contribution": "墨家学派创始人，提出兼爱非攻思想，建立严密的学派组织"
-      },
-      {
-        "id": "qin-huali",
-        "name": "禽滑厘",
-        "name_en": "Qin Huali",
         "period": "战国时期",
-        "contribution": "墨子弟子，传承墨家学说，擅长守城之术"
+        "contribution": "创立墨家思想，提出兼爱非攻"
       }
     ],
     "classicWorks": [
       {
-        "id": "mozi-book",
+        "id": "work_mozi",
         "title": "墨子",
         "title_en": "Mozi",
-        "author": "墨子及其弟子",
-        "description": "墨家学派的主要著作，阐述兼爱、非攻等核心思想"
+        "author": "墨子",
+        "description": "墨家思想的主要著作"
       }
     ],
-    "description": "墨家是战国时期与儒家并称的重要学派，由墨子创立。墨家主张「兼爱」（无差别的爱）和「非攻」（反对侵略战争），强调实用主义和功利主义。墨家有严密的组织纪律，门徒众多。",
-    "influence": "墨家在战国时期影响巨大，与儒家并称「显学」。墨家的逻辑学、科学技术思想对后世有重要影响。虽然秦汉后墨家衰落，但其兼爱非攻思想仍具有现代价值。",
-    "color": "#4169E1"
-  },
-  {
-    "id": "school-of-names",
-    "name": "名家",
-    "name_en": "School of Names",
-    "founder": "邓析",
-    "founderEn": "Deng Xi",
-    "foundingPeriod": "春秋战国时期",
-    "coreIdeas": ["名实之辩", "白马非马", "坚白之辩", "逻辑分析", "概念辨析"],
-    "representativeFigures": [
-      {
-        "id": "gongsun-long",
-        "name": "公孙龙",
-        "name_en": "Gongsun Long",
-        "period": "约前320年-前250年",
-        "contribution": "名家代表人物，提出「白马非马」「坚白论」等著名命题"
-      },
-      {
-        "id": "hui-shi",
-        "name": "惠施",
-        "name_en": "Hui Shi",
-        "period": "约前370年-前310年",
-        "contribution": "名家代表人物，提出「历物十事」等辩证命题"
-      }
-    ],
-    "classicWorks": [
-      {
-        "id": "gongsun-longzi",
-        "title": "公孙龙子",
-        "title_en": "Gongsun Longzi",
-        "author": "公孙龙",
-        "description": "名家重要著作，包含白马论、坚白论等逻辑辩论"
-      }
-    ],
-    "description": "名家是战国时期专门研究名实关系和逻辑问题的学派。名家善于辩论，注重概念分析和逻辑推理，提出了许多著名的逻辑命题，如「白马非马」「坚白离」等。",
-    "influence": "名家对中国古代逻辑学的发展做出了重要贡献。虽然名家作为独立学派在秦汉后消亡，但其逻辑思维方法对后世哲学和语言学研究有一定影响。",
-    "color": "#9932CC"
-  },
-  {
-    "id": "yin-yang",
-    "name": "阴阳家",
-    "name_en": "School of Yin-Yang",
-    "founder": "邹衍",
-    "founderEn": "Zou Yan",
-    "foundingPeriod": "战国时期",
-    "coreIdeas": ["阴阳", "五行", "五德终始", "天人感应", "相生相克"],
-    "representativeFigures": [
-      {
-        "id": "zou-yan",
-        "name": "邹衍",
-        "name_en": "Zou Yan",
-        "period": "约前305年-前240年",
-        "contribution": "阴阳家代表人物，创立五德终始说，将阴阳五行学说系统化"
-      }
-    ],
-    "classicWorks": [
-      {
-        "id": "zou-yan-works",
-        "title": "邹子",
-        "title_en": "Zouzi",
-        "author": "邹衍",
-        "description": "阴阳家主要著作，已佚失，内容见于其他典籍引用"
-      }
-    ],
-    "description": "阴阳家是战国时期以阴阳五行学说解释宇宙万物的学派。阴阳家将阴阳、五行概念系统化，用以解释自然现象和社会变化，提出「五德终始」的历史循环论。",
-    "influence": "阴阳五行学说对中国传统文化影响深远，渗透到哲学、医学、天文、历法、风水等各个领域。中医理论、传统历法都以阴阳五行为基础。",
-    "color": "#FFD700"
-  },
-  {
-    "id": "diplomacy",
-    "name": "纵横家",
-    "name_en": "School of Diplomacy",
-    "founder": "鬼谷子",
-    "founderEn": "Guiguzi",
-    "foundingPeriod": "战国时期",
-    "coreIdeas": ["合纵连横", "游说之术", "权谋策略", "因势利导", "揣摩人心"],
-    "representativeFigures": [
-      {
-        "id": "su-qin",
-        "name": "苏秦",
-        "name_en": "Su Qin",
-        "period": "？-前284年",
-        "contribution": "纵横家代表人物，主张「合纵」，曾佩六国相印"
-      },
-      {
-        "id": "zhang-yi",
-        "name": "张仪",
-        "name_en": "Zhang Yi",
-        "period": "？-前309年",
-        "contribution": "纵横家代表人物，主张「连横」，为秦国瓦解六国联盟"
-      }
-    ],
-    "classicWorks": [
-      {
-        "id": "guiguzi",
-        "title": "鬼谷子",
-        "title_en": "Guiguzi",
-        "author": "鬼谷子",
-        "description": "纵横家理论著作，论述游说技巧和谋略之术"
-      },
-      {
-        "id": "zhanguoce",
-        "title": "战国策",
-        "title_en": "Strategies of the Warring States",
-        "author": "刘向编",
-        "description": "记录战国时期纵横家活动的历史著作"
-      }
-    ],
-    "description": "纵横家是战国时期从事政治外交活动的学派。纵横家以游说诸侯、从事外交活动为主，「纵」指合纵（六国联合抗秦），「横」指连横（与秦国结盟）。",
-    "influence": "纵横家的外交策略和游说技巧对后世政治、外交产生了重要影响。《鬼谷子》《战国策》等著作成为研究谋略和说服术的经典。",
-    "color": "#DC143C"
-  },
-  {
-    "id": "eclecticism",
-    "name": "杂家",
-    "name_en": "School of Eclecticism",
-    "founder": "吕不韦",
-    "founderEn": "Lü Buwei",
-    "foundingPeriod": "战国末期",
-    "coreIdeas": ["兼收并蓄", "博采众长", "综合百家", "实用主义"],
-    "representativeFigures": [
-      {
-        "id": "lv-buwei",
-        "name": "吕不韦",
-        "name_en": "Lü Buwei",
-        "period": "？-前235年",
-        "contribution": "杂家代表人物，主持编撰《吕氏春秋》，综合百家学说"
-      },
-      {
-        "id": "liu-an",
-        "name": "刘安",
-        "name_en": "Liu An",
-        "period": "前179年-前122年",
-        "contribution": "西汉淮南王，主持编撰《淮南子》，融合道家与诸子思想"
-      }
-    ],
-    "classicWorks": [
-      {
-        "id": "lushi-chunqiu",
-        "title": "吕氏春秋",
-        "title_en": "The Annals of Lü Buwei",
-        "author": "吕不韦门客",
-        "description": "杂家代表作，综合先秦诸子百家思想的百科全书式著作"
-      },
-      {
-        "id": "huainanzi",
-        "title": "淮南子",
-        "title_en": "Huainanzi",
-        "author": "刘安及其门客",
-        "description": "西汉杂家著作，融合道家思想与诸子学说"
-      }
-    ],
-    "description": "杂家是战国末期兼采各家学说的学派。杂家不拘一家之言，博采众长，试图综合诸子百家的思想精华，形成一套完整的治国理论。",
-    "influence": "杂家的综合精神对后世学术发展有重要影响。《吕氏春秋》《淮南子》等著作保存了大量先秦思想资料，是研究诸子百家的重要文献。",
-    "color": "#708090"
-  },
-  {
-    "id": "agriculturalism",
-    "name": "农家",
-    "name_en": "School of Agriculturalism",
-    "founder": "许行",
-    "founderEn": "Xu Xing",
-    "foundingPeriod": "战国时期",
-    "coreIdeas": ["重农", "君民并耕", "市贾不二", "农本思想"],
-    "representativeFigures": [
-      {
-        "id": "xu-xing",
-        "name": "许行",
-        "name_en": "Xu Xing",
-        "period": "战国时期",
-        "contribution": "农家代表人物，主张君民并耕，反对社会等级分化"
-      },
-      {
-        "id": "chen-xiang",
-        "name": "陈相",
-        "name_en": "Chen Xiang",
-        "period": "战国时期",
-        "contribution": "许行弟子，传播农家学说"
-      }
-    ],
-    "classicWorks": [
-      {
-        "id": "shengnong",
-        "title": "神农",
-        "title_en": "Shennong",
-        "author": "农家学者",
-        "description": "农家著作，已佚失，内容涉及农业生产和社会理想"
-      }
-    ],
-    "description": "农家是战国时期主张重视农业生产的学派。农家认为农业是国家根本，主张君主应与百姓一起耕作，反对社会等级分化和商业投机。",
-    "influence": "农家的重农思想对中国传统社会产生了深远影响。「以农为本」成为历代王朝的基本国策，农业在中国传统经济中始终占据核心地位。",
-    "color": "#228B22"
-  },
-  {
-    "id": "militarism",
-    "name": "兵家",
-    "name_en": "School of Military",
-    "founder": "孙武",
-    "founderEn": "Sun Wu",
-    "foundingPeriod": "春秋战国时期",
-    "coreIdeas": ["知己知彼", "不战而胜", "奇正相生", "因敌制胜", "兵者诡道"],
-    "representativeFigures": [
-      {
-        "id": "sun-wu",
-        "name": "孙武",
-        "name_en": "Sun Wu",
-        "period": "约前545年-前470年",
-        "contribution": "兵家鼻祖，著《孙子兵法》，被尊为「兵圣」"
-      },
-      {
-        "id": "sun-bin",
-        "name": "孙膑",
-        "name_en": "Sun Bin",
-        "period": "约前380年-前316年",
-        "contribution": "兵家代表人物，著《孙膑兵法》，以围魏救赵闻名"
-      },
-      {
-        "id": "wu-qi",
-        "name": "吴起",
-        "name_en": "Wu Qi",
-        "period": "约前440年-前381年",
-        "contribution": "兵家代表人物，著《吴子》，善于治军和变法"
-      }
-    ],
-    "classicWorks": [
-      {
-        "id": "art-of-war",
-        "title": "孙子兵法",
-        "title_en": "The Art of War",
-        "author": "孙武",
-        "description": "中国古代最著名的军事著作，被誉为「兵学圣典」"
-      },
-      {
-        "id": "sun-bin-art-of-war",
-        "title": "孙膑兵法",
-        "title_en": "Sun Bin's Art of War",
-        "author": "孙膑",
-        "description": "兵家重要著作，1972年出土于银雀山汉墓"
-      },
-      {
-        "id": "wuzi",
-        "title": "吴子",
-        "title_en": "Wuzi",
-        "author": "吴起",
-        "description": "兵家经典著作，论述治军和作战之道"
-      }
-    ],
-    "description": "兵家是研究军事战略战术的学派，形成于春秋战国时期。兵家注重战争规律的研究，强调「知己知彼，百战不殆」，追求「不战而屈人之兵」的最高境界。",
-    "influence": "兵家思想对中国乃至世界军事理论产生了深远影响。《孙子兵法》被译成多种语言，在全球广泛传播，其战略思想被应用于军事、商业、管理等多个领域。",
-    "color": "#B22222"
+    "description": "提倡兼爱、非攻、节俭的哲学思想",
+    "influence": "在战国时期与儒家并称显学，对后世逻辑学发展有贡献",
+    "color": "#F39C12"
   }
 ]

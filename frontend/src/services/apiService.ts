@@ -2,7 +2,7 @@ import type { Event } from '@/services/timeline/types';
 import type { Place } from '@/services/map/types';
 import type { CommonPerson } from '@/services/people/common/types';
 import type { Dynasty } from '@/services/culture/types';
-import type { Emperor } from '@/services/emperor/types';
+import type { Emperor } from '@/services/people/emperors/types';
 import type { Mythology } from '@/services/mythology/types';
 import type { ReligionGraphData } from '@/services/religion/types';
 import type { PhilosophicalSchool } from '@/services/schools/types';
@@ -10,8 +10,8 @@ import { timelineApi } from '@/services/timeline/timelineApi';
 import { mapApi } from '@/services/map/mapApi';
 import { personApi } from '@/services/people/common/personApi';
 import { dynastiesApi } from '@/services/culture/cultureApi';
-import { getEmperors, getEmperorById } from '@/services/emperor/emperorApi';
-import { fetchMythologies, fetchMythologyById } from '@/services/mythology/mythologyApi';
+import { getEmperors, getEmperorById } from '@/services/people/emperors/emperorApi';
+import { mythologyApi } from '@/services/mythology/mythologyApi';
 import { getReligionGraphData, getReligionNodeById } from '@/services/religion/religionApi';
 import { getSchools, getSchoolById } from '@/services/schools/schoolsApi';
 
@@ -19,7 +19,7 @@ export interface ServiceInterface {
   getEvents(): Promise<{ data: Event[] }>;
   getPlaces(): Promise<{ data: Place[] }>;
   getPersons(): Promise<{ data: CommonPerson[] }>;
-  getPerson(id: string): Promise<{ data: CommonPerson }>;
+  getPerson(id: string): Promise<{ data: CommonPerson | null }>;
   getDynasties(): Promise<{ data: Dynasty[] }>;
   getEmperors(): Promise<{ data: Emperor[] }>;
   getEmperor(id: string): Promise<{ data: Emperor | null }>;
@@ -40,12 +40,12 @@ export const apiService: ServiceInterface = {
   getEmperors: () => getEmperors(),
   getEmperor: (id) => getEmperorById(id),
   getMythologies: async () => {
-    const result = await fetchMythologies();
+    const result = await mythologyApi.getMythologies();
     return { data: result.data };
   },
   getMythology: async (id) => {
-    const result = await fetchMythologyById(id);
-    return { data: result };
+    const result = await mythologyApi.getMythology(id);
+    return { data: result.data };
   },
   getReligionGraph: async () => {
     const result = await getReligionGraphData();

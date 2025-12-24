@@ -1,16 +1,34 @@
+import { createUnifiedService } from '../base/serviceFactory';
 import type { PhilosophicalSchool } from './types';
-import { createApiClient, handleApiResponse } from '../utils/apiResponseHandler';
 
-const api = createApiClient();
+// 数据转换器
+function transformJsonToSchool(jsonSchool: any): PhilosophicalSchool {
+  return {
+    id: jsonSchool.id,
+    name: jsonSchool.name,
+    name_en: jsonSchool.name_en,
+    founder: jsonSchool.founder,
+    founderEn: jsonSchool.founderEn,
+    foundingYear: jsonSchool.foundingYear,
+    foundingPeriod: jsonSchool.foundingPeriod,
+    coreBeliefs: jsonSchool.coreBeliefs,
+    keyTexts: jsonSchool.keyTexts,
+    representativeFigures: jsonSchool.representativeFigures,
+    classicWorks: jsonSchool.classicWorks,
+    description: jsonSchool.description,
+    influence: jsonSchool.influence,
+    color: jsonSchool.color,
+  };
+}
 
-export const getSchools = async () => {
-  const response = await api.get('/schools');
-  return handleApiResponse<PhilosophicalSchool>(response);
-};
+// 创建统一服务
+const unifiedService = createUnifiedService<PhilosophicalSchool>(
+  '/schools',
+  '/data/json/schools.json',
+  transformJsonToSchool,
+  { hasGetById: true }
+);
 
-export const getSchoolById = async (id: string) => {
-  const response = await api.get(`/schools/${id}`);
-  const result = handleApiResponse<PhilosophicalSchool>(response);
-  const school = Array.isArray(result.data) ? result.data[0] : result.data;
-  return { data: school || null };
-};
+export const getSchools = () => unifiedService.getAll();
+
+export const getSchoolById = (id: string) => unifiedService.getById!(id);

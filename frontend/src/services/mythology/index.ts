@@ -15,23 +15,10 @@ export type {
 export { VALID_CATEGORIES } from './types';
 
 // 服务函数导出
-export { 
-  validateMythology,
-  isValidCategory,
-  filterByCategory,
-  getMythologies,
-  getMythologyById,
-  getAllCategories
-} from './mythologyService';
-
-export type { ValidationResult } from './mythologyService';
+export { validateMythology, getMythologies, filterByCategory } from './mythologyService';
 
 // API 导出
-export { fetchMythologies, fetchMythologyById } from './mythologyApi';
-export type { MythologyApiResponse } from './mythologyApi';
+export { fetchMythologies, fetchMythologyById, mythologyApi } from './mythologyApi';
 
 // 数据客户端导出
 export * from './mythologyDataClient';
-
-// Mock 数据导出（用于测试）
-export { mockMythologies } from './mythologyMock';

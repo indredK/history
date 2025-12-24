@@ -41,6 +41,7 @@ export const useMythologyStore = create<MythologyStore>((set, get) => ({
   // 计算属性：获取筛选后的神话列表
   getFilteredMythologies: () => {
     const { mythologies, activeCategory } = get();
+    if (!activeCategory) return mythologies;
     return filterByCategory(mythologies, activeCategory);
   },
 }));

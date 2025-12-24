@@ -6,4 +6,4 @@ export {
   getEmperors,
   getEmperorById,
   getDynasties
-} from '../../emperor/emperorDataClient';
+} from './emperorDataClient';

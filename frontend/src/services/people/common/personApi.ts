@@ -1,16 +1,35 @@
 import type { PersonService } from './personService';
+import { createUnifiedService } from '../../base/serviceFactory';
 import type { CommonPerson } from './types';
-import { createApiClient, handleApiResponse, handleSingleApiResponse } from '../../utils/apiResponseHandler';
 
-const api = createApiClient();
+// 数据转换器
+function transformJsonToPerson(jsonPerson: any, index: number): CommonPerson {
+  const roles = jsonPerson.roles ? jsonPerson.roles.split(',').map((r: string) => r.trim()) : [];
+  
+  return {
+    id: `person_${jsonPerson.name.replace(/\s+/g, '_')}_${index}`,
+    name: jsonPerson.name,
+    name_en: jsonPerson.name_en,
+    birthYear: jsonPerson.birth_year,
+    birthMonth: jsonPerson.birth_month,
+    deathYear: jsonPerson.death_year,
+    deathMonth: jsonPerson.death_month,
+    biography: jsonPerson.biography,
+    roles: roles,
+    source_ids: jsonPerson.source ? [`src_${jsonPerson.source}`] : [],
+  };
+}
+
+// 创建统一服务
+const unifiedService = createUnifiedService<CommonPerson>(
+  '/persons',
+  '/data/json/persons.json',
+  transformJsonToPerson,
+  { hasGetById: true }
+);
 
 export const personApi: PersonService = {
-  getPersons: async () => {
-    const response = await api.get('/persons');
-    return handleApiResponse<CommonPerson>(response);
-  },
-  getPerson: async (id: string) => {
-    const response = await api.get(`/persons/${id}`);
-    return handleSingleApiResponse<CommonPerson>(response);
-  },
+  ...unifiedService,
+  getPersons: () => unifiedService.getAll(),
+  getPerson: (id: string) => unifiedService.getById!(id),
 };
