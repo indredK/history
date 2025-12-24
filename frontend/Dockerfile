@@ -16,6 +16,9 @@ COPY . .
 ARG VITE_API_BASE_URL=/api/v1
 ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 
+ARG VITE_BASE_PATH=/
+ENV VITE_BASE_PATH=$VITE_BASE_PATH
+
 # Build the application
 RUN npx tsc --noEmit && npx vite build
 

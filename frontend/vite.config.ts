@@ -6,8 +6,8 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   
   return {
-  // GitHub Pages 部署配置
-  base: process.env.NODE_ENV === 'production' ? '/history/' : '/',
+  // 兼容 GitHub Pages (需要 /history/) 和 自有服务器 (需要 /)
+  base: process.env.VITE_BASE_PATH || '/',
   plugins: [
     react({
       // 生产环境移除 React DevTools
