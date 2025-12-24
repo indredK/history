@@ -102,8 +102,8 @@ jobs:
               --name history-backend \
               --restart always \
               --network history-network \
-              -v history-data:/app/prisma \
-              -e DATABASE_URL="file:/app/prisma/dev.db" \
+              -v history-data:/app/data \
+              -e DATABASE_URL="file:/app/data/dev.db" \
               -e API_PREFIX="/api/v1" \
               -e NODE_ENV="production" \
               -e CORS_ORIGIN="*" \

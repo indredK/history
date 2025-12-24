@@ -1,9 +1,10 @@
 // Prisma Schema for Chinese Historical Panorama
 generator client {
-  provider     = "prisma-client"
-  output       = "../src/generated/prisma"
-  engineType   = "client"
-  moduleFormat = "cjs"
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["driverAdapters"]
+  engineType      = "library"
+  moduleFormat    = "cjs"
 }
 
 datasource db {

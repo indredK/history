@@ -29,6 +29,9 @@ WORKDIR /app
 COPY package.json package-lock.json* bun.lockb* ./
 RUN if [ -f bun.lockb ]; then npm install -g bun && bun install --production; else npm install --production; fi
 
+# Install openssl for Prisma
+RUN apk add --no-cache openssl
+
 # Copy built assets from builder
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
@@ -37,4 +40,4 @@ COPY --from=builder /app/prisma ./prisma
 EXPOSE 3001
 
 # Start command
-CMD ["npm", "run", "start:prod"]
+CMD ["/bin/sh", "-c", "npx prisma migrate deploy && npm run start:prod"]
