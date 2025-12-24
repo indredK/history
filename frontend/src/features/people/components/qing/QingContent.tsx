@@ -13,9 +13,9 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { useRequest } from 'ahooks';
 
 import { useQingRulerStore } from '@/store';
-import { getQingRulers } from '@/services/people/qing';
-import type { QingRuler } from '@/services/people/qing/types';
-import type { QingRulerSortBy } from '@/services/people/qing';
+import { getQingRulers } from '@/services/person/qing';
+import type { QingRuler } from '@/services/person/qing/types';
+import type { QingRulerSortBy } from '@/services/person/qing';
 
 import { PeopleFilter } from '../common/PeopleFilter';
 import { QingRulerGrid } from './QingRulerGrid';

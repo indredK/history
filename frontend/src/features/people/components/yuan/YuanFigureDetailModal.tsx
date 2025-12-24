@@ -10,9 +10,9 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import HistoryIcon from '@mui/icons-material/History';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import WorkIcon from '@mui/icons-material/Work';
-import type { YuanFigure } from '@/services/people/yuanFigure/types';
-import { ROLE_LABELS } from '@/services/people/yuanFigure/types';
-import { yuanFigureService } from '@/services/people/yuanFigure';
+import type { YuanFigure } from '@/services/person/yuan/types';
+import { ROLE_LABELS } from '@/services/person/yuan/types';
+import { yuanFigureService } from '@/services/person/yuan';
 
 interface YuanFigureDetailModalProps {
   figure: YuanFigure | null;

@@ -8,8 +8,8 @@
  */
 
 import { PersonCard, type TagColor } from '@/components/common';
-import type { QingRuler } from '@/services/people/qing/types';
-import { qingRulerService } from '@/services/people/qing';
+import type { QingRuler } from '@/services/person/qing/types';
+import { qingRulerService } from '@/services/person/qing';
 
 interface QingRulerCardProps {
   ruler: QingRuler;

@@ -24,7 +24,7 @@ import {
   Refresh as RefreshIcon,
   Settings as SettingsIcon,
 } from '@mui/icons-material';
-import { getApiStatus, fallbackControl } from '@/services/utils/apiResponseHandler';
+import { getApiStatus, fallbackControl } from '@/utils/services/apiClient';
 
 /**
  * API状态指示器组件

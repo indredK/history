@@ -3,9 +3,9 @@
  */
 
 import { PersonCard, type TagColor } from '@/components/common';
-import type { SongFigure } from '@/services/people/songFigure/types';
-import { ROLE_LABELS } from '@/services/people/songFigure/types';
-import { songFigureService } from '@/services/people/songFigure';
+import type { SongFigure } from '@/services/person/song/types';
+import { ROLE_LABELS } from '@/services/person/song/types';
+import { songFigureService } from '@/services/person/song';
 
 interface SongFigureCardProps {
   figure: SongFigure;

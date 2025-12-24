@@ -27,8 +27,8 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
-import type { QingRuler } from '@/services/people/qing/types';
-import { qingRulerService } from '@/services/people/qing';
+import type { QingRuler } from '@/services/person/qing/types';
+import { qingRulerService } from '@/services/person/qing';
 
 interface QingRulerDetailModalProps {
   ruler: QingRuler | null;

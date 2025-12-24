@@ -8,7 +8,7 @@
  */
 
 import { ContentCard, type ContentTagColor } from '@/components/common';
-import type { PhilosophicalSchool } from '@/services/schools/types';
+import type { PhilosophicalSchool } from '@/services/school/types';
 
 interface SchoolCardProps {
   school: PhilosophicalSchool;

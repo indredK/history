@@ -10,7 +10,7 @@
 
 import { Box, Typography, Skeleton, Card, CardContent } from '@mui/material';
 import { SchoolCard } from './SchoolCard';
-import type { PhilosophicalSchool } from '@/services/schools/types';
+import type { PhilosophicalSchool } from '@/services/school/types';
 
 interface SchoolsListProps {
   schools: PhilosophicalSchool[];

@@ -8,10 +8,10 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { useRequest } from 'ahooks';
 
 import { useSongFigureStore } from '@/store/songFigureStore';
-import { getSongFigures } from '@/services/people/songFigure';
-import type { SongFigure, SongFigureRole } from '@/services/people/songFigure/types';
-import type { SongFigureSortBy } from '@/services/people/songFigure';
-import { ROLE_LABELS } from '@/services/people/songFigure/types';
+import { getSongFigures } from '@/services/person/song';
+import type { SongFigure, SongFigureRole } from '@/services/person/song/types';
+import type { SongFigureSortBy } from '@/services/person/song';
+import { ROLE_LABELS } from '@/services/person/song/types';
 
 import { PeopleFilter } from '../common/PeopleFilter';
 import { SongFigureGrid } from './SongFigureGrid';

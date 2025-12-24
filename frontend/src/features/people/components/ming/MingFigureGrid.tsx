@@ -5,7 +5,7 @@
 import { Box, Typography } from '@mui/material';
 import { MingFigureCard } from './MingFigureCard';
 import { GridSkeleton } from '../common/GridSkeleton';
-import type { MingFigure } from '@/services/people/mingFigure/types';
+import type { MingFigure } from '@/services/person/ming/types';
 
 interface MingFigureGridProps {
   figures: MingFigure[];

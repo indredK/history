@@ -3,9 +3,9 @@
  */
 
 import { create } from 'zustand';
-import type { YuanFigure, YuanFigureRole } from '@/services/people/yuanFigure/types';
-import { yuanFigureService, type YuanFigureSortBy } from '@/services/people/yuanFigure';
-import { YUAN_PERIODS } from '@/services/people/yuanFigure/types';
+import type { YuanFigure, YuanFigureRole } from '@/services/person/yuan/types';
+import { yuanFigureServiceHelper, type YuanFigureSortBy } from '@/services/person/yuan';
+import { YUAN_PERIODS } from '@/services/person/yuan/types';
 
 interface YuanFigureFilters {
   role: YuanFigureRole | '全部';
@@ -52,11 +52,11 @@ export const useYuanFigureStore = create<YuanFigureState>((set, get) => ({
   setRoleFilter: (role) => set((state) => ({ filters: { ...state.filters, role } })),
   setPeriodFilter: (period) => set((state) => ({ filters: { ...state.filters, period } })),
   setSearchQuery: (query) => set((state) => ({ filters: { ...state.filters, searchQuery: query } })),
-  setSortBy: (sortBy) => set((state) => ({ filters: { ...state.filters, sortBy } })),
+  setSortBy: (sortBy: YuanFigureSortBy) => set((state) => ({ filters: { ...state.filters, sortBy } })),
 
   getFilteredFigures: () => {
     const { figures, filters } = get();
-    return yuanFigureService.filterAndSort(figures, {
+    return yuanFigureServiceHelper.filterAndSort(figures, {
       role: filters.role,
       period: filters.period,
       query: filters.searchQuery,

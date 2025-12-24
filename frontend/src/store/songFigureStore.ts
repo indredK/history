@@ -3,9 +3,9 @@
  */
 
 import { create } from 'zustand';
-import type { SongFigure, SongFigureRole } from '@/services/people/songFigure/types';
-import { songFigureService, type SongFigureSortBy } from '@/services/people/songFigure';
-import { SONG_PERIODS } from '@/services/people/songFigure/types';
+import type { SongFigure, SongFigureRole } from '@/services/person/song/types';
+import { songFigureServiceHelper, type SongFigureSortBy } from '@/services/person/song';
+import { SONG_PERIODS } from '@/services/person/song/types';
 
 interface SongFigureFilters {
   role: SongFigureRole | '全部';
@@ -52,11 +52,11 @@ export const useSongFigureStore = create<SongFigureState>((set, get) => ({
   setRoleFilter: (role) => set((state) => ({ filters: { ...state.filters, role } })),
   setPeriodFilter: (period) => set((state) => ({ filters: { ...state.filters, period } })),
   setSearchQuery: (query) => set((state) => ({ filters: { ...state.filters, searchQuery: query } })),
-  setSortBy: (sortBy) => set((state) => ({ filters: { ...state.filters, sortBy } })),
+  setSortBy: (sortBy: SongFigureSortBy) => set((state) => ({ filters: { ...state.filters, sortBy } })),
 
   getFilteredFigures: () => {
     const { figures, filters } = get();
-    return songFigureService.filterAndSort(figures, {
+    return songFigureServiceHelper.filterAndSort(figures, {
       role: filters.role,
       period: filters.period,
       query: filters.searchQuery,

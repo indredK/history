@@ -1,12 +1,12 @@
 import type { ServiceInterface } from './apiService';
 import { timelineApi } from '@/services/timeline/timelineApi';
 import { mapApi } from '@/services/map/mapApi';
-import { personApi } from '@/services/people/common/personApi';
+import { personApi } from '@/services/person/common/personApi';
 import { dynastiesApi } from '@/services/culture/cultureApi';
-import { getEmperors, getEmperorById } from '@/services/people/emperors/emperorApi';
+import { getEmperors, getEmperorById } from '@/services/person/emperors/emperorApi';
 import { mythologyApi } from '@/services/mythology/mythologyApi';
 import { getReligionGraphData, getReligionNodeById } from '@/services/religion/religionApi';
-import { getSchools, getSchoolById } from '@/services/schools/schoolsApi';
+import { getSchools, getSchoolById } from '@/services/school/schoolApi';
 
 export const mockService: ServiceInterface = {
   getEvents: () => timelineApi.getEvents(),

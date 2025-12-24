@@ -8,9 +8,9 @@
  */
 
 import { create } from 'zustand';
-import type { MingFigure, MingFigureRole } from '@/services/people/mingFigure/types';
-import { mingFigureService, type MingFigureSortBy } from '@/services/people/mingFigure';
-import { MING_PERIODS } from '@/services/people/mingFigure/types';
+import type { MingFigure, MingFigureRole } from '@/services/person/ming/types';
+import { mingService, type MingFigureSortBy } from '@/services/person/ming';
+import { MING_PERIODS } from '@/services/person/ming/types';
 
 interface MingFigureFilters {
   role: MingFigureRole | '全部';
@@ -78,7 +78,7 @@ export const useMingFigureStore = create<MingFigureState>((set, get) => ({
 
   getFilteredFigures: () => {
     const { figures, filters } = get();
-    return mingFigureService.filterAndSort(figures, {
+    return mingService.filterAndSort(figures, {
       role: filters.role,
       period: filters.period,
       query: filters.searchQuery,

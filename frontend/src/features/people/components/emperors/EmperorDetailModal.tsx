@@ -10,8 +10,8 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import WarningIcon from '@mui/icons-material/Warning';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import type { Emperor } from '@/services/people/emperors/types';
-import { emperorService } from '@/services/people/emperors';
+import type { Emperor } from '@/services/person/emperors/types';
+import { emperorService } from '@/services/person/emperors';
 
 interface EmperorDetailModalProps {
   emperor: Emperor | null;

@@ -8,7 +8,7 @@
  */
 
 import { Box, Typography } from '@mui/material';
-import type { QingRuler } from '@/services/people/qing/types';
+import type { QingRuler } from '@/services/person/qing/types';
 import { QingRulerCard } from './QingRulerCard';
 import { GridSkeleton } from '../common/GridSkeleton';
 

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { PhilosophicalSchool } from '@/services/schools/types';
+import type { PhilosophicalSchool } from '@/services/school/types';
 
 interface SchoolsState {
   schools: PhilosophicalSchool[];

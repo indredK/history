@@ -10,9 +10,9 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import HistoryIcon from '@mui/icons-material/History';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import WorkIcon from '@mui/icons-material/Work';
-import type { MingFigure } from '@/services/people/mingFigure/types';
-import { ROLE_LABELS } from '@/services/people/mingFigure/types';
-import { mingFigureService } from '@/services/people/mingFigure';
+import type { MingFigure } from '@/services/person/ming/types';
+import { ROLE_LABELS } from '@/services/person/ming/types';
+import { mingFigureServiceHelper } from '@/services/person/ming';
 
 interface MingFigureDetailModalProps {
   figure: MingFigure | null;
@@ -35,8 +35,8 @@ export function MingFigureDetailModal({ figure, open, onClose }: MingFigureDetai
   const safeRoleColor = (roleColors[figure.role] || roleColors.other)!;
   const hasPortrait = figure.portraitUrl && figure.portraitUrl.trim() !== '';
   const firstChar = figure.name.charAt(0);
-  const lifespan = mingFigureService.formatLifespan(figure);
-  const age = mingFigureService.calculateAge(figure);
+  const lifespan = mingFigureServiceHelper.formatLifespan(figure);
+  const age = mingFigureServiceHelper.calculateAge(figure);
   const roleLabel = ROLE_LABELS[figure.role];
 
   return (

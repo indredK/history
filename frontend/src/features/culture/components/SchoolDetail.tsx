@@ -30,7 +30,7 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import PersonIcon from '@mui/icons-material/Person';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
-import type { PhilosophicalSchool } from '@/services/schools/types';
+import type { PhilosophicalSchool } from '@/services/school/types';
 
 interface SchoolDetailProps {
   school: PhilosophicalSchool | null;
@@ -121,7 +121,7 @@ export function SchoolDetail({
                   label={`创始人: ${school.founder}`}
                   size="small"
                   sx={{
-                    backgroundColor: `${school.color}20` || 'rgba(158, 158, 158, 0.15)',
+                    backgroundColor: school.color ? `${school.color}20` : 'rgba(158, 158, 158, 0.15)',
                     color: school.color || 'var(--color-text-secondary)',
                     fontWeight: 500,
                     fontSize: '0.75rem',
@@ -203,16 +203,16 @@ export function SchoolDetail({
             核心思想
           </Typography>
           <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-            {(school.coreBeliefs || school.coreIdeas || []).map((idea, index) => (
+            {(school.coreBeliefs || school.coreIdeas || []).map((idea: string, index: number) => (
               <Chip
                 key={index}
                 label={idea}
                 sx={{
-                  backgroundColor: `${school.color}15` || 'rgba(158, 158, 158, 0.1)',
+                  backgroundColor: school.color ? `${school.color}15` : 'rgba(158, 158, 158, 0.1)',
                   color: school.color || 'var(--color-text-primary)',
                   fontWeight: 500,
                   fontSize: '0.85rem',
-                  border: `1px solid ${school.color}40` || 'var(--color-border)',
+                  border: school.color ? `1px solid ${school.color}40` : '1px solid var(--color-border)',
                 }}
               />
             ))}
@@ -239,7 +239,7 @@ export function SchoolDetail({
               代表人物
             </Typography>
             <List dense disablePadding>
-              {school.representativeFigures.map((figure) => (
+              {school.representativeFigures.map((figure: { id: string; name: string; name_en: string; period: string; contribution: string }) => (
                 <ListItem
                   key={figure.id}
                   sx={{
@@ -334,7 +334,7 @@ export function SchoolDetail({
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               {/* 如果有详细的classicWorks数据 */}
               {school.classicWorks && school.classicWorks.length > 0 ? (
-                school.classicWorks.map((work) => (
+                school.classicWorks.map((work: { id: string; title: string; title_en: string; author: string; description: string }) => (
                   <Box
                     key={work.id}
                     sx={{
@@ -394,7 +394,7 @@ export function SchoolDetail({
                 ))
               ) : (
                 /* 如果只有keyTexts数据 */
-                school.keyTexts?.map((text, index) => (
+                school.keyTexts?.map((text: string, index: number) => (
                   <Box
                     key={index}
                     sx={{

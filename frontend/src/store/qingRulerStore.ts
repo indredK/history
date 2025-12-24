@@ -8,9 +8,9 @@
  */
 
 import { create } from 'zustand';
-import type { QingRuler } from '@/services/people/qing/types';
-import { qingRulerService, type QingRulerSortBy } from '@/services/people/qing';
-import { QING_PERIODS } from '@/services/people/qing/types';
+import type { QingRuler } from '@/services/person/qing/types';
+import { qingRulerServiceHelper, type QingRulerSortBy } from '@/services/person/qing';
+import { QING_PERIODS } from '@/services/person/qing/types';
 
 interface QingRulerFilters {
   period: string;
@@ -70,7 +70,7 @@ export const useQingRulerStore = create<QingRulerState>((set, get) => ({
 
   getFilteredRulers: () => {
     const { rulers, filters } = get();
-    return qingRulerService.filterAndSort(rulers, {
+    return qingRulerServiceHelper.filterAndSort(rulers, {
       period: filters.period,
       query: filters.searchQuery,
       sortBy: filters.sortBy,

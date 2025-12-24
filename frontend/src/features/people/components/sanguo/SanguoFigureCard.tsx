@@ -3,9 +3,9 @@
  */
 
 import { PersonCard, type TagColor } from '@/components/common';
-import type { SanguoFigure } from '@/services/people/sanguoFigure/types';
-import { ROLE_LABELS, KINGDOM_COLORS } from '@/services/people/sanguoFigure/types';
-import { sanguoFigureService } from '@/services/people/sanguoFigure';
+import type { SanguoFigure } from '@/services/person/sanguo/types';
+import { ROLE_LABELS, KINGDOM_COLORS } from '@/services/person/sanguo/types';
+import { sanguoFigureService } from '@/services/person/sanguo';
 
 interface SanguoFigureCardProps {
   figure: SanguoFigure;

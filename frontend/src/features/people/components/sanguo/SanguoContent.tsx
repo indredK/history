@@ -8,10 +8,10 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { useRequest } from 'ahooks';
 
 import { useSanguoFigureStore } from '@/store/sanguoFigureStore';
-import { getSanguoFigures } from '@/services/people/sanguoFigure';
-import type { SanguoFigure, SanguoFigureRole, SanguoKingdom } from '@/services/people/sanguoFigure/types';
-import type { SanguoFigureSortBy } from '@/services/people/sanguoFigure';
-import { ROLE_LABELS, KINGDOM_LABELS } from '@/services/people/sanguoFigure/types';
+import { getSanguoFigures } from '@/services/person/sanguo';
+import type { SanguoFigure, SanguoFigureRole, SanguoKingdom } from '@/services/person/sanguo/types';
+import type { SanguoFigureSortBy } from '@/services/person/sanguo';
+import { ROLE_LABELS, KINGDOM_LABELS } from '@/services/person/sanguo/types';
 
 import { PeopleFilter } from '../common/PeopleFilter';
 import { SanguoFigureGrid } from './SanguoFigureGrid';

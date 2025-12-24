@@ -8,10 +8,10 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { useRequest } from 'ahooks';
 
 import { useTangFigureStore } from '@/store/tangFigureStore';
-import { getTangFigures } from '@/services/people/tangFigure';
-import type { TangFigure, TangFigureRole } from '@/services/people/tangFigure/types';
-import type { TangFigureSortBy } from '@/services/people/tangFigure';
-import { ROLE_LABELS } from '@/services/people/tangFigure/types';
+import { getTangFigures } from '@/services/person/tang';
+import type { TangFigure, TangFigureRole } from '@/services/person/tang/types';
+import type { TangFigureSortBy } from '@/services/person/tang';
+import { ROLE_LABELS } from '@/services/person/tang/types';
 
 import { PeopleFilter } from '../common/PeopleFilter';
 import { TangFigureGrid } from './TangFigureGrid';

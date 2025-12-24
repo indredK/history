@@ -9,8 +9,8 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { useRequest } from 'ahooks';
 
 import { useScholarStore } from '@/store';
-import { getScholars } from '@/services/people/scholars';
-import type { Scholar } from '@/services/people/scholars/types';
+import { getScholars } from '@/services/person/scholars';
+import type { Scholar } from '@/services/person/scholars/types';
 
 import { ScholarFilter, ScholarGrid, ScholarDetailModal } from '@/features/culture/components';
 

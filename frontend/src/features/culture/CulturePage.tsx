@@ -15,8 +15,8 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { useRequest } from 'ahooks';
 
 import { useSchoolsStore } from '@/store';
-import { getSchools } from '@/services/schools';
-import type { PhilosophicalSchool } from '@/services/schools/types';
+import { getSchools } from '@/services/school';
+import type { PhilosophicalSchool } from '@/services/school/types';
 
 import { FixedTabsPage, type FixedTabConfig } from '@/components/common';
 import {

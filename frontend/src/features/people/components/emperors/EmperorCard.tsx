@@ -8,8 +8,8 @@
  */
 
 import { PersonCard, type TagColor } from '@/components/common';
-import type { Emperor } from '@/services/people/emperors/types';
-import { emperorService } from '@/services/people/emperors';
+import type { Emperor } from '@/services/person/emperors/types';
+import { emperorService } from '@/services/person/emperors';
 
 interface EmperorCardProps {
   emperor: Emperor;

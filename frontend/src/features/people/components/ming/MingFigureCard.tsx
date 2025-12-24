@@ -3,9 +3,9 @@
  */
 
 import { PersonCard, type TagColor } from '@/components/common';
-import type { MingFigure } from '@/services/people/mingFigure/types';
-import { ROLE_LABELS } from '@/services/people/mingFigure/types';
-import { mingFigureService } from '@/services/people/mingFigure';
+import type { MingFigure } from '@/services/person/ming/types';
+import { ROLE_LABELS } from '@/services/person/ming/types';
+import { mingFigureServiceHelper } from '@/services/person/ming';
 
 interface MingFigureCardProps {
   figure: MingFigure;
@@ -25,7 +25,7 @@ const defaultColor: TagColor = { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e
 
 export function MingFigureCard({ figure, onClick }: MingFigureCardProps) {
   const roleColor = roleColors[figure.role] || roleColors.other!;
-  const lifespan = mingFigureService.formatLifespan(figure);
+  const lifespan = mingFigureServiceHelper.formatLifespan(figure);
   const roleLabel = ROLE_LABELS[figure.role];
 
   const secondaryTags = figure.faction

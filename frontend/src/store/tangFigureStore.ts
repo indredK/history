@@ -3,9 +3,9 @@
  */
 
 import { create } from 'zustand';
-import type { TangFigure, TangFigureRole } from '@/services/people/tangFigure/types';
-import { tangFigureService, type TangFigureSortBy } from '@/services/people/tangFigure';
-import { TANG_PERIODS } from '@/services/people/tangFigure/types';
+import type { TangFigure, TangFigureRole } from '@/services/person/tang/types';
+import { tangFigureService, type TangFigureSortBy } from '@/services/person/tang';
+import { TANG_PERIODS } from '@/services/person/tang/types';
 
 interface TangFigureFilters {
   role: TangFigureRole | '全部';
@@ -52,7 +52,7 @@ export const useTangFigureStore = create<TangFigureState>((set, get) => ({
   setRoleFilter: (role) => set((state) => ({ filters: { ...state.filters, role } })),
   setPeriodFilter: (period) => set((state) => ({ filters: { ...state.filters, period } })),
   setSearchQuery: (query) => set((state) => ({ filters: { ...state.filters, searchQuery: query } })),
-  setSortBy: (sortBy) => set((state) => ({ filters: { ...state.filters, sortBy } })),
+  setSortBy: (sortBy: TangFigureSortBy) => set((state) => ({ filters: { ...state.filters, sortBy } })),
 
   getFilteredFigures: () => {
     const { figures, filters } = get();

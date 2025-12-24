@@ -218,5 +218,86 @@ export const dataLoaders = {
   mapGeoJson: loadMapGeoJson,
 } as const;
 
+/**
+ * API响应处理工具
+ */
+export interface ApiResponse<T> {
+  data: T;
+  success?: boolean;
+  message?: string;
+}
+
+/**
+ * 统一的API响应处理函数
+ */
+export function handleApiResponse<T>(response: any): ApiResponse<T[]> {
+  // 如果是axios响应对象
+  if (response.data) {
+    const backendData = response.data;
+    
+    // 检查后端响应格式
+    if (backendData.success !== undefined) {
+      if (!backendData.success) {
+        throw new Error(backendData.message || 'API请求失败');
+      }
+      
+      // 提取实际数据
+      if (backendData.data) {
+        if (Array.isArray(backendData.data)) {
+          return { data: backendData.data };
+        }
+        // 如果是分页响应
+        if (typeof backendData.data === 'object' && 'data' in backendData.data) {
+          return { data: backendData.data.data };
+        }
+        // 单个对象包装成数组
+        return { data: [backendData.data] };
+      }
+    }
+    
+    // 直接是数组数据
+    if (Array.isArray(backendData)) {
+      return { data: backendData };
+    }
+  }
+  
+  return { data: [] };
+}
+
+/**
+ * 处理单个对象的API响应
+ */
+export function handleSingleApiResponse<T>(response: any): ApiResponse<T> {
+  if (response.data) {
+    const backendData = response.data;
+    
+    if (backendData.success !== undefined) {
+      if (!backendData.success) {
+        throw new Error(backendData.message || 'API请求失败');
+      }
+      
+      if (backendData.data) {
+        return { data: backendData.data };
+      }
+    }
+    
+    // 直接返回数据
+    return { data: backendData };
+  }
+  
+  throw new Error('响应数据为空');
+}
+
+/**
+ * 创建统一的数据获取函数
+ */
+export function createDataFetcher<TArgs extends any[], TReturn>(
+  apiFetcher: (...args: TArgs) => TReturn,
+  mockFetcher: (...args: TArgs) => TReturn,
+  dataSourceMode: 'api' | 'mock' = 'mock'
+): (...args: TArgs) => TReturn {
+  return dataSourceMode === 'api' ? apiFetcher : mockFetcher;
+}
+
 // 导出类型
 export type DataLoaderKey = keyof typeof dataLoaders;

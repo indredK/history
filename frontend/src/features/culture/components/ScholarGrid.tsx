@@ -10,7 +10,7 @@
 
 import { Box, Typography, Skeleton, Card, CardContent } from '@mui/material';
 import { ScholarCard } from './ScholarCard';
-import type { Scholar } from '@/services/people/scholars/types';
+import type { Scholar } from '@/services/person/scholars/types';
 
 interface ScholarGridProps {
   scholars: Scholar[];

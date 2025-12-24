@@ -1,0 +1,201 @@
+[
+  {
+    "id": "zhao-kuangyin",
+    "name": "赵匡胤",
+    "birthYear": 927,
+    "deathYear": 976,
+    "role": "emperor",
+    "positions": ["宋太祖"],
+    "biography": "宋朝开国皇帝，通过陈桥兵变黄袍加身，建立宋朝。杯酒释兵权，加强中央集权，结束五代十国的分裂局面。",
+    "politicalViews": "重文轻武，加强中央集权",
+    "achievements": [
+      "建立宋朝，结束五代十国分裂",
+      "杯酒释兵权，加强中央集权",
+      "制定\"先南后北\"统一战略",
+      "完善科举制度"
+    ],
+    "events": [
+      { "name": "陈桥兵变", "year": 960, "role": "主角", "description": "黄袍加身，建立宋朝" },
+      { "name": "杯酒释兵权", "year": 961, "role": "主导者", "description": "解除武将兵权，加强中央集权" }
+    ],
+    "evaluations": [
+      {
+        "source": "《宋史》",
+        "content": "太祖起介胄之中，践九五之位，原其得国，视晋、汉、周亦岂甚相绝哉？",
+        "author": "脱脱"
+      }
+    ],
+    "sources": ["《宋史》", "《续资治通鉴长编》"]
+  },
+  {
+    "id": "zhao-guangyi",
+    "name": "赵光义",
+    "birthYear": 939,
+    "deathYear": 997,
+    "role": "emperor",
+    "positions": ["宋太宗"],
+    "biography": "宋朝第二位皇帝，完成统一大业，但两次北伐辽国失败。在位期间大力发展文化教育，编纂《太平御览》等大型类书。",
+    "politicalViews": "继续重文轻武政策",
+    "achievements": ["完成统一大业", "编纂《太平御览》《太平广记》", "发展文化教育"],
+    "events": [
+      { "name": "灭北汉", "year": 979, "role": "主导者", "description": "完成统一大业" },
+      { "name": "高梁河之战", "year": 979, "role": "主帅", "description": "北伐辽国失败" }
+    ],
+    "evaluations": [{ "source": "《宋史》", "content": "帝沈谋英断，慨然有削平天下之志。", "author": "脱脱" }],
+    "sources": ["《宋史》"]
+  },
+  {
+    "id": "wang-anshi",
+    "name": "王安石",
+    "courtesy": "介甫",
+    "birthYear": 1021,
+    "deathYear": 1086,
+    "role": "chancellor",
+    "positions": ["参知政事", "同中书门下平章事"],
+    "faction": "新党",
+    "biography": "北宋著名政治家、改革家、文学家。主持熙宁变法，推行青苗法、免役法等新政，是中国历史上著名的改革家。",
+    "politicalViews": "天变不足畏，祖宗不足法，人言不足恤",
+    "achievements": ["主持熙宁变法", "推行青苗法、免役法等新政", "唐宋八大家之一", "著有《临川先生文集》"],
+    "events": [{ "name": "熙宁变法", "year": 1069, "role": "主导者", "description": "推行全面改革，富国强兵" }],
+    "evaluations": [{ "source": "《宋史》", "content": "安石少好读书，一过目终身不忘。", "author": "脱脱" }],
+    "sources": ["《宋史》", "《临川先生文集》"]
+  },
+  {
+    "id": "sima-guang",
+    "name": "司马光",
+    "courtesy": "君实",
+    "birthYear": 1019,
+    "deathYear": 1086,
+    "role": "chancellor",
+    "positions": ["翰林学士", "尚书左仆射"],
+    "faction": "旧党",
+    "biography": "北宋著名政治家、史学家。反对王安石变法，主编《资治通鉴》，是中国历史上最重要的编年体通史。",
+    "politicalViews": "保守稳健，反对激进改革",
+    "achievements": ["主编《资治通鉴》", "反对王安石变法", "废除新法"],
+    "events": [
+      { "name": "反对变法", "year": 1070, "role": "反对派领袖", "description": "坚决反对王安石变法" },
+      { "name": "元祐更化", "year": 1085, "role": "主导者", "description": "废除新法，恢复旧制" }
+    ],
+    "evaluations": [
+      { "source": "《宋史》", "content": "光孝友忠信，恭俭正直，居处有法，动作有礼。", "author": "脱脱" }
+    ],
+    "sources": ["《宋史》", "《资治通鉴》"]
+  },
+  {
+    "id": "yue-fei",
+    "name": "岳飞",
+    "courtesy": "鹏举",
+    "birthYear": 1103,
+    "deathYear": 1142,
+    "role": "general",
+    "positions": ["枢密副使", "少保"],
+    "biography": "南宋抗金名将，民族英雄。率领岳家军北伐，收复大片失地，后被秦桧以\"莫须有\"罪名害死。",
+    "politicalViews": "精忠报国，收复失地",
+    "achievements": ["创建岳家军", "收复襄阳六郡", "郾城大捷", "著有《满江红》"],
+    "events": [
+      { "name": "郾城大捷", "year": 1140, "role": "主帅", "description": "大破金兀术，收复失地" },
+      { "name": "风波亭冤案", "year": 1142, "role": "受害者", "description": "被秦桧以\"莫须有\"罪名害死" }
+    ],
+    "evaluations": [
+      {
+        "source": "《宋史》",
+        "content": "飞事亲至孝，家无姬侍。吴玠素服飞，愿与交欢，饰名姝遗之，飞曰：\"主上宵旰，岂大将安乐时？\"却不受。",
+        "author": "脱脱"
+      }
+    ],
+    "sources": ["《宋史》"]
+  },
+  {
+    "id": "han-shizhong",
+    "name": "韩世忠",
+    "courtesy": "良臣",
+    "birthYear": 1089,
+    "deathYear": 1151,
+    "role": "general",
+    "positions": ["枢密使", "咸安郡王"],
+    "biography": "南宋抗金名将，与岳飞、张俊、刘光世并称\"中兴四将\"。黄天荡之战以少胜多，阻击金军南下。",
+    "politicalViews": "坚决抗金",
+    "achievements": ["黄天荡之战", "中兴四将之一", "多次击败金军"],
+    "events": [
+      { "name": "黄天荡之战", "year": 1130, "role": "主帅", "description": "以八千人阻击金军十万，相持四十八日" }
+    ],
+    "evaluations": [{ "source": "《宋史》", "content": "世忠勇敢绝人，猿臂善射。", "author": "脱脱" }],
+    "sources": ["《宋史》"]
+  },
+  {
+    "id": "su-shi",
+    "name": "苏轼",
+    "courtesy": "子瞻",
+    "birthYear": 1037,
+    "deathYear": 1101,
+    "role": "scholar",
+    "positions": ["翰林学士", "礼部尚书"],
+    "biography": "北宋著名文学家、书画家。诗词文赋皆精，与父苏洵、弟苏辙并称\"三苏\"，为唐宋八大家之一。",
+    "politicalViews": "反对激进变法，主张渐进改革",
+    "achievements": ["唐宋八大家之一", "开创豪放词派", "书法\"宋四家\"之一", "著有《东坡全集》"],
+    "events": [{ "name": "乌台诗案", "year": 1079, "role": "受害者", "description": "因诗文获罪，被贬黄州" }],
+    "evaluations": [
+      { "source": "《宋史》", "content": "轼尝自评其文曰：\"吾文如万斛泉源，不择地皆可出。\"", "author": "脱脱" }
+    ],
+    "sources": ["《宋史》", "《东坡全集》"]
+  },
+  {
+    "id": "zhu-xi",
+    "name": "朱熹",
+    "courtesy": "元晦",
+    "birthYear": 1130,
+    "deathYear": 1200,
+    "role": "scholar",
+    "positions": ["焕章阁待制", "秘阁修撰"],
+    "biography": "南宋著名理学家、思想家、教育家。集理学之大成，建立完整的理学体系，对后世影响深远。",
+    "politicalViews": "存天理，灭人欲",
+    "achievements": ["集理学之大成", "注释《四书》", "创办白鹿洞书院", "著有《四书章句集注》"],
+    "events": [{ "name": "庆元党禁", "year": 1196, "role": "受害者", "description": "理学被禁，朱熹被斥为\"伪学\"" }],
+    "evaluations": [
+      {
+        "source": "《宋史》",
+        "content": "熹幼颖悟，年五岁，始读《孝经》，即题其上曰：\"不若是，非人也。\"",
+        "author": "脱脱"
+      }
+    ],
+    "sources": ["《宋史》", "《朱子语类》"]
+  },
+  {
+    "id": "ouyang-xiu",
+    "name": "欧阳修",
+    "courtesy": "永叔",
+    "birthYear": 1007,
+    "deathYear": 1072,
+    "role": "scholar",
+    "positions": ["翰林学士", "枢密副使", "参知政事"],
+    "biography": "北宋著名文学家、史学家。领导北宋诗文革新运动，唐宋八大家之一，主修《新唐书》《新五代史》。",
+    "politicalViews": "支持庆历新政",
+    "achievements": ["唐宋八大家之一", "领导诗文革新运动", "主修《新唐书》《新五代史》", "著有《醉翁亭记》"],
+    "events": [{ "name": "庆历新政", "year": 1043, "role": "支持者", "description": "支持范仲淹改革" }],
+    "evaluations": [
+      { "source": "《宋史》", "content": "修天资刚劲，见义勇为，虽机阱在前，触发之不顾。", "author": "脱脱" }
+    ],
+    "sources": ["《宋史》", "《欧阳文忠公集》"]
+  },
+  {
+    "id": "fan-zhongyan",
+    "name": "范仲淹",
+    "courtesy": "希文",
+    "birthYear": 989,
+    "deathYear": 1052,
+    "role": "official",
+    "positions": ["参知政事", "枢密副使"],
+    "biography": "北宋著名政治家、文学家、军事家。主持庆历新政，著有《岳阳楼记》，\"先天下之忧而忧，后天下之乐而乐\"成为千古名句。",
+    "politicalViews": "先天下之忧而忧，后天下之乐而乐",
+    "achievements": ["主持庆历新政", "著有《岳阳楼记》", "镇守西北边疆", "创办应天书院"],
+    "events": [{ "name": "庆历新政", "year": 1043, "role": "主导者", "description": "推行改革，整顿吏治" }],
+    "evaluations": [
+      {
+        "source": "《宋史》",
+        "content": "仲淹内刚外和，性至孝，以母在时方贫，其后虽贵，非宾客不重肉。",
+        "author": "脱脱"
+      }
+    ],
+    "sources": ["《宋史》", "《范文正公集》"]
+  }
+]

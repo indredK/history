@@ -8,9 +8,9 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { useRequest } from 'ahooks';
 
 import { useEmperorStore } from '@/store';
-import { getEmperors } from '@/services/people/emperors';
-import type { Emperor } from '@/services/people/emperors/types';
-import type { EmperorSortBy } from '@/services/people/emperors';
+import { getEmperors } from '@/services/person/emperors';
+import type { Emperor } from '@/services/person/emperors/types';
+import type { EmperorSortBy } from '@/services/person/emperors';
 
 import { PeopleFilter } from '../common/PeopleFilter';
 import { EmperorGrid } from './EmperorGrid';

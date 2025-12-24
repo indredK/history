@@ -1,0 +1,178 @@
+[
+  {
+    "id": "li-shimin",
+    "name": "李世民",
+    "birthYear": 598,
+    "deathYear": 649,
+    "role": "emperor",
+    "positions": ["唐太宗", "天可汗"],
+    "biography": "唐朝第二位皇帝，开创\"贞观之治\"，被誉为中国历史上最伟大的皇帝之一。善于纳谏，任用贤能，使唐朝成为当时世界上最强盛的国家。",
+    "politicalViews": "以民为本，虚心纳谏，任人唯贤",
+    "achievements": ["开创贞观之治", "击败东突厥，被尊为天可汗", "完善三省六部制", "编纂《贞观政要》"],
+    "events": [
+      { "name": "玄武门之变", "year": 626, "role": "发动者", "description": "杀死太子李建成和齐王李元吉，夺取皇位" },
+      { "name": "灭东突厥", "year": 630, "role": "决策者", "description": "派李靖北伐，俘获颉利可汗" }
+    ],
+    "evaluations": [
+      { "source": "《旧唐书》", "content": "太宗文武之才，高出前古。盖三代以还，中国之盛未之有也。", "author": "刘昫" }
+    ],
+    "sources": ["《旧唐书》", "《新唐书》", "《贞观政要》"]
+  },
+  {
+    "id": "wu-zetian",
+    "name": "武则天",
+    "birthYear": 624,
+    "deathYear": 705,
+    "role": "emperor",
+    "positions": ["皇后", "皇太后", "武周皇帝"],
+    "biography": "中国历史上唯一的正统女皇帝，建立武周王朝。在位期间政治清明，国力强盛，为开元盛世奠定基础。",
+    "politicalViews": "重用寒门，打击门阀，发展科举",
+    "achievements": ["中国唯一正统女皇帝", "完善科举制度", "发展经济，国力强盛", "开创殿试制度"],
+    "events": [
+      { "name": "称帝建周", "year": 690, "role": "主导者", "description": "改唐为周，自立为帝" },
+      { "name": "神龙政变", "year": 705, "role": "被迫退位", "description": "张柬之等发动政变，武则天退位" }
+    ],
+    "evaluations": [{ "source": "《旧唐书》", "content": "则天太后善刑名，有权术。", "author": "刘昫" }],
+    "sources": ["《旧唐书》", "《新唐书》"]
+  },
+  {
+    "id": "li-longji",
+    "name": "李隆基",
+    "birthYear": 685,
+    "deathYear": 762,
+    "role": "emperor",
+    "positions": ["唐玄宗", "唐明皇"],
+    "biography": "唐朝在位最长的皇帝，开创开元盛世，使唐朝达到鼎盛。晚年宠信杨贵妃，导致安史之乱，唐朝由盛转衰。",
+    "politicalViews": "励精图治，任用贤相",
+    "achievements": ["开创开元盛世", "改革官制，整顿吏治", "发展文化艺术", "编纂《大唐开元礼》"],
+    "events": [
+      { "name": "开元盛世", "year": 713, "role": "主导者", "description": "任用姚崇、宋璟等贤相，开创盛世" },
+      { "name": "安史之乱", "year": 755, "role": "当政者", "description": "安禄山起兵叛乱，唐朝由盛转衰" }
+    ],
+    "evaluations": [
+      {
+        "source": "《旧唐书》",
+        "content": "玄宗少历民间，身经险难，故即位之初，知人疾苦，躬勤庶政。",
+        "author": "刘昫"
+      }
+    ],
+    "sources": ["《旧唐书》", "《新唐书》"]
+  },
+  {
+    "id": "wei-zheng",
+    "name": "魏徵",
+    "courtesy": "玄成",
+    "birthYear": 580,
+    "deathYear": 643,
+    "role": "chancellor",
+    "positions": ["尚书左丞", "秘书监", "侍中"],
+    "biography": "唐朝著名政治家、思想家，以直言敢谏著称。辅佐唐太宗开创贞观之治，被誉为\"千古第一谏臣\"。",
+    "politicalViews": "兼听则明，偏信则暗",
+    "achievements": ["直言敢谏，辅佐明君", "主编《群书治要》", "参与制定贞观律令"],
+    "events": [{ "name": "贞观之治", "year": 627, "role": "谏臣", "description": "多次直谏太宗，纠正施政偏差" }],
+    "evaluations": [{ "source": "《旧唐书》", "content": "徵状貌不逾中人，而有胆略，善回人主意。", "author": "刘昫" }],
+    "sources": ["《旧唐书》", "《贞观政要》"]
+  },
+  {
+    "id": "fang-xuanling",
+    "name": "房玄龄",
+    "courtesy": "乔",
+    "birthYear": 579,
+    "deathYear": 648,
+    "role": "chancellor",
+    "positions": ["中书令", "尚书左仆射", "司空"],
+    "biography": "唐朝初年名相，与杜如晦并称\"房谋杜断\"。辅佐唐太宗二十余年，是贞观之治的重要功臣。",
+    "politicalViews": "谋略深远，善于筹划",
+    "achievements": ["辅佐太宗开创贞观之治", "主持修订《唐律》", "监修国史"],
+    "events": [{ "name": "玄武门之变", "year": 626, "role": "参与者", "description": "参与策划玄武门之变" }],
+    "evaluations": [
+      { "source": "《旧唐书》", "content": "玄龄明达吏事，辅以文学，夙夜尽心，惟恐一物失所。", "author": "刘昫" }
+    ],
+    "sources": ["《旧唐书》", "《新唐书》"]
+  },
+  {
+    "id": "li-jing",
+    "name": "李靖",
+    "courtesy": "药师",
+    "birthYear": 571,
+    "deathYear": 649,
+    "role": "general",
+    "positions": ["兵部尚书", "尚书右仆射", "卫国公"],
+    "biography": "唐朝杰出军事家，用兵如神，战功赫赫。平定萧铣、辅公祏，灭东突厥、吐谷浑，被誉为\"军神\"。",
+    "politicalViews": "用兵贵在神速",
+    "achievements": ["平定江南", "灭东突厥", "征服吐谷浑", "著《李卫公兵法》"],
+    "events": [
+      { "name": "灭东突厥", "year": 630, "role": "主帅", "description": "率军北伐，俘获颉利可汗" },
+      { "name": "征吐谷浑", "year": 634, "role": "主帅", "description": "率军西征，大破吐谷浑" }
+    ],
+    "evaluations": [{ "source": "《旧唐书》", "content": "靖用兵，长于奇计。", "author": "刘昫" }],
+    "sources": ["《旧唐书》", "《新唐书》"]
+  },
+  {
+    "id": "guo-ziyi",
+    "name": "郭子仪",
+    "courtesy": "子仪",
+    "birthYear": 697,
+    "deathYear": 781,
+    "role": "general",
+    "positions": ["天下兵马副元帅", "中书令", "汾阳王"],
+    "biography": "唐朝中兴名将，平定安史之乱的主要功臣。历仕七朝，功盖天下而主不疑，位极人臣而众不嫉。",
+    "politicalViews": "忠君报国，宽厚待人",
+    "achievements": ["平定安史之乱", "收复两京", "抵御吐蕃入侵", "历仕七朝，功高不震主"],
+    "events": [
+      { "name": "收复两京", "year": 757, "role": "主帅", "description": "率军收复长安、洛阳" },
+      { "name": "单骑退回纥", "year": 765, "role": "主帅", "description": "单骑入回纥营，说退敌军" }
+    ],
+    "evaluations": [
+      { "source": "《旧唐书》", "content": "子仪功盖天下而主不疑，位极人臣而众不嫉。", "author": "刘昫" }
+    ],
+    "sources": ["《旧唐书》", "《新唐书》"]
+  },
+  {
+    "id": "li-bai",
+    "name": "李白",
+    "courtesy": "太白",
+    "birthYear": 701,
+    "deathYear": 762,
+    "role": "poet",
+    "positions": ["翰林供奉"],
+    "biography": "唐代伟大的浪漫主义诗人，被誉为\"诗仙\"。其诗豪放飘逸，想象丰富，与杜甫并称\"李杜\"。",
+    "politicalViews": "追求自由，蔑视权贵",
+    "achievements": ["创作大量传世诗篇", "被誉为\"诗仙\"", "与杜甫并称\"李杜\""],
+    "events": [{ "name": "供奉翰林", "year": 742, "role": "翰林", "description": "被唐玄宗召入宫中，供奉翰林" }],
+    "evaluations": [{ "source": "《旧唐书》", "content": "白嗜酒，善诗，有逸才。", "author": "刘昫" }],
+    "sources": ["《旧唐书》", "《新唐书》"]
+  },
+  {
+    "id": "du-fu",
+    "name": "杜甫",
+    "courtesy": "子美",
+    "birthYear": 712,
+    "deathYear": 770,
+    "role": "poet",
+    "positions": ["左拾遗", "检校工部员外郎"],
+    "biography": "唐代伟大的现实主义诗人，被誉为\"诗圣\"。其诗沉郁顿挫，忧国忧民，被称为\"诗史\"。",
+    "politicalViews": "忧国忧民，关心民生",
+    "achievements": ["创作大量现实主义诗篇", "被誉为\"诗圣\"", "诗作被称为\"诗史\""],
+    "events": [
+      { "name": "安史之乱", "year": 755, "role": "亲历者", "description": "亲历战乱，创作大量反映战争的诗篇" }
+    ],
+    "evaluations": [{ "source": "《旧唐书》", "content": "甫天才俊逸，每一篇出，人皆传诵。", "author": "刘昫" }],
+    "sources": ["《旧唐书》", "《新唐书》"]
+  },
+  {
+    "id": "bai-juyi",
+    "name": "白居易",
+    "courtesy": "乐天",
+    "birthYear": 772,
+    "deathYear": 846,
+    "role": "poet",
+    "positions": ["翰林学士", "左赞善大夫", "刑部尚书"],
+    "biography": "唐代著名诗人，新乐府运动的倡导者。其诗通俗易懂，流传广泛，有\"诗魔\"之称。",
+    "politicalViews": "文章合为时而著，歌诗合为事而作",
+    "achievements": ["倡导新乐府运动", "创作《长恨歌》《琵琶行》等名篇", "诗风通俗，影响深远"],
+    "events": [{ "name": "新乐府运动", "year": 809, "role": "倡导者", "description": "倡导诗歌反映社会现实" }],
+    "evaluations": [{ "source": "《旧唐书》", "content": "居易文辞富艳，尤精于诗笔。", "author": "刘昫" }],
+    "sources": ["《旧唐书》", "《新唐书》"]
+  }
+]

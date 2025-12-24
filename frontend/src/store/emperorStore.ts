@@ -8,8 +8,8 @@
  */
 
 import { create } from 'zustand';
-import type { Emperor } from '@/services/people/emperors/types';
-import { emperorService, type EmperorSortBy } from '@/services/people/emperors';
+import type { Emperor } from '@/services/person/emperors/types';
+import { emperorService, type EmperorSortBy } from '@/services/person/emperors';
 
 interface EmperorFilters {
   dynasty: string;

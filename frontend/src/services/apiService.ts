@@ -1,19 +1,19 @@
 import type { Event } from '@/services/timeline/types';
 import type { Place } from '@/services/map/types';
-import type { CommonPerson } from '@/services/people/common/types';
+import type { CommonPerson } from '@/services/person/common/types';
 import type { Dynasty } from '@/services/culture/types';
-import type { Emperor } from '@/services/people/emperors/types';
+import type { Emperor } from '@/services/person/emperors/types';
 import type { Mythology } from '@/services/mythology/types';
 import type { ReligionGraphData } from '@/services/religion/types';
-import type { PhilosophicalSchool } from '@/services/schools/types';
+import type { PhilosophicalSchool } from '@/services/school/types';
 import { timelineApi } from '@/services/timeline/timelineApi';
 import { mapApi } from '@/services/map/mapApi';
-import { personApi } from '@/services/people/common/personApi';
+import { personApi } from '@/services/person/common/personApi';
 import { dynastiesApi } from '@/services/culture/cultureApi';
-import { getEmperors, getEmperorById } from '@/services/people/emperors/emperorApi';
+import { getEmperors, getEmperorById } from '@/services/person/emperors/emperorApi';
 import { mythologyApi } from '@/services/mythology/mythologyApi';
 import { getReligionGraphData, getReligionNodeById } from '@/services/religion/religionApi';
-import { getSchools, getSchoolById } from '@/services/schools/schoolsApi';
+import { getSchools, getSchoolById } from '@/services/school/schoolApi';
 
 export interface ServiceInterface {
   getEvents(): Promise<{ data: Event[] }>;
