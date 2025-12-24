@@ -97,4 +97,4 @@ export { handleApiResponse, handleSingleApiResponse };
 
 // 创建并导出默认API客户端实例
 import { DATA_SOURCE_CONFIG } from '@/config/dataSource';
-export const apiClient = createApiClient(DATA_SOURCE_CONFIG.api.baseURL + '/api/v1');
+export const apiClient = createApiClient(DATA_SOURCE_CONFIG.api.baseURL);

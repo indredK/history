@@ -34,7 +34,7 @@ export function getDataSourceMode(): DataSourceMode {
 export const DATA_SOURCE_CONFIG = {
   // API配置
   api: {
-    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001',
+    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api/v1',
     timeout: 10000,
   },
   
