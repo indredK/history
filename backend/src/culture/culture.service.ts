@@ -77,9 +77,9 @@ export class CultureService {
       const { philosophicalSchool, ...scholarData } = scholar;
       return {
         ...scholarData,
-        // Parse JSON fields if they exist
-        majorWorks: scholarData.majorWorks ? JSON.parse(scholarData.majorWorks as string) : null,
-        contributions: scholarData.contributions ? JSON.parse(scholarData.contributions as string) : null,
+        // Parse JSON fields safely
+        majorWorks: this.safeJsonParse(scholarData.majorWorks),
+        contributions: this.safeJsonParse(scholarData.contributions),
       };
     });
 
@@ -102,9 +102,9 @@ export class CultureService {
     const { philosophicalSchool, ...scholarData } = scholar;
     return {
       ...scholarData,
-      // Parse JSON fields if they exist
-      majorWorks: scholarData.majorWorks ? JSON.parse(scholarData.majorWorks as string) : null,
-      contributions: scholarData.contributions ? JSON.parse(scholarData.contributions as string) : null,
+      // Parse JSON fields safely
+      majorWorks: this.safeJsonParse(scholarData.majorWorks),
+      contributions: this.safeJsonParse(scholarData.contributions),
     };
   }
 
@@ -144,9 +144,9 @@ export class CultureService {
     // Transform the data to match DTO structure
     const transformedSchools = schools.map(school => ({
       ...school,
-      // Parse JSON fields if they exist
-      coreBeliefs: school.coreBeliefs ? JSON.parse(school.coreBeliefs as string) : null,
-      keyTexts: school.keyTexts ? JSON.parse(school.keyTexts as string) : null,
+      // Parse JSON fields safely
+      coreBeliefs: this.safeJsonParse(school.coreBeliefs),
+      keyTexts: this.safeJsonParse(school.keyTexts),
     }));
 
     return new PaginatedResponseDto(transformedSchools, total, page, limit);
@@ -164,9 +164,21 @@ export class CultureService {
     // Transform the data to match DTO structure
     return {
       ...school,
-      // Parse JSON fields if they exist
-      coreBeliefs: school.coreBeliefs ? JSON.parse(school.coreBeliefs as string) : null,
-      keyTexts: school.keyTexts ? JSON.parse(school.keyTexts as string) : null,
+      // Parse JSON fields safely
+      coreBeliefs: this.safeJsonParse(school.coreBeliefs),
+      keyTexts: this.safeJsonParse(school.keyTexts),
     };
+  }
+
+  private safeJsonParse(value: any): any {
+    if (!value) return null;
+    if (typeof value === 'string' && value.trim() !== '') {
+      try {
+        return JSON.parse(value);
+      } catch (e) {
+        return value;
+      }
+    }
+    return value;
   }
 }

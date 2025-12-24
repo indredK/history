@@ -216,13 +216,21 @@ model TangFigure {
   id          String   @id @default(uuid())
   name        String
   dynastyId   String
+  courtesy    String?
   role        String   // 'poet', 'official', 'general', 'monk', 'other'
   birthYear   Int?
   deathYear   Int?
   period      String?  // 'early', 'middle', 'late'
+  positions   Json?    // Array of positions
+  faction     String?
+  politicalViews String?
   achievements Json?   // Array of achievements
   works       Json?    // Array of works/poems
   biography   String?
+  events      Json?    // Array of historical events
+  evaluations Json?    // Array of historical evaluations
+  portraitUrl String?
+  sources     Json?    // Array of source names/links
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -237,13 +245,21 @@ model SongFigure {
   id          String   @id @default(uuid())
   name        String
   dynastyId   String
+  courtesy    String?
   role        String   // 'scholar', 'poet', 'official', 'inventor', 'other'
   birthYear   Int?
   deathYear   Int?
   period      String?  // 'northern_song', 'southern_song'
+  positions   Json?    // Array of positions
+  faction     String?
+  politicalViews String?
   achievements Json?   // Array of achievements
   works       Json?    // Array of works
   biography   String?
+  events      Json?    // Array of historical events
+  evaluations Json?    // Array of historical evaluations
+  portraitUrl String?
+  sources     Json?    // Array of source names/links
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -258,13 +274,21 @@ model YuanFigure {
   id          String   @id @default(uuid())
   name        String
   dynastyId   String
+  courtesy    String?
   role        String   // 'playwright', 'poet', 'official', 'general', 'other'
   birthYear   Int?
   deathYear   Int?
   ethnicity   String?  // 'mongol', 'han', 'semu', 'other'
+  positions   Json?    // Array of positions
+  faction     String?
+  politicalViews String?
   achievements Json?   // Array of achievements
   works       Json?    // Array of works
   biography   String?
+  events      Json?    // Array of historical events
+  evaluations Json?    // Array of historical evaluations
+  portraitUrl String?
+  sources     Json?    // Array of source names/links
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -279,13 +303,21 @@ model MingFigure {
   id          String   @id @default(uuid())
   name        String
   dynastyId   String
+  courtesy    String?
   role        String   // 'explorer', 'official', 'scholar', 'artist', 'other'
   birthYear   Int?
   deathYear   Int?
   period      String?  // 'early', 'middle', 'late'
+  positions   Json?    // Array of positions
+  faction     String?
+  politicalViews String?
   achievements Json?   // Array of achievements
   works       Json?    // Array of works
   biography   String?
+  events      Json?    // Array of historical events
+  evaluations Json?    // Array of historical evaluations
+  portraitUrl String?
+  sources     Json?    // Array of source names/links
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -300,14 +332,27 @@ model QingRuler {
   id          String   @id @default(uuid())
   name        String
   dynastyId   String
+  templeName  String?
+  eraName     String?
+  courtesy    String?
   role        String   // 'emperor', 'regent', 'prince', 'other'
   reignStart  Int?
   reignEnd    Int?
   birthYear   Int?
   deathYear   Int?
+  positions   Json?    // Array of positions
+  faction     String?
+  politicalViews String?
   achievements Json?   // Array of achievements
-  policies    Json?    // Array of policies
+  policies    Json?    // Array of policies (PolicyMeasure objects)
   biography   String?
+  majorEvents Json?    // Array of historical events
+  events      Json?    // Array of other historical events
+  contribution String?
+  responsibility String?
+  evaluations Json?    // Array of historical evaluations
+  portraitUrl String?
+  sources     Json?    // Array of source names/links
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -321,13 +366,21 @@ model QingRuler {
 model SanguoFigure {
   id          String   @id @default(uuid())
   name        String
+  courtesy    String?
   role        String   // 'general', 'strategist', 'ruler', 'advisor', 'other'
   kingdom     String   // 'wei', 'shu', 'wu'
   birthYear   Int?
   deathYear   Int?
+  positions   Json?    // Array of positions
+  faction     String?
+  politicalViews String?
   achievements Json?   // Array of achievements
   battles     Json?    // Array of battles participated
   biography   String?
+  events      Json?    // Array of historical events
+  evaluations Json?    // Array of historical evaluations
+  portraitUrl String?
+  sources     Json?    // Array of source names/links
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

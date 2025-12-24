@@ -44,12 +44,20 @@ export type QingRulerMinAggregateOutputType = {
   id: string | null
   name: string | null
   dynastyId: string | null
+  templeName: string | null
+  eraName: string | null
+  courtesy: string | null
   role: string | null
   reignStart: number | null
   reignEnd: number | null
   birthYear: number | null
   deathYear: number | null
+  faction: string | null
+  politicalViews: string | null
   biography: string | null
+  contribution: string | null
+  responsibility: string | null
+  portraitUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,12 +66,20 @@ export type QingRulerMaxAggregateOutputType = {
   id: string | null
   name: string | null
   dynastyId: string | null
+  templeName: string | null
+  eraName: string | null
+  courtesy: string | null
   role: string | null
   reignStart: number | null
   reignEnd: number | null
   birthYear: number | null
   deathYear: number | null
+  faction: string | null
+  politicalViews: string | null
   biography: string | null
+  contribution: string | null
+  responsibility: string | null
+  portraitUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -72,14 +88,27 @@ export type QingRulerCountAggregateOutputType = {
   id: number
   name: number
   dynastyId: number
+  templeName: number
+  eraName: number
+  courtesy: number
   role: number
   reignStart: number
   reignEnd: number
   birthYear: number
   deathYear: number
+  positions: number
+  faction: number
+  politicalViews: number
   achievements: number
   policies: number
   biography: number
+  majorEvents: number
+  events: number
+  contribution: number
+  responsibility: number
+  evaluations: number
+  portraitUrl: number
+  sources: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -104,12 +133,20 @@ export type QingRulerMinAggregateInputType = {
   id?: true
   name?: true
   dynastyId?: true
+  templeName?: true
+  eraName?: true
+  courtesy?: true
   role?: true
   reignStart?: true
   reignEnd?: true
   birthYear?: true
   deathYear?: true
+  faction?: true
+  politicalViews?: true
   biography?: true
+  contribution?: true
+  responsibility?: true
+  portraitUrl?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -118,12 +155,20 @@ export type QingRulerMaxAggregateInputType = {
   id?: true
   name?: true
   dynastyId?: true
+  templeName?: true
+  eraName?: true
+  courtesy?: true
   role?: true
   reignStart?: true
   reignEnd?: true
   birthYear?: true
   deathYear?: true
+  faction?: true
+  politicalViews?: true
   biography?: true
+  contribution?: true
+  responsibility?: true
+  portraitUrl?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -132,14 +177,27 @@ export type QingRulerCountAggregateInputType = {
   id?: true
   name?: true
   dynastyId?: true
+  templeName?: true
+  eraName?: true
+  courtesy?: true
   role?: true
   reignStart?: true
   reignEnd?: true
   birthYear?: true
   deathYear?: true
+  positions?: true
+  faction?: true
+  politicalViews?: true
   achievements?: true
   policies?: true
   biography?: true
+  majorEvents?: true
+  events?: true
+  contribution?: true
+  responsibility?: true
+  evaluations?: true
+  portraitUrl?: true
+  sources?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -235,14 +293,27 @@ export type QingRulerGroupByOutputType = {
   id: string
   name: string
   dynastyId: string
+  templeName: string | null
+  eraName: string | null
+  courtesy: string | null
   role: string
   reignStart: number | null
   reignEnd: number | null
   birthYear: number | null
   deathYear: number | null
+  positions: runtime.JsonValue | null
+  faction: string | null
+  politicalViews: string | null
   achievements: runtime.JsonValue | null
   policies: runtime.JsonValue | null
   biography: string | null
+  majorEvents: runtime.JsonValue | null
+  events: runtime.JsonValue | null
+  contribution: string | null
+  responsibility: string | null
+  evaluations: runtime.JsonValue | null
+  portraitUrl: string | null
+  sources: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: QingRulerCountAggregateOutputType | null
@@ -274,14 +345,27 @@ export type QingRulerWhereInput = {
   id?: Prisma.StringFilter<"QingRuler"> | string
   name?: Prisma.StringFilter<"QingRuler"> | string
   dynastyId?: Prisma.StringFilter<"QingRuler"> | string
+  templeName?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  eraName?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  courtesy?: Prisma.StringNullableFilter<"QingRuler"> | string | null
   role?: Prisma.StringFilter<"QingRuler"> | string
   reignStart?: Prisma.IntNullableFilter<"QingRuler"> | number | null
   reignEnd?: Prisma.IntNullableFilter<"QingRuler"> | number | null
   birthYear?: Prisma.IntNullableFilter<"QingRuler"> | number | null
   deathYear?: Prisma.IntNullableFilter<"QingRuler"> | number | null
+  positions?: Prisma.JsonNullableFilter<"QingRuler">
+  faction?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"QingRuler"> | string | null
   achievements?: Prisma.JsonNullableFilter<"QingRuler">
   policies?: Prisma.JsonNullableFilter<"QingRuler">
   biography?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  majorEvents?: Prisma.JsonNullableFilter<"QingRuler">
+  events?: Prisma.JsonNullableFilter<"QingRuler">
+  contribution?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  responsibility?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  evaluations?: Prisma.JsonNullableFilter<"QingRuler">
+  portraitUrl?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  sources?: Prisma.JsonNullableFilter<"QingRuler">
   createdAt?: Prisma.DateTimeFilter<"QingRuler"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"QingRuler"> | Date | string
   dynasty?: Prisma.XOR<Prisma.DynastyScalarRelationFilter, Prisma.DynastyWhereInput>
@@ -291,14 +375,27 @@ export type QingRulerOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  templeName?: Prisma.SortOrderInput | Prisma.SortOrder
+  eraName?: Prisma.SortOrderInput | Prisma.SortOrder
+  courtesy?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   reignStart?: Prisma.SortOrderInput | Prisma.SortOrder
   reignEnd?: Prisma.SortOrderInput | Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  positions?: Prisma.SortOrderInput | Prisma.SortOrder
+  faction?: Prisma.SortOrderInput | Prisma.SortOrder
+  politicalViews?: Prisma.SortOrderInput | Prisma.SortOrder
   achievements?: Prisma.SortOrderInput | Prisma.SortOrder
   policies?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  majorEvents?: Prisma.SortOrderInput | Prisma.SortOrder
+  events?: Prisma.SortOrderInput | Prisma.SortOrder
+  contribution?: Prisma.SortOrderInput | Prisma.SortOrder
+  responsibility?: Prisma.SortOrderInput | Prisma.SortOrder
+  evaluations?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   dynasty?: Prisma.DynastyOrderByWithRelationInput
@@ -311,14 +408,27 @@ export type QingRulerWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.QingRulerWhereInput | Prisma.QingRulerWhereInput[]
   name?: Prisma.StringFilter<"QingRuler"> | string
   dynastyId?: Prisma.StringFilter<"QingRuler"> | string
+  templeName?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  eraName?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  courtesy?: Prisma.StringNullableFilter<"QingRuler"> | string | null
   role?: Prisma.StringFilter<"QingRuler"> | string
   reignStart?: Prisma.IntNullableFilter<"QingRuler"> | number | null
   reignEnd?: Prisma.IntNullableFilter<"QingRuler"> | number | null
   birthYear?: Prisma.IntNullableFilter<"QingRuler"> | number | null
   deathYear?: Prisma.IntNullableFilter<"QingRuler"> | number | null
+  positions?: Prisma.JsonNullableFilter<"QingRuler">
+  faction?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"QingRuler"> | string | null
   achievements?: Prisma.JsonNullableFilter<"QingRuler">
   policies?: Prisma.JsonNullableFilter<"QingRuler">
   biography?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  majorEvents?: Prisma.JsonNullableFilter<"QingRuler">
+  events?: Prisma.JsonNullableFilter<"QingRuler">
+  contribution?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  responsibility?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  evaluations?: Prisma.JsonNullableFilter<"QingRuler">
+  portraitUrl?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  sources?: Prisma.JsonNullableFilter<"QingRuler">
   createdAt?: Prisma.DateTimeFilter<"QingRuler"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"QingRuler"> | Date | string
   dynasty?: Prisma.XOR<Prisma.DynastyScalarRelationFilter, Prisma.DynastyWhereInput>
@@ -328,14 +438,27 @@ export type QingRulerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  templeName?: Prisma.SortOrderInput | Prisma.SortOrder
+  eraName?: Prisma.SortOrderInput | Prisma.SortOrder
+  courtesy?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   reignStart?: Prisma.SortOrderInput | Prisma.SortOrder
   reignEnd?: Prisma.SortOrderInput | Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  positions?: Prisma.SortOrderInput | Prisma.SortOrder
+  faction?: Prisma.SortOrderInput | Prisma.SortOrder
+  politicalViews?: Prisma.SortOrderInput | Prisma.SortOrder
   achievements?: Prisma.SortOrderInput | Prisma.SortOrder
   policies?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  majorEvents?: Prisma.SortOrderInput | Prisma.SortOrder
+  events?: Prisma.SortOrderInput | Prisma.SortOrder
+  contribution?: Prisma.SortOrderInput | Prisma.SortOrder
+  responsibility?: Prisma.SortOrderInput | Prisma.SortOrder
+  evaluations?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.QingRulerCountOrderByAggregateInput
@@ -352,14 +475,27 @@ export type QingRulerScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"QingRuler"> | string
   name?: Prisma.StringWithAggregatesFilter<"QingRuler"> | string
   dynastyId?: Prisma.StringWithAggregatesFilter<"QingRuler"> | string
+  templeName?: Prisma.StringNullableWithAggregatesFilter<"QingRuler"> | string | null
+  eraName?: Prisma.StringNullableWithAggregatesFilter<"QingRuler"> | string | null
+  courtesy?: Prisma.StringNullableWithAggregatesFilter<"QingRuler"> | string | null
   role?: Prisma.StringWithAggregatesFilter<"QingRuler"> | string
   reignStart?: Prisma.IntNullableWithAggregatesFilter<"QingRuler"> | number | null
   reignEnd?: Prisma.IntNullableWithAggregatesFilter<"QingRuler"> | number | null
   birthYear?: Prisma.IntNullableWithAggregatesFilter<"QingRuler"> | number | null
   deathYear?: Prisma.IntNullableWithAggregatesFilter<"QingRuler"> | number | null
+  positions?: Prisma.JsonNullableWithAggregatesFilter<"QingRuler">
+  faction?: Prisma.StringNullableWithAggregatesFilter<"QingRuler"> | string | null
+  politicalViews?: Prisma.StringNullableWithAggregatesFilter<"QingRuler"> | string | null
   achievements?: Prisma.JsonNullableWithAggregatesFilter<"QingRuler">
   policies?: Prisma.JsonNullableWithAggregatesFilter<"QingRuler">
   biography?: Prisma.StringNullableWithAggregatesFilter<"QingRuler"> | string | null
+  majorEvents?: Prisma.JsonNullableWithAggregatesFilter<"QingRuler">
+  events?: Prisma.JsonNullableWithAggregatesFilter<"QingRuler">
+  contribution?: Prisma.StringNullableWithAggregatesFilter<"QingRuler"> | string | null
+  responsibility?: Prisma.StringNullableWithAggregatesFilter<"QingRuler"> | string | null
+  evaluations?: Prisma.JsonNullableWithAggregatesFilter<"QingRuler">
+  portraitUrl?: Prisma.StringNullableWithAggregatesFilter<"QingRuler"> | string | null
+  sources?: Prisma.JsonNullableWithAggregatesFilter<"QingRuler">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"QingRuler"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"QingRuler"> | Date | string
 }
@@ -367,14 +503,27 @@ export type QingRulerScalarWhereWithAggregatesInput = {
 export type QingRulerCreateInput = {
   id?: string
   name: string
+  templeName?: string | null
+  eraName?: string | null
+  courtesy?: string | null
   role: string
   reignStart?: number | null
   reignEnd?: number | null
   birthYear?: number | null
   deathYear?: number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   policies?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  majorEvents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  contribution?: string | null
+  responsibility?: string | null
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   dynasty: Prisma.DynastyCreateNestedOneWithoutQingRulersInput
@@ -384,14 +533,27 @@ export type QingRulerUncheckedCreateInput = {
   id?: string
   name: string
   dynastyId: string
+  templeName?: string | null
+  eraName?: string | null
+  courtesy?: string | null
   role: string
   reignStart?: number | null
   reignEnd?: number | null
   birthYear?: number | null
   deathYear?: number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   policies?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  majorEvents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  contribution?: string | null
+  responsibility?: string | null
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -399,14 +561,27 @@ export type QingRulerUncheckedCreateInput = {
 export type QingRulerUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  templeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eraName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   reignStart?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reignEnd?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   policies?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  majorEvents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  contribution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsibility?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dynasty?: Prisma.DynastyUpdateOneRequiredWithoutQingRulersNestedInput
@@ -416,14 +591,27 @@ export type QingRulerUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   dynastyId?: Prisma.StringFieldUpdateOperationsInput | string
+  templeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eraName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   reignStart?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reignEnd?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   policies?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  majorEvents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  contribution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsibility?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -432,14 +620,27 @@ export type QingRulerCreateManyInput = {
   id?: string
   name: string
   dynastyId: string
+  templeName?: string | null
+  eraName?: string | null
+  courtesy?: string | null
   role: string
   reignStart?: number | null
   reignEnd?: number | null
   birthYear?: number | null
   deathYear?: number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   policies?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  majorEvents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  contribution?: string | null
+  responsibility?: string | null
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -447,14 +648,27 @@ export type QingRulerCreateManyInput = {
 export type QingRulerUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  templeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eraName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   reignStart?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reignEnd?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   policies?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  majorEvents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  contribution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsibility?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -463,14 +677,27 @@ export type QingRulerUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   dynastyId?: Prisma.StringFieldUpdateOperationsInput | string
+  templeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eraName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   reignStart?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reignEnd?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   policies?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  majorEvents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  contribution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsibility?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -489,14 +716,27 @@ export type QingRulerCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  templeName?: Prisma.SortOrder
+  eraName?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   reignStart?: Prisma.SortOrder
   reignEnd?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
+  positions?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   achievements?: Prisma.SortOrder
   policies?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  majorEvents?: Prisma.SortOrder
+  events?: Prisma.SortOrder
+  contribution?: Prisma.SortOrder
+  responsibility?: Prisma.SortOrder
+  evaluations?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
+  sources?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -512,12 +752,20 @@ export type QingRulerMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  templeName?: Prisma.SortOrder
+  eraName?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   reignStart?: Prisma.SortOrder
   reignEnd?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  contribution?: Prisma.SortOrder
+  responsibility?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -526,12 +774,20 @@ export type QingRulerMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  templeName?: Prisma.SortOrder
+  eraName?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   reignStart?: Prisma.SortOrder
   reignEnd?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  contribution?: Prisma.SortOrder
+  responsibility?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -588,14 +844,27 @@ export type QingRulerUncheckedUpdateManyWithoutDynastyNestedInput = {
 export type QingRulerCreateWithoutDynastyInput = {
   id?: string
   name: string
+  templeName?: string | null
+  eraName?: string | null
+  courtesy?: string | null
   role: string
   reignStart?: number | null
   reignEnd?: number | null
   birthYear?: number | null
   deathYear?: number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   policies?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  majorEvents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  contribution?: string | null
+  responsibility?: string | null
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -603,14 +872,27 @@ export type QingRulerCreateWithoutDynastyInput = {
 export type QingRulerUncheckedCreateWithoutDynastyInput = {
   id?: string
   name: string
+  templeName?: string | null
+  eraName?: string | null
+  courtesy?: string | null
   role: string
   reignStart?: number | null
   reignEnd?: number | null
   birthYear?: number | null
   deathYear?: number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   policies?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  majorEvents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  contribution?: string | null
+  responsibility?: string | null
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -647,14 +929,27 @@ export type QingRulerScalarWhereInput = {
   id?: Prisma.StringFilter<"QingRuler"> | string
   name?: Prisma.StringFilter<"QingRuler"> | string
   dynastyId?: Prisma.StringFilter<"QingRuler"> | string
+  templeName?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  eraName?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  courtesy?: Prisma.StringNullableFilter<"QingRuler"> | string | null
   role?: Prisma.StringFilter<"QingRuler"> | string
   reignStart?: Prisma.IntNullableFilter<"QingRuler"> | number | null
   reignEnd?: Prisma.IntNullableFilter<"QingRuler"> | number | null
   birthYear?: Prisma.IntNullableFilter<"QingRuler"> | number | null
   deathYear?: Prisma.IntNullableFilter<"QingRuler"> | number | null
+  positions?: Prisma.JsonNullableFilter<"QingRuler">
+  faction?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"QingRuler"> | string | null
   achievements?: Prisma.JsonNullableFilter<"QingRuler">
   policies?: Prisma.JsonNullableFilter<"QingRuler">
   biography?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  majorEvents?: Prisma.JsonNullableFilter<"QingRuler">
+  events?: Prisma.JsonNullableFilter<"QingRuler">
+  contribution?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  responsibility?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  evaluations?: Prisma.JsonNullableFilter<"QingRuler">
+  portraitUrl?: Prisma.StringNullableFilter<"QingRuler"> | string | null
+  sources?: Prisma.JsonNullableFilter<"QingRuler">
   createdAt?: Prisma.DateTimeFilter<"QingRuler"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"QingRuler"> | Date | string
 }
@@ -662,14 +957,27 @@ export type QingRulerScalarWhereInput = {
 export type QingRulerCreateManyDynastyInput = {
   id?: string
   name: string
+  templeName?: string | null
+  eraName?: string | null
+  courtesy?: string | null
   role: string
   reignStart?: number | null
   reignEnd?: number | null
   birthYear?: number | null
   deathYear?: number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   policies?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  majorEvents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  contribution?: string | null
+  responsibility?: string | null
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -677,14 +985,27 @@ export type QingRulerCreateManyDynastyInput = {
 export type QingRulerUpdateWithoutDynastyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  templeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eraName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   reignStart?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reignEnd?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   policies?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  majorEvents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  contribution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsibility?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -692,14 +1013,27 @@ export type QingRulerUpdateWithoutDynastyInput = {
 export type QingRulerUncheckedUpdateWithoutDynastyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  templeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eraName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   reignStart?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reignEnd?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   policies?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  majorEvents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  contribution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsibility?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -707,14 +1041,27 @@ export type QingRulerUncheckedUpdateWithoutDynastyInput = {
 export type QingRulerUncheckedUpdateManyWithoutDynastyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  templeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eraName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   reignStart?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reignEnd?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   policies?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  majorEvents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  contribution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsibility?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -725,14 +1072,27 @@ export type QingRulerSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  templeName?: boolean
+  eraName?: boolean
+  courtesy?: boolean
   role?: boolean
   reignStart?: boolean
   reignEnd?: boolean
   birthYear?: boolean
   deathYear?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   policies?: boolean
   biography?: boolean
+  majorEvents?: boolean
+  events?: boolean
+  contribution?: boolean
+  responsibility?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
@@ -742,14 +1102,27 @@ export type QingRulerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  templeName?: boolean
+  eraName?: boolean
+  courtesy?: boolean
   role?: boolean
   reignStart?: boolean
   reignEnd?: boolean
   birthYear?: boolean
   deathYear?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   policies?: boolean
   biography?: boolean
+  majorEvents?: boolean
+  events?: boolean
+  contribution?: boolean
+  responsibility?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
@@ -759,14 +1132,27 @@ export type QingRulerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  templeName?: boolean
+  eraName?: boolean
+  courtesy?: boolean
   role?: boolean
   reignStart?: boolean
   reignEnd?: boolean
   birthYear?: boolean
   deathYear?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   policies?: boolean
   biography?: boolean
+  majorEvents?: boolean
+  events?: boolean
+  contribution?: boolean
+  responsibility?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
@@ -776,19 +1162,32 @@ export type QingRulerSelectScalar = {
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  templeName?: boolean
+  eraName?: boolean
+  courtesy?: boolean
   role?: boolean
   reignStart?: boolean
   reignEnd?: boolean
   birthYear?: boolean
   deathYear?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   policies?: boolean
   biography?: boolean
+  majorEvents?: boolean
+  events?: boolean
+  contribution?: boolean
+  responsibility?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type QingRulerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "dynastyId" | "role" | "reignStart" | "reignEnd" | "birthYear" | "deathYear" | "achievements" | "policies" | "biography" | "createdAt" | "updatedAt", ExtArgs["result"]["qingRuler"]>
+export type QingRulerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "dynastyId" | "templeName" | "eraName" | "courtesy" | "role" | "reignStart" | "reignEnd" | "birthYear" | "deathYear" | "positions" | "faction" | "politicalViews" | "achievements" | "policies" | "biography" | "majorEvents" | "events" | "contribution" | "responsibility" | "evaluations" | "portraitUrl" | "sources" | "createdAt" | "updatedAt", ExtArgs["result"]["qingRuler"]>
 export type QingRulerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
 }
@@ -808,14 +1207,27 @@ export type $QingRulerPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     id: string
     name: string
     dynastyId: string
+    templeName: string | null
+    eraName: string | null
+    courtesy: string | null
     role: string
     reignStart: number | null
     reignEnd: number | null
     birthYear: number | null
     deathYear: number | null
+    positions: runtime.JsonValue | null
+    faction: string | null
+    politicalViews: string | null
     achievements: runtime.JsonValue | null
     policies: runtime.JsonValue | null
     biography: string | null
+    majorEvents: runtime.JsonValue | null
+    events: runtime.JsonValue | null
+    contribution: string | null
+    responsibility: string | null
+    evaluations: runtime.JsonValue | null
+    portraitUrl: string | null
+    sources: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["qingRuler"]>
@@ -1245,14 +1657,27 @@ export interface QingRulerFieldRefs {
   readonly id: Prisma.FieldRef<"QingRuler", 'String'>
   readonly name: Prisma.FieldRef<"QingRuler", 'String'>
   readonly dynastyId: Prisma.FieldRef<"QingRuler", 'String'>
+  readonly templeName: Prisma.FieldRef<"QingRuler", 'String'>
+  readonly eraName: Prisma.FieldRef<"QingRuler", 'String'>
+  readonly courtesy: Prisma.FieldRef<"QingRuler", 'String'>
   readonly role: Prisma.FieldRef<"QingRuler", 'String'>
   readonly reignStart: Prisma.FieldRef<"QingRuler", 'Int'>
   readonly reignEnd: Prisma.FieldRef<"QingRuler", 'Int'>
   readonly birthYear: Prisma.FieldRef<"QingRuler", 'Int'>
   readonly deathYear: Prisma.FieldRef<"QingRuler", 'Int'>
+  readonly positions: Prisma.FieldRef<"QingRuler", 'Json'>
+  readonly faction: Prisma.FieldRef<"QingRuler", 'String'>
+  readonly politicalViews: Prisma.FieldRef<"QingRuler", 'String'>
   readonly achievements: Prisma.FieldRef<"QingRuler", 'Json'>
   readonly policies: Prisma.FieldRef<"QingRuler", 'Json'>
   readonly biography: Prisma.FieldRef<"QingRuler", 'String'>
+  readonly majorEvents: Prisma.FieldRef<"QingRuler", 'Json'>
+  readonly events: Prisma.FieldRef<"QingRuler", 'Json'>
+  readonly contribution: Prisma.FieldRef<"QingRuler", 'String'>
+  readonly responsibility: Prisma.FieldRef<"QingRuler", 'String'>
+  readonly evaluations: Prisma.FieldRef<"QingRuler", 'Json'>
+  readonly portraitUrl: Prisma.FieldRef<"QingRuler", 'String'>
+  readonly sources: Prisma.FieldRef<"QingRuler", 'Json'>
   readonly createdAt: Prisma.FieldRef<"QingRuler", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"QingRuler", 'DateTime'>
 }

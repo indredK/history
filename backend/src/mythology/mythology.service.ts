@@ -45,13 +45,24 @@ export class MythologyService {
       this.prisma.mythology.count({ where }),
     ]);
 
-    // Transform the data to match DTO structure
-    const transformedMythologies = mythologies.map(mythology => ({
-      ...mythology,
-      // Parse JSON fields if they exist
-      stories: mythology.stories ? JSON.parse(mythology.stories as string) : null,
-      symbolism: mythology.symbolism ? JSON.parse(mythology.symbolism as string) : null,
-    }));
+    // Transform the data to match frontend requirements
+    const transformedMythologies = mythologies.map(mythology => {
+      // Parse JSON fields safely
+      const stories = this.safeJsonParse(mythology.stories) || [];
+      const symbolism = this.safeJsonParse(mythology.symbolism) || [];
+
+      // Convert database fields to frontend interface
+      return {
+        id: mythology.id,
+        title: mythology.name, // Map database 'name' to frontend 'title'
+        englishTitle: '', // Database doesn't have name_en field
+        category: mythology.category as any, // Cast to match frontend category type
+        description: mythology.description || '', // Ensure description is not null
+        characters: Array.isArray(stories) ? stories.slice(0, 5) : [], 
+        source: mythology.origin || '', // Map database 'origin' to frontend 'source'
+        imageUrl: '', // Provide empty string if no image URL available
+      };
+    });
 
     return new PaginatedResponseDto(transformedMythologies, total, page, limit);
   }
@@ -65,12 +76,33 @@ export class MythologyService {
       throw new NotFoundException(`Mythology with ID ${id} not found`);
     }
 
-    // Transform the data to match DTO structure
+    // Parse JSON fields safely
+    const stories = this.safeJsonParse(mythology.stories) || [];
+    const symbolism = this.safeJsonParse(mythology.symbolism) || [];
+
+    // Convert database fields to frontend interface
     return {
-      ...mythology,
-      // Parse JSON fields if they exist
-      stories: mythology.stories ? JSON.parse(mythology.stories as string) : null,
-      symbolism: mythology.symbolism ? JSON.parse(mythology.symbolism as string) : null,
+      id: mythology.id,
+      title: mythology.name, // Map database 'name' to frontend 'title'
+      englishTitle: '', // Database doesn't have name_en field
+      category: mythology.category as any, // Cast to match frontend category type
+      description: mythology.description || '', // Ensure description is not null
+      characters: Array.isArray(stories) ? stories.slice(0, 5) : [],
+      source: mythology.origin || '', // Map database 'origin' to frontend 'source'
+      imageUrl: '', // Provide empty string if no image URL available
     };
+  }
+
+  private safeJsonParse(value: any): any {
+    if (!value) return null;
+    if (typeof value === 'string' && value.trim() !== '') {
+      try {
+        return JSON.parse(value);
+      } catch (e) {
+        // If it's not valid JSON, it might be a plain string
+        return value;
+      }
+    }
+    return value;
   }
 }

@@ -1,17 +1,17 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { BaseFigureDto } from './base-figure.dto';
+import { BaseFigureDto } from '../common/base.dto';
 
-export class MingFigureDto extends BaseFigureDto {
+export class TangFigureDto extends BaseFigureDto {
   @ApiProperty({ description: 'Dynasty ID', example: 'uuid-string' })
   dynastyId: string;
 
   @ApiPropertyOptional({ 
-    description: 'Ming period', 
+    description: 'Tang period', 
     example: 'early',
     enum: ['early', 'middle', 'late']
   })
   period?: string | null;
 
-  @ApiPropertyOptional({ description: 'Works', type: [String] })
+  @ApiPropertyOptional({ description: 'Works/poems', type: [String] })
   works?: string[] | null;
 }

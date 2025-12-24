@@ -40,11 +40,15 @@ export type SongFigureMinAggregateOutputType = {
   id: string | null
   name: string | null
   dynastyId: string | null
+  courtesy: string | null
   role: string | null
   birthYear: number | null
   deathYear: number | null
   period: string | null
+  faction: string | null
+  politicalViews: string | null
   biography: string | null
+  portraitUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,11 +57,15 @@ export type SongFigureMaxAggregateOutputType = {
   id: string | null
   name: string | null
   dynastyId: string | null
+  courtesy: string | null
   role: string | null
   birthYear: number | null
   deathYear: number | null
   period: string | null
+  faction: string | null
+  politicalViews: string | null
   biography: string | null
+  portraitUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,13 +74,21 @@ export type SongFigureCountAggregateOutputType = {
   id: number
   name: number
   dynastyId: number
+  courtesy: number
   role: number
   birthYear: number
   deathYear: number
   period: number
+  positions: number
+  faction: number
+  politicalViews: number
   achievements: number
   works: number
   biography: number
+  events: number
+  evaluations: number
+  portraitUrl: number
+  sources: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -93,11 +109,15 @@ export type SongFigureMinAggregateInputType = {
   id?: true
   name?: true
   dynastyId?: true
+  courtesy?: true
   role?: true
   birthYear?: true
   deathYear?: true
   period?: true
+  faction?: true
+  politicalViews?: true
   biography?: true
+  portraitUrl?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -106,11 +126,15 @@ export type SongFigureMaxAggregateInputType = {
   id?: true
   name?: true
   dynastyId?: true
+  courtesy?: true
   role?: true
   birthYear?: true
   deathYear?: true
   period?: true
+  faction?: true
+  politicalViews?: true
   biography?: true
+  portraitUrl?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -119,13 +143,21 @@ export type SongFigureCountAggregateInputType = {
   id?: true
   name?: true
   dynastyId?: true
+  courtesy?: true
   role?: true
   birthYear?: true
   deathYear?: true
   period?: true
+  positions?: true
+  faction?: true
+  politicalViews?: true
   achievements?: true
   works?: true
   biography?: true
+  events?: true
+  evaluations?: true
+  portraitUrl?: true
+  sources?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -221,13 +253,21 @@ export type SongFigureGroupByOutputType = {
   id: string
   name: string
   dynastyId: string
+  courtesy: string | null
   role: string
   birthYear: number | null
   deathYear: number | null
   period: string | null
+  positions: runtime.JsonValue | null
+  faction: string | null
+  politicalViews: string | null
   achievements: runtime.JsonValue | null
   works: runtime.JsonValue | null
   biography: string | null
+  events: runtime.JsonValue | null
+  evaluations: runtime.JsonValue | null
+  portraitUrl: string | null
+  sources: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: SongFigureCountAggregateOutputType | null
@@ -259,13 +299,21 @@ export type SongFigureWhereInput = {
   id?: Prisma.StringFilter<"SongFigure"> | string
   name?: Prisma.StringFilter<"SongFigure"> | string
   dynastyId?: Prisma.StringFilter<"SongFigure"> | string
+  courtesy?: Prisma.StringNullableFilter<"SongFigure"> | string | null
   role?: Prisma.StringFilter<"SongFigure"> | string
   birthYear?: Prisma.IntNullableFilter<"SongFigure"> | number | null
   deathYear?: Prisma.IntNullableFilter<"SongFigure"> | number | null
   period?: Prisma.StringNullableFilter<"SongFigure"> | string | null
+  positions?: Prisma.JsonNullableFilter<"SongFigure">
+  faction?: Prisma.StringNullableFilter<"SongFigure"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"SongFigure"> | string | null
   achievements?: Prisma.JsonNullableFilter<"SongFigure">
   works?: Prisma.JsonNullableFilter<"SongFigure">
   biography?: Prisma.StringNullableFilter<"SongFigure"> | string | null
+  events?: Prisma.JsonNullableFilter<"SongFigure">
+  evaluations?: Prisma.JsonNullableFilter<"SongFigure">
+  portraitUrl?: Prisma.StringNullableFilter<"SongFigure"> | string | null
+  sources?: Prisma.JsonNullableFilter<"SongFigure">
   createdAt?: Prisma.DateTimeFilter<"SongFigure"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SongFigure"> | Date | string
   dynasty?: Prisma.XOR<Prisma.DynastyScalarRelationFilter, Prisma.DynastyWhereInput>
@@ -275,13 +323,21 @@ export type SongFigureOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
   period?: Prisma.SortOrderInput | Prisma.SortOrder
+  positions?: Prisma.SortOrderInput | Prisma.SortOrder
+  faction?: Prisma.SortOrderInput | Prisma.SortOrder
+  politicalViews?: Prisma.SortOrderInput | Prisma.SortOrder
   achievements?: Prisma.SortOrderInput | Prisma.SortOrder
   works?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  events?: Prisma.SortOrderInput | Prisma.SortOrder
+  evaluations?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   dynasty?: Prisma.DynastyOrderByWithRelationInput
@@ -294,13 +350,21 @@ export type SongFigureWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SongFigureWhereInput | Prisma.SongFigureWhereInput[]
   name?: Prisma.StringFilter<"SongFigure"> | string
   dynastyId?: Prisma.StringFilter<"SongFigure"> | string
+  courtesy?: Prisma.StringNullableFilter<"SongFigure"> | string | null
   role?: Prisma.StringFilter<"SongFigure"> | string
   birthYear?: Prisma.IntNullableFilter<"SongFigure"> | number | null
   deathYear?: Prisma.IntNullableFilter<"SongFigure"> | number | null
   period?: Prisma.StringNullableFilter<"SongFigure"> | string | null
+  positions?: Prisma.JsonNullableFilter<"SongFigure">
+  faction?: Prisma.StringNullableFilter<"SongFigure"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"SongFigure"> | string | null
   achievements?: Prisma.JsonNullableFilter<"SongFigure">
   works?: Prisma.JsonNullableFilter<"SongFigure">
   biography?: Prisma.StringNullableFilter<"SongFigure"> | string | null
+  events?: Prisma.JsonNullableFilter<"SongFigure">
+  evaluations?: Prisma.JsonNullableFilter<"SongFigure">
+  portraitUrl?: Prisma.StringNullableFilter<"SongFigure"> | string | null
+  sources?: Prisma.JsonNullableFilter<"SongFigure">
   createdAt?: Prisma.DateTimeFilter<"SongFigure"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SongFigure"> | Date | string
   dynasty?: Prisma.XOR<Prisma.DynastyScalarRelationFilter, Prisma.DynastyWhereInput>
@@ -310,13 +374,21 @@ export type SongFigureOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
   period?: Prisma.SortOrderInput | Prisma.SortOrder
+  positions?: Prisma.SortOrderInput | Prisma.SortOrder
+  faction?: Prisma.SortOrderInput | Prisma.SortOrder
+  politicalViews?: Prisma.SortOrderInput | Prisma.SortOrder
   achievements?: Prisma.SortOrderInput | Prisma.SortOrder
   works?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  events?: Prisma.SortOrderInput | Prisma.SortOrder
+  evaluations?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SongFigureCountOrderByAggregateInput
@@ -333,13 +405,21 @@ export type SongFigureScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"SongFigure"> | string
   name?: Prisma.StringWithAggregatesFilter<"SongFigure"> | string
   dynastyId?: Prisma.StringWithAggregatesFilter<"SongFigure"> | string
+  courtesy?: Prisma.StringNullableWithAggregatesFilter<"SongFigure"> | string | null
   role?: Prisma.StringWithAggregatesFilter<"SongFigure"> | string
   birthYear?: Prisma.IntNullableWithAggregatesFilter<"SongFigure"> | number | null
   deathYear?: Prisma.IntNullableWithAggregatesFilter<"SongFigure"> | number | null
   period?: Prisma.StringNullableWithAggregatesFilter<"SongFigure"> | string | null
+  positions?: Prisma.JsonNullableWithAggregatesFilter<"SongFigure">
+  faction?: Prisma.StringNullableWithAggregatesFilter<"SongFigure"> | string | null
+  politicalViews?: Prisma.StringNullableWithAggregatesFilter<"SongFigure"> | string | null
   achievements?: Prisma.JsonNullableWithAggregatesFilter<"SongFigure">
   works?: Prisma.JsonNullableWithAggregatesFilter<"SongFigure">
   biography?: Prisma.StringNullableWithAggregatesFilter<"SongFigure"> | string | null
+  events?: Prisma.JsonNullableWithAggregatesFilter<"SongFigure">
+  evaluations?: Prisma.JsonNullableWithAggregatesFilter<"SongFigure">
+  portraitUrl?: Prisma.StringNullableWithAggregatesFilter<"SongFigure"> | string | null
+  sources?: Prisma.JsonNullableWithAggregatesFilter<"SongFigure">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SongFigure"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SongFigure"> | Date | string
 }
@@ -347,13 +427,21 @@ export type SongFigureScalarWhereWithAggregatesInput = {
 export type SongFigureCreateInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   period?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   dynasty: Prisma.DynastyCreateNestedOneWithoutSongFiguresInput
@@ -363,13 +451,21 @@ export type SongFigureUncheckedCreateInput = {
   id?: string
   name: string
   dynastyId: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   period?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -377,13 +473,21 @@ export type SongFigureUncheckedCreateInput = {
 export type SongFigureUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dynasty?: Prisma.DynastyUpdateOneRequiredWithoutSongFiguresNestedInput
@@ -393,13 +497,21 @@ export type SongFigureUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   dynastyId?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -408,13 +520,21 @@ export type SongFigureCreateManyInput = {
   id?: string
   name: string
   dynastyId: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   period?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -422,13 +542,21 @@ export type SongFigureCreateManyInput = {
 export type SongFigureUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -437,13 +565,21 @@ export type SongFigureUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   dynastyId?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -462,13 +598,21 @@ export type SongFigureCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
   period?: Prisma.SortOrder
+  positions?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   achievements?: Prisma.SortOrder
   works?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  events?: Prisma.SortOrder
+  evaluations?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
+  sources?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -482,11 +626,15 @@ export type SongFigureMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
   period?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -495,11 +643,15 @@ export type SongFigureMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
   period?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -554,13 +706,21 @@ export type SongFigureUncheckedUpdateManyWithoutDynastyNestedInput = {
 export type SongFigureCreateWithoutDynastyInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   period?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -568,13 +728,21 @@ export type SongFigureCreateWithoutDynastyInput = {
 export type SongFigureUncheckedCreateWithoutDynastyInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   period?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -611,13 +779,21 @@ export type SongFigureScalarWhereInput = {
   id?: Prisma.StringFilter<"SongFigure"> | string
   name?: Prisma.StringFilter<"SongFigure"> | string
   dynastyId?: Prisma.StringFilter<"SongFigure"> | string
+  courtesy?: Prisma.StringNullableFilter<"SongFigure"> | string | null
   role?: Prisma.StringFilter<"SongFigure"> | string
   birthYear?: Prisma.IntNullableFilter<"SongFigure"> | number | null
   deathYear?: Prisma.IntNullableFilter<"SongFigure"> | number | null
   period?: Prisma.StringNullableFilter<"SongFigure"> | string | null
+  positions?: Prisma.JsonNullableFilter<"SongFigure">
+  faction?: Prisma.StringNullableFilter<"SongFigure"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"SongFigure"> | string | null
   achievements?: Prisma.JsonNullableFilter<"SongFigure">
   works?: Prisma.JsonNullableFilter<"SongFigure">
   biography?: Prisma.StringNullableFilter<"SongFigure"> | string | null
+  events?: Prisma.JsonNullableFilter<"SongFigure">
+  evaluations?: Prisma.JsonNullableFilter<"SongFigure">
+  portraitUrl?: Prisma.StringNullableFilter<"SongFigure"> | string | null
+  sources?: Prisma.JsonNullableFilter<"SongFigure">
   createdAt?: Prisma.DateTimeFilter<"SongFigure"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SongFigure"> | Date | string
 }
@@ -625,13 +801,21 @@ export type SongFigureScalarWhereInput = {
 export type SongFigureCreateManyDynastyInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   period?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -639,13 +823,21 @@ export type SongFigureCreateManyDynastyInput = {
 export type SongFigureUpdateWithoutDynastyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -653,13 +845,21 @@ export type SongFigureUpdateWithoutDynastyInput = {
 export type SongFigureUncheckedUpdateWithoutDynastyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -667,13 +867,21 @@ export type SongFigureUncheckedUpdateWithoutDynastyInput = {
 export type SongFigureUncheckedUpdateManyWithoutDynastyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -684,13 +892,21 @@ export type SongFigureSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  courtesy?: boolean
   role?: boolean
   birthYear?: boolean
   deathYear?: boolean
   period?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   works?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
@@ -700,13 +916,21 @@ export type SongFigureSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  courtesy?: boolean
   role?: boolean
   birthYear?: boolean
   deathYear?: boolean
   period?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   works?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
@@ -716,13 +940,21 @@ export type SongFigureSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  courtesy?: boolean
   role?: boolean
   birthYear?: boolean
   deathYear?: boolean
   period?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   works?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
@@ -732,18 +964,26 @@ export type SongFigureSelectScalar = {
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  courtesy?: boolean
   role?: boolean
   birthYear?: boolean
   deathYear?: boolean
   period?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   works?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SongFigureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "dynastyId" | "role" | "birthYear" | "deathYear" | "period" | "achievements" | "works" | "biography" | "createdAt" | "updatedAt", ExtArgs["result"]["songFigure"]>
+export type SongFigureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "dynastyId" | "courtesy" | "role" | "birthYear" | "deathYear" | "period" | "positions" | "faction" | "politicalViews" | "achievements" | "works" | "biography" | "events" | "evaluations" | "portraitUrl" | "sources" | "createdAt" | "updatedAt", ExtArgs["result"]["songFigure"]>
 export type SongFigureInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
 }
@@ -763,13 +1003,21 @@ export type $SongFigurePayload<ExtArgs extends runtime.Types.Extensions.Internal
     id: string
     name: string
     dynastyId: string
+    courtesy: string | null
     role: string
     birthYear: number | null
     deathYear: number | null
     period: string | null
+    positions: runtime.JsonValue | null
+    faction: string | null
+    politicalViews: string | null
     achievements: runtime.JsonValue | null
     works: runtime.JsonValue | null
     biography: string | null
+    events: runtime.JsonValue | null
+    evaluations: runtime.JsonValue | null
+    portraitUrl: string | null
+    sources: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["songFigure"]>
@@ -1199,13 +1447,21 @@ export interface SongFigureFieldRefs {
   readonly id: Prisma.FieldRef<"SongFigure", 'String'>
   readonly name: Prisma.FieldRef<"SongFigure", 'String'>
   readonly dynastyId: Prisma.FieldRef<"SongFigure", 'String'>
+  readonly courtesy: Prisma.FieldRef<"SongFigure", 'String'>
   readonly role: Prisma.FieldRef<"SongFigure", 'String'>
   readonly birthYear: Prisma.FieldRef<"SongFigure", 'Int'>
   readonly deathYear: Prisma.FieldRef<"SongFigure", 'Int'>
   readonly period: Prisma.FieldRef<"SongFigure", 'String'>
+  readonly positions: Prisma.FieldRef<"SongFigure", 'Json'>
+  readonly faction: Prisma.FieldRef<"SongFigure", 'String'>
+  readonly politicalViews: Prisma.FieldRef<"SongFigure", 'String'>
   readonly achievements: Prisma.FieldRef<"SongFigure", 'Json'>
   readonly works: Prisma.FieldRef<"SongFigure", 'Json'>
   readonly biography: Prisma.FieldRef<"SongFigure", 'String'>
+  readonly events: Prisma.FieldRef<"SongFigure", 'Json'>
+  readonly evaluations: Prisma.FieldRef<"SongFigure", 'Json'>
+  readonly portraitUrl: Prisma.FieldRef<"SongFigure", 'String'>
+  readonly sources: Prisma.FieldRef<"SongFigure", 'Json'>
   readonly createdAt: Prisma.FieldRef<"SongFigure", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SongFigure", 'DateTime'>
 }

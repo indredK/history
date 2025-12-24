@@ -62,6 +62,32 @@ const FAILURES_MAP: Record<string, string[]> = {
 
 // 数据转换器
 function transformJsonToEmperor(jsonPerson: any, index: number): Emperor {
+  // 处理后端 DTO 格式
+  if (jsonPerson.dynastyId || jsonPerson.reignStart !== undefined) {
+    const historicalEval = jsonPerson.historicalEvaluation;
+    const evaluations = historicalEval ? [{
+      source: historicalEval.source || '历史评估',
+      content: historicalEval.content || '',
+      author: historicalEval.author || '匿名'
+    }] : [];
+
+    return {
+      id: jsonPerson.id,
+      name: jsonPerson.name,
+      templeName: jsonPerson.templeName,
+      dynasty: jsonPerson.dynasty?.name || '未知', // 后端可能包含关联的朝代对象
+      reignStart: jsonPerson.reignStart,
+      reignEnd: jsonPerson.reignEnd,
+      eraNames: jsonPerson.eraNames || [],
+      achievements: jsonPerson.achievements || [],
+      failures: jsonPerson.failures || [],
+      evaluations: jsonPerson.evaluations || evaluations,
+      biography: jsonPerson.biography || '',
+      sources: jsonPerson.sources || []
+    };
+  }
+
+  // 以下是原有处理 Mock 数据的逻辑
   const person = jsonPerson as PersonData;
   
   // 检查是否为帝王角色
@@ -94,7 +120,7 @@ function transformJsonToEmperor(jsonPerson: any, index: number): Emperor {
   }
   
   return {
-    id: `emp_${person.name_en.toLowerCase().replace(/\s+/g, '_') || `unknown_${index}`}`,
+    id: `emp_${person.name_en?.toLowerCase().replace(/\s+/g, '_') || `unknown_${index}`}`,
     name: person.name,
     ...(templeName && { templeName }),
     dynasty,

@@ -62,10 +62,10 @@ export class EmperorService {
       const { dynasty, ...emperorData } = emperor;
       return {
         ...emperorData,
-        // Parse JSON fields if they exist
-        eraNames: emperorData.eraNames ? JSON.parse(emperorData.eraNames as string) : null,
-        achievements: emperorData.achievements ? JSON.parse(emperorData.achievements as string) : null,
-        historicalEvaluation: emperorData.historicalEvaluation ? JSON.parse(emperorData.historicalEvaluation as string) : null,
+        // Parse JSON fields if they exist and are strings
+        eraNames: this.safeJsonParse(emperorData.eraNames),
+        achievements: this.safeJsonParse(emperorData.achievements),
+        historicalEvaluation: this.safeJsonParse(emperorData.historicalEvaluation),
       };
     });
 
@@ -89,9 +89,21 @@ export class EmperorService {
     return {
       ...emperorData,
       // Parse JSON fields if they exist
-      eraNames: emperorData.eraNames ? JSON.parse(emperorData.eraNames as string) : null,
-      achievements: emperorData.achievements ? JSON.parse(emperorData.achievements as string) : null,
-      historicalEvaluation: emperorData.historicalEvaluation ? JSON.parse(emperorData.historicalEvaluation as string) : null,
+      eraNames: this.safeJsonParse(emperorData.eraNames),
+      achievements: this.safeJsonParse(emperorData.achievements),
+      historicalEvaluation: this.safeJsonParse(emperorData.historicalEvaluation),
     };
+  }
+
+  private safeJsonParse(value: any): any {
+    if (!value) return null;
+    if (typeof value === 'string' && value.trim() !== '') {
+      try {
+        return JSON.parse(value);
+      } catch (e) {
+        return value;
+      }
+    }
+    return value;
   }
 }

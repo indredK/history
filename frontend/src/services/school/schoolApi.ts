@@ -6,19 +6,19 @@ import type { PhilosophicalSchool } from './types';
 function transformJsonToSchool(jsonSchool: any): PhilosophicalSchool {
   return {
     id: jsonSchool.id,
-    name: jsonSchool.name,
-    name_en: jsonSchool.name_en,
-    founder: jsonSchool.founder,
-    founderEn: jsonSchool.founderEn,
+    name: jsonSchool.name || '',
+    name_en: jsonSchool.name_en || jsonSchool.nameEn || '',
+    founder: jsonSchool.founder || '',
+    founderEn: jsonSchool.founderEn || '',
     foundingYear: jsonSchool.foundingYear,
-    foundingPeriod: jsonSchool.foundingPeriod,
-    coreBeliefs: jsonSchool.coreBeliefs,
-    keyTexts: jsonSchool.keyTexts,
-    representativeFigures: jsonSchool.representativeFigures,
-    classicWorks: jsonSchool.classicWorks,
-    description: jsonSchool.description,
-    influence: jsonSchool.influence,
-    color: jsonSchool.color,
+    foundingPeriod: jsonSchool.foundingPeriod || '',
+    coreBeliefs: jsonSchool.coreBeliefs || [],
+    keyTexts: jsonSchool.keyTexts || [],
+    representativeFigures: jsonSchool.representativeFigures || [],
+    classicWorks: jsonSchool.classicWorks || [],
+    description: jsonSchool.description || '',
+    influence: jsonSchool.influence || '',
+    color: jsonSchool.color || '',
   };
 }
 

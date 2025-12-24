@@ -49,11 +49,11 @@ export class FigureQueryDto extends PaginationQueryDto {
 export class SanguoFigureQueryDto extends PaginationQueryDto {
   @ApiPropertyOptional({
     description: 'Filter by kingdom',
-    example: 'shu',
-    enum: ['wei', 'shu', 'wu'],
+    example: '蜀',
+    enum: ['魏', '蜀', '吴', '其他'],
   })
   @IsOptional()
-  @IsIn(['wei', 'shu', 'wu'])
+  @IsIn(['魏', '蜀', '吴', '其他'])
   kingdom?: string;
 
   @ApiPropertyOptional({
@@ -69,6 +69,7 @@ export class SanguoFigureQueryDto extends PaginationQueryDto {
     description: 'Search by name (partial match)',
     example: '诸葛',
   })
+  @IsOptional()
   @IsOptional()
   name?: string;
 }

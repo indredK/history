@@ -7,6 +7,8 @@ import { getDataSourceMode } from '@/config/dataSource';
 import { loadJsonArray, type ApiResponse } from './dataLoaders';
 import { fallbackManager } from './errorHandling';
 
+import { apiClient, handleApiResponse, handleSingleApiResponse } from './apiClient';
+
 /**
  * 基础服务接口
  */
@@ -49,10 +51,41 @@ export function createUnifiedService<T>(
 
   // API数据获取函数
   const getApiData = async (): Promise<ApiResponse<T[]>> => {
-    // 这里可以集成实际的API调用逻辑
-    // 目前返回空数据，等待后端API实现
-    console.log(`API调用: GET ${apiEndpoint}`);
-    return { data: [] };
+    try {
+      console.log(`API调用: GET ${apiEndpoint}`);
+      const response = await apiClient.get(apiEndpoint);
+      const apiResponse = handleApiResponse<any>(response);
+      const transformedData = apiResponse.data.map((item, index) => transformer(item, index));
+      return { data: transformedData };
+    } catch (error) {
+      console.error(`API调用失败 (${apiEndpoint}):`, error);
+      throw error;
+    }
+  };
+
+  // API单个数据获取函数
+  const getApiDataById = async (id: string): Promise<ApiResponse<T | null>> => {
+    try {
+      const endpoint = `${apiEndpoint}/${id}`;
+      console.log(`API调用: GET ${endpoint}`);
+      const response = await apiClient.get(endpoint);
+      const apiResponse = handleSingleApiResponse<any>(response);
+      const transformedItem = apiResponse.data ? transformer(apiResponse.data, 0) : null;
+      return { data: transformedItem };
+    } catch (error) {
+      console.error(`API单个数据获取失败 (${apiEndpoint}/${id}):`, error);
+      throw error;
+    }
+  };
+
+  // Mock单个数据获取函数 (从全量数据中查找)
+  const getMockDataById = async (id: string): Promise<ApiResponse<T | null>> => {
+    const allData = await getMockData();
+    const item = allData.data.find((item: any) => {
+      // 兼容不同类型的ID比较
+      return String((item as any).id) === String(id);
+    });
+    return { data: item || null };
   };
 
   // 统一的数据获取函数
@@ -77,9 +110,18 @@ export function createUnifiedService<T>(
   // 如果需要getById方法
   if (hasGetById) {
     service.getById = async (id: string): Promise<ApiResponse<T | null>> => {
-      const allData = await getAll();
-      const item = allData.data.find((item: any) => item.id === id);
-      return { data: item || null };
+      const dataSourceMode = getDataSourceMode();
+      
+      if (dataSourceMode === 'mock') {
+        return getMockDataById(id);
+      }
+      
+      // API模式下，先尝试请求特定ID的API，如果失败则回退到Mock
+      return fallbackManager.executeWithFallback(
+        () => getApiDataById(id),
+        () => getMockDataById(id),
+        `获取${apiEndpoint}单个数据(id=${id})`
+      );
     };
   }
 

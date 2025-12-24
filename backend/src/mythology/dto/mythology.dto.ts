@@ -4,34 +4,28 @@ export class MythologyDto {
   @ApiProperty({ description: 'Mythology ID', example: 'uuid-string' })
   id: string;
 
-  @ApiProperty({ description: 'Mythology name', example: '盘古开天' })
-  name: string;
+  @ApiProperty({ description: 'Chinese title', example: '盘古开天' })
+  title: string;
+
+  @ApiPropertyOptional({ description: 'English title', example: 'Pangu Creates the World' })
+  englishTitle?: string | null;
 
   @ApiProperty({ 
     description: 'Mythology category', 
-    example: 'creation_myth',
-    enum: ['deity', 'legend', 'folklore', 'creation_myth', 'other']
+    example: '创世神话',
+    enum: ['创世神话', '英雄神话', '自然神话', '爱情神话', '神仙传说', '民间传说']
   })
   category: string;
 
-  @ApiPropertyOptional({ description: 'Geographic or cultural origin', example: '中原' })
-  origin?: string | null;
+  @ApiProperty({ description: 'Story description' })
+  description: string;
 
-  @ApiPropertyOptional({ description: 'Historical period', example: '上古' })
-  period?: string | null;
+  @ApiPropertyOptional({ description: 'Related characters', type: [String] })
+  characters?: string[] | null;
 
-  @ApiPropertyOptional({ description: 'Mythology description' })
-  description?: string | null;
+  @ApiPropertyOptional({ description: 'Source/reference', example: '《三五历记》' })
+  source?: string | null;
 
-  @ApiPropertyOptional({ description: 'Related stories', type: [String] })
-  stories?: string[] | null;
-
-  @ApiPropertyOptional({ description: 'Symbolic meanings', type: [String] })
-  symbolism?: string[] | null;
-
-  @ApiProperty({ description: 'Creation timestamp' })
-  createdAt: Date;
-
-  @ApiProperty({ description: 'Last update timestamp' })
-  updatedAt: Date;
+  @ApiPropertyOptional({ description: 'Image URL', example: '/images/mythologies/pangu.jpg' })
+  imageUrl?: string | null;
 }

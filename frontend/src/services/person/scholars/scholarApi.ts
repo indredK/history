@@ -10,8 +10,8 @@ const transformJsonToScholar = (jsonData: any, index: number): Scholar => {
   return {
     id: jsonData.id || `scholar_${jsonData.name?.replace(/\s+/g, '_') || `unknown_${index}`}`,
     name: jsonData.name || '',
-    name_en: jsonData.name_en || '',
-    dynasty: jsonData.dynasty || '',
+    name_en: jsonData.name_en || jsonData.nameEn || '',
+    dynasty: jsonData.dynasty?.name || jsonData.dynasty || '',
     dynastyPeriod: jsonData.dynastyPeriod || '',
     birthYear: jsonData.birthYear || 0,
     deathYear: jsonData.deathYear || 0,
@@ -21,7 +21,7 @@ const transformJsonToScholar = (jsonData: any, index: number): Scholar => {
     portraitUrl: jsonData.portraitUrl,
     achievements: jsonData.achievements || [],
     contributions: jsonData.contributions || [],
-    representativeWorks: jsonData.representativeWorks || [],
+    representativeWorks: jsonData.majorWorks || jsonData.representativeWorks || [],
     createdAt: jsonData.createdAt ? new Date(jsonData.createdAt) : undefined,
     updatedAt: jsonData.updatedAt ? new Date(jsonData.updatedAt) : undefined
   };

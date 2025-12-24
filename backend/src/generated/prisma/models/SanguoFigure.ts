@@ -39,11 +39,15 @@ export type SanguoFigureSumAggregateOutputType = {
 export type SanguoFigureMinAggregateOutputType = {
   id: string | null
   name: string | null
+  courtesy: string | null
   role: string | null
   kingdom: string | null
   birthYear: number | null
   deathYear: number | null
+  faction: string | null
+  politicalViews: string | null
   biography: string | null
+  portraitUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -51,11 +55,15 @@ export type SanguoFigureMinAggregateOutputType = {
 export type SanguoFigureMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  courtesy: string | null
   role: string | null
   kingdom: string | null
   birthYear: number | null
   deathYear: number | null
+  faction: string | null
+  politicalViews: string | null
   biography: string | null
+  portraitUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -63,13 +71,21 @@ export type SanguoFigureMaxAggregateOutputType = {
 export type SanguoFigureCountAggregateOutputType = {
   id: number
   name: number
+  courtesy: number
   role: number
   kingdom: number
   birthYear: number
   deathYear: number
+  positions: number
+  faction: number
+  politicalViews: number
   achievements: number
   battles: number
   biography: number
+  events: number
+  evaluations: number
+  portraitUrl: number
+  sources: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -89,11 +105,15 @@ export type SanguoFigureSumAggregateInputType = {
 export type SanguoFigureMinAggregateInputType = {
   id?: true
   name?: true
+  courtesy?: true
   role?: true
   kingdom?: true
   birthYear?: true
   deathYear?: true
+  faction?: true
+  politicalViews?: true
   biography?: true
+  portraitUrl?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -101,11 +121,15 @@ export type SanguoFigureMinAggregateInputType = {
 export type SanguoFigureMaxAggregateInputType = {
   id?: true
   name?: true
+  courtesy?: true
   role?: true
   kingdom?: true
   birthYear?: true
   deathYear?: true
+  faction?: true
+  politicalViews?: true
   biography?: true
+  portraitUrl?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -113,13 +137,21 @@ export type SanguoFigureMaxAggregateInputType = {
 export type SanguoFigureCountAggregateInputType = {
   id?: true
   name?: true
+  courtesy?: true
   role?: true
   kingdom?: true
   birthYear?: true
   deathYear?: true
+  positions?: true
+  faction?: true
+  politicalViews?: true
   achievements?: true
   battles?: true
   biography?: true
+  events?: true
+  evaluations?: true
+  portraitUrl?: true
+  sources?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -214,13 +246,21 @@ export type SanguoFigureGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 export type SanguoFigureGroupByOutputType = {
   id: string
   name: string
+  courtesy: string | null
   role: string
   kingdom: string
   birthYear: number | null
   deathYear: number | null
+  positions: runtime.JsonValue | null
+  faction: string | null
+  politicalViews: string | null
   achievements: runtime.JsonValue | null
   battles: runtime.JsonValue | null
   biography: string | null
+  events: runtime.JsonValue | null
+  evaluations: runtime.JsonValue | null
+  portraitUrl: string | null
+  sources: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: SanguoFigureCountAggregateOutputType | null
@@ -251,13 +291,21 @@ export type SanguoFigureWhereInput = {
   NOT?: Prisma.SanguoFigureWhereInput | Prisma.SanguoFigureWhereInput[]
   id?: Prisma.StringFilter<"SanguoFigure"> | string
   name?: Prisma.StringFilter<"SanguoFigure"> | string
+  courtesy?: Prisma.StringNullableFilter<"SanguoFigure"> | string | null
   role?: Prisma.StringFilter<"SanguoFigure"> | string
   kingdom?: Prisma.StringFilter<"SanguoFigure"> | string
   birthYear?: Prisma.IntNullableFilter<"SanguoFigure"> | number | null
   deathYear?: Prisma.IntNullableFilter<"SanguoFigure"> | number | null
+  positions?: Prisma.JsonNullableFilter<"SanguoFigure">
+  faction?: Prisma.StringNullableFilter<"SanguoFigure"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"SanguoFigure"> | string | null
   achievements?: Prisma.JsonNullableFilter<"SanguoFigure">
   battles?: Prisma.JsonNullableFilter<"SanguoFigure">
   biography?: Prisma.StringNullableFilter<"SanguoFigure"> | string | null
+  events?: Prisma.JsonNullableFilter<"SanguoFigure">
+  evaluations?: Prisma.JsonNullableFilter<"SanguoFigure">
+  portraitUrl?: Prisma.StringNullableFilter<"SanguoFigure"> | string | null
+  sources?: Prisma.JsonNullableFilter<"SanguoFigure">
   createdAt?: Prisma.DateTimeFilter<"SanguoFigure"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SanguoFigure"> | Date | string
 }
@@ -265,13 +313,21 @@ export type SanguoFigureWhereInput = {
 export type SanguoFigureOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   kingdom?: Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  positions?: Prisma.SortOrderInput | Prisma.SortOrder
+  faction?: Prisma.SortOrderInput | Prisma.SortOrder
+  politicalViews?: Prisma.SortOrderInput | Prisma.SortOrder
   achievements?: Prisma.SortOrderInput | Prisma.SortOrder
   battles?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  events?: Prisma.SortOrderInput | Prisma.SortOrder
+  evaluations?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -282,13 +338,21 @@ export type SanguoFigureWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.SanguoFigureWhereInput[]
   NOT?: Prisma.SanguoFigureWhereInput | Prisma.SanguoFigureWhereInput[]
   name?: Prisma.StringFilter<"SanguoFigure"> | string
+  courtesy?: Prisma.StringNullableFilter<"SanguoFigure"> | string | null
   role?: Prisma.StringFilter<"SanguoFigure"> | string
   kingdom?: Prisma.StringFilter<"SanguoFigure"> | string
   birthYear?: Prisma.IntNullableFilter<"SanguoFigure"> | number | null
   deathYear?: Prisma.IntNullableFilter<"SanguoFigure"> | number | null
+  positions?: Prisma.JsonNullableFilter<"SanguoFigure">
+  faction?: Prisma.StringNullableFilter<"SanguoFigure"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"SanguoFigure"> | string | null
   achievements?: Prisma.JsonNullableFilter<"SanguoFigure">
   battles?: Prisma.JsonNullableFilter<"SanguoFigure">
   biography?: Prisma.StringNullableFilter<"SanguoFigure"> | string | null
+  events?: Prisma.JsonNullableFilter<"SanguoFigure">
+  evaluations?: Prisma.JsonNullableFilter<"SanguoFigure">
+  portraitUrl?: Prisma.StringNullableFilter<"SanguoFigure"> | string | null
+  sources?: Prisma.JsonNullableFilter<"SanguoFigure">
   createdAt?: Prisma.DateTimeFilter<"SanguoFigure"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SanguoFigure"> | Date | string
 }, "id">
@@ -296,13 +360,21 @@ export type SanguoFigureWhereUniqueInput = Prisma.AtLeast<{
 export type SanguoFigureOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   kingdom?: Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  positions?: Prisma.SortOrderInput | Prisma.SortOrder
+  faction?: Prisma.SortOrderInput | Prisma.SortOrder
+  politicalViews?: Prisma.SortOrderInput | Prisma.SortOrder
   achievements?: Prisma.SortOrderInput | Prisma.SortOrder
   battles?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  events?: Prisma.SortOrderInput | Prisma.SortOrder
+  evaluations?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.SanguoFigureCountOrderByAggregateInput
@@ -318,13 +390,21 @@ export type SanguoFigureScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SanguoFigureScalarWhereWithAggregatesInput | Prisma.SanguoFigureScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"SanguoFigure"> | string
   name?: Prisma.StringWithAggregatesFilter<"SanguoFigure"> | string
+  courtesy?: Prisma.StringNullableWithAggregatesFilter<"SanguoFigure"> | string | null
   role?: Prisma.StringWithAggregatesFilter<"SanguoFigure"> | string
   kingdom?: Prisma.StringWithAggregatesFilter<"SanguoFigure"> | string
   birthYear?: Prisma.IntNullableWithAggregatesFilter<"SanguoFigure"> | number | null
   deathYear?: Prisma.IntNullableWithAggregatesFilter<"SanguoFigure"> | number | null
+  positions?: Prisma.JsonNullableWithAggregatesFilter<"SanguoFigure">
+  faction?: Prisma.StringNullableWithAggregatesFilter<"SanguoFigure"> | string | null
+  politicalViews?: Prisma.StringNullableWithAggregatesFilter<"SanguoFigure"> | string | null
   achievements?: Prisma.JsonNullableWithAggregatesFilter<"SanguoFigure">
   battles?: Prisma.JsonNullableWithAggregatesFilter<"SanguoFigure">
   biography?: Prisma.StringNullableWithAggregatesFilter<"SanguoFigure"> | string | null
+  events?: Prisma.JsonNullableWithAggregatesFilter<"SanguoFigure">
+  evaluations?: Prisma.JsonNullableWithAggregatesFilter<"SanguoFigure">
+  portraitUrl?: Prisma.StringNullableWithAggregatesFilter<"SanguoFigure"> | string | null
+  sources?: Prisma.JsonNullableWithAggregatesFilter<"SanguoFigure">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SanguoFigure"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SanguoFigure"> | Date | string
 }
@@ -332,13 +412,21 @@ export type SanguoFigureScalarWhereWithAggregatesInput = {
 export type SanguoFigureCreateInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   kingdom: string
   birthYear?: number | null
   deathYear?: number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   battles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -346,13 +434,21 @@ export type SanguoFigureCreateInput = {
 export type SanguoFigureUncheckedCreateInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   kingdom: string
   birthYear?: number | null
   deathYear?: number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   battles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -360,13 +456,21 @@ export type SanguoFigureUncheckedCreateInput = {
 export type SanguoFigureUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   kingdom?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   battles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -374,13 +478,21 @@ export type SanguoFigureUpdateInput = {
 export type SanguoFigureUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   kingdom?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   battles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -388,13 +500,21 @@ export type SanguoFigureUncheckedUpdateInput = {
 export type SanguoFigureCreateManyInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   kingdom: string
   birthYear?: number | null
   deathYear?: number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   battles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -402,13 +522,21 @@ export type SanguoFigureCreateManyInput = {
 export type SanguoFigureUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   kingdom?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   battles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -416,13 +544,21 @@ export type SanguoFigureUpdateManyMutationInput = {
 export type SanguoFigureUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   kingdom?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   battles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -430,13 +566,21 @@ export type SanguoFigureUncheckedUpdateManyInput = {
 export type SanguoFigureCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   kingdom?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
+  positions?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   achievements?: Prisma.SortOrder
   battles?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  events?: Prisma.SortOrder
+  evaluations?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
+  sources?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -449,11 +593,15 @@ export type SanguoFigureAvgOrderByAggregateInput = {
 export type SanguoFigureMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   kingdom?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -461,11 +609,15 @@ export type SanguoFigureMaxOrderByAggregateInput = {
 export type SanguoFigureMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   kingdom?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -480,13 +632,21 @@ export type SanguoFigureSumOrderByAggregateInput = {
 export type SanguoFigureSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  courtesy?: boolean
   role?: boolean
   kingdom?: boolean
   birthYear?: boolean
   deathYear?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   battles?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["sanguoFigure"]>
@@ -494,13 +654,21 @@ export type SanguoFigureSelect<ExtArgs extends runtime.Types.Extensions.Internal
 export type SanguoFigureSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  courtesy?: boolean
   role?: boolean
   kingdom?: boolean
   birthYear?: boolean
   deathYear?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   battles?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["sanguoFigure"]>
@@ -508,13 +676,21 @@ export type SanguoFigureSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
 export type SanguoFigureSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  courtesy?: boolean
   role?: boolean
   kingdom?: boolean
   birthYear?: boolean
   deathYear?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   battles?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["sanguoFigure"]>
@@ -522,18 +698,26 @@ export type SanguoFigureSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
 export type SanguoFigureSelectScalar = {
   id?: boolean
   name?: boolean
+  courtesy?: boolean
   role?: boolean
   kingdom?: boolean
   birthYear?: boolean
   deathYear?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   battles?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SanguoFigureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "role" | "kingdom" | "birthYear" | "deathYear" | "achievements" | "battles" | "biography" | "createdAt" | "updatedAt", ExtArgs["result"]["sanguoFigure"]>
+export type SanguoFigureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "courtesy" | "role" | "kingdom" | "birthYear" | "deathYear" | "positions" | "faction" | "politicalViews" | "achievements" | "battles" | "biography" | "events" | "evaluations" | "portraitUrl" | "sources" | "createdAt" | "updatedAt", ExtArgs["result"]["sanguoFigure"]>
 
 export type $SanguoFigurePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SanguoFigure"
@@ -541,13 +725,21 @@ export type $SanguoFigurePayload<ExtArgs extends runtime.Types.Extensions.Intern
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    courtesy: string | null
     role: string
     kingdom: string
     birthYear: number | null
     deathYear: number | null
+    positions: runtime.JsonValue | null
+    faction: string | null
+    politicalViews: string | null
     achievements: runtime.JsonValue | null
     battles: runtime.JsonValue | null
     biography: string | null
+    events: runtime.JsonValue | null
+    evaluations: runtime.JsonValue | null
+    portraitUrl: string | null
+    sources: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["sanguoFigure"]>
@@ -975,13 +1167,21 @@ export interface Prisma__SanguoFigureClient<T, Null = never, ExtArgs extends run
 export interface SanguoFigureFieldRefs {
   readonly id: Prisma.FieldRef<"SanguoFigure", 'String'>
   readonly name: Prisma.FieldRef<"SanguoFigure", 'String'>
+  readonly courtesy: Prisma.FieldRef<"SanguoFigure", 'String'>
   readonly role: Prisma.FieldRef<"SanguoFigure", 'String'>
   readonly kingdom: Prisma.FieldRef<"SanguoFigure", 'String'>
   readonly birthYear: Prisma.FieldRef<"SanguoFigure", 'Int'>
   readonly deathYear: Prisma.FieldRef<"SanguoFigure", 'Int'>
+  readonly positions: Prisma.FieldRef<"SanguoFigure", 'Json'>
+  readonly faction: Prisma.FieldRef<"SanguoFigure", 'String'>
+  readonly politicalViews: Prisma.FieldRef<"SanguoFigure", 'String'>
   readonly achievements: Prisma.FieldRef<"SanguoFigure", 'Json'>
   readonly battles: Prisma.FieldRef<"SanguoFigure", 'Json'>
   readonly biography: Prisma.FieldRef<"SanguoFigure", 'String'>
+  readonly events: Prisma.FieldRef<"SanguoFigure", 'Json'>
+  readonly evaluations: Prisma.FieldRef<"SanguoFigure", 'Json'>
+  readonly portraitUrl: Prisma.FieldRef<"SanguoFigure", 'String'>
+  readonly sources: Prisma.FieldRef<"SanguoFigure", 'Json'>
   readonly createdAt: Prisma.FieldRef<"SanguoFigure", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SanguoFigure", 'DateTime'>
 }

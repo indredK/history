@@ -4,19 +4,20 @@ import type { CommonPerson } from './types';
 
 // 数据转换器
 function transformJsonToPerson(jsonPerson: any, index: number): CommonPerson {
-  const roles = jsonPerson.roles ? jsonPerson.roles.split(',').map((r: string) => r.trim()) : [];
+  const rolesStr = jsonPerson.roles || jsonPerson.role || '';
+  const roles = Array.isArray(rolesStr) ? rolesStr : (rolesStr ? rolesStr.split(',').map((r: string) => r.trim()) : []);
   
   return {
-    id: `person_${jsonPerson.name.replace(/\s+/g, '_')}_${index}`,
+    id: jsonPerson.id || `person_${jsonPerson.name?.replace(/\s+/g, '_') || index}_${index}`,
     name: jsonPerson.name,
-    name_en: jsonPerson.name_en,
-    birthYear: jsonPerson.birth_year,
-    birthMonth: jsonPerson.birth_month,
-    deathYear: jsonPerson.death_year,
-    deathMonth: jsonPerson.death_month,
+    name_en: jsonPerson.name_en || jsonPerson.nameEn,
+    birthYear: jsonPerson.birthYear ?? jsonPerson.birth_year,
+    birthMonth: jsonPerson.birthMonth ?? jsonPerson.birth_month,
+    deathYear: jsonPerson.deathYear ?? jsonPerson.death_year,
+    deathMonth: jsonPerson.deathMonth ?? jsonPerson.death_month,
     biography: jsonPerson.biography,
     roles: roles,
-    source_ids: jsonPerson.source ? [`src_${jsonPerson.source}`] : [],
+    source_ids: jsonPerson.source_ids || (jsonPerson.source ? [`src_${jsonPerson.source}`] : []),
   };
 }
 

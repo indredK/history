@@ -87,23 +87,29 @@ const mingFigureMockData: MingFigure[] = [
 
 // 数据转换器
 function transformJsonToMingFigure(jsonData: any, index: number): MingFigure {
-  // 如果是直接使用模拟数据，则不需要转换
-  if (jsonData.id && jsonData.name) {
+  // 如果是直接使用已转换的对象且包含必需字段
+  if (jsonData.birthYear !== undefined && jsonData.achievements && Array.isArray(jsonData.achievements)) {
     return jsonData as MingFigure;
   }
   
-  // 否则从JSON文件数据转换
+  // 处理后端数据或原始 Mock 数据
+  const parseArray = (val: any) => {
+    if (Array.isArray(val)) return val;
+    if (typeof val === 'string') return val.split(',').map(s => s.trim());
+    return [];
+  };
+
   return {
-    id: `ming_figure_${jsonData.name.replace(/\s+/g, '_')}_${index}`,
+    id: jsonData.id || `ming_figure_${jsonData.name?.replace(/\s+/g, '_')}_${index}`,
     name: jsonData.name,
-    courtesy: jsonData.courtesy,
-    birthYear: jsonData.birth_year,
-    deathYear: jsonData.death_year,
+    courtesy: jsonData.courtesy || '',
+    birthYear: jsonData.birthYear ?? jsonData.birth_year,
+    deathYear: jsonData.deathYear ?? jsonData.death_year,
     role: (jsonData.role as any) || 'other',
-    positions: jsonData.positions ? jsonData.positions.split(',').map((p: string) => p.trim()) : [],
-    biography: jsonData.biography,
-    politicalViews: jsonData.political_views,
-    achievements: jsonData.achievements ? jsonData.achievements.split(',').map((a: string) => a.trim()) : [],
+    positions: parseArray(jsonData.positions),
+    biography: jsonData.biography || '',
+    politicalViews: jsonData.politicalViews || jsonData.political_views || '',
+    achievements: parseArray(jsonData.achievements),
     events: jsonData.events || [],
     evaluations: jsonData.evaluations || [],
     sources: jsonData.sources || []

@@ -40,11 +40,15 @@ export type MingFigureMinAggregateOutputType = {
   id: string | null
   name: string | null
   dynastyId: string | null
+  courtesy: string | null
   role: string | null
   birthYear: number | null
   deathYear: number | null
   period: string | null
+  faction: string | null
+  politicalViews: string | null
   biography: string | null
+  portraitUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,11 +57,15 @@ export type MingFigureMaxAggregateOutputType = {
   id: string | null
   name: string | null
   dynastyId: string | null
+  courtesy: string | null
   role: string | null
   birthYear: number | null
   deathYear: number | null
   period: string | null
+  faction: string | null
+  politicalViews: string | null
   biography: string | null
+  portraitUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,13 +74,21 @@ export type MingFigureCountAggregateOutputType = {
   id: number
   name: number
   dynastyId: number
+  courtesy: number
   role: number
   birthYear: number
   deathYear: number
   period: number
+  positions: number
+  faction: number
+  politicalViews: number
   achievements: number
   works: number
   biography: number
+  events: number
+  evaluations: number
+  portraitUrl: number
+  sources: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -93,11 +109,15 @@ export type MingFigureMinAggregateInputType = {
   id?: true
   name?: true
   dynastyId?: true
+  courtesy?: true
   role?: true
   birthYear?: true
   deathYear?: true
   period?: true
+  faction?: true
+  politicalViews?: true
   biography?: true
+  portraitUrl?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -106,11 +126,15 @@ export type MingFigureMaxAggregateInputType = {
   id?: true
   name?: true
   dynastyId?: true
+  courtesy?: true
   role?: true
   birthYear?: true
   deathYear?: true
   period?: true
+  faction?: true
+  politicalViews?: true
   biography?: true
+  portraitUrl?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -119,13 +143,21 @@ export type MingFigureCountAggregateInputType = {
   id?: true
   name?: true
   dynastyId?: true
+  courtesy?: true
   role?: true
   birthYear?: true
   deathYear?: true
   period?: true
+  positions?: true
+  faction?: true
+  politicalViews?: true
   achievements?: true
   works?: true
   biography?: true
+  events?: true
+  evaluations?: true
+  portraitUrl?: true
+  sources?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -221,13 +253,21 @@ export type MingFigureGroupByOutputType = {
   id: string
   name: string
   dynastyId: string
+  courtesy: string | null
   role: string
   birthYear: number | null
   deathYear: number | null
   period: string | null
+  positions: runtime.JsonValue | null
+  faction: string | null
+  politicalViews: string | null
   achievements: runtime.JsonValue | null
   works: runtime.JsonValue | null
   biography: string | null
+  events: runtime.JsonValue | null
+  evaluations: runtime.JsonValue | null
+  portraitUrl: string | null
+  sources: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: MingFigureCountAggregateOutputType | null
@@ -259,13 +299,21 @@ export type MingFigureWhereInput = {
   id?: Prisma.StringFilter<"MingFigure"> | string
   name?: Prisma.StringFilter<"MingFigure"> | string
   dynastyId?: Prisma.StringFilter<"MingFigure"> | string
+  courtesy?: Prisma.StringNullableFilter<"MingFigure"> | string | null
   role?: Prisma.StringFilter<"MingFigure"> | string
   birthYear?: Prisma.IntNullableFilter<"MingFigure"> | number | null
   deathYear?: Prisma.IntNullableFilter<"MingFigure"> | number | null
   period?: Prisma.StringNullableFilter<"MingFigure"> | string | null
+  positions?: Prisma.JsonNullableFilter<"MingFigure">
+  faction?: Prisma.StringNullableFilter<"MingFigure"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"MingFigure"> | string | null
   achievements?: Prisma.JsonNullableFilter<"MingFigure">
   works?: Prisma.JsonNullableFilter<"MingFigure">
   biography?: Prisma.StringNullableFilter<"MingFigure"> | string | null
+  events?: Prisma.JsonNullableFilter<"MingFigure">
+  evaluations?: Prisma.JsonNullableFilter<"MingFigure">
+  portraitUrl?: Prisma.StringNullableFilter<"MingFigure"> | string | null
+  sources?: Prisma.JsonNullableFilter<"MingFigure">
   createdAt?: Prisma.DateTimeFilter<"MingFigure"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MingFigure"> | Date | string
   dynasty?: Prisma.XOR<Prisma.DynastyScalarRelationFilter, Prisma.DynastyWhereInput>
@@ -275,13 +323,21 @@ export type MingFigureOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
   period?: Prisma.SortOrderInput | Prisma.SortOrder
+  positions?: Prisma.SortOrderInput | Prisma.SortOrder
+  faction?: Prisma.SortOrderInput | Prisma.SortOrder
+  politicalViews?: Prisma.SortOrderInput | Prisma.SortOrder
   achievements?: Prisma.SortOrderInput | Prisma.SortOrder
   works?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  events?: Prisma.SortOrderInput | Prisma.SortOrder
+  evaluations?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   dynasty?: Prisma.DynastyOrderByWithRelationInput
@@ -294,13 +350,21 @@ export type MingFigureWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.MingFigureWhereInput | Prisma.MingFigureWhereInput[]
   name?: Prisma.StringFilter<"MingFigure"> | string
   dynastyId?: Prisma.StringFilter<"MingFigure"> | string
+  courtesy?: Prisma.StringNullableFilter<"MingFigure"> | string | null
   role?: Prisma.StringFilter<"MingFigure"> | string
   birthYear?: Prisma.IntNullableFilter<"MingFigure"> | number | null
   deathYear?: Prisma.IntNullableFilter<"MingFigure"> | number | null
   period?: Prisma.StringNullableFilter<"MingFigure"> | string | null
+  positions?: Prisma.JsonNullableFilter<"MingFigure">
+  faction?: Prisma.StringNullableFilter<"MingFigure"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"MingFigure"> | string | null
   achievements?: Prisma.JsonNullableFilter<"MingFigure">
   works?: Prisma.JsonNullableFilter<"MingFigure">
   biography?: Prisma.StringNullableFilter<"MingFigure"> | string | null
+  events?: Prisma.JsonNullableFilter<"MingFigure">
+  evaluations?: Prisma.JsonNullableFilter<"MingFigure">
+  portraitUrl?: Prisma.StringNullableFilter<"MingFigure"> | string | null
+  sources?: Prisma.JsonNullableFilter<"MingFigure">
   createdAt?: Prisma.DateTimeFilter<"MingFigure"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MingFigure"> | Date | string
   dynasty?: Prisma.XOR<Prisma.DynastyScalarRelationFilter, Prisma.DynastyWhereInput>
@@ -310,13 +374,21 @@ export type MingFigureOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
   period?: Prisma.SortOrderInput | Prisma.SortOrder
+  positions?: Prisma.SortOrderInput | Prisma.SortOrder
+  faction?: Prisma.SortOrderInput | Prisma.SortOrder
+  politicalViews?: Prisma.SortOrderInput | Prisma.SortOrder
   achievements?: Prisma.SortOrderInput | Prisma.SortOrder
   works?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  events?: Prisma.SortOrderInput | Prisma.SortOrder
+  evaluations?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.MingFigureCountOrderByAggregateInput
@@ -333,13 +405,21 @@ export type MingFigureScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"MingFigure"> | string
   name?: Prisma.StringWithAggregatesFilter<"MingFigure"> | string
   dynastyId?: Prisma.StringWithAggregatesFilter<"MingFigure"> | string
+  courtesy?: Prisma.StringNullableWithAggregatesFilter<"MingFigure"> | string | null
   role?: Prisma.StringWithAggregatesFilter<"MingFigure"> | string
   birthYear?: Prisma.IntNullableWithAggregatesFilter<"MingFigure"> | number | null
   deathYear?: Prisma.IntNullableWithAggregatesFilter<"MingFigure"> | number | null
   period?: Prisma.StringNullableWithAggregatesFilter<"MingFigure"> | string | null
+  positions?: Prisma.JsonNullableWithAggregatesFilter<"MingFigure">
+  faction?: Prisma.StringNullableWithAggregatesFilter<"MingFigure"> | string | null
+  politicalViews?: Prisma.StringNullableWithAggregatesFilter<"MingFigure"> | string | null
   achievements?: Prisma.JsonNullableWithAggregatesFilter<"MingFigure">
   works?: Prisma.JsonNullableWithAggregatesFilter<"MingFigure">
   biography?: Prisma.StringNullableWithAggregatesFilter<"MingFigure"> | string | null
+  events?: Prisma.JsonNullableWithAggregatesFilter<"MingFigure">
+  evaluations?: Prisma.JsonNullableWithAggregatesFilter<"MingFigure">
+  portraitUrl?: Prisma.StringNullableWithAggregatesFilter<"MingFigure"> | string | null
+  sources?: Prisma.JsonNullableWithAggregatesFilter<"MingFigure">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MingFigure"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MingFigure"> | Date | string
 }
@@ -347,13 +427,21 @@ export type MingFigureScalarWhereWithAggregatesInput = {
 export type MingFigureCreateInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   period?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   dynasty: Prisma.DynastyCreateNestedOneWithoutMingFiguresInput
@@ -363,13 +451,21 @@ export type MingFigureUncheckedCreateInput = {
   id?: string
   name: string
   dynastyId: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   period?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -377,13 +473,21 @@ export type MingFigureUncheckedCreateInput = {
 export type MingFigureUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dynasty?: Prisma.DynastyUpdateOneRequiredWithoutMingFiguresNestedInput
@@ -393,13 +497,21 @@ export type MingFigureUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   dynastyId?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -408,13 +520,21 @@ export type MingFigureCreateManyInput = {
   id?: string
   name: string
   dynastyId: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   period?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -422,13 +542,21 @@ export type MingFigureCreateManyInput = {
 export type MingFigureUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -437,13 +565,21 @@ export type MingFigureUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   dynastyId?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -462,13 +598,21 @@ export type MingFigureCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
   period?: Prisma.SortOrder
+  positions?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   achievements?: Prisma.SortOrder
   works?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  events?: Prisma.SortOrder
+  evaluations?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
+  sources?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -482,11 +626,15 @@ export type MingFigureMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
   period?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -495,11 +643,15 @@ export type MingFigureMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
   period?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -554,13 +706,21 @@ export type MingFigureUncheckedUpdateManyWithoutDynastyNestedInput = {
 export type MingFigureCreateWithoutDynastyInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   period?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -568,13 +728,21 @@ export type MingFigureCreateWithoutDynastyInput = {
 export type MingFigureUncheckedCreateWithoutDynastyInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   period?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -611,13 +779,21 @@ export type MingFigureScalarWhereInput = {
   id?: Prisma.StringFilter<"MingFigure"> | string
   name?: Prisma.StringFilter<"MingFigure"> | string
   dynastyId?: Prisma.StringFilter<"MingFigure"> | string
+  courtesy?: Prisma.StringNullableFilter<"MingFigure"> | string | null
   role?: Prisma.StringFilter<"MingFigure"> | string
   birthYear?: Prisma.IntNullableFilter<"MingFigure"> | number | null
   deathYear?: Prisma.IntNullableFilter<"MingFigure"> | number | null
   period?: Prisma.StringNullableFilter<"MingFigure"> | string | null
+  positions?: Prisma.JsonNullableFilter<"MingFigure">
+  faction?: Prisma.StringNullableFilter<"MingFigure"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"MingFigure"> | string | null
   achievements?: Prisma.JsonNullableFilter<"MingFigure">
   works?: Prisma.JsonNullableFilter<"MingFigure">
   biography?: Prisma.StringNullableFilter<"MingFigure"> | string | null
+  events?: Prisma.JsonNullableFilter<"MingFigure">
+  evaluations?: Prisma.JsonNullableFilter<"MingFigure">
+  portraitUrl?: Prisma.StringNullableFilter<"MingFigure"> | string | null
+  sources?: Prisma.JsonNullableFilter<"MingFigure">
   createdAt?: Prisma.DateTimeFilter<"MingFigure"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MingFigure"> | Date | string
 }
@@ -625,13 +801,21 @@ export type MingFigureScalarWhereInput = {
 export type MingFigureCreateManyDynastyInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   period?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -639,13 +823,21 @@ export type MingFigureCreateManyDynastyInput = {
 export type MingFigureUpdateWithoutDynastyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -653,13 +845,21 @@ export type MingFigureUpdateWithoutDynastyInput = {
 export type MingFigureUncheckedUpdateWithoutDynastyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -667,13 +867,21 @@ export type MingFigureUncheckedUpdateWithoutDynastyInput = {
 export type MingFigureUncheckedUpdateManyWithoutDynastyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -684,13 +892,21 @@ export type MingFigureSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  courtesy?: boolean
   role?: boolean
   birthYear?: boolean
   deathYear?: boolean
   period?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   works?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
@@ -700,13 +916,21 @@ export type MingFigureSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  courtesy?: boolean
   role?: boolean
   birthYear?: boolean
   deathYear?: boolean
   period?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   works?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
@@ -716,13 +940,21 @@ export type MingFigureSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  courtesy?: boolean
   role?: boolean
   birthYear?: boolean
   deathYear?: boolean
   period?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   works?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
@@ -732,18 +964,26 @@ export type MingFigureSelectScalar = {
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  courtesy?: boolean
   role?: boolean
   birthYear?: boolean
   deathYear?: boolean
   period?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   works?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MingFigureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "dynastyId" | "role" | "birthYear" | "deathYear" | "period" | "achievements" | "works" | "biography" | "createdAt" | "updatedAt", ExtArgs["result"]["mingFigure"]>
+export type MingFigureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "dynastyId" | "courtesy" | "role" | "birthYear" | "deathYear" | "period" | "positions" | "faction" | "politicalViews" | "achievements" | "works" | "biography" | "events" | "evaluations" | "portraitUrl" | "sources" | "createdAt" | "updatedAt", ExtArgs["result"]["mingFigure"]>
 export type MingFigureInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
 }
@@ -763,13 +1003,21 @@ export type $MingFigurePayload<ExtArgs extends runtime.Types.Extensions.Internal
     id: string
     name: string
     dynastyId: string
+    courtesy: string | null
     role: string
     birthYear: number | null
     deathYear: number | null
     period: string | null
+    positions: runtime.JsonValue | null
+    faction: string | null
+    politicalViews: string | null
     achievements: runtime.JsonValue | null
     works: runtime.JsonValue | null
     biography: string | null
+    events: runtime.JsonValue | null
+    evaluations: runtime.JsonValue | null
+    portraitUrl: string | null
+    sources: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["mingFigure"]>
@@ -1199,13 +1447,21 @@ export interface MingFigureFieldRefs {
   readonly id: Prisma.FieldRef<"MingFigure", 'String'>
   readonly name: Prisma.FieldRef<"MingFigure", 'String'>
   readonly dynastyId: Prisma.FieldRef<"MingFigure", 'String'>
+  readonly courtesy: Prisma.FieldRef<"MingFigure", 'String'>
   readonly role: Prisma.FieldRef<"MingFigure", 'String'>
   readonly birthYear: Prisma.FieldRef<"MingFigure", 'Int'>
   readonly deathYear: Prisma.FieldRef<"MingFigure", 'Int'>
   readonly period: Prisma.FieldRef<"MingFigure", 'String'>
+  readonly positions: Prisma.FieldRef<"MingFigure", 'Json'>
+  readonly faction: Prisma.FieldRef<"MingFigure", 'String'>
+  readonly politicalViews: Prisma.FieldRef<"MingFigure", 'String'>
   readonly achievements: Prisma.FieldRef<"MingFigure", 'Json'>
   readonly works: Prisma.FieldRef<"MingFigure", 'Json'>
   readonly biography: Prisma.FieldRef<"MingFigure", 'String'>
+  readonly events: Prisma.FieldRef<"MingFigure", 'Json'>
+  readonly evaluations: Prisma.FieldRef<"MingFigure", 'Json'>
+  readonly portraitUrl: Prisma.FieldRef<"MingFigure", 'String'>
+  readonly sources: Prisma.FieldRef<"MingFigure", 'Json'>
   readonly createdAt: Prisma.FieldRef<"MingFigure", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"MingFigure", 'DateTime'>
 }

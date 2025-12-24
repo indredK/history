@@ -40,11 +40,15 @@ export type YuanFigureMinAggregateOutputType = {
   id: string | null
   name: string | null
   dynastyId: string | null
+  courtesy: string | null
   role: string | null
   birthYear: number | null
   deathYear: number | null
   ethnicity: string | null
+  faction: string | null
+  politicalViews: string | null
   biography: string | null
+  portraitUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,11 +57,15 @@ export type YuanFigureMaxAggregateOutputType = {
   id: string | null
   name: string | null
   dynastyId: string | null
+  courtesy: string | null
   role: string | null
   birthYear: number | null
   deathYear: number | null
   ethnicity: string | null
+  faction: string | null
+  politicalViews: string | null
   biography: string | null
+  portraitUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,13 +74,21 @@ export type YuanFigureCountAggregateOutputType = {
   id: number
   name: number
   dynastyId: number
+  courtesy: number
   role: number
   birthYear: number
   deathYear: number
   ethnicity: number
+  positions: number
+  faction: number
+  politicalViews: number
   achievements: number
   works: number
   biography: number
+  events: number
+  evaluations: number
+  portraitUrl: number
+  sources: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -93,11 +109,15 @@ export type YuanFigureMinAggregateInputType = {
   id?: true
   name?: true
   dynastyId?: true
+  courtesy?: true
   role?: true
   birthYear?: true
   deathYear?: true
   ethnicity?: true
+  faction?: true
+  politicalViews?: true
   biography?: true
+  portraitUrl?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -106,11 +126,15 @@ export type YuanFigureMaxAggregateInputType = {
   id?: true
   name?: true
   dynastyId?: true
+  courtesy?: true
   role?: true
   birthYear?: true
   deathYear?: true
   ethnicity?: true
+  faction?: true
+  politicalViews?: true
   biography?: true
+  portraitUrl?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -119,13 +143,21 @@ export type YuanFigureCountAggregateInputType = {
   id?: true
   name?: true
   dynastyId?: true
+  courtesy?: true
   role?: true
   birthYear?: true
   deathYear?: true
   ethnicity?: true
+  positions?: true
+  faction?: true
+  politicalViews?: true
   achievements?: true
   works?: true
   biography?: true
+  events?: true
+  evaluations?: true
+  portraitUrl?: true
+  sources?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -221,13 +253,21 @@ export type YuanFigureGroupByOutputType = {
   id: string
   name: string
   dynastyId: string
+  courtesy: string | null
   role: string
   birthYear: number | null
   deathYear: number | null
   ethnicity: string | null
+  positions: runtime.JsonValue | null
+  faction: string | null
+  politicalViews: string | null
   achievements: runtime.JsonValue | null
   works: runtime.JsonValue | null
   biography: string | null
+  events: runtime.JsonValue | null
+  evaluations: runtime.JsonValue | null
+  portraitUrl: string | null
+  sources: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: YuanFigureCountAggregateOutputType | null
@@ -259,13 +299,21 @@ export type YuanFigureWhereInput = {
   id?: Prisma.StringFilter<"YuanFigure"> | string
   name?: Prisma.StringFilter<"YuanFigure"> | string
   dynastyId?: Prisma.StringFilter<"YuanFigure"> | string
+  courtesy?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
   role?: Prisma.StringFilter<"YuanFigure"> | string
   birthYear?: Prisma.IntNullableFilter<"YuanFigure"> | number | null
   deathYear?: Prisma.IntNullableFilter<"YuanFigure"> | number | null
   ethnicity?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
+  positions?: Prisma.JsonNullableFilter<"YuanFigure">
+  faction?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
   achievements?: Prisma.JsonNullableFilter<"YuanFigure">
   works?: Prisma.JsonNullableFilter<"YuanFigure">
   biography?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
+  events?: Prisma.JsonNullableFilter<"YuanFigure">
+  evaluations?: Prisma.JsonNullableFilter<"YuanFigure">
+  portraitUrl?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
+  sources?: Prisma.JsonNullableFilter<"YuanFigure">
   createdAt?: Prisma.DateTimeFilter<"YuanFigure"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"YuanFigure"> | Date | string
   dynasty?: Prisma.XOR<Prisma.DynastyScalarRelationFilter, Prisma.DynastyWhereInput>
@@ -275,13 +323,21 @@ export type YuanFigureOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
   ethnicity?: Prisma.SortOrderInput | Prisma.SortOrder
+  positions?: Prisma.SortOrderInput | Prisma.SortOrder
+  faction?: Prisma.SortOrderInput | Prisma.SortOrder
+  politicalViews?: Prisma.SortOrderInput | Prisma.SortOrder
   achievements?: Prisma.SortOrderInput | Prisma.SortOrder
   works?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  events?: Prisma.SortOrderInput | Prisma.SortOrder
+  evaluations?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   dynasty?: Prisma.DynastyOrderByWithRelationInput
@@ -294,13 +350,21 @@ export type YuanFigureWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.YuanFigureWhereInput | Prisma.YuanFigureWhereInput[]
   name?: Prisma.StringFilter<"YuanFigure"> | string
   dynastyId?: Prisma.StringFilter<"YuanFigure"> | string
+  courtesy?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
   role?: Prisma.StringFilter<"YuanFigure"> | string
   birthYear?: Prisma.IntNullableFilter<"YuanFigure"> | number | null
   deathYear?: Prisma.IntNullableFilter<"YuanFigure"> | number | null
   ethnicity?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
+  positions?: Prisma.JsonNullableFilter<"YuanFigure">
+  faction?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
   achievements?: Prisma.JsonNullableFilter<"YuanFigure">
   works?: Prisma.JsonNullableFilter<"YuanFigure">
   biography?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
+  events?: Prisma.JsonNullableFilter<"YuanFigure">
+  evaluations?: Prisma.JsonNullableFilter<"YuanFigure">
+  portraitUrl?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
+  sources?: Prisma.JsonNullableFilter<"YuanFigure">
   createdAt?: Prisma.DateTimeFilter<"YuanFigure"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"YuanFigure"> | Date | string
   dynasty?: Prisma.XOR<Prisma.DynastyScalarRelationFilter, Prisma.DynastyWhereInput>
@@ -310,13 +374,21 @@ export type YuanFigureOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
   ethnicity?: Prisma.SortOrderInput | Prisma.SortOrder
+  positions?: Prisma.SortOrderInput | Prisma.SortOrder
+  faction?: Prisma.SortOrderInput | Prisma.SortOrder
+  politicalViews?: Prisma.SortOrderInput | Prisma.SortOrder
   achievements?: Prisma.SortOrderInput | Prisma.SortOrder
   works?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  events?: Prisma.SortOrderInput | Prisma.SortOrder
+  evaluations?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.YuanFigureCountOrderByAggregateInput
@@ -333,13 +405,21 @@ export type YuanFigureScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"YuanFigure"> | string
   name?: Prisma.StringWithAggregatesFilter<"YuanFigure"> | string
   dynastyId?: Prisma.StringWithAggregatesFilter<"YuanFigure"> | string
+  courtesy?: Prisma.StringNullableWithAggregatesFilter<"YuanFigure"> | string | null
   role?: Prisma.StringWithAggregatesFilter<"YuanFigure"> | string
   birthYear?: Prisma.IntNullableWithAggregatesFilter<"YuanFigure"> | number | null
   deathYear?: Prisma.IntNullableWithAggregatesFilter<"YuanFigure"> | number | null
   ethnicity?: Prisma.StringNullableWithAggregatesFilter<"YuanFigure"> | string | null
+  positions?: Prisma.JsonNullableWithAggregatesFilter<"YuanFigure">
+  faction?: Prisma.StringNullableWithAggregatesFilter<"YuanFigure"> | string | null
+  politicalViews?: Prisma.StringNullableWithAggregatesFilter<"YuanFigure"> | string | null
   achievements?: Prisma.JsonNullableWithAggregatesFilter<"YuanFigure">
   works?: Prisma.JsonNullableWithAggregatesFilter<"YuanFigure">
   biography?: Prisma.StringNullableWithAggregatesFilter<"YuanFigure"> | string | null
+  events?: Prisma.JsonNullableWithAggregatesFilter<"YuanFigure">
+  evaluations?: Prisma.JsonNullableWithAggregatesFilter<"YuanFigure">
+  portraitUrl?: Prisma.StringNullableWithAggregatesFilter<"YuanFigure"> | string | null
+  sources?: Prisma.JsonNullableWithAggregatesFilter<"YuanFigure">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"YuanFigure"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"YuanFigure"> | Date | string
 }
@@ -347,13 +427,21 @@ export type YuanFigureScalarWhereWithAggregatesInput = {
 export type YuanFigureCreateInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   ethnicity?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   dynasty: Prisma.DynastyCreateNestedOneWithoutYuanFiguresInput
@@ -363,13 +451,21 @@ export type YuanFigureUncheckedCreateInput = {
   id?: string
   name: string
   dynastyId: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   ethnicity?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -377,13 +473,21 @@ export type YuanFigureUncheckedCreateInput = {
 export type YuanFigureUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ethnicity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dynasty?: Prisma.DynastyUpdateOneRequiredWithoutYuanFiguresNestedInput
@@ -393,13 +497,21 @@ export type YuanFigureUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   dynastyId?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ethnicity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -408,13 +520,21 @@ export type YuanFigureCreateManyInput = {
   id?: string
   name: string
   dynastyId: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   ethnicity?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -422,13 +542,21 @@ export type YuanFigureCreateManyInput = {
 export type YuanFigureUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ethnicity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -437,13 +565,21 @@ export type YuanFigureUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   dynastyId?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ethnicity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -462,13 +598,21 @@ export type YuanFigureCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
   ethnicity?: Prisma.SortOrder
+  positions?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   achievements?: Prisma.SortOrder
   works?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  events?: Prisma.SortOrder
+  evaluations?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
+  sources?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -482,11 +626,15 @@ export type YuanFigureMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
   ethnicity?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -495,11 +643,15 @@ export type YuanFigureMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   dynastyId?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
   role?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
   ethnicity?: Prisma.SortOrder
+  faction?: Prisma.SortOrder
+  politicalViews?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -554,13 +706,21 @@ export type YuanFigureUncheckedUpdateManyWithoutDynastyNestedInput = {
 export type YuanFigureCreateWithoutDynastyInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   ethnicity?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -568,13 +728,21 @@ export type YuanFigureCreateWithoutDynastyInput = {
 export type YuanFigureUncheckedCreateWithoutDynastyInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   ethnicity?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -611,13 +779,21 @@ export type YuanFigureScalarWhereInput = {
   id?: Prisma.StringFilter<"YuanFigure"> | string
   name?: Prisma.StringFilter<"YuanFigure"> | string
   dynastyId?: Prisma.StringFilter<"YuanFigure"> | string
+  courtesy?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
   role?: Prisma.StringFilter<"YuanFigure"> | string
   birthYear?: Prisma.IntNullableFilter<"YuanFigure"> | number | null
   deathYear?: Prisma.IntNullableFilter<"YuanFigure"> | number | null
   ethnicity?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
+  positions?: Prisma.JsonNullableFilter<"YuanFigure">
+  faction?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
+  politicalViews?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
   achievements?: Prisma.JsonNullableFilter<"YuanFigure">
   works?: Prisma.JsonNullableFilter<"YuanFigure">
   biography?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
+  events?: Prisma.JsonNullableFilter<"YuanFigure">
+  evaluations?: Prisma.JsonNullableFilter<"YuanFigure">
+  portraitUrl?: Prisma.StringNullableFilter<"YuanFigure"> | string | null
+  sources?: Prisma.JsonNullableFilter<"YuanFigure">
   createdAt?: Prisma.DateTimeFilter<"YuanFigure"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"YuanFigure"> | Date | string
 }
@@ -625,13 +801,21 @@ export type YuanFigureScalarWhereInput = {
 export type YuanFigureCreateManyDynastyInput = {
   id?: string
   name: string
+  courtesy?: string | null
   role: string
   birthYear?: number | null
   deathYear?: number | null
   ethnicity?: string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: string | null
+  politicalViews?: string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -639,13 +823,21 @@ export type YuanFigureCreateManyDynastyInput = {
 export type YuanFigureUpdateWithoutDynastyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ethnicity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -653,13 +845,21 @@ export type YuanFigureUpdateWithoutDynastyInput = {
 export type YuanFigureUncheckedUpdateWithoutDynastyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ethnicity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -667,13 +867,21 @@ export type YuanFigureUncheckedUpdateWithoutDynastyInput = {
 export type YuanFigureUncheckedUpdateManyWithoutDynastyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ethnicity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  faction?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  politicalViews?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -684,13 +892,21 @@ export type YuanFigureSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  courtesy?: boolean
   role?: boolean
   birthYear?: boolean
   deathYear?: boolean
   ethnicity?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   works?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
@@ -700,13 +916,21 @@ export type YuanFigureSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  courtesy?: boolean
   role?: boolean
   birthYear?: boolean
   deathYear?: boolean
   ethnicity?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   works?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
@@ -716,13 +940,21 @@ export type YuanFigureSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  courtesy?: boolean
   role?: boolean
   birthYear?: boolean
   deathYear?: boolean
   ethnicity?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   works?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
@@ -732,18 +964,26 @@ export type YuanFigureSelectScalar = {
   id?: boolean
   name?: boolean
   dynastyId?: boolean
+  courtesy?: boolean
   role?: boolean
   birthYear?: boolean
   deathYear?: boolean
   ethnicity?: boolean
+  positions?: boolean
+  faction?: boolean
+  politicalViews?: boolean
   achievements?: boolean
   works?: boolean
   biography?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type YuanFigureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "dynastyId" | "role" | "birthYear" | "deathYear" | "ethnicity" | "achievements" | "works" | "biography" | "createdAt" | "updatedAt", ExtArgs["result"]["yuanFigure"]>
+export type YuanFigureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "dynastyId" | "courtesy" | "role" | "birthYear" | "deathYear" | "ethnicity" | "positions" | "faction" | "politicalViews" | "achievements" | "works" | "biography" | "events" | "evaluations" | "portraitUrl" | "sources" | "createdAt" | "updatedAt", ExtArgs["result"]["yuanFigure"]>
 export type YuanFigureInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   dynasty?: boolean | Prisma.DynastyDefaultArgs<ExtArgs>
 }
@@ -763,13 +1003,21 @@ export type $YuanFigurePayload<ExtArgs extends runtime.Types.Extensions.Internal
     id: string
     name: string
     dynastyId: string
+    courtesy: string | null
     role: string
     birthYear: number | null
     deathYear: number | null
     ethnicity: string | null
+    positions: runtime.JsonValue | null
+    faction: string | null
+    politicalViews: string | null
     achievements: runtime.JsonValue | null
     works: runtime.JsonValue | null
     biography: string | null
+    events: runtime.JsonValue | null
+    evaluations: runtime.JsonValue | null
+    portraitUrl: string | null
+    sources: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["yuanFigure"]>
@@ -1199,13 +1447,21 @@ export interface YuanFigureFieldRefs {
   readonly id: Prisma.FieldRef<"YuanFigure", 'String'>
   readonly name: Prisma.FieldRef<"YuanFigure", 'String'>
   readonly dynastyId: Prisma.FieldRef<"YuanFigure", 'String'>
+  readonly courtesy: Prisma.FieldRef<"YuanFigure", 'String'>
   readonly role: Prisma.FieldRef<"YuanFigure", 'String'>
   readonly birthYear: Prisma.FieldRef<"YuanFigure", 'Int'>
   readonly deathYear: Prisma.FieldRef<"YuanFigure", 'Int'>
   readonly ethnicity: Prisma.FieldRef<"YuanFigure", 'String'>
+  readonly positions: Prisma.FieldRef<"YuanFigure", 'Json'>
+  readonly faction: Prisma.FieldRef<"YuanFigure", 'String'>
+  readonly politicalViews: Prisma.FieldRef<"YuanFigure", 'String'>
   readonly achievements: Prisma.FieldRef<"YuanFigure", 'Json'>
   readonly works: Prisma.FieldRef<"YuanFigure", 'Json'>
   readonly biography: Prisma.FieldRef<"YuanFigure", 'String'>
+  readonly events: Prisma.FieldRef<"YuanFigure", 'Json'>
+  readonly evaluations: Prisma.FieldRef<"YuanFigure", 'Json'>
+  readonly portraitUrl: Prisma.FieldRef<"YuanFigure", 'String'>
+  readonly sources: Prisma.FieldRef<"YuanFigure", 'Json'>
   readonly createdAt: Prisma.FieldRef<"YuanFigure", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"YuanFigure", 'DateTime'>
 }

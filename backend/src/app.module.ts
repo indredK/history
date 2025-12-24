@@ -11,6 +11,7 @@ import { EventModule } from './event/event.module';
 import { CultureModule } from './culture/culture.module';
 import { MythologyModule } from './mythology/mythology.module';
 import { ReligionModule } from './religion/religion.module';
+import { MapModule } from './map/map.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ReligionModule } from './religion/religion.module';
     CultureModule,
     MythologyModule,
     ReligionModule,
+    MapModule,
   ],
   controllers: [AppController],
   providers: [AppService],
