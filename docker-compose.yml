@@ -17,5 +17,35 @@ services:
       timeout: 5s
       retries: 5
 
+  backend:
+    build: ./backend
+    container_name: history-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/history_db
+      - PORT=3001
+      - NODE_ENV=development
+      - API_PREFIX=api/v1
+      - CORS_ORIGIN=http://localhost:5173
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - history-network
+
+  frontend:
+    build: ./frontend
+    container_name: history-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - history-network
+
+networks:
+  history-network:
+
 volumes:
   postgres_data:
