@@ -48,3 +48,7 @@ coverage/
 
 # Runtime
 .turbo/
+
+# Deployment temporary keys
+temp_deploy_key
+temp_deploy_key.pub
