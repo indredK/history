@@ -32,11 +32,11 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# Database
-*.db
+# Database (keep prisma/dev.db for deployment with initial data)
 *.db-shm
 *.db-wal
-prisma/dev.db*
+# Uncomment the following line if you don't want to track dev.db
+# prisma/dev.db*
 
 # OS
 .DS_Store

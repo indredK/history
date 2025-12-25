@@ -97,17 +97,31 @@ jobs:
             # Create volume if not exists
             sudo docker volume create history-data
             
-            # Run Backend
+            # Initialize database file in volume if not exists
+            # First copy from container to volume
+            sudo docker run --rm \
+              -v history-data:/data \
+              ${{ env.REGISTRY }}/$REPO_LOWER-backend:latest \
+              /bin/sh -c "cp /app/prisma/dev.db /data/dev.db 2>/dev/null || echo 'No dev.db to copy'" || true
+            
+            # Run Backend with correct database path
             sudo docker run -d \
               --name history-backend \
               --restart always \
               --network history-network \
-              -v history-data:/app/data \
-              -e DATABASE_URL="file:/app/data/dev.db" \
-              -e API_PREFIX="/api/v1" \
+              -v history-data:/app/prisma \
+              -e DATABASE_URL="file:./prisma/dev.db" \
+              -e API_PREFIX="api/v1" \
+              -e PORT="3001" \
               -e NODE_ENV="production" \
               -e CORS_ORIGIN="*" \
               ${{ env.REGISTRY }}/$REPO_LOWER-backend:latest
+            
+            # Wait for backend to start
+            sleep 5
+            
+            # Check backend logs for debugging
+            sudo docker logs history-backend --tail 50
             
             # Run Frontend (exposed on port 80)
             sudo docker run -d \
@@ -119,3 +133,4 @@ jobs:
               
             # Cleanup unused images
             sudo docker image prune -f
+

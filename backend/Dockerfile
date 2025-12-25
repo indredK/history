@@ -7,14 +7,13 @@ WORKDIR /app
 COPY package.json package-lock.json* bun.lockb* ./
 
 # Install dependencies
-# Using bun/npm based on lock file, assuming npm if not specific, but user has bun.lock
-RUN if [ -f bun.lockb ]; then npm install -g bun && bun install; else npm install; fi
+RUN npm install
 
-# Copy source code
+# Copy source code (includes prisma/dev.db if exists)
 COPY . .
 
 # Generate Prisma client
-ENV DATABASE_URL="file:./dev.db"
+ENV DATABASE_URL="file:./prisma/dev.db"
 RUN npx prisma generate
 
 # Build the application
@@ -25,19 +24,29 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Install production dependencies
-COPY package.json package-lock.json* bun.lockb* ./
-RUN if [ -f bun.lockb ]; then npm install -g bun && bun install --production; else npm install --production; fi
-
 # Install openssl for Prisma
 RUN apk add --no-cache openssl
+
+# Copy package files and install production dependencies
+COPY package.json package-lock.json* bun.lockb* ./
+RUN npm install --omit=dev
 
 # Copy built assets from builder
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 
+# Copy generated Prisma client (CRITICAL - this was missing!)
+COPY --from=builder /app/src/generated ./src/generated
+
+# Create data directory and copy database file for persistence
+RUN mkdir -p /app/data
+
 # Expose port
 EXPOSE 3001
 
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3001/api/v1/health || exit 1
+
 # Start command
-CMD ["/bin/sh", "-c", "npx prisma migrate deploy && npm run start:prod"]
+CMD ["node", "dist/main.js"]
