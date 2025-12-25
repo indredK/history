@@ -5,9 +5,10 @@ package-lock.json
 # Keep bun.lock for reproducible builds
 
 # Environment
-.env
 .env.local
 .env.*.local
+backend/.env
+# frontend/.env 被提交到仓库
 
 # Build & Distribution
 dist/
