@@ -49,4 +49,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3001/health || exit 1
 
 # Start command - initialize database if needed
-CMD ["sh", "-c", "if [ ! -f /app/prisma/dev.db ]; then npx prisma migrate deploy; fi && node dist/main.js"]
+CMD ["sh", "-c", "if [ ! -f /app/prisma/dev.db ]; then npx prisma migrate deploy; fi && node dist/src/main.js"]

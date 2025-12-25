@@ -87,15 +87,15 @@ jobs:
             sudo docker pull ${{ env.REGISTRY }}/$REPO_LOWER-backend:latest
             sudo docker pull ${{ env.REGISTRY }}/$REPO_LOWER-frontend:latest
             
-            # Stop keys containers
+            # Stop old containers
             sudo docker stop history-frontend history-backend || true
             sudo docker rm history-frontend history-backend || true
             
             # Create network if not exists
-            sudo docker network create history-network || true
+            sudo docker network create history-network 2>/dev/null || true
             
             # Create volume for database persistence
-            sudo docker volume create history-data || true
+            sudo docker volume create history-data 2>/dev/null || true
             
             # Run Backend with correct database path and volume
             sudo docker run -d \
