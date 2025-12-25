@@ -7,7 +7,10 @@ export class DynastyDto {
   @ApiProperty({ description: 'Dynasty name', example: '唐朝' })
   name: string;
 
-  @ApiPropertyOptional({ description: 'English name of the dynasty', example: 'Tang Dynasty' })
+  @ApiPropertyOptional({
+    description: 'English name of the dynasty',
+    example: 'Tang Dynasty',
+  })
   name_en?: string | null;
 
   @ApiProperty({ description: 'Dynasty start year', example: 618 })
@@ -25,7 +28,10 @@ export class DynastyDto {
   @ApiPropertyOptional({ description: 'Dynasty description' })
   description?: string | null;
 
-  @ApiPropertyOptional({ description: 'Color code for the dynasty', example: '#FF0000' })
+  @ApiPropertyOptional({
+    description: 'Color code for the dynasty',
+    example: '#FF0000',
+  })
   color?: string | null;
 
   @ApiProperty({ description: 'Creation timestamp' })

@@ -5,10 +5,10 @@ export class SongFigureDto extends BaseFigureDto {
   @ApiProperty({ description: 'Dynasty ID', example: 'uuid-string' })
   dynastyId: string;
 
-  @ApiPropertyOptional({ 
-    description: 'Song period', 
+  @ApiPropertyOptional({
+    description: 'Song period',
     example: 'northern_song',
-    enum: ['northern_song', 'southern_song']
+    enum: ['northern_song', 'southern_song'],
   })
   period?: string | null;
 

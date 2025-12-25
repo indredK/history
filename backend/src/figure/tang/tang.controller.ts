@@ -11,30 +11,36 @@ export class TangController {
   constructor(private readonly tangService: TangService) {}
 
   @Get('figures/tang')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get Tang Dynasty figures',
-    description: 'Retrieve a paginated list of Tang Dynasty historical figures with optional filtering'
+    description:
+      'Retrieve a paginated list of Tang Dynasty historical figures with optional filtering',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved Tang figures',
     type: PaginatedResponseDto<TangFigureDto>,
   })
-  async getTangFigures(@Query() query: FigureQueryDto): Promise<PaginatedResponseDto<TangFigureDto>> {
+  async getTangFigures(
+    @Query() query: FigureQueryDto,
+  ): Promise<PaginatedResponseDto<TangFigureDto>> {
     return this.tangService.getTangFigures(query);
   }
 
   @Get('tang-figures')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get Tang Dynasty figures (compatible endpoint)',
-    description: 'Retrieve a paginated list of Tang Dynasty figures (compatible with frontend API)' 
+    description:
+      'Retrieve a paginated list of Tang Dynasty figures (compatible with frontend API)',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved Tang figures',
     type: PaginatedResponseDto<TangFigureDto>,
   })
-  async getTangFiguresCompat(@Query() query: FigureQueryDto): Promise<PaginatedResponseDto<TangFigureDto>> {
+  async getTangFiguresCompat(
+    @Query() query: FigureQueryDto,
+  ): Promise<PaginatedResponseDto<TangFigureDto>> {
     return this.tangService.getTangFigures(query);
   }
 }

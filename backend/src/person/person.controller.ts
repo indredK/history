@@ -11,23 +11,27 @@ export class PersonController {
   constructor(private readonly personService: PersonService) {}
 
   @Get()
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get all persons',
-    description: 'Retrieve a paginated list of historical persons with optional filtering by year range, name, and dynasty'
+    description:
+      'Retrieve a paginated list of historical persons with optional filtering by year range, name, and dynasty',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved persons',
     type: PaginatedResponseDto<PersonDto>,
   })
-  async findAll(@Query() query: PersonQueryDto): Promise<PaginatedResponseDto<PersonDto>> {
+  async findAll(
+    @Query() query: PersonQueryDto,
+  ): Promise<PaginatedResponseDto<PersonDto>> {
     return this.personService.findAll(query);
   }
 
   @Get(':id')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get person by ID',
-    description: 'Retrieve detailed information about a specific historical person'
+    description:
+      'Retrieve detailed information about a specific historical person',
   })
   @ApiParam({ name: 'id', description: 'Person ID' })
   @ApiResponse({

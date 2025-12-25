@@ -11,30 +11,36 @@ export class QingController {
   constructor(private readonly qingService: QingService) {}
 
   @Get('figures/qing')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get Qing Dynasty rulers',
-    description: 'Retrieve a paginated list of Qing Dynasty historical rulers with optional filtering'
+    description:
+      'Retrieve a paginated list of Qing Dynasty historical rulers with optional filtering',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved Qing rulers',
     type: PaginatedResponseDto<QingRulerDto>,
   })
-  async getQingRulers(@Query() query: FigureQueryDto): Promise<PaginatedResponseDto<QingRulerDto>> {
+  async getQingRulers(
+    @Query() query: FigureQueryDto,
+  ): Promise<PaginatedResponseDto<QingRulerDto>> {
     return this.qingService.getQingRulers(query);
   }
 
   @Get('qing-rulers')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get Qing Dynasty rulers (compatible endpoint)',
-    description: 'Retrieve a paginated list of Qing Dynasty rulers (compatible with frontend API)' 
+    description:
+      'Retrieve a paginated list of Qing Dynasty rulers (compatible with frontend API)',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved Qing rulers',
     type: PaginatedResponseDto<QingRulerDto>,
   })
-  async getQingRulersCompat(@Query() query: FigureQueryDto): Promise<PaginatedResponseDto<QingRulerDto>> {
+  async getQingRulersCompat(
+    @Query() query: FigureQueryDto,
+  ): Promise<PaginatedResponseDto<QingRulerDto>> {
     return this.qingService.getQingRulers(query);
   }
 }

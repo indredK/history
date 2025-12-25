@@ -8,25 +8,27 @@ import { MythologyDto } from './dto/mythology.dto';
 export class MythologyService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(query: MythologyQueryDto): Promise<PaginatedResponseDto<MythologyDto>> {
+  async findAll(
+    query: MythologyQueryDto,
+  ): Promise<PaginatedResponseDto<MythologyDto>> {
     const { page = 1, limit = 20, category, origin, period, name } = query;
     const skip = (page - 1) * limit;
 
     // Build where clause
     const where: any = {};
-    
+
     if (category) {
       where.category = category;
     }
-    
+
     if (origin) {
       where.origin = { contains: origin };
     }
-    
+
     if (period) {
       where.period = { contains: period };
     }
-    
+
     if (name) {
       where.name = { contains: name };
     }
@@ -37,16 +39,13 @@ export class MythologyService {
         where,
         skip,
         take: limit,
-        orderBy: [
-          { category: 'asc' },
-          { name: 'asc' },
-        ],
+        orderBy: [{ category: 'asc' }, { name: 'asc' }],
       }),
       this.prisma.mythology.count({ where }),
     ]);
 
     // Transform the data to match frontend requirements
-    const transformedMythologies = mythologies.map(mythology => {
+    const transformedMythologies = mythologies.map((mythology) => {
       // Parse JSON fields safely
       const stories = this.safeJsonParse(mythology.stories) || [];
       const symbolism = this.safeJsonParse(mythology.symbolism) || [];
@@ -58,7 +57,7 @@ export class MythologyService {
         englishTitle: '', // Database doesn't have name_en field
         category: mythology.category as any, // Cast to match frontend category type
         description: mythology.description || '', // Ensure description is not null
-        characters: Array.isArray(stories) ? stories.slice(0, 5) : [], 
+        characters: Array.isArray(stories) ? stories.slice(0, 5) : [],
         source: mythology.origin || '', // Map database 'origin' to frontend 'source'
         imageUrl: '', // Provide empty string if no image URL available
       };

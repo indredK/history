@@ -6,21 +6,28 @@ import { PaginatedResponseDto } from '../../common/dto/paginated-response.dto';
 
 @Injectable()
 export class SongService extends FigureBaseService {
-  async getSongFigures(query: FigureQueryDto): Promise<PaginatedResponseDto<SongFigureDto>> {
-    const { page = 1, limit = 20, role, period, name, birthYear, deathYear } = query;
+  async getSongFigures(
+    query: FigureQueryDto,
+  ): Promise<PaginatedResponseDto<SongFigureDto>> {
+    const {
+      page = 1,
+      limit = 20,
+      role,
+      period,
+      name,
+      birthYear,
+      deathYear,
+    } = query;
     const skip = (page - 1) * limit;
 
     const where: any = {};
-    
+
     if (role) where.role = { contains: role };
     if (period) where.period = period;
     if (name) where.name = { contains: name };
     if (birthYear !== undefined) where.birthYear = { gte: birthYear };
     if (deathYear !== undefined) {
-      where.OR = [
-        { deathYear: { lte: deathYear } },
-        { deathYear: null },
-      ];
+      where.OR = [{ deathYear: { lte: deathYear } }, { deathYear: null }];
     }
 
     const [figures, total] = await Promise.all([
@@ -33,7 +40,9 @@ export class SongService extends FigureBaseService {
       this.prisma.songFigure.count({ where }),
     ]);
 
-    const transformedFigures = figures.map(figure => this.transformFigure<SongFigureDto>(figure));
+    const transformedFigures = figures.map((figure) =>
+      this.transformFigure<SongFigureDto>(figure),
+    );
 
     return new PaginatedResponseDto(transformedFigures, total, page, limit);
   }

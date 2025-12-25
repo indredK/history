@@ -5,10 +5,10 @@ export class MingFigureDto extends BaseFigureDto {
   @ApiProperty({ description: 'Dynasty ID', example: 'uuid-string' })
   dynastyId: string;
 
-  @ApiPropertyOptional({ 
-    description: 'Ming period', 
+  @ApiPropertyOptional({
+    description: 'Ming period',
     example: 'early',
-    enum: ['early', 'middle', 'late']
+    enum: ['early', 'middle', 'late'],
   })
   period?: string | null;
 

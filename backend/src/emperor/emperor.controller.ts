@@ -11,23 +11,27 @@ export class EmperorController {
   constructor(private readonly emperorService: EmperorService) {}
 
   @Get()
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get all emperors',
-    description: 'Retrieve a paginated list of Chinese emperors with optional filtering by dynasty, reign period, and name'
+    description:
+      'Retrieve a paginated list of Chinese emperors with optional filtering by dynasty, reign period, and name',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved emperors',
     type: PaginatedResponseDto<EmperorDto>,
   })
-  async findAll(@Query() query: EmperorQueryDto): Promise<PaginatedResponseDto<EmperorDto>> {
+  async findAll(
+    @Query() query: EmperorQueryDto,
+  ): Promise<PaginatedResponseDto<EmperorDto>> {
     return this.emperorService.findAll(query);
   }
 
   @Get(':id')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get emperor by ID',
-    description: 'Retrieve detailed information about a specific emperor including era names, achievements, and historical evaluation'
+    description:
+      'Retrieve detailed information about a specific emperor including era names, achievements, and historical evaluation',
   })
   @ApiParam({ name: 'id', description: 'Emperor ID' })
   @ApiResponse({

@@ -8,24 +8,26 @@ import { DynastyDto } from './dto/dynasty.dto';
 export class DynastyService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(query: DynastyQueryDto): Promise<PaginatedResponseDto<DynastyDto>> {
+  async findAll(
+    query: DynastyQueryDto,
+  ): Promise<PaginatedResponseDto<DynastyDto>> {
     const { page = 1, limit = 20, startYear, endYear, name } = query;
     const skip = (page - 1) * limit;
 
     // Build where clause
     const where: any = {};
-    
+
     if (startYear !== undefined) {
       where.startYear = { gte: startYear };
     }
-    
+
     if (endYear !== undefined) {
       where.OR = [
         { endYear: { lte: endYear } },
         { endYear: null }, // Include ongoing dynasties
       ];
     }
-    
+
     if (name) {
       where.name = { contains: name };
     }

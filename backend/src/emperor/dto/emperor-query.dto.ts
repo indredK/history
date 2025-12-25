@@ -13,7 +13,8 @@ export class EmperorQueryDto extends PaginationQueryDto {
   dynastyId?: string;
 
   @ApiPropertyOptional({
-    description: 'Filter by reign start year (emperors who started reigning from this year)',
+    description:
+      'Filter by reign start year (emperors who started reigning from this year)',
     example: 600,
   })
   @IsOptional()
@@ -23,7 +24,8 @@ export class EmperorQueryDto extends PaginationQueryDto {
   reignStart?: number;
 
   @ApiPropertyOptional({
-    description: 'Filter by reign end year (emperors who ended reigning before this year)',
+    description:
+      'Filter by reign end year (emperors who ended reigning before this year)',
     example: 1000,
   })
   @IsOptional()

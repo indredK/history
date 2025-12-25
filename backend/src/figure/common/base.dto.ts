@@ -18,7 +18,10 @@ export class HistoricalEvaluationDto {
   @ApiProperty({ description: '评价来源', example: '三国志' })
   source: string;
 
-  @ApiProperty({ description: '评价内容', example: '识治之良才，管、萧之亚匹也' })
+  @ApiProperty({
+    description: '评价内容',
+    example: '识治之良才，管、萧之亚匹也',
+  })
   content: string;
 
   @ApiPropertyOptional({ description: '评价作者', example: '陈寿' })
@@ -32,7 +35,10 @@ export class PolicyMeasureDto {
   @ApiPropertyOptional({ description: '实施年份', example: 1723 })
   year?: number;
 
-  @ApiProperty({ description: '政策描述', example: '将丁银摊入地亩，征收统一的地丁银' })
+  @ApiProperty({
+    description: '政策描述',
+    example: '将丁银摊入地亩，征收统一的地丁银',
+  })
   description: string;
 
   @ApiProperty({ description: '影响', example: '废除了人头税，促进了人口增长' })
@@ -76,7 +82,10 @@ export class BaseFigureDto {
   @ApiPropertyOptional({ description: '相关事件', type: [HistoricalEventDto] })
   events?: HistoricalEventDto[] | null;
 
-  @ApiPropertyOptional({ description: '历史评价', type: [HistoricalEvaluationDto] })
+  @ApiPropertyOptional({
+    description: '历史评价',
+    type: [HistoricalEvaluationDto],
+  })
   evaluations?: HistoricalEvaluationDto[] | null;
 
   @ApiPropertyOptional({ description: '头像链接' })

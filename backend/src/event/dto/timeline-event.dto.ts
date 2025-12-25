@@ -16,7 +16,9 @@ export class TimelineEventDto {
   @ApiPropertyOptional({ description: 'Event type', example: 'war' })
   eventType?: string | null;
 
-  @ApiPropertyOptional({ description: 'Brief description for timeline display' })
+  @ApiPropertyOptional({
+    description: 'Brief description for timeline display',
+  })
   description?: string | null;
 }
 
@@ -30,6 +32,9 @@ export class TimelineResponseDto {
   @ApiProperty({ description: 'Timeline end year', example: 1000 })
   endYear: number;
 
-  @ApiProperty({ description: 'Total number of events in timeline', example: 25 })
+  @ApiProperty({
+    description: 'Total number of events in timeline',
+    example: 25,
+  })
   totalEvents: number;
 }

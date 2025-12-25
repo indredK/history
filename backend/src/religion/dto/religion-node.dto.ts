@@ -7,17 +7,17 @@ export class ReligionNodeDto {
   @ApiProperty({ description: 'Node name', example: '少林寺' })
   name: string;
 
-  @ApiProperty({ 
-    description: 'Node type', 
+  @ApiProperty({
+    description: 'Node type',
     example: 'temple',
-    enum: ['sect', 'temple', 'master', 'text', 'concept']
+    enum: ['sect', 'temple', 'master', 'text', 'concept'],
   })
   nodeType: string;
 
-  @ApiProperty({ 
-    description: 'Religious tradition', 
+  @ApiProperty({
+    description: 'Religious tradition',
     example: 'buddhism',
-    enum: ['buddhism', 'taoism', 'confucianism', 'folk_religion']
+    enum: ['buddhism', 'taoism', 'confucianism', 'folk_religion'],
   })
   tradition: string;
 
@@ -27,7 +27,10 @@ export class ReligionNodeDto {
   @ApiPropertyOptional({ description: 'Historical period', example: '唐朝' })
   period?: string | null;
 
-  @ApiPropertyOptional({ description: 'Geographic location', example: '河南嵩山' })
+  @ApiPropertyOptional({
+    description: 'Geographic location',
+    example: '河南嵩山',
+  })
   location?: string | null;
 
   @ApiProperty({ description: 'Creation timestamp' })

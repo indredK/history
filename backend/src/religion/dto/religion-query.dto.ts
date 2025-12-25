@@ -24,10 +24,22 @@ export class ReligionGraphQueryDto {
   @ApiPropertyOptional({
     description: 'Filter by relationship type',
     example: 'founded_by',
-    enum: ['founded_by', 'influenced_by', 'split_from', 'merged_with', 'located_at'],
+    enum: [
+      'founded_by',
+      'influenced_by',
+      'split_from',
+      'merged_with',
+      'located_at',
+    ],
   })
   @IsOptional()
-  @IsIn(['founded_by', 'influenced_by', 'split_from', 'merged_with', 'located_at'])
+  @IsIn([
+    'founded_by',
+    'influenced_by',
+    'split_from',
+    'merged_with',
+    'located_at',
+  ])
   relationship?: string;
 
   @ApiPropertyOptional({

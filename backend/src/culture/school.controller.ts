@@ -11,23 +11,27 @@ export class SchoolController {
   constructor(private readonly cultureService: CultureService) {}
 
   @Get()
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get all philosophical schools',
-    description: 'Retrieve a paginated list of philosophical schools with optional filtering by name, founder, and founding year'
+    description:
+      'Retrieve a paginated list of philosophical schools with optional filtering by name, founder, and founding year',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved philosophical schools',
     type: PaginatedResponseDto<PhilosophicalSchoolDto>,
   })
-  async findAll(@Query() query: SchoolQueryDto): Promise<PaginatedResponseDto<PhilosophicalSchoolDto>> {
+  async findAll(
+    @Query() query: SchoolQueryDto,
+  ): Promise<PaginatedResponseDto<PhilosophicalSchoolDto>> {
     return this.cultureService.findAllSchools(query);
   }
 
   @Get(':id')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get philosophical school by ID',
-    description: 'Retrieve detailed information about a specific philosophical school including core beliefs and key texts'
+    description:
+      'Retrieve detailed information about a specific philosophical school including core beliefs and key texts',
   })
   @ApiParam({ name: 'id', description: 'Philosophical school ID' })
   @ApiResponse({

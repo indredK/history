@@ -11,30 +11,36 @@ export class YuanController {
   constructor(private readonly yuanService: YuanService) {}
 
   @Get('figures/yuan')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get Yuan Dynasty figures',
-    description: 'Retrieve a paginated list of Yuan Dynasty historical figures with optional filtering'
+    description:
+      'Retrieve a paginated list of Yuan Dynasty historical figures with optional filtering',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved Yuan figures',
     type: PaginatedResponseDto<YuanFigureDto>,
   })
-  async getYuanFigures(@Query() query: FigureQueryDto): Promise<PaginatedResponseDto<YuanFigureDto>> {
+  async getYuanFigures(
+    @Query() query: FigureQueryDto,
+  ): Promise<PaginatedResponseDto<YuanFigureDto>> {
     return this.yuanService.getYuanFigures(query);
   }
 
   @Get('yuan-figures')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get Yuan Dynasty figures (compatible endpoint)',
-    description: 'Retrieve a paginated list of Yuan Dynasty figures (compatible with frontend API)' 
+    description:
+      'Retrieve a paginated list of Yuan Dynasty figures (compatible with frontend API)',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved Yuan figures',
     type: PaginatedResponseDto<YuanFigureDto>,
   })
-  async getYuanFiguresCompat(@Query() query: FigureQueryDto): Promise<PaginatedResponseDto<YuanFigureDto>> {
+  async getYuanFiguresCompat(
+    @Query() query: FigureQueryDto,
+  ): Promise<PaginatedResponseDto<YuanFigureDto>> {
     return this.yuanService.getYuanFigures(query);
   }
 }

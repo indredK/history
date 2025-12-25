@@ -1,5 +1,9 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { BaseFigureDto, HistoricalEventDto, PolicyMeasureDto } from '../common/base.dto';
+import {
+  BaseFigureDto,
+  HistoricalEventDto,
+  PolicyMeasureDto,
+} from '../common/base.dto';
 
 export class QingRulerDto extends BaseFigureDto {
   @ApiProperty({ description: 'Dynasty ID', example: 'uuid-string' })
@@ -20,7 +24,10 @@ export class QingRulerDto extends BaseFigureDto {
   @ApiPropertyOptional({ description: '政策举措', type: [PolicyMeasureDto] })
   policies?: PolicyMeasureDto[] | null;
 
-  @ApiPropertyOptional({ description: '重大历史事件', type: [HistoricalEventDto] })
+  @ApiPropertyOptional({
+    description: '重大历史事件',
+    type: [HistoricalEventDto],
+  })
   majorEvents?: HistoricalEventDto[] | null;
 
   @ApiPropertyOptional({ description: '对朝代的贡献' })

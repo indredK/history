@@ -45,15 +45,11 @@ export class ReligionService {
     const nodes = await this.prisma.religionNode.findMany({
       where: nodeWhere,
       take: maxNodes,
-      orderBy: [
-        { tradition: 'asc' },
-        { nodeType: 'asc' },
-        { name: 'asc' },
-      ],
+      orderBy: [{ tradition: 'asc' }, { nodeType: 'asc' }, { name: 'asc' }],
     });
 
     // Get node IDs for filtering edges
-    const nodeIds = nodes.map(node => node.id);
+    const nodeIds = nodes.map((node) => node.id);
 
     // Build edge where clause to only include edges between retrieved nodes
     const edgeWhereWithNodes = {
@@ -69,10 +65,7 @@ export class ReligionService {
       ? this.prisma.religionEdge.findMany({
           where: edgeWhereWithNodes,
           take: maxEdges,
-          orderBy: [
-            { relationship: 'asc' },
-            { strength: 'desc' },
-          ],
+          orderBy: [{ relationship: 'asc' }, { strength: 'desc' }],
           include: {
             sourceNode: true,
             targetNode: true,
@@ -81,16 +74,13 @@ export class ReligionService {
       : this.prisma.religionEdge.findMany({
           where: edgeWhereWithNodes,
           take: maxEdges,
-          orderBy: [
-            { relationship: 'asc' },
-            { strength: 'desc' },
-          ],
+          orderBy: [{ relationship: 'asc' }, { strength: 'desc' }],
         });
 
     const edges = await edgesQuery;
 
     // Transform nodes to DTO
-    const nodeDtos: ReligionNodeDto[] = nodes.map(node => ({
+    const nodeDtos: ReligionNodeDto[] = nodes.map((node) => ({
       id: node.id,
       name: node.name,
       nodeType: node.nodeType,

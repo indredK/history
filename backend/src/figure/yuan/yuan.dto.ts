@@ -5,10 +5,10 @@ export class YuanFigureDto extends BaseFigureDto {
   @ApiProperty({ description: 'Dynasty ID', example: 'uuid-string' })
   dynastyId: string;
 
-  @ApiPropertyOptional({ 
-    description: 'Ethnicity', 
+  @ApiPropertyOptional({
+    description: 'Ethnicity',
     example: 'mongol',
-    enum: ['mongol', 'han', 'semu', 'other']
+    enum: ['mongol', 'han', 'semu', 'other'],
   })
   ethnicity?: string | null;
 

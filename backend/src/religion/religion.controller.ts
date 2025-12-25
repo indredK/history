@@ -10,16 +10,19 @@ export class ReligionController {
   constructor(private readonly religionService: ReligionService) {}
 
   @Get('graph')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get religion relationship graph',
-    description: 'Retrieve a graph of religious relationships including nodes (sects, temples, masters, texts, concepts) and their connections with optional filtering by tradition, node type, and relationship type'
+    description:
+      'Retrieve a graph of religious relationships including nodes (sects, temples, masters, texts, concepts) and their connections with optional filtering by tradition, node type, and relationship type',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved religion graph',
     type: ReligionGraphDto,
   })
-  async getGraph(@Query() query: ReligionGraphQueryDto): Promise<ReligionGraphDto> {
+  async getGraph(
+    @Query() query: ReligionGraphQueryDto,
+  ): Promise<ReligionGraphDto> {
     return this.religionService.getGraph(query);
   }
 }
@@ -31,24 +34,26 @@ export class ReligionsController {
   constructor(private readonly religionService: ReligionService) {}
 
   @Get()
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get all religions (frontend compatible)',
-    description: 'Retrieve religion graph data for frontend compatibility'
+    description: 'Retrieve religion graph data for frontend compatibility',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved religions',
     type: ReligionGraphDto,
   })
-  async getAll(@Query() query: ReligionGraphQueryDto): Promise<{ data: ReligionGraphDto[] }> {
+  async getAll(
+    @Query() query: ReligionGraphQueryDto,
+  ): Promise<{ data: ReligionGraphDto[] }> {
     const graph = await this.religionService.getGraph(query);
     return { data: [graph] };
   }
 
   @Get(':id')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get religion node by ID (frontend compatible)',
-    description: 'Retrieve a specific religion node by ID'
+    description: 'Retrieve a specific religion node by ID',
   })
   @ApiParam({ name: 'id', description: 'Religion node ID' })
   @ApiResponse({
@@ -56,9 +61,12 @@ export class ReligionsController {
     description: 'Successfully retrieved religion node',
     type: Object,
   })
-  async getById(@Param('id') id: string, @Query() query: ReligionGraphQueryDto): Promise<{ data: any }> {
+  async getById(
+    @Param('id') id: string,
+    @Query() query: ReligionGraphQueryDto,
+  ): Promise<{ data: any }> {
     const graph = await this.religionService.getGraph(query);
-    const node = graph.nodes.find(n => n.id === id) || null;
+    const node = graph.nodes.find((n) => n.id === id) || null;
     return { data: node };
   }
 }

@@ -16,7 +16,10 @@ export class PaginationMeta {
   @ApiProperty({ description: 'Whether there is a next page', example: true })
   hasNext: boolean;
 
-  @ApiProperty({ description: 'Whether there is a previous page', example: false })
+  @ApiProperty({
+    description: 'Whether there is a previous page',
+    example: false,
+  })
   hasPrev: boolean;
 }
 
@@ -29,9 +32,9 @@ export class PaginatedResponseDto<T> {
 
   constructor(data: T[], total: number, page: number, limit: number) {
     this.data = data;
-    
+
     const totalPages = Math.ceil(total / limit);
-    
+
     this.meta = {
       page,
       limit,

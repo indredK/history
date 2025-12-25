@@ -15,7 +15,10 @@ export class ReligionGraphDto {
   @ApiProperty({ description: 'Total number of edges', example: 30 })
   totalEdges: number;
 
-  @ApiPropertyOptional({ description: 'Filtered tradition', example: 'buddhism' })
+  @ApiPropertyOptional({
+    description: 'Filtered tradition',
+    example: 'buddhism',
+  })
   tradition?: string;
 
   @ApiPropertyOptional({ description: 'Filtered node type', example: 'temple' })

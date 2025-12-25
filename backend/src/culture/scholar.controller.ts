@@ -11,23 +11,27 @@ export class ScholarController {
   constructor(private readonly cultureService: CultureService) {}
 
   @Get()
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get all scholars',
-    description: 'Retrieve a paginated list of scholars with optional filtering by dynasty, philosophical school, and name'
+    description:
+      'Retrieve a paginated list of scholars with optional filtering by dynasty, philosophical school, and name',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved scholars',
     type: PaginatedResponseDto<ScholarDto>,
   })
-  async findAll(@Query() query: ScholarQueryDto): Promise<PaginatedResponseDto<ScholarDto>> {
+  async findAll(
+    @Query() query: ScholarQueryDto,
+  ): Promise<PaginatedResponseDto<ScholarDto>> {
     return this.cultureService.findAllScholars(query);
   }
 
   @Get(':id')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get scholar by ID',
-    description: 'Retrieve detailed information about a specific scholar including their works and contributions'
+    description:
+      'Retrieve detailed information about a specific scholar including their works and contributions',
   })
   @ApiParam({ name: 'id', description: 'Scholar ID' })
   @ApiResponse({

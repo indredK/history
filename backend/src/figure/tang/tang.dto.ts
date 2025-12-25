@@ -5,10 +5,10 @@ export class TangFigureDto extends BaseFigureDto {
   @ApiProperty({ description: 'Dynasty ID', example: 'uuid-string' })
   dynastyId: string;
 
-  @ApiPropertyOptional({ 
-    description: 'Tang period', 
+  @ApiPropertyOptional({
+    description: 'Tang period',
     example: 'early',
-    enum: ['early', 'middle', 'late']
+    enum: ['early', 'middle', 'late'],
   })
   period?: string | null;
 

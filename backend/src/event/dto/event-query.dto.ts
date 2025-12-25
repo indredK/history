@@ -25,7 +25,8 @@ export class EventQueryDto extends PaginationQueryDto {
   endYear?: number;
 
   @ApiPropertyOptional({
-    description: 'Filter by year range start (events that occurred during or after this year)',
+    description:
+      'Filter by year range start (events that occurred during or after this year)',
     example: 700,
   })
   @IsOptional()
@@ -35,7 +36,8 @@ export class EventQueryDto extends PaginationQueryDto {
   yearRangeStart?: number;
 
   @ApiPropertyOptional({
-    description: 'Filter by year range end (events that occurred during or before this year)',
+    description:
+      'Filter by year range end (events that occurred during or before this year)',
     example: 800,
   })
   @IsOptional()

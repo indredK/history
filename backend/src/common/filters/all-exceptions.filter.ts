@@ -25,12 +25,12 @@ export class AllExceptionsFilter implements ExceptionFilter {
     if (exception instanceof HttpException) {
       status = exception.getStatus();
       const exceptionResponse = exception.getResponse();
-      
+
       if (typeof exceptionResponse === 'object' && exceptionResponse !== null) {
         message = (exceptionResponse as any).message || exception.message;
         error = exceptionResponse;
       } else {
-        message = exceptionResponse as string;
+        message = exceptionResponse;
         error = { statusCode: status, message };
       }
     } else {
@@ -39,7 +39,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
       error = {
         statusCode: status,
         message,
-        ...(process.env.NODE_ENV === 'development' && { stack: (exception as Error).stack }),
+        ...(process.env.NODE_ENV === 'development' && {
+          stack: (exception as Error).stack,
+        }),
       };
     }
 

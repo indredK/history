@@ -6,12 +6,14 @@ import { PaginatedResponseDto } from '../../common/dto/paginated-response.dto';
 
 @Injectable()
 export class SanguoService extends FigureBaseService {
-  async getSanguoFigures(query: SanguoFigureQueryDto): Promise<PaginatedResponseDto<SanguoFigureDto>> {
+  async getSanguoFigures(
+    query: SanguoFigureQueryDto,
+  ): Promise<PaginatedResponseDto<SanguoFigureDto>> {
     const { page = 1, limit = 20, kingdom, role, name } = query;
     const skip = (page - 1) * limit;
 
     const where: any = {};
-    
+
     if (kingdom) where.kingdom = kingdom;
     if (role) where.role = role;
     if (name) where.name = { contains: name };
@@ -26,7 +28,9 @@ export class SanguoService extends FigureBaseService {
       this.prisma.sanguoFigure.count({ where }),
     ]);
 
-    const transformedFigures = figures.map(figure => this.transformFigure<SanguoFigureDto>(figure));
+    const transformedFigures = figures.map((figure) =>
+      this.transformFigure<SanguoFigureDto>(figure),
+    );
 
     return new PaginatedResponseDto(transformedFigures, total, page, limit);
   }

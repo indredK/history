@@ -11,23 +11,26 @@ export class DynastyController {
   constructor(private readonly dynastyService: DynastyService) {}
 
   @Get()
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get all dynasties',
-    description: 'Retrieve a paginated list of Chinese dynasties with optional filtering by year range and name'
+    description:
+      'Retrieve a paginated list of Chinese dynasties with optional filtering by year range and name',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved dynasties',
     type: PaginatedResponseDto<DynastyDto>,
   })
-  async findAll(@Query() query: DynastyQueryDto): Promise<PaginatedResponseDto<DynastyDto>> {
+  async findAll(
+    @Query() query: DynastyQueryDto,
+  ): Promise<PaginatedResponseDto<DynastyDto>> {
     return this.dynastyService.findAll(query);
   }
 
   @Get(':id')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get dynasty by ID',
-    description: 'Retrieve detailed information about a specific dynasty'
+    description: 'Retrieve detailed information about a specific dynasty',
   })
   @ApiParam({ name: 'id', description: 'Dynasty ID' })
   @ApiResponse({

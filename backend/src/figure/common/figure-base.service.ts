@@ -10,7 +10,7 @@ export class FigureBaseService {
    */
   protected transformFigure<T>(figure: any): T {
     if (!figure) return {} as T;
-    
+
     return {
       ...figure,
       achievements: this.parseJson(figure.achievements),
@@ -22,7 +22,7 @@ export class FigureBaseService {
       battles: this.parseJson(figure.battles),
       policies: this.parseJson(figure.policies),
       majorEvents: this.parseJson(figure.majorEvents),
-    } as any;
+    };
   }
 
   protected parseJson(value: any): any {

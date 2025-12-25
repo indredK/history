@@ -21,7 +21,10 @@ export class EmperorDto {
   @ApiPropertyOptional({ description: 'Temple name', example: '太宗' })
   templeName?: string | null;
 
-  @ApiPropertyOptional({ description: 'Posthumous name', example: '文武大圣大广孝皇帝' })
+  @ApiPropertyOptional({
+    description: 'Posthumous name',
+    example: '文武大圣大广孝皇帝',
+  })
   posthumousName?: string | null;
 
   @ApiPropertyOptional({ description: 'Era names', type: [EraNameDto] })
@@ -39,7 +42,10 @@ export class EmperorDto {
   @ApiPropertyOptional({ description: 'Achievements', type: [String] })
   achievements?: string[] | null;
 
-  @ApiPropertyOptional({ description: 'Historical evaluation', type: HistoricalEvaluationDto })
+  @ApiPropertyOptional({
+    description: 'Historical evaluation',
+    type: HistoricalEvaluationDto,
+  })
   historicalEvaluation?: HistoricalEvaluationDto | null;
 
   @ApiProperty({ description: 'Creation timestamp' })

@@ -9,7 +9,7 @@ const adapter = new PrismaLibSql({
   url: databaseUrl,
 });
 
-export const prisma = new PrismaClient({ 
+export const prisma = new PrismaClient({
   adapter,
   log: ['query', 'info', 'warn', 'error'],
 });

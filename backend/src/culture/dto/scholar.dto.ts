@@ -16,7 +16,10 @@ export class ScholarDto {
   @ApiPropertyOptional({ description: 'Death year', example: -479 })
   deathYear?: number | null;
 
-  @ApiPropertyOptional({ description: 'Philosophical school ID', example: 'uuid-string' })
+  @ApiPropertyOptional({
+    description: 'Philosophical school ID',
+    example: 'uuid-string',
+  })
   philosophicalSchoolId?: string | null;
 
   @ApiPropertyOptional({ description: 'Major works', type: [String] })

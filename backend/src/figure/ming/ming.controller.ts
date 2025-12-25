@@ -11,30 +11,36 @@ export class MingController {
   constructor(private readonly mingService: MingService) {}
 
   @Get('figures/ming')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get Ming Dynasty figures',
-    description: 'Retrieve a paginated list of Ming Dynasty historical figures with optional filtering'
+    description:
+      'Retrieve a paginated list of Ming Dynasty historical figures with optional filtering',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved Ming figures',
     type: PaginatedResponseDto<MingFigureDto>,
   })
-  async getMingFigures(@Query() query: FigureQueryDto): Promise<PaginatedResponseDto<MingFigureDto>> {
+  async getMingFigures(
+    @Query() query: FigureQueryDto,
+  ): Promise<PaginatedResponseDto<MingFigureDto>> {
     return this.mingService.getMingFigures(query);
   }
 
   @Get('ming-figures')
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get Ming Dynasty figures (compatible endpoint)',
-    description: 'Retrieve a paginated list of Ming Dynasty figures (compatible with frontend API)' 
+    description:
+      'Retrieve a paginated list of Ming Dynasty figures (compatible with frontend API)',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved Ming figures',
     type: PaginatedResponseDto<MingFigureDto>,
   })
-  async getMingFiguresCompat(@Query() query: FigureQueryDto): Promise<PaginatedResponseDto<MingFigureDto>> {
+  async getMingFiguresCompat(
+    @Query() query: FigureQueryDto,
+  ): Promise<PaginatedResponseDto<MingFigureDto>> {
     return this.mingService.getMingFigures(query);
   }
 }

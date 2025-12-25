@@ -10,49 +10,48 @@ import { PhilosophicalSchoolDto } from './dto/philosophical-school.dto';
 export class CultureService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAllScholars(query: ScholarQueryDto): Promise<PaginatedResponseDto<ScholarDto>> {
-    const { 
-      page = 1, 
-      limit = 20, 
-      dynastyPeriod, 
-      philosophicalSchoolId, 
-      schoolName, 
-      name, 
-      birthYear, 
-      deathYear 
+  async findAllScholars(
+    query: ScholarQueryDto,
+  ): Promise<PaginatedResponseDto<ScholarDto>> {
+    const {
+      page = 1,
+      limit = 20,
+      dynastyPeriod,
+      philosophicalSchoolId,
+      schoolName,
+      name,
+      birthYear,
+      deathYear,
     } = query;
     const skip = (page - 1) * limit;
 
     // Build where clause
     const where: any = {};
-    
+
     if (dynastyPeriod) {
       where.dynastyPeriod = { contains: dynastyPeriod };
     }
-    
+
     if (philosophicalSchoolId) {
       where.philosophicalSchoolId = philosophicalSchoolId;
     }
-    
+
     if (schoolName) {
       where.philosophicalSchool = {
         name: { contains: schoolName },
       };
     }
-    
+
     if (name) {
       where.name = { contains: name };
     }
-    
+
     if (birthYear !== undefined) {
       where.birthYear = { gte: birthYear };
     }
-    
+
     if (deathYear !== undefined) {
-      where.OR = [
-        { deathYear: { lte: deathYear } },
-        { deathYear: null },
-      ];
+      where.OR = [{ deathYear: { lte: deathYear } }, { deathYear: null }];
     }
 
     // Execute queries
@@ -61,10 +60,7 @@ export class CultureService {
         where,
         skip,
         take: limit,
-        orderBy: [
-          { birthYear: 'asc' },
-          { name: 'asc' },
-        ],
+        orderBy: [{ birthYear: 'asc' }, { name: 'asc' }],
         include: {
           philosophicalSchool: true,
         },
@@ -73,7 +69,7 @@ export class CultureService {
     ]);
 
     // Transform the data to match DTO structure
-    const transformedScholars = scholars.map(scholar => {
+    const transformedScholars = scholars.map((scholar) => {
       const { philosophicalSchool, ...scholarData } = scholar;
       return {
         ...scholarData,
@@ -108,21 +104,23 @@ export class CultureService {
     };
   }
 
-  async findAllSchools(query: SchoolQueryDto): Promise<PaginatedResponseDto<PhilosophicalSchoolDto>> {
+  async findAllSchools(
+    query: SchoolQueryDto,
+  ): Promise<PaginatedResponseDto<PhilosophicalSchoolDto>> {
     const { page = 1, limit = 20, name, founder, foundingYear } = query;
     const skip = (page - 1) * limit;
 
     // Build where clause
     const where: any = {};
-    
+
     if (name) {
       where.name = { contains: name };
     }
-    
+
     if (founder) {
       where.founder = { contains: founder };
     }
-    
+
     if (foundingYear !== undefined) {
       where.foundingYear = { gte: foundingYear };
     }
@@ -133,16 +131,13 @@ export class CultureService {
         where,
         skip,
         take: limit,
-        orderBy: [
-          { foundingYear: 'asc' },
-          { name: 'asc' },
-        ],
+        orderBy: [{ foundingYear: 'asc' }, { name: 'asc' }],
       }),
       this.prisma.philosophicalSchool.count({ where }),
     ]);
 
     // Transform the data to match DTO structure
-    const transformedSchools = schools.map(school => ({
+    const transformedSchools = schools.map((school) => ({
       ...school,
       // Parse JSON fields safely
       coreBeliefs: this.safeJsonParse(school.coreBeliefs),
@@ -158,7 +153,9 @@ export class CultureService {
     });
 
     if (!school) {
-      throw new NotFoundException(`Philosophical school with ID ${id} not found`);
+      throw new NotFoundException(
+        `Philosophical school with ID ${id} not found`,
+      );
     }
 
     // Transform the data to match DTO structure

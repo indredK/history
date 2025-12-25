@@ -10,16 +10,19 @@ export class TimelineController {
   constructor(private readonly eventService: EventService) {}
 
   @Get()
-  @ApiOperation({ 
+  @ApiOperation({
     summary: 'Get historical timeline',
-    description: 'Retrieve a chronological timeline of historical events within a specified year range'
+    description:
+      'Retrieve a chronological timeline of historical events within a specified year range',
   })
   @ApiResponse({
     status: 200,
     description: 'Successfully retrieved timeline',
     type: TimelineResponseDto,
   })
-  async getTimeline(@Query() query: TimelineQueryDto): Promise<TimelineResponseDto> {
+  async getTimeline(
+    @Query() query: TimelineQueryDto,
+  ): Promise<TimelineResponseDto> {
     return this.eventService.getTimeline(query);
   }
 }
