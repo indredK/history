@@ -25,7 +25,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Install openssl for Prisma
-RUN apk add --no-cache openssl
+RUN apk add --no-cache openssl wget
 
 # Copy package files and install production dependencies
 COPY package.json package-lock.json* bun.lockb* ./
@@ -38,7 +38,7 @@ COPY --from=builder /app/prisma ./prisma
 # Copy generated Prisma client (CRITICAL - this was missing!)
 COPY --from=builder /app/src/generated ./src/generated
 
-# Create data directory and copy database file for persistence
+# Create data directory and persistence
 RUN mkdir -p /app/data
 
 # Expose port
@@ -46,7 +46,7 @@ EXPOSE 3001
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:3001/api/v1/health || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3001/health || exit 1
 
-# Start command
-CMD ["node", "dist/main.js"]
+# Start command - initialize database if needed
+CMD ["sh", "-c", "if [ ! -f /app/prisma/dev.db ]; then npx prisma migrate deploy; fi && node dist/main.js"]

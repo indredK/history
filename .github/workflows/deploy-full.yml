@@ -94,17 +94,10 @@ jobs:
             # Create network if not exists
             sudo docker network create history-network || true
             
-            # Create volume if not exists
-            sudo docker volume create history-data
+            # Create volume for database persistence
+            sudo docker volume create history-data || true
             
-            # Initialize database file in volume if not exists
-            # First copy from container to volume
-            sudo docker run --rm \
-              -v history-data:/data \
-              ${{ env.REGISTRY }}/$REPO_LOWER-backend:latest \
-              /bin/sh -c "cp /app/prisma/dev.db /data/dev.db 2>/dev/null || echo 'No dev.db to copy'" || true
-            
-            # Run Backend with correct database path
+            # Run Backend with correct database path and volume
             sudo docker run -d \
               --name history-backend \
               --restart always \

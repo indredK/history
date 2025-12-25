@@ -15,7 +15,7 @@ export async function testApiConnection(): Promise<{
 }> {
   try {
     const baseURL = DATA_SOURCE_CONFIG.api.baseURL;
-    const healthUrl = `${baseURL}/api/v1/health`;
+    const healthUrl = `${baseURL}/health`;
     
     console.log(`🔍 测试API连接: ${healthUrl}`);
     
@@ -53,7 +53,7 @@ export async function testApiConnection(): Promise<{
       message: `❌ API连接失败: ${error instanceof Error ? error.message : '未知错误'}`,
       details: {
         error: error instanceof Error ? error.message : error,
-        url: `${DATA_SOURCE_CONFIG.api.baseURL}/api/v1/health`,
+        url: `${DATA_SOURCE_CONFIG.api.baseURL}/health`,
       },
     };
   }
@@ -70,7 +70,7 @@ export async function testApiEndpoint(endpoint: string): Promise<{
 }> {
   try {
     const baseURL = DATA_SOURCE_CONFIG.api.baseURL;
-    const fullUrl = `${baseURL}/api/v1${endpoint}`;
+    const fullUrl = `${baseURL}${endpoint}`;
     
     console.log(`🔍 测试API端点: ${fullUrl}`);
     
