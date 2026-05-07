@@ -12,7 +12,11 @@
     "deploy": "bun scripts/deploy.mjs",
     "lint": "bunx eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 100",
     "lint:fix": "bunx eslint src --ext ts,tsx --fix",
-    "type-check": "bunx tsc --noEmit"
+    "type-check": "bunx tsc --noEmit",
+    "test": "bunx vitest --run",
+    "test:watch": "bunx vitest",
+    "test:coverage": "bunx vitest run --coverage",
+    "vitest": "vitest"
   },
   "dependencies": {
     "@deck.gl/geo-layers": "^9.2.5",
