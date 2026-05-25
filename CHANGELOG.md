@@ -57,7 +57,7 @@
     orderBy 用 `[reignStart, name]` 而非 `[birthYear, name]`(因为 QingRuler 是帝王模型),
     没有 period 字段;`birthYear=0` 进入 where、deathYear OR(lte,null)、JSON 字段 transform)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):32 个测试文件 / 371 个用例,覆盖
+- 前端核心组件 vitest 测试扩充(§2.8):36 个测试文件 / 404 个用例,覆盖
   关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
   - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
     SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
@@ -147,6 +147,23 @@
     false 不计)、getTotalDynastiesCount、setDynastyIds(写入 / 清空)、
     跨标签页 StorageListener:dispatchEvent('storage') 命中 DYNASTIES_EXPANDED key
     时把新值灌进 store,无关 key 不影响 store
+  - `frontend/src/store/scholarStore.test.ts`(12 个用例):学者 store 含
+    in-house filter 全覆盖。setters + getFilteredScholars(两个 filter='全部' 直通 /
+    dynasty 命中 scholar.dynasty / scholar.dynastyPeriod 兜底 / dynasty 与
+    dynastyPeriod 同时存在时短路 OR 以 dynasty 为准 / schoolOfThought 命中 /
+    AND 复合 / 字段缺失时 dynasty='全部' 通过,具体值不通过)
+  - `frontend/src/store/mythologyStore.test.ts`(9 个用例):神话 store。
+    setters(category=null 清空 / error 是 string)+ getFilteredMythologies
+    (activeCategory=null 时短路返回原数组 + 不调 filterByCategory / 有 category
+    时通过 vi.mock 的 filterByCategory 透传校验入参与返回)
+  - `frontend/src/store/emperorStore.test.ts`(7 个用例):帝王 store。
+    全 setters + getFilteredEmperors 把 store filters 转换后(注意 searchQuery
+    → query)透传给 mocked emperorService.filterAndSort / getDynastyOptions
+    ['全部', ...uniq(emperors.dynasty)] 保序去重 / emperors 为空时 ['全部']
+  - `frontend/src/store/qingRulerStore.test.ts`(7 个用例):清朝统治者 store。
+    全 setters + getFilteredRulers 透传(searchQuery→query)给 mocked
+    qingRulerServiceHelper.filterAndSort / getPeriodOptions 与 QING_PERIODS 一致 /
+    options 是纯配置静态(与 rulers 无关)
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`
