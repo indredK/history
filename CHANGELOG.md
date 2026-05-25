@@ -58,7 +58,7 @@
     orderBy 用 `[reignStart, name]` 而非 `[birthYear, name]`(因为 QingRuler 是帝王模型),
     没有 period 字段;`birthYear=0` 进入 where、deathYear OR(lte,null)、JSON 字段 transform)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):48 个测试文件 / 485 个用例,覆盖
+- 前端核心组件 vitest 测试扩充(§2.8):79 个测试文件 / 804 个用例,覆盖
   关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
   - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
     SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
@@ -332,6 +332,34 @@ vi.resetModules() + 重新 await import` 拦截内部动态 import,验证透传
       `validTo`)+ 过早/过晚返回 null,clearCache(key) 只清单 key 与 clearCache()
       全清,getCacheStats 初始 loadingCount=0,全局单例 `mapDataService` 是
       `MapDataService` 实例
+  - `frontend/src/features/timeline/components/SearchBar.test.tsx`(4 个用例):
+    placeholder 文案 + 受控 value 改变 + onFocus 改变 border/boxShadow +
+    onBlur 还原(锁定 focus 视觉反馈语义)
+  - `frontend/src/layouts/Footer.test.tsx`(2 个用例):页脚版权与
+    资源链接结构(纯展示组件回归基线)
+  - `frontend/src/features/mythology/components/MythologyCard.test.tsx`(7 个用例):
+    极薄包装委托 ContentCard,验证 title / category 主标签 / description
+    显示,characters 渲染 footer tags(≤3 不溢出 / >3 显示前 3 + '+N' chip),
+    characters undefined 走 `?.map` 不抛错,未知 category 仍能渲染(fallback
+    defaultColor),点击 / Enter / Space 都触发 `onClick(mythology)`(继承自
+    ContentCard 键盘可达)
+  - `frontend/src/features/mythology/components/CategoryFilter.test.tsx`
+    (5 个用例):分类筛选 chip 列表显示、选中态切换、点击触发回调
+  - `frontend/src/features/mythology/components/CategoryTabs.test.tsx`
+    (4 个用例):mobile / desktop 分支通过 `window.matchMedia` 控制
+    `useMediaQuery` 切换 Tabs / Dropdown 形态
+  - `frontend/src/features/timeline/components/EventCard.test.tsx`
+    (8 个用例):timeline 事件卡片渲染 title / startYear / endYear /
+    description / categories,confidence 区间显示徽章,点击触发 onClick(event)
+  - `frontend/src/layouts/Sidebar/SettingsPanel/ThemeToggleButton.test.tsx`
+    (5 个用例):themeStore 集成、明/暗切换 icon 反转、aria-label 国际化、
+    点击触发 toggleTheme
+  - `frontend/src/layouts/Sidebar/SettingsPanel/StyleSwitcherButton.test.tsx`
+    (4 个用例):styleStore 集成、glass↔classic 切换、过渡时给
+    `document.documentElement` 加 'style-transitioning' class 并在
+    500ms 后移除(锁定切换动画 cleanup 语义)
+  - `frontend/src/layouts/Sidebar/SettingsPanel/LanguageSwitcherButton.test.tsx`
+    (4 个用例):langStore 集成、zh↔en 切换 icon、aria-label、点击触发回调
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`

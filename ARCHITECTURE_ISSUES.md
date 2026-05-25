@@ -136,7 +136,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 
 #### 2.8 前端测试形同虚设
 
-- 已配置 vitest,本轮已扩到 48 个测试文件 / 485 个用例
+- 已配置 vitest,本轮已扩到 79 个测试文件 / 804 个用例
 - 仍有部分组件仅含空 `describe` 块,需要持续投入
 - **工作量**:持续投入
 
@@ -250,7 +250,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 5. ~~**§4.4 文档补全** — CONTRIBUTING / CODE_OF_CONDUCT / README 修正 / API 文档~~ ✅ 已完成(0321f5b / 8fe6336 / 本轮)
 6. ~~**§1.3 EventService 拆分**~~ ✅ 已完成(ec26deb)
 7. **§2.7 / §1.1 路由守卫** — 跟着认证一起 — 0.5 天(§2.7 真 404 页 ✅ 本轮已完成)
-8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 48 个 vitest 测试文件 485 个用例,
+8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 79 个 vitest 测试文件 804 个用例,
    覆盖关键交互、store 集成、createFigureStore 工厂、errorHandling 全路径(降级 /
    重试 / 状态管理)、dataLoaders 全路径(fetch / cache / retry / API 响应解包)、
    PerformanceMonitor(mark/measure 含 falsy-start 已知行为锁定)、routeUtils
@@ -306,6 +306,12 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
    5 字段聚合 errors + 动态 import 通过 doMock+resetModules 拦截);
    mapDataService 16 用例(MapDataCache singleflight + memo 抛错不缓存 + clearCache by-key/全清 +
    loadBoundaryMappings 10 朝代硬编码 + getBoundaryDataByYear validTo 边界);
+   小型组件 9 个(timeline 的 SearchBar focus 视觉反馈 + 受控 value 改变 +
+   EventCard 渲染 / confidence 徽章 / onClick(event),mythology 的 MythologyCard
+   极薄包装 + CategoryFilter chip + CategoryTabs mobile/desktop 通过 matchMedia
+   控制 useMediaQuery 切换 Tabs/Dropdown,Footer 页脚展示基线,SettingsPanel 的
+   ThemeToggleButton + StyleSwitcherButton(过渡时给 documentElement 加
+   'style-transitioning' class 并 500ms 后移除)+ LanguageSwitcherButton store 集成);
    后端 `DynastyService` / `PersonService` / `EventService` /
    `EmperorService` / `FigureBaseService` / `ReligionService` / `CultureService` /
    `MythologyService` / `TangService` / `SanguoService` / `QingService` 共 125 个用例)
