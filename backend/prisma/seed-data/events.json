@@ -1,0 +1,2832 @@
+[
+  {
+    "id": "66fc7a50-1407-438e-ac2f-09f7d8891ecf",
+    "title": "安史之乱",
+    "startYear": 755,
+    "endYear": 763,
+    "description": "唐朝中期的一次重大叛乱，严重削弱了唐朝的国力。",
+    "eventType": "war",
+    "createdAt": "2025-12-24T19:50:18.760+00:00",
+    "updatedAt": "2025-12-24T19:50:18.760+00:00"
+  },
+  {
+    "id": "84db28fe-f9b8-41aa-98e6-f2c134a7c550",
+    "title": "贞观之治",
+    "startYear": 627,
+    "endYear": 649,
+    "description": "唐太宗李世民统治时期的政治清明、经济繁荣时期。",
+    "eventType": "political",
+    "createdAt": "2025-12-24T19:50:18.761+00:00",
+    "updatedAt": "2025-12-24T19:50:18.761+00:00"
+  },
+  {
+    "id": "dac75b2e-e0e3-46e2-970a-b38eb392a38f",
+    "title": "玄奘西行取经",
+    "startYear": 629,
+    "endYear": 645,
+    "description": "唐朝高僧玄奘前往印度取经的历史事件。",
+    "eventType": "cultural",
+    "createdAt": "2025-12-24T19:50:18.762+00:00",
+    "updatedAt": "2025-12-24T19:50:18.762+00:00"
+  },
+  {
+    "id": "866f07df-5fd9-4b75-88da-e73cab9feb07",
+    "title": "禹建立夏朝",
+    "startYear": -2070,
+    "endYear": -2070,
+    "description": "禹被推举为夏王，建立中国历史上第一个王朝夏朝，标志着原始社会结束，奴隶社会开始。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T19:53:48.316+00:00",
+    "updatedAt": "2025-12-24T19:53:48.316+00:00"
+  },
+  {
+    "id": "68d69685-3278-4b89-af78-e5df1792618d",
+    "title": "启继承父位",
+    "startYear": -2070,
+    "endYear": -2070,
+    "description": "启继承父位，世袭制代替禅让制，公天下变成了家天下。",
+    "eventType": "political_event,succession",
+    "createdAt": "2025-12-24T19:53:48.316+00:00",
+    "updatedAt": "2025-12-24T19:53:48.316+00:00"
+  },
+  {
+    "id": "76d5a497-55fb-495b-bb53-bdad3567a07c",
+    "title": "鸣条之战",
+    "startYear": -1600,
+    "endYear": -1600,
+    "description": "商汤率领部落联军在鸣条之战中击败夏朝最后一位君主桀，夏朝灭亡。",
+    "eventType": "war,dynasty_overthrow",
+    "createdAt": "2025-12-24T19:53:48.316+00:00",
+    "updatedAt": "2025-12-24T19:53:48.316+00:00"
+  },
+  {
+    "id": "5024aaac-209d-4243-a217-1faa639dbfb2",
+    "title": "商汤建立商朝",
+    "startYear": -1600,
+    "endYear": -1600,
+    "description": "商汤在鸣条之战胜利后，建立商朝，定都于亳。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T19:53:48.317+00:00",
+    "updatedAt": "2025-12-24T19:53:48.317+00:00"
+  },
+  {
+    "id": "58f1ed31-0a5f-4f3f-8090-77ca0e27b8da",
+    "title": "盘庚迁殷",
+    "startYear": -1300,
+    "endYear": -1300,
+    "description": "商王盘庚将商朝都城迁至殷，从此商朝又称殷商，政治经济进入稳定发展时期。",
+    "eventType": "political_event,capital_move",
+    "createdAt": "2025-12-24T19:53:48.317+00:00",
+    "updatedAt": "2025-12-24T19:53:48.317+00:00"
+  },
+  {
+    "id": "0a409208-3bf0-495a-a155-9a149b36994b",
+    "title": "牧野之战",
+    "startYear": -1046,
+    "endYear": -1046,
+    "description": "周武王率领诸侯联军在牧野之战中击败商朝最后一位君主纣，商朝灭亡。",
+    "eventType": "war,dynasty_overthrow",
+    "createdAt": "2025-12-24T19:53:48.318+00:00",
+    "updatedAt": "2025-12-24T19:53:48.318+00:00"
+  },
+  {
+    "id": "a4e32299-7558-4a20-99e4-f0f27084eb9c",
+    "title": "周武王建立西周",
+    "startYear": -1046,
+    "endYear": -1046,
+    "description": "周武王在牧野之战胜利后，建立西周，定都于镐京。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T19:53:48.318+00:00",
+    "updatedAt": "2025-12-24T19:53:48.318+00:00"
+  },
+  {
+    "id": "9844443d-7dcf-4a1a-9b84-a89539a8cb9e",
+    "title": "周公东征",
+    "startYear": -1042,
+    "endYear": -1039,
+    "description": "周公旦率军东征，平定三监之乱，巩固了西周的统治。",
+    "eventType": "war,military_campaign",
+    "createdAt": "2025-12-24T19:53:48.318+00:00",
+    "updatedAt": "2025-12-24T19:53:48.318+00:00"
+  },
+  {
+    "id": "32de389c-90b9-4a4a-b389-4b42a18a8a0b",
+    "title": "国人暴动",
+    "startYear": -841,
+    "endYear": -841,
+    "description": "西周都城镐京的国人发动暴动，赶走周厉王，实行共和执政，这是中国历史有确切纪年的开始。",
+    "eventType": "war,rebellion",
+    "createdAt": "2025-12-24T19:53:48.319+00:00",
+    "updatedAt": "2025-12-24T19:53:48.319+00:00"
+  },
+  {
+    "id": "ccf67973-f71f-4a4a-a2b9-f90e8388d63d",
+    "title": "烽火戏诸侯",
+    "startYear": -771,
+    "endYear": -771,
+    "description": "周幽王为博褒姒一笑，多次点燃烽火戏弄诸侯，最终犬戎入侵时无人救援，西周灭亡。",
+    "eventType": "political_event,tragedy",
+    "createdAt": "2025-12-24T19:53:48.319+00:00",
+    "updatedAt": "2025-12-24T19:53:48.319+00:00"
+  },
+  {
+    "id": "a9e3a4bb-f391-4738-849d-c7d929efe6c4",
+    "title": "周平王东迁",
+    "startYear": -770,
+    "endYear": -770,
+    "description": "周平王将都城从镐京迁至洛邑，东周开始，春秋战国时期拉开序幕。",
+    "eventType": "political_event,capital_move",
+    "createdAt": "2025-12-24T19:53:48.320+00:00",
+    "updatedAt": "2025-12-24T19:53:48.320+00:00"
+  },
+  {
+    "id": "bf6bd645-2d26-4747-aae8-57ecb16e9d40",
+    "title": "齐桓公称霸",
+    "startYear": -685,
+    "endYear": -643,
+    "description": "齐桓公任用管仲为相，推行改革，提出'尊王攘夷'的口号，成为春秋时期第一位霸主。",
+    "eventType": "political_event,hegemony",
+    "createdAt": "2025-12-24T19:53:48.320+00:00",
+    "updatedAt": "2025-12-24T19:53:48.320+00:00"
+  },
+  {
+    "id": "bf3ba46c-dc64-4eba-aeb0-f729dda9361d",
+    "title": "晋文公践土之盟",
+    "startYear": -632,
+    "endYear": -632,
+    "description": "晋文公在城濮之战击败楚军后，在践土与诸侯会盟，被周襄王策命为'侯伯'，成为春秋第二位霸主。",
+    "eventType": "political_event,alliance",
+    "createdAt": "2025-12-24T19:53:48.321+00:00",
+    "updatedAt": "2025-12-24T19:53:48.321+00:00"
+  },
+  {
+    "id": "6032ae3f-a88a-4be0-89c3-ffdf585e179a",
+    "title": "楚庄王问鼎中原",
+    "startYear": -606,
+    "endYear": -606,
+    "description": "楚庄王率军北伐至洛邑，向周王使者询问九鼎的大小轻重，显示了其取代周室的野心。",
+    "eventType": "political_event,challenge",
+    "createdAt": "2025-12-24T19:53:48.321+00:00",
+    "updatedAt": "2025-12-24T19:53:48.321+00:00"
+  },
+  {
+    "id": "8d3c019e-9755-4ebc-a0cd-84d9ef5d6502",
+    "title": "三家分晋",
+    "startYear": -453,
+    "endYear": -403,
+    "description": "韩、赵、魏三家大夫瓜分了晋国，标志着春秋时期结束，战国时期开始。",
+    "eventType": "political_event,state_formation",
+    "createdAt": "2025-12-24T19:53:48.322+00:00",
+    "updatedAt": "2025-12-24T19:53:48.322+00:00"
+  },
+  {
+    "id": "dd225d18-6dd3-4ecb-9b9d-758e72b3925c",
+    "title": "田氏代齐",
+    "startYear": -386,
+    "endYear": -386,
+    "description": "田氏家族取代姜姓吕氏成为齐国国君，战国七雄格局正式形成。",
+    "eventType": "political_event,coup",
+    "createdAt": "2025-12-24T19:53:48.323+00:00",
+    "updatedAt": "2025-12-24T19:53:48.323+00:00"
+  },
+  {
+    "id": "9f02da17-178f-410c-b623-42b50ab4b915",
+    "title": "商鞅变法",
+    "startYear": -356,
+    "endYear": -338,
+    "description": "商鞅在秦国推行变法，包括废除世卿世禄制、实行郡县制、奖励耕战等，使秦国逐渐强大。",
+    "eventType": "political_reform,legalist",
+    "createdAt": "2025-12-24T19:53:48.323+00:00",
+    "updatedAt": "2025-12-24T19:53:48.323+00:00"
+  },
+  {
+    "id": "1242ffcf-3050-4ea4-95d3-38d4ec1763ac",
+    "title": "围魏救赵",
+    "startYear": -354,
+    "endYear": -353,
+    "description": "孙膑采用'围魏救赵'的策略，率军围攻魏国都城大梁，迫使魏军回援，解了赵国之围。",
+    "eventType": "war,military_strategy",
+    "createdAt": "2025-12-24T19:53:48.324+00:00",
+    "updatedAt": "2025-12-24T19:53:48.324+00:00"
+  },
+  {
+    "id": "6cef7dd2-2b47-4bda-a6ba-5351b1a1edce",
+    "title": "长平之战",
+    "startYear": -260,
+    "endYear": -260,
+    "description": "秦国与赵国在长平展开决战，最终秦国获胜，坑杀赵军四十万，赵国从此一蹶不振。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T19:53:48.324+00:00",
+    "updatedAt": "2025-12-24T19:53:48.324+00:00"
+  },
+  {
+    "id": "5f4ea85f-10be-426c-a2aa-c49ecfe39db0",
+    "title": "秦末农民起义",
+    "startYear": 209,
+    "endYear": 206,
+    "description": "陈胜、吴广领导的反秦农民起义。因征役不满，在大泽乡起义，震撼了秦朝统治的基础，加速了秦朝的灭亡。",
+    "eventType": "war,peasant_uprising",
+    "createdAt": "2025-12-24T19:53:48.325+00:00",
+    "updatedAt": "2025-12-24T19:53:48.325+00:00"
+  },
+  {
+    "id": "02cd2ca3-0265-455a-9ade-5239095144e5",
+    "title": "秦汉战争",
+    "startYear": 206,
+    "endYear": 202,
+    "description": "项羽与刘邦争夺天下的战争。经过四年的激战，最终刘邦击败项羽，建立了汉朝。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T19:53:48.325+00:00",
+    "updatedAt": "2025-12-24T19:53:48.325+00:00"
+  },
+  {
+    "id": "7ee5eb6f-465c-4d48-bba8-ddba041bb14b",
+    "title": "官渡之战",
+    "startYear": 200,
+    "endYear": 200,
+    "description": "曹操与袁绍在官渡进行的决战，曹操以少胜多，击败袁绍主力，为统一北方奠定了基础。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T19:53:48.326+00:00",
+    "updatedAt": "2025-12-24T19:53:48.326+00:00"
+  },
+  {
+    "id": "89923e9c-d6c3-416e-a347-485c395a9321",
+    "title": "赤壁之战",
+    "startYear": 208,
+    "endYear": 208,
+    "description": "孙权、刘备联军在赤壁大败曹操，为三国鼎立局面的形成奠定了基础。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T19:53:48.326+00:00",
+    "updatedAt": "2025-12-24T19:53:48.326+00:00"
+  },
+  {
+    "id": "1a748724-a0c2-495c-9a1e-18e440ff5e05",
+    "title": "三国鼎立",
+    "startYear": 220,
+    "endYear": 280,
+    "description": "曹丕建魏(220年)、刘备建汉(221年)、孙权建吴(229年)，三国鼎立局面正式形成。",
+    "eventType": "political_event,state_formation",
+    "createdAt": "2025-12-24T19:53:48.327+00:00",
+    "updatedAt": "2025-12-24T19:53:48.327+00:00"
+  },
+  {
+    "id": "27ae5c74-f4fb-4c1a-807c-200ed73c0235",
+    "title": "晋朝统一",
+    "startYear": 280,
+    "endYear": 280,
+    "description": "西晋灭吴，结束了三国鼎立的局面，实现了全国统一。",
+    "eventType": "political_event,unification",
+    "createdAt": "2025-12-24T19:53:48.327+00:00",
+    "updatedAt": "2025-12-24T19:53:48.327+00:00"
+  },
+  {
+    "id": "db883615-9880-44dd-aaed-106a5d2a2160",
+    "title": "八王之乱",
+    "startYear": 291,
+    "endYear": 306,
+    "description": "西晋皇室内部发生的权力争斗，导致西晋国力急剧衰落，引发了五胡乱华。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T19:53:48.327+00:00",
+    "updatedAt": "2025-12-24T19:53:48.327+00:00"
+  },
+  {
+    "id": "5a8821ea-b9c9-4421-b003-1a76bb11fddc",
+    "title": "五胡乱华",
+    "startYear": 316,
+    "endYear": 439,
+    "description": "北方游牧民族进入中原，建立了多个政权，西晋灭亡，东晋偏安江南。",
+    "eventType": "war,ethnic_conflict",
+    "createdAt": "2025-12-24T19:53:48.328+00:00",
+    "updatedAt": "2025-12-24T19:53:48.328+00:00"
+  },
+  {
+    "id": "a807a640-4643-4fc5-aff6-2cbd04441f8e",
+    "title": "淝水之战",
+    "startYear": 383,
+    "endYear": 383,
+    "description": "东晋以少胜多，击败前秦苻坚的百万大军，阻止了北方游牧民族的南侵。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T19:53:48.328+00:00",
+    "updatedAt": "2025-12-24T19:53:48.328+00:00"
+  },
+  {
+    "id": "7b2a4b60-193a-4d2c-b350-9917f012ca1b",
+    "title": "汉-匈奴战争",
+    "startYear": 140,
+    "endYear": 89,
+    "description": "西汉对匈奴进行的大规模军事行动。汉武帝时期派遣卫青、霍去病等将领打击匈奴，开拓了丝绸之路。",
+    "eventType": "war,military_conflict",
+    "createdAt": "2025-12-24T19:53:48.329+00:00",
+    "updatedAt": "2025-12-24T19:53:48.329+00:00"
+  },
+  {
+    "id": "74a12c02-944e-439a-a7ce-46324ad52056",
+    "title": "隋朝建立",
+    "startYear": 581,
+    "endYear": 581,
+    "description": "杨坚取代北周，建立隋朝，定都长安。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T19:53:48.329+00:00",
+    "updatedAt": "2025-12-24T19:53:48.329+00:00"
+  },
+  {
+    "id": "94a4c810-222b-4f70-99a9-bde41169b586",
+    "title": "隋朝统一全国",
+    "startYear": 589,
+    "endYear": 589,
+    "description": "隋军南下，灭掉陈朝，结束了自西晋末年以来长达近300年的分裂局面，实现了全国统一。",
+    "eventType": "political_event,unification",
+    "createdAt": "2025-12-24T19:53:48.330+00:00",
+    "updatedAt": "2025-12-24T19:53:48.330+00:00"
+  },
+  {
+    "id": "be3d49b1-187b-468d-ac22-262f4a0c1f27",
+    "title": "开凿大运河",
+    "startYear": 605,
+    "endYear": 610,
+    "description": "隋炀帝下令开凿大运河，以洛阳为中心，北起涿郡（今北京），南至余杭（今杭州），连接海河、黄河、淮河、长江和钱塘江五大水系，全长约2700公里。",
+    "eventType": "engineering,economic_infrastructure",
+    "createdAt": "2025-12-24T19:53:48.331+00:00",
+    "updatedAt": "2025-12-24T19:53:48.331+00:00"
+  },
+  {
+    "id": "fbab03a8-6617-47c7-a604-904966e4c12a",
+    "title": "隋末农民起义",
+    "startYear": 611,
+    "endYear": 618,
+    "description": "由于隋炀帝的暴政，各地爆发大规模农民起义，最终导致隋朝灭亡。",
+    "eventType": "war,peasant_uprising",
+    "createdAt": "2025-12-24T19:53:48.332+00:00",
+    "updatedAt": "2025-12-24T19:53:48.332+00:00"
+  },
+  {
+    "id": "1a54f622-5b4b-439c-aad6-3b84a1b26a48",
+    "title": "唐朝建立",
+    "startYear": 618,
+    "endYear": 618,
+    "description": "李渊在长安称帝，建立唐朝，取代隋朝。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T19:53:48.332+00:00",
+    "updatedAt": "2025-12-24T19:53:48.332+00:00"
+  },
+  {
+    "id": "52d0a9ff-2607-41ca-8a4c-da5d8161cf78",
+    "title": "贞观之治",
+    "startYear": 626,
+    "endYear": 649,
+    "description": "唐太宗推行的一个以儒家思想为指导的治国政策。强调民本和谦虚，使唐朝的政治、经济、文化达到了新的高度。",
+    "eventType": "political_reform,cultural_flourishing",
+    "createdAt": "2025-12-24T19:53:48.333+00:00",
+    "updatedAt": "2025-12-24T19:53:48.333+00:00"
+  },
+  {
+    "id": "68c9690a-723b-438e-9f59-23114ee5592b",
+    "title": "玄武门之变",
+    "startYear": 626,
+    "endYear": 626,
+    "description": "唐太宗李世民在长安玄武门发动的政变。通过这场政变，李世民打败了兄长太子李建成和弟弟齐王李元吉，夺得了王位。",
+    "eventType": "political_event,coup_d'etat",
+    "createdAt": "2025-12-24T19:53:48.333+00:00",
+    "updatedAt": "2025-12-24T19:53:48.333+00:00"
+  },
+  {
+    "id": "49bca116-405e-448b-8374-c69f58083996",
+    "title": "玄奘西行",
+    "startYear": 627,
+    "endYear": 645,
+    "description": "玄奘法师从长安出发，西行天竺（今印度）取经，历时18年，带回大量佛经，促进了中印文化交流。",
+    "eventType": "cultural_event,religious_pilgrimage",
+    "createdAt": "2025-12-24T19:53:48.334+00:00",
+    "updatedAt": "2025-12-24T19:53:48.334+00:00"
+  },
+  {
+    "id": "bffe3550-acde-4a72-9fa0-a4b07a0f5c1f",
+    "title": "文成公主入藏",
+    "startYear": 641,
+    "endYear": 641,
+    "description": "唐太宗将文成公主嫁给吐蕃赞普松赞干布，促进了唐蕃友好和文化交流。",
+    "eventType": "diplomatic_event,cultural_exchange",
+    "createdAt": "2025-12-24T19:53:48.334+00:00",
+    "updatedAt": "2025-12-24T19:53:48.334+00:00"
+  },
+  {
+    "id": "01eeec36-34b4-4030-9ae5-d9255c617324",
+    "title": "武则天称帝",
+    "startYear": 690,
+    "endYear": 690,
+    "description": "武则天改唐为周，自称圣神皇帝，成为中国历史上唯一的女皇帝。",
+    "eventType": "political_event,gender_milestone",
+    "createdAt": "2025-12-24T19:53:48.335+00:00",
+    "updatedAt": "2025-12-24T19:53:48.335+00:00"
+  },
+  {
+    "id": "0c15e955-8e64-4c45-a94c-6289502ce5e0",
+    "title": "开元盛世",
+    "startYear": 713,
+    "endYear": 741,
+    "description": "唐玄宗统治前期，政治清明，经济繁荣，文化昌盛，唐朝进入全盛时期，史称'开元盛世'。",
+    "eventType": "political_reform,cultural_flourishing",
+    "createdAt": "2025-12-24T19:53:48.335+00:00",
+    "updatedAt": "2025-12-24T19:53:48.335+00:00"
+  },
+  {
+    "id": "43c2c5ef-c7cf-4084-9c3e-8b746ce6b4d0",
+    "title": "安史之乱",
+    "startYear": 755,
+    "endYear": 763,
+    "description": "安禄山和史思明在唐玄宗统治时期发动的大规模叛乱。虽然最终被平定，但使唐朝元气大伤，标志着唐朝由盛转衰。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T19:53:48.336+00:00",
+    "updatedAt": "2025-12-24T19:53:48.336+00:00"
+  },
+  {
+    "id": "b97e5c74-7dbd-432d-a61e-520b55eb074d",
+    "title": "藩镇割据",
+    "startYear": 763,
+    "endYear": 907,
+    "description": "安史之乱后，唐朝在地方上设置了众多藩镇，这些藩镇逐渐形成割据势力，不听从中央命令，严重削弱了唐朝的统治。",
+    "eventType": "political_fragmentation,regionalism",
+    "createdAt": "2025-12-24T19:53:48.336+00:00",
+    "updatedAt": "2025-12-24T19:53:48.336+00:00"
+  },
+  {
+    "id": "ac4d6257-26cf-4124-9115-dfa3a7936d19",
+    "title": "牛李党争",
+    "startYear": 808,
+    "endYear": 846,
+    "description": "唐朝后期以牛僧孺、李宗闵为首的牛党与李德裕、郑覃为首的李党之间的长期政治斗争，加速了唐朝的衰落。",
+    "eventType": "political_event,factional_conflict",
+    "createdAt": "2025-12-24T19:53:48.337+00:00",
+    "updatedAt": "2025-12-24T19:53:48.337+00:00"
+  },
+  {
+    "id": "f8bdc6b2-72cd-4336-88cf-229d717eb594",
+    "title": "黄巢起义",
+    "startYear": 875,
+    "endYear": 884,
+    "description": "黄巢领导的大规模农民起义。一度攻占长安，建立大齐政权，虽最终失败，但动摇了唐末政权的基础。",
+    "eventType": "war,peasant_uprising",
+    "createdAt": "2025-12-24T19:53:48.337+00:00",
+    "updatedAt": "2025-12-24T19:53:48.337+00:00"
+  },
+  {
+    "id": "36be2608-59d2-443d-971d-d4d93397360b",
+    "title": "玄武门之变",
+    "startYear": 626,
+    "endYear": 626,
+    "description": "唐太宗李世民在长安玄武门发动的政变。通过这场政变，李世民打败了兄长太子李建成和弟弟齐王李元吉，夺得了王位。",
+    "eventType": "political_event,coup_d'etat",
+    "createdAt": "2025-12-24T19:53:48.338+00:00",
+    "updatedAt": "2025-12-24T19:53:48.338+00:00"
+  },
+  {
+    "id": "d43a264b-73e9-4613-948a-ae989be60c74",
+    "title": "五代十国",
+    "startYear": 907,
+    "endYear": 960,
+    "description": "唐朝灭亡后，中国陷入分裂状态。五个小朝代在中原轮流统治，十个政权在南方并立，历时约 53 年。",
+    "eventType": "political_fragmentation,war",
+    "createdAt": "2025-12-24T19:53:48.338+00:00",
+    "updatedAt": "2025-12-24T19:53:48.338+00:00"
+  },
+  {
+    "id": "71636f2a-9a60-48ba-8860-aca7d4887e72",
+    "title": "陈桥兵变",
+    "startYear": 960,
+    "endYear": 960,
+    "description": "赵匡胤发动兵变，黄袍加身，取代后周，建立宋朝，定都开封。",
+    "eventType": "political_event,coup_d'etat",
+    "createdAt": "2025-12-24T19:53:48.339+00:00",
+    "updatedAt": "2025-12-24T19:53:48.339+00:00"
+  },
+  {
+    "id": "46085a1c-2adf-4dee-9b00-5aa66b4fa72e",
+    "title": "杯酒释兵权",
+    "startYear": 961,
+    "endYear": 961,
+    "description": "赵匡胤通过酒宴的方式，威胁利诱高级将领交出兵权，加强中央集权。",
+    "eventType": "political_event,military_reform",
+    "createdAt": "2025-12-24T19:53:48.339+00:00",
+    "updatedAt": "2025-12-24T19:53:48.339+00:00"
+  },
+  {
+    "id": "8956a499-c5e4-4dfa-82cb-670b5a225a95",
+    "title": "北宋统一战争",
+    "startYear": 962,
+    "endYear": 979,
+    "description": "宋朝建立后，对剩余割据政权进行的一系列军事行动，结束了五代十国的分裂局面。",
+    "eventType": "war,unification",
+    "createdAt": "2025-12-24T19:53:48.340+00:00",
+    "updatedAt": "2025-12-24T19:53:48.340+00:00"
+  },
+  {
+    "id": "2c98e905-9986-4eda-a3bd-695a10ca6d9d",
+    "title": "澶渊之盟",
+    "startYear": 1005,
+    "endYear": 1005,
+    "description": "北宋与辽朝在澶州签订和约，结束了长达25年的战争，开启了长达120年的和平局面。",
+    "eventType": "diplomatic_event,treaty",
+    "createdAt": "2025-12-24T19:53:48.340+00:00",
+    "updatedAt": "2025-12-24T19:53:48.340+00:00"
+  },
+  {
+    "id": "587192d1-90dd-4a55-bb59-9940828a042b",
+    "title": "王安石变法",
+    "startYear": 1069,
+    "endYear": 1085,
+    "description": "宋神宗时期，王安石发起的旨在富国强兵的社会改革运动，涉及政治、经济、军事等多个领域。",
+    "eventType": "political_reform,economic_reform",
+    "createdAt": "2025-12-24T19:53:48.341+00:00",
+    "updatedAt": "2025-12-24T19:53:48.341+00:00"
+  },
+  {
+    "id": "2a53c1b4-9051-42ed-ac78-62b30c0e5f2e",
+    "title": "靖康之变",
+    "startYear": 1125,
+    "endYear": 1127,
+    "description": "金兵南下，攻占宋朝都城开封。宋徽宗和宋钦宗都被金人掠去，北宋灭亡。",
+    "eventType": "war,military_defeat",
+    "createdAt": "2025-12-24T19:53:48.341+00:00",
+    "updatedAt": "2025-12-24T19:53:48.341+00:00"
+  },
+  {
+    "id": "1944e77a-094b-49d4-af7a-9d8b542f4da5",
+    "title": "南宋建立",
+    "startYear": 1127,
+    "endYear": 1127,
+    "description": "赵构在应天府称帝，建立南宋政权，后迁都临安。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T19:53:48.341+00:00",
+    "updatedAt": "2025-12-24T19:53:48.341+00:00"
+  },
+  {
+    "id": "dad1f995-ccfa-4733-b874-af9f974e14d8",
+    "title": "岳飞抗金",
+    "startYear": 1127,
+    "endYear": 1142,
+    "description": "岳飞率领岳家军抗击金兵，收复失地，是南宋抗金名将。",
+    "eventType": "war,military_campaign",
+    "createdAt": "2025-12-24T19:53:48.342+00:00",
+    "updatedAt": "2025-12-24T19:53:48.342+00:00"
+  },
+  {
+    "id": "0fb251ed-164f-4d27-851b-003541f4c2cc",
+    "title": "绍兴和议",
+    "startYear": 1141,
+    "endYear": 1141,
+    "description": "南宋与金国签订和约，南宋向金国称臣纳贡，双方以淮水-大散关为界。",
+    "eventType": "diplomatic_event,treaty",
+    "createdAt": "2025-12-24T19:53:48.342+00:00",
+    "updatedAt": "2025-12-24T19:53:48.342+00:00"
+  },
+  {
+    "id": "1e16ddcf-8dd0-483f-80c5-89b922a36929",
+    "title": "蒙古统一",
+    "startYear": 1206,
+    "endYear": 1206,
+    "description": "铁木真统一蒙古各部，建立大蒙古国，被尊称为成吉思汗。",
+    "eventType": "political_event,unification",
+    "createdAt": "2025-12-24T19:53:48.343+00:00",
+    "updatedAt": "2025-12-24T19:53:48.343+00:00"
+  },
+  {
+    "id": "554e964d-c1e3-4149-8f85-e523af626203",
+    "title": "元朝建立",
+    "startYear": 1271,
+    "endYear": 1271,
+    "description": "忽必烈改国号为元，定都大都，元朝正式建立。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T19:53:48.343+00:00",
+    "updatedAt": "2025-12-24T19:53:48.343+00:00"
+  },
+  {
+    "id": "1d5b619d-8817-4d84-a266-30ecbfaa51af",
+    "title": "蒙宋战争",
+    "startYear": 1235,
+    "endYear": 1279,
+    "description": "蒙古帝国对南宋的征服战争，最终南宋灭亡。",
+    "eventType": "war,conquest",
+    "createdAt": "2025-12-24T19:53:48.344+00:00",
+    "updatedAt": "2025-12-24T19:53:48.344+00:00"
+  },
+  {
+    "id": "13eeac1a-623f-4f8f-95ff-f52b2f5e118f",
+    "title": "崖山海战",
+    "startYear": 1279,
+    "endYear": 1279,
+    "description": "元朝军队与南宋残余势力在崖山进行的决战，南宋灭亡，元朝统一全国。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T19:53:48.344+00:00",
+    "updatedAt": "2025-12-24T19:53:48.344+00:00"
+  },
+  {
+    "id": "c73dcbad-1b22-4cd8-af40-36efd7715b61",
+    "title": "马可波罗来华",
+    "startYear": 1275,
+    "endYear": 1292,
+    "description": "意大利旅行家马可波罗来到中国，在元朝任职，回国后著《马可波罗游记》。",
+    "eventType": "cultural_event,diplomatic_visit",
+    "createdAt": "2025-12-24T19:53:48.344+00:00",
+    "updatedAt": "2025-12-24T19:53:48.344+00:00"
+  },
+  {
+    "id": "c3609e36-9739-4b6b-98ee-ab57f74f9abf",
+    "title": "元末农民起义",
+    "startYear": 1351,
+    "endYear": 1368,
+    "description": "元朝末期的大规模农民起义，其中最重要的是朱元璋所参加的起义。最终导致了元朝的灭亡和明朝的建立。",
+    "eventType": "war,peasant_uprising",
+    "createdAt": "2025-12-24T19:53:48.345+00:00",
+    "updatedAt": "2025-12-24T19:53:48.345+00:00"
+  },
+  {
+    "id": "1b17c63f-be70-41b7-8fd5-5f29945ec551",
+    "title": "明朝建立",
+    "startYear": 1368,
+    "endYear": 1368,
+    "description": "朱元璋在南京称帝，建立明朝，元朝灭亡。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T19:53:48.345+00:00",
+    "updatedAt": "2025-12-24T19:53:48.345+00:00"
+  },
+  {
+    "id": "1e08c641-4c17-449e-ab24-29da3004e17c",
+    "title": "靖难之役",
+    "startYear": 1399,
+    "endYear": 1402,
+    "description": "朱元璋之子朱棣为夺取侄子朱允炆的皇位而发动的军事行动。经过三年战争，朱棣最终成功夺得皇位。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T19:53:48.346+00:00",
+    "updatedAt": "2025-12-24T19:53:48.346+00:00"
+  },
+  {
+    "id": "4450ca8d-1345-4e06-8d76-fa557921e45d",
+    "title": "永乐盛世",
+    "startYear": 1402,
+    "endYear": 1424,
+    "description": "明成祖朱棣统治时期。这一时期国力强盛，经济繁荣，郑和下西洋开拓了海外贸易，使明朝成为当时最强大的国家。",
+    "eventType": "cultural_flourishing,political_stability",
+    "createdAt": "2025-12-24T19:53:48.346+00:00",
+    "updatedAt": "2025-12-24T19:53:48.346+00:00"
+  },
+  {
+    "id": "b3c0562b-d709-4733-a6e1-daf72c652bb3",
+    "title": "郑和下西洋",
+    "startYear": 1405,
+    "endYear": 1433,
+    "description": "郑和率领船队七次下西洋，到达亚非30多个国家和地区，是世界航海史上的壮举。",
+    "eventType": "cultural_event,diplomatic_expedition",
+    "createdAt": "2025-12-24T19:53:48.347+00:00",
+    "updatedAt": "2025-12-24T19:53:48.347+00:00"
+  },
+  {
+    "id": "627702ac-1a1c-460c-b343-b8878cc4fc56",
+    "title": "土木堡之变",
+    "startYear": 1449,
+    "endYear": 1449,
+    "description": "明英宗朱祁镇亲征瓦剌，在土木堡被瓦剌军队俘虏，明朝国力大损。",
+    "eventType": "war,military_defeat",
+    "createdAt": "2025-12-24T19:53:48.347+00:00",
+    "updatedAt": "2025-12-24T19:53:48.347+00:00"
+  },
+  {
+    "id": "78e34282-e8ed-4e98-af60-73e445cd5758",
+    "title": "戚继光抗倭",
+    "startYear": 1555,
+    "endYear": 1567,
+    "description": "戚继光率领戚家军抗击倭寇，扫平了东南沿海的倭患。",
+    "eventType": "war,anti_piracy",
+    "createdAt": "2025-12-24T19:53:48.348+00:00",
+    "updatedAt": "2025-12-24T19:53:48.348+00:00"
+  },
+  {
+    "id": "c60849ce-3597-4a39-b9f3-e120c0fb99bb",
+    "title": "张居正改革",
+    "startYear": 1572,
+    "endYear": 1582,
+    "description": "张居正推行的一系列改革，包括一条鞭法等，使明朝经济得到恢复和发展。",
+    "eventType": "political_reform,economic_reform",
+    "createdAt": "2025-12-24T19:53:48.348+00:00",
+    "updatedAt": "2025-12-24T19:53:48.348+00:00"
+  },
+  {
+    "id": "023730d5-9b70-4c6c-9f18-ec8ab912964a",
+    "title": "万历朝鲜战争",
+    "startYear": 1592,
+    "endYear": 1598,
+    "description": "明朝援助朝鲜抗击日本侵略的战争，最终以明朝和朝鲜的胜利告终。",
+    "eventType": "war,international_conflict",
+    "createdAt": "2025-12-24T19:53:48.349+00:00",
+    "updatedAt": "2025-12-24T19:53:48.349+00:00"
+  },
+  {
+    "id": "55b7519a-040d-463d-a5be-22f84dc7ff48",
+    "title": "明末农民起义",
+    "startYear": 1627,
+    "endYear": 1644,
+    "description": "明朝末期的大规模农民起义，以李自成和张献忠的起义最为著名，最终导致明朝灭亡。",
+    "eventType": "war,peasant_uprising",
+    "createdAt": "2025-12-24T19:53:48.349+00:00",
+    "updatedAt": "2025-12-24T19:53:48.349+00:00"
+  },
+  {
+    "id": "dd42fffd-b0c0-4f4a-8790-fe38f39a6764",
+    "title": "女真兴起",
+    "startYear": 1616,
+    "endYear": 1644,
+    "description": "满族（女真）的努尔哈赤建立的后金政权，最终由其子皇太极改国号为清，并最终入主中原。",
+    "eventType": "political_event,ethnic_migration",
+    "createdAt": "2025-12-24T19:53:48.349+00:00",
+    "updatedAt": "2025-12-24T19:53:48.349+00:00"
+  },
+  {
+    "id": "9e906b04-0be7-42a4-82e5-2c5b3597b13c",
+    "title": "清朝建立",
+    "startYear": 1644,
+    "endYear": 1644,
+    "description": "清军入关，顺治帝在北京即位，建立清朝，明朝灭亡。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T19:53:48.350+00:00",
+    "updatedAt": "2025-12-24T19:53:48.350+00:00"
+  },
+  {
+    "id": "4f048d23-3d13-42b6-b6b7-991e9b09a34b",
+    "title": "三藩之乱",
+    "startYear": 1673,
+    "endYear": 1681,
+    "description": "清初平定的三位藩王（吴三桂、尚可喜、耿精忠）发动的大规模反抗。康熙通过这一战争加强了中央集权。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T19:53:48.350+00:00",
+    "updatedAt": "2025-12-24T19:53:48.350+00:00"
+  },
+  {
+    "id": "6e4cdfff-e7f3-48c4-b496-d04ddf27ea21",
+    "title": "康熙盛世",
+    "startYear": 1662,
+    "endYear": 1722,
+    "description": "康熙帝统治时期，国家统一，经济繁荣，文化昌盛，是清朝的鼎盛时期之一。",
+    "eventType": "political_stability,cultural_flourishing",
+    "createdAt": "2025-12-24T19:53:48.351+00:00",
+    "updatedAt": "2025-12-24T19:53:48.351+00:00"
+  },
+  {
+    "id": "d1e1a0ab-4630-456c-a640-290c28235230",
+    "title": "乾隆盛世",
+    "startYear": 1735,
+    "endYear": 1796,
+    "description": "乾隆帝统治时期，清朝达到鼎盛，国家统一，经济繁荣，文化发展。",
+    "eventType": "political_stability,cultural_flourishing",
+    "createdAt": "2025-12-24T19:53:48.352+00:00",
+    "updatedAt": "2025-12-24T19:53:48.352+00:00"
+  },
+  {
+    "id": "ff0af3f7-c44e-42d3-9323-6952153814e2",
+    "title": "马戛尔尼使团访华",
+    "startYear": 1793,
+    "endYear": 1794,
+    "description": "英国派遣马戛尔尼使团访华，试图与清朝建立贸易关系，但由于礼仪问题和贸易分歧而失败。",
+    "eventType": "diplomatic_event,cultural_exchange",
+    "createdAt": "2025-12-24T19:53:48.352+00:00",
+    "updatedAt": "2025-12-24T19:53:48.352+00:00"
+  },
+  {
+    "id": "1bd21a0b-455c-42bd-926f-82d937a00846",
+    "title": "鸦片战争",
+    "startYear": 1840,
+    "endYear": 1842,
+    "description": "英国为了打开中国市场而对华发动的战争。中国战败后被迫签订《南京条约》，开放了五个通商口岸。",
+    "eventType": "war,foreign_aggression",
+    "createdAt": "2025-12-24T19:53:48.352+00:00",
+    "updatedAt": "2025-12-24T19:53:48.352+00:00"
+  },
+  {
+    "id": "3973e1ab-9fe7-4a19-8a44-234ee0958373",
+    "title": "太平天国",
+    "startYear": 1851,
+    "endYear": 1864,
+    "description": "洪秀全领导的大规模农民起义，建立了地跨多省的政权。虽然最终被清军镇压，但震撼了整个中国。",
+    "eventType": "war,rebellion,political_state",
+    "createdAt": "2025-12-24T19:53:48.353+00:00",
+    "updatedAt": "2025-12-24T19:53:48.353+00:00"
+  },
+  {
+    "id": "e0b00ddb-f3e9-4028-b94c-1955928fa8dd",
+    "title": "戊戌变法",
+    "startYear": 1898,
+    "endYear": 1898,
+    "description": "光绪帝和康有为等维新派进行的政治改革运动。试图学习西方制度，但最终被慈禧太后镇压。",
+    "eventType": "political_reform,cultural_change",
+    "createdAt": "2025-12-24T19:53:48.353+00:00",
+    "updatedAt": "2025-12-24T19:53:48.353+00:00"
+  },
+  {
+    "id": "c810d2a7-2fa7-44b7-b435-0b663464cdfa",
+    "title": "辛亥革命",
+    "startYear": 1911,
+    "endYear": 1912,
+    "description": "推翻满清统治，建立共和制政体的伟大革命。孙中山领导的革命者发动起义，推动了中国从帝制向共和的转变。",
+    "eventType": "political_revolution,military_action",
+    "createdAt": "2025-12-24T19:53:48.353+00:00",
+    "updatedAt": "2025-12-24T19:53:48.353+00:00"
+  },
+  {
+    "id": "079c1780-311c-46c0-addc-e6c7f38ca0f8",
+    "title": "中华民国临时政府成立",
+    "startYear": 1912,
+    "endYear": 1912,
+    "description": "孙中山在南京宣布成立中华民国临时政府，就任临时大总统，标志着中国历史上第一个资产阶级共和国的诞生。",
+    "eventType": "political_event,government_formation",
+    "createdAt": "2025-12-24T19:53:48.354+00:00",
+    "updatedAt": "2025-12-24T19:53:48.354+00:00"
+  },
+  {
+    "id": "0348c6b4-10fc-48be-9c3e-f5cbfe2ef786",
+    "title": "袁世凯就任临时大总统",
+    "startYear": 1912,
+    "endYear": 1912,
+    "description": "袁世凯在北京就任中华民国临时大总统，临时政府迁都北京，北洋政府统治时期开始。",
+    "eventType": "political_event,leadership_change",
+    "createdAt": "2025-12-24T19:53:48.356+00:00",
+    "updatedAt": "2025-12-24T19:53:48.356+00:00"
+  },
+  {
+    "id": "fa1ab4f7-deb9-4fb2-98bb-af74db2d74c5",
+    "title": "袁世凯称帝",
+    "startYear": 1915,
+    "endYear": 1916,
+    "description": "袁世凯宣布复辟帝制，改国号为中华帝国，引发全国反对。",
+    "eventType": "political_event,emperor_claim",
+    "createdAt": "2025-12-24T19:53:48.357+00:00",
+    "updatedAt": "2025-12-24T19:53:48.357+00:00"
+  },
+  {
+    "id": "9913eea2-1852-40d5-9c99-7cf9aa08674f",
+    "title": "护国运动",
+    "startYear": 1915,
+    "endYear": 1916,
+    "description": "蔡锷等宣布云南独立，组织护国军讨伐袁世凯，各地纷纷响应，最终迫使袁世凯取消帝制。",
+    "eventType": "war,rebellion",
+    "createdAt": "2025-12-24T19:53:48.357+00:00",
+    "updatedAt": "2025-12-24T19:53:48.357+00:00"
+  },
+  {
+    "id": "663317ed-bf07-48e7-8154-9196a71cd487",
+    "title": "袁世凯去世",
+    "startYear": 1916,
+    "endYear": 1916,
+    "description": "袁世凯因尿毒症在北京去世，北洋军阀开始分裂为直系、皖系、奉系等派系。",
+    "eventType": "political_event,leadership_change",
+    "createdAt": "2025-12-24T19:53:48.358+00:00",
+    "updatedAt": "2025-12-24T19:53:48.358+00:00"
+  },
+  {
+    "id": "38dfbb53-d307-4f90-babd-fa156a2403a0",
+    "title": "张勋复辟",
+    "startYear": 1917,
+    "endYear": 1917,
+    "description": "张勋率辫子军入京，拥戴溥仪复辟帝制，仅12天即被段祺瑞击败。",
+    "eventType": "political_event,restoration_attempt",
+    "createdAt": "2025-12-24T19:53:48.358+00:00",
+    "updatedAt": "2025-12-24T19:53:48.358+00:00"
+  },
+  {
+    "id": "f41082f0-1996-43aa-a613-a810768fda8a",
+    "title": "护法运动",
+    "startYear": 1917,
+    "endYear": 1922,
+    "description": "孙中山在广州组织护法军政府，反对段祺瑞破坏《临时约法》，维护共和制度。",
+    "eventType": "political_movement",
+    "createdAt": "2025-12-24T19:53:48.358+00:00",
+    "updatedAt": "2025-12-24T19:53:48.358+00:00"
+  },
+  {
+    "id": "2c970fa5-ab72-4918-a183-d35abec8a1bd",
+    "title": "五四运动",
+    "startYear": 1919,
+    "endYear": 1919,
+    "description": "北京学生因巴黎和会外交失败举行游行示威，抗议北洋政府卖国行径，随后演变为全国性的爱国运动。",
+    "eventType": "social_movement,cultural_revolution",
+    "createdAt": "2025-12-24T19:53:48.359+00:00",
+    "updatedAt": "2025-12-24T19:53:48.359+00:00"
+  },
+  {
+    "id": "2c9ed2f8-261d-4922-9248-87a15423966d",
+    "title": "第一次直奉战争",
+    "startYear": 1922,
+    "endYear": 1922,
+    "description": "直系军阀吴佩孚与奉系军阀张作霖之间的战争，直系获胜，控制了北京政府。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T19:53:48.359+00:00",
+    "updatedAt": "2025-12-24T19:53:48.359+00:00"
+  },
+  {
+    "id": "44fca5d4-ca78-416c-9ddb-bb56074f889c",
+    "title": "第二次直奉战争",
+    "startYear": 1924,
+    "endYear": 1924,
+    "description": "直系与奉系再次爆发战争，冯玉祥发动北京政变，直系失败，奉系控制北京政府。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T19:53:48.360+00:00",
+    "updatedAt": "2025-12-24T19:53:48.360+00:00"
+  },
+  {
+    "id": "97a3a6b0-fe7f-4f40-acb0-0935c4d60ab6",
+    "title": "北伐战争开始",
+    "startYear": 1926,
+    "endYear": 1926,
+    "description": "国民革命军在广州誓师北伐，讨伐北洋军阀吴佩孚、孙传芳、张作霖。",
+    "eventType": "war,military_campaign",
+    "createdAt": "2025-12-24T19:53:48.360+00:00",
+    "updatedAt": "2025-12-24T19:53:48.360+00:00"
+  },
+  {
+    "id": "3848979b-2c5d-4fc8-b2b5-a5feac7f0f0d",
+    "title": "北洋政府结束",
+    "startYear": 1928,
+    "endYear": 1928,
+    "description": "国民革命军占领北京，北洋政府统治结束，南京国民政府形式上统一全国。",
+    "eventType": "political_event,government_end",
+    "createdAt": "2025-12-24T19:53:48.360+00:00",
+    "updatedAt": "2025-12-24T19:53:48.360+00:00"
+  },
+  {
+    "id": "6cb5ab2e-f8d6-4c88-be0d-31d3a42c647c",
+    "title": "东北易帜",
+    "startYear": 1928,
+    "endYear": 1928,
+    "description": "张学良宣布东北易帜，服从国民政府，国民政府形式上统一全国。",
+    "eventType": "political_event,unification",
+    "createdAt": "2025-12-24T19:53:48.361+00:00",
+    "updatedAt": "2025-12-24T19:53:48.361+00:00"
+  },
+  {
+    "id": "b18d5bbf-f892-4a60-b018-424e188ddcb2",
+    "title": "中原大战",
+    "startYear": 1930,
+    "endYear": 1930,
+    "description": "蒋介石与冯玉祥、阎锡山、李宗仁等军阀的战争，是中国近代史上规模最大的军阀混战。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T19:53:48.361+00:00",
+    "updatedAt": "2025-12-24T19:53:48.361+00:00"
+  },
+  {
+    "id": "2f866631-a339-408f-be23-223fb49f2f35",
+    "title": "九一八事变",
+    "startYear": 1931,
+    "endYear": 1931,
+    "description": "日本发动九一八事变，侵占中国东北，标志着日本局部侵华战争的开始。",
+    "eventType": "war,invasion",
+    "createdAt": "2025-12-24T19:53:48.362+00:00",
+    "updatedAt": "2025-12-24T19:53:48.362+00:00"
+  },
+  {
+    "id": "7076af91-18e1-4bc8-9347-722369dd47a9",
+    "title": "一二八事变",
+    "startYear": 1932,
+    "endYear": 1932,
+    "description": "日本发动一二八事变，进攻上海，中国第十九路军奋起抵抗。",
+    "eventType": "war,battle",
+    "createdAt": "2025-12-24T19:53:48.362+00:00",
+    "updatedAt": "2025-12-24T19:53:48.362+00:00"
+  },
+  {
+    "id": "c9b80c24-b23e-4aaa-bddc-b014d72600fd",
+    "title": "长城抗战",
+    "startYear": 1933,
+    "endYear": 1933,
+    "description": "中国军队在长城沿线抵抗日本侵略，是中国人民局部抗战的重要组成部分。",
+    "eventType": "war,defense",
+    "createdAt": "2025-12-24T19:53:48.363+00:00",
+    "updatedAt": "2025-12-24T19:53:48.363+00:00"
+  },
+  {
+    "id": "ceb634e1-518c-4d78-a19a-5fcffa6155a1",
+    "title": "西安事变",
+    "startYear": 1936,
+    "endYear": 1936,
+    "description": "张学良、杨虎城发动西安事变，扣留蒋介石，逼蒋抗日，最终促成抗日民族统一战线形成。",
+    "eventType": "political_event,peaceful_resolution",
+    "createdAt": "2025-12-24T19:53:48.363+00:00",
+    "updatedAt": "2025-12-24T19:53:48.363+00:00"
+  },
+  {
+    "id": "c7029f41-9940-4afb-aef0-c9add445548d",
+    "title": "七七卢沟桥事变",
+    "startYear": 1937,
+    "endYear": 1937,
+    "description": "日本发动七七卢沟桥事变，进攻北平，标志着日本全面侵华战争的开始，中国全面抗战开始。",
+    "eventType": "war,full-scale_invasion",
+    "createdAt": "2025-12-24T19:53:48.364+00:00",
+    "updatedAt": "2025-12-24T19:53:48.364+00:00"
+  },
+  {
+    "id": "5a7393aa-2c15-4e1c-9789-d2c06919031d",
+    "title": "淞沪会战",
+    "startYear": 1937,
+    "endYear": 1937,
+    "description": "中国军队在上海抵抗日本侵略，是抗日战争中规模最大、战斗最激烈的战役之一。",
+    "eventType": "war,battle",
+    "createdAt": "2025-12-24T19:53:48.364+00:00",
+    "updatedAt": "2025-12-24T19:53:48.364+00:00"
+  },
+  {
+    "id": "7ba58805-e093-4504-8458-29fdeb05ccab",
+    "title": "南京大屠杀",
+    "startYear": 1937,
+    "endYear": 1938,
+    "description": "日军占领南京后，进行了长达6周的惨绝人寰的大屠杀，杀害中国平民和放下武器的士兵超过30万人。",
+    "eventType": "war,genocide",
+    "createdAt": "2025-12-24T19:53:48.365+00:00",
+    "updatedAt": "2025-12-24T19:53:48.365+00:00"
+  },
+  {
+    "id": "63f36eea-ac3a-4a42-85ea-d075494f8816",
+    "title": "武汉会战",
+    "startYear": 1938,
+    "endYear": 1938,
+    "description": "中国军队在武汉地区抵抗日本侵略，是抗日战争中规模最大的战役之一，标志着抗日战争进入相持阶段。",
+    "eventType": "war,battle",
+    "createdAt": "2025-12-24T19:53:48.365+00:00",
+    "updatedAt": "2025-12-24T19:53:48.365+00:00"
+  },
+  {
+    "id": "5bae104a-4ae3-4011-966f-53898d8948e5",
+    "title": "百团大战",
+    "startYear": 1940,
+    "endYear": 1940,
+    "description": "八路军发动百团大战，大规模破袭日军交通线，沉重打击了日本侵略者的嚣张气焰。",
+    "eventType": "war,offensive",
+    "createdAt": "2025-12-24T19:53:48.365+00:00",
+    "updatedAt": "2025-12-24T19:53:48.365+00:00"
+  },
+  {
+    "id": "e9d01156-bfa0-4f8f-8bed-58393d1cd8e6",
+    "title": "太平洋战争爆发",
+    "startYear": 1941,
+    "endYear": 1941,
+    "description": "日本偷袭珍珠港，太平洋战争爆发，中国抗战进入新阶段，成为世界反法西斯战争的重要组成部分。",
+    "eventType": "war,international_conflict",
+    "createdAt": "2025-12-24T19:53:48.366+00:00",
+    "updatedAt": "2025-12-24T19:53:48.366+00:00"
+  },
+  {
+    "id": "ef0040f2-f3a7-4677-9579-5d7044559b93",
+    "title": "中国远征军入缅作战",
+    "startYear": 1942,
+    "endYear": 1945,
+    "description": "中国远征军入缅作战，支援盟军，打通中印公路，为世界反法西斯战争作出重要贡献。",
+    "eventType": "war,allied_campaign",
+    "createdAt": "2025-12-24T19:53:48.366+00:00",
+    "updatedAt": "2025-12-24T19:53:48.366+00:00"
+  },
+  {
+    "id": "76055b6d-0cc2-4706-b0a8-c9cc810689de",
+    "title": "日本投降",
+    "startYear": 1945,
+    "endYear": 1945,
+    "description": "1945年8月15日，日本宣布无条件投降；9月2日，正式签署投降书，标志着中国抗日战争和第二次世界大战的胜利结束。",
+    "eventType": "war,ceasefire,surrender",
+    "createdAt": "2025-12-24T19:53:48.367+00:00",
+    "updatedAt": "2025-12-24T19:53:48.367+00:00"
+  },
+  {
+    "id": "79bd4887-039d-466e-a712-2157dab02c06",
+    "title": "重庆谈判",
+    "startYear": 1945,
+    "endYear": 1945,
+    "description": "毛泽东与蒋介石在重庆进行和平谈判，签订《双十协定》，但未能阻止内战爆发。",
+    "eventType": "political_event,negotiations",
+    "createdAt": "2025-12-24T19:53:48.367+00:00",
+    "updatedAt": "2025-12-24T19:53:48.367+00:00"
+  },
+  {
+    "id": "09675565-3367-4213-b1d0-cbfe54cd9e46",
+    "title": "上党战役",
+    "startYear": 1945,
+    "endYear": 1945,
+    "description": "中国共产党领导的晋冀鲁豫军区部队在山西上党地区反击国民党军进攻的战役，是解放战争的第一仗。",
+    "eventType": "war,battle",
+    "createdAt": "2025-12-24T19:53:48.367+00:00",
+    "updatedAt": "2025-12-24T19:53:48.367+00:00"
+  },
+  {
+    "id": "c26136c2-177e-4550-8d5e-2f4196bcb303",
+    "title": "全面内战爆发",
+    "startYear": 1946,
+    "endYear": 1946,
+    "description": "国民党军向中原解放区发动大规模进攻，标志着全面内战爆发。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T19:53:48.368+00:00",
+    "updatedAt": "2025-12-24T19:53:48.368+00:00"
+  },
+  {
+    "id": "211fb0fa-811a-4397-baa7-b844aa066f4b",
+    "title": "辽沈战役",
+    "startYear": 1948,
+    "endYear": 1948,
+    "description": "中国人民解放军在东北战场进行的战略决战，解放了东北全境，使解放战争形势发生根本转折。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T19:53:48.368+00:00",
+    "updatedAt": "2025-12-24T19:53:48.368+00:00"
+  },
+  {
+    "id": "8b893f7a-55b7-42c3-ab5c-b4950cd48fc6",
+    "title": "淮海战役",
+    "startYear": 1948,
+    "endYear": 1949,
+    "description": "中国人民解放军在华东、中原战场进行的战略决战，歼灭国民党军主力，加速了解放战争胜利进程。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T19:53:48.369+00:00",
+    "updatedAt": "2025-12-24T19:53:48.369+00:00"
+  },
+  {
+    "id": "393a860e-ee68-4273-8c97-ca8c52fd2f45",
+    "title": "平津战役",
+    "startYear": 1948,
+    "endYear": 1949,
+    "description": "中国人民解放军在华北战场进行的战略决战，和平解放北平，基本解放华北地区。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T19:53:48.369+00:00",
+    "updatedAt": "2025-12-24T19:53:48.369+00:00"
+  },
+  {
+    "id": "c5ab5784-4d9c-489a-9718-78cad199abb2",
+    "title": "渡江战役",
+    "startYear": 1949,
+    "endYear": 1949,
+    "description": "中国人民解放军百万雄师横渡长江，解放南京，推翻了国民党政权在大陆的统治。",
+    "eventType": "war,offensive",
+    "createdAt": "2025-12-24T19:53:48.369+00:00",
+    "updatedAt": "2025-12-24T19:53:48.369+00:00"
+  },
+  {
+    "id": "c718afb7-8225-4309-8551-637a38561980",
+    "title": "南京解放",
+    "startYear": 1949,
+    "endYear": 1949,
+    "description": "中国人民解放军第三野战军解放南京，标志着国民党政权在大陆的统治结束。",
+    "eventType": "war,offensive,occupation",
+    "createdAt": "2025-12-24T19:53:48.370+00:00",
+    "updatedAt": "2025-12-24T19:53:48.370+00:00"
+  },
+  {
+    "id": "ff5e216d-5a87-4b62-b311-e7690394ebca",
+    "title": "上海解放",
+    "startYear": 1949,
+    "endYear": 1949,
+    "description": "中国人民解放军解放上海，是渡江战役的重要组成部分，标志着华东地区的解放。",
+    "eventType": "war,offensive,occupation",
+    "createdAt": "2025-12-24T19:53:48.370+00:00",
+    "updatedAt": "2025-12-24T19:53:48.370+00:00"
+  },
+  {
+    "id": "e4f838d0-33b8-4ecf-9cec-4d75bc17861c",
+    "title": "中国人民政治协商会议第一次全体会议",
+    "startYear": 1949,
+    "endYear": 1949,
+    "description": "中国人民政治协商会议第一次全体会议在北平召开，通过了《中国人民政治协商会议共同纲领》，确定了新中国的国体、政体和各项基本政策。",
+    "eventType": "political_event,constitution",
+    "createdAt": "2025-12-24T19:53:48.371+00:00",
+    "updatedAt": "2025-12-24T19:53:48.371+00:00"
+  },
+  {
+    "id": "78e3e887-1bf0-4114-bd3e-ed5c0a13acaa",
+    "title": "中华人民共和国成立",
+    "startYear": 1949,
+    "endYear": 1949,
+    "description": "毛泽东在天安门城楼宣布中华人民共和国成立，标志着中国新民主主义革命的胜利和半殖民地半封建社会的结束，中国进入了人民当家作主的新纪元。",
+    "eventType": "political_event,foundation",
+    "createdAt": "2025-12-24T19:53:48.371+00:00",
+    "updatedAt": "2025-12-24T19:53:48.371+00:00"
+  },
+  {
+    "id": "38cafba6-146a-49ed-b185-8f4400608a9e",
+    "title": "西藏和平解放",
+    "startYear": 1951,
+    "endYear": 1951,
+    "description": "中央人民政府与西藏地方政府签订《关于和平解放西藏办法的协议》，西藏和平解放，中国大陆实现统一。",
+    "eventType": "political_event,unification",
+    "createdAt": "2025-12-24T19:53:48.372+00:00",
+    "updatedAt": "2025-12-24T19:53:48.372+00:00"
+  },
+  {
+    "id": "bad00d47-ddf4-4dc4-a3e9-07e0699ddf0b",
+    "title": "抗美援朝战争",
+    "startYear": 1950,
+    "endYear": 1953,
+    "description": "中国人民志愿军入朝参战，与朝鲜人民军共同抗击美国为首的联合国军，最终签订停战协定，维护了朝鲜半岛的和平与稳定。",
+    "eventType": "war,defensive_war,international",
+    "createdAt": "2025-12-24T19:53:48.372+00:00",
+    "updatedAt": "2025-12-24T19:53:48.372+00:00"
+  },
+  {
+    "id": "c834c1b3-e230-4bdf-a909-3e9530995e12",
+    "title": "土地改革",
+    "startYear": 1950,
+    "endYear": 1952,
+    "description": "中央人民政府颁布《中华人民共和国土地改革法》，废除封建土地所有制，实行农民土地所有制，极大地解放了农村生产力。",
+    "eventType": "political_event,economic_reform,social_change",
+    "createdAt": "2025-12-24T19:53:48.372+00:00",
+    "updatedAt": "2025-12-24T19:53:48.372+00:00"
+  },
+  {
+    "id": "fd193bdd-5b2d-4d2f-83a5-b4b251bf6fe3",
+    "title": "第一个五年计划",
+    "startYear": 1953,
+    "endYear": 1957,
+    "description": "中国开始实施第一个五年计划，重点发展重工业，初步建立了独立的工业体系和国民经济体系。",
+    "eventType": "economic_event,development_plan,industrialization",
+    "createdAt": "2025-12-24T19:53:48.373+00:00",
+    "updatedAt": "2025-12-24T19:53:48.373+00:00"
+  },
+  {
+    "id": "99442e92-fd6a-46e3-a855-9d63bbf244bb",
+    "title": "第一届全国人民代表大会",
+    "startYear": 1954,
+    "endYear": 1954,
+    "description": "第一届全国人民代表大会第一次会议在北京召开，通过了《中华人民共和国宪法》，确立了人民代表大会制度为国家根本政治制度。",
+    "eventType": "political_event,constitution,legislative",
+    "createdAt": "2025-12-24T19:53:48.373+00:00",
+    "updatedAt": "2025-12-24T19:53:48.373+00:00"
+  },
+  {
+    "id": "c7e2fcae-6233-4d89-a169-c189a346adce",
+    "title": "社会主义改造",
+    "startYear": 1953,
+    "endYear": 1956,
+    "description": "中国对农业、手工业和资本主义工商业进行社会主义改造，实现了生产资料公有制的社会主义制度确立。",
+    "eventType": "political_event,economic_reform,system_change",
+    "createdAt": "2025-12-24T19:53:48.374+00:00",
+    "updatedAt": "2025-12-24T19:53:48.374+00:00"
+  },
+  {
+    "id": "fa323a6b-c610-457c-9591-dcd79cb3cd06",
+    "title": "庐山会议",
+    "startYear": 1959,
+    "endYear": 1959,
+    "description": "中共中央在庐山召开政治局扩大会议，随后召开八届八中全会，错误地开展了对彭德怀的批判，标志着党内左倾错误的进一步发展。",
+    "eventType": "political_event,internal_party,decision_making",
+    "createdAt": "2025-12-24T19:53:48.374+00:00",
+    "updatedAt": "2025-12-24T19:53:48.374+00:00"
+  },
+  {
+    "id": "0d3e89c8-e2f7-440e-a21f-5a976db61fe8",
+    "title": "三年困难时期",
+    "startYear": 1959,
+    "endYear": 1962,
+    "description": "中国的一场严重饥荒。由大跃进政策不当导致，造成了大量人口死亡，是中国现代历史上的一场重大灾难。",
+    "eventType": "natural_disaster,economic_crisis",
+    "createdAt": "2025-12-24T19:53:48.374+00:00",
+    "updatedAt": "2025-12-24T19:53:48.374+00:00"
+  },
+  {
+    "id": "a24b896a-de3a-4b22-87c8-348e90afb4a5",
+    "title": "文化大革命",
+    "startYear": 1966,
+    "endYear": 1976,
+    "description": "毛泽东发动的一场全社会性的政治运动。持续十年，造成了严重的社会动荡和文化破坏，最终导致了多方面的倒退。",
+    "eventType": "political_movement,social_upheaval",
+    "createdAt": "2025-12-24T19:53:48.375+00:00",
+    "updatedAt": "2025-12-24T19:53:48.375+00:00"
+  },
+  {
+    "id": "752745fb-625e-4a3d-a2a4-f0a7d388a3cc",
+    "title": "毛泽东逝世",
+    "startYear": 1976,
+    "endYear": 1976,
+    "description": "中国共产党中央委员会主席、中国人民解放军主席毛泽东逝世，享年83岁，中国进入历史转折点。",
+    "eventType": "political_event,death,succession",
+    "createdAt": "2025-12-24T19:53:48.375+00:00",
+    "updatedAt": "2025-12-24T19:53:48.375+00:00"
+  },
+  {
+    "id": "aa86c2a2-23b6-4f0c-a5ad-bdec66e7763b",
+    "title": "粉碎四人帮",
+    "startYear": 1976,
+    "endYear": 1976,
+    "description": "中共中央采取果断措施，粉碎了以江青为首的四人帮反革命集团，标志着文化大革命的结束。",
+    "eventType": "political_event,internal_party,coup",
+    "createdAt": "2025-12-24T19:53:48.376+00:00",
+    "updatedAt": "2025-12-24T19:53:48.376+00:00"
+  },
+  {
+    "id": "0e160b4c-63b3-4f74-ae52-2e33c7902125",
+    "title": "邓小平恢复工作",
+    "startYear": 1977,
+    "endYear": 1977,
+    "description": "中共十届三中全会决定恢复邓小平中共中央副主席、国务院副总理、中央军委副主席等职务，邓小平重新复出工作。",
+    "eventType": "political_event,succession,leadership",
+    "createdAt": "2025-12-24T19:53:48.376+00:00",
+    "updatedAt": "2025-12-24T19:53:48.376+00:00"
+  },
+  {
+    "id": "73fda497-8b19-4896-87dc-8facf7d0b231",
+    "title": "真理标准问题大讨论",
+    "startYear": 1978,
+    "endYear": 1978,
+    "description": "《光明日报》发表《实践是检验真理的唯一标准》特约评论员文章，引发全国范围的真理标准问题大讨论，为拨乱反正和改革开放奠定了思想基础。",
+    "eventType": "political_event,ideological,debate",
+    "createdAt": "2025-12-24T19:53:48.377+00:00",
+    "updatedAt": "2025-12-24T19:53:48.377+00:00"
+  },
+  {
+    "id": "c01aa03f-09af-472b-a4b1-d99a0161899c",
+    "title": "中共十一届三中全会",
+    "startYear": 1978,
+    "endYear": 1978,
+    "description": "中共十一届三中全会在北京召开，确立了以经济建设为中心，实行改革开放的基本国策，实现了党和国家工作中心的历史性转变。",
+    "eventType": "political_event,reform,policy",
+    "createdAt": "2025-12-24T19:53:48.377+00:00",
+    "updatedAt": "2025-12-24T19:53:48.377+00:00"
+  },
+  {
+    "id": "dfb0847c-6d3d-460a-b590-3f7509247999",
+    "title": "家庭联产承包责任制实行",
+    "startYear": 1978,
+    "endYear": 1978,
+    "description": "安徽省凤阳县小岗村18户农民秘密签订契约，实行包产到户，拉开了中国农村改革的序幕，家庭联产承包责任制逐渐在全国推广。",
+    "eventType": "economic_event,agricultural_reform,policy",
+    "createdAt": "2025-12-24T19:53:48.377+00:00",
+    "updatedAt": "2025-12-24T19:53:48.377+00:00"
+  },
+  {
+    "id": "cf8e55de-efe1-47b9-bc62-5c29c1b36f24",
+    "title": "深圳等经济特区建立",
+    "startYear": 1980,
+    "endYear": 1980,
+    "description": "全国人大常委会批准在深圳、珠海、汕头和厦门设立经济特区，标志着中国对外开放战略的实施。",
+    "eventType": "economic_event,special_zone,reform",
+    "createdAt": "2025-12-24T19:53:48.378+00:00",
+    "updatedAt": "2025-12-24T19:53:48.378+00:00"
+  },
+  {
+    "id": "09e1b795-7926-4fc1-9ad9-27d9eee0ab87",
+    "title": "邓小平南方谈话",
+    "startYear": 1992,
+    "endYear": 1992,
+    "description": "邓小平视察深圳、珠海、上海等地，发表重要谈话，进一步解放思想，推动改革开放和现代化建设进入新阶段。",
+    "eventType": "political_event,ideological,reform",
+    "createdAt": "2025-12-24T19:53:48.378+00:00",
+    "updatedAt": "2025-12-24T19:53:48.378+00:00"
+  },
+  {
+    "id": "8b835c8e-95d3-4cc6-929b-e0a4ca0e21b7",
+    "title": "香港回归",
+    "startYear": 1997,
+    "endYear": 1997,
+    "description": "中华人民共和国对香港恢复行使主权，香港特别行政区成立，实行一国两制方针。",
+    "eventType": "political_event,unification,diplomacy",
+    "createdAt": "2025-12-24T19:53:48.379+00:00",
+    "updatedAt": "2025-12-24T19:53:48.379+00:00"
+  },
+  {
+    "id": "0b1a2f8c-70e0-4f4c-93f9-ea09fcdf47f6",
+    "title": "澳门回归",
+    "startYear": 1999,
+    "endYear": 1999,
+    "description": "中华人民共和国对澳门恢复行使主权，澳门特别行政区成立，实行一国两制方针。",
+    "eventType": "political_event,unification,diplomacy",
+    "createdAt": "2025-12-24T19:53:48.379+00:00",
+    "updatedAt": "2025-12-24T19:53:48.379+00:00"
+  },
+  {
+    "id": "a6a3b21c-8a4a-403f-b935-6b157d635f00",
+    "title": "中国加入世界贸易组织",
+    "startYear": 2001,
+    "endYear": 2001,
+    "description": "中国正式加入世界贸易组织，标志着中国对外开放进入新阶段，全面融入经济全球化进程。",
+    "eventType": "economic_event,trade,international",
+    "createdAt": "2025-12-24T19:53:48.379+00:00",
+    "updatedAt": "2025-12-24T19:53:48.379+00:00"
+  },
+  {
+    "id": "5d04f6e5-722a-47f1-896c-337a7bb4561b",
+    "title": "北京奥运会",
+    "startYear": 2008,
+    "endYear": 2008,
+    "description": "第29届夏季奥林匹克运动会在北京成功举办，展示了中国改革开放以来的发展成就和国际影响力。",
+    "eventType": "cultural_event,sports,international",
+    "createdAt": "2025-12-24T19:53:48.380+00:00",
+    "updatedAt": "2025-12-24T19:53:48.380+00:00"
+  },
+  {
+    "id": "11a76482-9e7b-4738-bf2d-ee8fd533aa67",
+    "title": "中国特色社会主义进入新时代",
+    "startYear": 2017,
+    "endYear": 2017,
+    "description": "中共十九大召开，习近平总书记宣布中国特色社会主义进入新时代，确立习近平新时代中国特色社会主义思想为党必须长期坚持的指导思想。",
+    "eventType": "political_event,ideological,leadership",
+    "createdAt": "2025-12-24T19:53:48.381+00:00",
+    "updatedAt": "2025-12-24T19:53:48.381+00:00"
+  },
+  {
+    "id": "2dc915b0-c578-483a-8dc1-258b3339219b",
+    "title": "全面建成小康社会",
+    "startYear": 2021,
+    "endYear": 2021,
+    "description": "中共中央庆祝中国共产党成立100周年大会上，习近平总书记庄严宣告，经过全党全国各族人民持续奋斗，我们实现了第一个百年奋斗目标，在中华大地上全面建成了小康社会。",
+    "eventType": "political_event,development,achievement",
+    "createdAt": "2025-12-24T19:53:48.381+00:00",
+    "updatedAt": "2025-12-24T19:53:48.381+00:00"
+  },
+  {
+    "id": "e2b9fd18-2bf6-41e6-b7f0-720ab7191e3a",
+    "title": "禹建立夏朝",
+    "startYear": -2070,
+    "endYear": -2070,
+    "description": "禹被推举为夏王，建立中国历史上第一个王朝夏朝，标志着原始社会结束，奴隶社会开始。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T20:08:26.444+00:00",
+    "updatedAt": "2025-12-24T20:08:26.444+00:00"
+  },
+  {
+    "id": "0f27e0d9-34eb-42cf-9c29-733af9921c1a",
+    "title": "启继承父位",
+    "startYear": -2070,
+    "endYear": -2070,
+    "description": "启继承父位，世袭制代替禅让制，公天下变成了家天下。",
+    "eventType": "political_event,succession",
+    "createdAt": "2025-12-24T20:08:26.445+00:00",
+    "updatedAt": "2025-12-24T20:08:26.445+00:00"
+  },
+  {
+    "id": "6aa3790c-d91e-40cd-a900-3024cc3f4ce2",
+    "title": "鸣条之战",
+    "startYear": -1600,
+    "endYear": -1600,
+    "description": "商汤率领部落联军在鸣条之战中击败夏朝最后一位君主桀，夏朝灭亡。",
+    "eventType": "war,dynasty_overthrow",
+    "createdAt": "2025-12-24T20:08:26.445+00:00",
+    "updatedAt": "2025-12-24T20:08:26.445+00:00"
+  },
+  {
+    "id": "d42002d9-22c3-4141-be4b-2ba7de71a269",
+    "title": "商汤建立商朝",
+    "startYear": -1600,
+    "endYear": -1600,
+    "description": "商汤在鸣条之战胜利后，建立商朝，定都于亳。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T20:08:26.445+00:00",
+    "updatedAt": "2025-12-24T20:08:26.445+00:00"
+  },
+  {
+    "id": "fc751438-f845-4d73-aa2c-ea5d8fd25601",
+    "title": "盘庚迁殷",
+    "startYear": -1300,
+    "endYear": -1300,
+    "description": "商王盘庚将商朝都城迁至殷，从此商朝又称殷商，政治经济进入稳定发展时期。",
+    "eventType": "political_event,capital_move",
+    "createdAt": "2025-12-24T20:08:26.446+00:00",
+    "updatedAt": "2025-12-24T20:08:26.446+00:00"
+  },
+  {
+    "id": "ea393576-bd55-4b8c-908f-936320e3aace",
+    "title": "牧野之战",
+    "startYear": -1046,
+    "endYear": -1046,
+    "description": "周武王率领诸侯联军在牧野之战中击败商朝最后一位君主纣，商朝灭亡。",
+    "eventType": "war,dynasty_overthrow",
+    "createdAt": "2025-12-24T20:08:26.446+00:00",
+    "updatedAt": "2025-12-24T20:08:26.446+00:00"
+  },
+  {
+    "id": "ecd5a844-c7be-46c9-95aa-0c9fbc98d334",
+    "title": "周武王建立西周",
+    "startYear": -1046,
+    "endYear": -1046,
+    "description": "周武王在牧野之战胜利后，建立西周，定都于镐京。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T20:08:26.447+00:00",
+    "updatedAt": "2025-12-24T20:08:26.447+00:00"
+  },
+  {
+    "id": "a229bf6e-8aac-491f-815a-08f441d38c1e",
+    "title": "周公东征",
+    "startYear": -1042,
+    "endYear": -1039,
+    "description": "周公旦率军东征，平定三监之乱，巩固了西周的统治。",
+    "eventType": "war,military_campaign",
+    "createdAt": "2025-12-24T20:08:26.448+00:00",
+    "updatedAt": "2025-12-24T20:08:26.448+00:00"
+  },
+  {
+    "id": "680db5ec-53f0-436f-baaa-066bcfd1fd65",
+    "title": "国人暴动",
+    "startYear": -841,
+    "endYear": -841,
+    "description": "西周都城镐京的国人发动暴动，赶走周厉王，实行共和执政，这是中国历史有确切纪年的开始。",
+    "eventType": "war,rebellion",
+    "createdAt": "2025-12-24T20:08:26.448+00:00",
+    "updatedAt": "2025-12-24T20:08:26.448+00:00"
+  },
+  {
+    "id": "659ef30d-6d3a-4cbc-a551-da2eecb44ba8",
+    "title": "烽火戏诸侯",
+    "startYear": -771,
+    "endYear": -771,
+    "description": "周幽王为博褒姒一笑，多次点燃烽火戏弄诸侯，最终犬戎入侵时无人救援，西周灭亡。",
+    "eventType": "political_event,tragedy",
+    "createdAt": "2025-12-24T20:08:26.449+00:00",
+    "updatedAt": "2025-12-24T20:08:26.449+00:00"
+  },
+  {
+    "id": "596f5450-3903-4a36-9b68-a90cf335cb34",
+    "title": "周平王东迁",
+    "startYear": -770,
+    "endYear": -770,
+    "description": "周平王将都城从镐京迁至洛邑，东周开始，春秋战国时期拉开序幕。",
+    "eventType": "political_event,capital_move",
+    "createdAt": "2025-12-24T20:08:26.449+00:00",
+    "updatedAt": "2025-12-24T20:08:26.449+00:00"
+  },
+  {
+    "id": "71505f3f-349a-460a-8dfb-ccc1a974f0b8",
+    "title": "齐桓公称霸",
+    "startYear": -685,
+    "endYear": -643,
+    "description": "齐桓公任用管仲为相，推行改革，提出'尊王攘夷'的口号，成为春秋时期第一位霸主。",
+    "eventType": "political_event,hegemony",
+    "createdAt": "2025-12-24T20:08:26.450+00:00",
+    "updatedAt": "2025-12-24T20:08:26.450+00:00"
+  },
+  {
+    "id": "76d22737-5ba0-4ae1-ac72-d98c929e714f",
+    "title": "晋文公践土之盟",
+    "startYear": -632,
+    "endYear": -632,
+    "description": "晋文公在城濮之战击败楚军后，在践土与诸侯会盟，被周襄王策命为'侯伯'，成为春秋第二位霸主。",
+    "eventType": "political_event,alliance",
+    "createdAt": "2025-12-24T20:08:26.451+00:00",
+    "updatedAt": "2025-12-24T20:08:26.451+00:00"
+  },
+  {
+    "id": "29c0d194-32f8-41f5-bcb5-2f60a601d4af",
+    "title": "楚庄王问鼎中原",
+    "startYear": -606,
+    "endYear": -606,
+    "description": "楚庄王率军北伐至洛邑，向周王使者询问九鼎的大小轻重，显示了其取代周室的野心。",
+    "eventType": "political_event,challenge",
+    "createdAt": "2025-12-24T20:08:26.451+00:00",
+    "updatedAt": "2025-12-24T20:08:26.451+00:00"
+  },
+  {
+    "id": "5e4fa9d1-bb8b-4628-aaf3-b5beacbc329f",
+    "title": "三家分晋",
+    "startYear": -453,
+    "endYear": -403,
+    "description": "韩、赵、魏三家大夫瓜分了晋国，标志着春秋时期结束，战国时期开始。",
+    "eventType": "political_event,state_formation",
+    "createdAt": "2025-12-24T20:08:26.452+00:00",
+    "updatedAt": "2025-12-24T20:08:26.452+00:00"
+  },
+  {
+    "id": "1dd196df-3659-4d7e-ad3e-c2acba32816e",
+    "title": "田氏代齐",
+    "startYear": -386,
+    "endYear": -386,
+    "description": "田氏家族取代姜姓吕氏成为齐国国君，战国七雄格局正式形成。",
+    "eventType": "political_event,coup",
+    "createdAt": "2025-12-24T20:08:26.452+00:00",
+    "updatedAt": "2025-12-24T20:08:26.452+00:00"
+  },
+  {
+    "id": "c5c93e93-e03e-416a-9903-22dbed21b486",
+    "title": "商鞅变法",
+    "startYear": -356,
+    "endYear": -338,
+    "description": "商鞅在秦国推行变法，包括废除世卿世禄制、实行郡县制、奖励耕战等，使秦国逐渐强大。",
+    "eventType": "political_reform,legalist",
+    "createdAt": "2025-12-24T20:08:26.453+00:00",
+    "updatedAt": "2025-12-24T20:08:26.453+00:00"
+  },
+  {
+    "id": "b7deccbb-395f-43b4-8e45-1c24edaf87e5",
+    "title": "围魏救赵",
+    "startYear": -354,
+    "endYear": -353,
+    "description": "孙膑采用'围魏救赵'的策略，率军围攻魏国都城大梁，迫使魏军回援，解了赵国之围。",
+    "eventType": "war,military_strategy",
+    "createdAt": "2025-12-24T20:08:26.453+00:00",
+    "updatedAt": "2025-12-24T20:08:26.453+00:00"
+  },
+  {
+    "id": "1b846e85-d4fd-46cb-bc01-16d2b068721e",
+    "title": "长平之战",
+    "startYear": -260,
+    "endYear": -260,
+    "description": "秦国与赵国在长平展开决战，最终秦国获胜，坑杀赵军四十万，赵国从此一蹶不振。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T20:08:26.454+00:00",
+    "updatedAt": "2025-12-24T20:08:26.454+00:00"
+  },
+  {
+    "id": "dbe975a6-060c-421c-b478-e10ffa22c25a",
+    "title": "秦末农民起义",
+    "startYear": 209,
+    "endYear": 206,
+    "description": "陈胜、吴广领导的反秦农民起义。因征役不满，在大泽乡起义，震撼了秦朝统治的基础，加速了秦朝的灭亡。",
+    "eventType": "war,peasant_uprising",
+    "createdAt": "2025-12-24T20:08:26.454+00:00",
+    "updatedAt": "2025-12-24T20:08:26.454+00:00"
+  },
+  {
+    "id": "78b96be2-0a61-45cc-93a8-2ed0dc01275f",
+    "title": "秦汉战争",
+    "startYear": 206,
+    "endYear": 202,
+    "description": "项羽与刘邦争夺天下的战争。经过四年的激战，最终刘邦击败项羽，建立了汉朝。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T20:08:26.455+00:00",
+    "updatedAt": "2025-12-24T20:08:26.455+00:00"
+  },
+  {
+    "id": "3d2fd347-e1d9-4539-b0a8-73652f1e3282",
+    "title": "官渡之战",
+    "startYear": 200,
+    "endYear": 200,
+    "description": "曹操与袁绍在官渡进行的决战，曹操以少胜多，击败袁绍主力，为统一北方奠定了基础。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T20:08:26.455+00:00",
+    "updatedAt": "2025-12-24T20:08:26.455+00:00"
+  },
+  {
+    "id": "b703392a-7a74-4352-803e-e6b9d1f17b21",
+    "title": "赤壁之战",
+    "startYear": 208,
+    "endYear": 208,
+    "description": "孙权、刘备联军在赤壁大败曹操，为三国鼎立局面的形成奠定了基础。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T20:08:26.455+00:00",
+    "updatedAt": "2025-12-24T20:08:26.455+00:00"
+  },
+  {
+    "id": "c5fcfeb8-0bab-4e91-869a-814ae607f702",
+    "title": "三国鼎立",
+    "startYear": 220,
+    "endYear": 280,
+    "description": "曹丕建魏(220年)、刘备建汉(221年)、孙权建吴(229年)，三国鼎立局面正式形成。",
+    "eventType": "political_event,state_formation",
+    "createdAt": "2025-12-24T20:08:26.456+00:00",
+    "updatedAt": "2025-12-24T20:08:26.456+00:00"
+  },
+  {
+    "id": "4c08e744-0ac7-4160-ba2e-ead79770ca57",
+    "title": "晋朝统一",
+    "startYear": 280,
+    "endYear": 280,
+    "description": "西晋灭吴，结束了三国鼎立的局面，实现了全国统一。",
+    "eventType": "political_event,unification",
+    "createdAt": "2025-12-24T20:08:26.457+00:00",
+    "updatedAt": "2025-12-24T20:08:26.457+00:00"
+  },
+  {
+    "id": "b5a093d6-2806-424e-bb9b-3481aa5ba349",
+    "title": "八王之乱",
+    "startYear": 291,
+    "endYear": 306,
+    "description": "西晋皇室内部发生的权力争斗，导致西晋国力急剧衰落，引发了五胡乱华。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T20:08:26.457+00:00",
+    "updatedAt": "2025-12-24T20:08:26.457+00:00"
+  },
+  {
+    "id": "702c7532-c5ed-4564-a816-3d6b67c18044",
+    "title": "五胡乱华",
+    "startYear": 316,
+    "endYear": 439,
+    "description": "北方游牧民族进入中原，建立了多个政权，西晋灭亡，东晋偏安江南。",
+    "eventType": "war,ethnic_conflict",
+    "createdAt": "2025-12-24T20:08:26.458+00:00",
+    "updatedAt": "2025-12-24T20:08:26.458+00:00"
+  },
+  {
+    "id": "335d1214-cce5-4dbe-b067-7a2d344f26dc",
+    "title": "淝水之战",
+    "startYear": 383,
+    "endYear": 383,
+    "description": "东晋以少胜多，击败前秦苻坚的百万大军，阻止了北方游牧民族的南侵。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T20:08:26.459+00:00",
+    "updatedAt": "2025-12-24T20:08:26.459+00:00"
+  },
+  {
+    "id": "4abbc7ff-968f-4b2c-801f-289edd82ca70",
+    "title": "汉-匈奴战争",
+    "startYear": 140,
+    "endYear": 89,
+    "description": "西汉对匈奴进行的大规模军事行动。汉武帝时期派遣卫青、霍去病等将领打击匈奴，开拓了丝绸之路。",
+    "eventType": "war,military_conflict",
+    "createdAt": "2025-12-24T20:08:26.459+00:00",
+    "updatedAt": "2025-12-24T20:08:26.459+00:00"
+  },
+  {
+    "id": "90cc271b-63ff-4381-8b7c-24bfbf1041cb",
+    "title": "隋朝建立",
+    "startYear": 581,
+    "endYear": 581,
+    "description": "杨坚取代北周，建立隋朝，定都长安。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T20:08:26.460+00:00",
+    "updatedAt": "2025-12-24T20:08:26.460+00:00"
+  },
+  {
+    "id": "b7182d8d-ccbc-4d87-a2c9-408654a4ad8e",
+    "title": "隋朝统一全国",
+    "startYear": 589,
+    "endYear": 589,
+    "description": "隋军南下，灭掉陈朝，结束了自西晋末年以来长达近300年的分裂局面，实现了全国统一。",
+    "eventType": "political_event,unification",
+    "createdAt": "2025-12-24T20:08:26.460+00:00",
+    "updatedAt": "2025-12-24T20:08:26.460+00:00"
+  },
+  {
+    "id": "c12a9ee9-7cd3-4260-a88f-e17769c7e6db",
+    "title": "开凿大运河",
+    "startYear": 605,
+    "endYear": 610,
+    "description": "隋炀帝下令开凿大运河，以洛阳为中心，北起涿郡（今北京），南至余杭（今杭州），连接海河、黄河、淮河、长江和钱塘江五大水系，全长约2700公里。",
+    "eventType": "engineering,economic_infrastructure",
+    "createdAt": "2025-12-24T20:08:26.461+00:00",
+    "updatedAt": "2025-12-24T20:08:26.461+00:00"
+  },
+  {
+    "id": "829343c5-5b6e-4bd4-81de-caf03e0d57ed",
+    "title": "隋末农民起义",
+    "startYear": 611,
+    "endYear": 618,
+    "description": "由于隋炀帝的暴政，各地爆发大规模农民起义，最终导致隋朝灭亡。",
+    "eventType": "war,peasant_uprising",
+    "createdAt": "2025-12-24T20:08:26.461+00:00",
+    "updatedAt": "2025-12-24T20:08:26.461+00:00"
+  },
+  {
+    "id": "2dfefb75-d33e-496c-94de-1276b3324bc0",
+    "title": "唐朝建立",
+    "startYear": 618,
+    "endYear": 618,
+    "description": "李渊在长安称帝，建立唐朝，取代隋朝。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T20:08:26.462+00:00",
+    "updatedAt": "2025-12-24T20:08:26.462+00:00"
+  },
+  {
+    "id": "728724db-d6c0-433a-821b-e3a06387183d",
+    "title": "贞观之治",
+    "startYear": 626,
+    "endYear": 649,
+    "description": "唐太宗推行的一个以儒家思想为指导的治国政策。强调民本和谦虚，使唐朝的政治、经济、文化达到了新的高度。",
+    "eventType": "political_reform,cultural_flourishing",
+    "createdAt": "2025-12-24T20:08:26.462+00:00",
+    "updatedAt": "2025-12-24T20:08:26.462+00:00"
+  },
+  {
+    "id": "3e96034a-e24a-4ec1-93aa-db798221e2b1",
+    "title": "玄武门之变",
+    "startYear": 626,
+    "endYear": 626,
+    "description": "唐太宗李世民在长安玄武门发动的政变。通过这场政变，李世民打败了兄长太子李建成和弟弟齐王李元吉，夺得了王位。",
+    "eventType": "political_event,coup_d'etat",
+    "createdAt": "2025-12-24T20:08:26.463+00:00",
+    "updatedAt": "2025-12-24T20:08:26.463+00:00"
+  },
+  {
+    "id": "2725fada-cd40-45f0-b07c-96150d650701",
+    "title": "玄奘西行",
+    "startYear": 627,
+    "endYear": 645,
+    "description": "玄奘法师从长安出发，西行天竺（今印度）取经，历时18年，带回大量佛经，促进了中印文化交流。",
+    "eventType": "cultural_event,religious_pilgrimage",
+    "createdAt": "2025-12-24T20:08:26.463+00:00",
+    "updatedAt": "2025-12-24T20:08:26.463+00:00"
+  },
+  {
+    "id": "74d58606-b5db-4c3c-93e5-1140ccc45555",
+    "title": "文成公主入藏",
+    "startYear": 641,
+    "endYear": 641,
+    "description": "唐太宗将文成公主嫁给吐蕃赞普松赞干布，促进了唐蕃友好和文化交流。",
+    "eventType": "diplomatic_event,cultural_exchange",
+    "createdAt": "2025-12-24T20:08:26.464+00:00",
+    "updatedAt": "2025-12-24T20:08:26.464+00:00"
+  },
+  {
+    "id": "7345642b-e467-4661-83b7-3d1c479318ce",
+    "title": "武则天称帝",
+    "startYear": 690,
+    "endYear": 690,
+    "description": "武则天改唐为周，自称圣神皇帝，成为中国历史上唯一的女皇帝。",
+    "eventType": "political_event,gender_milestone",
+    "createdAt": "2025-12-24T20:08:26.464+00:00",
+    "updatedAt": "2025-12-24T20:08:26.464+00:00"
+  },
+  {
+    "id": "5f811c6f-46a2-48d6-ad6a-013cc6c5b25c",
+    "title": "开元盛世",
+    "startYear": 713,
+    "endYear": 741,
+    "description": "唐玄宗统治前期，政治清明，经济繁荣，文化昌盛，唐朝进入全盛时期，史称'开元盛世'。",
+    "eventType": "political_reform,cultural_flourishing",
+    "createdAt": "2025-12-24T20:08:26.465+00:00",
+    "updatedAt": "2025-12-24T20:08:26.465+00:00"
+  },
+  {
+    "id": "ba3efe68-00c9-4efc-85c0-413fa9865a93",
+    "title": "安史之乱",
+    "startYear": 755,
+    "endYear": 763,
+    "description": "安禄山和史思明在唐玄宗统治时期发动的大规模叛乱。虽然最终被平定，但使唐朝元气大伤，标志着唐朝由盛转衰。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T20:08:26.465+00:00",
+    "updatedAt": "2025-12-24T20:08:26.465+00:00"
+  },
+  {
+    "id": "96be8a4c-dd1f-4452-bd64-adf448f349af",
+    "title": "藩镇割据",
+    "startYear": 763,
+    "endYear": 907,
+    "description": "安史之乱后，唐朝在地方上设置了众多藩镇，这些藩镇逐渐形成割据势力，不听从中央命令，严重削弱了唐朝的统治。",
+    "eventType": "political_fragmentation,regionalism",
+    "createdAt": "2025-12-24T20:08:26.466+00:00",
+    "updatedAt": "2025-12-24T20:08:26.466+00:00"
+  },
+  {
+    "id": "3128a679-4205-401a-aae7-fe2297f727ed",
+    "title": "牛李党争",
+    "startYear": 808,
+    "endYear": 846,
+    "description": "唐朝后期以牛僧孺、李宗闵为首的牛党与李德裕、郑覃为首的李党之间的长期政治斗争，加速了唐朝的衰落。",
+    "eventType": "political_event,factional_conflict",
+    "createdAt": "2025-12-24T20:08:26.466+00:00",
+    "updatedAt": "2025-12-24T20:08:26.466+00:00"
+  },
+  {
+    "id": "3a480229-aebd-4a10-a7e2-5fca77a612e9",
+    "title": "黄巢起义",
+    "startYear": 875,
+    "endYear": 884,
+    "description": "黄巢领导的大规模农民起义。一度攻占长安，建立大齐政权，虽最终失败，但动摇了唐末政权的基础。",
+    "eventType": "war,peasant_uprising",
+    "createdAt": "2025-12-24T20:08:26.467+00:00",
+    "updatedAt": "2025-12-24T20:08:26.467+00:00"
+  },
+  {
+    "id": "fc5b6406-7d2d-4548-8af8-25e16c12c591",
+    "title": "玄武门之变",
+    "startYear": 626,
+    "endYear": 626,
+    "description": "唐太宗李世民在长安玄武门发动的政变。通过这场政变，李世民打败了兄长太子李建成和弟弟齐王李元吉，夺得了王位。",
+    "eventType": "political_event,coup_d'etat",
+    "createdAt": "2025-12-24T20:08:26.467+00:00",
+    "updatedAt": "2025-12-24T20:08:26.467+00:00"
+  },
+  {
+    "id": "3fb418e7-4000-4e27-a3e5-d61a2cc875a0",
+    "title": "五代十国",
+    "startYear": 907,
+    "endYear": 960,
+    "description": "唐朝灭亡后，中国陷入分裂状态。五个小朝代在中原轮流统治，十个政权在南方并立，历时约 53 年。",
+    "eventType": "political_fragmentation,war",
+    "createdAt": "2025-12-24T20:08:26.468+00:00",
+    "updatedAt": "2025-12-24T20:08:26.468+00:00"
+  },
+  {
+    "id": "4ee7711e-1844-49c5-8fea-2515b904b891",
+    "title": "陈桥兵变",
+    "startYear": 960,
+    "endYear": 960,
+    "description": "赵匡胤发动兵变，黄袍加身，取代后周，建立宋朝，定都开封。",
+    "eventType": "political_event,coup_d'etat",
+    "createdAt": "2025-12-24T20:08:26.468+00:00",
+    "updatedAt": "2025-12-24T20:08:26.468+00:00"
+  },
+  {
+    "id": "fae116a2-692e-4b9a-ad1c-9be3fbdb8f2e",
+    "title": "杯酒释兵权",
+    "startYear": 961,
+    "endYear": 961,
+    "description": "赵匡胤通过酒宴的方式，威胁利诱高级将领交出兵权，加强中央集权。",
+    "eventType": "political_event,military_reform",
+    "createdAt": "2025-12-24T20:08:26.469+00:00",
+    "updatedAt": "2025-12-24T20:08:26.469+00:00"
+  },
+  {
+    "id": "f319f677-998d-4272-b859-bb8b4c24fb4f",
+    "title": "北宋统一战争",
+    "startYear": 962,
+    "endYear": 979,
+    "description": "宋朝建立后，对剩余割据政权进行的一系列军事行动，结束了五代十国的分裂局面。",
+    "eventType": "war,unification",
+    "createdAt": "2025-12-24T20:08:26.470+00:00",
+    "updatedAt": "2025-12-24T20:08:26.470+00:00"
+  },
+  {
+    "id": "6ff145d6-46ee-458c-8b89-b18b0d493851",
+    "title": "澶渊之盟",
+    "startYear": 1005,
+    "endYear": 1005,
+    "description": "北宋与辽朝在澶州签订和约，结束了长达25年的战争，开启了长达120年的和平局面。",
+    "eventType": "diplomatic_event,treaty",
+    "createdAt": "2025-12-24T20:08:26.471+00:00",
+    "updatedAt": "2025-12-24T20:08:26.471+00:00"
+  },
+  {
+    "id": "80e8242f-85a8-4649-86b6-e43d03ee278c",
+    "title": "王安石变法",
+    "startYear": 1069,
+    "endYear": 1085,
+    "description": "宋神宗时期，王安石发起的旨在富国强兵的社会改革运动，涉及政治、经济、军事等多个领域。",
+    "eventType": "political_reform,economic_reform",
+    "createdAt": "2025-12-24T20:08:26.471+00:00",
+    "updatedAt": "2025-12-24T20:08:26.471+00:00"
+  },
+  {
+    "id": "1acb2569-e914-4785-80ed-5c3c32db9063",
+    "title": "靖康之变",
+    "startYear": 1125,
+    "endYear": 1127,
+    "description": "金兵南下，攻占宋朝都城开封。宋徽宗和宋钦宗都被金人掠去，北宋灭亡。",
+    "eventType": "war,military_defeat",
+    "createdAt": "2025-12-24T20:08:26.472+00:00",
+    "updatedAt": "2025-12-24T20:08:26.472+00:00"
+  },
+  {
+    "id": "9568ac68-9b4f-4ca2-98f4-37aab958f1c6",
+    "title": "南宋建立",
+    "startYear": 1127,
+    "endYear": 1127,
+    "description": "赵构在应天府称帝，建立南宋政权，后迁都临安。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T20:08:26.473+00:00",
+    "updatedAt": "2025-12-24T20:08:26.473+00:00"
+  },
+  {
+    "id": "85d19d4f-fb4c-431f-a2d4-019b5010d659",
+    "title": "岳飞抗金",
+    "startYear": 1127,
+    "endYear": 1142,
+    "description": "岳飞率领岳家军抗击金兵，收复失地，是南宋抗金名将。",
+    "eventType": "war,military_campaign",
+    "createdAt": "2025-12-24T20:08:26.473+00:00",
+    "updatedAt": "2025-12-24T20:08:26.473+00:00"
+  },
+  {
+    "id": "5ff67f6f-1283-4bbc-847e-4d37d4ee8013",
+    "title": "绍兴和议",
+    "startYear": 1141,
+    "endYear": 1141,
+    "description": "南宋与金国签订和约，南宋向金国称臣纳贡，双方以淮水-大散关为界。",
+    "eventType": "diplomatic_event,treaty",
+    "createdAt": "2025-12-24T20:08:26.474+00:00",
+    "updatedAt": "2025-12-24T20:08:26.474+00:00"
+  },
+  {
+    "id": "4a69ca11-a233-4e88-95d8-2f349ae3fbdb",
+    "title": "蒙古统一",
+    "startYear": 1206,
+    "endYear": 1206,
+    "description": "铁木真统一蒙古各部，建立大蒙古国，被尊称为成吉思汗。",
+    "eventType": "political_event,unification",
+    "createdAt": "2025-12-24T20:08:26.475+00:00",
+    "updatedAt": "2025-12-24T20:08:26.475+00:00"
+  },
+  {
+    "id": "a1df3bd2-901c-4fcb-bb88-240c3e1b656f",
+    "title": "元朝建立",
+    "startYear": 1271,
+    "endYear": 1271,
+    "description": "忽必烈改国号为元，定都大都，元朝正式建立。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T20:08:26.475+00:00",
+    "updatedAt": "2025-12-24T20:08:26.475+00:00"
+  },
+  {
+    "id": "829a2172-e5c0-4aed-bd9f-19ed95917aa2",
+    "title": "蒙宋战争",
+    "startYear": 1235,
+    "endYear": 1279,
+    "description": "蒙古帝国对南宋的征服战争，最终南宋灭亡。",
+    "eventType": "war,conquest",
+    "createdAt": "2025-12-24T20:08:26.476+00:00",
+    "updatedAt": "2025-12-24T20:08:26.476+00:00"
+  },
+  {
+    "id": "2f7caa06-26dc-4728-ad95-551b32e4818a",
+    "title": "崖山海战",
+    "startYear": 1279,
+    "endYear": 1279,
+    "description": "元朝军队与南宋残余势力在崖山进行的决战，南宋灭亡，元朝统一全国。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T20:08:26.476+00:00",
+    "updatedAt": "2025-12-24T20:08:26.476+00:00"
+  },
+  {
+    "id": "9e593b02-313d-49f1-8c9a-b4d16a20468d",
+    "title": "马可波罗来华",
+    "startYear": 1275,
+    "endYear": 1292,
+    "description": "意大利旅行家马可波罗来到中国，在元朝任职，回国后著《马可波罗游记》。",
+    "eventType": "cultural_event,diplomatic_visit",
+    "createdAt": "2025-12-24T20:08:26.477+00:00",
+    "updatedAt": "2025-12-24T20:08:26.477+00:00"
+  },
+  {
+    "id": "ceb32b2e-e481-4e51-850a-2cc25052e399",
+    "title": "元末农民起义",
+    "startYear": 1351,
+    "endYear": 1368,
+    "description": "元朝末期的大规模农民起义，其中最重要的是朱元璋所参加的起义。最终导致了元朝的灭亡和明朝的建立。",
+    "eventType": "war,peasant_uprising",
+    "createdAt": "2025-12-24T20:08:26.477+00:00",
+    "updatedAt": "2025-12-24T20:08:26.477+00:00"
+  },
+  {
+    "id": "1453f009-4e32-4ff1-9617-70b4af060a30",
+    "title": "明朝建立",
+    "startYear": 1368,
+    "endYear": 1368,
+    "description": "朱元璋在南京称帝，建立明朝，元朝灭亡。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T20:08:26.478+00:00",
+    "updatedAt": "2025-12-24T20:08:26.478+00:00"
+  },
+  {
+    "id": "dfaee377-a31c-4e29-b7c2-523468f575f5",
+    "title": "靖难之役",
+    "startYear": 1399,
+    "endYear": 1402,
+    "description": "朱元璋之子朱棣为夺取侄子朱允炆的皇位而发动的军事行动。经过三年战争，朱棣最终成功夺得皇位。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T20:08:26.479+00:00",
+    "updatedAt": "2025-12-24T20:08:26.479+00:00"
+  },
+  {
+    "id": "e70ee0a4-5f70-495b-8710-99aa25487c1d",
+    "title": "永乐盛世",
+    "startYear": 1402,
+    "endYear": 1424,
+    "description": "明成祖朱棣统治时期。这一时期国力强盛，经济繁荣，郑和下西洋开拓了海外贸易，使明朝成为当时最强大的国家。",
+    "eventType": "cultural_flourishing,political_stability",
+    "createdAt": "2025-12-24T20:08:26.479+00:00",
+    "updatedAt": "2025-12-24T20:08:26.479+00:00"
+  },
+  {
+    "id": "89eae294-3760-49e7-8e86-4a2d04531077",
+    "title": "郑和下西洋",
+    "startYear": 1405,
+    "endYear": 1433,
+    "description": "郑和率领船队七次下西洋，到达亚非30多个国家和地区，是世界航海史上的壮举。",
+    "eventType": "cultural_event,diplomatic_expedition",
+    "createdAt": "2025-12-24T20:08:26.480+00:00",
+    "updatedAt": "2025-12-24T20:08:26.480+00:00"
+  },
+  {
+    "id": "09a8ec8c-7747-497d-933d-55f92f3eaf15",
+    "title": "土木堡之变",
+    "startYear": 1449,
+    "endYear": 1449,
+    "description": "明英宗朱祁镇亲征瓦剌，在土木堡被瓦剌军队俘虏，明朝国力大损。",
+    "eventType": "war,military_defeat",
+    "createdAt": "2025-12-24T20:08:26.480+00:00",
+    "updatedAt": "2025-12-24T20:08:26.480+00:00"
+  },
+  {
+    "id": "7e108f9f-2361-4d31-ae5c-a3d4ca6016d8",
+    "title": "戚继光抗倭",
+    "startYear": 1555,
+    "endYear": 1567,
+    "description": "戚继光率领戚家军抗击倭寇，扫平了东南沿海的倭患。",
+    "eventType": "war,anti_piracy",
+    "createdAt": "2025-12-24T20:08:26.481+00:00",
+    "updatedAt": "2025-12-24T20:08:26.481+00:00"
+  },
+  {
+    "id": "43602fac-da25-45ed-af44-b2ed6d316b2a",
+    "title": "张居正改革",
+    "startYear": 1572,
+    "endYear": 1582,
+    "description": "张居正推行的一系列改革，包括一条鞭法等，使明朝经济得到恢复和发展。",
+    "eventType": "political_reform,economic_reform",
+    "createdAt": "2025-12-24T20:08:26.481+00:00",
+    "updatedAt": "2025-12-24T20:08:26.481+00:00"
+  },
+  {
+    "id": "ca2f291c-3503-4b3c-9c3b-fb172e218df6",
+    "title": "万历朝鲜战争",
+    "startYear": 1592,
+    "endYear": 1598,
+    "description": "明朝援助朝鲜抗击日本侵略的战争，最终以明朝和朝鲜的胜利告终。",
+    "eventType": "war,international_conflict",
+    "createdAt": "2025-12-24T20:08:26.482+00:00",
+    "updatedAt": "2025-12-24T20:08:26.482+00:00"
+  },
+  {
+    "id": "1699dca7-837a-4f1f-9d2b-aba15dec1087",
+    "title": "明末农民起义",
+    "startYear": 1627,
+    "endYear": 1644,
+    "description": "明朝末期的大规模农民起义，以李自成和张献忠的起义最为著名，最终导致明朝灭亡。",
+    "eventType": "war,peasant_uprising",
+    "createdAt": "2025-12-24T20:08:26.483+00:00",
+    "updatedAt": "2025-12-24T20:08:26.483+00:00"
+  },
+  {
+    "id": "721bf084-b8f4-46db-ac89-cc90b727d5f6",
+    "title": "女真兴起",
+    "startYear": 1616,
+    "endYear": 1644,
+    "description": "满族（女真）的努尔哈赤建立的后金政权，最终由其子皇太极改国号为清，并最终入主中原。",
+    "eventType": "political_event,ethnic_migration",
+    "createdAt": "2025-12-24T20:08:26.483+00:00",
+    "updatedAt": "2025-12-24T20:08:26.483+00:00"
+  },
+  {
+    "id": "9d986991-a462-400e-b6b4-4fb0c5a7b959",
+    "title": "清朝建立",
+    "startYear": 1644,
+    "endYear": 1644,
+    "description": "清军入关，顺治帝在北京即位，建立清朝，明朝灭亡。",
+    "eventType": "political_event,dynasty_founding",
+    "createdAt": "2025-12-24T20:08:26.486+00:00",
+    "updatedAt": "2025-12-24T20:08:26.486+00:00"
+  },
+  {
+    "id": "45b8a80b-b563-41e2-bf60-d4f682ea6874",
+    "title": "三藩之乱",
+    "startYear": 1673,
+    "endYear": 1681,
+    "description": "清初平定的三位藩王（吴三桂、尚可喜、耿精忠）发动的大规模反抗。康熙通过这一战争加强了中央集权。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T20:08:26.487+00:00",
+    "updatedAt": "2025-12-24T20:08:26.487+00:00"
+  },
+  {
+    "id": "bc118eeb-1b30-4782-8b52-18274779ec19",
+    "title": "康熙盛世",
+    "startYear": 1662,
+    "endYear": 1722,
+    "description": "康熙帝统治时期，国家统一，经济繁荣，文化昌盛，是清朝的鼎盛时期之一。",
+    "eventType": "political_stability,cultural_flourishing",
+    "createdAt": "2025-12-24T20:08:26.487+00:00",
+    "updatedAt": "2025-12-24T20:08:26.487+00:00"
+  },
+  {
+    "id": "b8738cbd-6869-4982-b357-06edd9038c84",
+    "title": "乾隆盛世",
+    "startYear": 1735,
+    "endYear": 1796,
+    "description": "乾隆帝统治时期，清朝达到鼎盛，国家统一，经济繁荣，文化发展。",
+    "eventType": "political_stability,cultural_flourishing",
+    "createdAt": "2025-12-24T20:08:26.488+00:00",
+    "updatedAt": "2025-12-24T20:08:26.488+00:00"
+  },
+  {
+    "id": "b384f4b9-7299-416a-bb66-c5ae31b97319",
+    "title": "马戛尔尼使团访华",
+    "startYear": 1793,
+    "endYear": 1794,
+    "description": "英国派遣马戛尔尼使团访华，试图与清朝建立贸易关系，但由于礼仪问题和贸易分歧而失败。",
+    "eventType": "diplomatic_event,cultural_exchange",
+    "createdAt": "2025-12-24T20:08:26.489+00:00",
+    "updatedAt": "2025-12-24T20:08:26.489+00:00"
+  },
+  {
+    "id": "0f1f2f92-38ce-4072-9851-a9472fb5448d",
+    "title": "鸦片战争",
+    "startYear": 1840,
+    "endYear": 1842,
+    "description": "英国为了打开中国市场而对华发动的战争。中国战败后被迫签订《南京条约》，开放了五个通商口岸。",
+    "eventType": "war,foreign_aggression",
+    "createdAt": "2025-12-24T20:08:26.489+00:00",
+    "updatedAt": "2025-12-24T20:08:26.489+00:00"
+  },
+  {
+    "id": "0479cddb-a671-4ab4-a929-9377fca7d51d",
+    "title": "太平天国",
+    "startYear": 1851,
+    "endYear": 1864,
+    "description": "洪秀全领导的大规模农民起义，建立了地跨多省的政权。虽然最终被清军镇压，但震撼了整个中国。",
+    "eventType": "war,rebellion,political_state",
+    "createdAt": "2025-12-24T20:08:26.490+00:00",
+    "updatedAt": "2025-12-24T20:08:26.490+00:00"
+  },
+  {
+    "id": "9aa59cf5-53ef-4fe9-937e-a4a1928de304",
+    "title": "戊戌变法",
+    "startYear": 1898,
+    "endYear": 1898,
+    "description": "光绪帝和康有为等维新派进行的政治改革运动。试图学习西方制度，但最终被慈禧太后镇压。",
+    "eventType": "political_reform,cultural_change",
+    "createdAt": "2025-12-24T20:08:26.491+00:00",
+    "updatedAt": "2025-12-24T20:08:26.491+00:00"
+  },
+  {
+    "id": "1c2c0d09-bb1a-4a35-bd8d-e3f83be4934c",
+    "title": "辛亥革命",
+    "startYear": 1911,
+    "endYear": 1912,
+    "description": "推翻满清统治，建立共和制政体的伟大革命。孙中山领导的革命者发动起义，推动了中国从帝制向共和的转变。",
+    "eventType": "political_revolution,military_action",
+    "createdAt": "2025-12-24T20:08:26.492+00:00",
+    "updatedAt": "2025-12-24T20:08:26.492+00:00"
+  },
+  {
+    "id": "62f2e365-7e2d-4188-a2c7-5ed592e6f20d",
+    "title": "中华民国临时政府成立",
+    "startYear": 1912,
+    "endYear": 1912,
+    "description": "孙中山在南京宣布成立中华民国临时政府，就任临时大总统，标志着中国历史上第一个资产阶级共和国的诞生。",
+    "eventType": "political_event,government_formation",
+    "createdAt": "2025-12-24T20:08:26.493+00:00",
+    "updatedAt": "2025-12-24T20:08:26.493+00:00"
+  },
+  {
+    "id": "ed04358b-38f1-42a5-836c-b3033b467f02",
+    "title": "袁世凯就任临时大总统",
+    "startYear": 1912,
+    "endYear": 1912,
+    "description": "袁世凯在北京就任中华民国临时大总统，临时政府迁都北京，北洋政府统治时期开始。",
+    "eventType": "political_event,leadership_change",
+    "createdAt": "2025-12-24T20:08:26.493+00:00",
+    "updatedAt": "2025-12-24T20:08:26.493+00:00"
+  },
+  {
+    "id": "ce9b0471-3a27-463b-b44d-2172591f477d",
+    "title": "袁世凯称帝",
+    "startYear": 1915,
+    "endYear": 1916,
+    "description": "袁世凯宣布复辟帝制，改国号为中华帝国，引发全国反对。",
+    "eventType": "political_event,emperor_claim",
+    "createdAt": "2025-12-24T20:08:26.494+00:00",
+    "updatedAt": "2025-12-24T20:08:26.494+00:00"
+  },
+  {
+    "id": "a3148dfe-ad6d-4157-8462-794484577c04",
+    "title": "护国运动",
+    "startYear": 1915,
+    "endYear": 1916,
+    "description": "蔡锷等宣布云南独立，组织护国军讨伐袁世凯，各地纷纷响应，最终迫使袁世凯取消帝制。",
+    "eventType": "war,rebellion",
+    "createdAt": "2025-12-24T20:08:26.494+00:00",
+    "updatedAt": "2025-12-24T20:08:26.494+00:00"
+  },
+  {
+    "id": "4876cd46-74ff-4f3c-886a-2a5ece126a74",
+    "title": "袁世凯去世",
+    "startYear": 1916,
+    "endYear": 1916,
+    "description": "袁世凯因尿毒症在北京去世，北洋军阀开始分裂为直系、皖系、奉系等派系。",
+    "eventType": "political_event,leadership_change",
+    "createdAt": "2025-12-24T20:08:26.495+00:00",
+    "updatedAt": "2025-12-24T20:08:26.495+00:00"
+  },
+  {
+    "id": "4e08f97f-8664-4841-a72d-3612829df884",
+    "title": "张勋复辟",
+    "startYear": 1917,
+    "endYear": 1917,
+    "description": "张勋率辫子军入京，拥戴溥仪复辟帝制，仅12天即被段祺瑞击败。",
+    "eventType": "political_event,restoration_attempt",
+    "createdAt": "2025-12-24T20:08:26.495+00:00",
+    "updatedAt": "2025-12-24T20:08:26.495+00:00"
+  },
+  {
+    "id": "d7f66735-16c8-43e1-9034-dd4020f577c4",
+    "title": "护法运动",
+    "startYear": 1917,
+    "endYear": 1922,
+    "description": "孙中山在广州组织护法军政府，反对段祺瑞破坏《临时约法》，维护共和制度。",
+    "eventType": "political_movement",
+    "createdAt": "2025-12-24T20:08:26.496+00:00",
+    "updatedAt": "2025-12-24T20:08:26.496+00:00"
+  },
+  {
+    "id": "ebee344b-b0fb-4033-9326-5f558ea77fbf",
+    "title": "五四运动",
+    "startYear": 1919,
+    "endYear": 1919,
+    "description": "北京学生因巴黎和会外交失败举行游行示威，抗议北洋政府卖国行径，随后演变为全国性的爱国运动。",
+    "eventType": "social_movement,cultural_revolution",
+    "createdAt": "2025-12-24T20:08:26.498+00:00",
+    "updatedAt": "2025-12-24T20:08:26.498+00:00"
+  },
+  {
+    "id": "4aeff0b7-a98c-4fed-a495-05c8da6e4610",
+    "title": "第一次直奉战争",
+    "startYear": 1922,
+    "endYear": 1922,
+    "description": "直系军阀吴佩孚与奉系军阀张作霖之间的战争，直系获胜，控制了北京政府。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T20:08:26.498+00:00",
+    "updatedAt": "2025-12-24T20:08:26.498+00:00"
+  },
+  {
+    "id": "19889856-9092-4b3d-9c5d-96849445738a",
+    "title": "第二次直奉战争",
+    "startYear": 1924,
+    "endYear": 1924,
+    "description": "直系与奉系再次爆发战争，冯玉祥发动北京政变，直系失败，奉系控制北京政府。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T20:08:26.499+00:00",
+    "updatedAt": "2025-12-24T20:08:26.499+00:00"
+  },
+  {
+    "id": "e4eff9cd-ad9c-45df-8be2-81a9097bae5f",
+    "title": "北伐战争开始",
+    "startYear": 1926,
+    "endYear": 1926,
+    "description": "国民革命军在广州誓师北伐，讨伐北洋军阀吴佩孚、孙传芳、张作霖。",
+    "eventType": "war,military_campaign",
+    "createdAt": "2025-12-24T20:08:26.500+00:00",
+    "updatedAt": "2025-12-24T20:08:26.500+00:00"
+  },
+  {
+    "id": "b4f636b6-cd8e-44a9-9ab4-cf4cba96603c",
+    "title": "北洋政府结束",
+    "startYear": 1928,
+    "endYear": 1928,
+    "description": "国民革命军占领北京，北洋政府统治结束，南京国民政府形式上统一全国。",
+    "eventType": "political_event,government_end",
+    "createdAt": "2025-12-24T20:08:26.501+00:00",
+    "updatedAt": "2025-12-24T20:08:26.501+00:00"
+  },
+  {
+    "id": "2bc28d72-08f3-4e9f-98f6-cdd6fd13c562",
+    "title": "东北易帜",
+    "startYear": 1928,
+    "endYear": 1928,
+    "description": "张学良宣布东北易帜，服从国民政府，国民政府形式上统一全国。",
+    "eventType": "political_event,unification",
+    "createdAt": "2025-12-24T20:08:26.502+00:00",
+    "updatedAt": "2025-12-24T20:08:26.502+00:00"
+  },
+  {
+    "id": "033fd15e-7f3e-4f3b-9051-e85d4ceb2990",
+    "title": "中原大战",
+    "startYear": 1930,
+    "endYear": 1930,
+    "description": "蒋介石与冯玉祥、阎锡山、李宗仁等军阀的战争，是中国近代史上规模最大的军阀混战。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T20:08:26.502+00:00",
+    "updatedAt": "2025-12-24T20:08:26.502+00:00"
+  },
+  {
+    "id": "dd0d2674-e515-4a53-8f5e-9777f07e0c5d",
+    "title": "九一八事变",
+    "startYear": 1931,
+    "endYear": 1931,
+    "description": "日本发动九一八事变，侵占中国东北，标志着日本局部侵华战争的开始。",
+    "eventType": "war,invasion",
+    "createdAt": "2025-12-24T20:08:26.503+00:00",
+    "updatedAt": "2025-12-24T20:08:26.503+00:00"
+  },
+  {
+    "id": "21576c1f-e3bf-4d99-b22b-ced340f8132b",
+    "title": "一二八事变",
+    "startYear": 1932,
+    "endYear": 1932,
+    "description": "日本发动一二八事变，进攻上海，中国第十九路军奋起抵抗。",
+    "eventType": "war,battle",
+    "createdAt": "2025-12-24T20:08:26.504+00:00",
+    "updatedAt": "2025-12-24T20:08:26.504+00:00"
+  },
+  {
+    "id": "5625f0f8-d179-40e3-a8d4-a5a446a24f15",
+    "title": "长城抗战",
+    "startYear": 1933,
+    "endYear": 1933,
+    "description": "中国军队在长城沿线抵抗日本侵略，是中国人民局部抗战的重要组成部分。",
+    "eventType": "war,defense",
+    "createdAt": "2025-12-24T20:08:26.505+00:00",
+    "updatedAt": "2025-12-24T20:08:26.505+00:00"
+  },
+  {
+    "id": "f688845f-3e3a-40cd-b450-5d3245fa4ce4",
+    "title": "西安事变",
+    "startYear": 1936,
+    "endYear": 1936,
+    "description": "张学良、杨虎城发动西安事变，扣留蒋介石，逼蒋抗日，最终促成抗日民族统一战线形成。",
+    "eventType": "political_event,peaceful_resolution",
+    "createdAt": "2025-12-24T20:08:26.506+00:00",
+    "updatedAt": "2025-12-24T20:08:26.506+00:00"
+  },
+  {
+    "id": "78e48e62-9e83-4bb6-aa4e-49d7011a8fbe",
+    "title": "七七卢沟桥事变",
+    "startYear": 1937,
+    "endYear": 1937,
+    "description": "日本发动七七卢沟桥事变，进攻北平，标志着日本全面侵华战争的开始，中国全面抗战开始。",
+    "eventType": "war,full-scale_invasion",
+    "createdAt": "2025-12-24T20:08:26.506+00:00",
+    "updatedAt": "2025-12-24T20:08:26.506+00:00"
+  },
+  {
+    "id": "3b9fbd87-be8e-43e6-9d12-992962fb882b",
+    "title": "淞沪会战",
+    "startYear": 1937,
+    "endYear": 1937,
+    "description": "中国军队在上海抵抗日本侵略，是抗日战争中规模最大、战斗最激烈的战役之一。",
+    "eventType": "war,battle",
+    "createdAt": "2025-12-24T20:08:26.507+00:00",
+    "updatedAt": "2025-12-24T20:08:26.507+00:00"
+  },
+  {
+    "id": "c20a62f6-c5c5-4eac-a1e4-b6052f5bb2fe",
+    "title": "南京大屠杀",
+    "startYear": 1937,
+    "endYear": 1938,
+    "description": "日军占领南京后，进行了长达6周的惨绝人寰的大屠杀，杀害中国平民和放下武器的士兵超过30万人。",
+    "eventType": "war,genocide",
+    "createdAt": "2025-12-24T20:08:26.508+00:00",
+    "updatedAt": "2025-12-24T20:08:26.508+00:00"
+  },
+  {
+    "id": "03634ad4-a406-43d7-a712-51e334998a62",
+    "title": "武汉会战",
+    "startYear": 1938,
+    "endYear": 1938,
+    "description": "中国军队在武汉地区抵抗日本侵略，是抗日战争中规模最大的战役之一，标志着抗日战争进入相持阶段。",
+    "eventType": "war,battle",
+    "createdAt": "2025-12-24T20:08:26.508+00:00",
+    "updatedAt": "2025-12-24T20:08:26.508+00:00"
+  },
+  {
+    "id": "54fba1ff-569e-4a18-aea6-723157ba1fdd",
+    "title": "百团大战",
+    "startYear": 1940,
+    "endYear": 1940,
+    "description": "八路军发动百团大战，大规模破袭日军交通线，沉重打击了日本侵略者的嚣张气焰。",
+    "eventType": "war,offensive",
+    "createdAt": "2025-12-24T20:08:26.509+00:00",
+    "updatedAt": "2025-12-24T20:08:26.509+00:00"
+  },
+  {
+    "id": "b9daf052-cb4a-4849-92f9-4a4daec16522",
+    "title": "太平洋战争爆发",
+    "startYear": 1941,
+    "endYear": 1941,
+    "description": "日本偷袭珍珠港，太平洋战争爆发，中国抗战进入新阶段，成为世界反法西斯战争的重要组成部分。",
+    "eventType": "war,international_conflict",
+    "createdAt": "2025-12-24T20:08:26.510+00:00",
+    "updatedAt": "2025-12-24T20:08:26.510+00:00"
+  },
+  {
+    "id": "402cdb70-4af2-4496-ae9a-530a330cd469",
+    "title": "中国远征军入缅作战",
+    "startYear": 1942,
+    "endYear": 1945,
+    "description": "中国远征军入缅作战，支援盟军，打通中印公路，为世界反法西斯战争作出重要贡献。",
+    "eventType": "war,allied_campaign",
+    "createdAt": "2025-12-24T20:08:26.510+00:00",
+    "updatedAt": "2025-12-24T20:08:26.510+00:00"
+  },
+  {
+    "id": "7b66b50b-9367-43c1-93c4-ac142124480b",
+    "title": "日本投降",
+    "startYear": 1945,
+    "endYear": 1945,
+    "description": "1945年8月15日，日本宣布无条件投降；9月2日，正式签署投降书，标志着中国抗日战争和第二次世界大战的胜利结束。",
+    "eventType": "war,ceasefire,surrender",
+    "createdAt": "2025-12-24T20:08:26.511+00:00",
+    "updatedAt": "2025-12-24T20:08:26.511+00:00"
+  },
+  {
+    "id": "736dd6b0-8817-45a7-a555-4c2f68e32ad5",
+    "title": "重庆谈判",
+    "startYear": 1945,
+    "endYear": 1945,
+    "description": "毛泽东与蒋介石在重庆进行和平谈判，签订《双十协定》，但未能阻止内战爆发。",
+    "eventType": "political_event,negotiations",
+    "createdAt": "2025-12-24T20:08:26.511+00:00",
+    "updatedAt": "2025-12-24T20:08:26.511+00:00"
+  },
+  {
+    "id": "dc82d890-7e16-4bb1-9a65-378a565a7f96",
+    "title": "上党战役",
+    "startYear": 1945,
+    "endYear": 1945,
+    "description": "中国共产党领导的晋冀鲁豫军区部队在山西上党地区反击国民党军进攻的战役，是解放战争的第一仗。",
+    "eventType": "war,battle",
+    "createdAt": "2025-12-24T20:08:26.511+00:00",
+    "updatedAt": "2025-12-24T20:08:26.511+00:00"
+  },
+  {
+    "id": "4f35b3b2-045f-4f22-9591-38851aea5e21",
+    "title": "全面内战爆发",
+    "startYear": 1946,
+    "endYear": 1946,
+    "description": "国民党军向中原解放区发动大规模进攻，标志着全面内战爆发。",
+    "eventType": "war,civil_war",
+    "createdAt": "2025-12-24T20:08:26.512+00:00",
+    "updatedAt": "2025-12-24T20:08:26.512+00:00"
+  },
+  {
+    "id": "2d9adc01-28c8-47b8-b406-f4a5394d4ff3",
+    "title": "辽沈战役",
+    "startYear": 1948,
+    "endYear": 1948,
+    "description": "中国人民解放军在东北战场进行的战略决战，解放了东北全境，使解放战争形势发生根本转折。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T20:08:26.512+00:00",
+    "updatedAt": "2025-12-24T20:08:26.512+00:00"
+  },
+  {
+    "id": "9e3843d5-0921-486f-8900-eb074b846d89",
+    "title": "淮海战役",
+    "startYear": 1948,
+    "endYear": 1949,
+    "description": "中国人民解放军在华东、中原战场进行的战略决战，歼灭国民党军主力，加速了解放战争胜利进程。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T20:08:26.513+00:00",
+    "updatedAt": "2025-12-24T20:08:26.513+00:00"
+  },
+  {
+    "id": "9b1e9abe-c48d-49ea-9b02-1672bfa41736",
+    "title": "平津战役",
+    "startYear": 1948,
+    "endYear": 1949,
+    "description": "中国人民解放军在华北战场进行的战略决战，和平解放北平，基本解放华北地区。",
+    "eventType": "war,decisive_battle",
+    "createdAt": "2025-12-24T20:08:26.514+00:00",
+    "updatedAt": "2025-12-24T20:08:26.514+00:00"
+  },
+  {
+    "id": "dc5d4fe4-5b66-41df-a82f-60aa87d82168",
+    "title": "渡江战役",
+    "startYear": 1949,
+    "endYear": 1949,
+    "description": "中国人民解放军百万雄师横渡长江，解放南京，推翻了国民党政权在大陆的统治。",
+    "eventType": "war,offensive",
+    "createdAt": "2025-12-24T20:08:26.516+00:00",
+    "updatedAt": "2025-12-24T20:08:26.516+00:00"
+  },
+  {
+    "id": "73c110b6-842b-45aa-9961-5e586adab812",
+    "title": "南京解放",
+    "startYear": 1949,
+    "endYear": 1949,
+    "description": "中国人民解放军第三野战军解放南京，标志着国民党政权在大陆的统治结束。",
+    "eventType": "war,offensive,occupation",
+    "createdAt": "2025-12-24T20:08:26.517+00:00",
+    "updatedAt": "2025-12-24T20:08:26.517+00:00"
+  },
+  {
+    "id": "3145f6c2-94e9-4725-aa66-75d8ea9d8213",
+    "title": "上海解放",
+    "startYear": 1949,
+    "endYear": 1949,
+    "description": "中国人民解放军解放上海，是渡江战役的重要组成部分，标志着华东地区的解放。",
+    "eventType": "war,offensive,occupation",
+    "createdAt": "2025-12-24T20:08:26.518+00:00",
+    "updatedAt": "2025-12-24T20:08:26.518+00:00"
+  },
+  {
+    "id": "1d4dcbf2-6756-43a5-bc0b-ae2922a690dd",
+    "title": "中国人民政治协商会议第一次全体会议",
+    "startYear": 1949,
+    "endYear": 1949,
+    "description": "中国人民政治协商会议第一次全体会议在北平召开，通过了《中国人民政治协商会议共同纲领》，确定了新中国的国体、政体和各项基本政策。",
+    "eventType": "political_event,constitution",
+    "createdAt": "2025-12-24T20:08:26.519+00:00",
+    "updatedAt": "2025-12-24T20:08:26.519+00:00"
+  },
+  {
+    "id": "c344dc4a-441b-4608-8d0a-24ed31568465",
+    "title": "中华人民共和国成立",
+    "startYear": 1949,
+    "endYear": 1949,
+    "description": "毛泽东在天安门城楼宣布中华人民共和国成立，标志着中国新民主主义革命的胜利和半殖民地半封建社会的结束，中国进入了人民当家作主的新纪元。",
+    "eventType": "political_event,foundation",
+    "createdAt": "2025-12-24T20:08:26.520+00:00",
+    "updatedAt": "2025-12-24T20:08:26.520+00:00"
+  },
+  {
+    "id": "dc082f86-9359-4e6b-a43b-3f730e9850c0",
+    "title": "西藏和平解放",
+    "startYear": 1951,
+    "endYear": 1951,
+    "description": "中央人民政府与西藏地方政府签订《关于和平解放西藏办法的协议》，西藏和平解放，中国大陆实现统一。",
+    "eventType": "political_event,unification",
+    "createdAt": "2025-12-24T20:08:26.520+00:00",
+    "updatedAt": "2025-12-24T20:08:26.520+00:00"
+  },
+  {
+    "id": "a40706d4-5532-4ed8-acff-33da87b369ac",
+    "title": "抗美援朝战争",
+    "startYear": 1950,
+    "endYear": 1953,
+    "description": "中国人民志愿军入朝参战，与朝鲜人民军共同抗击美国为首的联合国军，最终签订停战协定，维护了朝鲜半岛的和平与稳定。",
+    "eventType": "war,defensive_war,international",
+    "createdAt": "2025-12-24T20:08:26.521+00:00",
+    "updatedAt": "2025-12-24T20:08:26.521+00:00"
+  },
+  {
+    "id": "c97ac8a8-9634-47b2-90de-11cb5228babd",
+    "title": "土地改革",
+    "startYear": 1950,
+    "endYear": 1952,
+    "description": "中央人民政府颁布《中华人民共和国土地改革法》，废除封建土地所有制，实行农民土地所有制，极大地解放了农村生产力。",
+    "eventType": "political_event,economic_reform,social_change",
+    "createdAt": "2025-12-24T20:08:26.522+00:00",
+    "updatedAt": "2025-12-24T20:08:26.522+00:00"
+  },
+  {
+    "id": "2c966109-67d3-4784-abe6-98d7a406c579",
+    "title": "第一个五年计划",
+    "startYear": 1953,
+    "endYear": 1957,
+    "description": "中国开始实施第一个五年计划，重点发展重工业，初步建立了独立的工业体系和国民经济体系。",
+    "eventType": "economic_event,development_plan,industrialization",
+    "createdAt": "2025-12-24T20:08:26.522+00:00",
+    "updatedAt": "2025-12-24T20:08:26.522+00:00"
+  },
+  {
+    "id": "bf4adc38-9167-4c1d-8e2d-14272d94269d",
+    "title": "第一届全国人民代表大会",
+    "startYear": 1954,
+    "endYear": 1954,
+    "description": "第一届全国人民代表大会第一次会议在北京召开，通过了《中华人民共和国宪法》，确立了人民代表大会制度为国家根本政治制度。",
+    "eventType": "political_event,constitution,legislative",
+    "createdAt": "2025-12-24T20:08:26.523+00:00",
+    "updatedAt": "2025-12-24T20:08:26.523+00:00"
+  },
+  {
+    "id": "6e948d6a-401d-4d7d-ab4d-54eb792c7b09",
+    "title": "社会主义改造",
+    "startYear": 1953,
+    "endYear": 1956,
+    "description": "中国对农业、手工业和资本主义工商业进行社会主义改造，实现了生产资料公有制的社会主义制度确立。",
+    "eventType": "political_event,economic_reform,system_change",
+    "createdAt": "2025-12-24T20:08:26.523+00:00",
+    "updatedAt": "2025-12-24T20:08:26.523+00:00"
+  },
+  {
+    "id": "e4e91959-bc09-4cb9-99ce-e394b110e28c",
+    "title": "庐山会议",
+    "startYear": 1959,
+    "endYear": 1959,
+    "description": "中共中央在庐山召开政治局扩大会议，随后召开八届八中全会，错误地开展了对彭德怀的批判，标志着党内左倾错误的进一步发展。",
+    "eventType": "political_event,internal_party,decision_making",
+    "createdAt": "2025-12-24T20:08:26.524+00:00",
+    "updatedAt": "2025-12-24T20:08:26.524+00:00"
+  },
+  {
+    "id": "7846dd2a-8581-4548-9c86-f19243194995",
+    "title": "三年困难时期",
+    "startYear": 1959,
+    "endYear": 1962,
+    "description": "中国的一场严重饥荒。由大跃进政策不当导致，造成了大量人口死亡，是中国现代历史上的一场重大灾难。",
+    "eventType": "natural_disaster,economic_crisis",
+    "createdAt": "2025-12-24T20:08:26.525+00:00",
+    "updatedAt": "2025-12-24T20:08:26.525+00:00"
+  },
+  {
+    "id": "f7a7355b-02e4-4579-9aa6-24780028ecb8",
+    "title": "文化大革命",
+    "startYear": 1966,
+    "endYear": 1976,
+    "description": "毛泽东发动的一场全社会性的政治运动。持续十年，造成了严重的社会动荡和文化破坏，最终导致了多方面的倒退。",
+    "eventType": "political_movement,social_upheaval",
+    "createdAt": "2025-12-24T20:08:26.525+00:00",
+    "updatedAt": "2025-12-24T20:08:26.525+00:00"
+  },
+  {
+    "id": "5f0f93e9-31f6-4cc8-94d3-ee273b955f23",
+    "title": "毛泽东逝世",
+    "startYear": 1976,
+    "endYear": 1976,
+    "description": "中国共产党中央委员会主席、中国人民解放军主席毛泽东逝世，享年83岁，中国进入历史转折点。",
+    "eventType": "political_event,death,succession",
+    "createdAt": "2025-12-24T20:08:26.525+00:00",
+    "updatedAt": "2025-12-24T20:08:26.525+00:00"
+  },
+  {
+    "id": "c67e8a14-b3bc-4cdc-9f49-555784c2f623",
+    "title": "粉碎四人帮",
+    "startYear": 1976,
+    "endYear": 1976,
+    "description": "中共中央采取果断措施，粉碎了以江青为首的四人帮反革命集团，标志着文化大革命的结束。",
+    "eventType": "political_event,internal_party,coup",
+    "createdAt": "2025-12-24T20:08:26.526+00:00",
+    "updatedAt": "2025-12-24T20:08:26.526+00:00"
+  },
+  {
+    "id": "722085d9-581f-402b-97b0-d28a7413cd30",
+    "title": "邓小平恢复工作",
+    "startYear": 1977,
+    "endYear": 1977,
+    "description": "中共十届三中全会决定恢复邓小平中共中央副主席、国务院副总理、中央军委副主席等职务，邓小平重新复出工作。",
+    "eventType": "political_event,succession,leadership",
+    "createdAt": "2025-12-24T20:08:26.526+00:00",
+    "updatedAt": "2025-12-24T20:08:26.526+00:00"
+  },
+  {
+    "id": "45133d2f-f762-4541-b73f-015937927a62",
+    "title": "真理标准问题大讨论",
+    "startYear": 1978,
+    "endYear": 1978,
+    "description": "《光明日报》发表《实践是检验真理的唯一标准》特约评论员文章，引发全国范围的真理标准问题大讨论，为拨乱反正和改革开放奠定了思想基础。",
+    "eventType": "political_event,ideological,debate",
+    "createdAt": "2025-12-24T20:08:26.527+00:00",
+    "updatedAt": "2025-12-24T20:08:26.527+00:00"
+  },
+  {
+    "id": "806c2810-c0b4-4b9c-be19-4695c43be82f",
+    "title": "中共十一届三中全会",
+    "startYear": 1978,
+    "endYear": 1978,
+    "description": "中共十一届三中全会在北京召开，确立了以经济建设为中心，实行改革开放的基本国策，实现了党和国家工作中心的历史性转变。",
+    "eventType": "political_event,reform,policy",
+    "createdAt": "2025-12-24T20:08:26.527+00:00",
+    "updatedAt": "2025-12-24T20:08:26.527+00:00"
+  },
+  {
+    "id": "1a5143b8-d9d9-458d-9fd5-1a911f1485ec",
+    "title": "家庭联产承包责任制实行",
+    "startYear": 1978,
+    "endYear": 1978,
+    "description": "安徽省凤阳县小岗村18户农民秘密签订契约，实行包产到户，拉开了中国农村改革的序幕，家庭联产承包责任制逐渐在全国推广。",
+    "eventType": "economic_event,agricultural_reform,policy",
+    "createdAt": "2025-12-24T20:08:26.528+00:00",
+    "updatedAt": "2025-12-24T20:08:26.528+00:00"
+  },
+  {
+    "id": "ab3d9259-327c-4e7b-8892-710694f4be02",
+    "title": "深圳等经济特区建立",
+    "startYear": 1980,
+    "endYear": 1980,
+    "description": "全国人大常委会批准在深圳、珠海、汕头和厦门设立经济特区，标志着中国对外开放战略的实施。",
+    "eventType": "economic_event,special_zone,reform",
+    "createdAt": "2025-12-24T20:08:26.528+00:00",
+    "updatedAt": "2025-12-24T20:08:26.528+00:00"
+  },
+  {
+    "id": "fb4cbb08-b451-4139-9d8e-d3de74e0b888",
+    "title": "邓小平南方谈话",
+    "startYear": 1992,
+    "endYear": 1992,
+    "description": "邓小平视察深圳、珠海、上海等地，发表重要谈话，进一步解放思想，推动改革开放和现代化建设进入新阶段。",
+    "eventType": "political_event,ideological,reform",
+    "createdAt": "2025-12-24T20:08:26.529+00:00",
+    "updatedAt": "2025-12-24T20:08:26.529+00:00"
+  },
+  {
+    "id": "73af12db-c5aa-473c-b8fe-784853296862",
+    "title": "香港回归",
+    "startYear": 1997,
+    "endYear": 1997,
+    "description": "中华人民共和国对香港恢复行使主权，香港特别行政区成立，实行一国两制方针。",
+    "eventType": "political_event,unification,diplomacy",
+    "createdAt": "2025-12-24T20:08:26.529+00:00",
+    "updatedAt": "2025-12-24T20:08:26.529+00:00"
+  },
+  {
+    "id": "dd99a51f-56d5-40ca-ab1b-87fab82e8f9a",
+    "title": "澳门回归",
+    "startYear": 1999,
+    "endYear": 1999,
+    "description": "中华人民共和国对澳门恢复行使主权，澳门特别行政区成立，实行一国两制方针。",
+    "eventType": "political_event,unification,diplomacy",
+    "createdAt": "2025-12-24T20:08:26.530+00:00",
+    "updatedAt": "2025-12-24T20:08:26.530+00:00"
+  },
+  {
+    "id": "a8eda10f-3e12-4a7c-8310-e8c82e9a3ffd",
+    "title": "中国加入世界贸易组织",
+    "startYear": 2001,
+    "endYear": 2001,
+    "description": "中国正式加入世界贸易组织，标志着中国对外开放进入新阶段，全面融入经济全球化进程。",
+    "eventType": "economic_event,trade,international",
+    "createdAt": "2025-12-24T20:08:26.530+00:00",
+    "updatedAt": "2025-12-24T20:08:26.530+00:00"
+  },
+  {
+    "id": "3db63e17-a1d9-4cb6-8e41-39b155c32d0b",
+    "title": "北京奥运会",
+    "startYear": 2008,
+    "endYear": 2008,
+    "description": "第29届夏季奥林匹克运动会在北京成功举办，展示了中国改革开放以来的发展成就和国际影响力。",
+    "eventType": "cultural_event,sports,international",
+    "createdAt": "2025-12-24T20:08:26.531+00:00",
+    "updatedAt": "2025-12-24T20:08:26.531+00:00"
+  },
+  {
+    "id": "dff3d869-93ea-476a-aa57-e47a044b33c4",
+    "title": "中国特色社会主义进入新时代",
+    "startYear": 2017,
+    "endYear": 2017,
+    "description": "中共十九大召开，习近平总书记宣布中国特色社会主义进入新时代，确立习近平新时代中国特色社会主义思想为党必须长期坚持的指导思想。",
+    "eventType": "political_event,ideological,leadership",
+    "createdAt": "2025-12-24T20:08:26.531+00:00",
+    "updatedAt": "2025-12-24T20:08:26.531+00:00"
+  },
+  {
+    "id": "51e3ad7f-b753-498a-ad85-c2f2f9a0cf9d",
+    "title": "全面建成小康社会",
+    "startYear": 2021,
+    "endYear": 2021,
+    "description": "中共中央庆祝中国共产党成立100周年大会上，习近平总书记庄严宣告，经过全党全国各族人民持续奋斗，我们实现了第一个百年奋斗目标，在中华大地上全面建成了小康社会。",
+    "eventType": "political_event,development,achievement",
+    "createdAt": "2025-12-24T20:08:26.532+00:00",
+    "updatedAt": "2025-12-24T20:08:26.532+00:00"
+  }
+]

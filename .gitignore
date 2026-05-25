@@ -34,11 +34,16 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# Database (keep prisma/dev.db for deployment with initial data)
+# Database
+# dev.db 不入仓:
+#   - 仓库膨胀风险(SQLite 二进制不友好 merge)
+#   - 真实数据通过 prisma/seed-data/*.json + `prisma db seed` 重建
 *.db-shm
 *.db-wal
-# Uncomment the following line if you don't want to track dev.db
-# prisma/dev.db*
+backend/dev.db
+backend/dev.db.bak
+backend/prisma/dev.db
+backend/prisma/dev.db.bak
 
 # OS
 .DS_Store

@@ -32,9 +32,10 @@
 | `8fe6336` | §4.4 M1 治理文档全套(CONTRIBUTING / CoC / CHANGELOG / Issue 模板 / dependabot) |
 | `ec26deb` | §1.3 EventService 范围筛选与边界计算拆分(244→229 行) |
 | `<本轮>` | §2.7 真正 404 页面 + §4.4 README 修正 + §6.3 e2e 冒烟测试 |
+| `<本轮>` | §3.3 dev.db 剥离 → seed-data/*.json + `bun prisma/seed.ts`,补迁移对齐表结构 |
 | 既有 | §2.7 路由懒加载 已用 `React.lazy` |
 
-- **P0**:3 / 4 完成(剩 dev.db 剥离推迟)
+- **P0**:4 / 4 完成(§3.3 dev.db 剥离已落地,改用 seed-data JSON + `prisma db seed` 重建)
 - **P1**:4 / 6 完成(状态合并推迟;pre-commit hooks 与 openapi-generator 受沙箱阻塞)
 
 ---
@@ -79,13 +80,18 @@
 - 改动会牵动后端 6 个模块和前端 6 套 store(关联 §1.4 / §3.2)
 - **工作量**:2~3 天(含数据迁移)
 
-#### 3.3 dev.db 被提交进仓库 ⏸ 已决定推迟
+#### 3.3 dev.db 被提交进仓库 ✅(本轮)
 
-- [backend/prisma/dev.db](backend/prisma/dev.db) 大小 **664 KB**
-- `.gitignore` 中有注释说明"保留用于部署初始数据"
-- 风险:git 历史膨胀、二进制冲突难合并、团队成员本地状态污染
-- **方案**:写 `prisma/seed.ts` → `.gitignore` 加 `dev.db` → CI 执行 `prisma migrate deploy && prisma db seed`
-- **工作量**:1~2h
+- 历史:[backend/prisma/dev.db](backend/prisma/dev.db) 曾被纳入版本控制(664 KB),`.gitignore` 中保留"用于部署初始数据"的妥协注释
+- 风险:git 历史膨胀、二进制 merge 冲突、团队成员本地状态污染
+- **方案落地**:
+  - 新增 [backend/scripts/export-db.ts](backend/scripts/export-db.ts):一次性把 15 张表(共 732 行)导出到 `backend/prisma/seed-data/*.json`,JSON 字段已递归去转义
+  - 新增 [backend/prisma/seed.ts](backend/prisma/seed.ts):按 FK 顺序读取 seed-data 并 `upsert`,幂等
+  - 新增对齐迁移 `20260526024505_align_figure_columns_with_schema/migration.sql`:补齐 `tang/song/yuan/ming/qing/sanguo` 此前用 `db push` 直接打入数据库、未生成 migration 的 ~53 个列
+  - `.gitignore` 显式排除 `backend/{prisma/,}dev.db{,.bak}`,`git rm --cached` 解除追踪
+  - Prisma 7 走 [backend/prisma.config.ts](backend/prisma.config.ts) 的 `migrations.seed: 'bun ./prisma/seed.ts'`(7.x 不再读 `package.json#prisma.seed`)
+  - [backend/Dockerfile](backend/Dockerfile) 运行时切到 `oven/bun:1.3-slim` + 启动钩子 `prisma migrate deploy && (首次跑 prisma db seed) && bun dist/src/main.js`
+- **验证**:`rm dev.db && bunx prisma migrate deploy && bunx prisma db seed` 重建出 732 行,与原 dev.db 行数一致
 
 ---
 

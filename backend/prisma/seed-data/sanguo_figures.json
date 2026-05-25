@@ -1,0 +1,984 @@
+[
+  {
+    "id": "7c439a4d-03a6-42bb-b325-257529b70753",
+    "name": "曹操",
+    "courtesy": "孟德",
+    "role": "ruler",
+    "kingdom": "魏",
+    "birthYear": 155,
+    "deathYear": 220,
+    "positions": [
+      "魏王",
+      "丞相"
+    ],
+    "faction": null,
+    "politicalViews": "唯才是举，不拘一格",
+    "achievements": [
+      "统一北方",
+      "官渡之战大败袁绍",
+      "建安文学领袖",
+      "屯田制度"
+    ],
+    "battles": null,
+    "biography": "东汉末年杰出的政治家、军事家、文学家。统一北方，奠定曹魏基业，是三国时期最具影响力的人物之一。",
+    "events": [
+      {
+        "name": "官渡之战",
+        "year": 200,
+        "role": "主帅",
+        "description": "以少胜多，大败袁绍"
+      },
+      {
+        "name": "赤壁之战",
+        "year": 208,
+        "role": "主帅",
+        "description": "南下失败，三分天下格局形成"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "太祖运筹演谋，鞭挞宇内，揽申、商之法术，该韩、白之奇策。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》",
+      "《后汉书》"
+    ],
+    "createdAt": "2025-12-24T19:53:48.275+00:00",
+    "updatedAt": "2025-12-24T19:53:48.275+00:00"
+  },
+  {
+    "id": "66ccb398-2ba6-4631-a604-2c9aa379c7bb",
+    "name": "刘备",
+    "courtesy": "玄德",
+    "role": "ruler",
+    "kingdom": "蜀",
+    "birthYear": 161,
+    "deathYear": 223,
+    "positions": [
+      "蜀汉昭烈帝"
+    ],
+    "faction": null,
+    "politicalViews": "以德服人，兴复汉室",
+    "achievements": [
+      "建立蜀汉政权",
+      "三顾茅庐",
+      "入主益州",
+      "汉中之战"
+    ],
+    "battles": null,
+    "biography": "蜀汉开国皇帝，汉室宗亲。以仁德著称，三顾茅庐请诸葛亮出山，建立蜀汉政权。",
+    "events": [
+      {
+        "name": "三顾茅庐",
+        "year": 207,
+        "role": "求贤者",
+        "description": "三次拜访诸葛亮，请其出山"
+      },
+      {
+        "name": "夷陵之战",
+        "year": 222,
+        "role": "主帅",
+        "description": "为关羽报仇伐吴，大败而归"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "先主之弘毅宽厚，知人待士，盖有高祖之风，英雄之器焉。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T19:53:48.276+00:00",
+    "updatedAt": "2025-12-24T19:53:48.276+00:00"
+  },
+  {
+    "id": "0b07ed98-ce1c-459e-b1d0-fe6d2fb2e9a1",
+    "name": "孙权",
+    "courtesy": "仲谋",
+    "role": "ruler",
+    "kingdom": "吴",
+    "birthYear": 182,
+    "deathYear": 252,
+    "positions": [
+      "吴大帝"
+    ],
+    "faction": null,
+    "politicalViews": "保境安民，联蜀抗魏",
+    "achievements": [
+      "建立东吴政权",
+      "赤壁之战联刘抗曹",
+      "开发江南",
+      "派卫温到达夷洲"
+    ],
+    "battles": null,
+    "biography": "东吴开国皇帝，孙坚之子、孙策之弟。继承父兄基业，建立东吴政权，与魏、蜀三分天下。",
+    "events": [
+      {
+        "name": "赤壁之战",
+        "year": 208,
+        "role": "决策者",
+        "description": "联合刘备大败曹操"
+      },
+      {
+        "name": "夷陵之战",
+        "year": 222,
+        "role": "决策者",
+        "description": "大败刘备，巩固东吴"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "孙权屈身忍辱，任才尚计，有勾践之奇，英人之杰矣。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T19:53:48.277+00:00",
+    "updatedAt": "2025-12-24T19:53:48.277+00:00"
+  },
+  {
+    "id": "9e635f12-d6c8-4a3d-8c16-f3fa4bba08fb",
+    "name": "诸葛亮",
+    "courtesy": "孔明",
+    "role": "strategist",
+    "kingdom": "蜀",
+    "birthYear": 181,
+    "deathYear": 234,
+    "positions": [
+      "丞相",
+      "武乡侯"
+    ],
+    "faction": null,
+    "politicalViews": "兴复汉室，还于旧都",
+    "achievements": [
+      "隆中对策",
+      "联吴抗曹",
+      "治理蜀汉",
+      "发明木牛流马、诸葛连弩"
+    ],
+    "battles": null,
+    "biography": "三国时期蜀汉丞相，杰出的政治家、军事家、发明家。辅佐刘备建立蜀汉，六出祁山北伐曹魏，鞠躬尽瘁，死而后已。",
+    "events": [
+      {
+        "name": "隆中对",
+        "year": 207,
+        "role": "献策者",
+        "description": "提出三分天下战略"
+      },
+      {
+        "name": "北伐曹魏",
+        "year": 228,
+        "role": "主帅",
+        "description": "六出祁山，北伐曹魏"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "诸葛亮之为相国也，抚百姓，示仪轨，约官职，从权制，开诚心，布公道。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》",
+      "《出师表》"
+    ],
+    "createdAt": "2025-12-24T19:53:48.278+00:00",
+    "updatedAt": "2025-12-24T19:53:48.278+00:00"
+  },
+  {
+    "id": "64b4f3c0-6f89-41a6-9e85-5fd60d01f058",
+    "name": "关羽",
+    "courtesy": "云长",
+    "role": "general",
+    "kingdom": "蜀",
+    "birthYear": 160,
+    "deathYear": 220,
+    "positions": [
+      "前将军",
+      "汉寿亭侯"
+    ],
+    "faction": null,
+    "politicalViews": "忠义为本",
+    "achievements": [
+      "斩颜良诛文丑",
+      "过五关斩六将",
+      "水淹七军",
+      "威震华夏"
+    ],
+    "battles": null,
+    "biography": "三国时期蜀汉名将，与刘备、张飞桃园结义。以忠义著称，被后世尊为\"武圣\"、\"关帝\"。",
+    "events": [
+      {
+        "name": "斩颜良",
+        "year": 200,
+        "role": "先锋",
+        "description": "官渡之战斩杀袁绍大将颜良"
+      },
+      {
+        "name": "水淹七军",
+        "year": 219,
+        "role": "主帅",
+        "description": "大败于禁，威震华夏"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "关羽、张飞皆称万人之敌，为世虎臣。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T19:53:48.278+00:00",
+    "updatedAt": "2025-12-24T19:53:48.278+00:00"
+  },
+  {
+    "id": "adf648d6-f7b7-4881-becb-fd62e61dbabd",
+    "name": "张飞",
+    "courtesy": "益德",
+    "role": "general",
+    "kingdom": "蜀",
+    "birthYear": 167,
+    "deathYear": 221,
+    "positions": [
+      "车骑将军",
+      "西乡侯"
+    ],
+    "faction": null,
+    "politicalViews": "忠义为本",
+    "achievements": [
+      "长坂坡退敌",
+      "义释严颜",
+      "大败张郃"
+    ],
+    "battles": null,
+    "biography": "三国时期蜀汉名将，与刘备、关羽桃园结义。勇猛过人，长坂坡一声怒吼吓退曹军。",
+    "events": [
+      {
+        "name": "长坂坡",
+        "year": 208,
+        "role": "断后",
+        "description": "据水断桥，吓退曹军"
+      },
+      {
+        "name": "入川之战",
+        "year": 214,
+        "role": "先锋",
+        "description": "义释严颜，攻取巴郡"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "飞雄壮威猛，亚于关羽，魏谋臣程昱等咸称羽、飞万人之敌也。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T19:53:48.279+00:00",
+    "updatedAt": "2025-12-24T19:53:48.279+00:00"
+  },
+  {
+    "id": "9b0f4ec3-918b-4aba-8e62-2c333ea5d292",
+    "name": "赵云",
+    "courtesy": "子龙",
+    "role": "general",
+    "kingdom": "蜀",
+    "birthYear": 168,
+    "deathYear": 229,
+    "positions": [
+      "镇军将军",
+      "永昌亭侯"
+    ],
+    "faction": null,
+    "politicalViews": "忠君报国",
+    "achievements": [
+      "长坂坡救阿斗",
+      "截江夺阿斗",
+      "汉水之战"
+    ],
+    "battles": null,
+    "biography": "三国时期蜀汉名将，以勇武和忠诚著称。长坂坡单骑救主，被誉为\"常胜将军\"。",
+    "events": [
+      {
+        "name": "长坂坡",
+        "year": 208,
+        "role": "护卫",
+        "description": "单骑救出刘禅"
+      },
+      {
+        "name": "汉水之战",
+        "year": 219,
+        "role": "将领",
+        "description": "以少胜多，大败曹军"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "云身长八尺，姿颜雄伟，为本郡所举。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T19:53:48.280+00:00",
+    "updatedAt": "2025-12-24T19:53:48.280+00:00"
+  },
+  {
+    "id": "dde47a25-01ce-46b5-9ad1-097775fbcb48",
+    "name": "司马懿",
+    "courtesy": "仲达",
+    "role": "strategist",
+    "kingdom": "魏",
+    "birthYear": 179,
+    "deathYear": 251,
+    "positions": [
+      "太傅",
+      "大将军"
+    ],
+    "faction": null,
+    "politicalViews": "隐忍待时，谋定后动",
+    "achievements": [
+      "抵御诸葛亮北伐",
+      "平定辽东",
+      "高平陵之变",
+      "奠定西晋基业"
+    ],
+    "battles": null,
+    "biography": "三国时期曹魏权臣，西晋王朝的奠基人。多次抵御诸葛亮北伐，后发动高平陵之变，掌控曹魏政权。",
+    "events": [
+      {
+        "name": "空城计",
+        "year": 228,
+        "role": "对手",
+        "description": "与诸葛亮斗智"
+      },
+      {
+        "name": "高平陵之变",
+        "year": 249,
+        "role": "主导者",
+        "description": "发动政变，掌控曹魏"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "宣帝之雄略内断，固非常人所及。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》",
+      "《晋书》"
+    ],
+    "createdAt": "2025-12-24T19:53:48.281+00:00",
+    "updatedAt": "2025-12-24T19:53:48.281+00:00"
+  },
+  {
+    "id": "357c8247-75f4-44b7-8c6d-487caa06d096",
+    "name": "周瑜",
+    "courtesy": "公瑾",
+    "role": "strategist",
+    "kingdom": "吴",
+    "birthYear": 175,
+    "deathYear": 210,
+    "positions": [
+      "大都督",
+      "偏将军"
+    ],
+    "faction": null,
+    "politicalViews": "联刘抗曹",
+    "achievements": [
+      "赤壁之战大败曹操",
+      "南郡之战",
+      "精通音律"
+    ],
+    "battles": null,
+    "biography": "三国时期东吴名将，赤壁之战的主要指挥者。精通音律，风流倜傥，被誉为\"美周郎\"。",
+    "events": [
+      {
+        "name": "赤壁之战",
+        "year": 208,
+        "role": "主帅",
+        "description": "火烧赤壁，大败曹操"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "瑜少精意于音乐，虽三爵之后，其有阙误，瑜必知之，知之必顾。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T19:53:48.282+00:00",
+    "updatedAt": "2025-12-24T19:53:48.282+00:00"
+  },
+  {
+    "id": "67a4a87a-3c2c-4812-8045-95284c242859",
+    "name": "陆逊",
+    "courtesy": "伯言",
+    "role": "strategist",
+    "kingdom": "吴",
+    "birthYear": 183,
+    "deathYear": 245,
+    "positions": [
+      "丞相",
+      "大都督"
+    ],
+    "faction": null,
+    "politicalViews": "稳健持重",
+    "achievements": [
+      "夷陵之战大败刘备",
+      "石亭之战",
+      "治理荆州"
+    ],
+    "battles": null,
+    "biography": "三国时期东吴名将、政治家。夷陵之战大败刘备，石亭之战击退曹休，是东吴后期的中流砥柱。",
+    "events": [
+      {
+        "name": "夷陵之战",
+        "year": 222,
+        "role": "主帅",
+        "description": "火烧连营，大败刘备"
+      },
+      {
+        "name": "石亭之战",
+        "year": 228,
+        "role": "主帅",
+        "description": "大败曹休"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "刘备天下称雄，一世所惮，陆逊春秋方壮，威名未著，摧而克之。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T19:53:48.283+00:00",
+    "updatedAt": "2025-12-24T19:53:48.283+00:00"
+  },
+  {
+    "id": "03eeb7ce-aa82-4b9b-9919-256db2d9fdfa",
+    "name": "曹操",
+    "courtesy": "孟德",
+    "role": "ruler",
+    "kingdom": "魏",
+    "birthYear": 155,
+    "deathYear": 220,
+    "positions": [
+      "魏王",
+      "丞相"
+    ],
+    "faction": null,
+    "politicalViews": "唯才是举，不拘一格",
+    "achievements": [
+      "统一北方",
+      "官渡之战大败袁绍",
+      "建安文学领袖",
+      "屯田制度"
+    ],
+    "battles": null,
+    "biography": "东汉末年杰出的政治家、军事家、文学家。统一北方，奠定曹魏基业，是三国时期最具影响力的人物之一。",
+    "events": [
+      {
+        "name": "官渡之战",
+        "year": 200,
+        "role": "主帅",
+        "description": "以少胜多，大败袁绍"
+      },
+      {
+        "name": "赤壁之战",
+        "year": 208,
+        "role": "主帅",
+        "description": "南下失败，三分天下格局形成"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "太祖运筹演谋，鞭挞宇内，揽申、商之法术，该韩、白之奇策。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》",
+      "《后汉书》"
+    ],
+    "createdAt": "2025-12-24T20:08:26.356+00:00",
+    "updatedAt": "2025-12-24T20:08:26.356+00:00"
+  },
+  {
+    "id": "1d8b0bc2-0731-456a-9c77-04620d81729d",
+    "name": "刘备",
+    "courtesy": "玄德",
+    "role": "ruler",
+    "kingdom": "蜀",
+    "birthYear": 161,
+    "deathYear": 223,
+    "positions": [
+      "蜀汉昭烈帝"
+    ],
+    "faction": null,
+    "politicalViews": "以德服人，兴复汉室",
+    "achievements": [
+      "建立蜀汉政权",
+      "三顾茅庐",
+      "入主益州",
+      "汉中之战"
+    ],
+    "battles": null,
+    "biography": "蜀汉开国皇帝，汉室宗亲。以仁德著称，三顾茅庐请诸葛亮出山，建立蜀汉政权。",
+    "events": [
+      {
+        "name": "三顾茅庐",
+        "year": 207,
+        "role": "求贤者",
+        "description": "三次拜访诸葛亮，请其出山"
+      },
+      {
+        "name": "夷陵之战",
+        "year": 222,
+        "role": "主帅",
+        "description": "为关羽报仇伐吴，大败而归"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "先主之弘毅宽厚，知人待士，盖有高祖之风，英雄之器焉。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T20:08:26.358+00:00",
+    "updatedAt": "2025-12-24T20:08:26.358+00:00"
+  },
+  {
+    "id": "0984218e-350b-4a5e-8dd1-b00d433dfb26",
+    "name": "孙权",
+    "courtesy": "仲谋",
+    "role": "ruler",
+    "kingdom": "吴",
+    "birthYear": 182,
+    "deathYear": 252,
+    "positions": [
+      "吴大帝"
+    ],
+    "faction": null,
+    "politicalViews": "保境安民，联蜀抗魏",
+    "achievements": [
+      "建立东吴政权",
+      "赤壁之战联刘抗曹",
+      "开发江南",
+      "派卫温到达夷洲"
+    ],
+    "battles": null,
+    "biography": "东吴开国皇帝，孙坚之子、孙策之弟。继承父兄基业，建立东吴政权，与魏、蜀三分天下。",
+    "events": [
+      {
+        "name": "赤壁之战",
+        "year": 208,
+        "role": "决策者",
+        "description": "联合刘备大败曹操"
+      },
+      {
+        "name": "夷陵之战",
+        "year": 222,
+        "role": "决策者",
+        "description": "大败刘备，巩固东吴"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "孙权屈身忍辱，任才尚计，有勾践之奇，英人之杰矣。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T20:08:26.361+00:00",
+    "updatedAt": "2025-12-24T20:08:26.361+00:00"
+  },
+  {
+    "id": "89201c21-3801-45a3-a53d-5d985a042d41",
+    "name": "诸葛亮",
+    "courtesy": "孔明",
+    "role": "strategist",
+    "kingdom": "蜀",
+    "birthYear": 181,
+    "deathYear": 234,
+    "positions": [
+      "丞相",
+      "武乡侯"
+    ],
+    "faction": null,
+    "politicalViews": "兴复汉室，还于旧都",
+    "achievements": [
+      "隆中对策",
+      "联吴抗曹",
+      "治理蜀汉",
+      "发明木牛流马、诸葛连弩"
+    ],
+    "battles": null,
+    "biography": "三国时期蜀汉丞相，杰出的政治家、军事家、发明家。辅佐刘备建立蜀汉，六出祁山北伐曹魏，鞠躬尽瘁，死而后已。",
+    "events": [
+      {
+        "name": "隆中对",
+        "year": 207,
+        "role": "献策者",
+        "description": "提出三分天下战略"
+      },
+      {
+        "name": "北伐曹魏",
+        "year": 228,
+        "role": "主帅",
+        "description": "六出祁山，北伐曹魏"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "诸葛亮之为相国也，抚百姓，示仪轨，约官职，从权制，开诚心，布公道。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》",
+      "《出师表》"
+    ],
+    "createdAt": "2025-12-24T20:08:26.363+00:00",
+    "updatedAt": "2025-12-24T20:08:26.363+00:00"
+  },
+  {
+    "id": "73f56387-cac3-4f92-bd9d-3d93a8bfef6f",
+    "name": "关羽",
+    "courtesy": "云长",
+    "role": "general",
+    "kingdom": "蜀",
+    "birthYear": 160,
+    "deathYear": 220,
+    "positions": [
+      "前将军",
+      "汉寿亭侯"
+    ],
+    "faction": null,
+    "politicalViews": "忠义为本",
+    "achievements": [
+      "斩颜良诛文丑",
+      "过五关斩六将",
+      "水淹七军",
+      "威震华夏"
+    ],
+    "battles": null,
+    "biography": "三国时期蜀汉名将，与刘备、张飞桃园结义。以忠义著称，被后世尊为\"武圣\"、\"关帝\"。",
+    "events": [
+      {
+        "name": "斩颜良",
+        "year": 200,
+        "role": "先锋",
+        "description": "官渡之战斩杀袁绍大将颜良"
+      },
+      {
+        "name": "水淹七军",
+        "year": 219,
+        "role": "主帅",
+        "description": "大败于禁，威震华夏"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "关羽、张飞皆称万人之敌，为世虎臣。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T20:08:26.364+00:00",
+    "updatedAt": "2025-12-24T20:08:26.364+00:00"
+  },
+  {
+    "id": "59c1687c-1bfb-40c4-ba9d-84df8639b98c",
+    "name": "张飞",
+    "courtesy": "益德",
+    "role": "general",
+    "kingdom": "蜀",
+    "birthYear": 167,
+    "deathYear": 221,
+    "positions": [
+      "车骑将军",
+      "西乡侯"
+    ],
+    "faction": null,
+    "politicalViews": "忠义为本",
+    "achievements": [
+      "长坂坡退敌",
+      "义释严颜",
+      "大败张郃"
+    ],
+    "battles": null,
+    "biography": "三国时期蜀汉名将，与刘备、关羽桃园结义。勇猛过人，长坂坡一声怒吼吓退曹军。",
+    "events": [
+      {
+        "name": "长坂坡",
+        "year": 208,
+        "role": "断后",
+        "description": "据水断桥，吓退曹军"
+      },
+      {
+        "name": "入川之战",
+        "year": 214,
+        "role": "先锋",
+        "description": "义释严颜，攻取巴郡"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "飞雄壮威猛，亚于关羽，魏谋臣程昱等咸称羽、飞万人之敌也。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T20:08:26.365+00:00",
+    "updatedAt": "2025-12-24T20:08:26.365+00:00"
+  },
+  {
+    "id": "d098bdf1-c922-41fd-b91d-3d57046ab455",
+    "name": "赵云",
+    "courtesy": "子龙",
+    "role": "general",
+    "kingdom": "蜀",
+    "birthYear": 168,
+    "deathYear": 229,
+    "positions": [
+      "镇军将军",
+      "永昌亭侯"
+    ],
+    "faction": null,
+    "politicalViews": "忠君报国",
+    "achievements": [
+      "长坂坡救阿斗",
+      "截江夺阿斗",
+      "汉水之战"
+    ],
+    "battles": null,
+    "biography": "三国时期蜀汉名将，以勇武和忠诚著称。长坂坡单骑救主，被誉为\"常胜将军\"。",
+    "events": [
+      {
+        "name": "长坂坡",
+        "year": 208,
+        "role": "护卫",
+        "description": "单骑救出刘禅"
+      },
+      {
+        "name": "汉水之战",
+        "year": 219,
+        "role": "将领",
+        "description": "以少胜多，大败曹军"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "云身长八尺，姿颜雄伟，为本郡所举。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T20:08:26.366+00:00",
+    "updatedAt": "2025-12-24T20:08:26.366+00:00"
+  },
+  {
+    "id": "0c054cc8-05ac-4405-880e-68d59524ac71",
+    "name": "司马懿",
+    "courtesy": "仲达",
+    "role": "strategist",
+    "kingdom": "魏",
+    "birthYear": 179,
+    "deathYear": 251,
+    "positions": [
+      "太傅",
+      "大将军"
+    ],
+    "faction": null,
+    "politicalViews": "隐忍待时，谋定后动",
+    "achievements": [
+      "抵御诸葛亮北伐",
+      "平定辽东",
+      "高平陵之变",
+      "奠定西晋基业"
+    ],
+    "battles": null,
+    "biography": "三国时期曹魏权臣，西晋王朝的奠基人。多次抵御诸葛亮北伐，后发动高平陵之变，掌控曹魏政权。",
+    "events": [
+      {
+        "name": "空城计",
+        "year": 228,
+        "role": "对手",
+        "description": "与诸葛亮斗智"
+      },
+      {
+        "name": "高平陵之变",
+        "year": 249,
+        "role": "主导者",
+        "description": "发动政变，掌控曹魏"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "宣帝之雄略内断，固非常人所及。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》",
+      "《晋书》"
+    ],
+    "createdAt": "2025-12-24T20:08:26.367+00:00",
+    "updatedAt": "2025-12-24T20:08:26.367+00:00"
+  },
+  {
+    "id": "9fc56876-8610-4f9d-a2ef-d8b62c345298",
+    "name": "周瑜",
+    "courtesy": "公瑾",
+    "role": "strategist",
+    "kingdom": "吴",
+    "birthYear": 175,
+    "deathYear": 210,
+    "positions": [
+      "大都督",
+      "偏将军"
+    ],
+    "faction": null,
+    "politicalViews": "联刘抗曹",
+    "achievements": [
+      "赤壁之战大败曹操",
+      "南郡之战",
+      "精通音律"
+    ],
+    "battles": null,
+    "biography": "三国时期东吴名将，赤壁之战的主要指挥者。精通音律，风流倜傥，被誉为\"美周郎\"。",
+    "events": [
+      {
+        "name": "赤壁之战",
+        "year": 208,
+        "role": "主帅",
+        "description": "火烧赤壁，大败曹操"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "瑜少精意于音乐，虽三爵之后，其有阙误，瑜必知之，知之必顾。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T20:08:26.368+00:00",
+    "updatedAt": "2025-12-24T20:08:26.368+00:00"
+  },
+  {
+    "id": "379fc906-4505-493c-ad04-12d21afe946e",
+    "name": "陆逊",
+    "courtesy": "伯言",
+    "role": "strategist",
+    "kingdom": "吴",
+    "birthYear": 183,
+    "deathYear": 245,
+    "positions": [
+      "丞相",
+      "大都督"
+    ],
+    "faction": null,
+    "politicalViews": "稳健持重",
+    "achievements": [
+      "夷陵之战大败刘备",
+      "石亭之战",
+      "治理荆州"
+    ],
+    "battles": null,
+    "biography": "三国时期东吴名将、政治家。夷陵之战大败刘备，石亭之战击退曹休，是东吴后期的中流砥柱。",
+    "events": [
+      {
+        "name": "夷陵之战",
+        "year": 222,
+        "role": "主帅",
+        "description": "火烧连营，大败刘备"
+      },
+      {
+        "name": "石亭之战",
+        "year": 228,
+        "role": "主帅",
+        "description": "大败曹休"
+      }
+    ],
+    "evaluations": [
+      {
+        "source": "《三国志》",
+        "content": "刘备天下称雄，一世所惮，陆逊春秋方壮，威名未著，摧而克之。",
+        "author": "陈寿"
+      }
+    ],
+    "portraitUrl": null,
+    "sources": [
+      "《三国志》"
+    ],
+    "createdAt": "2025-12-24T20:08:26.369+00:00",
+    "updatedAt": "2025-12-24T20:08:26.369+00:00"
+  }
+]

@@ -18,6 +18,10 @@
 - `ARCHITECTURE_ISSUES.md`:架构剩余待办清单
 - `frontend/src/pages/NotFoundPage.tsx`:真正的 404 页面,替代静默重定向
 - `backend/test/app.e2e-spec.ts`:health + 404 冒烟测试(替代空白模板)
+- `backend/scripts/export-db.ts`:一次性 dev.db → `prisma/seed-data/*.json` 导出器(15 张表 / 732 行,JSON 字段递归去转义)
+- `backend/prisma/seed.ts`:幂等 seed,按 FK 顺序读取 seed-data 并 `upsert`
+- `backend/prisma/seed-data/*.json`:版本化的初始数据(替代二进制 dev.db)
+- `backend/prisma/migrations/20260526024505_align_figure_columns_with_schema/`:补齐 `tang/song/yuan/ming/qing/sanguo` 历史 `db push` 留下的 ~53 个未迁移列
 
 ### Changed
 - 后端 Service 层 16 处 `any` → `Prisma.XxxWhereInput`
@@ -37,9 +41,20 @@
 - `ROADMAP.md` 重写,与当前现状对齐(M1~M7)
 - `SECURITY.md` 修正虚假"已实现"项,补充本轮真实落地
 - `README.md` 重写:前置要求 / 安装 / 项目结构 / 技术栈 与实际(Bun + SQLite)对齐
+- `backend/Dockerfile` 运行时由 `node:20-slim` 切换至 `oven/bun:1.3-slim`(seed 入口需要 bun 运行时);启动命令变为 `prisma migrate deploy && (首次 prisma db seed) && bun dist/src/main.js`
+- `backend/prisma.config.ts` 增加 `migrations.seed = 'bun ./prisma/seed.ts'`(Prisma 7 不再读 `package.json#prisma.seed`)
+- `backend/.env.example` 默认值由 PostgreSQL DSN 改回 `file:./prisma/dev.db`,与实际 datasource 一致
+- 根目录 `package.json` 的 `db:seed` / `db:migrate` / `db:reset` / `db:export` 改用 `bunx`
 
 ### Removed
 - 废弃的 `frontend/src/services_backup/` 目录
+- 历史遗留的 seed 脚本(已被新 `prisma/seed.ts` 取代):
+  - `backend/prisma/comprehensive-seed.ts`
+  - `backend/prisma/dynasty-seed.ts`
+  - `backend/prisma/mock-import-seed.ts`
+  - `backend/prisma/seeds.ts`
+  - `backend/scripts/test-prisma.ts`
+- `backend/{,prisma/}dev.db`:从 git 历史中解除追踪(`.gitignore` 已显式排除)
 
 ### Security
 - ✅ 全局 `ValidationPipe` + `class-validator`(防 XSS)
