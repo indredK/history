@@ -58,7 +58,7 @@
     orderBy 用 `[reignStart, name]` 而非 `[birthYear, name]`(因为 QingRuler 是帝王模型),
     没有 period 字段;`birthYear=0` 进入 where、deathYear OR(lte,null)、JSON 字段 transform)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):79 个测试文件 / 804 个用例,覆盖
+- 前端核心组件 vitest 测试扩充(§2.8):94 个测试文件 / 861 个用例,覆盖
   关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
   - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
     SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
@@ -360,6 +360,53 @@ vi.resetModules() + 重新 await import` 拦截内部动态 import,验证透传
     500ms 后移除(锁定切换动画 cleanup 语义)
   - `frontend/src/layouts/Sidebar/SettingsPanel/LanguageSwitcherButton.test.tsx`
     (4 个用例):langStore 集成、zh↔en 切换 icon、aria-label、点击触发回调
+  - `frontend/src/pages/NotFoundPage.test.tsx`(4 个用例):
+    渲染 404 + 走丢标题 + 当前路径回显;"回到时间轴" 调
+    `navigate('/timeline', { replace: true })`;`history.length > 1` 时
+    "返回上一页" 调 `navigate(-1)`;`history.length <= 1` 兜底跳 `/timeline`
+    (`Object.defineProperty(window.history, 'length', { get })` 覆盖只读 getter)
+  - `frontend/src/layouts/Sidebar/SettingsPanel/SettingsPanel.test.tsx`
+    (3 个用例):极薄聚合 — `collapsed` prop 透传给三个子按钮 +
+    渲染顺序 Theme → Style → Language(三个子按钮用 `vi.mock` 桩出
+    `data-testid` + `data-collapsed`)
+  - `frontend/src/layouts/Sidebar/NavigationSection.test.tsx`(5 个用例):
+    渲染 6 个导航 label(时间轴/历代纪元/地图/人物/文化/神话)、
+    点击按钮调 `navigate(path)`、`activeTab` 决定 contained vs outlined
+    variant(MuiButton-contained / MuiButton-outlined class 二选一)
+  - `frontend/src/layouts/Sidebar/FunctionPanel/FunctionPanel.test.tsx`
+    (6 个用例):路由分发 — 5 个 case(timeline/dynasties/map/people/culture)
+    各自渲染对应子面板 + 未知 activeTab 走 default 返回 null
+  - `frontend/src/features/timeline/components/timeline/components/EventDetailPanel.test.tsx`
+    (7 个用例):title / startYear 显示、endYear≠startYear 时显示 endYear、
+    description / startDate 缺失时不渲染对应区、收藏按钮触发
+    `onToggleFavorite(eventId)`、分享按钮触发 `onShare(event)`
+  - `frontend/src/features/timeline/components/timeline/components/TimelineToolbar.test.tsx`
+    (4 个用例):标题 + `zoomLevel.toFixed(1)` 文本、5 个按钮通过 title
+    属性区分并触发对应回调、mouseEnter/mouseLeave 写入 inline style 不抛错
+  - `frontend/src/layouts/Sidebar/FunctionPanel/timeline/EventTypeFilterPopover.test.tsx`
+    (2 个用例):anchorEl=null 关闭 / 非空打开 + 4 个事件类型 checkbox
+  - `frontend/src/layouts/Sidebar/FunctionPanel/timeline/index.test.tsx`
+    (3 个用例):TimelineFunctions Popover 开关状态机 —
+    初始关闭 / 点击按钮设置 anchorEl 为该按钮 / 调子 popover 的 onClose
+    重置(用 act 包裹 React 18 自动 batching 触发的 state 更新)
+  - `frontend/src/layouts/Sidebar/FunctionPanel/culture/CultureTypePopover.test.tsx`
+    (2 个用例):6 个文化类型 checkbox(2 个 defaultChecked)
+  - `frontend/src/layouts/Sidebar/FunctionPanel/culture/PeriodFilterPopover.test.tsx`
+    (2 个用例):6 个时期 chip(先秦/秦汉/魏晋/隋唐/宋元/明清)
+  - `frontend/src/layouts/Sidebar/FunctionPanel/culture/index.test.tsx`
+    (4 个用例):CultureFunctions 两个独立 popover(文化类型 / 时期筛选)
+    互不干扰开关 + onClose 独立关闭
+  - `frontend/src/layouts/Sidebar/FunctionPanel/people/OccupationFilterPopover.test.tsx`
+    (2 个用例):6 个职业 checkbox(均不默认选中)
+  - `frontend/src/layouts/Sidebar/FunctionPanel/people/PeopleDynastyFilterPopover.test.tsx`
+    (2 个用例):6 个朝代 chip(春秋战国/秦汉/魏晋南北朝/隋唐/宋元/明清)
+  - `frontend/src/layouts/Sidebar/FunctionPanel/people/index.test.tsx`
+    (5 个用例):PeopleFunctions 搜索框 + 两个独立 popover 开关
+    (朝代/职业)互不干扰 + onClose 独立关闭
+  - `frontend/src/layouts/Sidebar/FunctionPanel/dynasties/index.test.tsx`
+    (6 个用例):'已展开 X / Y' 文本、expandedCount=0 时 '收起' disabled、
+    expandedCount=total 时 '展开' disabled、中间状态两按钮可用、
+    点击按钮调 `expandAllDynasties` / `collapseAllDynasties`
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`

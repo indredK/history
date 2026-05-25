@@ -136,7 +136,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 
 #### 2.8 前端测试形同虚设
 
-- 已配置 vitest,本轮已扩到 79 个测试文件 / 804 个用例
+- 已配置 vitest,本轮已扩到 94 个测试文件 / 861 个用例
 - 仍有部分组件仅含空 `describe` 块,需要持续投入
 - **工作量**:持续投入
 
@@ -250,7 +250,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 5. ~~**§4.4 文档补全** — CONTRIBUTING / CODE_OF_CONDUCT / README 修正 / API 文档~~ ✅ 已完成(0321f5b / 8fe6336 / 本轮)
 6. ~~**§1.3 EventService 拆分**~~ ✅ 已完成(ec26deb)
 7. **§2.7 / §1.1 路由守卫** — 跟着认证一起 — 0.5 天(§2.7 真 404 页 ✅ 本轮已完成)
-8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 79 个 vitest 测试文件 804 个用例,
+8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 94 个 vitest 测试文件 861 个用例,
    覆盖关键交互、store 集成、createFigureStore 工厂、errorHandling 全路径(降级 /
    重试 / 状态管理)、dataLoaders 全路径(fetch / cache / retry / API 响应解包)、
    PerformanceMonitor(mark/measure 含 falsy-start 已知行为锁定)、routeUtils
@@ -312,6 +312,16 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
    控制 useMediaQuery 切换 Tabs/Dropdown,Footer 页脚展示基线,SettingsPanel 的
    ThemeToggleButton + StyleSwitcherButton(过渡时给 documentElement 加
    'style-transitioning' class 并 500ms 后移除)+ LanguageSwitcherButton store 集成);
+   再补 15 个小型组件 / 聚合面板(NotFoundPage 404 + handleBack 走 history.length
+   双分支 + 用 Object.defineProperty 覆盖只读 length getter / SettingsPanel 极薄聚合
+   collapsed prop 透传 / NavigationSection 6 个导航 + variant contained 切换 /
+   FunctionPanel 5 case 路由分发 + default null / EventDetailPanel favorite/share
+   按钮 + endYear 显示规则 / TimelineToolbar 5 按钮 + zoomLevel toFixed(1) +
+   mouseEnter inline style / 4 个 FunctionPanel index 受控 popover 开关
+   (timeline/culture/people 两两独立 popover + onClose 互不干扰,需 act 包裹
+   state 更新)+ 5 个 FilterPopover(EventType/CultureType/Period/Occupation/
+   PeopleDynasty 静态枚举 chip/checkbox)+ DynastiesFunctions disabled 状态
+   随 expandedCount 在 0/total/中间三态切换);
    后端 `DynastyService` / `PersonService` / `EventService` /
    `EmperorService` / `FigureBaseService` / `ReligionService` / `CultureService` /
    `MythologyService` / `TangService` / `SanguoService` / `QingService` 共 125 个用例)
