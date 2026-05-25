@@ -155,7 +155,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 
 #### 4.1 CI 工作流(剩余)
 
-- ❌ PR 检查工作流(可选,GitHub Actions 默认对 PR 自动跑 `test.yml`)
+- ✅ PR 检查工作流:新增 `.github/workflows/pr.yml`(Conventional Commits 标题校验 + lint informational + concurrency cancel-in-progress);`test.yml` 也加上 concurrency
 - ❌ 代码覆盖率上报(待 codecov 集成)
 
 #### 4.2 无 Git Hooks ⏸ 沙箱阻塞

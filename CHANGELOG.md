@@ -22,6 +22,8 @@
 - `backend/prisma/seed.ts`:幂等 seed,按 FK 顺序读取 seed-data 并 `upsert`
 - `backend/prisma/seed-data/*.json`:版本化的初始数据(替代二进制 dev.db)
 - `backend/prisma/migrations/20260526024505_align_figure_columns_with_schema/`:补齐 `tang/song/yuan/ming/qing/sanguo` 历史 `db push` 留下的 ~53 个未迁移列
+- `.github/workflows/pr.yml`:PR 专用检查(Conventional Commits 标题校验 + 前后端 lint informational + concurrency cancel-in-progress)
+- `.github/workflows/test.yml` 加 concurrency 配置,新 push 自动取消旧 run
 
 ### Changed
 - 后端 Service 层 16 处 `any` → `Prisma.XxxWhereInput`

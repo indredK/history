@@ -1,0 +1,73 @@
+name: PR Checks
+
+# 专用于 pull_request 的轻量检查工作流。
+# test.yml 仍负责 test + type-check;此处补 lint(尚有历史错误,标记 continue-on-error 仅作信号)、
+# Conventional Commits PR 标题校验、以及并发取消旧 run。
+
+on:
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened, edited]
+
+# 同一 PR 新提交时取消上一次未完成的 run,节约 CI 配额
+concurrency:
+  group: pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  pr-title:
+    name: PR title (Conventional Commits)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR title
+        uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # 允许的 type 列表,与 CONTRIBUTING.md / CHANGELOG.md 风格保持一致
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+          requireScope: false
+          # 中文摘要也允许(中英文混排)
+          subjectPattern: ^.{1,100}$
+
+  lint-frontend:
+    name: Frontend lint (informational)
+    runs-on: ubuntu-latest
+    # 历史 116 个 no-explicit-any 警告超阈值,清理前不阻塞 PR;
+    # 仅作为信号,作者应观察 delta 不上涨
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: cd frontend && bun install
+      - run: cd frontend && bun run lint
+
+  lint-backend:
+    name: Backend lint (informational)
+    runs-on: ubuntu-latest
+    # 历史 130 个 no-unsafe-* / no-unused-vars 错误,清理前不阻塞 PR
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: cd backend && bun install
+      - run: cd backend && bun run lint
