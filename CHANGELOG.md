@@ -49,9 +49,17 @@
     NotFoundException)
   - `backend/src/figure/tang/tang.service.spec.ts`(8 个用例,Tang 是 5 字段全集
     canonical 模板:role contains / period eq / name contains / birthYear gte /
-    deathYear OR + null;`birthYear=0` 也进入 where(`!== undefined` 而非 truthy));
-    Ming/Song 与 Tang 形状完全一致,Yuan 为 Tang 子集(无 period),共用
-    transformFigure 已由 FigureBaseService spec 覆盖
+    deathYear OR + null;`birthYear=0` 也进入 where(`!== undefined` 而非 truthy))
+  - `backend/src/figure/ming/ming.service.spec.ts`(8 个用例,与 Tang 同形 5 字段,
+    role contains 用明朝典型值 `cabinet`,period 用 "中后期",JSON 字段示例覆盖
+    `policies` 路径(张居正考成法))
+  - `backend/src/figure/song/song.service.spec.ts`(8 个用例,与 Tang 同形 5 字段,
+    role contains 用宋特征值 `chancellor`,period 用 "北宋",JSON 字段示例覆盖
+    `works + policies` 双路径(王安石熙宁变法))
+  - `backend/src/figure/yuan/yuan.service.spec.ts`(9 个用例,Yuan 是 Tang 的子集 —
+    yuan.service.ts:13 的 destructure **不含 period**,显式锁定 "传入 period 静默丢弃"
+    的当前行为,避免日后误以为 period 应该生效;role contains 用元朝典型值 `khan`,
+    JSON 字段示例覆盖 `battles` 路径(忽必烈襄阳之战))
   - `backend/src/figure/sanguo/sanguo.service.spec.ts`(6 个用例,Sanguo 与其它 5 朝代
     差异维度:`kingdom` 替代 `period`、`role/kingdom` 走 eq 而非 contains)
   - `backend/src/figure/qing/qing.service.spec.ts`(9 个用例,Qing 与其它朝代差异维度:

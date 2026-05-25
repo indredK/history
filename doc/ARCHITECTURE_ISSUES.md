@@ -62,10 +62,12 @@
 - **工作量**:持续投入,优先核心 Service
 - **起步完成**:`DynastyService` / `PersonService` / `EventService` / `EmperorService` /
   `FigureBaseService` / `ReligionService` / `CultureService` / `MythologyService` /
-  `TangService` / `SanguoService` / `QingService` 共 123 个 spec + 既有 `app.controller`
-  spec = 125 个测试 ✅(jest 通过 `moduleNameMapper` 适配 Prisma 7 ESM 风格 `.js` 导入);
-  Tang 作 canonical 模板覆盖 Ming/Song(同形)与 Yuan(子集)的 where 路径,Sanguo 覆盖
-  kingdom 维度差异,Qing 覆盖 `orderBy: [reignStart, name]` 帝王模型差异
+  `TangService` / `SanguoService` / `QingService` / `MingService` / `SongService` /
+  `YuanService` 共 150 个 spec(含既有 `app.controller` spec)= 150 个测试 ✅
+  (jest 通过 `moduleNameMapper` 适配 Prisma 7 ESM 风格 `.js` 导入);
+  Tang 作 canonical 模板,Ming/Song 同形(各自用 cabinet / chancellor 维度示例区分),
+  Yuan 显式锁定 "destructure 不含 period 静默丢弃" 的当前行为,Sanguo 覆盖 kingdom 维度差异,
+  Qing 覆盖 `orderBy: [reignStart, name]` 帝王模型差异
 
 #### 2.1 状态管理失控:20 个独立 Store
 
