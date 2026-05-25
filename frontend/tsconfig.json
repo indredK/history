@@ -41,6 +41,5 @@
     "noUncheckedIndexedAccess": true
   },
   "include": ["src"],
-  "exclude": ["src/services_backup"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
