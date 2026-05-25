@@ -57,7 +57,7 @@
     orderBy 用 `[reignStart, name]` 而非 `[birthYear, name]`(因为 QingRuler 是帝王模型),
     没有 period 字段;`birthYear=0` 进入 where、deathYear OR(lte,null)、JSON 字段 transform)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):22 个测试文件 / 207 个用例,覆盖
+- 前端核心组件 vitest 测试扩充(§2.8):23 个测试文件 / 217 个用例,覆盖
   关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
   - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
     SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
@@ -74,6 +74,11 @@
     handleSingleApiResponse(success=true/false / 无 success 字段直通 / 空抛错) /
     createDataFetcher(默认 mock / mode='api' / mode='mock' / 参数透传)
   - `frontend/src/utils/storage.test.ts`(9 → 21,新增 clear / isSupported / 错误兜底 / sidebarStorage / dynastiesStorage / StorageListener)
+  - `frontend/src/utils/performance.test.ts`(10 个用例):PerformanceMonitor 单例 /
+    mark 写 metrics + 调 performance.mark API / measure 计算 duration + 调底层
+    performance.mark/measure API / measure 兜底分支(mark 缺失返回 0 + console.warn)/
+    `if (!startTime)` 把 start=0 也当作"未标记"的已知行为(锁定为回归测试)/
+    getMetrics 快照 / reportWebVitals 两条分支
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`
