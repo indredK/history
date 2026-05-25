@@ -97,14 +97,16 @@ cd frontend && bun test         # Vitest
 ```
 chinese-historical-panorama/
 ├── README.md                     # 项目主文档
-├── ROADMAP.md                    # 开发路线图与里程碑
-├── ARCHITECTURE_ISSUES.md        # 架构债务清单与进展
 ├── CHANGELOG.md                  # 变更日志(Keep a Changelog)
 ├── CONTRIBUTING.md               # 贡献指南
 ├── CODE_OF_CONDUCT.md            # 社区行为准则(Contributor Covenant)
 ├── SECURITY.md                   # 安全漏洞上报流程
-├── DEPLOY.md                     # 部署指南
 ├── LICENSE                       # MIT
+│
+├── doc/                          # 内部 / 开发面向文档
+│   ├── ROADMAP.md                # 开发路线图与里程碑
+│   ├── ARCHITECTURE_ISSUES.md    # 架构债务清单与进展
+│   └── DEPLOY.md                 # 部署指南
 │
 ├── backend/                      # NestJS 11 + Prisma 7 + SQLite
 │   ├── src/
@@ -165,7 +167,7 @@ chinese-historical-panorama/
 | **部署** | Dockerfile + GitHub Actions(可选) | — |
 
 > 当前栈相对最初的 `ROADMAP` 设想做了化简：用 **SQLite** 替代 PostgreSQL+PostGIS(GIS 计算放在前端),用 **Bun workspace** 替代多包工具链。
-> 详见 [`ROADMAP.md`](./ROADMAP.md) 与 [`ARCHITECTURE_ISSUES.md`](./ARCHITECTURE_ISSUES.md)。
+> 详见 [`doc/ROADMAP.md`](./doc/ROADMAP.md) 与 [`doc/ARCHITECTURE_ISSUES.md`](./doc/ARCHITECTURE_ISSUES.md)。
 
 ---
 
@@ -183,7 +185,7 @@ chinese-historical-panorama/
 欢迎代码、数据、文档、设计等各类贡献。
 
 1. 阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)(分支策略、提交规范、代码风格)
-2. 浏览 [ROADMAP.md](./ROADMAP.md) 与 [ARCHITECTURE_ISSUES.md](./ARCHITECTURE_ISSUES.md) 了解当前优先项
+2. 浏览 [doc/ROADMAP.md](./doc/ROADMAP.md) 与 [doc/ARCHITECTURE_ISSUES.md](./doc/ARCHITECTURE_ISSUES.md) 了解当前优先项
 3. 在 [Issues](../../issues) 中选择或创建任务,使用对应模板
 4. Fork → 创建 `feature/* / fix/*` 分支 → 提交 PR(请填写 PR 模板)
 

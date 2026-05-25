@@ -148,7 +148,7 @@ docs: 更新 SECURITY.md 已实现项
 - 禁用 `any` 类型(后端 Service 已全部用 `Prisma.XxxWhereInput`)
 - 函数命名:动词开头,清晰描述意图
 - 组件命名:PascalCase;hook 以 `use` 开头
-- 文件大小:单文件建议 < 260 行(详见 [ARCHITECTURE_ISSUES.md](./ARCHITECTURE_ISSUES.md) §2.3)
+- 文件大小:单文件建议 < 260 行(详见 [doc/ARCHITECTURE_ISSUES.md](./doc/ARCHITECTURE_ISSUES.md) §2.3)
 
 提交前请跑:
 ```bash
@@ -202,7 +202,7 @@ PR 必须满足:
 - 💬 [GitHub Discussions](https://github.com/) — 功能讨论、问题求助
 - 🐛 [Issues](https://github.com/) — bug 报告
 - 🔒 [SECURITY.md](./SECURITY.md) — 安全漏洞上报
-- 📖 [ARCHITECTURE_ISSUES.md](./ARCHITECTURE_ISSUES.md) — 当前架构问题与待办
+- 📖 [doc/ARCHITECTURE_ISSUES.md](./doc/ARCHITECTURE_ISSUES.md) — 当前架构问题与待办
 
 ---
 

@@ -417,6 +417,11 @@ vi.resetModules() + 重新 await import` 拦截内部动态 import,验证透传
 
 ### Changed
 
+- 内部 / 开发面向文档汇总到 `doc/` 文件夹:`ARCHITECTURE_ISSUES.md` / `ROADMAP.md` /
+  `DEPLOY.md` 三份 git mv 到 `doc/`,根目录只保留 GitHub 自动识别的标准文件
+  (`README.md` / `LICENSE` / `CHANGELOG.md` / `CONTRIBUTING.md` /
+  `CODE_OF_CONDUCT.md` / `SECURITY.md`)。`README.md` 项目结构图与 `CONTRIBUTING.md`
+  / `SECURITY.md` 内的链接同步更新指向 `./doc/...`
 - `frontend/src/store/{tang,song,yuan,ming}FigureStore.ts`:四个 70+ 行的 store 各自重复实现
   `figures/selectedFigure/filters` 同一套逻辑,统一收敛到 `createFigureStore` 工厂(§2.1 起步),
   每个朝代 store 现在只剩 ~20 行,差异化的只有"角色枚举 / 时期常量 / service 实例 /

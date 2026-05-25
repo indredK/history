@@ -100,12 +100,12 @@
 
 | 类别 | 说明 | 跟踪位置 |
 |---|---|---|
-| 认证缺失 | 所有 Controller 当前为 public,无 JWT 验证 | ARCHITECTURE_ISSUES.md §1.1 |
-| 速率限制 | 后端未接入 throttler,易被刷接口 | ARCHITECTURE_ISSUES.md §6.4 |
-| 安全头 | 后端未接入 helmet | ARCHITECTURE_ISSUES.md §6.4 |
-| 审计日志 | 无结构化日志,排查困难 | ARCHITECTURE_ISSUES.md §1.7 |
+| 认证缺失 | 所有 Controller 当前为 public,无 JWT 验证 | doc/ARCHITECTURE_ISSUES.md §1.1 |
+| 速率限制 | 后端未接入 throttler,易被刷接口 | doc/ARCHITECTURE_ISSUES.md §6.4 |
+| 安全头 | 后端未接入 helmet | doc/ARCHITECTURE_ISSUES.md §6.4 |
+| 审计日志 | 无结构化日志,排查困难 | doc/ARCHITECTURE_ISSUES.md §1.7 |
 
-详细修复计划见 [ROADMAP.md](./ROADMAP.md) M2 后端能力补强。
+详细修复计划见 [doc/ROADMAP.md](./doc/ROADMAP.md) M2 后端能力补强。
 
 ## 安全相关的更新
 
