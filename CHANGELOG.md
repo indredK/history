@@ -57,7 +57,7 @@
     orderBy 用 `[reignStart, name]` 而非 `[birthYear, name]`(因为 QingRuler 是帝王模型),
     没有 period 字段;`birthYear=0` 进入 where、deathYear OR(lte,null)、JSON 字段 transform)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):23 个测试文件 / 217 个用例,覆盖
+- 前端核心组件 vitest 测试扩充(§2.8):24 个测试文件 / 232 个用例,覆盖
   关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
   - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
     SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
@@ -79,6 +79,10 @@
     performance.mark/measure API / measure 兜底分支(mark 缺失返回 0 + console.warn)/
     `if (!startTime)` 把 start=0 也当作"未标记"的已知行为(锁定为回归测试)/
     getMetrics 快照 / reportWebVitals 两条分支
+  - `frontend/src/utils/routeUtils.test.ts`(15 个用例):getRouteByPath
+    (命中 / 未命中 / 空串 / 仅前缀 4 个分支)、getActiveTabFromPath 4 条具名分支 + 默认值 +
+    大小写敏感、getAllRoutes 引用一致性 + 数据结构、validateRoutes 返回长度 +
+    `routes.length + 1` 次 console.log + 每条 log 含 label/key/path
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`
