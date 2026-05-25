@@ -69,6 +69,9 @@
 - 没有 selector 模式,组件直接订阅整个 store,性能差
 - store 之间无关联,跨实体联动需要在组件层手工拼接
 - **建议**:按领域合并为 3~4 个 store(`historical-data` / `ui` / `navigation` / `theme`)
+- **起步完成**:`createFigureStore` 工厂已抽出,tang/song/yuan/ming 四个 70+ 行 store 各自降到 ~20 行,
+  对外 hook 名(`useTangFigureStore` 等)与所有 action / getter 不变,下游 `TangContent` /
+  `SongContent` / `YuanContent` / `MingContent` 零改动。Sanguo 用 `kingdom` 而非 `period`,本轮不并入。
 - **工作量**:1~2 天(单次会话不够,需要专项)
 
 #### 3.1 Prisma Schema 设计不规范

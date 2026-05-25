@@ -35,8 +35,16 @@
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`
+- `frontend/src/store/createFigureStore.ts`:tang/song/yuan/ming 四个朝代人物 store 工厂(§2.1 起步),
+  保留每个朝代的 hook 名与公开 API(无下游改动)
+- `frontend/src/store/createFigureStore.test.ts`:工厂 6 个 vitest 用例(初始值 / 写入 /
+  filter 透传 / 实例隔离)
 
 ### Changed
+- `frontend/src/store/{tang,song,yuan,ming}FigureStore.ts`:四个 70+ 行的 store 各自重复实现
+  `figures/selectedFigure/filters` 同一套逻辑,统一收敛到 `createFigureStore` 工厂(§2.1 起步),
+  每个朝代 store 现在只剩 ~20 行,差异化的只有"角色枚举 / 时期常量 / service 实例 /
+  默认排序"。Sanguo 因 filter 形状用 `kingdom` 与其它不同,本轮不并入,留待 §3.1 schema 重构。
 - 后端 Service 层 16 处 `any` → `Prisma.XxxWhereInput`
 - CI workflow 拆分前后端 job,后端加入 lint 与 type-check
 - 6 个大组件按"主壳 + parts/ + hooks/"模式拆分:
