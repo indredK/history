@@ -251,11 +251,12 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 5. ~~**§4.4 文档补全** — CONTRIBUTING / CODE_OF_CONDUCT / README 修正 / API 文档~~ ✅ 已完成(0321f5b / 8fe6336 / 本轮)
 6. ~~**§1.3 EventService 拆分**~~ ✅ 已完成(ec26deb)
 7. **§2.7 / §1.1 路由守卫** — 跟着认证一起 — 0.5 天(§2.7 真 404 页 ✅ 本轮已完成)
-8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 24 个 vitest 测试文件 232 个用例,
+8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 25 个 vitest 测试文件 243 个用例,
    覆盖关键交互、store 集成、createFigureStore 工厂、errorHandling 全路径(降级 /
    重试 / 状态管理)、dataLoaders 全路径(fetch / cache / retry / API 响应解包)、
-   PerformanceMonitor(mark/measure 含 falsy-start 已知行为锁定)和 routeUtils
-   全部 4 个函数;后端 `DynastyService` / `PersonService` / `EventService` /
+   PerformanceMonitor(mark/measure 含 falsy-start 已知行为锁定)、routeUtils
+   全部 4 个函数,以及 serviceFactory 的 createSimpleDataClient / createMultipleServices
+   / ServiceMonitor 单例统计;后端 `DynastyService` / `PersonService` / `EventService` /
    `EmperorService` / `FigureBaseService` / `ReligionService` / `CultureService` /
    `MythologyService` / `TangService` / `SanguoService` / `QingService` 共 125 个用例)
 
