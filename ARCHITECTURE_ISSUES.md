@@ -61,8 +61,9 @@
 - 估算覆盖率 **< 5%**
 - **工作量**:持续投入,优先核心 Service
 - **起步完成**:`DynastyService` / `PersonService` / `EventService` / `EmperorService` /
-  `FigureBaseService` / `ReligionService` 共 65 个 spec + 既有 `app.controller` spec = 67 个测试
-  ✅(jest 通过 `moduleNameMapper` 适配 Prisma 7 ESM 风格 `.js` 导入)
+  `FigureBaseService` / `ReligionService` / `CultureService` 共 86 个 spec +
+  既有 `app.controller` spec = 88 个测试 ✅(jest 通过 `moduleNameMapper` 适配 Prisma 7
+  ESM 风格 `.js` 导入)
 
 #### 2.1 状态管理失控:20 个独立 Store
 
@@ -239,7 +240,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 19 个 vitest 测试文件由"渲染不报错"
    扩到 152 个用例,覆盖关键交互与 store 集成、createFigureStore 工厂;后端
    `DynastyService` / `PersonService` / `EventService` / `EmperorService` /
-   `FigureBaseService` / `ReligionService` 共 67 个用例)
+   `FigureBaseService` / `ReligionService` / `CultureService` 共 88 个用例)
 
 ### 低优(沙箱解开后再做)
 

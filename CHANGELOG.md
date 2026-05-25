@@ -36,6 +36,11 @@
   - `backend/src/religion/religion.service.spec.ts`(19 个用例,where 构建 tradition/nodeType/
     period(双落点)/relationship、默认 maxNodes=100 / maxEdges=200、orderBy、nodeIds 串联、
     includeNodeDetails 双分支、DTO 转换、totalNodes/totalEdges/tradition/nodeType 回显)
+  - `backend/src/culture/culture.service.spec.ts`(21 个用例,findAllScholars 全字段 where
+    /嵌套 schoolName / deathYear OR+null / orderBy / philosophicalSchool 剥离 / JSON 解析,
+    findScholarById 命中与 NotFoundException,findAllSchools where / orderBy / JSON 解析,
+    findSchoolById 命中与 NotFoundException,safeJsonParse 边界:空串 / 仅空白 / null /
+    undefined / 已是对象不二次解析)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
 - 前端核心组件 vitest 测试扩充(§2.8):19 个测试文件由"仅渲染不报错"扩到 146 个用例,覆盖
   关键交互、store 集成与 a11y(键盘事件、role/label)
