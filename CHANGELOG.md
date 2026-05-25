@@ -60,6 +60,24 @@
     yuan.service.ts:13 的 destructure **不含 period**,显式锁定 "传入 period 静默丢弃"
     的当前行为,避免日后误以为 period 应该生效;role contains 用元朝典型值 `khan`,
     JSON 字段示例覆盖 `battles` 路径(忽必烈襄阳之战))
+  - `backend/src/common/dto/api-response.dto.spec.ts`(10 个用例,
+    constructor 全参/缺省/timestamp ISO 8601 双向解析、success() 默认/自定义 message +
+    null/0/[] 不被 falsy 屏蔽、error() data=null + 透传 error)
+  - `backend/src/common/dto/paginated-response.dto.spec.ts`(12 个用例,
+    totalPages 整除/向上取整/单页/total=0 四态、hasNext/hasPrev 首/中/末/仅 1 页/空集
+    五态状态机、data 数组 by-reference 保留、meta 6 字段完整快照)
+  - `backend/src/common/interceptors/transform.interceptor.spec.ts`(9 个用例,
+    包装路径:裸对象/数组/null/原始字符串/缺 timestamp 单 success 键/缺 success 单
+    timestamp 键 — 全部包成 ApiResponseDto;透传路径:已是 ApiResponseDto.success /
+    error / 鸭子类型双键对象 — 引用相等直通)
+  - `backend/src/common/interceptors/logging.interceptor.spec.ts`(4 个用例,
+    请求入口 log 含 method/url/ip/userAgent、userAgent 缺失回落空串、响应完成
+    log 含 `<duration>ms`(Date.now 桩固定首尾时间差)、总调用 logger.log 2 次)
+  - `backend/src/common/filters/all-exceptions.filter.spec.ts`(8 个用例,
+    HttpException 对象 response 取 obj.message / 字符串 response 直接采用 / 缺
+    message 回落 exception.message;非 HttpException 走 500 + 通用 message;
+    NODE_ENV=development 时 error.stack 暴露 / 非 development 时 stack 不暴露;
+    非 Error 字面量也兜成 500;副作用 logger.error 1 次 + response.status().json() 链)
   - `backend/src/figure/sanguo/sanguo.service.spec.ts`(6 个用例,Sanguo 与其它 5 朝代
     差异维度:`kingdom` 替代 `period`、`role/kingdom` 走 eq 而非 contains)
   - `backend/src/figure/qing/qing.service.spec.ts`(9 个用例,Qing 与其它朝代差异维度:

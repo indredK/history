@@ -63,11 +63,16 @@
 - **起步完成**:`DynastyService` / `PersonService` / `EventService` / `EmperorService` /
   `FigureBaseService` / `ReligionService` / `CultureService` / `MythologyService` /
   `TangService` / `SanguoService` / `QingService` / `MingService` / `SongService` /
-  `YuanService` 共 150 个 spec(含既有 `app.controller` spec)= 150 个测试 ✅
+  `YuanService` + common 层(`ApiResponseDto` / `PaginatedResponseDto` /
+  `TransformInterceptor` / `LoggingInterceptor` / `AllExceptionsFilter`)共 191 个测试 ✅
   (jest 通过 `moduleNameMapper` 适配 Prisma 7 ESM 风格 `.js` 导入);
   Tang 作 canonical 模板,Ming/Song 同形(各自用 cabinet / chancellor 维度示例区分),
   Yuan 显式锁定 "destructure 不含 period 静默丢弃" 的当前行为,Sanguo 覆盖 kingdom 维度差异,
-  Qing 覆盖 `orderBy: [reignStart, name]` 帝王模型差异
+  Qing 覆盖 `orderBy: [reignStart, name]` 帝王模型差异;common 层覆盖响应包络的
+  双工厂(success/error)、分页 meta 状态机(首/中/末/单页/空集 5 态)、
+  TransformInterceptor wrap-or-passthrough 双分支、LoggingInterceptor 请求/响应双 log +
+  Date.now 桩验时长、AllExceptionsFilter HttpException 对象/字符串 response +
+  非 HttpException 走 500 + dev/prod stack 暴露分支
 
 #### 2.1 状态管理失控:20 个独立 Store
 
