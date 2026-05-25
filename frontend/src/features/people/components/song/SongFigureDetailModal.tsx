@@ -40,7 +40,7 @@ export function SongFigureDetailModal({ figure, open, onClose }: SongFigureDetai
   const roleLabel = ROLE_LABELS[figure.role];
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth aria-labelledby="song-figure-detail-title" PaperProps={{ sx: { background: 'var(--color-bg-card)', borderRadius: 'var(--radius-lg)', maxHeight: '90vh' } }}>
+    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth aria-labelledby="song-figure-detail-title" slotProps={{ paper: { sx: { background: 'var(--color-bg-card)', borderRadius: 'var(--radius-lg)', maxHeight: '90vh' } } }}>
       <DialogTitle id="song-figure-detail-title" sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', pb: 1 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           <Avatar {...(hasPortrait ? { src: figure.portraitUrl } : {})} alt={figure.name} sx={{ width: 72, height: 72, backgroundColor: safeRoleColor.bg, color: safeRoleColor.text, fontWeight: 'bold', fontSize: '2rem', border: `3px solid ${safeRoleColor.text}` }}>

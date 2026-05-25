@@ -1,6 +1,6 @@
 import { Component, ReactNode } from 'react';
 import { Box, Typography, Button } from '@mui/material';
-import { ErrorOutline } from '@mui/icons-material';
+import { ErrorOutlined } from '@mui/icons-material';
 
 interface Props {
   children: ReactNode;
@@ -42,7 +42,7 @@ export class ErrorBoundary extends Component<Props, State> {
           p: 3,
           textAlign: 'center'
         }}>
-          <ErrorOutline sx={{ fontSize: 48, color: 'error.main', mb: 2 }} />
+          <ErrorOutlined sx={{ fontSize: 48, color: 'error.main', mb: 2 }} />
           <Typography variant="h6" sx={{ mb: 1 }}>
             出现了一些问题
           </Typography>

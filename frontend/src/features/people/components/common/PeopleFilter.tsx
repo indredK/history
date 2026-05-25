@@ -35,7 +35,7 @@ export function PeopleFilter({ searchQuery, onSearchChange, searchPlaceholder = 
 
       <TextField size="small" placeholder={searchPlaceholder} value={searchQuery} onChange={handleSearchChange}
         sx={{ minWidth: { xs: '100%', sm: 200 }, '& .MuiOutlinedInput-root': { backgroundColor: 'var(--color-bg-card)', '& fieldset': { borderColor: 'var(--color-border)' }, '&:hover fieldset': { borderColor: 'var(--color-primary)' } } }}
-        InputProps={{ startAdornment: <InputAdornment position="start"><SearchIcon sx={{ color: 'var(--color-text-secondary)', fontSize: '1.2rem' }} /></InputAdornment> }}
+        slotProps={{ input: { startAdornment: <InputAdornment position="start"><SearchIcon sx={{ color: 'var(--color-text-secondary)', fontSize: '1.2rem' }} /></InputAdornment> } }}
       />
 
       {filters.map((filter) => (

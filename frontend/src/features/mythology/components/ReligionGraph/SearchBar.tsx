@@ -51,28 +51,30 @@ export function SearchBar() {
         placeholder="搜索神仙..."
         value={inputValue}
         onChange={handleInputChange}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon sx={{ color: 'var(--color-text-secondary)', fontSize: 16 }} />
-            </InputAdornment>
-          ),
-          endAdornment: inputValue && (
-            <InputAdornment position="end">
-              <IconButton
-                size="small"
-                onClick={handleClear}
-                sx={{ 
-                  padding: 0.25,
-                  '&:hover': {
-                    color: 'var(--color-primary)',
-                  },
-                }}
-              >
-                <ClearIcon sx={{ fontSize: 14 }} />
-              </IconButton>
-            </InputAdornment>
-          ),
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon sx={{ color: 'var(--color-text-secondary)', fontSize: 16 }} />
+              </InputAdornment>
+            ),
+            endAdornment: inputValue && (
+              <InputAdornment position="end">
+                <IconButton
+                  size="small"
+                  onClick={handleClear}
+                  sx={{
+                    padding: 0.25,
+                    '&:hover': {
+                      color: 'var(--color-primary)',
+                    },
+                  }}
+                >
+                  <ClearIcon sx={{ fontSize: 14 }} />
+                </IconButton>
+              </InputAdornment>
+            ),
+          },
         }}
         sx={{
           width: '100%',

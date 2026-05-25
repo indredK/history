@@ -23,7 +23,7 @@ export function PeriodFilterPopover({ anchorEl, onClose }: PeriodFilterPopoverPr
           时期筛选
         </Typography>
         <Stack spacing={1}>
-          <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+          <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap' }} useFlexGap>
             <Chip 
               label="先秦" 
               size="small" 

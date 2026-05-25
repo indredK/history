@@ -71,7 +71,7 @@ export function useResponsive(breakpoints: Breakpoints = defaultBreakpoints): Re
     };
 
     // 使用防抖优化性能
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: ReturnType<typeof setTimeout>;
     const debouncedResize = () => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(handleResize, 150);
@@ -213,7 +213,7 @@ export function useViewport() {
       });
     };
 
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: ReturnType<typeof setTimeout>;
     const debouncedResize = () => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(handleResize, 150);

@@ -89,11 +89,13 @@ export function ScholarDetailModal({
       fullWidth
       aria-labelledby="scholar-detail-title"
       aria-describedby="scholar-detail-description"
-      PaperProps={{
-        sx: {
-          background: 'var(--color-bg-card)',
-          borderRadius: 'var(--radius-lg)',
-          maxHeight: '90vh',
+      slotProps={{
+        paper: {
+          sx: {
+            background: 'var(--color-bg-card)',
+            borderRadius: 'var(--radius-lg)',
+            maxHeight: '90vh',
+          },
         },
       }}
     >

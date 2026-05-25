@@ -32,7 +32,7 @@ export function useScrollbarAreaDetect<T extends HTMLElement>(
     const container = containerRef.current;
     if (!container || !hasScrollableContentRef.current) return undefined;
 
-    if (showDebugArea && process.env.NODE_ENV === 'development') {
+    if (showDebugArea && import.meta.env.DEV) {
       const existingIndicator = container.querySelector('.hover-scroll-indicator');
       if (existingIndicator) existingIndicator.remove();
 

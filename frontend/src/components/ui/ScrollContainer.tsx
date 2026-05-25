@@ -41,8 +41,8 @@ export function ScrollContainer({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // 恢复滚动位置
   useEffect(() => {

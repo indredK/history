@@ -266,13 +266,13 @@ export const ApiStatusIndicator: React.FC = () => {
             <Typography variant="h6" gutterBottom>
               功能说明
             </Typography>
-            <Typography variant="body2" color="text.secondary" paragraph>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
               • <strong>自动降级:</strong> 当API连续失败达到阈值时，自动切换到Mock数据
             </Typography>
-            <Typography variant="body2" color="text.secondary" paragraph>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
               • <strong>熔断保护:</strong> 防止无限重试导致页面卡死
             </Typography>
-            <Typography variant="body2" color="text.secondary" paragraph>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
               • <strong>智能恢复:</strong> API恢复正常后自动切换回真实数据
             </Typography>
             <Typography variant="body2" color="text.secondary">

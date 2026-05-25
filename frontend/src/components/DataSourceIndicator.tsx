@@ -129,15 +129,15 @@ export const DataSourceIndicator: React.FC = () => {
               <strong>数据源模式:</strong> {dataSourceInfo.description}
             </Alert>
             
-            <Typography variant="body2" color="text.secondary" paragraph>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
               <strong>配置位置:</strong> <code>frontend/.env</code>（变量 <code>VITE_DATA_SOURCE</code>）
             </Typography>
 
-            <Typography variant="body2" color="text.secondary" paragraph>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
               <strong>当前开关值:</strong> <code>DATA_SOURCE_MODE = {DATA_SOURCE_MODE}</code>
             </Typography>
 
-            <Typography variant="body2" color="text.secondary" paragraph>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
               <strong>切换方法:</strong>
               <br />• 设置 <code>VITE_DATA_SOURCE=mock</code>（或 <code>json</code>）使用模拟数据
               <br />• 设置 <code>VITE_DATA_SOURCE=api</code> 使用真实API

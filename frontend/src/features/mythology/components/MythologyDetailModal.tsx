@@ -59,10 +59,12 @@ export function MythologyDetailModal({
       fullWidth
       aria-labelledby="mythology-detail-title"
       aria-describedby="mythology-detail-description"
-      PaperProps={{
-        sx: {
-          background: 'var(--color-bg-card)',
-          borderRadius: 'var(--radius-lg)',
+      slotProps={{
+        paper: {
+          sx: {
+            background: 'var(--color-bg-card)',
+            borderRadius: 'var(--radius-lg)',
+          },
         },
       }}
     >

@@ -59,11 +59,13 @@ export function SchoolDetail({
       fullWidth
       aria-labelledby="school-detail-title"
       aria-describedby="school-detail-description"
-      PaperProps={{
-        sx: {
-          background: 'var(--color-bg-card)',
-          borderRadius: 'var(--radius-lg)',
-          maxHeight: '90vh',
+      slotProps={{
+        paper: {
+          sx: {
+            background: 'var(--color-bg-card)',
+            borderRadius: 'var(--radius-lg)',
+            maxHeight: '90vh',
+          },
         },
       }}
     >

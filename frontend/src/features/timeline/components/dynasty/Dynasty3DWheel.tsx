@@ -325,7 +325,7 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const isScrollingRef = useRef<boolean>(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   // 使用ahooks的useRequest获取数据
   useRequest(

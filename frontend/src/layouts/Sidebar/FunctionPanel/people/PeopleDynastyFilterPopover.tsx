@@ -23,7 +23,7 @@ export function PeopleDynastyFilterPopover({ anchorEl, onClose }: PeopleDynastyF
           朝代筛选
         </Typography>
         <Stack spacing={1}>
-          <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+          <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap' }} useFlexGap>
             <Chip 
               label="春秋战国" 
               size="small" 

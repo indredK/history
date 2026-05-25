@@ -35,11 +35,10 @@ export function SettingsPanel({ collapsed }: SettingsPanelProps) {
   // 折叠状态下垂直排列，展开状态下水平排列
   return (
     <Box sx={panelStyle}>
-      <Stack 
+      <Stack
         direction={collapsed ? 'column' : 'row'}
-        spacing={1} 
-        justifyContent="center"
-        alignItems="center"
+        spacing={1}
+        sx={{ justifyContent: 'center', alignItems: 'center' }}
       >
         <ThemeToggleButton collapsed={collapsed} />
         <StyleSwitcherButton collapsed={collapsed} />

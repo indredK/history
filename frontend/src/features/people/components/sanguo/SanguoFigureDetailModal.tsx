@@ -41,7 +41,7 @@ export function SanguoFigureDetailModal({ figure, open, onClose }: SanguoFigureD
   const kingdomLabel = KINGDOM_LABELS[figure.kingdom];
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth aria-labelledby="sanguo-figure-detail-title" PaperProps={{ sx: { background: 'var(--color-bg-card)', borderRadius: 'var(--radius-lg)', maxHeight: '90vh' } }}>
+    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth aria-labelledby="sanguo-figure-detail-title" slotProps={{ paper: { sx: { background: 'var(--color-bg-card)', borderRadius: 'var(--radius-lg)', maxHeight: '90vh' } } }}>
       <DialogTitle id="sanguo-figure-detail-title" sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', pb: 1 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           <Avatar {...(hasPortrait ? { src: figure.portraitUrl } : {})} alt={figure.name} sx={{ width: 72, height: 72, backgroundColor: kingdomColor.bg, color: kingdomColor.text, fontWeight: 'bold', fontSize: '2rem', border: `3px solid ${kingdomColor.text}` }}>

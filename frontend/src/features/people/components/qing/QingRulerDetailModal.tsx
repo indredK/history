@@ -84,11 +84,13 @@ export function QingRulerDetailModal({
       maxWidth="md"
       fullWidth
       aria-labelledby="qing-ruler-detail-title"
-      PaperProps={{
-        sx: {
-          background: 'var(--color-bg-card)',
-          borderRadius: 'var(--radius-lg)',
-          maxHeight: '90vh',
+      slotProps={{
+        paper: {
+          sx: {
+            background: 'var(--color-bg-card)',
+            borderRadius: 'var(--radius-lg)',
+            maxHeight: '90vh',
+          },
         },
       }}
     >

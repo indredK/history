@@ -9,12 +9,14 @@ export function LoadingSkeleton({ count = 6, variant = 'cards' }: LoadingSkeleto
   // 页面级加载
   if (variant === 'page') {
     return (
-      <Box 
-        display="flex" 
-        justifyContent="center" 
-        alignItems="center" 
-        height="100%"
-        minHeight="200px"
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
+          minHeight: '200px',
+        }}
       >
         <CircularProgress />
       </Box>
