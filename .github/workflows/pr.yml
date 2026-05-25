@@ -52,7 +52,7 @@ jobs:
     # 仅作为信号,作者应观察 delta 不上涨
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
@@ -65,7 +65,7 @@ jobs:
     # 历史 130 个 no-unsafe-* / no-unused-vars 错误,清理前不阻塞 PR
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
