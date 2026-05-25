@@ -5,9 +5,44 @@
 
 import { getDataSourceMode } from '@/config/dataSource';
 import { loadJsonArray, type ApiResponse } from './dataLoaders';
-import { fallbackManager } from './errorHandling';
+import { ApiError, ApiErrorType, fallbackManager, retryOperation } from './errorHandling';
 
 import { apiClient, handleApiResponse, handleSingleApiResponse } from './apiClient';
+
+const isDev = import.meta.env.DEV;
+
+/**
+ * 是否为瞬时错误：网络/超时/5xx 才重试，4xx 客户端错误不重试
+ */
+function isTransientError(error: unknown): boolean {
+  if (!(error instanceof ApiError)) return true; // 未知错误兜底也允许 1 次重试
+  return (
+    error.type === ApiErrorType.NETWORK_ERROR ||
+    error.type === ApiErrorType.TIMEOUT_ERROR ||
+    error.type === ApiErrorType.SERVER_ERROR
+  );
+}
+
+/**
+ * 仅对瞬时错误重试的包装
+ */
+async function withTransientRetry<T>(
+  op: () => Promise<T>,
+  maxRetries = 2,
+  delay = 500
+): Promise<T> {
+  return retryOperation(async () => {
+    try {
+      return await op();
+    } catch (error) {
+      if (!isTransientError(error)) {
+        // 4xx 等非瞬时错误直接向外抛，不再进 retryOperation 的下一轮
+        throw error;
+      }
+      throw error;
+    }
+  }, maxRetries, delay);
+}
 
 /**
  * 基础服务接口
@@ -49,31 +84,29 @@ export function createUnifiedService<T>(
     }
   };
 
-  // API数据获取函数
+  // API数据获取函数 —— GET 列表带瞬时错误重试
   const getApiData = async (): Promise<ApiResponse<T[]>> => {
     try {
-      console.log(`API调用: GET ${apiEndpoint}`);
-      const response = await apiClient.get(apiEndpoint);
+      const response = await withTransientRetry(() => apiClient.get(apiEndpoint));
       const apiResponse = handleApiResponse<any>(response);
       const transformedData = apiResponse.data.map((item, index) => transformer(item, index));
       return { data: transformedData };
     } catch (error) {
-      console.error(`API调用失败 (${apiEndpoint}):`, error);
+      if (isDev) console.error(`API调用失败 (${apiEndpoint}):`, error);
       throw error;
     }
   };
 
-  // API单个数据获取函数
+  // API单个数据获取函数 —— GET 详情带瞬时错误重试
   const getApiDataById = async (id: string): Promise<ApiResponse<T | null>> => {
     try {
       const endpoint = `${apiEndpoint}/${id}`;
-      console.log(`API调用: GET ${endpoint}`);
-      const response = await apiClient.get(endpoint);
+      const response = await withTransientRetry(() => apiClient.get(endpoint));
       const apiResponse = handleSingleApiResponse<any>(response);
       const transformedItem = apiResponse.data ? transformer(apiResponse.data, 0) : null;
       return { data: transformedItem };
     } catch (error) {
-      console.error(`API单个数据获取失败 (${apiEndpoint}/${id}):`, error);
+      if (isDev) console.error(`API单个数据获取失败 (${apiEndpoint}/${id}):`, error);
       throw error;
     }
   };
