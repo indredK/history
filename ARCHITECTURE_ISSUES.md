@@ -13,27 +13,27 @@
 
 本轮 P0/P1 已落地的修复(commit 全部本地保留,未推送):
 
-| Commit | 工作 |
-|---|---|
-| `1a3642b` | P0 §1.2 Service 层 16 处 any → Prisma WhereInput |
-| `39cb74f` | P0 §4.1 CI 拆分前后端 job + lint + test |
-| `8d8552a` | P0 §2.4 删除 services_backup/ |
-| `7a95941` | P1 §2.2 5 朝代 FigureDetailModal 抽公共组件 |
-| `178f9af` | P1 §2.5+§6.2+§6.4 HTTP 客户端错误分类 + 路由级 ErrorBoundary |
-| `7e9ef10` | P1 §2.3 拆分 ReligionGraph(669→223 行) |
-| `5b0212c` | P1 §2.3 拆分 TimelineChart(556→123 行) |
-| `7539a88` | P1 §2.3 拆分 QingRulerDetailModal(547→132 行) |
-| `8b17883` | P1 §2.3 拆分 DynastyRow(494→105 行) |
-| `d3db134` | P1 §2.3 拆分 SchoolDetail(466→107 行) |
-| `6dad68f` | P1 §2.3 拆分 Dynasty3DWheel(414→76 行) |
-| `94eb489` | §1.5 Swagger 加 addBearerAuth + §4.3/§6.1 复核 |
-| `a0074a5` | §2.6 UI 库收敛到 MUI v9(antd 已清除) |
-| `0321f5b` | §4.4 ROADMAP / SECURITY 与现状对齐 |
+| Commit    | 工作                                                                           |
+| --------- | ------------------------------------------------------------------------------ |
+| `1a3642b` | P0 §1.2 Service 层 16 处 any → Prisma WhereInput                               |
+| `39cb74f` | P0 §4.1 CI 拆分前后端 job + lint + test                                        |
+| `8d8552a` | P0 §2.4 删除 services_backup/                                                  |
+| `7a95941` | P1 §2.2 5 朝代 FigureDetailModal 抽公共组件                                    |
+| `178f9af` | P1 §2.5+§6.2+§6.4 HTTP 客户端错误分类 + 路由级 ErrorBoundary                   |
+| `7e9ef10` | P1 §2.3 拆分 ReligionGraph(669→223 行)                                         |
+| `5b0212c` | P1 §2.3 拆分 TimelineChart(556→123 行)                                         |
+| `7539a88` | P1 §2.3 拆分 QingRulerDetailModal(547→132 行)                                  |
+| `8b17883` | P1 §2.3 拆分 DynastyRow(494→105 行)                                            |
+| `d3db134` | P1 §2.3 拆分 SchoolDetail(466→107 行)                                          |
+| `6dad68f` | P1 §2.3 拆分 Dynasty3DWheel(414→76 行)                                         |
+| `94eb489` | §1.5 Swagger 加 addBearerAuth + §4.3/§6.1 复核                                 |
+| `a0074a5` | §2.6 UI 库收敛到 MUI v9(antd 已清除)                                           |
+| `0321f5b` | §4.4 ROADMAP / SECURITY 与现状对齐                                             |
 | `8fe6336` | §4.4 M1 治理文档全套(CONTRIBUTING / CoC / CHANGELOG / Issue 模板 / dependabot) |
-| `ec26deb` | §1.3 EventService 范围筛选与边界计算拆分(244→229 行) |
-| `<本轮>` | §2.7 真正 404 页面 + §4.4 README 修正 + §6.3 e2e 冒烟测试 |
-| `<本轮>` | §3.3 dev.db 剥离 → seed-data/*.json + `bun prisma/seed.ts`,补迁移对齐表结构 |
-| 既有 | §2.7 路由懒加载 已用 `React.lazy` |
+| `ec26deb` | §1.3 EventService 范围筛选与边界计算拆分(244→229 行)                           |
+| `<本轮>`  | §2.7 真正 404 页面 + §4.4 README 修正 + §6.3 e2e 冒烟测试                      |
+| `<本轮>`  | §3.3 dev.db 剥离 → seed-data/\*.json + `bun prisma/seed.ts`,补迁移对齐表结构   |
+| 既有      | §2.7 路由懒加载 已用 `React.lazy`                                              |
 
 - **P0**:4 / 4 完成(§3.3 dev.db 剥离已落地,改用 seed-data JSON + `prisma db seed` 重建)
 - **P1**:4 / 6 完成(状态合并推迟;pre-commit hooks 与 openapi-generator 受沙箱阻塞)
@@ -136,7 +136,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 
 #### 2.8 前端测试形同虚设
 
-- 已配置 vitest,本轮已扩到 38 个测试文件 / 425 个用例
+- 已配置 vitest,本轮已扩到 48 个测试文件 / 485 个用例
 - 仍有部分组件仅含空 `describe` 块,需要持续投入
 - **工作量**:持续投入
 
@@ -176,16 +176,16 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 
 #### 4.4 文档缺失 / 与实现脱节
 
-| 文档 | 状态 | 问题 |
-|---|---|---|
-| README.md | ✅ | 已修正为 Bun + SQLite,移除虚假目录引用(0321f5b/本轮) |
-| SECURITY.md | ✅ | 已与现状对齐(0321f5b),未实现项明确列入"待实现" |
-| DEPLOY.md | ✅ 存在 | 仅覆盖 GitHub Pages |
-| ROADMAP.md | ✅ | 已重写为里程碑 M1~M7(0321f5b) |
-| CONTRIBUTING.md | ✅ | 8fe6336 已新增 |
-| CODE_OF_CONDUCT.md | ✅ | 8fe6336 已新增(Contributor Covenant 2.1) |
-| CHANGELOG.md | ✅ | 8fe6336 已新增(Keep a Changelog) |
-| ARCHITECTURE_ISSUES.md | ✅ | 本文档(0b153ac 已重写) |
+| 文档                   | 状态    | 问题                                                 |
+| ---------------------- | ------- | ---------------------------------------------------- |
+| README.md              | ✅      | 已修正为 Bun + SQLite,移除虚假目录引用(0321f5b/本轮) |
+| SECURITY.md            | ✅      | 已与现状对齐(0321f5b),未实现项明确列入"待实现"       |
+| DEPLOY.md              | ✅ 存在 | 仅覆盖 GitHub Pages                                  |
+| ROADMAP.md             | ✅      | 已重写为里程碑 M1~M7(0321f5b)                        |
+| CONTRIBUTING.md        | ✅      | 8fe6336 已新增                                       |
+| CODE_OF_CONDUCT.md     | ✅      | 8fe6336 已新增(Contributor Covenant 2.1)             |
+| CHANGELOG.md           | ✅      | 8fe6336 已新增(Keep a Changelog)                     |
+| ARCHITECTURE_ISSUES.md | ✅      | 本文档(0b153ac 已重写)                               |
 
 > 文档基础设施基本就位,API 文档由 Swagger 自动生成(http://localhost:3001/api/docs)。
 
@@ -221,18 +221,18 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 
 ## 三、安全(SECURITY.md 承诺 vs 实现)
 
-| 承诺 | 实现 | 状态 |
-|---|---|---|
-| HTTPS/TLS 加密传输 | 无 HTTPS 配置 | ❌ |
-| 输入验证与输出转义 | ValidationPipe + class-validator | ✅ |
-| SQL 参数化查询 | Prisma 自带 | ✅ |
-| CORS 配置限制 | 已配置 | ✅ |
-| 环境变量管理 | `.env` 文件 | ✅ |
-| 用户身份认证(OAuth/JWT) | **零实现** | ❌(同 §1.1) |
-| 数据库连接加密 | 未配置 | ❌ |
-| 速率限制与 DDoS 防护 | 无 `@nestjs/throttler` | ❌ |
-| helmet 安全头 | 未配置 | ❌ |
-| 安全审计日志 | 无 | ❌(同 §1.7) |
+| 承诺                    | 实现                             | 状态        |
+| ----------------------- | -------------------------------- | ----------- |
+| HTTPS/TLS 加密传输      | 无 HTTPS 配置                    | ❌          |
+| 输入验证与输出转义      | ValidationPipe + class-validator | ✅          |
+| SQL 参数化查询          | Prisma 自带                      | ✅          |
+| CORS 配置限制           | 已配置                           | ✅          |
+| 环境变量管理            | `.env` 文件                      | ✅          |
+| 用户身份认证(OAuth/JWT) | **零实现**                       | ❌(同 §1.1) |
+| 数据库连接加密          | 未配置                           | ❌          |
+| 速率限制与 DDoS 防护    | 无 `@nestjs/throttler`           | ❌          |
+| helmet 安全头           | 未配置                           | ❌          |
+| 安全审计日志            | 无                               | ❌(同 §1.7) |
 
 ---
 
@@ -250,7 +250,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 5. ~~**§4.4 文档补全** — CONTRIBUTING / CODE_OF_CONDUCT / README 修正 / API 文档~~ ✅ 已完成(0321f5b / 8fe6336 / 本轮)
 6. ~~**§1.3 EventService 拆分**~~ ✅ 已完成(ec26deb)
 7. **§2.7 / §1.1 路由守卫** — 跟着认证一起 — 0.5 天(§2.7 真 404 页 ✅ 本轮已完成)
-8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 38 个 vitest 测试文件 425 个用例,
+8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 48 个 vitest 测试文件 485 个用例,
    覆盖关键交互、store 集成、createFigureStore 工厂、errorHandling 全路径(降级 /
    重试 / 状态管理)、dataLoaders 全路径(fetch / cache / retry / API 响应解包)、
    PerformanceMonitor(mark/measure 含 falsy-start 已知行为锁定)、routeUtils
@@ -276,7 +276,17 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
    searchQuery/sortBy → service.filterAndSort 重命名 searchQuery→query,role/kingdom
    options 纯静态),useSidebar hook(renderHook+act:localStorage 初值含 false 不被
    默认值覆盖 / toggle/expand/collapse/setCollapsed / useEffect 持久化 / 跨标签页
-   StorageListener storage 事件回填 + 同值不变 + 其它 key 忽略 + unmount 不抛);
+   StorageListener storage 事件回填 + 同值不变 + 其它 key 忽略 + unmount 不抛),
+   tang/song/yuan/mingFigureStore(createFigureStore 工厂四朝实例化烟雾:sortBy
+   默认值锁定 + roleOptions 朝代特色枚举 poet/scholar/cabinet/eunuch + periodOptions
+   与各自 PERIODS 常量对齐 + getFilteredFigures 走对应 service 且 searchQuery→query
+   重命名),personStore + navigationStore + timelineStore + dynastyStore + schoolStore
+   (五个轻量 store 的 setter 语义、null/空串清空、默认值锁定),useDynastiesExpanded
+   hook(renderHook+act:默认展开规则 undefined/true 视为展开、显式 false 才收起、
+   set/toggle/expandAll/collapseAll/areAllExpanded/areAllCollapsed 全员检查、
+   无参 expandAllDynasties 已有 ids 优先空 state 走 default 24 朝代列表、
+   getExpandedDynastiesCount 只算 default 24、跨标签页 StorageListener 回填
+   整个 expandedStates);
    后端 `DynastyService` / `PersonService` / `EventService` /
    `EmperorService` / `FigureBaseService` / `ReligionService` / `CultureService` /
    `MythologyService` / `TangService` / `SanguoService` / `QingService` 共 125 个用例)
@@ -293,12 +303,12 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 
 以下项当前会话受沙箱限制(npm registry 不可达)无法推进:
 
-| 依赖 | 用途 | 关联 |
-|---|---|---|
-| pino + pino-pretty | 结构化日志 | §1.7 |
-| @nestjs/throttler | 速率限制 | §安全 |
-| helmet | 安全头中间件 | §安全 |
-| husky + lint-staged + commitlint | pre-commit hooks | §4.2 |
-| openapi-generator-cli 或 orval | 前后端类型同步 | §3.4 |
-| turbo 或 nx | monorepo 增量构建 | §4.5 |
-| @types/jest | 后端测试类型(目前用 bun test 但缺类型) | §1.6 |
+| 依赖                             | 用途                                   | 关联  |
+| -------------------------------- | -------------------------------------- | ----- |
+| pino + pino-pretty               | 结构化日志                             | §1.7  |
+| @nestjs/throttler                | 速率限制                               | §安全 |
+| helmet                           | 安全头中间件                           | §安全 |
+| husky + lint-staged + commitlint | pre-commit hooks                       | §4.2  |
+| openapi-generator-cli 或 orval   | 前后端类型同步                         | §3.4  |
+| turbo 或 nx                      | monorepo 增量构建                      | §4.5  |
+| @types/jest                      | 后端测试类型(目前用 bun test 但缺类型) | §1.6  |

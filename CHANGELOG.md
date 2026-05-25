@@ -7,6 +7,7 @@
 ## [Unreleased]
 
 ### Added
+
 - M1 治理文档全套:`CONTRIBUTING.md` / `CODE_OF_CONDUCT.md` / `CHANGELOG.md`
 - `.github/ISSUE_TEMPLATE/`:bug / feature / data_contribution / config
 - `.github/pull_request_template.md`
@@ -57,7 +58,7 @@
     orderBy 用 `[reignStart, name]` 而非 `[birthYear, name]`(因为 QingRuler 是帝王模型),
     没有 period 字段;`birthYear=0` 进入 where、deathYear OR(lte,null)、JSON 字段 transform)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):38 个测试文件 / 425 个用例,覆盖
+- 前端核心组件 vitest 测试扩充(§2.8):48 个测试文件 / 485 个用例,覆盖
   关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
   - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
     SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
@@ -174,6 +175,30 @@
     false(关键回归)、toggle 翻转、setCollapsed 直写、expand/collapse 幂等、useEffect
     挂载即落盘 + 变更同步 localStorage、跨标签页 dispatchEvent('storage'):key 匹配
     且 newValue !== 当前值 → 回填 / 同值不变 / 其它 key 忽略 / unmount 后再触发不抛
+  - `frontend/src/hooks/useDynastiesExpanded.test.ts`(26 个用例):朝代展开 hook 全覆盖。
+    初始化(localStorage 无值/有值)、isDynastyExpanded(undefined/true/false 默认展开规则)、
+    setDynastyExpanded(写入 + useEffect 持久化 + 追加不影响已有)、toggleDynasty(双向)、
+    expandAll/collapseAll(传 ids,只动 ids)、toggleAll(全展开则收起,否则全展)、
+    areAllExpanded/areAllCollapsed(默认展开规则)、expandAllDynasties/collapseAllDynasties
+    (无参版:已有 ids 优先,空 state 走 default 24 朝代列表)、getExpandedDynastiesCount
+    (固定 default 24 + undefined/true 计入,显式 false 不计 + 不在 default 24 列表的
+    id 不影响)、getTotalDynastiesCount 固定 24、跨标签页 storage 事件回填整个 expandedStates
+  - `frontend/src/store/personStore.test.ts`(3 个用例):通用人物 store。persons/
+    selectedPersonId/searchQuery 三组 setter + null/空串清空语义
+  - `frontend/src/store/navigationStore.test.ts`(3 个用例):导航 store。
+    默认 activeTab='timeline' 锁定 + setActiveTab 任意字符串 + 空串不校验
+  - `frontend/src/store/timelineStore.test.ts`(4 个用例):时间轴 store。
+    默认 -500~2000 + setYears 一次性更新两端 + 允许负数(BC)+ 不校验先后顺序
+  - `frontend/src/store/dynastyStore.test.ts`(3 个用例):朝代 store。
+    setDynasties 同引用 + setSelectedDynasty 写入/null 清空
+  - `frontend/src/store/schoolStore.test.ts`(3 个用例):学派 store。
+    全 setter + null 清空 + loading 反复切换
+  - `frontend/src/store/{tang,song,yuan,ming}FigureStore.test.ts`(各 4 个用例,合 16 个):
+    四朝人物 store 工厂实例化烟雾测试。各自验证 sortBy='birthYear' 默认值、
+    roleOptions(tang 用 poet / song+yuan 用 scholar / ming 用 cabinet+eunuch 替代)、
+    periodOptions 与 {TANG,SONG,YUAN,MING}\_PERIODS 配置一致、
+    getFilteredFigures 走对应 service(tangFigureService / songFigureServiceHelper /
+    yuanFigureServiceHelper / mingService)且 searchQuery→query 重命名
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`
@@ -183,6 +208,7 @@
   filter 透传 / 实例隔离)
 
 ### Changed
+
 - `frontend/src/store/{tang,song,yuan,ming}FigureStore.ts`:四个 70+ 行的 store 各自重复实现
   `figures/selectedFigure/filters` 同一套逻辑,统一收敛到 `createFigureStore` 工厂(§2.1 起步),
   每个朝代 store 现在只剩 ~20 行,差异化的只有"角色枚举 / 时期常量 / service 实例 /
@@ -211,11 +237,13 @@
 - `docker-compose.yml` 与 SQLite 栈对齐:移除遗留 `postgres` + `PostGIS` 服务,`backend` 改挂 named volume `backend_db:/app/prisma`,`DATABASE_URL` 指向 `file:/app/prisma/dev.db`,`frontend` 依赖 `backend` healthcheck 通过后启动
 
 ### Fixed
+
 - `DataSourceIndicator` / `ApiStatusIndicator` 弹窗关闭时未清理 `testResults` / `testing` / `refreshing` 等本地状态,导致下次打开看到陈旧测试结果(§6.2)
 - `layoutAlgorithms.ts` 第二个层级查找循环里 `placed = true; break;` 的 `placed` 赋值后不再被读取
   (`no-useless-assignment` 死存储),改为单纯 `break` 跳出
 
 ### Removed
+
 - 废弃的 `frontend/src/services_backup/` 目录
 - 历史遗留的 seed 脚本(已被新 `prisma/seed.ts` 取代):
   - `backend/prisma/comprehensive-seed.ts`
@@ -226,6 +254,7 @@
 - `backend/{,prisma/}dev.db`:从 git 历史中解除追踪(`.gitignore` 已显式排除)
 
 ### Security
+
 - ✅ 全局 `ValidationPipe` + `class-validator`(防 XSS)
 - ✅ Prisma 参数化查询(防 SQL 注入)
 - ✅ CORS 配置由 `CORS_ORIGIN` env 控制
@@ -246,6 +275,7 @@
 - **PATCH**:向后兼容的 bug 修复
 
 发布节奏建议:
+
 - PATCH:随时发(只要有 bug 修复)
 - MINOR:每月或重要功能就绪时
 - MAJOR:重大架构调整时(如 Schema 重构、认证体系上线)
