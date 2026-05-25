@@ -1,0 +1,85 @@
+name: 📊 数据贡献
+description: 提交新的历史数据(人物/事件/边界 GeoJSON 等)
+title: "[Data] "
+labels: ["data", "needs-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢贡献数据!历史数据是本项目核心资产,请尽量提供来源与许可信息。
+        阅读 [CONTRIBUTING.md → 数据贡献](../../blob/main/CONTRIBUTING.md#数据贡献) 了解流程。
+
+  - type: dropdown
+    id: data_type
+    attributes:
+      label: 数据类型
+      options:
+        - 边界 GeoJSON(朝代/行政区划)
+        - 历史人物
+        - 历史事件
+        - 文化/学派/宗教
+        - 来源/参考文献
+        - 其他
+    validations:
+      required: true
+
+  - type: input
+    id: dynasty
+    attributes:
+      label: 涉及朝代 / 时间范围
+      placeholder: 唐(618-907)
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 数据简述
+      description: 简要描述要新增/修正的内容
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: 数据来源
+      description: 列出主要来源(机构、论文、官方网站、地方志等)
+      placeholder: |
+        - CHGIS v6.0 (Harvard)
+        - 《中国历史地图集》(谭其骧主编)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: license
+    attributes:
+      label: 数据许可
+      description: 必须是开放许可
+      options:
+        - CC-BY-4.0
+        - CC-BY-SA-4.0
+        - CC0 / 公有领域
+        - 自制(我自己整理,愿以 CC-BY-4.0 发布)
+        - 其他(在备注里说明)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: confidence
+    attributes:
+      label: 置信度
+      options:
+        - 高(学术来源,有明确文献)
+        - 中(来自地方志或学者整理)
+        - 低(社区考据,需进一步校验)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 自查
+      options:
+        - label: 我已确认数据来源允许开放使用(无商业版权)
+          required: true
+        - label: 我已在 PR 中更新 `frontend/public/data/SOURCES.md`
+        - label: GeoJSON 数据使用 EPSG:4326 坐标系
+        - label: 字段命名与 Prisma schema 对齐

@@ -1,0 +1,91 @@
+name: 🐛 Bug 报告
+description: 报告一个 bug 或异常行为
+title: "[Bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢报告 bug!请尽量详细填写下列字段,这能大大加快定位速度。
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug 描述
+      description: 清晰地描述发生了什么
+      placeholder: 比如"点击朝代卡片后页面白屏,Console 报 TypeError ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      description: 一步一步描述如何复现
+      placeholder: |
+        1. 打开 http://localhost:5173/timeline
+        2. 点击"唐"卡片
+        3. 滚动到底部
+        4. 看到 ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+      placeholder: 应该展示唐朝详情面板
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+      placeholder: 页面白屏,Console 报错
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: 影响范围
+      options:
+        - 前端 (frontend)
+        - 后端 (backend)
+        - 数据 (data)
+        - 文档 (docs)
+        - CI / 构建
+        - 其他 / 不确定
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: 版本 / commit
+      description: package.json version 或 git rev-parse HEAD 的输出
+      placeholder: "1.0.0 或 abc1234"
+
+  - type: input
+    id: environment
+    attributes:
+      label: 环境
+      placeholder: "macOS 14.5 / Chrome 130 / Bun 1.3.5"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 相关日志 / 截图
+      description: 控制台错误、后端日志、屏幕截图等
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 自查
+      options:
+        - label: 我已搜过 Issues,没有重复
+          required: true
+        - label: 我已 git pull 到最新 main,问题仍存在
+          required: true

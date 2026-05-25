@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/discussions
+    about: 讨论新功能方向、求助、想法分享 — 提 Issue 前请优先来这里
+  - name: 🔒 安全漏洞
+    url: https://github.com/blob/main/SECURITY.md
+    about: 不要在公开 Issue 中报告安全漏洞,请按 SECURITY.md 流程私信
