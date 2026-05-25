@@ -57,7 +57,7 @@
     orderBy 用 `[reignStart, name]` 而非 `[birthYear, name]`(因为 QingRuler 是帝王模型),
     没有 period 字段;`birthYear=0` 进入 where、deathYear OR(lte,null)、JSON 字段 transform)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):27 个测试文件 / 282 个用例,覆盖
+- 前端核心组件 vitest 测试扩充(§2.8):28 个测试文件 / 307 个用例,覆盖
   关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
   - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
     SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
@@ -103,6 +103,17 @@
     抛 Error / fetch 抛非 Error 值),testAllApiEndpoints(逐个调 5 个端点全成功 /
     任意一个失败时仍返回所有 results),testFrontendProxy(成功 + 代理 URL /
     格式错误 + details.suggestion 提示 Vite 代理 / HTTP 错 / fetch 抛错)
+  - `frontend/src/store/religionStore.test.ts`(25 个用例):宗教关系图 store 全覆盖。
+    初始 state(graphData=null / 高亮集合空 / viewMode='force')、基础 setters
+    (setViewMode / setGraphData / setSelectedNode / 高亮集合 / 门派 / loading /
+    error)、setHoveredNode(null 清三件、graphData=null 时只写入、命中节点把
+    相连边 & 两端节点点亮含自己、孤立节点只点亮自己)、setSearchQuery(空 /
+    仅空白 / graphData=null / 命中 name / 大小写归一化 / title 匹配命中)、
+    getFilteredNodes(无数据 / 不筛 / selectedSects 命中含 sect 节点豁免 /
+    searchQuery 跨 name/title/description / sect+search 同时生效)、
+    getFilteredEdges 只留两端在 filteredNodes 中的边、
+    getRelatedNodesAndEdges(graphData=null / 邻居含相连边 / 自身排除 / 孤立空)、
+    resetFilters(只清 4 个筛选高亮字段,保留 hoveredNode/selectedNode/loading)
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`
