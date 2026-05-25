@@ -41,6 +41,11 @@
     findScholarById 命中与 NotFoundException,findAllSchools where / orderBy / JSON 解析,
     findSchoolById 命中与 NotFoundException,safeJsonParse 边界:空串 / 仅空白 / null /
     undefined / 已是对象不二次解析)
+  - `backend/src/mythology/mythology.service.spec.ts`(14 个用例,findAll where
+    category/origin/period/name + 双 orderBy 与分页,字段映射 name→title / origin→source /
+    固定占位 englishTitle/imageUrl="" / description|origin null 兜底空串 /
+    characters = stories.slice(0,5) / 非数组与非法 JSON 回落 [],findOne 命中映射与
+    NotFoundException)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
 - 前端核心组件 vitest 测试扩充(§2.8):19 个测试文件由"仅渲染不报错"扩到 146 个用例,覆盖
   关键交互、store 集成与 a11y(键盘事件、role/label)
