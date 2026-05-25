@@ -63,7 +63,8 @@ export default defineConfig(({ command, mode }) => {
   },
   build: {
     // 简化构建配置，不做代码分割
-    minify: 'esbuild',
+    // Vite 8 默认用 rolldown + oxc minifier，不再依赖 esbuild
+    minify: 'oxc',
     target: 'es2020',
     sourcemap: false,
     // 禁用代码分割，所有代码打包到一个文件
