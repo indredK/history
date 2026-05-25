@@ -46,6 +46,13 @@
     固定占位 englishTitle/imageUrl="" / description|origin null 兜底空串 /
     characters = stories.slice(0,5) / 非数组与非法 JSON 回落 [],findOne 命中映射与
     NotFoundException)
+  - `backend/src/figure/tang/tang.service.spec.ts`(8 个用例,Tang 是 5 字段全集
+    canonical 模板:role contains / period eq / name contains / birthYear gte /
+    deathYear OR + null;`birthYear=0` 也进入 where(`!== undefined` 而非 truthy));
+    Ming 与 Tang 形状完全一致,Song/Yuan/Qing 为 Tang 子集(无 period),共用
+    transformFigure 已由 FigureBaseService spec 覆盖
+  - `backend/src/figure/sanguo/sanguo.service.spec.ts`(6 个用例,Sanguo 与其它 5 朝代
+    差异维度:`kingdom` 替代 `period`、`role/kingdom` 走 eq 而非 contains)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
 - 前端核心组件 vitest 测试扩充(§2.8):19 个测试文件由"仅渲染不报错"扩到 146 个用例,覆盖
   关键交互、store 集成与 a11y(键盘事件、role/label)

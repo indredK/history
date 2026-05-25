@@ -61,9 +61,10 @@
 - 估算覆盖率 **< 5%**
 - **工作量**:持续投入,优先核心 Service
 - **起步完成**:`DynastyService` / `PersonService` / `EventService` / `EmperorService` /
-  `FigureBaseService` / `ReligionService` / `CultureService` / `MythologyService` 共 100 个
-  spec + 既有 `app.controller` spec = 102 个测试 ✅(jest 通过 `moduleNameMapper` 适配
-  Prisma 7 ESM 风格 `.js` 导入)
+  `FigureBaseService` / `ReligionService` / `CultureService` / `MythologyService` /
+  `TangService` / `SanguoService` 共 114 个 spec + 既有 `app.controller` spec = 116 个
+  测试 ✅(jest 通过 `moduleNameMapper` 适配 Prisma 7 ESM 风格 `.js` 导入);Tang 作
+  canonical 模板覆盖 Ming/Song/Yuan/Qing 的同形 where,Sanguo 单独覆盖 kingdom 维度
 
 #### 2.1 状态管理失控:20 个独立 Store
 
@@ -240,7 +241,8 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 19 个 vitest 测试文件由"渲染不报错"
    扩到 152 个用例,覆盖关键交互与 store 集成、createFigureStore 工厂;后端
    `DynastyService` / `PersonService` / `EventService` / `EmperorService` /
-   `FigureBaseService` / `ReligionService` / `CultureService` / `MythologyService` 共 102 个用例)
+   `FigureBaseService` / `ReligionService` / `CultureService` / `MythologyService` /
+   `TangService` / `SanguoService` 共 116 个用例)
 
 ### 低优(沙箱解开后再做)
 
