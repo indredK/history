@@ -62,9 +62,10 @@
 - **工作量**:持续投入,优先核心 Service
 - **起步完成**:`DynastyService` / `PersonService` / `EventService` / `EmperorService` /
   `FigureBaseService` / `ReligionService` / `CultureService` / `MythologyService` /
-  `TangService` / `SanguoService` 共 114 个 spec + 既有 `app.controller` spec = 116 个
-  测试 ✅(jest 通过 `moduleNameMapper` 适配 Prisma 7 ESM 风格 `.js` 导入);Tang 作
-  canonical 模板覆盖 Ming/Song/Yuan/Qing 的同形 where,Sanguo 单独覆盖 kingdom 维度
+  `TangService` / `SanguoService` / `QingService` 共 123 个 spec + 既有 `app.controller`
+  spec = 125 个测试 ✅(jest 通过 `moduleNameMapper` 适配 Prisma 7 ESM 风格 `.js` 导入);
+  Tang 作 canonical 模板覆盖 Ming/Song(同形)与 Yuan(子集)的 where 路径,Sanguo 覆盖
+  kingdom 维度差异,Qing 覆盖 `orderBy: [reignStart, name]` 帝王模型差异
 
 #### 2.1 状态管理失控:20 个独立 Store
 
@@ -255,7 +256,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
    重试 / 状态管理)和 dataLoaders 全路径(fetch / cache / retry / API 响应解包);
    后端 `DynastyService` / `PersonService` / `EventService` / `EmperorService` /
    `FigureBaseService` / `ReligionService` / `CultureService` / `MythologyService` /
-   `TangService` / `SanguoService` 共 116 个用例)
+   `TangService` / `SanguoService` / `QingService` 共 125 个用例)
 
 ### 低优(沙箱解开后再做)
 
