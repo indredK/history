@@ -11,7 +11,7 @@
 
 ## 一、已完成工作概览
 
-本轮 P0/P1 已落地的修复(13 个 commit 全部本地保留,未推送):
+本轮 P0/P1 已落地的修复(commit 全部本地保留,未推送):
 
 | Commit | 工作 |
 |---|---|
@@ -28,10 +28,14 @@
 | `6dad68f` | P1 §2.3 拆分 Dynasty3DWheel(414→76 行) |
 | `94eb489` | §1.5 Swagger 加 addBearerAuth + §4.3/§6.1 复核 |
 | `a0074a5` | §2.6 UI 库收敛到 MUI v9(antd 已清除) |
+| `0321f5b` | §4.4 ROADMAP / SECURITY 与现状对齐 |
+| `8fe6336` | §4.4 M1 治理文档全套(CONTRIBUTING / CoC / CHANGELOG / Issue 模板 / dependabot) |
+| `ec26deb` | §1.3 EventService 范围筛选与边界计算拆分(244→229 行) |
+| `<本轮>` | §2.7 真正 404 页面 + §4.4 README 修正 + §6.3 e2e 冒烟测试 |
 | 既有 | §2.7 路由懒加载 已用 `React.lazy` |
 
 - **P0**:3 / 4 完成(剩 dev.db 剥离推迟)
-- **P1**:3 / 6 完成(状态合并推迟;pre-commit hooks 与 openapi-generator 受沙箱阻塞)
+- **P1**:4 / 6 完成(状态合并推迟;pre-commit hooks 与 openapi-generator 受沙箱阻塞)
 
 ---
 
@@ -52,7 +56,7 @@
 
 - 仅 1 个 spec:`app.controller.spec.ts`
 - 所有业务 Service / Controller 均无测试
-- `test/app.e2e-spec.ts` 为空白模板
+- `test/app.e2e-spec.ts` 已有冒烟测试(health + 404),业务路径未覆盖
 - 估算覆盖率 **< 5%**
 - **工作量**:持续投入,优先核心 Service
 
@@ -87,12 +91,10 @@
 
 ### 🟠 重要问题
 
-#### 1.3 EventService 过度膨胀
+#### 1.3 EventService 已拆分 ✅(ec26deb)
 
-- [event.service.ts](backend/src/event/event.service.ts) 共 243 行,是最大的 Service
-- `findAll()` + `getTimeline()` 内嵌 70+ 行的年份范围筛选条件
-- **建议**:抽出 `buildYearRangeFilter()` 等私有方法,降低圈复杂度
-- **工作量**:2h
+已抽出 `buildOverlapRangeFilter` / `mergeWhere` / `calculateTimelineBounds` / `toTimelineEvent` 4 个私有方法,
+findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 → 229 行,圈复杂度显著下降。
 
 #### 1.4 Figure 模块严重重复
 
@@ -114,7 +116,7 @@
 
 #### 2.7 路由层薄弱(剩余)
 
-- ❌ 真正 404 兜底页面(当前是 `<Navigate to="/timeline" replace />` 重定向)
+- ✅ 真正 404 兜底页面(本轮已实现 `pages/NotFoundPage.tsx`,替代之前的 Navigate 重定向)
 - ❌ 路由守卫(待认证体系一起接入)
 
 #### 2.8 前端测试形同虚设
@@ -162,12 +164,16 @@
 
 | 文档 | 状态 | 问题 |
 |---|---|---|
-| README.md | ✅ 存在 | 示例用 PostgreSQL,实际用 SQLite — 需修正 |
-| SECURITY.md | ✅ 存在 | 承诺的认证/HTTPS/速率限制全未实现 — 见 §五 |
+| README.md | ✅ | 已修正为 Bun + SQLite,移除虚假目录引用(0321f5b/本轮) |
+| SECURITY.md | ✅ | 已与现状对齐(0321f5b),未实现项明确列入"待实现" |
 | DEPLOY.md | ✅ 存在 | 仅覆盖 GitHub Pages |
-| ROADMAP.md | ✅ 存在 | 信息有限 |
-| CONTRIBUTING.md | ❌ | **缺失** |
-| CODE_OF_CONDUCT.md | ❌ | **缺失** |
+| ROADMAP.md | ✅ | 已重写为里程碑 M1~M7(0321f5b) |
+| CONTRIBUTING.md | ✅ | 8fe6336 已新增 |
+| CODE_OF_CONDUCT.md | ✅ | 8fe6336 已新增(Contributor Covenant 2.1) |
+| CHANGELOG.md | ✅ | 8fe6336 已新增(Keep a Changelog) |
+| ARCHITECTURE_ISSUES.md | ✅ | 本文档(0b153ac 已重写) |
+
+> 文档基础设施基本就位,API 文档由 Swagger 自动生成(http://localhost:3001/api/docs)。
 
 #### 4.5 monorepo 工具选型偏弱
 
@@ -180,7 +186,8 @@
 
 - §6.2 Modal 关闭时未清理数据(仍待逐个 Modal 收敛)
 - §6.3 大量空的 vitest 测试文件(19 个文件大部分仅 `describe` 空块)
-- §6.3 后端 `test/app.e2e-spec.ts` 空模板
+- ✅ §6.3 后端 `test/app.e2e-spec.ts` 已替换为带 health + 404 校验的冒烟测试(本轮)
+- ❌ 仓库根的 `docker-compose.yml` 仍是 PostgreSQL 版本,与实际 SQLite 栈不一致;Dockerfile 已经是 SQLite,compose 文件待清理或重写
 
 ---
 
@@ -212,9 +219,9 @@
 ### 中优(可穿插)
 
 4. **§2.1 状态管理合并** — 20 store → 4 store — 1~2 天
-5. **§4.4 文档补全** — CONTRIBUTING / CODE_OF_CONDUCT / README 修正 / API 文档 — 1~2 天
-6. **§1.3 EventService 拆分** — 2h
-7. **§2.7 / §1.1 真 404 页 + 路由守卫** — 跟着认证一起 — 0.5 天
+5. ~~**§4.4 文档补全** — CONTRIBUTING / CODE_OF_CONDUCT / README 修正 / API 文档~~ ✅ 已完成(0321f5b / 8fe6336 / 本轮)
+6. ~~**§1.3 EventService 拆分**~~ ✅ 已完成(ec26deb)
+7. **§2.7 / §1.1 路由守卫** — 跟着认证一起 — 0.5 天(§2.7 真 404 页 ✅ 本轮已完成)
 8. **§1.6 / §2.8 单元测试持续投入** — 长期
 
 ### 低优(沙箱解开后再做)

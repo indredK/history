@@ -4,7 +4,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Data License: CC-BY-4.0](https://img.shields.io/badge/Data%20License-CC--BY--4.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
-[![GitHub Stars](https://img.shields.io/github/stars/your-org/chinese-historical-panorama?style=social)](https://github.com)
 [![Contributing](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
 ---
@@ -20,7 +19,6 @@
 - **交互式时间轴**：拖动、缩放、跳转到任意历史时期，自动更新地图与事件列表
 - **事件与人物关联**：完整展示历史事件的参与者、发生地点、历史影响
 - **开源与协作**：托管于 GitHub，欢迎贡献者完善数据与功能
-- **学术引用**：所有数据均支持来源追踪与学术引用
 
 ---
 
@@ -28,47 +26,69 @@
 
 ### 前置要求
 
-- Node.js >= 16
-- PostgreSQL >= 12 + PostGIS extension
-- Docker & Docker Compose（可选，用于容器化部署）
+- **Bun** >= 1.3（首选包管理器与运行时）
+- **Node.js** >= 20.19（用于部分工具链兼容,非必需运行时）
+- 操作系统：macOS / Linux / Windows(WSL2)
 
-### 本地开发（5 分钟）
+> 当前栈使用 **SQLite** 作为后端数据库,数据文件位于 `backend/prisma/dev.db`,**无需 PostgreSQL/PostGIS/Docker** 即可本地开发。
 
-#### 1. 克隆仓库
+### 本地开发(3 分钟)
+
+#### 1. 克隆仓库 & 安装依赖
+
 ```bash
-git clone https://github.com/your-org/chinese-historical-panorama.git
+git clone <repo-url> chinese-historical-panorama
 cd chinese-historical-panorama
+bun install            # 根目录执行,自动安装 frontend / backend workspace
 ```
 
-#### 2. 启动数据库（使用 Docker）
-```bash
-docker-compose up -d postgres
-```
+#### 2. 准备数据库
 
-或本地安装 PostgreSQL 并启用 PostGIS：
-```bash
-createdb history_db
-psql history_db -c "CREATE EXTENSION postgis;"
-```
-
-#### 3. 初始化后端
 ```bash
 cd backend
-npm install
-npm run migrate  # 运行数据库迁移
-npm run seed     # 导入样例数据
-npm run dev      # 启动开发服务器 http://localhost:3000
+bunx prisma migrate deploy   # 应用现有迁移到 SQLite
+bunx prisma generate         # 生成 Prisma Client
+# 可选:导入样例数据
+bun run seed
 ```
 
-#### 4. 启动前端
+#### 3. 启动开发服务器
+
+回到仓库根目录:
+
 ```bash
-cd frontend
-npm install
-npm run dev      # 启动开发服务器 http://localhost:5173
+bun run dev      # 并行启动 frontend (5173) + backend (3001)
 ```
 
-#### 5. 打开浏览器
-访问 [http://localhost:5173](http://localhost:5173) 查看演示站点
+或分别启动:
+
+```bash
+# 前端
+cd frontend && bun run dev      # http://localhost:5173
+
+# 后端
+cd backend && bun run start:dev # http://localhost:3001/api/v1
+                                # Swagger: http://localhost:3001/api/docs
+```
+
+#### 4. 打开浏览器
+
+访问 [http://localhost:5173](http://localhost:5173) 查看本地实例。
+
+### 常用脚本
+
+```bash
+bun run lint           # 同时跑前端 + 后端 ESLint
+bun run type-check     # 同时跑前端 + 后端 TypeScript 类型检查
+bun run build          # 构建前端 + 后端产物
+
+# 后端测试
+cd backend && bun test          # 单元测试
+cd backend && bun test:e2e      # 端到端测试
+
+# 前端测试
+cd frontend && bun test         # Vitest
+```
 
 ---
 
@@ -76,210 +96,119 @@ npm run dev      # 启动开发服务器 http://localhost:5173
 
 ```
 chinese-historical-panorama/
-├── README.md                    # 项目主文档
-├── ROADMAP.md                   # 开发路线图与里程碑
-├── CONTRIBUTING.md              # 贡献指南
-├── CODE_OF_CONDUCT.md          # 社区行为准则
-├── LICENSE                      # 代码许可 (MIT)
-├── DATA_LICENSE.md             # 数据许可 (CC-BY-4.0)
-├── SECURITY.md                 # 安全漏洞上报流程
+├── README.md                     # 项目主文档
+├── ROADMAP.md                    # 开发路线图与里程碑
+├── ARCHITECTURE_ISSUES.md        # 架构债务清单与进展
+├── CHANGELOG.md                  # 变更日志(Keep a Changelog)
+├── CONTRIBUTING.md               # 贡献指南
+├── CODE_OF_CONDUCT.md            # 社区行为准则(Contributor Covenant)
+├── SECURITY.md                   # 安全漏洞上报流程
+├── DEPLOY.md                     # 部署指南
+├── LICENSE                       # MIT
 │
-├── backend/                     # 后端服务 (Node.js / FastAPI)
+├── backend/                      # NestJS 11 + Prisma 7 + SQLite
 │   ├── src/
-│   │   ├── models/             # 数据模型与 ORM
-│   │   ├── routes/             # API 路由
-│   │   ├── services/           # 业务逻辑
-│   │   └── utils/              # 工具函数
-│   ├── migrations/             # 数据库迁移脚本
-│   ├── seeds/                  # 样例数据导入脚本
-│   └── tests/                  # 单元测试与集成测试
+│   │   ├── common/               # 公共拦截器 / 过滤器 / DTO
+│   │   ├── prisma/               # PrismaService
+│   │   ├── dynasty/ event/ ...   # 各业务模块(controller + service + dto)
+│   │   ├── app.module.ts
+│   │   └── main.ts               # Nest 引导,Swagger 配置
+│   ├── prisma/
+│   │   ├── schema.prisma         # 数据库 schema
+│   │   ├── migrations/           # 迁移脚本
+│   │   └── dev.db                # SQLite 数据(本地,gitignored)
+│   ├── test/                     # e2e 测试
+│   └── Dockerfile                # 生产部署镜像
 │
-├── frontend/                    # 前端应用 (React + TypeScript)
+├── frontend/                     # React 19 + Vite 8 + MUI v9 + Zustand
 │   ├── src/
-│   │   ├── components/         # React 组件库
-│   │   ├── pages/              # 页面模板
-│   │   ├── hooks/              # 自定义 hooks
-│   │   ├── stores/             # 状态管理 (Redux / Zustand)
-│   │   ├── styles/             # 全局样式
-│   │   └── utils/              # 工具函数
-│   ├── public/                 # 静态资源
-│   └── tests/                  # 单元测试与集成测试
+│   │   ├── components/           # 通用 UI 组件
+│   │   ├── features/             # 业务功能模块(timeline / map / people ...)
+│   │   ├── pages/                # 页面壳组件 + NotFoundPage
+│   │   ├── router/               # 路由配置
+│   │   ├── services/             # API 客户端(统一 axios 封装)
+│   │   ├── stores/               # Zustand 状态
+│   │   └── theme/                # MUI 主题
+│   ├── public/data/              # 静态数据资源(GeoJSON 等)
+│   └── Dockerfile                # 生产 Nginx 镜像
 │
-├── data/                        # 数据文件与处理脚本
-│   ├── raw/                    # 原始数据（CHGIS、历史记录等）
-│   ├── processed/              # 清洗后的数据（GeoJSON、CSV）
-│   ├── scripts/                # GDAL、Tippecanoe 处理脚本
-│   ├── tiles/                  # 矢量瓦片 (MBTiles / 切片集)
-│   └── SOURCES.md              # 数据来源清单与许可
-│
-├── docs/                        # 技术文档
-│   ├── ARCHITECTURE.md         # 系统架构设计
-│   ├── DATA_MODEL.md           # 数据模型与 ER 图
-│   ├── SCHEMA.md               # 数据库表结构详解
-│   ├── GIS_PIPELINE.md         # 地理数据处理管线
-│   ├── DEPLOYMENT.md           # 部署指南（开发/生产）
-│   ├── API.md                  # API 文档与示例
-│   └── CONTRIBUTING_DEV.md     # 开发者深度指南
-│
-├── .github/                     # GitHub 配置
-│   ├── workflows/              # CI/CD pipeline（Actions）
-│   ├── ISSUE_TEMPLATE/         # Issue 模板
-│   ├── PULL_REQUEST_TEMPLATE.md # PR 模板
-│   └── dependabot.yml          # 依赖更新自动化
-│
-├── docker-compose.yml          # 本地开发容器编排
-├── docker-compose.prod.yml     # 生产环境容器编排
-└── .gitignore
+├── scripts/                      # 仓库级脚本
+└── .github/
+    ├── workflows/                # GitHub Actions CI/CD
+    ├── ISSUE_TEMPLATE/           # Bug / Feature / Data 模板
+    ├── pull_request_template.md  # PR 模板
+    └── dependabot.yml            # 依赖更新自动化
 ```
+
+> 注：上面省略了运行时生成的 `dist/`、`node_modules/`、`coverage/` 等目录。
 
 ---
 
-## 🏗️ 技术栈
+## 🏗️ 技术栈(实际使用)
 
-| 层级 | 推荐技术 | 说明 |
-|------|--------|------|
-| **前端框架** | React 18 + TypeScript | 声明式 UI，类型安全 |
-| **地图库** | MapLibre GL + Deck.gl | 矢量瓦片渲染 + GPU 加速可视化 |
-| **时间轴** | visx / vis.js Timeline | 可交互的时间线组件 |
-| **状态管理** | Redux Toolkit / Zustand | 全局状态管理 |
-| **样式** | Tailwind CSS / styled-components | 响应式 UI 开发 |
-| **后端框架** | Node.js (NestJS/Fastify) 或 Python (FastAPI) | 高性能 API 服务 |
-| **数据库** | PostgreSQL + PostGIS | 关系数据库 + 地理空间扩展 |
-| **ORM** | Prisma / SQLAlchemy | 数据层抽象 |
-| **矢量瓦片** | Tippecanoe / GeoServer | GeoJSON → MBTiles 转换 |
-| **部署** | Docker + GitHub Actions | 容器化与 CI/CD 自动化 |
-| **CDN / 对象存储** | S3 / 阿里 OSS / 腾讯 COS | 静态资源与瓦片发布 |
+| 层级 | 技术 | 版本 |
+|------|------|------|
+| **前端框架** | React + TypeScript | React 19 / TS 6 |
+| **构建工具** | Vite + Rolldown + OXC minifier | Vite 8 |
+| **UI 库** | Material UI + Emotion | MUI v9 |
+| **状态管理** | Zustand | v5 |
+| **路由** | React Router | v7 |
+| **地图渲染** | MapLibre GL + Deck.gl | maplibre 5 / deck.gl 9 |
+| **3D 可视化** | three + @react-three/* | three r170+ |
+| **HTTP 客户端** | axios(统一封装、错误兜底) | — |
+| **后端框架** | NestJS | v11 |
+| **ORM** | Prisma | v7 |
+| **数据库** | SQLite(via @libsql/client + @prisma/adapter-libsql) | — |
+| **API 文档** | Swagger / OpenAPI | @nestjs/swagger 11 |
+| **包管理 / 运行时** | Bun | 1.3+ |
+| **测试** | Vitest(前端) / Jest(后端) | — |
+| **部署** | Dockerfile + GitHub Actions(可选) | — |
+
+> 当前栈相对最初的 `ROADMAP` 设想做了化简：用 **SQLite** 替代 PostgreSQL+PostGIS(GIS 计算放在前端),用 **Bun workspace** 替代多包工具链。
+> 详见 [`ROADMAP.md`](./ROADMAP.md) 与 [`ARCHITECTURE_ISSUES.md`](./ARCHITECTURE_ISSUES.md)。
 
 ---
 
 ## 📊 数据来源与许可
 
-本项目的历史数据来自以下学术与开放资源：
+项目的历史数据主要来自学术与开放资源（如 CHGIS、OpenHistoricalMap、地方志、学术论文等），来源清单维护在 `frontend/public/data/SOURCES.md`(逐步完善中)。
 
-- **CHGIS**（中国历史地理信息系统，哈佛大学 / 中研院）
-- **OpenHistoricalMap**（开放地理志愿者项目）
-- **David Rumsey Map Collection**（历史地图扫描档案库）
-- 国家图书馆、地方志、学术论文及社区贡献
-
-所有数据遵循相应的开源许可（详见 [DATA_LICENSE.md](./DATA_LICENSE.md)）。
-
-**代码许可**: MIT（自由使用与修改，保留署名）  
-**数据许可**: CC-BY-4.0（署名-保持一致）
+- **代码许可**：MIT(详见 [LICENSE](./LICENSE))
+- **数据许可**：CC-BY-4.0(数据贡献需明确来源,详见 [CONTRIBUTING.md → 数据贡献](./CONTRIBUTING.md))
 
 ---
 
 ## 🤝 如何贡献
 
-我们热烈欢迎各类贡献！无论你是开发者、数据专家、设计师还是历史爱好者，都可以参与：
+欢迎代码、数据、文档、设计等各类贡献。
 
-### 贡献类型
+1. 阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)(分支策略、提交规范、代码风格)
+2. 浏览 [ROADMAP.md](./ROADMAP.md) 与 [ARCHITECTURE_ISSUES.md](./ARCHITECTURE_ISSUES.md) 了解当前优先项
+3. 在 [Issues](../../issues) 中选择或创建任务,使用对应模板
+4. Fork → 创建 `feature/* / fix/*` 分支 → 提交 PR(请填写 PR 模板)
 
-- **代码贡献**：功能开发、bug 修复、性能优化、测试编写
-- **数据贡献**：补充新历史事件、人物、地图数据，改进已有数据质量
-- **文档贡献**：翻译、写教程、完善 API 文档、补充数据说明
-- **设计贡献**：UI/UX 改进、可视化优化、新特性原型设计
-- **翻译贡献**：国际化（英文、日文、韩文等）
+提交前请运行:
 
-### 快速入门
-
-1. 查看 [CONTRIBUTING.md](./CONTRIBUTING.md) 详细指南
-2. 查看 [ROADMAP.md](./ROADMAP.md) 了解当前开发阶段与优先项
-3. 选择一个 [issue](https://github.com/your-org/chinese-historical-panorama/issues) 或提出新想法
-4. Fork → 创建 feature 分支 → 提交 PR → 等待审查
-
-**首次贡献？** 寻找标有 [`good-first-issue`](https://github.com) 或 [`help-wanted`](https://github.com) 的任务开始！
-
----
-
-## 📚 文档与资源
-
-### 核心文档
-
-- [开发路线图与里程碑](./ROADMAP.md)
-- [系统架构设计](./docs/ARCHITECTURE.md)
-- [数据模型与 ER 图](./docs/DATA_MODEL.md)
-- [API 文档](./docs/API.md)
-- [GIS 数据处理管线](./docs/GIS_PIPELINE.md)
-- [部署指南](./docs/DEPLOYMENT.md)
-
-### 学术参考
-
-- [CHGIS 数据手册](https://www.fas.harvard.edu/~chgis/)
-- [OpenHistoricalMap 百科](https://www.openhistoricalmap.org/)
-- 中国地方志库、民国时期地图档案等
-
-### 社区讨论
-
-- [GitHub Discussions](https://github.com/your-org/chinese-historical-panorama/discussions) - 功能讨论、问题解答
-- [Issue Tracker](https://github.com/your-org/chinese-historical-panorama/issues) - bug 报告与功能请求
-- 微信公众号（建设中） | Discord 频道（建设中）
-
----
-
-## 🎓 学术引用
-
-如果你在学术或研究中使用了本项目的数据或代码，请按以下方式引用：
-
-```bibtex
-@software{chinese_historical_panorama2025,
-  title={Chinese Historical Panorama: An Interactive Multi-dimensional Visualization Platform},
-  author={Contributors},
-  year={2025},
-  url={https://github.com/your-org/chinese-historical-panorama},
-  license={MIT (code), CC-BY-4.0 (data)}
-}
+```bash
+bun run lint && bun run type-check
+cd backend && bun test
 ```
 
----
-
-## 🐛 反馈与支持
-
-- **发现 bug？** 请在 [Issues](https://github.com/your-org/chinese-historical-panorama/issues) 中详细描述
-- **有功能建议？** 欢迎开启 [Discussion](https://github.com/your-org/chinese-historical-panorama/discussions) 或提交 Issue
-- **安全漏洞？** 请参考 [SECURITY.md](./SECURITY.md) 安全上报流程
+数据贡献请额外提供来源与许可信息,详见 [`📊 数据贡献` Issue 模板](./.github/ISSUE_TEMPLATE/data_contribution.yml)。
 
 ---
 
-## 📈 项目现状与计划
+## 🔒 安全
 
-| 阶段 | 目标 | 预计完成 | 状态 |
-|------|------|--------|------|
-| **Phase 0: MVP** | 基础展示平台、时间轴、地图、事件列表 | 2026-01-09 | 🔄 进行中 |
-| **Phase 1: 数据 & 部署** | 完整数据管线、CI/CD、生产环境 | 2026-02-04 | ⏳ 计划中 |
-| **Phase 2: 社区与扩展** | 活跃社区、用户贡献、地区与主题扩展 | 2026-Q2 | 📅 规划中 |
-
-详见 [ROADMAP.md](./ROADMAP.md)
+请勿在公开 Issue 中报告安全漏洞,见 [SECURITY.md](./SECURITY.md)。
 
 ---
 
 ## 📄 许可证
 
-- **代码**: MIT License（详见 [LICENSE](./LICENSE)）
-- **数据**: CC-BY-4.0（详见 [DATA_LICENSE.md](./DATA_LICENSE.md)）
+- **代码**:[MIT License](./LICENSE)
+- **数据**:CC-BY-4.0
 
 ---
 
-## 💬 社区与反馈
-
-<div align="center">
-
-🌟 喜欢这个项目？请点击 Star ⭐  
-🐛 遇到问题？请在 Issue 中反馈  
-🤝 想参与开发？欢迎 Fork 并提交 PR  
-
-</div>
-
----
-
-## 致谢
-
-感谢以下机构与项目为本平台提供的数据与灵感：
-
-- Harvard CHGIS 项目
-- OpenHistoricalMap 社区
-- David Rumsey Map Collection
-- 开源社区的无数贡献者
-
----
-
-**祝你探索历史愉快！** 🎭📜🗺️
+**祝你探索历史愉快!** 🎭📜🗺️

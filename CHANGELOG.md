@@ -16,6 +16,8 @@
 - HTTP 客户端错误分类与 transient retry(network/timeout/5xx 自动重试 2 次)
 - `BaseFigureDetailModal` 公共组件(Tang/Song/Yuan/Ming/Sanguo 已收敛)
 - `ARCHITECTURE_ISSUES.md`:架构剩余待办清单
+- `frontend/src/pages/NotFoundPage.tsx`:真正的 404 页面,替代静默重定向
+- `backend/test/app.e2e-spec.ts`:health + 404 冒烟测试(替代空白模板)
 
 ### Changed
 - 后端 Service 层 16 处 `any` → `Prisma.XxxWhereInput`
@@ -27,11 +29,14 @@
   - `DynastyRow` 494 → 105 行
   - `SchoolDetail` 466 → 107 行
   - `Dynasty3DWheel` 414 → 76 行
+- `EventService` 拆出 4 个私有方法(范围筛选 / where 合并 / 边界计算 / 行→DTO 映射),
+  消除 findAll/getTimeline 重复逻辑(244 → 229 行)
 - UI 库收敛到 MUI v9,移除 antd
 - Vite 8 minify 改用 oxc 替代 esbuild
 - 升级全部依赖至 MUI v9 / TS 6 / Vite 8 / React 19
 - `ROADMAP.md` 重写,与当前现状对齐(M1~M7)
 - `SECURITY.md` 修正虚假"已实现"项,补充本轮真实落地
+- `README.md` 重写:前置要求 / 安装 / 项目结构 / 技术栈 与实际(Bun + SQLite)对齐
 
 ### Removed
 - 废弃的 `frontend/src/services_backup/` 目录
