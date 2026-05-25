@@ -136,7 +136,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 
 #### 2.8 前端测试形同虚设
 
-- 已配置 vitest,本轮已扩到 29 个测试文件 / 321 个用例
+- 已配置 vitest,本轮已扩到 32 个测试文件 / 371 个用例
 - 仍有部分组件仅含空 `describe` 块,需要持续投入
 - **工作量**:持续投入
 
@@ -250,7 +250,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 5. ~~**§4.4 文档补全** — CONTRIBUTING / CODE_OF_CONDUCT / README 修正 / API 文档~~ ✅ 已完成(0321f5b / 8fe6336 / 本轮)
 6. ~~**§1.3 EventService 拆分**~~ ✅ 已完成(ec26deb)
 7. **§2.7 / §1.1 路由守卫** — 跟着认证一起 — 0.5 天(§2.7 真 404 页 ✅ 本轮已完成)
-8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 29 个 vitest 测试文件 321 个用例,
+8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 32 个 vitest 测试文件 371 个用例,
    覆盖关键交互、store 集成、createFigureStore 工厂、errorHandling 全路径(降级 /
    重试 / 状态管理)、dataLoaders 全路径(fetch / cache / retry / API 响应解包)、
    PerformanceMonitor(mark/measure 含 falsy-start 已知行为锁定)、routeUtils
@@ -263,7 +263,12 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
    多维筛选、getRelatedNodesAndEdges、resetFilters),themeStore + 命名导出
    initializeTheme(localStorage 持久化 / data-theme DOM 副作用 / matchMedia
    prefersReducedMotion / 异常容错走 Object.defineProperty 绕开 happy-dom Proxy 的
-   set 静默 no-op);后端 `DynastyService` / `PersonService` / `EventService` /
+   set 静默 no-op),styleStore + 命名导出 initializeStyle(同构于 themeStore 的
+   localStorage + data-style DOM + 异常容错),mapStore(viewport 与 setLocation
+   写入 / setViewport 浅合并 / Feature 选中悬停 / hoveredFeatureId+layerType 联动 /
+   三个图层 toggle / opacity 0-1 clamp 边界值),dynastyExpandedStore(默认展开 /
+   set/toggle/expandAll/collapseAll + dynastiesStorage 持久化 / count 统计 /
+   StorageListener 跨标签页 storage 事件灌入);后端 `DynastyService` / `PersonService` / `EventService` /
    `EmperorService` / `FigureBaseService` / `ReligionService` / `CultureService` /
    `MythologyService` / `TangService` / `SanguoService` / `QingService` 共 125 个用例)
 

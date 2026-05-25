@@ -57,7 +57,7 @@
     orderBy 用 `[reignStart, name]` 而非 `[birthYear, name]`(因为 QingRuler 是帝王模型),
     没有 period 字段;`birthYear=0` 进入 where、deathYear OR(lte,null)、JSON 字段 transform)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):29 个测试文件 / 321 个用例,覆盖
+- 前端核心组件 vitest 测试扩充(§2.8):32 个测试文件 / 371 个用例,覆盖
   关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
   - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
     SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
@@ -123,6 +123,30 @@
     no-op,必须走 Object.defineProperty;getItem 抛错 console.warn + 回落 DEFAULT_THEME;
     setItem 抛错 console.warn 但不抛,state 仍写入)、命名导出 initializeTheme()
     (读 localStorage 写 DOM 但不动 store / 没值时写 DEFAULT_THEME 到 DOM)
+  - `frontend/src/store/styleStore.test.ts`(12 个用例):样式 store + 命名导出
+    initializeStyle 全覆盖。结构与 themeStore 同构(localStorage + data-style DOM
+    副作用 + isValidStyle),复用 happy-dom Storage Proxy 绕过的
+    Object.defineProperty 模式。setStyle 合法/非法值 + toggleStyle glass↔classic +
+    initializeStyle 从存储恢复(无值或非法值回落 DEFAULT_STYLE)+ 异常容错
+    (getItem 抛错 console.warn 回落 DEFAULT_STYLE / setItem 抛错 console.warn
+    不抛、state 仍写入)+ 命名导出 initializeStyle 只动 DOM 不动 store
+  - `frontend/src/store/mapStore.test.ts`(19 个用例):地图 store 全覆盖。
+    初始 state(viewport 35/110/zoom=4、所有图层可见、selectedFeature=null)、
+    setLocation(一次性 lat/lon/zoom + 不动 bearing/pitch)、setViewport 浅合并
+    (单字段不丢其它 / 多字段一次更新)、setSelectedFeature/setHoveredFeature
+    (写 Feature / null 清空)、setHoveredFeatureId(featureId+layerType 联动 admin/
+    dynasty/null)、三个图层 toggle(admin/dynasty/eventMarkers 翻转)、
+    setAdminBoundaryOpacity / setDynastyBoundaryOpacity 0-1 clamp
+    (区间内直写 / 超 1 → 1 / 负数 → 0 / 边界 0|1 不变)
+  - `frontend/src/store/dynastyExpandedStore.test.ts`(19 个用例):朝代展开
+    store + 跨标签页同步全覆盖。isDynastyExpanded(默认 true 即 undefined ≠ false /
+    显式 true/false)、setDynastyExpanded(写 state + 走 dynastiesStorage 持久化 /
+    不覆盖已有 id)、toggleDynasty(默认 → false → 再 toggle → true / 走持久化)、
+    expandAllDynasties/collapseAllDynasties(只动 dynastyIds 内的 id,其它字段保留 /
+    写 localStorage)、getExpandedDynastiesCount(undefined+true 都计入,只有显式
+    false 不计)、getTotalDynastiesCount、setDynastyIds(写入 / 清空)、
+    跨标签页 StorageListener:dispatchEvent('storage') 命中 DYNASTIES_EXPANDED key
+    时把新值灌进 store,无关 key 不影响 store
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`
