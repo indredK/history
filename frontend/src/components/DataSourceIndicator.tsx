@@ -13,9 +13,19 @@ export const DataSourceIndicator: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [testing, setTesting] = useState(false);
   const [testResults, setTestResults] = useState<any>(null);
-  
+
   const dataSourceInfo = getDataSourceInfo();
   const isMockMode = dataSourceInfo.mode === 'mock';
+
+  /**
+   * 关闭弹窗时同时清理本次测试结果与 testing 标志,
+   * 避免下次打开看到上次会话的陈旧结果(§6.2)。
+   */
+  const handleClose = () => {
+    setOpen(false);
+    setTestResults(null);
+    setTesting(false);
+  };
   
   // 测试API连接
   const handleTestConnection = async () => {
@@ -115,7 +125,7 @@ export const DataSourceIndicator: React.FC = () => {
         )}
       </Box>
       
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
+      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
         <DialogTitle>
           📊 数据源配置信息
         </DialogTitle>
@@ -242,7 +252,7 @@ export const DataSourceIndicator: React.FC = () => {
         </DialogContent>
         
         <DialogActions>
-          <Button onClick={() => setOpen(false)}>
+          <Button onClick={handleClose}>
             关闭
           </Button>
         </DialogActions>

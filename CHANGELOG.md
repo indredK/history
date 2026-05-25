@@ -49,6 +49,9 @@
 - 根目录 `package.json` 的 `db:seed` / `db:migrate` / `db:reset` / `db:export` 改用 `bunx`
 - `docker-compose.yml` 与 SQLite 栈对齐:移除遗留 `postgres` + `PostGIS` 服务,`backend` 改挂 named volume `backend_db:/app/prisma`,`DATABASE_URL` 指向 `file:/app/prisma/dev.db`,`frontend` 依赖 `backend` healthcheck 通过后启动
 
+### Fixed
+- `DataSourceIndicator` / `ApiStatusIndicator` 弹窗关闭时未清理 `testResults` / `testing` / `refreshing` 等本地状态,导致下次打开看到陈旧测试结果(§6.2)
+
 ### Removed
 - 废弃的 `frontend/src/services_backup/` 目录
 - 历史遗留的 seed 脚本(已被新 `prisma/seed.ts` 取代):

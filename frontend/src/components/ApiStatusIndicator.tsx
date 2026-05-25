@@ -35,6 +35,15 @@ export const ApiStatusIndicator: React.FC = () => {
   const [apiStatus, setApiStatus] = useState<any>(null);
   const [refreshing, setRefreshing] = useState(false);
 
+  /**
+   * 关闭弹窗时清理瞬态 refreshing 标志(§6.2)。
+   * apiStatus 由定时器 5s 刷新且角标上一直在显示,保留即可。
+   */
+  const handleClose = () => {
+    setOpen(false);
+    setRefreshing(false);
+  };
+
   // 获取API状态
   const fetchApiStatus = () => {
     try {
@@ -145,7 +154,7 @@ export const ApiStatusIndicator: React.FC = () => {
         </Tooltip>
       </Box>
 
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
+      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
         <DialogTitle>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <SettingsIcon />
@@ -282,7 +291,7 @@ export const ApiStatusIndicator: React.FC = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpen(false)}>
+          <Button onClick={handleClose}>
             关闭
           </Button>
         </DialogActions>

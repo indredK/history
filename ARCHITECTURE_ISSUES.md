@@ -190,10 +190,12 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 
 #### 6.2 / 6.3 剩余清理项
 
-- §6.2 Modal 关闭时未清理数据(仍待逐个 Modal 收敛)
+- ✅ §6.2 Modal 关闭时清理 state(本轮):
+  - 5 朝代 FigureDetailModal + EmperorDetailModal + QingRulerDetailModal + ScholarDetailModal + SchoolDetail + MythologyDetailModal 全部为无内部 state 的纯展示组件,父级 `*Content.tsx` 已 `setSelected*(null)` 兜底
+  - 有状态的 `DataSourceIndicator` / `ApiStatusIndicator` 抽出 `handleClose`,关闭时清理瞬态 `testResults` / `testing` / `refreshing`,避免下次打开看到陈旧结果
 - §6.3 大量空的 vitest 测试文件(19 个文件大部分仅 `describe` 空块)
 - ✅ §6.3 后端 `test/app.e2e-spec.ts` 已替换为带 health + 404 校验的冒烟测试(本轮)
-- ❌ 仓库根的 `docker-compose.yml` 仍是 PostgreSQL 版本,与实际 SQLite 栈不一致;Dockerfile 已经是 SQLite,compose 文件待清理或重写
+- ✅ §3.3 仓库根 `docker-compose.yml` 已重写为 SQLite 栈(本轮),不再引用 PostgreSQL/PostGIS
 
 ---
 
