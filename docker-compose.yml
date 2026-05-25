@@ -1,38 +1,36 @@
-version: '3.8'
-
+# 中国历史全视界 - 本地/部署 Compose 编排
+#
+# 数据栈说明:
+#   - 项目实际使用 SQLite(file:./prisma/dev.db),通过 @prisma/adapter-libsql 驱动
+#   - 之前的 postgres + PostGIS 服务为遗留产物,已移除(参见 SECURITY.md / ARCHITECTURE_ISSUES.md §3.3)
+#   - dev.db 不入镜像、不入仓:容器首次启动时由 backend 自身执行
+#     `bunx prisma migrate deploy && (首次) bunx prisma db seed` 重建
+#   - 持久化:挂载 named volume `backend_db` 到 /app/prisma,
+#     这样容器重启不会丢数据,且 .seeded 哨兵文件防止重复 seed
 services:
-  postgres:
-    image: postgis/postgis:15-3.3
-    container_name: history-db
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: history_db
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   backend:
     build: ./backend
     container_name: history-backend
     ports:
       - "3001:3001"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/history_db
+      - DATABASE_URL=file:/app/prisma/dev.db
       - PORT=3001
-      - NODE_ENV=development
+      - NODE_ENV=production
       - API_PREFIX=api/v1
-      - CORS_ORIGIN=http://localhost:5173
-    depends_on:
-      postgres:
-        condition: service_healthy
+      - CORS_ORIGIN=http://localhost:8080
+    volumes:
+      # SQLite 数据持久化;首次启动 entrypoint 会跑 migrate + seed
+      - backend_db:/app/prisma
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 15s
+      retries: 3
     networks:
       - history-network
+    restart: unless-stopped
 
   frontend:
     build: ./frontend
@@ -40,12 +38,15 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     networks:
       - history-network
+    restart: unless-stopped
 
 networks:
   history-network:
+    driver: bridge
 
 volumes:
-  postgres_data:
+  backend_db:
