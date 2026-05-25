@@ -7,7 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  frontend:
+    name: Frontend (test + type-check)
     runs-on: ubuntu-latest
 
     steps:
@@ -20,16 +21,38 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: |
-          cd frontend
-          bun install
+        run: cd frontend && bun install
 
       - name: Run tests
-        run: |
-          cd frontend
-          bun run test
+        run: cd frontend && bun run test
 
       - name: Run type check
-        run: |
-          cd frontend
-          bun run type-check
+        run: cd frontend && bun run type-check
+
+  backend:
+    name: Backend (test + type-check)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: cd backend && bun install
+
+      - name: Run tests
+        run: cd backend && bun run test
+
+      - name: Run type check
+        run: cd backend && bun run type-check
+
+  # NOTE: lint 暂未接入 CI。前后端各有历史警告/错误超出阈值:
+  # - frontend: 116 个 no-explicit-any 警告(阈值 100)
+  # - backend:  130 个 no-unsafe-* / no-unused-vars 错误,集中在
+  #             transformFigure / parseJson / safeJsonParse 等 helper
+  # 清理完成后追加 lint job。

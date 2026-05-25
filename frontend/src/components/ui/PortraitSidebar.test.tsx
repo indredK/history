@@ -1,6 +1,5 @@
-import { vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, it, vi } from 'vitest';
+import { render } from '@testing-library/react';
 
 vi.mock('@/hooks/useResponsive', () => ({
   useResponsive: () => ({ screenWidth: 1024, isMobile: false }),
