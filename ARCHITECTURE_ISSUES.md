@@ -136,7 +136,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 
 #### 2.8 前端测试形同虚设
 
-- 已配置 vitest,本轮已扩到 26 个测试文件 / 266 个用例
+- 已配置 vitest,本轮已扩到 27 个测试文件 / 282 个用例
 - 仍有部分组件仅含空 `describe` 块,需要持续投入
 - **工作量**:持续投入
 
@@ -250,14 +250,15 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 5. ~~**§4.4 文档补全** — CONTRIBUTING / CODE_OF_CONDUCT / README 修正 / API 文档~~ ✅ 已完成(0321f5b / 8fe6336 / 本轮)
 6. ~~**§1.3 EventService 拆分**~~ ✅ 已完成(ec26deb)
 7. **§2.7 / §1.1 路由守卫** — 跟着认证一起 — 0.5 天(§2.7 真 404 页 ✅ 本轮已完成)
-8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 26 个 vitest 测试文件 266 个用例,
+8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 27 个 vitest 测试文件 282 个用例,
    覆盖关键交互、store 集成、createFigureStore 工厂、errorHandling 全路径(降级 /
    重试 / 状态管理)、dataLoaders 全路径(fetch / cache / retry / API 响应解包)、
    PerformanceMonitor(mark/measure 含 falsy-start 已知行为锁定)、routeUtils
    全部 4 个函数,serviceFactory 的 createSimpleDataClient / createMultipleServices
-   / ServiceMonitor 单例统计,以及 apiClient(createApiClient 配置、normalizeAxiosError
+   / ServiceMonitor 单例统计,apiClient(createApiClient 配置、normalizeAxiosError
    全分支 NETWORK/TIMEOUT/SERVER/CLIENT、401/403 → AUTH_REQUIRED_EVENT 派发、
-   getApiStatus + fallbackControl 薄包装);后端 `DynastyService` / `PersonService` / `EventService` /
+   getApiStatus + fallbackControl 薄包装),以及 apiTest 四个 fetch 包装器(连接 /
+   端点 / 批量 / 代理)的成功/格式错误/HTTP错/抛错分支;后端 `DynastyService` / `PersonService` / `EventService` /
    `EmperorService` / `FigureBaseService` / `ReligionService` / `CultureService` /
    `MythologyService` / `TangService` / `SanguoService` / `QingService` 共 125 个用例)
 

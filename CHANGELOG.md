@@ -57,7 +57,7 @@
     orderBy 用 `[reignStart, name]` 而非 `[birthYear, name]`(因为 QingRuler 是帝王模型),
     没有 period 字段;`birthYear=0` 进入 where、deathYear OR(lte,null)、JSON 字段 transform)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):26 个测试文件 / 266 个用例,覆盖
+- 前端核心组件 vitest 测试扩充(§2.8):27 个测试文件 / 282 个用例,覆盖
   关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
   - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
     SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
@@ -97,6 +97,12 @@
     带 detail{status,url}、非 401/403 不触发;请求拦截器 rejected 也包成 ApiError;
     getApiStatus 拍平 fallbackManager.getState();fallbackControl 5 个方法薄包装;
     默认 `apiClient` 实例 baseURL 取自 DATA_SOURCE_CONFIG
+  - `frontend/src/utils/apiTest.test.ts`(16 个用例):四个对外 fetch 包装器全覆盖。
+    testApiConnection(success=true+data / 后端格式错误 / HTTP 非 2xx / fetch 抛错),
+    testApiEndpoint(成功 / data.message 兜底 / message 缺失走默认 / HTTP 错 / fetch
+    抛 Error / fetch 抛非 Error 值),testAllApiEndpoints(逐个调 5 个端点全成功 /
+    任意一个失败时仍返回所有 results),testFrontendProxy(成功 + 代理 URL /
+    格式错误 + details.suggestion 提示 Vite 代理 / HTTP 错 / fetch 抛错)
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`
