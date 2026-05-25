@@ -286,7 +286,19 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
    set/toggle/expandAll/collapseAll/areAllExpanded/areAllCollapsed 全员检查、
    无参 expandAllDynasties 已有 ids 优先空 state 走 default 24 朝代列表、
    getExpandedDynastiesCount 只算 default 24、跨标签页 StorageListener 回填
-   整个 expandedStates);
+   整个 expandedStates),useDynastyImage(globalThis.Image 桩 + imageCache 命中复用 +
+   id 切换重新加载 + 错误分支),useDynastyBackground / useHasSelectedDynasty
+   (vi.mock 子 hook + mobile/desktop attachment 切换 + hasBackgroundImage 三态),
+   useResponsive 全家桶(useResponsive / useMediaQuery / useTouchDevice / useOrientation /
+   useViewport,fake timers 测 debounce + matchMedia 桩),useStyleAwareGlass 三件套
+   (classic/glass 双分支 + dark/light 主题 + intensity/opacity/customColor),
+   useGlassStyle 三件套(可变 stylesState 切换 supportsBlur/reducedMotion/isLowEnd/
+   shouldBlur + 5 个 component 预设 opacity/blur 锁定 + 浮点精度回归 toBeCloseTo),
+   useDataFetch(模块级缓存 / 唯一 cacheKey 隔离 / refetch / retryCount / cancel),
+   useFunctionPanelScroll(scroll + gradient mask + scrollTo + cleanup),
+   useHoverScroll 系列(utils 纯函数 17 用例 + useScrollState + useSmoothAnimation
+   rAF 桩手动 flush + useScrollbarAreaDetect 事件拦截 preventDefault + composite
+   主入口 5 用例集成);
    后端 `DynastyService` / `PersonService` / `EventService` /
    `EmperorService` / `FigureBaseService` / `ReligionService` / `CultureService` /
    `MythologyService` / `TangService` / `SanguoService` / `QingService` 共 125 个用例)

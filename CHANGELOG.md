@@ -199,6 +199,80 @@
     periodOptions 与 {TANG,SONG,YUAN,MING}\_PERIODS 配置一致、
     getFilteredFigures 走对应 service(tangFigureService / songFigureServiceHelper /
     yuanFigureServiceHelper / mingService)且 searchQuery→query 重命名
+  - `frontend/src/hooks/useDynastyImage.test.ts`(6 个用例):朝代代表图懒加载 hook。
+    桩 `globalThis.Image` 类记录实例 + 触发 onload/onerror、imageCache 命中复用同一 URL
+    不再发起新 Image、selectedDynasty=null 重置 state 不抛错、不同 id 切换重新加载、
+    错误分支同时清空 imageUrl 与置 error / isLoading=false
+  - `frontend/src/hooks/useDynastyBackground.test.ts`(8 个用例):背景图布局 hook +
+    useHasSelectedDynasty。`vi.mock('./useDynastyImage')` 返回可变 mock,验证:有
+    selectedDynasty+imageUrl 时 backgroundStyle 写入 url() + scroll(移动)/fixed
+    (桌面)、无图时 fallback 仅 transparent、`hasBackgroundImage` 三态(true/false/loading
+    时仍可能 true)、useHasSelectedDynasty 反映 selectedDynasty 真值
+  - `frontend/src/hooks/useResponsive.test.ts`(16 个用例):响应式工具 hook 全家桶。
+    `vi.useFakeTimers + advanceTimersByTime(150)` 测 debounce、`vi.stubGlobal('matchMedia')`
+    - `Object.defineProperty(navigator,'maxTouchPoints')` 完成断点覆盖。
+      useResponsive(mobile/tablet/desktop 三档断点 + isPortrait/isLandscape + width/height
+      随 resize 更新 + debounce)、useMediaQuery(初始命中 / 不命中 / change 事件切换)、
+      useTouchDevice(maxTouchPoints>0 / ontouchstart in window / 都没有则 false)、
+      useOrientation(读 screen.orientation.type / 兜底 window.innerWidth>height 横屏判定)、
+      useViewport(width/height 实时 + debounce)
+  - `frontend/src/hooks/useStyleAwareGlass.test.ts`(12 个用例):样式感知 glass hook 三件套。
+    `vi.mock('./useResponsive')` 注入固定 screenWidth=1280,验证 useStyleAwareGlass classic
+    分支(不返回 backdropFilter)与 glass 分支(rgba + backdropFilter)、暗色/亮色主题切换、
+    `intensity`/`opacity`/`customColor` 自定义选项覆盖、useIsClassicStyle(style==='classic'
+    严格等)、useCurrentStyle(透传 useStyleStore.style)
+  - `frontend/src/hooks/useGlassStyle.test.ts`(15 个用例):基础 glass style hook 三件套。
+    同时 mock `./useResponsive` 与 `../config/styles`,通过可变 stylesState 切换
+    supportsBlur/reducedMotion/isLowEnd/shouldBlur/performanceClasses。useGlassStyle
+    (默认 / 自定义 opacity+blur+borderOpacity+saturation / dark 主题 / shouldBlur=false
+    回落 fallback 透明背景 / 浮点精度:0.7+0.1=0.7999... 用 toBeCloseTo(0.8, 5) + 正则匹配)、
+    useComponentGlassStyle(card/modal/sidebar/floating/tooltip 五个预设各自的
+    opacity/blur 数值锁定)、useGlassPerformance(supportsBlur=false → fallback +
+    isLowEnd=true → reduced + reducedMotion=true → no-transition)
+  - `frontend/src/hooks/useDataFetch.test.ts`(11 个用例):异步数据 hook + 模块级缓存。
+    每个用例用唯一 cacheKey 避免污染。成功路径(loading→data + cache 写入)、
+    失败路径(error 字符串 + data=null)、cache 命中(skipFetcher → 同步返回不调 fetcher)、
+    clearCache(by-key / all)、refetch(强制重新 fetch 即使有缓存)、
+    retryCount=2(共 3 次 fetcher 调用)、cancel(unmount 后 setState 静默不抛)
+  - `frontend/src/hooks/useFunctionPanelScroll.test.ts`(10 个用例):功能面板滚动 hook。
+    桩 requestAnimationFrame 收集回调手动 flush、桩 ResizeObserver。
+    scroll 事件(scrollTop 直读 + gradientMaskTop/Bottom 透明度按位置插值)、
+    scrollTo(写 scrollTop + 触发一次同步 scroll)、gradient 边界(顶部 opacity=0 /
+    底部 opacity=0)、unmount cleanup(removeEventListener + ResizeObserver.disconnect)
+  - `frontend/src/hooks/useHoverScroll/utils.test.ts`(17 个用例):纯函数模块全覆盖。
+    calculateScrollStep((target-current)\*easing + easing 被 clamp 到 [0.001, 1])、
+    isScrollComplete(默认 threshold=0.5 + 自定义)、calculateTargetFromMousePosition
+    (mouseX 落容器中点→maxScroll/2 + 越界 ratio clamp 至 0/1 + containerWidth<=0
+    或 maxScroll<=0 直接返回 0)、isPointInScrollbarArea(底部 16px 区域内 +
+    边界包含 + 左右越界 false)、getScrollbarAreaBounds(返回 4 边界)、
+    serialize/deserialize round-trip + 缺字段/类型错误抛 "Invalid scroll state format"
+  - `frontend/src/hooks/useHoverScroll/useScrollState.test.ts`(5 个用例):
+    滚动状态计算 hook。桩 ResizeObserver/MutationObserver。scrollWidth > clientWidth
+    → hasScrollableContentRef.current=true,反之 false、getScrollState 返回容器
+    scrollLeft/maxScroll/hasScrollable 快照、ref=null 时全零兜底、
+    maxScroll 用 `Math.max(0, ...)` clamp 负值
+  - `frontend/src/hooks/useHoverScroll/useSmoothAnimation.test.ts`(7 个用例):
+    平滑滚动 rAF 动画 hook。桩 rAF 收集回调 + cancelSpy 验证卸载。setTarget(写入 +
+    负值 clamp 至 0)、rAF 循环(enabled+hasScrollable+未达 target → scrollLeft 按
+    `easing=0.5` 收敛 0→50→75 + 触发 onFrame(current, target))、enabled=false
+    (不动 scrollLeft 但下一帧仍续)、hasScrollable=false(targetScroll 同步回当前
+    scrollLeft 不动 onFrame)、已到 target(差值<threshold)→ 不动、syncWithCurrent
+    (target+lastScrollLeftRef 一起回归当前 scrollLeft)、unmount 调 cancelAnimationFrame
+  - `frontend/src/hooks/useHoverScroll/useScrollbarAreaDetect.test.ts`(9 个用例):
+    scrollbar 命中检测 + 事件拦截 hook。getBoundingClientRect 桩固定矩形。
+    mousemove 在底部 16px 区域内 + 可滚动 → onPositionChange(target, ratio)
+    且 inAreaRef.current=true、区域外 → ref=false 且不调回调、enabled=false 完全跳过、
+    不可滚动(maxScroll<=0)→ ref 强制 false、mouseleave 重置 ref、wheel/mousedown/
+    touchstart ref=true 时 preventDefault,ref=false 时不动、document keydown
+    scroll 相关 key(ArrowLeft 等)+ ref=true 时 preventDefault,普通 key 不动、
+    unmount 后再触发不调回调(listener 全移)
+  - `frontend/src/hooks/useHoverScroll/useHoverScroll.test.ts`(5 个用例):主入口
+    composite hook 集成。验证 3 个子 hook 编排:getScrollState 透传 useScrollState
+    输出、setScrollPosition 仅写内部 ref 不直接动 scrollLeft(rAF 被桩成 no-op)+
+    setEnabled 可来回切换、container scroll 事件非 scrollbar 区域时同步
+    targetScroll=scrollLeft(getScrollState.scrollLeft 反映)、ref=null 时
+    setEnabled/setScrollPosition 不抛错 + getScrollState 全零兜底、setEnabled
+    false/true 切换不影响 getScrollState
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`
