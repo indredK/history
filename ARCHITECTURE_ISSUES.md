@@ -60,7 +60,9 @@
 - `test/app.e2e-spec.ts` 已有冒烟测试(health + 404),业务路径未覆盖
 - 估算覆盖率 **< 5%**
 - **工作量**:持续投入,优先核心 Service
-- **起步完成**:`DynastyService` / `PersonService` / `EventService` 共 25 个 spec + 既有 `app.controller` spec = 27 个测试 ✅(jest 通过 `moduleNameMapper` 适配 Prisma 7 ESM 风格 `.js` 导入)
+- **起步完成**:`DynastyService` / `PersonService` / `EventService` / `EmperorService` /
+  `FigureBaseService` 共 46 个 spec + 既有 `app.controller` spec = 48 个测试 ✅(jest 通过
+  `moduleNameMapper` 适配 Prisma 7 ESM 风格 `.js` 导入)
 
 #### 2.1 状态管理失控:20 个独立 Store
 
@@ -234,7 +236,10 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 5. ~~**§4.4 文档补全** — CONTRIBUTING / CODE_OF_CONDUCT / README 修正 / API 文档~~ ✅ 已完成(0321f5b / 8fe6336 / 本轮)
 6. ~~**§1.3 EventService 拆分**~~ ✅ 已完成(ec26deb)
 7. **§2.7 / §1.1 路由守卫** — 跟着认证一起 — 0.5 天(§2.7 真 404 页 ✅ 本轮已完成)
-8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 19 个 vitest 测试文件由"渲染不报错"扩到 146 个用例,覆盖关键交互与 store 集成;后端 27 个 Service 用例已落)
+8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 19 个 vitest 测试文件由"渲染不报错"
+   扩到 152 个用例,覆盖关键交互与 store 集成、createFigureStore 工厂;后端
+   `DynastyService` / `PersonService` / `EventService` / `EmperorService` /
+   `FigureBaseService` 共 48 个用例)
 
 ### 低优(沙箱解开后再做)
 

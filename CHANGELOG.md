@@ -28,6 +28,11 @@
   - `backend/src/dynasty/dynasty.service.spec.ts`(7 个用例)
   - `backend/src/person/person.service.spec.ts`(7 个用例)
   - `backend/src/event/event.service.spec.ts`(11 个用例)
+  - `backend/src/emperor/emperor.service.spec.ts`(12 个用例,findAll where 拼装 /
+    嵌套 dynastyName / reign 范围 / dynasty 关联剥离 / JSON 字段解析 / findOne 命中
+    与未命中 NotFoundException)
+  - `backend/src/figure/common/figure-base.service.spec.ts`(9 个用例,JSON 解析白名单 9 字段、
+    falsy 输入兜底、非法 JSON 不抛错)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
 - 前端核心组件 vitest 测试扩充(§2.8):19 个测试文件由"仅渲染不报错"扩到 146 个用例,覆盖
   关键交互、store 集成与 a11y(键盘事件、role/label)
