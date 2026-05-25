@@ -66,6 +66,10 @@
   - `backend/src/common/dto/paginated-response.dto.spec.ts`(12 个用例,
     totalPages 整除/向上取整/单页/total=0 四态、hasNext/hasPrev 首/中/末/仅 1 页/空集
     五态状态机、data 数组 by-reference 保留、meta 6 字段完整快照)
+  - `backend/src/common/dto/pagination-query.dto.spec.ts`(11 个用例,
+    所有列表 DTO 父类 PaginationQueryDto 的 skip/take getter:默认 page=1/limit=20、
+    skip=(page-1)*limit 多种取值、page/limit 显式 undefined 时分别回落 ?? 1 / ?? 20、
+    take=limit 直通)
   - `backend/src/common/interceptors/transform.interceptor.spec.ts`(9 个用例,
     包装路径:裸对象/数组/null/原始字符串/缺 timestamp 单 success 键/缺 success 单
     timestamp 键 — 全部包成 ApiResponseDto;透传路径:已是 ApiResponseDto.success /

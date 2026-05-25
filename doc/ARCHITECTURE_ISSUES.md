@@ -64,7 +64,8 @@
   `FigureBaseService` / `ReligionService` / `CultureService` / `MythologyService` /
   `TangService` / `SanguoService` / `QingService` / `MingService` / `SongService` /
   `YuanService` + common 层(`ApiResponseDto` / `PaginatedResponseDto` /
-  `TransformInterceptor` / `LoggingInterceptor` / `AllExceptionsFilter`)共 191 个测试 ✅
+  `TransformInterceptor` / `LoggingInterceptor` / `AllExceptionsFilter` /
+  `PaginationQueryDto`)共 202 个测试 ✅
   (jest 通过 `moduleNameMapper` 适配 Prisma 7 ESM 风格 `.js` 导入);
   Tang 作 canonical 模板,Ming/Song 同形(各自用 cabinet / chancellor 维度示例区分),
   Yuan 显式锁定 "destructure 不含 period 静默丢弃" 的当前行为,Sanguo 覆盖 kingdom 维度差异,
