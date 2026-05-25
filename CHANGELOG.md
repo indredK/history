@@ -57,7 +57,7 @@
     orderBy 用 `[reignStart, name]` 而非 `[birthYear, name]`(因为 QingRuler 是帝王模型),
     没有 period 字段;`birthYear=0` 进入 where、deathYear OR(lte,null)、JSON 字段 transform)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):28 个测试文件 / 307 个用例,覆盖
+- 前端核心组件 vitest 测试扩充(§2.8):29 个测试文件 / 321 个用例,覆盖
   关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
   - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
     SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
@@ -114,6 +114,15 @@
     getFilteredEdges 只留两端在 filteredNodes 中的边、
     getRelatedNodesAndEdges(graphData=null / 邻居含相连边 / 自身排除 / 孤立空)、
     resetFilters(只清 4 个筛选高亮字段,保留 hoveredNode/selectedNode/loading)
+  - `frontend/src/store/themeStore.test.ts`(14 个用例):主题 store + 命名导出
+    initializeTheme 全覆盖。setTheme(合法值落 localStorage + data-theme + state /
+    非法值 console.warn 且 state 不变 / 二次切换)、toggleTheme(dark↔light 双向 +
+    持久化 + DOM)、initializeTheme(store action:从 localStorage 恢复 / 没值或非法值
+    回落 DEFAULT_THEME / matchMedia 桩验证 prefersReducedMotion=true/false)、
+    localStorage 异常容错(happy-dom Storage 是 Proxy:set 拦截会对已有方法静默
+    no-op,必须走 Object.defineProperty;getItem 抛错 console.warn + 回落 DEFAULT_THEME;
+    setItem 抛错 console.warn 但不抛,state 仍写入)、命名导出 initializeTheme()
+    (读 localStorage 写 DOM 但不动 store / 没值时写 DEFAULT_THEME 到 DOM)
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`
