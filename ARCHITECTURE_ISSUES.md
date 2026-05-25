@@ -136,7 +136,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 
 #### 2.8 前端测试形同虚设
 
-- 已配置 vitest,本轮已扩到 36 个测试文件 / 404 个用例
+- 已配置 vitest,本轮已扩到 38 个测试文件 / 425 个用例
 - 仍有部分组件仅含空 `describe` 块,需要持续投入
 - **工作量**:持续投入
 
@@ -250,7 +250,7 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 5. ~~**§4.4 文档补全** — CONTRIBUTING / CODE_OF_CONDUCT / README 修正 / API 文档~~ ✅ 已完成(0321f5b / 8fe6336 / 本轮)
 6. ~~**§1.3 EventService 拆分**~~ ✅ 已完成(ec26deb)
 7. **§2.7 / §1.1 路由守卫** — 跟着认证一起 — 0.5 天(§2.7 真 404 页 ✅ 本轮已完成)
-8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 36 个 vitest 测试文件 404 个用例,
+8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 38 个 vitest 测试文件 425 个用例,
    覆盖关键交互、store 集成、createFigureStore 工厂、errorHandling 全路径(降级 /
    重试 / 状态管理)、dataLoaders 全路径(fetch / cache / retry / API 响应解包)、
    PerformanceMonitor(mark/measure 含 falsy-start 已知行为锁定)、routeUtils
@@ -272,7 +272,12 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
    含 dynasty/dynastyPeriod 兜底 + 短路 OR + AND 复合),mythologyStore(category=null
    短路 / vi.mock filterByCategory 入参与返回透传),emperorStore + qingRulerStore
    (store filters → service.filterAndSort 入参重命名 searchQuery→query,
-   dynasty/period options 静态计算);后端 `DynastyService` / `PersonService` / `EventService` /
+   dynasty/period options 静态计算),sanguoFigureStore(4 元 filters role/kingdom/
+   searchQuery/sortBy → service.filterAndSort 重命名 searchQuery→query,role/kingdom
+   options 纯静态),useSidebar hook(renderHook+act:localStorage 初值含 false 不被
+   默认值覆盖 / toggle/expand/collapse/setCollapsed / useEffect 持久化 / 跨标签页
+   StorageListener storage 事件回填 + 同值不变 + 其它 key 忽略 + unmount 不抛);
+   后端 `DynastyService` / `PersonService` / `EventService` /
    `EmperorService` / `FigureBaseService` / `ReligionService` / `CultureService` /
    `MythologyService` / `TangService` / `SanguoService` / `QingService` 共 125 个用例)
 

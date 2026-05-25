@@ -57,7 +57,7 @@
     orderBy 用 `[reignStart, name]` 而非 `[birthYear, name]`(因为 QingRuler 是帝王模型),
     没有 period 字段;`birthYear=0` 进入 where、deathYear OR(lte,null)、JSON 字段 transform)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):36 个测试文件 / 404 个用例,覆盖
+- 前端核心组件 vitest 测试扩充(§2.8):38 个测试文件 / 425 个用例,覆盖
   关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
   - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
     SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
@@ -164,6 +164,16 @@
     全 setters + getFilteredRulers 透传(searchQuery→query)给 mocked
     qingRulerServiceHelper.filterAndSort / getPeriodOptions 与 QING_PERIODS 一致 /
     options 是纯配置静态(与 rulers 无关)
+  - `frontend/src/store/sanguoFigureStore.test.ts`(12 个用例):三国人物 store。
+    全 setters + getFilteredFigures 把 4 元 filters(role/kingdom/searchQuery/sortBy)
+    转换后(注意 searchQuery→query)透传给 mocked sanguoFigureService.filterAndSort /
+    getRoleOptions 静态 ['全部','ruler','strategist','general','official','other'] /
+    getKingdomOptions 静态 ['全部','魏','蜀','吴','其他'] / options 与 figures 无关
+  - `frontend/src/hooks/useSidebar.test.ts`(9 个用例):侧边栏 hook + 跨标签页同步全覆盖。
+    renderHook+act 模式:localStorage 无值 → false / 已存 true → true / 已存 false →
+    false(关键回归)、toggle 翻转、setCollapsed 直写、expand/collapse 幂等、useEffect
+    挂载即落盘 + 变更同步 localStorage、跨标签页 dispatchEvent('storage'):key 匹配
+    且 newValue !== 当前值 → 回填 / 同值不变 / 其它 key 忽略 / unmount 后再触发不抛
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`
