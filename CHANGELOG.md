@@ -54,13 +54,22 @@
   - `backend/src/figure/sanguo/sanguo.service.spec.ts`(6 个用例,Sanguo 与其它 5 朝代
     差异维度:`kingdom` 替代 `period`、`role/kingdom` 走 eq 而非 contains)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):20 个测试文件由"仅渲染不报错"扩到 174 个用例,覆盖
+- 前端核心组件 vitest 测试扩充(§2.8):22 个测试文件 / 207 个用例,覆盖
   关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
   - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
     SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
     duration 过期自动停用 / CLIENT_ERROR 排除 / enableAutoFallback=false 短路),
     manualActivate/Deactivate/reset/updateConfig/getState 状态管理,retryOperation
     重试与终止
+  - `frontend/src/utils/services/dataLoaders.test.ts`(33 个用例):getResourcePath /
+    loadJsonData (ok=true/false + reject 透传) / loadJsonArray(数组直返 / 单对象包成
+    [obj] / 失败兜底 []) / ResourceLoader 缓存(命中 / 未命中 / useCache=false bypass /
+    clearCache by-key vs all / getCacheInfo) / DataLoadError 字段 / retryLoad(首次成功 /
+    第二次成功 / 全失败包成 DataLoadError 保留 originalError / maxRetries=1 不等待) /
+    createLoadingState 默认值 / handleApiResponse 列表多形态(success=true 数组 / 分页
+    data.data / 单对象 → [obj] / success=false 抛 message / 原始数组 / 空兜底 []) /
+    handleSingleApiResponse(success=true/false / 无 success 字段直通 / 空抛错) /
+    createDataFetcher(默认 mock / mode='api' / mode='mock' / 参数透传)
   - `frontend/src/utils/storage.test.ts`(9 → 21,新增 clear / isSupported / 错误兜底 / sidebarStorage / dynastiesStorage / StorageListener)
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
