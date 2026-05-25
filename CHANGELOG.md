@@ -29,6 +29,12 @@
   - `backend/src/person/person.service.spec.ts`(7 个用例)
   - `backend/src/event/event.service.spec.ts`(11 个用例)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
+- 前端核心组件 vitest 测试扩充(§2.8):19 个测试文件由"仅渲染不报错"扩到 146 个用例,覆盖
+  关键交互、store 集成与 a11y(键盘事件、role/label)
+  - `frontend/src/utils/storage.test.ts`(9 → 21,新增 clear / isSupported / 错误兜底 / sidebarStorage / dynastiesStorage / StorageListener)
+  - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
+  - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
+  - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`
 
 ### Changed
 - 后端 Service 层 16 处 `any` → `Prisma.XxxWhereInput`
@@ -56,6 +62,8 @@
 
 ### Fixed
 - `DataSourceIndicator` / `ApiStatusIndicator` 弹窗关闭时未清理 `testResults` / `testing` / `refreshing` 等本地状态,导致下次打开看到陈旧测试结果(§6.2)
+- `layoutAlgorithms.ts` 第二个层级查找循环里 `placed = true; break;` 的 `placed` 赋值后不再被读取
+  (`no-useless-assignment` 死存储),改为单纯 `break` 跳出
 
 ### Removed
 - 废弃的 `frontend/src/services_backup/` 目录

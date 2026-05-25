@@ -94,7 +94,7 @@ export const calculateLabelLayout = (
             level,
             priority
           });
-          placed = true;
+          // 注: 此处不需要再设 placed = true,因为后续 break 跳出且后面也不再读取该值
           break;
         }
       }
