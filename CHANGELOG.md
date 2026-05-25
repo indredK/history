@@ -57,7 +57,7 @@
     orderBy 用 `[reignStart, name]` 而非 `[birthYear, name]`(因为 QingRuler 是帝王模型),
     没有 period 字段;`birthYear=0` 进入 where、deathYear OR(lte,null)、JSON 字段 transform)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):25 个测试文件 / 243 个用例,覆盖
+- 前端核心组件 vitest 测试扩充(§2.8):26 个测试文件 / 266 个用例,覆盖
   关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
   - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
     SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
@@ -89,6 +89,14 @@
     ServiceMonitor 单例与 `serviceMonitor` 同引用 / registerService + getServiceList /
     未注册 recordCall 是 no-op / 成功累计 calls / 失败累计 errors + errorRate
     66.67% 四舍五入 / 零调用 errorRate '0%' / 多服务 stats 快照
+  - `frontend/src/utils/services/apiClient.test.ts`(23 个用例):createApiClient
+    默认 baseURL/timeout/Content-Type、自定义 baseURL、拦截器各 ≥1 条;响应拦截器
+    rejected 分支全覆盖(无 response + code=ECONNABORTED → TIMEOUT、message 含 timeout、
+    普通无 response → NETWORK、status≥500 → SERVER、4xx → CLIENT、response.data.message
+    覆盖 error.message、已是 ApiError 直通);AUTH_REQUIRED_EVENT 在 401/403 触发并
+    带 detail{status,url}、非 401/403 不触发;请求拦截器 rejected 也包成 ApiError;
+    getApiStatus 拍平 fallbackManager.getState();fallbackControl 5 个方法薄包装;
+    默认 `apiClient` 实例 baseURL 取自 DATA_SOURCE_CONFIG
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`
