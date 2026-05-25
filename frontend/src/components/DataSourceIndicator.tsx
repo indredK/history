@@ -130,17 +130,17 @@ export const DataSourceIndicator: React.FC = () => {
             </Alert>
             
             <Typography variant="body2" color="text.secondary" paragraph>
-              <strong>配置位置:</strong> <code>frontend/src/config/dataSource.ts</code>
+              <strong>配置位置:</strong> <code>frontend/.env</code>（变量 <code>VITE_DATA_SOURCE</code>）
             </Typography>
-            
+
             <Typography variant="body2" color="text.secondary" paragraph>
               <strong>当前开关值:</strong> <code>DATA_SOURCE_MODE = {DATA_SOURCE_MODE}</code>
             </Typography>
-            
+
             <Typography variant="body2" color="text.secondary" paragraph>
-              <strong>切换方法:</strong> 
-              <br />• 改为 <code>0</code> 使用模拟数据
-              <br />• 改为 <code>1</code> 使用真实API
+              <strong>切换方法:</strong>
+              <br />• 设置 <code>VITE_DATA_SOURCE=mock</code>（或 <code>json</code>）使用模拟数据
+              <br />• 设置 <code>VITE_DATA_SOURCE=api</code> 使用真实API
               <br />• 修改后需要重启前端服务器
             </Typography>
           </Box>
