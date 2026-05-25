@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { FigureBaseService } from '../common/figure-base.service';
+import { Prisma } from '../../generated/prisma/client';
 import { FigureQueryDto } from '../common/query.dto';
 import { QingRulerDto } from './qing.dto';
 import { PaginatedResponseDto } from '../../common/dto/paginated-response.dto';
@@ -12,7 +13,7 @@ export class QingService extends FigureBaseService {
     const { page = 1, limit = 20, role, name, birthYear, deathYear } = query;
     const skip = (page - 1) * limit;
 
-    const where: any = {};
+    const where: Prisma.QingRulerWhereInput = {};
 
     if (role) where.role = { contains: role };
     if (name) where.name = { contains: name };

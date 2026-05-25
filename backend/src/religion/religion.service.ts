@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '../generated/prisma/client';
 import { ReligionGraphQueryDto } from './dto/religion-query.dto';
 import { ReligionGraphDto } from './dto/religion-graph.dto';
 import { ReligionNodeDto } from './dto/religion-node.dto';
@@ -21,8 +22,8 @@ export class ReligionService {
     } = query;
 
     // Build where clauses for nodes and edges
-    const nodeWhere: any = {};
-    const edgeWhere: any = {};
+    const nodeWhere: Prisma.ReligionNodeWhereInput = {};
+    const edgeWhere: Prisma.ReligionEdgeWhereInput = {};
 
     if (tradition) {
       nodeWhere.tradition = tradition;

@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '../generated/prisma/client';
 import { PersonQueryDto } from './dto/person-query.dto';
 import { PaginatedResponseDto } from '../common/dto/paginated-response.dto';
 import { PersonDto } from './dto/person.dto';
@@ -15,7 +16,7 @@ export class PersonService {
     const skip = (page - 1) * limit;
 
     // Build where clause
-    const where: any = {};
+    const where: Prisma.PersonWhereInput = {};
 
     if (birthYear !== undefined) {
       where.birthYear = { gte: birthYear };

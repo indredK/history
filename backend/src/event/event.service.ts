@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '../generated/prisma/client';
 import { EventQueryDto } from './dto/event-query.dto';
 import { TimelineQueryDto } from './dto/timeline-query.dto';
 import { PaginatedResponseDto } from '../common/dto/paginated-response.dto';
@@ -27,7 +28,7 @@ export class EventService {
     const skip = (page - 1) * limit;
 
     // Build where clause
-    const where: any = {};
+    const where: Prisma.EventWhereInput = {};
 
     if (startYear !== undefined) {
       where.startYear = { gte: startYear };
@@ -42,7 +43,7 @@ export class EventService {
 
     // Year range filtering (events that occurred during the specified range)
     if (yearRangeStart !== undefined || yearRangeEnd !== undefined) {
-      const rangeConditions: any = {};
+      const rangeConditions: Prisma.EventWhereInput = {};
 
       if (yearRangeStart !== undefined && yearRangeEnd !== undefined) {
         // Events that overlap with the range
@@ -149,7 +150,7 @@ export class EventService {
     const { startYear, endYear, limit = 100, eventType } = query;
 
     // Build where clause for timeline
-    const where: any = {};
+    const where: Prisma.EventWhereInput = {};
 
     if (startYear !== undefined || endYear !== undefined) {
       if (startYear !== undefined && endYear !== undefined) {

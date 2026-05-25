@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '../generated/prisma/client';
 import { ScholarQueryDto } from './dto/scholar-query.dto';
 import { SchoolQueryDto } from './dto/school-query.dto';
 import { PaginatedResponseDto } from '../common/dto/paginated-response.dto';
@@ -26,7 +27,7 @@ export class CultureService {
     const skip = (page - 1) * limit;
 
     // Build where clause
-    const where: any = {};
+    const where: Prisma.ScholarWhereInput = {};
 
     if (dynastyPeriod) {
       where.dynastyPeriod = { contains: dynastyPeriod };
@@ -111,7 +112,7 @@ export class CultureService {
     const skip = (page - 1) * limit;
 
     // Build where clause
-    const where: any = {};
+    const where: Prisma.PhilosophicalSchoolWhereInput = {};
 
     if (name) {
       where.name = { contains: name };

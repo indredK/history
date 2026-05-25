@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '../generated/prisma/client';
 import { MythologyQueryDto } from './dto/mythology-query.dto';
 import { PaginatedResponseDto } from '../common/dto/paginated-response.dto';
 import { MythologyDto } from './dto/mythology.dto';
@@ -15,7 +16,7 @@ export class MythologyService {
     const skip = (page - 1) * limit;
 
     // Build where clause
-    const where: any = {};
+    const where: Prisma.MythologyWhereInput = {};
 
     if (category) {
       where.category = category;

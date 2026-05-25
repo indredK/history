@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '../generated/prisma/client';
 import { DynastyQueryDto } from './dto/dynasty-query.dto';
 import { PaginatedResponseDto } from '../common/dto/paginated-response.dto';
 import { DynastyDto } from './dto/dynasty.dto';
@@ -15,7 +16,7 @@ export class DynastyService {
     const skip = (page - 1) * limit;
 
     // Build where clause
-    const where: any = {};
+    const where: Prisma.DynastyWhereInput = {};
 
     if (startYear !== undefined) {
       where.startYear = { gte: startYear };

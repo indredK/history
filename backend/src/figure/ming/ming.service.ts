@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { FigureBaseService } from '../common/figure-base.service';
+import { Prisma } from '../../generated/prisma/client';
 import { FigureQueryDto } from '../common/query.dto';
 import { MingFigureDto } from './ming.dto';
 import { PaginatedResponseDto } from '../../common/dto/paginated-response.dto';
@@ -20,7 +21,7 @@ export class MingService extends FigureBaseService {
     } = query;
     const skip = (page - 1) * limit;
 
-    const where: any = {};
+    const where: Prisma.MingFigureWhereInput = {};
 
     if (role) where.role = { contains: role };
     if (period) where.period = period;
