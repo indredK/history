@@ -205,6 +205,18 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 - ✅ §6.3 后端 `test/app.e2e-spec.ts` 已替换为带 health + 404 校验的冒烟测试(本轮)
 - ✅ §3.3 仓库根 `docker-compose.yml` 已重写为 SQLite 栈(本轮),不再引用 PostgreSQL/PostGIS
 
+#### 6.5 MapService 全部为硬编码 mock 数据
+
+`backend/src/map/map.service.ts` 7 个公开方法全部返回硬编码字符串/数组,
+完全没有走 Prisma:`getPlaces` 只返回 2 条北京/上海字面量、
+`loadBoundaryData / getBoundaryDataByYear / loadBoundaryMappings / preloadCommonData` 全是 `'模拟边界数据'` 之类的字符串、
+`clearCache / getCacheStats` 也只回包写死的 cacheItems=100 / cacheSize='10MB'。
+对应的 Prisma 模型(`Place / BoundaryData`)其实是有的,但 service 根本没读。
+
+不写单测,因为没有逻辑可测;但应当作为独立 issue 跟进,要么删掉(下架地图功能),要么真接 Prisma。
+
+- **工作量**:接入 Prisma 1~2 天 / 删除半小时
+
 ---
 
 ## 三、安全(SECURITY.md 承诺 vs 实现)
@@ -238,11 +250,11 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
 5. ~~**§4.4 文档补全** — CONTRIBUTING / CODE_OF_CONDUCT / README 修正 / API 文档~~ ✅ 已完成(0321f5b / 8fe6336 / 本轮)
 6. ~~**§1.3 EventService 拆分**~~ ✅ 已完成(ec26deb)
 7. **§2.7 / §1.1 路由守卫** — 跟着认证一起 — 0.5 天(§2.7 真 404 页 ✅ 本轮已完成)
-8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 19 个 vitest 测试文件由"渲染不报错"
-   扩到 152 个用例,覆盖关键交互与 store 集成、createFigureStore 工厂;后端
-   `DynastyService` / `PersonService` / `EventService` / `EmperorService` /
-   `FigureBaseService` / `ReligionService` / `CultureService` / `MythologyService` /
-   `TangService` / `SanguoService` 共 116 个用例)
+8. **§1.6 / §2.8 单元测试持续投入** — 长期(本轮:前端 20 个 vitest 测试文件 174 个用例,
+   覆盖关键交互、store 集成、createFigureStore 工厂和 errorHandling 全路径(降级 /
+   重试 / 状态管理);后端 `DynastyService` / `PersonService` / `EventService` /
+   `EmperorService` / `FigureBaseService` / `ReligionService` / `CultureService` /
+   `MythologyService` / `TangService` / `SanguoService` 共 116 个用例)
 
 ### 低优(沙箱解开后再做)
 

@@ -54,8 +54,13 @@
   - `backend/src/figure/sanguo/sanguo.service.spec.ts`(6 个用例,Sanguo 与其它 5 朝代
     差异维度:`kingdom` 替代 `period`、`role/kingdom` 走 eq 而非 contains)
   - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
-- 前端核心组件 vitest 测试扩充(§2.8):19 个测试文件由"仅渲染不报错"扩到 146 个用例,覆盖
-  关键交互、store 集成与 a11y(键盘事件、role/label)
+- 前端核心组件 vitest 测试扩充(§2.8):20 个测试文件由"仅渲染不报错"扩到 174 个用例,覆盖
+  关键交互、store 集成、a11y(键盘事件、role/label)以及核心 utils:
+  - `frontend/src/utils/services/errorHandling.test.ts`(22 个用例):ApiError 构造、
+    SimpleFallbackManager.executeWithFallback 全路径(成功 / 失败计数 / 达阈值激活 /
+    duration 过期自动停用 / CLIENT_ERROR 排除 / enableAutoFallback=false 短路),
+    manualActivate/Deactivate/reset/updateConfig/getState 状态管理,retryOperation
+    重试与终止
   - `frontend/src/utils/storage.test.ts`(9 → 21,新增 clear / isSupported / 错误兜底 / sidebarStorage / dynastiesStorage / StorageListener)
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
