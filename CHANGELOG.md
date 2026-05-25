@@ -24,6 +24,11 @@
 - `backend/prisma/migrations/20260526024505_align_figure_columns_with_schema/`:补齐 `tang/song/yuan/ming/qing/sanguo` 历史 `db push` 留下的 ~53 个未迁移列
 - `.github/workflows/pr.yml`:PR 专用检查(Conventional Commits 标题校验 + 前后端 lint informational + concurrency cancel-in-progress)
 - `.github/workflows/test.yml` 加 concurrency 配置,新 push 自动取消旧 run
+- 核心 Service 单元测试(§1.6 起步):
+  - `backend/src/dynasty/dynasty.service.spec.ts`(7 个用例)
+  - `backend/src/person/person.service.spec.ts`(7 个用例)
+  - `backend/src/event/event.service.spec.ts`(11 个用例)
+  - jest 配置追加 `moduleNameMapper`,把 Prisma 7 生成代码里的 ESM 风格 `.js` 导入回退到 `.ts`
 
 ### Changed
 - 后端 Service 层 16 处 `any` → `Prisma.XxxWhereInput`

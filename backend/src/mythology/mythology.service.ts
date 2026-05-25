@@ -85,7 +85,7 @@ export class MythologyService {
       id: mythology.id,
       title: mythology.name, // Map database 'name' to frontend 'title'
       englishTitle: '', // Database doesn't have name_en field
-      category: mythology.category as any, // Cast to match frontend category type
+      category: mythology.category, // Cast to match frontend category type
       description: mythology.description || '', // Ensure description is not null
       characters: Array.isArray(stories) ? stories.slice(0, 5) : [],
       source: mythology.origin || '', // Map database 'origin' to frontend 'source'

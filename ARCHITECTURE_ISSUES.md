@@ -60,6 +60,7 @@
 - `test/app.e2e-spec.ts` 已有冒烟测试(health + 404),业务路径未覆盖
 - 估算覆盖率 **< 5%**
 - **工作量**:持续投入,优先核心 Service
+- **起步完成**:`DynastyService` / `PersonService` / `EventService` 共 25 个 spec + 既有 `app.controller` spec = 27 个测试 ✅(jest 通过 `moduleNameMapper` 适配 Prisma 7 ESM 风格 `.js` 导入)
 
 #### 2.1 状态管理失控:20 个独立 Store
 

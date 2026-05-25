@@ -51,7 +51,8 @@ async function bootstrap() {
         scheme: 'bearer',
         bearerFormat: 'JWT',
         name: 'Authorization',
-        description: 'Enter JWT token (Bearer scheme). 认证接入后所有需鉴权的路由统一携带。',
+        description:
+          'Enter JWT token (Bearer scheme). 认证接入后所有需鉴权的路由统一携带。',
         in: 'header',
       },
       'JWT-auth',
