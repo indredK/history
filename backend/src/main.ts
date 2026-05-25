@@ -45,6 +45,17 @@ async function bootstrap() {
       'API for Chinese historical data including dynasties, persons, events, and culture',
     )
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'Authorization',
+        description: 'Enter JWT token (Bearer scheme). 认证接入后所有需鉴权的路由统一携带。',
+        in: 'header',
+      },
+      'JWT-auth',
+    )
     .addTag('Health', 'Health check endpoints')
     .addTag('Dynasties', 'Dynasty-related endpoints')
     .addTag('Persons', 'Person-related endpoints')

@@ -59,10 +59,11 @@
 
 **根因**:Prisma schema 也为每个朝代建了独立表(见 §3.1),前后端被迫复制。
 
-### 1.5 Swagger 配置不完整
+### 1.5 Swagger 配置不完整 ✅ 已修复(commit 同本次)
 
-- [main.ts](backend/src/main.ts) 中 Swagger 已开,但缺少 Bearer/JWT 安全方案标签
-- 接入认证后需要 `addBearerAuth()`,目前未预留
+- [main.ts](backend/src/main.ts) 中 Swagger 已开,~~但缺少 Bearer/JWT 安全方案标签~~
+- 已加 `addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }, 'JWT-auth')`
+- 后续 Controller 上加 `@ApiBearerAuth('JWT-auth')` 即可关联
 
 ### 1.6 单元测试覆盖率近似为 0 🔴
 
@@ -248,9 +249,9 @@ styleStore / themeStore / index.ts
 
 任何不规范代码都能提交。
 
-### 4.3 根目录脚本 bug
+### 4.3 根目录脚本 bug ✅ 已复核为非 bug
 
-[package.json](package.json) 中 `lint:fix:backend` 实际跑的是 `lint` 而非 `lint:fix`(待复核)。
+[package.json](package.json) 中 `lint:fix:backend` 实际跑 `cd backend && bun run lint:fix`,backend 子包的 `lint:fix` 脚本是 `eslint ... --fix`,链路正确。原盘点结论作废。
 
 ### 4.4 文档与实现脱节
 
@@ -291,14 +292,16 @@ styleStore / themeStore / index.ts
 
 ## 六、坏味道清单
 
-### 6.1 硬编码值
+### 6.1 硬编码值 ✅ 已复核全部走 env
 
-| 位置 | 值 | 处理 |
+| 位置 | 值 | 当前状态 |
 |---|---|---|
-| [backend/src/main.ts:33](backend/src/main.ts:33) | `'http://localhost:5173'` | 走 ENV |
-| [frontend/src/config/dataSource.ts](frontend/src/config/dataSource.ts) | `'http://localhost:3001/api/v1'` | 走 `VITE_API_BASE_URL` |
-| `dataSource.ts` 中 `DATA_SOURCE_MODE` | `0 \| 1 = 1`,硬编码 | 走 ENV |
-| `vite.config.ts` proxy | `'http://localhost:3001'` | 用 ENV |
+| [backend/src/main.ts:33](backend/src/main.ts:33) | `'http://localhost:5173'` | ✅ `process.env.CORS_ORIGIN \|\| ...` |
+| [frontend/src/config/dataSource.ts:34](frontend/src/config/dataSource.ts:34) | `'http://localhost:3001/api/v1'` | ✅ `import.meta.env.VITE_API_BASE_URL \|\| ...` |
+| `dataSource.ts` 中 `DATA_SOURCE_MODE` | `0 \| 1 = 1` | ✅ 由 `VITE_DATA_SOURCE` 推导,`0/1` 仅为兼容输出 |
+| `vite.config.ts:43` proxy | `'http://localhost:3001'` | ✅ `env.VITE_API_BASE_URL \|\| ...` |
+
+均已 fallback 默认开发值,生产环境覆盖即可。
 
 ### 6.2 缺失的错误处理 ✅ 大部分已修复(commit `178f9af`)
 
