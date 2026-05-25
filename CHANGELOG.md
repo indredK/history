@@ -273,6 +273,65 @@
     targetScroll=scrollLeft(getScrollState.scrollLeft 反映)、ref=null 时
     setEnabled/setScrollPosition 不抛错 + getScrollState 全零兜底、setEnabled
     false/true 切换不影响 getScrollState
+  - `frontend/src/services/person/tang/tangService.test.ts`(30 个用例):tang 是
+    人物 helper canonical 模板。验证 filterByRole/filterByPeriod/filterByFaction
+    `全部`/空串直通 + 命中,searchFigures 覆盖 name+courtesy+positions+faction,
+    sortFigures `birthYear` 升序、`role` 按 roleOrder
+    `emperor(1)>chancellor(2)>general(3)>official(4)>poet(5)>other(6)` 升序 +
+    同 role 时 birthYear 升序、`name` zh-CN locale,filterAndSort 串联与全
+    undefined 直通,getRoleLabel 6 档 + 未知兜底 `其他`,formatLifespan /
+    calculateAge,默认 getAll/getById stub
+  - `frontend/src/services/person/sanguo/sanguoService.test.ts`(19 个用例):
+    sanguo 用 kingdom(魏/蜀/吴/其他)替代 period/faction,sortBy 多 `kingdom` 档:
+    `魏(1)>蜀(2)>吴(3)>其他(4)`,roleOrder 重新洗牌
+    `ruler(1)>strategist(2)>general(3)>official(4)>other(5)`,search 覆盖
+    name+courtesy+positions(无 faction)
+  - `frontend/src/services/person/song/songService.test.ts`(9 个用例):
+    song 与 tang 同构,roleOrder
+    `emperor(1)>chancellor(2)>general(3)>official(4)>scholar(5)>other(6)`,
+    period 为 `北宋前期/北宋后期/南宋前期/南宋后期`
+  - `frontend/src/services/person/yuan/yuanService.test.ts`(9 个用例):
+    yuan 与 song 同 roleOrder,period 为 `元初/元中期/元末`,
+    roleLabel 差异:emperor=`皇帝/大汗`,chancellor=`丞相`
+  - `frontend/src/services/person/ming/mingService.test.ts`(9 个用例):
+    ming roleOrder 把 chancellor 换成 cabinet、poet/scholar 换成 eunuch:
+    `emperor(1)>cabinet(2)>general(3)>official(4)>eunuch(5)>other(6)`,
+    period 为 `明初/明中期/明末`,roleLabel:cabinet=`内阁大臣`,eunuch=`宦官`
+  - `frontend/src/services/person/qing/qingRulerService.test.ts`(13 个用例):
+    清朝统治者(帝王模型)用 reignStart/reignEnd 替代 birthYear/deathYear,
+    sortBy 只有 `reignStart/name` 两档,search 覆盖 name+templeName+eraName,
+    period 走 `清初/盛清/清中期/晚清` 4 段,getTitle:
+    templeName=`（无庙号）` → `${eraName}帝`,否则 `清${templeName}（${eraName}）`,
+    formatReignPeriod / calculateReignYears 与默认 getAll/getById stub
+  - `frontend/src/services/person/emperors/emperorService.test.ts`(20 个用例):
+    emperor 用 DYNASTY_ORDER map(西汉=7 < 唐=15 < 北宋=17,未知 → 999 排到最后)
+    排序,formatReignPeriod 支持负数年份(`reignStart<0` → `公元前N年`、
+    跨公元混合),formatEraNames 空数组 → `无年号`,多个年号用 `、` 拼接,
+    search 5 字段:name+templeName+posthumousName+eraNames[].name+dynasty,
+    calculateReignYears 含负数跨公元
+  - `frontend/src/services/person/scholars/scholarService.test.ts`(18 个用例):
+    scholar 用 filterByDynasty 短路 OR(dynasty || dynastyPeriod 任一命中),
+    sortScholars `birthYear` 用 `a.birthYear || 0` 兜底 null,`name`/`dynasty`
+    走 localCompare 默认 locale + dynastyPeriod 兜底,search 覆盖 5 字段:
+    name+name_en(lowercase)+schoolOfThought+dynasty+dynastyPeriod
+  - `frontend/src/services/mythology/mythologyService.test.ts`(12 个用例):
+    mythologyService 是少量纯函数模块。validateMythology 验证 5 必填字段
+    (id/title/category/description/characters)缺失各自报错 +
+    characters undefined 也算缺失 + 多个错误一起累计;filterByCategory eq 命中 /
+    未命中 / 空数组;getMythologies 用 `vi.doMock('./mythologyApi') +
+vi.resetModules() + 重新 await import` 拦截内部动态 import,验证透传
+    `getMythologies` 返回值
+  - `frontend/src/services/map/mapDataService.test.ts`(16 个用例):
+    地图数据服务覆盖 MapDataCache singleflight + memo 与 MapDataService 公共方法。
+    用 `vi.mock('@/utils/services/dataLoaders')` 拦截 loadJsonData,验证
+    loadPlaces 走 `/data/json/places.json` + 二次走缓存 + 并发只触发一次 loader +
+    抛错后不缓存允许重试,loadBoundaryMappings 返回 10 个朝代硬编码(qin→qing)
+    - 二次走缓存且不调 loadJsonData,loadBoundaryData(period)走
+      `/data/raw/<file>` + period 不存在返回 null + loadJsonData 抛错落 catch
+      返回 null + 同 period 二次走缓存,getBoundaryDataByYear 区间命中(含边界
+      `validTo`)+ 过早/过晚返回 null,clearCache(key) 只清单 key 与 clearCache()
+      全清,getCacheStats 初始 loadingCount=0,全局单例 `mapDataService` 是
+      `MapDataService` 实例
   - `frontend/src/components/ui/{ErrorBoundary,LoadingSkeleton,ResponsiveTable,ResponsiveText,MobileTableContainer,ResponsiveContainer,ScrollContainer,ResponsiveButton,ResponsiveCard,YearSettingsPopover,ResponsiveLayout,PortraitSidebar}.test.tsx`
   - `frontend/src/components/common/{PersonCard,ContentCard,TabsContainer,CommonTabs,FixedTabsPage}.test.tsx`
   - `frontend/src/components/HoverScrollContainer/HoverScrollContainer.test.tsx`

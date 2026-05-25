@@ -299,6 +299,13 @@ findAll + getTimeline 的 70+ 行年份范围筛选条件去重。文件 244 →
    useHoverScroll 系列(utils 纯函数 17 用例 + useScrollState + useSmoothAnimation
    rAF 桩手动 flush + useScrollbarAreaDetect 事件拦截 preventDefault + composite
    主入口 5 用例集成);
+   service helpers 9 个文件(tang canonical 5 字段模板 / sanguo kingdom 替代 period+faction /
+   song+yuan+ming roleOrder 朝代特色洗牌(poet/scholar/cabinet/eunuch)/ qing reignStart 帝王模型 /
+   emperor DYNASTY_ORDER 排序+formatReignPeriod 负数年份+formatEraNames `、` join /
+   scholar dynasty||dynastyPeriod 短路+birthYear null→0 兜底 / mythology validateMythology
+   5 字段聚合 errors + 动态 import 通过 doMock+resetModules 拦截);
+   mapDataService 16 用例(MapDataCache singleflight + memo 抛错不缓存 + clearCache by-key/全清 +
+   loadBoundaryMappings 10 朝代硬编码 + getBoundaryDataByYear validTo 边界);
    后端 `DynastyService` / `PersonService` / `EventService` /
    `EmperorService` / `FigureBaseService` / `ReligionService` / `CultureService` /
    `MythologyService` / `TangService` / `SanguoService` / `QingService` 共 125 个用例)
