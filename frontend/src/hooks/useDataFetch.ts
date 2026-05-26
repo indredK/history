@@ -246,7 +246,6 @@ export function useDataFetch<T>(
     if (enabled) {
       throttledFetchData();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // 只在组件挂载时执行
 
   // 定时刷新 - 当 refetchInterval 变化时重新设置定时器
@@ -296,4 +295,3 @@ export function clearExpiredCache() {
     }
   }
 }
-
