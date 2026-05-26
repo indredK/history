@@ -42,8 +42,9 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
 
   // 同步当前激活朝代到全局 store
   useEffect(() => {
-    if (dynasties.length > 0) {
-      setSelectedDynasty(dynasties[activeIndex]);
+    const activeDynasty = dynasties[activeIndex];
+    if (activeDynasty) {
+      setSelectedDynasty(activeDynasty);
     }
   }, [activeIndex, dynasties, setSelectedDynasty]);
 

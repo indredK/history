@@ -54,7 +54,7 @@ describe("loadJsonData / loadJsonArray", () => {
   });
 
   it("loadJsonData 成功时返回 fetch 的 JSON", async () => {
-    const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValue({
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: true,
       statusText: "OK",
       json: () => Promise.resolve({ k: 1 }),
@@ -66,7 +66,7 @@ describe("loadJsonData / loadJsonArray", () => {
   });
 
   it("loadJsonData 在 response.ok=false 时抛错", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue({
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: false,
       statusText: "Not Found",
       json: () => Promise.resolve({}),
@@ -76,12 +76,12 @@ describe("loadJsonData / loadJsonArray", () => {
   });
 
   it("loadJsonData 在 fetch 拒绝时把错误透传", async () => {
-    vi.spyOn(global, "fetch").mockRejectedValue(new Error("network down"));
+    vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("network down"));
     await expect(loadJsonData("/x.json")).rejects.toThrow("network down");
   });
 
   it("loadJsonArray JSON 是数组时原样返回", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue({
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: true,
       statusText: "OK",
       json: () => Promise.resolve([1, 2, 3]),
@@ -92,7 +92,7 @@ describe("loadJsonData / loadJsonArray", () => {
   });
 
   it("loadJsonArray JSON 是单对象时包成 [obj]", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue({
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: true,
       statusText: "OK",
       json: () => Promise.resolve({ k: 1 }),
@@ -103,7 +103,7 @@ describe("loadJsonData / loadJsonArray", () => {
   });
 
   it("loadJsonArray fetch 失败时兜底返回空数组", async () => {
-    vi.spyOn(global, "fetch").mockRejectedValue(new Error("boom"));
+    vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("boom"));
     const data = await loadJsonArray("/x.json");
     expect(data).toEqual([]);
   });
@@ -121,7 +121,7 @@ describe("ResourceLoader", () => {
   });
 
   it("未命中缓存时调 fetch 并写入", async () => {
-    const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValue({
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: true,
       statusText: "OK",
       json: () => Promise.resolve({ v: 1 }),
@@ -138,7 +138,7 @@ describe("ResourceLoader", () => {
   });
 
   it("useCache=false 时永远走 fetch", async () => {
-    const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValue({
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: true,
       statusText: "OK",
       json: () => Promise.resolve({ v: 2 }),
@@ -150,7 +150,7 @@ describe("ResourceLoader", () => {
   });
 
   it("clearCache(path) 只删指定项,clearCache() 清空全部", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue({
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: true,
       statusText: "OK",
       json: () => Promise.resolve({}),

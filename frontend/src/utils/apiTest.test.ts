@@ -7,7 +7,7 @@
  * - testAllApiEndpoints:全部成功 → success=true,任意一个失败 → success=false
  * - testFrontendProxy:成功 / 格式错误 / HTTP 错 / fetch 抛错
  *
- * fetch 用 vi.spyOn(global, 'fetch') 桩,不发真实网络请求。
+ * fetch 用 vi.spyOn(globalThis, 'fetch') 桩,不发真实网络请求。
  */
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import {
@@ -47,7 +47,7 @@ describe("testApiConnection", () => {
 
   it("后端 success=true + data 时返回 success=true 与组装好的 details", async () => {
     const payload = { success: true, data: { status: "ok", uptime: 123 } };
-    vi.spyOn(global, "fetch").mockResolvedValue(
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
       fakeResponse({ ok: true, status: 200, body: payload }),
     );
 
@@ -65,7 +65,7 @@ describe("testApiConnection", () => {
   });
 
   it("响应 ok=true 但格式不符(无 success/data)→ 走 catch,返回失败", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue(
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
       fakeResponse({ ok: true, body: { foo: "bar" } }),
     );
 
@@ -76,7 +76,7 @@ describe("testApiConnection", () => {
   });
 
   it("HTTP 非 2xx → 抛错并返回失败,details 含 url", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue(
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
       fakeResponse({
         ok: false,
         status: 503,
@@ -93,7 +93,7 @@ describe("testApiConnection", () => {
   });
 
   it("fetch 直接抛错 → 返回失败,details.error 是原始消息", async () => {
-    vi.spyOn(global, "fetch").mockRejectedValue(new Error("network down"));
+    vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("network down"));
 
     const result = await testApiConnection();
     expect(result.success).toBe(false);
@@ -112,7 +112,7 @@ describe("testApiEndpoint", () => {
   });
 
   it("success=true + data → 返回 data 与 success=true", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue(
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
       fakeResponse({
         ok: true,
         body: { success: true, data: [{ id: 1 }] },
@@ -126,7 +126,7 @@ describe("testApiEndpoint", () => {
   });
 
   it("success=false + 自带 message → catch 把 message 抛出来", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue(
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
       fakeResponse({
         ok: true,
         body: { success: false, message: "找不到表" },
@@ -140,7 +140,7 @@ describe("testApiEndpoint", () => {
   });
 
   it("success=false 且没有 message → 走默认 '后端返回错误'", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue(
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
       fakeResponse({ ok: true, body: { success: false } }),
     );
 
@@ -150,7 +150,7 @@ describe("testApiEndpoint", () => {
   });
 
   it("HTTP 非 2xx → HTTP {status} 错误", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue(
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
       fakeResponse({ ok: false, status: 404, statusText: "Not Found" }),
     );
 
@@ -160,7 +160,7 @@ describe("testApiEndpoint", () => {
   });
 
   it("fetch 抛错 → 失败 + error 是错误消息", async () => {
-    vi.spyOn(global, "fetch").mockRejectedValue(new Error("ETIMEDOUT"));
+    vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("ETIMEDOUT"));
 
     const result = await testApiEndpoint("/x");
     expect(result.success).toBe(false);
@@ -169,7 +169,7 @@ describe("testApiEndpoint", () => {
 
   it("fetch 拒绝且抛非 Error 值时 → error 是原始非 Error 值", async () => {
     // 源码对 `error instanceof Error` 走 else 分支,直接把非 Error 透出
-    vi.spyOn(global, "fetch").mockRejectedValue("string-error");
+    vi.spyOn(globalThis, "fetch").mockRejectedValue("string-error");
 
     const result = await testApiEndpoint("/y");
     expect(result.success).toBe(false);
@@ -187,7 +187,7 @@ describe("testAllApiEndpoints", () => {
   });
 
   it("逐个调用 5 个端点,全部成功 → success=true,results 长度=5", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue(
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
       fakeResponse({
         ok: true,
         body: { success: true, data: { ok: true } },
@@ -210,7 +210,7 @@ describe("testAllApiEndpoints", () => {
   it("任意一个端点失败 → success=false,仍返回所有 results", async () => {
     // 依次:health ok / dynasties ok / persons 失败 / events ok / emperors ok
     let call = 0;
-    vi.spyOn(global, "fetch").mockImplementation(() => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(() => {
       call++;
       if (call === 3) {
         return Promise.resolve(
@@ -245,7 +245,7 @@ describe("testFrontendProxy", () => {
 
   it("通过代理返回正确格式 → success=true,details.url 是 /api/v1/health", async () => {
     const payload = { success: true, data: { proxy: "ok" } };
-    vi.spyOn(global, "fetch").mockResolvedValue(
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
       fakeResponse({ ok: true, status: 200, body: payload }),
     );
 
@@ -262,7 +262,7 @@ describe("testFrontendProxy", () => {
   });
 
   it("响应 ok=true 但格式不对 → catch,details.suggestion 提示 Vite 代理配置", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue(
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
       fakeResponse({ ok: true, body: { success: false } }),
     );
 
@@ -273,7 +273,7 @@ describe("testFrontendProxy", () => {
   });
 
   it("HTTP 非 2xx → 返回 HTTP {status} 失败", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue(
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
       fakeResponse({ ok: false, status: 502, statusText: "Bad Gateway" }),
     );
 
@@ -283,7 +283,7 @@ describe("testFrontendProxy", () => {
   });
 
   it("fetch 抛错 → 失败,details.error 是错误消息", async () => {
-    vi.spyOn(global, "fetch").mockRejectedValue(new Error("CORS denied"));
+    vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("CORS denied"));
 
     const result = await testFrontendProxy();
     expect(result.success).toBe(false);
