@@ -2,6 +2,7 @@ import { Test, type TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
 import { MythologyService } from './mythology.service';
 import { PrismaService } from '../prisma/prisma.service';
+import type { MythologyQueryDto } from './dto/mythology-query.dto';
 
 /**
  * 把 mock 的第 N 次调用第 M 个参数还原为期望类型,
@@ -10,6 +11,14 @@ import { PrismaService } from '../prisma/prisma.service';
 function getCallArg<T>(mock: jest.Mock, callIdx = 0, argIdx = 0): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return mock.mock.calls[callIdx]?.[argIdx] as T;
+}
+
+/**
+ * PaginationQueryDto 把 skip/take 暴露为只读 getter,导致裸字面量
+ * 不满足 MythologyQueryDto 类型 —— 用一个泛型 helper 集中收口 as 断言。
+ */
+function asQuery<T>(partial: Partial<T>): T {
+  return partial as T;
 }
 
 /**
@@ -60,7 +69,7 @@ describe('MythologyService', () => {
       prisma.mythology.findMany.mockResolvedValue([]);
       prisma.mythology.count.mockResolvedValue(0);
 
-      await service.findAll({});
+      await service.findAll(asQuery<MythologyQueryDto>({}));
 
       expect(prisma.mythology.findMany).toHaveBeenCalledWith({
         where: {},
@@ -74,7 +83,7 @@ describe('MythologyService', () => {
       prisma.mythology.findMany.mockResolvedValue([]);
       prisma.mythology.count.mockResolvedValue(0);
 
-      await service.findAll({ page: 4, limit: 5 });
+      await service.findAll(asQuery<MythologyQueryDto>({ page: 4, limit: 5 }));
 
       expect(prisma.mythology.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ skip: 15, take: 5 }),
@@ -85,7 +94,9 @@ describe('MythologyService', () => {
       prisma.mythology.findMany.mockResolvedValue([]);
       prisma.mythology.count.mockResolvedValue(0);
 
-      await service.findAll({ category: 'creation' });
+      await service.findAll(
+        asQuery<MythologyQueryDto>({ category: 'creation' }),
+      );
 
       const call = getCallArg<{ where: { category?: string } }>(
         prisma.mythology.findMany,
@@ -97,11 +108,13 @@ describe('MythologyService', () => {
       prisma.mythology.findMany.mockResolvedValue([]);
       prisma.mythology.count.mockResolvedValue(0);
 
-      await service.findAll({
-        origin: '黄河',
-        period: '上古',
-        name: '盘古',
-      });
+      await service.findAll(
+        asQuery<MythologyQueryDto>({
+          origin: '黄河',
+          period: '上古',
+          name: '盘古',
+        }),
+      );
 
       const call = getCallArg<{
         where: {
@@ -131,7 +144,7 @@ describe('MythologyService', () => {
       ]);
       prisma.mythology.count.mockResolvedValue(1);
 
-      const result = await service.findAll({});
+      const result = await service.findAll(asQuery<MythologyQueryDto>({}));
 
       expect(result.data[0]).toMatchObject({
         id: 'pangu',
@@ -158,7 +171,7 @@ describe('MythologyService', () => {
       ]);
       prisma.mythology.count.mockResolvedValue(1);
 
-      const result = await service.findAll({});
+      const result = await service.findAll(asQuery<MythologyQueryDto>({}));
 
       expect(result.data[0]?.description).toBe('');
       expect(result.data[0]?.source).toBe('');
@@ -178,7 +191,7 @@ describe('MythologyService', () => {
       ]);
       prisma.mythology.count.mockResolvedValue(1);
 
-      const result = await service.findAll({});
+      const result = await service.findAll(asQuery<MythologyQueryDto>({}));
 
       expect(result.data[0]?.characters).toEqual(['a', 'b', 'c', 'd', 'e']);
     });
@@ -198,7 +211,7 @@ describe('MythologyService', () => {
       ]);
       prisma.mythology.count.mockResolvedValue(1);
 
-      const result = await service.findAll({});
+      const result = await service.findAll(asQuery<MythologyQueryDto>({}));
 
       expect(result.data[0]?.characters).toEqual([]);
     });
@@ -230,7 +243,7 @@ describe('MythologyService', () => {
       ]);
       prisma.mythology.count.mockResolvedValue(2);
 
-      const result = await service.findAll({});
+      const result = await service.findAll(asQuery<MythologyQueryDto>({}));
 
       expect(result.data[0]?.characters).toEqual([]);
       expect(result.data[1]?.characters).toEqual([]);
@@ -240,7 +253,9 @@ describe('MythologyService', () => {
       prisma.mythology.findMany.mockResolvedValue([]);
       prisma.mythology.count.mockResolvedValue(13);
 
-      const result = await service.findAll({ page: 2, limit: 5 });
+      const result = await service.findAll(
+        asQuery<MythologyQueryDto>({ page: 2, limit: 5 }),
+      );
 
       expect(result.meta).toEqual(
         expect.objectContaining({ total: 13, page: 2, limit: 5 }),

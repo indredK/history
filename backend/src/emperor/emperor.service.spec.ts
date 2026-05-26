@@ -2,6 +2,7 @@ import { Test, type TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
 import { EmperorService } from './emperor.service';
 import { PrismaService } from '../prisma/prisma.service';
+import type { EmperorQueryDto } from './dto/emperor-query.dto';
 
 /**
  * 把 mock 的第 N 次调用第 M 个参数还原为期望类型,
@@ -10,6 +11,14 @@ import { PrismaService } from '../prisma/prisma.service';
 function getCallArg<T>(mock: jest.Mock, callIdx = 0, argIdx = 0): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return mock.mock.calls[callIdx]?.[argIdx] as T;
+}
+
+/**
+ * PaginationQueryDto 把 skip/take 暴露为只读 getter,导致裸字面量
+ * 不满足 EmperorQueryDto 类型 —— 用一个泛型 helper 集中收口 as 断言。
+ */
+function asQuery<T>(partial: Partial<T>): T {
+  return partial as T;
 }
 
 /**
@@ -53,7 +62,7 @@ describe('EmperorService', () => {
       prisma.emperor.findMany.mockResolvedValue([]);
       prisma.emperor.count.mockResolvedValue(0);
 
-      await service.findAll({});
+      await service.findAll(asQuery<EmperorQueryDto>({}));
 
       expect(prisma.emperor.findMany).toHaveBeenCalledWith({
         where: {},
@@ -68,7 +77,7 @@ describe('EmperorService', () => {
       prisma.emperor.findMany.mockResolvedValue([]);
       prisma.emperor.count.mockResolvedValue(0);
 
-      await service.findAll({ page: 3, limit: 10 });
+      await service.findAll(asQuery<EmperorQueryDto>({ page: 3, limit: 10 }));
 
       expect(prisma.emperor.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ skip: 20, take: 10 }),
@@ -79,7 +88,9 @@ describe('EmperorService', () => {
       prisma.emperor.findMany.mockResolvedValue([]);
       prisma.emperor.count.mockResolvedValue(0);
 
-      await service.findAll({ dynastyId: 'tang-id', name: '宗' });
+      await service.findAll(
+        asQuery<EmperorQueryDto>({ dynastyId: 'tang-id', name: '宗' }),
+      );
 
       const call = getCallArg<{
         where: { dynastyId?: string; name?: { contains?: string } };
@@ -92,7 +103,7 @@ describe('EmperorService', () => {
       prisma.emperor.findMany.mockResolvedValue([]);
       prisma.emperor.count.mockResolvedValue(0);
 
-      await service.findAll({ reignStart: 600 });
+      await service.findAll(asQuery<EmperorQueryDto>({ reignStart: 600 }));
 
       expect(prisma.emperor.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ where: { reignStart: { gte: 600 } } }),
@@ -103,7 +114,7 @@ describe('EmperorService', () => {
       prisma.emperor.findMany.mockResolvedValue([]);
       prisma.emperor.count.mockResolvedValue(0);
 
-      await service.findAll({ reignEnd: 1000 });
+      await service.findAll(asQuery<EmperorQueryDto>({ reignEnd: 1000 }));
 
       expect(prisma.emperor.findMany).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -118,7 +129,7 @@ describe('EmperorService', () => {
       prisma.emperor.findMany.mockResolvedValue([]);
       prisma.emperor.count.mockResolvedValue(0);
 
-      await service.findAll({ dynastyName: '唐' });
+      await service.findAll(asQuery<EmperorQueryDto>({ dynastyName: '唐' }));
 
       expect(prisma.emperor.findMany).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -140,7 +151,7 @@ describe('EmperorService', () => {
       ]);
       prisma.emperor.count.mockResolvedValue(1);
 
-      const result = await service.findAll({});
+      const result = await service.findAll(asQuery<EmperorQueryDto>({}));
 
       expect(result.data[0]).toEqual({
         id: 'e1',
@@ -164,7 +175,7 @@ describe('EmperorService', () => {
       ]);
       prisma.emperor.count.mockResolvedValue(1);
 
-      const result = await service.findAll({});
+      const result = await service.findAll(asQuery<EmperorQueryDto>({}));
 
       expect(result.data[0]?.eraNames).toBe('not-json');
       expect(result.data[0]?.achievements).toBeNull();
@@ -176,7 +187,9 @@ describe('EmperorService', () => {
       prisma.emperor.findMany.mockResolvedValue([]);
       prisma.emperor.count.mockResolvedValue(157);
 
-      const result = await service.findAll({ page: 2, limit: 25 });
+      const result = await service.findAll(
+        asQuery<EmperorQueryDto>({ page: 2, limit: 25 }),
+      );
 
       expect(result.meta).toEqual(
         expect.objectContaining({ total: 157, page: 2, limit: 25 }),

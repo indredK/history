@@ -1,6 +1,7 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { YuanService } from './yuan.service';
 import { PrismaService } from '../../prisma/prisma.service';
+import type { FigureQueryDto } from '../common/query.dto';
 
 /**
  * 把 mock 的第 N 次调用第 M 个参数还原为期望类型,集中处理 jest.Mock.calls 的 unsafe-member-access。
@@ -8,6 +9,14 @@ import { PrismaService } from '../../prisma/prisma.service';
 function getCallArg<T>(mock: jest.Mock, callIdx = 0, argIdx = 0): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return mock.mock.calls[callIdx]?.[argIdx] as T;
+}
+
+/**
+ * PaginationQueryDto 把 skip/take 暴露为只读 getter,导致裸字面量
+ * 不满足 FigureQueryDto 类型 —— 用一个泛型 helper 集中收口 as 断言。
+ */
+function asQuery<T>(partial: Partial<T>): T {
+  return partial as T;
 }
 
 /**
@@ -49,7 +58,7 @@ describe('YuanService', () => {
       prisma.yuanFigure.findMany.mockResolvedValue([]);
       prisma.yuanFigure.count.mockResolvedValue(0);
 
-      await service.getYuanFigures({});
+      await service.getYuanFigures(asQuery<FigureQueryDto>({}));
 
       expect(prisma.yuanFigure.findMany).toHaveBeenCalledWith({
         where: {},
@@ -63,7 +72,9 @@ describe('YuanService', () => {
       prisma.yuanFigure.findMany.mockResolvedValue([]);
       prisma.yuanFigure.count.mockResolvedValue(0);
 
-      await service.getYuanFigures({ page: 2, limit: 12 });
+      await service.getYuanFigures(
+        asQuery<FigureQueryDto>({ page: 2, limit: 12 }),
+      );
 
       expect(prisma.yuanFigure.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ skip: 12, take: 12 }),
@@ -74,10 +85,12 @@ describe('YuanService', () => {
       prisma.yuanFigure.findMany.mockResolvedValue([]);
       prisma.yuanFigure.count.mockResolvedValue(0);
 
-      await service.getYuanFigures({
-        role: 'khan',
-        name: '忽必烈',
-      });
+      await service.getYuanFigures(
+        asQuery<FigureQueryDto>({
+          role: 'khan',
+          name: '忽必烈',
+        }),
+      );
 
       const call = getCallArg<{
         where: {
@@ -94,7 +107,9 @@ describe('YuanService', () => {
       prisma.yuanFigure.count.mockResolvedValue(0);
 
       // 即使传入 period,where 也不应该包含 period 键
-      await service.getYuanFigures({ period: '元前期' });
+      await service.getYuanFigures(
+        asQuery<FigureQueryDto>({ period: '元前期' }),
+      );
 
       const call = getCallArg<{ where: Record<string, unknown> }>(
         prisma.yuanFigure.findMany,
@@ -107,7 +122,9 @@ describe('YuanService', () => {
       prisma.yuanFigure.findMany.mockResolvedValue([]);
       prisma.yuanFigure.count.mockResolvedValue(0);
 
-      await service.getYuanFigures({ birthYear: 1200 });
+      await service.getYuanFigures(
+        asQuery<FigureQueryDto>({ birthYear: 1200 }),
+      );
 
       expect(prisma.yuanFigure.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ where: { birthYear: { gte: 1200 } } }),
@@ -118,7 +135,9 @@ describe('YuanService', () => {
       prisma.yuanFigure.findMany.mockResolvedValue([]);
       prisma.yuanFigure.count.mockResolvedValue(0);
 
-      await service.getYuanFigures({ deathYear: 1300 });
+      await service.getYuanFigures(
+        asQuery<FigureQueryDto>({ deathYear: 1300 }),
+      );
 
       expect(prisma.yuanFigure.findMany).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -133,7 +152,7 @@ describe('YuanService', () => {
       prisma.yuanFigure.findMany.mockResolvedValue([]);
       prisma.yuanFigure.count.mockResolvedValue(0);
 
-      await service.getYuanFigures({ birthYear: 0 });
+      await service.getYuanFigures(asQuery<FigureQueryDto>({ birthYear: 0 }));
 
       const call = getCallArg<{ where: { birthYear?: { gte?: number } } }>(
         prisma.yuanFigure.findMany,
@@ -164,9 +183,9 @@ describe('YuanService', () => {
       ]);
       prisma.yuanFigure.count.mockResolvedValue(1);
 
-      const result = await service.getYuanFigures({});
+      const result = await service.getYuanFigures(asQuery<FigureQueryDto>({}));
 
-      const figure = result.data[0] as Record<string, unknown>;
+      const figure = result.data[0] as unknown as Record<string, unknown>;
       expect(figure.id).toBe('kublai');
       expect(figure.achievements).toEqual(['统一中国', '建立元朝']);
       expect(figure.positions).toEqual(['大汗', '皇帝']);
@@ -178,7 +197,9 @@ describe('YuanService', () => {
       prisma.yuanFigure.findMany.mockResolvedValue([]);
       prisma.yuanFigure.count.mockResolvedValue(28);
 
-      const result = await service.getYuanFigures({ page: 1, limit: 20 });
+      const result = await service.getYuanFigures(
+        asQuery<FigureQueryDto>({ page: 1, limit: 20 }),
+      );
 
       expect(result.meta).toEqual(
         expect.objectContaining({ total: 28, page: 1, limit: 20 }),

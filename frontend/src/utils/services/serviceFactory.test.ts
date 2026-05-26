@@ -79,14 +79,18 @@ describe('createMultipleServices', () => {
         name: 'A 服务',
         apiEndpoint: '/api/a',
         jsonDataPath: '/data/a.json',
-        transformer: (item: { id: string }) => ({ id: item.id }),
+        transformer: (item: unknown) => ({
+          id: (item as { id: string }).id,
+        }),
       },
       {
         key: 'b' as const,
         name: 'B 服务',
         apiEndpoint: '/api/b',
         jsonDataPath: '/data/b.json',
-        transformer: (item: { id: string }) => ({ id: item.id }),
+        transformer: (item: unknown) => ({
+          id: (item as { id: string }).id,
+        }),
       },
     ] satisfies Array<
       ServiceConfig<{ id: string }> & { key: 'a' | 'b' }

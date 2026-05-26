@@ -62,12 +62,17 @@ export interface ServiceOptions {
 }
 
 /**
+ * 数据转换器类型 —— 工厂内部以 unknown 喂入,调用方需要在函数内部完成类型收口。
+ */
+export type JsonTransformer<T> = (jsonItem: unknown, index: number) => T;
+
+/**
  * 创建统一服务的工厂函数
  */
 export function createUnifiedService<T>(
   apiEndpoint: string,
   jsonDataPath: string,
-  transformer: (jsonItem: unknown, index: number) => T,
+  transformer: JsonTransformer<T>,
   options: ServiceOptions = {}
 ): BaseService<T> {
   const { hasGetById = false } = options;
@@ -183,7 +188,7 @@ export interface ServiceConfig<T> {
   name: string;
   apiEndpoint: string;
   jsonDataPath: string;
-  transformer: (jsonItem: unknown, index: number) => T;
+  transformer: JsonTransformer<T>;
   options?: ServiceOptions;
 }
 

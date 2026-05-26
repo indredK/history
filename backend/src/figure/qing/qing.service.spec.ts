@@ -1,6 +1,7 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { QingService } from './qing.service';
 import { PrismaService } from '../../prisma/prisma.service';
+import type { FigureQueryDto } from '../common/query.dto';
 
 /**
  * 把 mock 的第 N 次调用第 M 个参数还原为期望类型,
@@ -9,6 +10,14 @@ import { PrismaService } from '../../prisma/prisma.service';
 function getCallArg<T>(mock: jest.Mock, callIdx = 0, argIdx = 0): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return mock.mock.calls[callIdx]?.[argIdx] as T;
+}
+
+/**
+ * PaginationQueryDto 把 skip/take 暴露为只读 getter,导致裸字面量
+ * 不满足 FigureQueryDto 类型 —— 用一个泛型 helper 集中收口 as 断言。
+ */
+function asQuery<T>(partial: Partial<T>): T {
+  return partial as T;
 }
 
 /**
@@ -50,7 +59,7 @@ describe('QingService', () => {
     prisma.qingRuler.findMany.mockResolvedValue([]);
     prisma.qingRuler.count.mockResolvedValue(0);
 
-    await service.getQingRulers({});
+    await service.getQingRulers(asQuery<FigureQueryDto>({}));
 
     expect(prisma.qingRuler.findMany).toHaveBeenCalledWith({
       where: {},
@@ -64,7 +73,7 @@ describe('QingService', () => {
     prisma.qingRuler.findMany.mockResolvedValue([]);
     prisma.qingRuler.count.mockResolvedValue(0);
 
-    await service.getQingRulers({ role: 'emperor' });
+    await service.getQingRulers(asQuery<FigureQueryDto>({ role: 'emperor' }));
 
     const call = getCallArg<{ where: { role?: { contains?: string } } }>(
       prisma.qingRuler.findMany,
@@ -76,7 +85,7 @@ describe('QingService', () => {
     prisma.qingRuler.findMany.mockResolvedValue([]);
     prisma.qingRuler.count.mockResolvedValue(0);
 
-    await service.getQingRulers({ name: '康' });
+    await service.getQingRulers(asQuery<FigureQueryDto>({ name: '康' }));
 
     const call = getCallArg<{ where: { name?: { contains?: string } } }>(
       prisma.qingRuler.findMany,
@@ -88,7 +97,7 @@ describe('QingService', () => {
     prisma.qingRuler.findMany.mockResolvedValue([]);
     prisma.qingRuler.count.mockResolvedValue(0);
 
-    await service.getQingRulers({ birthYear: 0 });
+    await service.getQingRulers(asQuery<FigureQueryDto>({ birthYear: 0 }));
 
     const call = getCallArg<{ where: { birthYear?: { gte?: number } } }>(
       prisma.qingRuler.findMany,
@@ -100,7 +109,7 @@ describe('QingService', () => {
     prisma.qingRuler.findMany.mockResolvedValue([]);
     prisma.qingRuler.count.mockResolvedValue(0);
 
-    await service.getQingRulers({ deathYear: 1912 });
+    await service.getQingRulers(asQuery<FigureQueryDto>({ deathYear: 1912 }));
 
     const call = getCallArg<{
       where: {
@@ -130,7 +139,7 @@ describe('QingService', () => {
     prisma.qingRuler.findMany.mockResolvedValue([]);
     prisma.qingRuler.count.mockResolvedValue(0);
 
-    await service.getQingRulers({ page: 3, limit: 5 });
+    await service.getQingRulers(asQuery<FigureQueryDto>({ page: 3, limit: 5 }));
 
     expect(prisma.qingRuler.findMany).toHaveBeenCalledWith(
       expect.objectContaining({ skip: 10, take: 5 }),
@@ -154,9 +163,9 @@ describe('QingService', () => {
     ]);
     prisma.qingRuler.count.mockResolvedValue(1);
 
-    const result = await service.getQingRulers({});
+    const result = await service.getQingRulers(asQuery<FigureQueryDto>({}));
 
-    const figure = result.data[0] as Record<string, unknown>;
+    const figure = result.data[0] as unknown as Record<string, unknown>;
     expect(figure.id).toBe('kangxi');
     expect(figure.achievements).toEqual(['平三藩', '收台湾', '三征噶尔丹']);
     expect(figure.policies).toEqual(['崇儒重道']);
@@ -166,7 +175,9 @@ describe('QingService', () => {
     prisma.qingRuler.findMany.mockResolvedValue([]);
     prisma.qingRuler.count.mockResolvedValue(12);
 
-    const result = await service.getQingRulers({ page: 2, limit: 5 });
+    const result = await service.getQingRulers(
+      asQuery<FigureQueryDto>({ page: 2, limit: 5 }),
+    );
 
     expect(result.meta).toEqual(
       expect.objectContaining({ total: 12, page: 2, limit: 5 }),

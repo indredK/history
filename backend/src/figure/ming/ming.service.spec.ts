@@ -1,6 +1,7 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { MingService } from './ming.service';
 import { PrismaService } from '../../prisma/prisma.service';
+import type { FigureQueryDto } from '../common/query.dto';
 
 /**
  * 把 mock 的第 N 次调用第 M 个参数还原为期望类型,集中处理 jest.Mock.calls 的 unsafe-member-access。
@@ -8,6 +9,14 @@ import { PrismaService } from '../../prisma/prisma.service';
 function getCallArg<T>(mock: jest.Mock, callIdx = 0, argIdx = 0): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return mock.mock.calls[callIdx]?.[argIdx] as T;
+}
+
+/**
+ * PaginationQueryDto 把 skip/take 暴露为只读 getter,导致裸字面量
+ * 不满足 FigureQueryDto 类型 —— 用一个泛型 helper 集中收口 as 断言。
+ */
+function asQuery<T>(partial: Partial<T>): T {
+  return partial as T;
 }
 
 /**
@@ -46,7 +55,7 @@ describe('MingService', () => {
       prisma.mingFigure.findMany.mockResolvedValue([]);
       prisma.mingFigure.count.mockResolvedValue(0);
 
-      await service.getMingFigures({});
+      await service.getMingFigures(asQuery<FigureQueryDto>({}));
 
       expect(prisma.mingFigure.findMany).toHaveBeenCalledWith({
         where: {},
@@ -60,7 +69,9 @@ describe('MingService', () => {
       prisma.mingFigure.findMany.mockResolvedValue([]);
       prisma.mingFigure.count.mockResolvedValue(0);
 
-      await service.getMingFigures({ page: 3, limit: 15 });
+      await service.getMingFigures(
+        asQuery<FigureQueryDto>({ page: 3, limit: 15 }),
+      );
 
       expect(prisma.mingFigure.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ skip: 30, take: 15 }),
@@ -71,11 +82,13 @@ describe('MingService', () => {
       prisma.mingFigure.findMany.mockResolvedValue([]);
       prisma.mingFigure.count.mockResolvedValue(0);
 
-      await service.getMingFigures({
-        role: 'cabinet',
-        period: '中后期',
-        name: '张',
-      });
+      await service.getMingFigures(
+        asQuery<FigureQueryDto>({
+          role: 'cabinet',
+          period: '中后期',
+          name: '张',
+        }),
+      );
 
       const call = getCallArg<{
         where: {
@@ -93,7 +106,9 @@ describe('MingService', () => {
       prisma.mingFigure.findMany.mockResolvedValue([]);
       prisma.mingFigure.count.mockResolvedValue(0);
 
-      await service.getMingFigures({ birthYear: 1500 });
+      await service.getMingFigures(
+        asQuery<FigureQueryDto>({ birthYear: 1500 }),
+      );
 
       expect(prisma.mingFigure.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ where: { birthYear: { gte: 1500 } } }),
@@ -104,7 +119,9 @@ describe('MingService', () => {
       prisma.mingFigure.findMany.mockResolvedValue([]);
       prisma.mingFigure.count.mockResolvedValue(0);
 
-      await service.getMingFigures({ deathYear: 1600 });
+      await service.getMingFigures(
+        asQuery<FigureQueryDto>({ deathYear: 1600 }),
+      );
 
       expect(prisma.mingFigure.findMany).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -119,7 +136,7 @@ describe('MingService', () => {
       prisma.mingFigure.findMany.mockResolvedValue([]);
       prisma.mingFigure.count.mockResolvedValue(0);
 
-      await service.getMingFigures({ birthYear: 0 });
+      await service.getMingFigures(asQuery<FigureQueryDto>({ birthYear: 0 }));
 
       const call = getCallArg<{ where: { birthYear?: { gte?: number } } }>(
         prisma.mingFigure.findMany,
@@ -151,9 +168,9 @@ describe('MingService', () => {
       ]);
       prisma.mingFigure.count.mockResolvedValue(1);
 
-      const result = await service.getMingFigures({});
+      const result = await service.getMingFigures(asQuery<FigureQueryDto>({}));
 
-      const figure = result.data[0] as Record<string, unknown>;
+      const figure = result.data[0] as unknown as Record<string, unknown>;
       expect(figure.id).toBe('zhangjuzheng');
       expect(figure.achievements).toEqual(['一条鞭法']);
       expect(figure.positions).toEqual(['内阁首辅']);
@@ -165,7 +182,9 @@ describe('MingService', () => {
       prisma.mingFigure.findMany.mockResolvedValue([]);
       prisma.mingFigure.count.mockResolvedValue(42);
 
-      const result = await service.getMingFigures({ page: 2, limit: 20 });
+      const result = await service.getMingFigures(
+        asQuery<FigureQueryDto>({ page: 2, limit: 20 }),
+      );
 
       expect(result.meta).toEqual(
         expect.objectContaining({ total: 42, page: 2, limit: 20 }),

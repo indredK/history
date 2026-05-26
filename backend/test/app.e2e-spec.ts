@@ -46,10 +46,20 @@ describe('App (e2e)', () => {
 
   describe('GET /api/v1/health', () => {
     it('应返回 200 + ApiResponseDto 包装的健康状态', async () => {
-      const res = await request(app.getHttpServer()).get(`/${apiPrefix}/health`);
+      const res = await request(app.getHttpServer()).get(
+        `/${apiPrefix}/health`,
+      );
+
+      // supertest 的 res.body 是 any,这里收口成 ApiResponseDto 形状方便后续断言
+      const body = res.body as {
+        success: boolean;
+        message: string;
+        data: { status: string; timestamp: string };
+        timestamp: string;
+      };
 
       expect(res.status).toBe(200);
-      expect(res.body).toMatchObject({
+      expect(body).toMatchObject({
         success: true,
         message: expect.any(String),
         data: {
@@ -59,7 +69,7 @@ describe('App (e2e)', () => {
         timestamp: expect.any(String),
       });
       // 时间戳必须是合法 ISO 字符串
-      expect(() => new Date(res.body.data.timestamp).toISOString()).not.toThrow();
+      expect(() => new Date(body.data.timestamp).toISOString()).not.toThrow();
     });
   });
 

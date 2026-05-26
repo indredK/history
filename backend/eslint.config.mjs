@@ -19,7 +19,11 @@ export default tseslint.config(
       },
       sourceType: 'commonjs',
       parserOptions: {
-        projectService: true,
+        projectService: {
+          // e2e 测试不在 tsconfig.json 的 include 里(只含 src),
+          // 这里给出 fallback 让 typescript-eslint 仍能解析。
+          allowDefaultProject: ['test/*.ts'],
+        },
         tsconfigRootDir: import.meta.dirname,
       },
     },
@@ -39,7 +43,17 @@ export default tseslint.config(
           destructuredArrayIgnorePattern: '^_',
         },
       ],
-      "prettier/prettier": ["error", { endOfLine: "auto" }],
+      'prettier/prettier': ['error', { endOfLine: 'auto' }],
+    },
+  },
+  {
+    // e2e 测试常常需要使用 supertest 返回的 res.body(类型 any)与
+    // expect.any(String) 等异类匹配器,放宽 no-unsafe-* 严格度。
+    files: ['test/**/*.ts'],
+    rules: {
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
     },
   },
 );

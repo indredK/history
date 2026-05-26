@@ -2,6 +2,15 @@ import { Test, type TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
 import { DynastyService } from './dynasty.service';
 import { PrismaService } from '../prisma/prisma.service';
+import type { DynastyQueryDto } from './dto/dynasty-query.dto';
+
+/**
+ * PaginationQueryDto 把 skip/take 暴露为只读 getter,导致裸字面量
+ * 不满足 DynastyQueryDto 类型 —— 用一个泛型 helper 集中收口 as 断言。
+ */
+function asQuery<T>(partial: Partial<T>): T {
+  return partial as T;
+}
 
 /**
  * DynastyService 单元测试
@@ -43,7 +52,7 @@ describe('DynastyService', () => {
       prisma.dynasty.findMany.mockResolvedValue([]);
       prisma.dynasty.count.mockResolvedValue(0);
 
-      const result = await service.findAll({});
+      const result = await service.findAll(asQuery<DynastyQueryDto>({}));
 
       expect(prisma.dynasty.findMany).toHaveBeenCalledWith({
         where: {},
@@ -60,7 +69,7 @@ describe('DynastyService', () => {
       prisma.dynasty.findMany.mockResolvedValue([]);
       prisma.dynasty.count.mockResolvedValue(0);
 
-      await service.findAll({ name: '唐' });
+      await service.findAll(asQuery<DynastyQueryDto>({ name: '唐' }));
 
       expect(prisma.dynasty.findMany).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -73,7 +82,9 @@ describe('DynastyService', () => {
       prisma.dynasty.findMany.mockResolvedValue([]);
       prisma.dynasty.count.mockResolvedValue(0);
 
-      await service.findAll({ startYear: 200, endYear: 600 });
+      await service.findAll(
+        asQuery<DynastyQueryDto>({ startYear: 200, endYear: 600 }),
+      );
 
       expect(prisma.dynasty.findMany).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -89,7 +100,7 @@ describe('DynastyService', () => {
       prisma.dynasty.findMany.mockResolvedValue([]);
       prisma.dynasty.count.mockResolvedValue(0);
 
-      await service.findAll({ page: 3, limit: 10 });
+      await service.findAll(asQuery<DynastyQueryDto>({ page: 3, limit: 10 }));
 
       expect(prisma.dynasty.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ skip: 20, take: 10 }),
@@ -101,7 +112,7 @@ describe('DynastyService', () => {
       prisma.dynasty.findMany.mockResolvedValue(fakeRows);
       prisma.dynasty.count.mockResolvedValue(1);
 
-      const result = await service.findAll({});
+      const result = await service.findAll(asQuery<DynastyQueryDto>({}));
 
       expect(result.data).toBe(fakeRows);
       expect(result.meta.total).toBe(1);

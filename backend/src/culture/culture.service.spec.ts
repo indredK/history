@@ -2,6 +2,8 @@ import { Test, type TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
 import { CultureService } from './culture.service';
 import { PrismaService } from '../prisma/prisma.service';
+import type { ScholarQueryDto } from './dto/scholar-query.dto';
+import type { SchoolQueryDto } from './dto/school-query.dto';
 
 /**
  * 把 mock 的第 N 次调用第 M 个参数还原为期望类型,
@@ -10,6 +12,15 @@ import { PrismaService } from '../prisma/prisma.service';
 function getCallArg<T>(mock: jest.Mock, callIdx = 0, argIdx = 0): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return mock.mock.calls[callIdx]?.[argIdx] as T;
+}
+
+/**
+ * PaginationQueryDto 把 skip/take 暴露为只读 getter,导致裸字面量
+ * 不满足 ScholarQueryDto / SchoolQueryDto 类型 —— 用一个泛型 helper
+ * 集中收口 as 断言。
+ */
+function asQuery<T>(partial: Partial<T>): T {
+  return partial as T;
 }
 
 /**
@@ -71,7 +82,7 @@ describe('CultureService', () => {
       prisma.scholar.findMany.mockResolvedValue([]);
       prisma.scholar.count.mockResolvedValue(0);
 
-      await service.findAllScholars({});
+      await service.findAllScholars(asQuery<ScholarQueryDto>({}));
 
       expect(prisma.scholar.findMany).toHaveBeenCalledWith({
         where: {},
@@ -86,7 +97,9 @@ describe('CultureService', () => {
       prisma.scholar.findMany.mockResolvedValue([]);
       prisma.scholar.count.mockResolvedValue(0);
 
-      await service.findAllScholars({ page: 2, limit: 15 });
+      await service.findAllScholars(
+        asQuery<ScholarQueryDto>({ page: 2, limit: 15 }),
+      );
 
       expect(prisma.scholar.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ skip: 15, take: 15 }),
@@ -97,7 +110,9 @@ describe('CultureService', () => {
       prisma.scholar.findMany.mockResolvedValue([]);
       prisma.scholar.count.mockResolvedValue(0);
 
-      await service.findAllScholars({ dynastyPeriod: '春秋' });
+      await service.findAllScholars(
+        asQuery<ScholarQueryDto>({ dynastyPeriod: '春秋' }),
+      );
 
       const call = getCallArg<{
         where: { dynastyPeriod?: { contains?: string } };
@@ -109,7 +124,9 @@ describe('CultureService', () => {
       prisma.scholar.findMany.mockResolvedValue([]);
       prisma.scholar.count.mockResolvedValue(0);
 
-      await service.findAllScholars({ philosophicalSchoolId: 'confucianism' });
+      await service.findAllScholars(
+        asQuery<ScholarQueryDto>({ philosophicalSchoolId: 'confucianism' }),
+      );
 
       const call = getCallArg<{
         where: { philosophicalSchoolId?: string };
@@ -121,7 +138,9 @@ describe('CultureService', () => {
       prisma.scholar.findMany.mockResolvedValue([]);
       prisma.scholar.count.mockResolvedValue(0);
 
-      await service.findAllScholars({ schoolName: '儒' });
+      await service.findAllScholars(
+        asQuery<ScholarQueryDto>({ schoolName: '儒' }),
+      );
 
       expect(prisma.scholar.findMany).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -134,7 +153,9 @@ describe('CultureService', () => {
       prisma.scholar.findMany.mockResolvedValue([]);
       prisma.scholar.count.mockResolvedValue(0);
 
-      await service.findAllScholars({ name: '孔', birthYear: -500 });
+      await service.findAllScholars(
+        asQuery<ScholarQueryDto>({ name: '孔', birthYear: -500 }),
+      );
 
       const call = getCallArg<{
         where: {
@@ -150,7 +171,7 @@ describe('CultureService', () => {
       prisma.scholar.findMany.mockResolvedValue([]);
       prisma.scholar.count.mockResolvedValue(0);
 
-      await service.findAllScholars({ deathYear: 0 });
+      await service.findAllScholars(asQuery<ScholarQueryDto>({ deathYear: 0 }));
 
       expect(prisma.scholar.findMany).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -175,7 +196,9 @@ describe('CultureService', () => {
       ]);
       prisma.scholar.count.mockResolvedValue(1);
 
-      const result = await service.findAllScholars({});
+      const result = await service.findAllScholars(
+        asQuery<ScholarQueryDto>({}),
+      );
 
       expect(result.data[0]).toEqual({
         id: 'kongzi',
@@ -201,7 +224,9 @@ describe('CultureService', () => {
       ]);
       prisma.scholar.count.mockResolvedValue(1);
 
-      const result = await service.findAllScholars({});
+      const result = await service.findAllScholars(
+        asQuery<ScholarQueryDto>({}),
+      );
 
       expect(result.data[0]?.majorWorks).toBe('not-json');
       expect(result.data[0]?.contributions).toBeNull();
@@ -211,7 +236,9 @@ describe('CultureService', () => {
       prisma.scholar.findMany.mockResolvedValue([]);
       prisma.scholar.count.mockResolvedValue(42);
 
-      const result = await service.findAllScholars({ page: 3, limit: 10 });
+      const result = await service.findAllScholars(
+        asQuery<ScholarQueryDto>({ page: 3, limit: 10 }),
+      );
 
       expect(result.meta).toEqual(
         expect.objectContaining({ total: 42, page: 3, limit: 10 }),
@@ -270,7 +297,7 @@ describe('CultureService', () => {
       prisma.philosophicalSchool.findMany.mockResolvedValue([]);
       prisma.philosophicalSchool.count.mockResolvedValue(0);
 
-      await service.findAllSchools({});
+      await service.findAllSchools(asQuery<SchoolQueryDto>({}));
 
       expect(prisma.philosophicalSchool.findMany).toHaveBeenCalledWith({
         where: {},
@@ -284,11 +311,13 @@ describe('CultureService', () => {
       prisma.philosophicalSchool.findMany.mockResolvedValue([]);
       prisma.philosophicalSchool.count.mockResolvedValue(0);
 
-      await service.findAllSchools({
-        name: '道',
-        founder: '老',
-        foundingYear: -600,
-      });
+      await service.findAllSchools(
+        asQuery<SchoolQueryDto>({
+          name: '道',
+          founder: '老',
+          foundingYear: -600,
+        }),
+      );
 
       const call = getCallArg<{
         where: {
@@ -313,7 +342,7 @@ describe('CultureService', () => {
       ]);
       prisma.philosophicalSchool.count.mockResolvedValue(1);
 
-      const result = await service.findAllSchools({});
+      const result = await service.findAllSchools(asQuery<SchoolQueryDto>({}));
 
       expect(result.data[0]?.coreBeliefs).toEqual(['无为', '自然']);
       expect(result.data[0]?.keyTexts).toEqual(['道德经', '庄子']);

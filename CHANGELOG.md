@@ -472,6 +472,24 @@ vi.resetModules() + 重新 await import` 拦截内部动态 import,验证透传
 - 前端 lint 全绿(`bun run lint` 退出 0,warnings 100 = budget):
   - `utils/services/serviceFactory.ts`:13 处 `any` → `unknown`(transformer / monitor / config / multipleServices)
   - `services/timeline/timelineApi.ts`:`transformJsonToEvent(jsonEvent: any)` → `unknown` + `Record<string, unknown>` 收口
+- 后端 `tsc --noEmit` 全绿,补齐前一次 lint 改造之后引入 / 暴露的 TS 编译报错:
+  - `mythology.service.ts`:`stories` 字段以 `unknown[]` 解析后用类型谓词 `(s): s is string` 过滤,
+    确保最终 `characters: string[]` 符合 DTO 形状(原先 `unknown[]` 无法赋给 `string[]`)
+  - `serviceFactory.ts` / `serviceFactory.test.ts`:`JsonTransformer<T>` 保持 `(jsonItem: unknown, index: number) => T`,
+    测试 transformer 改用 `(item: unknown) => ({ id: (item as { id: string }).id })`
+    避免严格函数类型下的参数逆变报错
+  - 11 个后端 `*.service.spec.ts` 文件加 `asQuery<T>(partial: Partial<T>): T` 测试辅助,
+    解决 `PaginationQueryDto.skip/take` 是 getter 导致 `{}` literal 不满足 DTO 形状的问题
+    (CI commit 39cb74f 把后端 type-check 并入 CI 后才暴露)
+  - 6 个朝代 figure spec 的 `as Record<string, unknown>` cast 改为 `as unknown as Record<string, unknown>`,
+    满足 TS 双层 cast 兼容性要求
+  - `religion.service.spec.ts` 3 处 `ReligionEdgeDto` → `Record<string, unknown>` cast 同样处理
+- 后端 lint 兼容 e2e 测试目录:
+  - `eslint.config.mjs` 加 `projectService.allowDefaultProject: ['test/*.ts']`,
+    `test/app.e2e-spec.ts` 不在 `tsconfig.json#include` 里也能被 type-aware lint 解析
+  - 给 `test/**/*.ts` 关闭 `no-unsafe-{assignment,member-access,argument}`,
+    e2e 用 supertest `res.body: any` 是正常路径
+  - `app.e2e-spec.ts` body 解构改为收口到本地接口形状,可读性更好
 - CI workflow 拆分前后端 job,后端加入 lint 与 type-check
 - 6 个大组件按"主壳 + parts/ + hooks/"模式拆分:
   - `ReligionGraph` 669 → 223 行

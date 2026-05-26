@@ -349,7 +349,7 @@ describe('ReligionService', () => {
 
       const result = await service.getGraph({});
 
-      const edge = result.edges[0] as Record<string, unknown>;
+      const edge = result.edges[0] as unknown as Record<string, unknown>;
       expect(edge.id).toBe('e1');
       expect(edge.sourceNodeId).toBe('a');
       expect(edge.targetNodeId).toBe('b');
@@ -367,7 +367,7 @@ describe('ReligionService', () => {
 
       const result = await service.getGraph({ includeNodeDetails: false });
 
-      const edge = result.edges[0] as Record<string, unknown>;
+      const edge = result.edges[0] as unknown as Record<string, unknown>;
       expect(edge.id).toBe('e1');
       expect(edge.sourceNode).toBeUndefined();
       expect(edge.targetNode).toBeUndefined();
@@ -382,7 +382,7 @@ describe('ReligionService', () => {
 
       const result = await service.getGraph({ includeNodeDetails: true });
 
-      const edge = result.edges[0] as Record<string, unknown>;
+      const edge = result.edges[0] as unknown as Record<string, unknown>;
       expect(edge.id).toBe('e-bad');
       expect(edge.sourceNode).toBeUndefined();
       expect(edge.targetNode).toBeUndefined();

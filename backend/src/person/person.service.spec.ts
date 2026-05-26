@@ -2,6 +2,7 @@ import { Test, type TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
 import { PersonService } from './person.service';
 import { PrismaService } from '../prisma/prisma.service';
+import type { PersonQueryDto } from './dto/person-query.dto';
 
 /**
  * 把 mock 的第 N 次调用第 M 个参数还原为期望类型,
@@ -10,6 +11,15 @@ import { PrismaService } from '../prisma/prisma.service';
 function getCallArg<T>(mock: jest.Mock, callIdx = 0, argIdx = 0): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return mock.mock.calls[callIdx]?.[argIdx] as T;
+}
+
+/**
+ * PersonQueryDto 继承自 PaginationQueryDto,而 skip/take 是 getter
+ * (而非可选字段),裸字面量在 strict 模式下不满足类型 —— 用一个
+ * helper 把测试里的 plain object 转成 DTO 形状,集中收口 as 断言。
+ */
+function asQuery(partial: Partial<PersonQueryDto>): PersonQueryDto {
+  return partial as PersonQueryDto;
 }
 
 /**
@@ -51,7 +61,7 @@ describe('PersonService', () => {
       prisma.person.findMany.mockResolvedValue([]);
       prisma.person.count.mockResolvedValue(0);
 
-      await service.findAll({});
+      await service.findAll(asQuery({}));
 
       expect(prisma.person.findMany).toHaveBeenCalledWith({
         where: {},
@@ -65,7 +75,7 @@ describe('PersonService', () => {
       prisma.person.findMany.mockResolvedValue([]);
       prisma.person.count.mockResolvedValue(0);
 
-      await service.findAll({ name: '李白' });
+      await service.findAll(asQuery({ name: '李白' }));
 
       expect(prisma.person.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ where: { name: { contains: '李白' } } }),
@@ -76,7 +86,7 @@ describe('PersonService', () => {
       prisma.person.findMany.mockResolvedValue([]);
       prisma.person.count.mockResolvedValue(0);
 
-      await service.findAll({ birthYear: 700, deathYear: 800 });
+      await service.findAll(asQuery({ birthYear: 700, deathYear: 800 }));
 
       expect(prisma.person.findMany).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -92,7 +102,7 @@ describe('PersonService', () => {
       prisma.person.findMany.mockResolvedValue([]);
       prisma.person.count.mockResolvedValue(0);
 
-      await service.findAll({});
+      await service.findAll(asQuery({}));
 
       const call = getCallArg<{ orderBy: Array<Record<string, string>> }>(
         prisma.person.findMany,

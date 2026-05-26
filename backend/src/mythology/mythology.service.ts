@@ -47,8 +47,12 @@ export class MythologyService {
 
     // Transform the data to match frontend requirements
     const transformedMythologies = mythologies.map((mythology) => {
-      // Parse JSON fields safely
+      // Parse JSON fields safely;stories 在历史落库里就是字符串数组,
+      // safeJsonParse 拿回来后只挑 string 元素做 characters 列表的兜底。
       const stories = this.safeJsonParse<unknown[]>(mythology.stories) ?? [];
+      const characters = Array.isArray(stories)
+        ? stories.filter((s): s is string => typeof s === 'string').slice(0, 5)
+        : [];
 
       // Convert database fields to frontend interface
       return {
@@ -57,7 +61,7 @@ export class MythologyService {
         englishTitle: '', // Database doesn't have name_en field
         category: mythology.category, // 直接采用 DB 字段,DTO 已声明 string
         description: mythology.description || '', // Ensure description is not null
-        characters: Array.isArray(stories) ? stories.slice(0, 5) : [],
+        characters,
         source: mythology.origin || '', // Map database 'origin' to frontend 'source'
         imageUrl: '', // Provide empty string if no image URL available
       };
@@ -75,8 +79,11 @@ export class MythologyService {
       throw new NotFoundException(`Mythology with ID ${id} not found`);
     }
 
-    // Parse JSON fields safely
+    // Parse JSON fields safely;同上,characters 只收 string。
     const stories = this.safeJsonParse<unknown[]>(mythology.stories) ?? [];
+    const characters = Array.isArray(stories)
+      ? stories.filter((s): s is string => typeof s === 'string').slice(0, 5)
+      : [];
 
     // Convert database fields to frontend interface
     return {
@@ -85,7 +92,7 @@ export class MythologyService {
       englishTitle: '', // Database doesn't have name_en field
       category: mythology.category, // Cast to match frontend category type
       description: mythology.description || '', // Ensure description is not null
-      characters: Array.isArray(stories) ? stories.slice(0, 5) : [],
+      characters,
       source: mythology.origin || '', // Map database 'origin' to frontend 'source'
       imageUrl: '', // Provide empty string if no image URL available
     };

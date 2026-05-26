@@ -1,6 +1,7 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { SanguoService } from './sanguo.service';
 import { PrismaService } from '../../prisma/prisma.service';
+import type { SanguoFigureQueryDto } from '../common/query.dto';
 
 /**
  * 把 mock 的第 N 次调用第 M 个参数还原为期望类型,
@@ -9,6 +10,14 @@ import { PrismaService } from '../../prisma/prisma.service';
 function getCallArg<T>(mock: jest.Mock, callIdx = 0, argIdx = 0): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return mock.mock.calls[callIdx]?.[argIdx] as T;
+}
+
+/**
+ * PaginationQueryDto 把 skip/take 暴露为只读 getter,导致裸字面量
+ * 不满足 SanguoFigureQueryDto 类型 —— 用一个泛型 helper 集中收口 as 断言。
+ */
+function asQuery<T>(partial: Partial<T>): T {
+  return partial as T;
 }
 
 /**
@@ -47,7 +56,7 @@ describe('SanguoService', () => {
     prisma.sanguoFigure.findMany.mockResolvedValue([]);
     prisma.sanguoFigure.count.mockResolvedValue(0);
 
-    await service.getSanguoFigures({});
+    await service.getSanguoFigures(asQuery<SanguoFigureQueryDto>({}));
 
     expect(prisma.sanguoFigure.findMany).toHaveBeenCalledWith({
       where: {},
@@ -61,7 +70,9 @@ describe('SanguoService', () => {
     prisma.sanguoFigure.findMany.mockResolvedValue([]);
     prisma.sanguoFigure.count.mockResolvedValue(0);
 
-    await service.getSanguoFigures({ kingdom: '蜀' });
+    await service.getSanguoFigures(
+      asQuery<SanguoFigureQueryDto>({ kingdom: '蜀' }),
+    );
 
     const call = getCallArg<{ where: { kingdom?: string } }>(
       prisma.sanguoFigure.findMany,
@@ -73,7 +84,9 @@ describe('SanguoService', () => {
     prisma.sanguoFigure.findMany.mockResolvedValue([]);
     prisma.sanguoFigure.count.mockResolvedValue(0);
 
-    await service.getSanguoFigures({ role: 'general' });
+    await service.getSanguoFigures(
+      asQuery<SanguoFigureQueryDto>({ role: 'general' }),
+    );
 
     const call = getCallArg<{ where: { role?: string } }>(
       prisma.sanguoFigure.findMany,
@@ -85,7 +98,9 @@ describe('SanguoService', () => {
     prisma.sanguoFigure.findMany.mockResolvedValue([]);
     prisma.sanguoFigure.count.mockResolvedValue(0);
 
-    await service.getSanguoFigures({ name: '诸' });
+    await service.getSanguoFigures(
+      asQuery<SanguoFigureQueryDto>({ name: '诸' }),
+    );
 
     const call = getCallArg<{ where: { name?: { contains?: string } } }>(
       prisma.sanguoFigure.findMany,
@@ -113,9 +128,11 @@ describe('SanguoService', () => {
     ]);
     prisma.sanguoFigure.count.mockResolvedValue(1);
 
-    const result = await service.getSanguoFigures({});
+    const result = await service.getSanguoFigures(
+      asQuery<SanguoFigureQueryDto>({}),
+    );
 
-    const figure = result.data[0] as Record<string, unknown>;
+    const figure = result.data[0] as unknown as Record<string, unknown>;
     expect(figure.id).toBe('zhugeliang');
     expect(figure.achievements).toEqual(['三顾茅庐', '赤壁之战']);
     expect(figure.battles).toEqual(['官渡', '赤壁', '汉中']);
@@ -126,7 +143,9 @@ describe('SanguoService', () => {
     prisma.sanguoFigure.findMany.mockResolvedValue([]);
     prisma.sanguoFigure.count.mockResolvedValue(7);
 
-    const result = await service.getSanguoFigures({ page: 1, limit: 20 });
+    const result = await service.getSanguoFigures(
+      asQuery<SanguoFigureQueryDto>({ page: 1, limit: 20 }),
+    );
 
     expect(result.meta).toEqual(
       expect.objectContaining({ total: 7, page: 1, limit: 20 }),

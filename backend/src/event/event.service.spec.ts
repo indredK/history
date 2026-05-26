@@ -2,6 +2,7 @@ import { Test, type TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
 import { EventService } from './event.service';
 import { PrismaService } from '../prisma/prisma.service';
+import type { EventQueryDto } from './dto/event-query.dto';
 
 /**
  * 把 mock 的第 N 次调用第 M 个参数还原为期望类型,
@@ -10,6 +11,14 @@ import { PrismaService } from '../prisma/prisma.service';
 function getCallArg<T>(mock: jest.Mock, callIdx = 0, argIdx = 0): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return mock.mock.calls[callIdx]?.[argIdx] as T;
+}
+
+/**
+ * PaginationQueryDto 把 skip/take 暴露为只读 getter,导致裸字面量
+ * 不满足 EventQueryDto 类型 —— 用一个泛型 helper 集中收口 as 断言。
+ */
+function asQuery<T>(partial: Partial<T>): T {
+  return partial as T;
 }
 
 /**
@@ -53,7 +62,7 @@ describe('EventService', () => {
       prisma.event.findMany.mockResolvedValue([]);
       prisma.event.count.mockResolvedValue(0);
 
-      await service.findAll({});
+      await service.findAll(asQuery<EventQueryDto>({}));
 
       expect(prisma.event.findMany).toHaveBeenCalledWith({
         where: {},
@@ -67,12 +76,14 @@ describe('EventService', () => {
       prisma.event.findMany.mockResolvedValue([]);
       prisma.event.count.mockResolvedValue(0);
 
-      await service.findAll({
-        title: '战',
-        eventType: 'war',
-        startYear: 100,
-        endYear: 200,
-      });
+      await service.findAll(
+        asQuery<EventQueryDto>({
+          title: '战',
+          eventType: 'war',
+          startYear: 100,
+          endYear: 200,
+        }),
+      );
 
       const call = getCallArg<{ where: Record<string, unknown> }>(
         prisma.event.findMany,
@@ -89,11 +100,13 @@ describe('EventService', () => {
       prisma.event.findMany.mockResolvedValue([]);
       prisma.event.count.mockResolvedValue(0);
 
-      await service.findAll({
-        eventType: 'war',
-        yearRangeStart: 100,
-        yearRangeEnd: 200,
-      });
+      await service.findAll(
+        asQuery<EventQueryDto>({
+          eventType: 'war',
+          yearRangeStart: 100,
+          yearRangeEnd: 200,
+        }),
+      );
 
       const call = getCallArg<{ where: Record<string, unknown> }>(
         prisma.event.findMany,
@@ -119,7 +132,7 @@ describe('EventService', () => {
       prisma.event.findMany.mockResolvedValue([]);
       prisma.event.count.mockResolvedValue(0);
 
-      await service.findAll({ yearRangeStart: 500 });
+      await service.findAll(asQuery<EventQueryDto>({ yearRangeStart: 500 }));
 
       const call = getCallArg<{ where: Record<string, unknown> }>(
         prisma.event.findMany,
@@ -134,7 +147,7 @@ describe('EventService', () => {
       prisma.event.findMany.mockResolvedValue([]);
       prisma.event.count.mockResolvedValue(0);
 
-      await service.findAll({ yearRangeEnd: 900 });
+      await service.findAll(asQuery<EventQueryDto>({ yearRangeEnd: 900 }));
 
       const call = getCallArg<{ where: Record<string, unknown> }>(
         prisma.event.findMany,

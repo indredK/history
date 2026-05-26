@@ -1,6 +1,7 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { SongService } from './song.service';
 import { PrismaService } from '../../prisma/prisma.service';
+import type { FigureQueryDto } from '../common/query.dto';
 
 /**
  * 把 mock 的第 N 次调用第 M 个参数还原为期望类型,集中处理 jest.Mock.calls 的 unsafe-member-access。
@@ -8,6 +9,14 @@ import { PrismaService } from '../../prisma/prisma.service';
 function getCallArg<T>(mock: jest.Mock, callIdx = 0, argIdx = 0): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return mock.mock.calls[callIdx]?.[argIdx] as T;
+}
+
+/**
+ * PaginationQueryDto 把 skip/take 暴露为只读 getter,导致裸字面量
+ * 不满足 FigureQueryDto 类型 —— 用一个泛型 helper 集中收口 as 断言。
+ */
+function asQuery<T>(partial: Partial<T>): T {
+  return partial as T;
 }
 
 /**
@@ -46,7 +55,7 @@ describe('SongService', () => {
       prisma.songFigure.findMany.mockResolvedValue([]);
       prisma.songFigure.count.mockResolvedValue(0);
 
-      await service.getSongFigures({});
+      await service.getSongFigures(asQuery<FigureQueryDto>({}));
 
       expect(prisma.songFigure.findMany).toHaveBeenCalledWith({
         where: {},
@@ -60,7 +69,9 @@ describe('SongService', () => {
       prisma.songFigure.findMany.mockResolvedValue([]);
       prisma.songFigure.count.mockResolvedValue(0);
 
-      await service.getSongFigures({ page: 4, limit: 25 });
+      await service.getSongFigures(
+        asQuery<FigureQueryDto>({ page: 4, limit: 25 }),
+      );
 
       expect(prisma.songFigure.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ skip: 75, take: 25 }),
@@ -71,11 +82,13 @@ describe('SongService', () => {
       prisma.songFigure.findMany.mockResolvedValue([]);
       prisma.songFigure.count.mockResolvedValue(0);
 
-      await service.getSongFigures({
-        role: 'chancellor',
-        period: '北宋',
-        name: '王',
-      });
+      await service.getSongFigures(
+        asQuery<FigureQueryDto>({
+          role: 'chancellor',
+          period: '北宋',
+          name: '王',
+        }),
+      );
 
       const call = getCallArg<{
         where: {
@@ -93,7 +106,9 @@ describe('SongService', () => {
       prisma.songFigure.findMany.mockResolvedValue([]);
       prisma.songFigure.count.mockResolvedValue(0);
 
-      await service.getSongFigures({ birthYear: 1000 });
+      await service.getSongFigures(
+        asQuery<FigureQueryDto>({ birthYear: 1000 }),
+      );
 
       expect(prisma.songFigure.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ where: { birthYear: { gte: 1000 } } }),
@@ -104,7 +119,9 @@ describe('SongService', () => {
       prisma.songFigure.findMany.mockResolvedValue([]);
       prisma.songFigure.count.mockResolvedValue(0);
 
-      await service.getSongFigures({ deathYear: 1100 });
+      await service.getSongFigures(
+        asQuery<FigureQueryDto>({ deathYear: 1100 }),
+      );
 
       expect(prisma.songFigure.findMany).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -119,7 +136,7 @@ describe('SongService', () => {
       prisma.songFigure.findMany.mockResolvedValue([]);
       prisma.songFigure.count.mockResolvedValue(0);
 
-      await service.getSongFigures({ birthYear: 0 });
+      await service.getSongFigures(asQuery<FigureQueryDto>({ birthYear: 0 }));
 
       const call = getCallArg<{ where: { birthYear?: { gte?: number } } }>(
         prisma.songFigure.findMany,
@@ -151,9 +168,9 @@ describe('SongService', () => {
       ]);
       prisma.songFigure.count.mockResolvedValue(1);
 
-      const result = await service.getSongFigures({});
+      const result = await service.getSongFigures(asQuery<FigureQueryDto>({}));
 
-      const figure = result.data[0] as Record<string, unknown>;
+      const figure = result.data[0] as unknown as Record<string, unknown>;
       expect(figure.id).toBe('wanganshi');
       expect(figure.achievements).toEqual(['熙宁变法']);
       expect(figure.positions).toEqual(['同中书门下平章事']);
@@ -166,7 +183,9 @@ describe('SongService', () => {
       prisma.songFigure.findMany.mockResolvedValue([]);
       prisma.songFigure.count.mockResolvedValue(73);
 
-      const result = await service.getSongFigures({ page: 2, limit: 20 });
+      const result = await service.getSongFigures(
+        asQuery<FigureQueryDto>({ page: 2, limit: 20 }),
+      );
 
       expect(result.meta).toEqual(
         expect.objectContaining({ total: 73, page: 2, limit: 20 }),

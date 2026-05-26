@@ -1,6 +1,7 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { TangService } from './tang.service';
 import { PrismaService } from '../../prisma/prisma.service';
+import type { FigureQueryDto } from '../common/query.dto';
 
 /**
  * 把 mock 的第 N 次调用第 M 个参数还原为期望类型,
@@ -9,6 +10,14 @@ import { PrismaService } from '../../prisma/prisma.service';
 function getCallArg<T>(mock: jest.Mock, callIdx = 0, argIdx = 0): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return mock.mock.calls[callIdx]?.[argIdx] as T;
+}
+
+/**
+ * PaginationQueryDto 把 skip/take 暴露为只读 getter,导致裸字面量
+ * 不满足 FigureQueryDto 类型 —— 用一个泛型 helper 集中收口 as 断言。
+ */
+function asQuery<T>(partial: Partial<T>): T {
+  return partial as T;
 }
 
 /**
@@ -54,7 +63,7 @@ describe('TangService', () => {
       prisma.tangFigure.findMany.mockResolvedValue([]);
       prisma.tangFigure.count.mockResolvedValue(0);
 
-      await service.getTangFigures({});
+      await service.getTangFigures(asQuery<FigureQueryDto>({}));
 
       expect(prisma.tangFigure.findMany).toHaveBeenCalledWith({
         where: {},
@@ -68,7 +77,9 @@ describe('TangService', () => {
       prisma.tangFigure.findMany.mockResolvedValue([]);
       prisma.tangFigure.count.mockResolvedValue(0);
 
-      await service.getTangFigures({ page: 5, limit: 10 });
+      await service.getTangFigures(
+        asQuery<FigureQueryDto>({ page: 5, limit: 10 }),
+      );
 
       expect(prisma.tangFigure.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ skip: 40, take: 10 }),
@@ -79,11 +90,13 @@ describe('TangService', () => {
       prisma.tangFigure.findMany.mockResolvedValue([]);
       prisma.tangFigure.count.mockResolvedValue(0);
 
-      await service.getTangFigures({
-        role: 'poet',
-        period: '盛唐',
-        name: '李',
-      });
+      await service.getTangFigures(
+        asQuery<FigureQueryDto>({
+          role: 'poet',
+          period: '盛唐',
+          name: '李',
+        }),
+      );
 
       const call = getCallArg<{
         where: {
@@ -101,7 +114,7 @@ describe('TangService', () => {
       prisma.tangFigure.findMany.mockResolvedValue([]);
       prisma.tangFigure.count.mockResolvedValue(0);
 
-      await service.getTangFigures({ birthYear: 700 });
+      await service.getTangFigures(asQuery<FigureQueryDto>({ birthYear: 700 }));
 
       expect(prisma.tangFigure.findMany).toHaveBeenCalledWith(
         expect.objectContaining({ where: { birthYear: { gte: 700 } } }),
@@ -112,7 +125,7 @@ describe('TangService', () => {
       prisma.tangFigure.findMany.mockResolvedValue([]);
       prisma.tangFigure.count.mockResolvedValue(0);
 
-      await service.getTangFigures({ deathYear: 800 });
+      await service.getTangFigures(asQuery<FigureQueryDto>({ deathYear: 800 }));
 
       expect(prisma.tangFigure.findMany).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -127,7 +140,7 @@ describe('TangService', () => {
       prisma.tangFigure.findMany.mockResolvedValue([]);
       prisma.tangFigure.count.mockResolvedValue(0);
 
-      await service.getTangFigures({ birthYear: 0 });
+      await service.getTangFigures(asQuery<FigureQueryDto>({ birthYear: 0 }));
 
       const call = getCallArg<{ where: { birthYear?: { gte?: number } } }>(
         prisma.tangFigure.findMany,
@@ -159,9 +172,9 @@ describe('TangService', () => {
       ]);
       prisma.tangFigure.count.mockResolvedValue(1);
 
-      const result = await service.getTangFigures({});
+      const result = await service.getTangFigures(asQuery<FigureQueryDto>({}));
 
-      const figure = result.data[0] as Record<string, unknown>;
+      const figure = result.data[0] as unknown as Record<string, unknown>;
       expect(figure.id).toBe('libai');
       expect(figure.name).toBe('李白');
       expect(figure.achievements).toEqual(['诗仙']);
@@ -176,7 +189,9 @@ describe('TangService', () => {
       prisma.tangFigure.findMany.mockResolvedValue([]);
       prisma.tangFigure.count.mockResolvedValue(58);
 
-      const result = await service.getTangFigures({ page: 3, limit: 20 });
+      const result = await service.getTangFigures(
+        asQuery<FigureQueryDto>({ page: 3, limit: 20 }),
+      );
 
       expect(result.meta).toEqual(
         expect.objectContaining({ total: 58, page: 3, limit: 20 }),
