@@ -14,6 +14,9 @@ concurrency:
   group: pr-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: read
   pull-requests: read
@@ -52,8 +55,8 @@ jobs:
     # 仅作为信号,作者应观察 delta 不上涨
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@v5.0.0
+      - uses: oven-sh/setup-bun@v2.0.2
         with:
           bun-version: 1.3.5
       - run: cd frontend && bun install
@@ -65,8 +68,8 @@ jobs:
     # 历史 130 个 no-unsafe-* / no-unused-vars 错误,清理前不阻塞 PR
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@v5.0.0
+      - uses: oven-sh/setup-bun@v2.0.2
         with:
           bun-version: 1.3.5
       - run: cd backend && bun install
