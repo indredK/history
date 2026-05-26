@@ -1,9 +1,19 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import fs from 'fs'
+
+const frontendPackage = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, './package.json'), 'utf8'),
+) as { name?: string; version?: string }
 
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
+  const appVersion = frontendPackage.version || '0.0.0'
+  const appName = frontendPackage.name || 'history-frontend'
+  const commitSha = process.env.GITHUB_SHA || process.env.GIT_SHA || 'local'
+  const buildTime = process.env.BUILD_TIME || new Date().toISOString()
+  const releaseId = `${appVersion}+${commitSha.slice(0, 7)}`
   
   return {
   // 兼容 GitHub Pages (需要 /history/) 和 自有服务器 (需要 /)
@@ -78,6 +88,11 @@ export default defineConfig(({ command, mode }) => {
   define: {
     'import.meta.env.VITE_DATA_SOURCE': JSON.stringify(env.VITE_DATA_SOURCE || 'mock'),
     'import.meta.env.VITE_MOCK_ERROR_RATE': JSON.stringify(env.VITE_MOCK_ERROR_RATE || '0'),
+    __APP_NAME__: JSON.stringify(appName),
+    __APP_VERSION__: JSON.stringify(appVersion),
+    __APP_COMMIT_SHA__: JSON.stringify(commitSha),
+    __APP_BUILD_TIME__: JSON.stringify(buildTime),
+    __APP_RELEASE_ID__: JSON.stringify(releaseId),
     // 移除生产环境的调试信息
     __DEV__: mode === 'development',
   },

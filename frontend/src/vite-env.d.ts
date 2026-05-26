@@ -5,11 +5,18 @@ interface ImportMetaEnv {
   readonly VITE_API_BASE_URL: string
   readonly VITE_MOCK_ERROR_RATE: string
   readonly VITE_DEV_PORT: string
+  readonly VITE_BASE_PATH: string
 }
 
 interface ImportMeta {
   readonly env: ImportMetaEnv
 }
+
+declare const __APP_NAME__: string
+declare const __APP_VERSION__: string
+declare const __APP_COMMIT_SHA__: string
+declare const __APP_BUILD_TIME__: string
+declare const __APP_RELEASE_ID__: string
 
 declare module '*.css' {
   const classes: { [key: string]: string }

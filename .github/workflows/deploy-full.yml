@@ -24,6 +24,10 @@ jobs:
         run: |
           echo "REPO_LOWER=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
+      - name: Capture build metadata
+        run: |
+          echo "BUILD_TIME=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >>${GITHUB_ENV}
+
       - name: Log in to the Container registry
         uses: docker/login-action@v4.1.0
         with:
@@ -67,6 +71,8 @@ jobs:
           labels: ${{ steps.meta-frontend.outputs.labels }}
           build-args: |
             VITE_API_BASE_URL=/api/v1
+            GIT_SHA=${{ github.sha }}
+            BUILD_TIME=${{ env.BUILD_TIME }}
 
   deploy:
     needs: build-and-push
