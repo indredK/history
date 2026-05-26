@@ -1,16 +1,17 @@
 # Build stage
-FROM node:20-alpine as build-stage
+FROM oven/bun:1.3.5-alpine AS build-stage
 
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json* bun.lockb* ./
+COPY frontend/package.json ./package.json
+COPY bun.lock ./bun.lock
 
 # Install dependencies
-RUN npm install
+RUN bun install --frozen-lockfile
 
 # Copy source code
-COPY . .
+COPY frontend/ ./
 
 # Build args for Vite
 ARG VITE_API_BASE_URL=/api/v1
@@ -20,10 +21,10 @@ ARG VITE_BASE_PATH=/
 ENV VITE_BASE_PATH=$VITE_BASE_PATH
 
 # Build the application
-RUN npx tsc --noEmit && npx vite build
+RUN bun run build
 
 # Production stage
-FROM nginx:alpine as production-stage
+FROM nginx:alpine AS production-stage
 
 # Copy built assets to Nginx
 COPY --from=build-stage /app/dist /usr/share/nginx/html

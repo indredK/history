@@ -1,29 +1,30 @@
 # Build stage
-FROM node:20-slim AS builder
+FROM oven/bun:1.3.5-slim AS builder
 
 WORKDIR /app
 
 # Copy package files
-COPY package.json package-lock.json* bun.lockb* ./
+COPY backend/package.json ./package.json
+COPY bun.lock ./bun.lock
 
 # Install dependencies
-RUN npm install
+RUN bun install --frozen-lockfile
 
 # Copy source code (dev.db 不入镜像,首次启动通过 migrate + seed 重建)
-COPY . .
+COPY backend/ ./
 
 # Generate Prisma client
 ENV DATABASE_URL="file:./prisma/dev.db"
-RUN npx prisma generate
+RUN bunx prisma generate
 
 # Build the application
-RUN npm run build
+RUN bun run build
 
 # Production stage — 用 oven/bun 作为运行时:
 #   - 体积接近 node:slim
 #   - seed.ts 是 TypeScript 文件,bun 可直接执行,无需额外构建/装载器
 #   - 部署后启动序列:migrate deploy → (首次)db seed → bun dist/src/main.js
-FROM oven/bun:1.3-slim
+FROM oven/bun:1.3.5-slim
 
 WORKDIR /app
 
@@ -31,7 +32,8 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y wget && rm -rf /var/lib/apt/lists/*
 
 # Copy package files and install production dependencies
-COPY package.json package-lock.json* bun.lockb* ./
+COPY backend/package.json ./package.json
+COPY bun.lock ./bun.lock
 RUN bun install --production --frozen-lockfile || bun install --production
 
 # Copy built assets from builder
