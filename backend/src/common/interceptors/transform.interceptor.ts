@@ -15,10 +15,10 @@ export class TransformInterceptor<T> implements NestInterceptor<
 > {
   intercept(
     context: ExecutionContext,
-    next: CallHandler,
+    next: CallHandler<T>,
   ): Observable<ApiResponseDto<T>> {
     return next.handle().pipe(
-      map((data) => {
+      map((data: T): ApiResponseDto<T> => {
         // If data is already wrapped in ApiResponseDto, return as is
         if (
           data &&
@@ -26,7 +26,7 @@ export class TransformInterceptor<T> implements NestInterceptor<
           'success' in data &&
           'timestamp' in data
         ) {
-          return data;
+          return data as unknown as ApiResponseDto<T>;
         }
 
         // Otherwise, wrap the data

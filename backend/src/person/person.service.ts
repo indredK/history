@@ -12,7 +12,7 @@ export class PersonService {
   async findAll(
     query: PersonQueryDto,
   ): Promise<PaginatedResponseDto<PersonDto>> {
-    const { page = 1, limit = 20, birthYear, deathYear, name, dynasty } = query;
+    const { page = 1, limit = 20, birthYear, deathYear, name } = query;
     const skip = (page - 1) * limit;
 
     // Build where clause
@@ -68,7 +68,7 @@ export class PersonService {
     }
 
     // Return the person without the events for now (can be extended later)
-    const { events, ...personData } = person;
+    const { events: _events, ...personData } = person;
     return personData;
   }
 }

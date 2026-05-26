@@ -93,7 +93,7 @@ describe('validateRoutes', () => {
   it('先打头部提示,再逐条 console.log 路由(总共 routes.length + 1 次)', () => {
     validateRoutes();
     expect(console.log).toHaveBeenCalledTimes(routes.length + 1);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+     
     expect(console.log).toHaveBeenNthCalledWith(
       1,
       expect.stringContaining('路由配置验证'),

@@ -4,6 +4,8 @@ import { Prisma } from '../generated/prisma/client';
 import { EmperorQueryDto } from './dto/emperor-query.dto';
 import { PaginatedResponseDto } from '../common/dto/paginated-response.dto';
 import { EmperorDto } from './dto/emperor.dto';
+import { EraNameDto } from './dto/era-name.dto';
+import { HistoricalEvaluationDto } from './dto/historical-evaluation.dto';
 
 @Injectable()
 export class EmperorService {
@@ -67,13 +69,13 @@ export class EmperorService {
 
     // Transform the data to match DTO structure
     const transformedEmperors = emperors.map((emperor) => {
-      const { dynasty, ...emperorData } = emperor;
+      const { dynasty: _dynasty, ...emperorData } = emperor;
       return {
         ...emperorData,
         // Parse JSON fields if they exist and are strings
-        eraNames: this.safeJsonParse(emperorData.eraNames),
-        achievements: this.safeJsonParse(emperorData.achievements),
-        historicalEvaluation: this.safeJsonParse(
+        eraNames: this.safeJsonParse<EraNameDto[]>(emperorData.eraNames),
+        achievements: this.safeJsonParse<string[]>(emperorData.achievements),
+        historicalEvaluation: this.safeJsonParse<HistoricalEvaluationDto>(
           emperorData.historicalEvaluation,
         ),
       };
@@ -95,27 +97,27 @@ export class EmperorService {
     }
 
     // Transform the data to match DTO structure
-    const { dynasty, ...emperorData } = emperor;
+    const { dynasty: _dynasty, ...emperorData } = emperor;
     return {
       ...emperorData,
       // Parse JSON fields if they exist
-      eraNames: this.safeJsonParse(emperorData.eraNames),
-      achievements: this.safeJsonParse(emperorData.achievements),
-      historicalEvaluation: this.safeJsonParse(
+      eraNames: this.safeJsonParse<EraNameDto[]>(emperorData.eraNames),
+      achievements: this.safeJsonParse<string[]>(emperorData.achievements),
+      historicalEvaluation: this.safeJsonParse<HistoricalEvaluationDto>(
         emperorData.historicalEvaluation,
       ),
     };
   }
 
-  private safeJsonParse(value: any): any {
+  private safeJsonParse<T = unknown>(value: unknown): T | null {
     if (!value) return null;
     if (typeof value === 'string' && value.trim() !== '') {
       try {
-        return JSON.parse(value);
-      } catch (e) {
-        return value;
+        return JSON.parse(value) as T;
+      } catch {
+        return value as unknown as T;
       }
     }
-    return value;
+    return value as T;
   }
 }

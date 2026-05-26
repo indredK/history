@@ -457,6 +457,21 @@ vi.resetModules() + 重新 await import` 拦截内部动态 import,验证透传
   每个朝代 store 现在只剩 ~20 行,差异化的只有"角色枚举 / 时期常量 / service 实例 /
   默认排序"。Sanguo 因 filter 形状用 `kingdom` 与其它不同,本轮不并入,留待 §3.1 schema 重构。
 - 后端 Service 层 16 处 `any` → `Prisma.XxxWhereInput`
+- 后端 lint 全绿(0 error / 0 warning):
+  - `religion.service.ts`:`(edge: any)` → `Prisma.ReligionEdgeGetPayload<{include:…}>`(消 56 个 unsafe-* 错误)
+  - `figure-base.service.ts`:`transformFigure(figure: any)` → `transformFigure(figure: unknown)`,新增 `FigureJsonRecord` 接口约束 JSON 字段形状
+  - `mythology.service.ts`:`safeJsonParse` 加泛型,删未用 `symbolism`、`as any`
+  - `culture.service.ts`:三处 `safeJsonParse` 调用补 `<string[]>` 泛型,消 unsafe-assignment
+  - `emperor.service.ts`:`safeJsonParse<T>` 泛型(无 any 残留),`dynasty` 解构改 `_dynasty`
+  - `map/map.service.ts`:7 处 `async` 桩方法去掉无 IO 的 await 要求,返回 `Promise.resolve(...)`,补 7 个具体响应接口替代 `Promise<any>`
+  - `map/map.controller.ts`:删未用 `Param` import
+  - `person.service.ts`:删未用解构变量 `dynasty`、`events` → `_events`
+  - `prisma.extension.ts`:删未用 `createClient` import
+  - `main.ts`:`bootstrap()` → `void bootstrap()` 平息 no-floating-promises
+  - 兼配 `backend/eslint.config.mjs`:`no-unused-vars` 接受下划线前缀
+- 前端 lint 全绿(`bun run lint` 退出 0,warnings 100 = budget):
+  - `utils/services/serviceFactory.ts`:13 处 `any` → `unknown`(transformer / monitor / config / multipleServices)
+  - `services/timeline/timelineApi.ts`:`transformJsonToEvent(jsonEvent: any)` → `unknown` + `Record<string, unknown>` 收口
 - CI workflow 拆分前后端 job,后端加入 lint 与 type-check
 - 6 个大组件按"主壳 + parts/ + hooks/"模式拆分:
   - `ReligionGraph` 669 → 223 行

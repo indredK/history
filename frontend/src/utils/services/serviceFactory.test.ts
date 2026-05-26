@@ -166,7 +166,7 @@ describe('ServiceMonitor', () => {
         errorRate: '0.00%',
       }),
     );
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+     
     expect((stats['svc-x'] as { lastCall: number }).lastCall).toBeGreaterThan(
       0,
     );
@@ -205,9 +205,9 @@ describe('ServiceMonitor', () => {
 
     const stats = monitor.getStats();
     expect(Object.keys(stats).sort()).toEqual(['s1', 's2']);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+     
     expect((stats['s1'] as { calls: number }).calls).toBe(1);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+     
     expect((stats['s2'] as { errors: number }).errors).toBe(1);
   });
 });

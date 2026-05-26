@@ -67,7 +67,7 @@ export interface ServiceOptions {
 export function createUnifiedService<T>(
   apiEndpoint: string,
   jsonDataPath: string,
-  transformer: (jsonItem: any, index: number) => T,
+  transformer: (jsonItem: unknown, index: number) => T,
   options: ServiceOptions = {}
 ): BaseService<T> {
   const { hasGetById = false } = options;
@@ -76,7 +76,9 @@ export function createUnifiedService<T>(
   const getMockData = async (): Promise<ApiResponse<T[]>> => {
     try {
       const jsonData = await loadJsonArray(jsonDataPath);
-      const transformedData = jsonData.map(transformer);
+      const transformedData = jsonData.map((item, index) =>
+        transformer(item, index),
+      );
       return { data: transformedData };
     } catch (error) {
       console.error(`Mock数据加载失败 (${jsonDataPath}):`, error);
@@ -88,8 +90,10 @@ export function createUnifiedService<T>(
   const getApiData = async (): Promise<ApiResponse<T[]>> => {
     try {
       const response = await withTransientRetry(() => apiClient.get(apiEndpoint));
-      const apiResponse = handleApiResponse<any>(response);
-      const transformedData = apiResponse.data.map((item, index) => transformer(item, index));
+      const apiResponse = handleApiResponse<unknown>(response);
+      const transformedData = apiResponse.data.map((item, index) =>
+        transformer(item, index),
+      );
       return { data: transformedData };
     } catch (error) {
       if (isDev) console.error(`API调用失败 (${apiEndpoint}):`, error);
@@ -102,7 +106,7 @@ export function createUnifiedService<T>(
     try {
       const endpoint = `${apiEndpoint}/${id}`;
       const response = await withTransientRetry(() => apiClient.get(endpoint));
-      const apiResponse = handleSingleApiResponse<any>(response);
+      const apiResponse = handleSingleApiResponse<unknown>(response);
       const transformedItem = apiResponse.data ? transformer(apiResponse.data, 0) : null;
       return { data: transformedItem };
     } catch (error) {
@@ -114,9 +118,9 @@ export function createUnifiedService<T>(
   // Mock单个数据获取函数 (从全量数据中查找)
   const getMockDataById = async (id: string): Promise<ApiResponse<T | null>> => {
     const allData = await getMockData();
-    const item = allData.data.find((item: any) => {
+    const item = allData.data.find((entry) => {
       // 兼容不同类型的ID比较
-      return String((item as any).id) === String(id);
+      return String((entry as { id?: unknown }).id) === String(id);
     });
     return { data: item || null };
   };
@@ -179,28 +183,30 @@ export interface ServiceConfig<T> {
   name: string;
   apiEndpoint: string;
   jsonDataPath: string;
-  transformer: (jsonItem: any, index: number) => T;
+  transformer: (jsonItem: unknown, index: number) => T;
   options?: ServiceOptions;
 }
 
 /**
  * 批量创建多个服务
  */
-export function createMultipleServices<T extends Record<string, BaseService<any>>>(
-  configs: Array<ServiceConfig<any> & { key: keyof T }>
+export function createMultipleServices<
+  T extends Record<string, BaseService<unknown>>,
+>(
+  configs: Array<ServiceConfig<unknown> & { key: keyof T }>,
 ): T {
-  const services = {} as T;
-  
-  configs.forEach(config => {
-    (services as any)[config.key] = createUnifiedService(
+  const services = {} as Record<string, BaseService<unknown>>;
+
+  configs.forEach((config) => {
+    services[config.key as string] = createUnifiedService(
       config.apiEndpoint,
       config.jsonDataPath,
       config.transformer,
-      config.options
+      config.options,
     );
   });
-  
-  return services;
+
+  return services as T;
 }
 
 /**
@@ -208,7 +214,7 @@ export function createMultipleServices<T extends Record<string, BaseService<any>
  */
 export class ServiceMonitor {
   private static instance: ServiceMonitor;
-  private services = new Map<string, any>();
+  private services = new Map<string, unknown>();
   private stats = new Map<string, { calls: number; errors: number; lastCall: number }>();
 
   static getInstance(): ServiceMonitor {
@@ -218,7 +224,7 @@ export class ServiceMonitor {
     return ServiceMonitor.instance;
   }
 
-  registerService(name: string, service: any): void {
+  registerService(name: string, service: unknown): void {
     this.services.set(name, service);
     this.stats.set(name, { calls: 0, errors: 0, lastCall: 0 });
   }
@@ -234,8 +240,8 @@ export class ServiceMonitor {
     }
   }
 
-  getStats(): Record<string, any> {
-    const result: Record<string, any> = {};
+  getStats(): Record<string, unknown> {
+    const result: Record<string, unknown> = {};
     this.stats.forEach((stat, name) => {
       result[name] = {
         ...stat,

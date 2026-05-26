@@ -14,7 +14,7 @@ export class ApiResponseDto<T> {
   data?: T;
 
   @ApiProperty({ description: 'Error details', required: false })
-  error?: any;
+  error?: unknown;
 
   @ApiProperty({
     description: 'Response timestamp',
@@ -22,7 +22,7 @@ export class ApiResponseDto<T> {
   })
   timestamp: string;
 
-  constructor(success: boolean, message: string, data?: T, error?: any) {
+  constructor(success: boolean, message: string, data?: T, error?: unknown) {
     this.success = success;
     this.message = message;
     this.data = data;
@@ -34,7 +34,7 @@ export class ApiResponseDto<T> {
     return new ApiResponseDto(true, message, data);
   }
 
-  static error(message: string, error?: any): ApiResponseDto<null> {
+  static error(message: string, error?: unknown): ApiResponseDto<null> {
     return new ApiResponseDto(false, message, null, error);
   }
 }

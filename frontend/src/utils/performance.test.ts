@@ -69,7 +69,7 @@ describe('PerformanceMonitor', () => {
   it('measure 在 mark 缺失时返回 0 并 console.warn', () => {
     const result = monitor.measure('never-marked-xyz');
     expect(result).toBe(0);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+     
     expect(console.warn).toHaveBeenCalledWith(
       expect.stringContaining('never-marked-xyz-start not found'),
     );
@@ -103,7 +103,7 @@ describe('PerformanceMonitor', () => {
     monitor.mark('perf-zero-start');
     const d = monitor.measure('perf-zero-start');
     expect(d).toBe(0);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+     
     expect(console.warn).toHaveBeenCalledWith(
       expect.stringContaining('perf-zero-start-start not found'),
     );
@@ -128,7 +128,7 @@ describe('PerformanceMonitor', () => {
     window['web-vital'] = true;
     try {
       monitor.reportWebVitals();
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+       
       expect(console.log).toHaveBeenCalledWith(
         expect.stringContaining('Web Vitals'),
       );

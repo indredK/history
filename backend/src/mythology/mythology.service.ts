@@ -48,15 +48,14 @@ export class MythologyService {
     // Transform the data to match frontend requirements
     const transformedMythologies = mythologies.map((mythology) => {
       // Parse JSON fields safely
-      const stories = this.safeJsonParse(mythology.stories) || [];
-      const symbolism = this.safeJsonParse(mythology.symbolism) || [];
+      const stories = this.safeJsonParse<unknown[]>(mythology.stories) ?? [];
 
       // Convert database fields to frontend interface
       return {
         id: mythology.id,
         title: mythology.name, // Map database 'name' to frontend 'title'
         englishTitle: '', // Database doesn't have name_en field
-        category: mythology.category as any, // Cast to match frontend category type
+        category: mythology.category, // 直接采用 DB 字段,DTO 已声明 string
         description: mythology.description || '', // Ensure description is not null
         characters: Array.isArray(stories) ? stories.slice(0, 5) : [],
         source: mythology.origin || '', // Map database 'origin' to frontend 'source'
@@ -77,8 +76,7 @@ export class MythologyService {
     }
 
     // Parse JSON fields safely
-    const stories = this.safeJsonParse(mythology.stories) || [];
-    const symbolism = this.safeJsonParse(mythology.symbolism) || [];
+    const stories = this.safeJsonParse<unknown[]>(mythology.stories) ?? [];
 
     // Convert database fields to frontend interface
     return {
@@ -93,16 +91,16 @@ export class MythologyService {
     };
   }
 
-  private safeJsonParse(value: any): any {
+  private safeJsonParse<T = unknown>(value: unknown): T | null {
     if (!value) return null;
     if (typeof value === 'string' && value.trim() !== '') {
       try {
-        return JSON.parse(value);
-      } catch (e) {
+        return JSON.parse(value) as T;
+      } catch {
         // If it's not valid JSON, it might be a plain string
-        return value;
+        return value as unknown as T;
       }
     }
-    return value;
+    return value as T;
   }
 }

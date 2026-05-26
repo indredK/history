@@ -80,6 +80,15 @@ export class ReligionService {
 
     const edges = await edgesQuery;
 
+    /**
+     * Edge 在 includeNodeDetails=true 分支会带 sourceNode/targetNode,
+     * 用 Prisma.GetPayload 把 include 形态固化下来,后面的 truthy 守卫
+     * (`edge.sourceNode && edge.targetNode`)处理 false 分支没有 include 的情况。
+     */
+    type EdgeWithNodes = Prisma.ReligionEdgeGetPayload<{
+      include: { sourceNode: true; targetNode: true };
+    }>;
+
     // Transform nodes to DTO
     const nodeDtos: ReligionNodeDto[] = nodes.map((node) => ({
       id: node.id,
@@ -94,50 +103,52 @@ export class ReligionService {
     }));
 
     // Transform edges to DTO
-    const edgeDtos: ReligionEdgeDto[] = edges.map((edge: any) => {
-      const baseEdge = {
-        id: edge.id,
-        sourceNodeId: edge.sourceNodeId,
-        targetNodeId: edge.targetNodeId,
-        relationship: edge.relationship,
-        strength: edge.strength,
-        period: edge.period,
-        description: edge.description,
-        createdAt: edge.createdAt,
-        updatedAt: edge.updatedAt,
-      };
-
-      // Add node details if included
-      if (includeNodeDetails && edge.sourceNode && edge.targetNode) {
-        return {
-          ...baseEdge,
-          sourceNode: {
-            id: edge.sourceNode.id,
-            name: edge.sourceNode.name,
-            nodeType: edge.sourceNode.nodeType,
-            tradition: edge.sourceNode.tradition,
-            description: edge.sourceNode.description,
-            period: edge.sourceNode.period,
-            location: edge.sourceNode.location,
-            createdAt: edge.sourceNode.createdAt,
-            updatedAt: edge.sourceNode.updatedAt,
-          },
-          targetNode: {
-            id: edge.targetNode.id,
-            name: edge.targetNode.name,
-            nodeType: edge.targetNode.nodeType,
-            tradition: edge.targetNode.tradition,
-            description: edge.targetNode.description,
-            period: edge.targetNode.period,
-            location: edge.targetNode.location,
-            createdAt: edge.targetNode.createdAt,
-            updatedAt: edge.targetNode.updatedAt,
-          },
+    const edgeDtos: ReligionEdgeDto[] = (edges as EdgeWithNodes[]).map(
+      (edge) => {
+        const baseEdge = {
+          id: edge.id,
+          sourceNodeId: edge.sourceNodeId,
+          targetNodeId: edge.targetNodeId,
+          relationship: edge.relationship,
+          strength: edge.strength,
+          period: edge.period,
+          description: edge.description,
+          createdAt: edge.createdAt,
+          updatedAt: edge.updatedAt,
         };
-      }
 
-      return baseEdge;
-    });
+        // Add node details if included
+        if (includeNodeDetails && edge.sourceNode && edge.targetNode) {
+          return {
+            ...baseEdge,
+            sourceNode: {
+              id: edge.sourceNode.id,
+              name: edge.sourceNode.name,
+              nodeType: edge.sourceNode.nodeType,
+              tradition: edge.sourceNode.tradition,
+              description: edge.sourceNode.description,
+              period: edge.sourceNode.period,
+              location: edge.sourceNode.location,
+              createdAt: edge.sourceNode.createdAt,
+              updatedAt: edge.sourceNode.updatedAt,
+            },
+            targetNode: {
+              id: edge.targetNode.id,
+              name: edge.targetNode.name,
+              nodeType: edge.targetNode.nodeType,
+              tradition: edge.targetNode.tradition,
+              description: edge.targetNode.description,
+              period: edge.targetNode.period,
+              location: edge.targetNode.location,
+              createdAt: edge.targetNode.createdAt,
+              updatedAt: edge.targetNode.updatedAt,
+            },
+          };
+        }
+
+        return baseEdge;
+      },
+    );
 
     return {
       nodes: nodeDtos,

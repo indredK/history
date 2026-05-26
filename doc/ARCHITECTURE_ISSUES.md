@@ -60,6 +60,9 @@
 - `test/app.e2e-spec.ts` 已有冒烟测试(health + 404),业务路径未覆盖
 - 估算覆盖率 **< 5%**
 - **工作量**:持续投入,优先核心 Service
+- **当前进度**:后端 jest **21 个 suite / 202 个用例全绿**,前端 vitest
+  **94 个文件 / 861 个用例**(本会话起为提升 lint 健康度,测试工作暂停,
+  后续可继续扩 service 之外的 controller/dto/util 覆盖)
 - **起步完成**:`DynastyService` / `PersonService` / `EventService` / `EmperorService` /
   `FigureBaseService` / `ReligionService` / `CultureService` / `MythologyService` /
   `TangService` / `SanguoService` / `QingService` / `MingService` / `SongService` /

@@ -1,12 +1,48 @@
 import { Injectable } from '@nestjs/common';
 import { PlaceDto } from './dto/place.dto';
 
+/**
+ * 当前 MapService 全部方法都是同步桩(待接入真实数据源前的占位实现):
+ * 没有 IO,因此 method body 不需要 await。
+ * 为了保持 controller 端调用 `await this.mapService.x()` 的写法兼容,
+ * 这里仍然返回 Promise(用 Promise.resolve 包裹),但不再标记 async,
+ * 从而避免 ESLint `@typescript-eslint/require-await` 报错。
+ */
+
+export interface BoundaryDataResponse {
+  period?: string;
+  year?: number;
+  boundary: string;
+  timestamp: string;
+}
+
+export interface BoundaryMappingsResponse {
+  mappings: { period: string; map: string }[];
+  timestamp: string;
+}
+
+export interface PreloadResponse {
+  commonData: string;
+  timestamp: string;
+}
+
+export interface ClearCacheResponse {
+  message: string;
+  timestamp: string;
+}
+
+export interface CacheStatsResponse {
+  cacheItems: number;
+  cacheSize: string;
+  timestamp: string;
+}
+
 @Injectable()
 export class MapService {
   // 获取所有地点
-  async getPlaces(): Promise<PlaceDto[]> {
+  getPlaces(): Promise<PlaceDto[]> {
     // 这里应该从数据库获取数据，暂时返回模拟数据
-    return [
+    return Promise.resolve([
       {
         id: 'place_beijing_0',
         canonical_name: '北京',
@@ -29,66 +65,60 @@ export class MapService {
         },
         source_ids: ['src_2'],
       },
-    ];
+    ]);
   }
 
   // 加载边界数据
-  async loadBoundaryData(period: string): Promise<any> {
-    // 模拟实现
-    return {
+  loadBoundaryData(period: string): Promise<BoundaryDataResponse> {
+    return Promise.resolve({
       period,
       boundary: '模拟边界数据',
       timestamp: new Date().toISOString(),
-    };
+    });
   }
 
   // 根据年份获取边界数据
-  async getBoundaryDataByYear(year: number): Promise<any> {
-    // 模拟实现
-    return {
+  getBoundaryDataByYear(year: number): Promise<BoundaryDataResponse> {
+    return Promise.resolve({
       year,
       boundary: '模拟年份边界数据',
       timestamp: new Date().toISOString(),
-    };
+    });
   }
 
   // 加载边界映射
-  async loadBoundaryMappings(): Promise<any> {
-    // 模拟实现
-    return {
+  loadBoundaryMappings(): Promise<BoundaryMappingsResponse> {
+    return Promise.resolve({
       mappings: [
         { period: 'ancient', map: 'map1' },
         { period: 'medieval', map: 'map2' },
       ],
       timestamp: new Date().toISOString(),
-    };
+    });
   }
 
   // 预加载通用数据
-  async preloadCommonData(): Promise<any> {
-    // 模拟实现
-    return {
+  preloadCommonData(): Promise<PreloadResponse> {
+    return Promise.resolve({
       commonData: '预加载的通用数据',
       timestamp: new Date().toISOString(),
-    };
+    });
   }
 
   // 清除缓存
-  async clearCache(key?: string): Promise<any> {
-    // 模拟实现
-    return {
+  clearCache(key?: string): Promise<ClearCacheResponse> {
+    return Promise.resolve({
       message: `缓存已清除${key ? ` (key: ${key})` : ''}`,
       timestamp: new Date().toISOString(),
-    };
+    });
   }
 
   // 获取缓存统计
-  async getCacheStats(): Promise<any> {
-    // 模拟实现
-    return {
+  getCacheStats(): Promise<CacheStatsResponse> {
+    return Promise.resolve({
       cacheItems: 100,
       cacheSize: '10MB',
       timestamp: new Date().toISOString(),
-    };
+    });
   }
 }
