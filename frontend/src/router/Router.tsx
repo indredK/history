@@ -20,7 +20,19 @@ export function AppRouter() {
     <Suspense fallback={<LoadingSkeleton variant="page" />}>
       <Routes>
         <Route path="/" element={<Navigate to="/timeline" replace />} />
-        <Route path="/*" element={<AppLayout routes={routes} />} />
+        <Route path="/" element={<AppLayout routes={routes} />}>
+          {routes.map((route) => (
+            <Route
+              key={route.key}
+              path={route.path.slice(1)}
+              element={
+                <ErrorBoundary>
+                  <route.component />
+                </ErrorBoundary>
+              }
+            />
+          ))}
+        </Route>
         <Route
           path="*"
           element={

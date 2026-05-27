@@ -1,6 +1,6 @@
 import { Suspense, useEffect } from 'react';
 import { Box } from '@mui/material';
-import { useLocation, Routes, Route, Navigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { PortraitSidebar } from '@/components/ui/PortraitSidebar';
 import { Footer } from './Footer';
@@ -10,6 +10,7 @@ import { useSidebar, useResponsive, useOrientation } from '@/hooks';
 import type { RouteConfig } from '@/router/routes';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import { getGlassConfig } from '@/config/glassConfig';
+import { MainContent } from './MainContent';
 
 interface AppLayoutProps {
   routes: RouteConfig[];
@@ -41,15 +42,8 @@ export function AppLayout({ routes }: AppLayoutProps) {
   const borderColor = isDark ? 'rgba(226, 198, 140, 0.16)' : 'rgba(118, 90, 51, 0.14)';
 
   // 根据路径确定当前活跃的标签
-  const getActiveTabFromPath = (pathname: string): string => {
-    if (pathname === '/timeline') return 'timeline';
-    if (pathname === '/dynasties') return 'dynasties';
-    if (pathname === '/map') return 'map';
-    if (pathname === '/people') return 'people';
-    if (pathname === '/culture') return 'culture';
-    if (pathname === '/mythology') return 'mythology';
-    return 'timeline';
-  };
+  const getActiveTabFromPath = (pathname: string): string =>
+    routes.find((route) => pathname.startsWith(route.path))?.key ?? 'timeline';
 
   const activeTab = getActiveTabFromPath(location.pathname);
   
@@ -168,17 +162,7 @@ export function AppLayout({ routes }: AppLayoutProps) {
             touchAction: 'pan-x pan-y', // 允许内部滚动
           }}>
             <Suspense fallback={<LoadingSkeleton variant="page" />}>
-              <Routes>
-                {routes.map((route) => (
-                  <Route
-                    key={route.key}
-                    path={route.path}
-                    element={<route.component />}
-                  />
-                ))}
-                {/* 默认重定向到时间轴 */}
-                <Route path="*" element={<Navigate to="/timeline" replace />} />
-              </Routes>
+              <MainContent />
             </Suspense>
           </div>
         </Box>
