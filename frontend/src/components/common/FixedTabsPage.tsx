@@ -8,6 +8,7 @@
 
 import { useState, ReactNode, useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
 import { CommonTabs, type CommonTabItem } from './CommonTabs';
 
 export interface TabConfig {
@@ -24,6 +25,7 @@ interface FixedTabsPageProps {
   title?: string;
   description?: string;
   onTabChange?: (tabValue: string) => void;
+  queryKey?: string;
   tabsProps?: {
     variant?: 'standard' | 'scrollable' | 'fullWidth';
     scrollButtons?: boolean | 'auto';
@@ -41,13 +43,21 @@ export function FixedTabsPage({
   title,
   description,
   onTabChange,
+  queryKey = 'tab',
 }: FixedTabsPageProps) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requestedTab = searchParams.get(queryKey);
   const [activeTab, setActiveTab] = useState<string>(
-    defaultTab || tabs[0]?.value || ''
+    requestedTab && tabs.some((tab) => tab.value === requestedTab)
+      ? requestedTab
+      : defaultTab || tabs[0]?.value || ''
   );
 
   const handleTabChange = (newValue: string) => {
     setActiveTab(newValue);
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.set(queryKey, newValue);
+    setSearchParams(nextParams, { replace: true });
     onTabChange?.(newValue);
   };
 
@@ -60,6 +70,27 @@ export function FixedTabsPage({
       }
     }
   }, [tabs, activeTab]);
+
+  useEffect(() => {
+    if (!requestedTab || requestedTab === activeTab) {
+      return;
+    }
+    if (tabs.some((tab) => tab.value === requestedTab)) {
+      setActiveTab(requestedTab);
+    }
+  }, [activeTab, requestedTab, tabs]);
+
+  useEffect(() => {
+    if (!activeTab) {
+      return;
+    }
+    if (searchParams.get(queryKey) === activeTab) {
+      return;
+    }
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.set(queryKey, activeTab);
+    setSearchParams(nextParams, { replace: true });
+  }, [activeTab, queryKey, searchParams, setSearchParams]);
 
   const activeTabConfig = tabs.find(tab => tab.value === activeTab);
 
