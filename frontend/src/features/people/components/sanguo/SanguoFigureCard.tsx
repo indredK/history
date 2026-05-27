@@ -21,7 +21,7 @@ const roleColors: Record<string, TagColor> = {
 };
 
 export function SanguoFigureCard({ figure, onClick }: SanguoFigureCardProps) {
-  const roleColor = roleColors[figure.role] || roleColors.other!;
+  const roleColor = roleColors[figure.role] || roleColors['other']!;
   const kingdomColor = KINGDOM_COLORS[figure.kingdom] || KINGDOM_COLORS['其他'];
   const lifespan = sanguoFigureService.formatLifespan(figure);
   const roleLabel = ROLE_LABELS[figure.role];

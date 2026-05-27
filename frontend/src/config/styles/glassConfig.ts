@@ -257,7 +257,7 @@ export function getPerformanceStyle(config?: GlassConfig): React.CSSProperties {
   
   // Apply containment based on config
   if (glassConfig.performance.containment) {
-    (style as Record<string, string>).contain = glassConfig.performance.containment;
+    (style as Record<string, string>)['contain'] = glassConfig.performance.containment;
   }
   
   return style;

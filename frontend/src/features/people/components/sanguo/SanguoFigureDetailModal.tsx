@@ -32,7 +32,7 @@ export function SanguoFigureDetailModal({ figure, open, onClose }: SanguoFigureD
   if (!figure) return null;
 
   const kingdomColor = KINGDOM_COLORS[figure.kingdom] || KINGDOM_COLORS['其他']!;
-  const roleColor = roleColors[figure.role] ?? roleColors.other!;
+  const roleColor = roleColors[figure.role] ?? roleColors['other']!;
   const lifespan = formatLifespan(figure);
   const age = calculateAge(figure);
   const roleLabel = ROLE_LABELS[figure.role];

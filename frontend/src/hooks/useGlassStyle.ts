@@ -143,13 +143,13 @@ export function useGlassStyle(
     }
     
     if (enableContainment) {
-      (baseStyle as Record<string, string>).contain = config.performance.containment;
+      (baseStyle as Record<string, string>)['contain'] = config.performance.containment;
     }
     
     // GPU 加速 (Requirements: 13.1)
     if (enableGPUAcceleration) {
       baseStyle.transform = 'translateZ(0)';
-      (baseStyle as Record<string, string>).backfaceVisibility = 'hidden';
+      (baseStyle as Record<string, string>)['backfaceVisibility'] = 'hidden';
     }
 
     // 生成 className
@@ -279,13 +279,13 @@ export function useComponentGlassStyle(
       }
       
       if (enableContainment) {
-        (baseStyle as Record<string, string>).contain = config.performance.containment;
+        (baseStyle as Record<string, string>)['contain'] = config.performance.containment;
       }
       
       // GPU 加速 (Requirements: 13.1)
       if (enableGPUAcceleration) {
         baseStyle.transform = 'translateZ(0)';
-        (baseStyle as Record<string, string>).backfaceVisibility = 'hidden';
+        (baseStyle as Record<string, string>)['backfaceVisibility'] = 'hidden';
       }
       
       // 如果组件配置有 hoverOpacityDelta，生成悬停样式

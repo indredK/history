@@ -30,7 +30,7 @@ const roleColors: Record<string, ThemeColor> = {
 export function YuanFigureDetailModal({ figure, open, onClose }: YuanFigureDetailModalProps) {
   if (!figure) return null;
 
-  const themeColor = roleColors[figure.role] ?? roleColors.other!;
+  const themeColor = roleColors[figure.role] ?? roleColors['other']!;
   const lifespan = formatLifespan(figure);
   const age = calculateAge(figure);
   const roleLabel = ROLE_LABELS[figure.role];

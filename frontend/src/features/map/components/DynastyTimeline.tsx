@@ -210,35 +210,35 @@ export const DynastyTimeline: React.FC<DynastyTimelineProps> = ({
   };
 
   if (loading) {
-    return <div className={styles.loading}>加载中...</div>;
+    return <div className={styles['loading']}>加载中...</div>;
   }
 
   if (error) {
-    return <div className={styles.error}>{error}</div>;
+    return <div className={styles['error']}>{error}</div>;
   }
 
   return (
-    <div className={styles.timelineContainer} ref={containerRef}>
-      <div className={styles.timelineHeader}>
-        <span className={styles.title}>朝代时间轴</span>
+    <div className={styles['timelineContainer']} ref={containerRef}>
+      <div className={styles['timelineHeader']}>
+        <span className={styles['title']}>朝代时间轴</span>
         {selectedDynasty && (
-          <div className={styles.selectedInfo}>
+          <div className={styles['selectedInfo']}>
             <div 
-              className={styles.colorIndicator} 
+              className={styles['colorIndicator']} 
               style={{ backgroundColor: selectedDynasty.color || dynastyConfig.defaultColor }} 
             />
-            <span className={styles.selectedName}>{selectedDynasty.name}</span>
-            <span className={styles.selectedYears}>
+            <span className={styles['selectedName']}>{selectedDynasty.name}</span>
+            <span className={styles['selectedYears']}>
               ({formatYear(selectedDynasty.startYear)} - {selectedDynasty.endYear ? formatYear(selectedDynasty.endYear) : '至今'})
             </span>
           </div>
         )}
       </div>
       
-      <div className={styles.timelineContent}>
+      <div className={styles['timelineContent']}>
         <div 
           ref={trackRef}
-          className={styles.timelineTrack}
+          className={styles['timelineTrack']}
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
         >
@@ -246,7 +246,7 @@ export const DynastyTimeline: React.FC<DynastyTimelineProps> = ({
           {dynasties.map((dynasty) => (
             <div 
               key={dynasty.id}
-              className={`${styles.dynastyMark} ${selectedDynasty?.id === dynasty.id ? styles.activeMark : ''}`}
+              className={`${styles['dynastyMark']} ${selectedDynasty?.id === dynasty.id ? styles['activeMark'] : ''}`}
               style={{ 
                 left: `${((dynasty.startYear - MIN_YEAR) / YEAR_RANGE) * 100}%`,
                 backgroundColor: dynasty.color || dynastyConfig.defaultColor
@@ -261,22 +261,22 @@ export const DynastyTimeline: React.FC<DynastyTimelineProps> = ({
           
           {/* 可拖动的滑块 */}
           <div 
-            className={`${styles.slider} ${isDragging ? styles.dragging : ''}`}
+            className={`${styles['slider']} ${isDragging ? styles['dragging'] : ''}`}
             style={{ left: `${sliderPosition}%` }}
           >
             <div 
-              className={styles.sliderHandle}
+              className={styles['sliderHandle']}
               style={{ backgroundColor: selectedDynasty?.color || '#1890ff' }}
             />
           </div>
         </div>
         
         {/* 年份刻度 */}
-        <div className={styles.yearMarkers}>
+        <div className={styles['yearMarkers']}>
           {[-2000, -1000, 0, 1000, 2000].map((year) => (
             <div 
               key={year}
-              className={styles.yearMarker}
+              className={styles['yearMarker']}
               style={{ left: `${((year - MIN_YEAR) / YEAR_RANGE) * 100}%` }}
             >
               <span>{year < 0 ? `${Math.abs(year)}BC` : year === 0 ? '0' : `${year}AD`}</span>

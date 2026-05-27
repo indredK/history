@@ -24,7 +24,7 @@ const roleColors: Record<string, TagColor> = {
 const defaultColor: TagColor = { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e' };
 
 export function TangFigureCard({ figure, onClick }: TangFigureCardProps) {
-  const roleColor = roleColors[figure.role] || roleColors.other!;
+  const roleColor = roleColors[figure.role] || roleColors['other']!;
   const lifespan = tangFigureService.formatLifespan(figure);
   const roleLabel = ROLE_LABELS[figure.role];
 

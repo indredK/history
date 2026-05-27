@@ -100,11 +100,11 @@ export const TimelineChart = forwardRef<TimelineChartRef, TimelineChartProps>(
     });
 
     if (events.length === 0) {
-      return <div style={timelineStyles.emptyState}>暂无匹配的历史事件</div>;
+      return <div style={timelineStyles['emptyState']}>暂无匹配的历史事件</div>;
     }
 
     return (
-      <div className="d3-timeline-container" style={timelineStyles.container}>
+      <div className="d3-timeline-container" style={timelineStyles['container']}>
         <TimelineToolbar
           zoomLevel={zoomLevel}
           onZoomIn={onZoomIn}
@@ -114,8 +114,8 @@ export const TimelineChart = forwardRef<TimelineChartRef, TimelineChartProps>(
           onPanRight={onPanRight}
         />
 
-        <div ref={containerRef} style={timelineStyles.svgContainer}>
-          <svg ref={svgRef} style={timelineStyles.svg} />
+        <div ref={containerRef} style={timelineStyles['svgContainer']}>
+          <svg ref={svgRef} style={timelineStyles['svg']} />
         </div>
       </div>
     );

@@ -60,7 +60,7 @@ export const getNavigationItem = (key: string): NavigationItemConfig | undefined
 
 // 获取导航项的主题配置
 export const getNavigationItemTheme = (key: string) => {
-  return navigationThemes[key] ?? navigationThemes.timeline;
+  return navigationThemes[key] ?? navigationThemes['timeline'];
 };
 
 // 导航样式配置
