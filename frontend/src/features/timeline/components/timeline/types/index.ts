@@ -129,4 +129,5 @@ export interface TimelineChartProps {
   onResetZoom: () => void;
   onPanLeft: () => void;
   onPanRight: () => void;
+  onTimeRangeChange?: ((range: [number, number]) => void) | undefined;
 }

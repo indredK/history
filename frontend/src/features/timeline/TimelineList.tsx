@@ -5,16 +5,29 @@ import { PageHeaderBadge, PagePanel } from '@/components/common';
 import { useDynastyStore } from '@/store';
 import { dynastyUtils } from '@/config';
 import { usePerformanceTrace } from '@/utils/performance';
-import { buildDynastyFocusRange } from './utils/dynastyUtils';
+import { buildDynastyFocusRange, findDynastyByYear } from './utils/dynastyUtils';
+import { useCallback } from 'react';
 
 export function TimelineList() {
-  const { selectedDynasty } = useDynastyStore();
+  const { selectedDynasty, dynasties, setSelectedDynasty } = useDynastyStore();
   usePerformanceTrace('timeline-page-mounted', []);
-  
+
   // 获取朝代背景颜色
   const dynastyColor = selectedDynasty?.color;
   const bgColor = dynastyUtils.getBackgroundColor(dynastyColor);
   const focusRange = buildDynastyFocusRange(selectedDynasty);
+
+  const handleTimeRangeChange = useCallback(
+    (range: [number, number]) => {
+      if (dynasties.length === 0) return;
+      const center = (range[0] + range[1]) / 2;
+      const found = findDynastyByYear(center, dynasties);
+      if (found && found.id !== selectedDynasty?.id) {
+        setSelectedDynasty(found);
+      }
+    },
+    [dynasties, selectedDynasty, setSelectedDynasty],
+  );
 
   return (
     <PagePanel
@@ -76,6 +89,7 @@ export function TimelineList() {
           <D3Timeline
             focusRange={focusRange}
             focusLabel={selectedDynasty?.name ?? null}
+            onTimeRangeChange={handleTimeRangeChange}
           />
         </Paper>
       </Box>

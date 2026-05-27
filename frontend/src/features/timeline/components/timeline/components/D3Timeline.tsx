@@ -11,9 +11,10 @@ import '../styles/D3Timeline.css';
 interface D3TimelineProps {
   focusRange?: [number, number] | null;
   focusLabel?: string | null;
+  onTimeRangeChange?: (range: [number, number]) => void;
 }
 
-export function D3Timeline({ focusRange, focusLabel }: D3TimelineProps) {
+export function D3Timeline({ focusRange, focusLabel, onTimeRangeChange }: D3TimelineProps) {
   const chartRef = useRef<TimelineChartRef>(null);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [events, setEvents] = useState<Event[]>([]);
@@ -74,6 +75,7 @@ export function D3Timeline({ focusRange, focusLabel }: D3TimelineProps) {
       onResetZoom={handleResetZoom}
       onPanLeft={handlePanLeft}
       onPanRight={handlePanRight}
+      onTimeRangeChange={onTimeRangeChange}
     />
   );
 }

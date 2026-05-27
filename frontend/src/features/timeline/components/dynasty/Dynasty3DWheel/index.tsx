@@ -14,16 +14,10 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from 'react';
-import {
-  KeyboardArrowLeft,
-  KeyboardArrowRight,
-} from '@mui/icons-material';
 import { Canvas } from '@react-three/fiber';
-import { ResponsiveIconButton } from '@/components/ui';
 import { useDynastyStore } from '@/store';
 import { getDynasties } from '@/services/dataClient';
 import type { Dynasty } from '@/services/culture/types';
-import { formatTimelineYear } from '@/features/timeline/utils/dynastyUtils';
 import { Scene } from './Scene';
 import { useDynastyWheelScroll } from './useDynastyWheelScroll';
 import { EffectSwitcher } from './EffectSwitcher';
@@ -37,15 +31,13 @@ interface Dynasty3DWheelProps {
 const EFFECT_STORAGE_KEY = 'dynasty3DWheel.effectId';
 
 export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
-  const { selectedDynasty, setSelectedDynasty } = useDynastyStore();
+  const { selectedDynasty, setSelectedDynasty, setDynasties } = useDynastyStore();
   const [allDynasties, setAllDynasties] = useState<Dynasty[]>([]);
-  const [activeIndex, setActiveIndex] = useState(-1);
   const [effectId, setEffectId] = useState<string>(() => {
     if (typeof window === 'undefined') return DEFAULT_EFFECT_ID;
     return window.localStorage.getItem(EFFECT_STORAGE_KEY) ?? DEFAULT_EFFECT_ID;
   });
   const containerRef = useRef<HTMLDivElement>(null);
-  const hasInitializedIndexRef = useRef(false);
   const selectedDynastyId = selectedDynasty?.id ?? null;
 
   useEffect(() => {
@@ -56,6 +48,7 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
 
       if (!cancelled) {
         setAllDynasties(result.data);
+        setDynasties(result.data);
       }
     };
 
@@ -64,7 +57,7 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [setDynasties]);
 
   const dynasties = allDynasties;
   const effect = useMemo(() => getEffectById(effectId), [effectId]);
@@ -76,30 +69,33 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
     }
   }, []);
 
-  useEffect(() => {
-    if (dynasties.length === 0 || hasInitializedIndexRef.current) {
-      return;
-    }
-
-    const matchedIndex = selectedDynastyId
-      ? dynasties.findIndex((dynasty) => dynasty.id === selectedDynastyId)
-      : -1;
-
-    setActiveIndex(matchedIndex >= 0 ? matchedIndex : 0);
-    hasInitializedIndexRef.current = true;
+  const activeIndex = useMemo(() => {
+    if (dynasties.length === 0) return -1;
+    if (!selectedDynastyId) return 0;
+    const idx = dynasties.findIndex((d) => d.id === selectedDynastyId);
+    return idx >= 0 ? idx : 0;
   }, [dynasties, selectedDynastyId]);
 
   useEffect(() => {
-    if (activeIndex < 0 || activeIndex >= dynasties.length) {
-      return;
-    }
+    if (dynasties.length === 0 || selectedDynastyId) return;
+    const first = dynasties[0];
+    if (first) setSelectedDynasty(first);
+  }, [dynasties, selectedDynastyId, setSelectedDynasty]);
 
-    const activeDynasty = dynasties[activeIndex];
-
-    if (activeDynasty && activeDynasty.id !== selectedDynastyId) {
-      setSelectedDynasty(activeDynasty);
-    }
-  }, [activeIndex, dynasties, selectedDynastyId, setSelectedDynasty]);
+  const setActiveIndex = useCallback(
+    (indexOrUpdater: number | ((prev: number) => number)) => {
+      if (dynasties.length === 0) return;
+      const next =
+        typeof indexOrUpdater === 'function'
+          ? indexOrUpdater(activeIndex)
+          : indexOrUpdater;
+      const target = dynasties[next];
+      if (target && target.id !== selectedDynastyId) {
+        setSelectedDynasty(target);
+      }
+    },
+    [dynasties, activeIndex, selectedDynastyId, setSelectedDynasty],
+  );
 
   const wrapIndex = useCallback(
     (index: number) => {
@@ -124,17 +120,6 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
   );
 
   const activeDynasty = activeIndex >= 0 ? dynasties[activeIndex] : null;
-  const activePeriod = useMemo(() => {
-    if (!activeDynasty) {
-      return '';
-    }
-
-    const endLabel = activeDynasty.endYear
-      ? formatTimelineYear(activeDynasty.endYear, { short: true })
-      : '今';
-
-    return `${formatTimelineYear(activeDynasty.startYear, { short: true })} - ${endLabel}`;
-  }, [activeDynasty]);
 
   useDynastyWheelScroll({
     containerRef,

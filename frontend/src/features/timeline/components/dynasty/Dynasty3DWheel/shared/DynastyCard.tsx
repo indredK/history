@@ -141,7 +141,7 @@ export function DynastyCard({
           center
           zIndexRange={[8, 0]}
           style={{
-            width: '160px',
+            width: '260px',
             pointerEvents: 'none',
             userSelect: 'none',
           }}

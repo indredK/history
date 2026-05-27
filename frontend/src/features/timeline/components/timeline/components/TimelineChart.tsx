@@ -48,6 +48,7 @@ export const TimelineChart = forwardRef<TimelineChartRef, TimelineChartProps>(
       onResetZoom,
       onPanLeft,
       onPanRight,
+      onTimeRangeChange,
     },
     ref
   ) => {
@@ -107,15 +108,36 @@ export const TimelineChart = forwardRef<TimelineChartRef, TimelineChartProps>(
       if (!boundsRange) {
         return;
       }
+      originalRangeRef.current = boundsRange;
+    }, [boundsRange]);
 
-      const nextRange = focusRange
+    useEffect(() => {
+      if (!boundsRange) {
+        return;
+      }
+
+      const target = focusRange
         ? clampRangeToBounds(focusRange, boundsRange)
         : boundsRange;
 
-      originalRangeRef.current = nextRange;
-      setTimeRange(nextRange);
-      onZoomChange(1);
+      const current = timeRangeRef.current;
+      if (current) {
+        const center = (current[0] + current[1]) / 2;
+        if (center >= target[0] && center <= target[1]) {
+          return;
+        }
+      }
+
+      setTimeRange(target);
+      const fullSpan = boundsRange[1] - boundsRange[0];
+      const currentSpan = target[1] - target[0];
+      onZoomChange(currentSpan > 0 ? fullSpan / currentSpan : 1);
     }, [boundsRange, focusRange, onZoomChange]);
+
+    useEffect(() => {
+      if (!timeRange) return;
+      onTimeRangeChange?.(timeRange);
+    }, [timeRange, onTimeRangeChange]);
 
     useEffect(() => {
       if (

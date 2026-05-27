@@ -41,3 +41,24 @@ export function formatTimelineYear(
 export function formatTimelineRange(range: TimelineRange): string {
   return `${formatTimelineYear(range[0])} - ${formatTimelineYear(range[1])}`;
 }
+
+export function findDynastyByYear(
+  year: number,
+  dynasties: Dynasty[],
+): Dynasty | null {
+  let best: Dynasty | null = null;
+  let bestDistance = Infinity;
+  for (const dynasty of dynasties) {
+    const start = dynasty.startYear;
+    const end = dynasty.endYear ?? dynasty.startYear;
+    if (year >= start && year <= end) {
+      return dynasty;
+    }
+    const distance = year < start ? start - year : year - end;
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      best = dynasty;
+    }
+  }
+  return best;
+}

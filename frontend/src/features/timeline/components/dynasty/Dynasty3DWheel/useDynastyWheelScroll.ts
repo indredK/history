@@ -7,7 +7,7 @@ import { useEffect, useRef, type RefObject } from 'react';
 interface Options {
   containerRef: RefObject<HTMLDivElement | null>;
   total: number;
-  setActiveIndex: (updater: (prev: number) => number) => void;
+  setActiveIndex: (updater: number | ((prev: number) => number)) => void;
 }
 
 export function useDynastyWheelScroll({ containerRef, total, setActiveIndex }: Options) {
