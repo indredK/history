@@ -232,15 +232,13 @@
 /* 根元素样式 */
 #root {
   height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
   position: relative;
-  touch-action: none; /* 防止触摸滚动 */
 }
 
 html {
   scroll-behavior: smooth;
   height: 100%; /* 确保html占满视口 */
-  overflow: hidden; /* 防止html滚动 */
 }
 
 body {
@@ -251,14 +249,9 @@ body {
   background: var(--color-bg-gradient);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden; /* 保持页面不滚动，内容在组件内滚动 */
-  height: 100vh; /* 确保body占满视口高度 */
+  min-height: 100vh;
   margin: 0; /* 移除默认边距 */
   padding: 0; /* 移除默认内边距 */
-  /* 移动端防滚动 */
-  overscroll-behavior: none;
-  -webkit-overscroll-behavior: none;
-  touch-action: none; /* 防止触摸滚动 */
   background-attachment: fixed;
 }
 

@@ -88,8 +88,6 @@ export function AppLayout({ routes }: AppLayoutProps) {
       height: '100vh', // 使用固定高度而不是minHeight
       overflow: 'hidden', // 确保不会出现页面滚动条
       position: 'relative', // 添加相对定位
-      touchAction: 'none', // 防止触摸滚动
-      overscrollBehavior: 'none', // 防止过度滚动
       width: '100%',
     }} className="app">
       {/* 数据源指示器 - 固定在右上角 */}
@@ -110,9 +108,9 @@ export function AppLayout({ routes }: AppLayoutProps) {
       <Box sx={{ 
         display: 'flex', 
         flex: 1, 
+        minHeight: 0,
         overflow: 'hidden',
         position: 'relative', // 添加相对定位
-        touchAction: 'pan-x pan-y', // 允许组件内部滚动
         width: '100%',
         maxWidth: 'var(--app-shell-max-width)',
         margin: '0 auto',
@@ -133,12 +131,12 @@ export function AppLayout({ routes }: AppLayoutProps) {
         
         <Box component="main" sx={{
           flex: 1,
+          minHeight: 0,
           overflow: 'hidden',
           padding: isMobile ? (isSmallMobile ? '8px' : '12px') : '16px',
           marginTop: 0,
           background: 'transparent',
           transition: `all ${glassConfig.animation.duration.slow} ${glassConfig.animation.easing}`,
-          touchAction: 'pan-x pan-y', // 允许内部滚动
           // 移动端优化
           ...(isMobile && {
             backgroundAttachment: 'scroll', // 移动端不支持 fixed
@@ -158,8 +156,8 @@ export function AppLayout({ routes }: AppLayoutProps) {
           <div className="content" style={{ 
             height: '100%', 
             position: 'relative',
-            overflow: 'hidden', // 确保内容容器不滚动
-            touchAction: 'pan-x pan-y', // 允许内部滚动
+            overflow: 'auto',
+            overscrollBehavior: 'contain',
           }}>
             <Suspense fallback={<LoadingSkeleton variant="page" />}>
               <MainContent />
