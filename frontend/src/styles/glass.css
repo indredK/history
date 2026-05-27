@@ -12,6 +12,10 @@
    桌面端CSS变量 (Desktop CSS Variables)
    ============================================ */
 :root {
+  --glass-surface-rgb: var(--theme-glass-surface-rgb, 255, 255, 255);
+  --glass-surface-soft-rgb: var(--theme-glass-surface-soft-rgb, 30, 30, 30);
+  --glass-on-surface-rgb: var(--theme-glass-on-surface-rgb, 255, 255, 255);
+  --glass-tint-rgb: var(--theme-glass-tint-rgb, 100, 150, 255);
   /* ------------------------------------------
      模糊级别 (Blur Levels)
      Requirements: 4.2
@@ -33,16 +37,16 @@
   --glass-bg-opacity-solid: 0.85;
 
   /* 预设背景颜色 */
-  --glass-bg-white: rgba(255, 255, 255, var(--glass-bg-opacity-medium));
-  --glass-bg-dark: rgba(30, 30, 30, var(--glass-bg-opacity-medium));
-  --glass-bg-accent: rgba(100, 150, 255, var(--glass-bg-opacity-light));
+  --glass-bg-white: rgba(var(--glass-surface-rgb), var(--glass-bg-opacity-medium));
+  --glass-bg-dark: rgba(var(--glass-surface-soft-rgb), var(--glass-bg-opacity-medium));
+  --glass-bg-accent: rgba(var(--glass-tint-rgb), var(--glass-bg-opacity-light));
 
   /* ------------------------------------------
      边框样式 (Border Styles)
      Requirements: 4.4
      ------------------------------------------ */
-  --glass-border-color: rgba(255, 255, 255, 0.18);
-  --glass-border-color-dark: rgba(0, 0, 0, 0.1);
+  --glass-border-color: var(--theme-glass-border, rgba(255, 255, 255, 0.18));
+  --glass-border-color-dark: var(--theme-glass-border-light, rgba(0, 0, 0, 0.1));
   --glass-border-width: 1px;
   --glass-border: var(--glass-border-width) solid var(--glass-border-color);
 
@@ -60,11 +64,11 @@
      阴影 (Shadows)
      Requirements: 4.5
      ------------------------------------------ */
-  --glass-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --glass-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-  --glass-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);
-  --glass-shadow-glow: 0 0 20px rgba(255, 255, 255, 0.1);
-  --glass-shadow-inset: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  --glass-shadow-sm: var(--theme-shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.1));
+  --glass-shadow-md: var(--theme-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12));
+  --glass-shadow-lg: var(--theme-shadow-lg, 0 8px 32px rgba(0, 0, 0, 0.15));
+  --glass-shadow-glow: var(--theme-shadow-glow, 0 0 20px rgba(255, 255, 255, 0.1));
+  --glass-shadow-inset: inset 0 1px 1px rgba(var(--glass-on-surface-rgb), 0.08);
 
   /* ------------------------------------------
      动画时长 (Animation Duration)
@@ -252,7 +256,7 @@
 .glass-effect {
   backdrop-filter: blur(var(--glass-blur-medium));
   -webkit-backdrop-filter: blur(var(--glass-blur-medium));
-  background-color: rgba(255, 255, 255, var(--glass-bg-opacity-medium));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-bg-opacity-medium));
   border: var(--glass-border);
   border-radius: var(--glass-radius-md);
   box-shadow: var(--glass-shadow-md);
@@ -260,7 +264,7 @@
 }
 
 .glass-effect:hover {
-  background-color: rgba(255, 255, 255, calc(var(--glass-bg-opacity-medium) + 0.1));
+  background-color: rgba(var(--glass-surface-rgb), calc(var(--glass-bg-opacity-medium) + 0.1));
 }
 
 /**
@@ -270,7 +274,7 @@
 .glass-card {
   backdrop-filter: blur(var(--glass-card-blur));
   -webkit-backdrop-filter: blur(var(--glass-card-blur));
-  background-color: rgba(255, 255, 255, var(--glass-card-bg-opacity));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-card-bg-opacity));
   border: var(--glass-border);
   border-radius: var(--glass-radius-lg);
   box-shadow: var(--glass-shadow-md);
@@ -278,7 +282,7 @@
 }
 
 .glass-card:hover {
-  background-color: rgba(255, 255, 255, calc(var(--glass-card-bg-opacity) + var(--glass-card-hover-delta)));
+  background-color: rgba(var(--glass-surface-rgb), calc(var(--glass-card-bg-opacity) + var(--glass-card-hover-delta)));
   box-shadow: var(--glass-shadow-lg);
 }
 
@@ -289,15 +293,15 @@
 .glass-card-dark {
   backdrop-filter: blur(var(--glass-card-blur));
   -webkit-backdrop-filter: blur(var(--glass-card-blur));
-  background-color: rgba(30, 30, 30, var(--glass-card-bg-opacity));
-  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-card-bg-opacity));
+  border: var(--glass-border-width) solid var(--theme-glass-border-light);
   border-radius: var(--glass-radius-lg);
   box-shadow: var(--glass-shadow-md);
   transition: var(--glass-transition);
 }
 
 .glass-card-dark:hover {
-  background-color: rgba(30, 30, 30, calc(var(--glass-card-bg-opacity) + var(--glass-card-hover-delta)));
+  background-color: rgba(var(--glass-surface-soft-rgb), calc(var(--glass-card-bg-opacity) + var(--glass-card-hover-delta)));
   box-shadow: var(--glass-shadow-lg);
 }
 
@@ -308,7 +312,7 @@
 .glass-button {
   backdrop-filter: blur(var(--glass-btn-primary-blur));
   -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur));
-  background-color: rgba(255, 255, 255, var(--glass-btn-primary-bg-opacity));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-btn-primary-bg-opacity));
   border: var(--glass-border);
   border-radius: var(--glass-radius-md);
   box-shadow: var(--glass-shadow-sm);
@@ -317,13 +321,13 @@
 }
 
 .glass-button:hover {
-  background-color: rgba(255, 255, 255, calc(var(--glass-btn-primary-bg-opacity) + 0.1));
+  background-color: rgba(var(--glass-surface-rgb), calc(var(--glass-btn-primary-bg-opacity) + 0.1));
   box-shadow: var(--glass-shadow-md);
   transform: translateY(-1px);
 }
 
 .glass-button:active {
-  background-color: rgba(255, 255, 255, calc(var(--glass-btn-primary-bg-opacity) - 0.05));
+  background-color: rgba(var(--glass-surface-rgb), calc(var(--glass-btn-primary-bg-opacity) - 0.05));
   transform: translateY(0);
   box-shadow: var(--glass-shadow-sm);
 }
@@ -335,7 +339,7 @@
 .glass-button-secondary {
   backdrop-filter: blur(var(--glass-btn-secondary-blur));
   -webkit-backdrop-filter: blur(var(--glass-btn-secondary-blur));
-  background-color: rgba(255, 255, 255, var(--glass-btn-secondary-bg-opacity));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-btn-secondary-bg-opacity));
   border: var(--glass-border);
   border-radius: var(--glass-radius-md);
   box-shadow: var(--glass-shadow-sm);
@@ -344,7 +348,7 @@
 }
 
 .glass-button-secondary:hover {
-  background-color: rgba(255, 255, 255, calc(var(--glass-btn-secondary-bg-opacity) + 0.1));
+  background-color: rgba(var(--glass-surface-rgb), calc(var(--glass-btn-secondary-bg-opacity) + 0.1));
 }
 
 /**
@@ -354,7 +358,7 @@
 .glass-button-icon {
   backdrop-filter: blur(var(--glass-btn-icon-blur));
   -webkit-backdrop-filter: blur(var(--glass-btn-icon-blur));
-  background-color: rgba(255, 255, 255, var(--glass-btn-icon-bg-opacity));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-btn-icon-bg-opacity));
   border: var(--glass-border);
   border-radius: var(--glass-radius-full);
   box-shadow: var(--glass-shadow-sm);
@@ -363,7 +367,7 @@
 }
 
 .glass-button-icon:hover {
-  background-color: rgba(255, 255, 255, calc(var(--glass-btn-icon-bg-opacity) + 0.15));
+  background-color: rgba(var(--glass-surface-rgb), calc(var(--glass-btn-icon-bg-opacity) + 0.15));
   box-shadow: var(--glass-shadow-glow);
 }
 
@@ -374,7 +378,7 @@
 .glass-nav {
   backdrop-filter: blur(var(--glass-nav-blur));
   -webkit-backdrop-filter: blur(var(--glass-nav-blur));
-  background-color: rgba(255, 255, 255, var(--glass-nav-bg-opacity));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-nav-bg-opacity));
   border-bottom: var(--glass-border);
   box-shadow: var(--glass-shadow-sm);
   transition: var(--glass-transition);
@@ -387,8 +391,8 @@
 .glass-nav-dark {
   backdrop-filter: blur(var(--glass-nav-blur));
   -webkit-backdrop-filter: blur(var(--glass-nav-blur));
-  background-color: rgba(30, 30, 30, var(--glass-nav-bg-opacity));
-  border-bottom: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-nav-bg-opacity));
+  border-bottom: var(--glass-border-width) solid var(--theme-glass-border-light);
   box-shadow: var(--glass-shadow-sm);
   transition: var(--glass-transition);
 }
@@ -404,11 +408,11 @@
 }
 
 .glass-nav-item:hover {
-  background-color: rgba(255, 255, 255, var(--glass-nav-item-hover-opacity));
+  background-color: rgba(var(--glass-tint-rgb), 0.12);
 }
 
 .glass-nav-item.active {
-  background-color: rgba(255, 255, 255, var(--glass-nav-item-hover-opacity));
+  background-color: rgba(var(--glass-tint-rgb), 0.16);
   box-shadow: var(--glass-nav-active-glow);
 }
 
@@ -419,8 +423,8 @@
 .glass-sidebar {
   backdrop-filter: blur(var(--glass-nav-blur));
   -webkit-backdrop-filter: blur(var(--glass-nav-blur));
-  background-color: rgba(30, 30, 30, var(--glass-nav-bg-opacity));
-  border-right: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-nav-bg-opacity));
+  border-right: var(--glass-border-width) solid var(--theme-glass-border-light);
   box-shadow: var(--glass-shadow-md);
   transition: var(--glass-transition);
 }
@@ -432,7 +436,7 @@
 .glass-table {
   backdrop-filter: blur(var(--glass-table-container-blur));
   -webkit-backdrop-filter: blur(var(--glass-table-container-blur));
-  background-color: rgba(255, 255, 255, var(--glass-table-container-bg-opacity));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-table-container-bg-opacity));
   border: var(--glass-border);
   border-radius: var(--glass-radius-lg);
   box-shadow: var(--glass-shadow-md);
@@ -446,7 +450,7 @@
 .glass-table-header {
   backdrop-filter: blur(var(--glass-table-header-blur));
   -webkit-backdrop-filter: blur(var(--glass-table-header-blur));
-  background-color: rgba(255, 255, 255, var(--glass-table-header-bg-opacity));
+  background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-header-bg-opacity));
   border-bottom: var(--glass-border);
 }
 
@@ -455,12 +459,12 @@
  * Glassmorphism table row
  */
 .glass-table-row {
-  background-color: rgba(255, 255, 255, var(--glass-table-row-bg-opacity));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-table-row-bg-opacity));
   transition: background-color var(--glass-duration-hover) var(--glass-easing);
 }
 
 .glass-table-row:hover {
-  background-color: rgba(255, 255, 255, var(--glass-table-row-hover-opacity));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-table-row-hover-opacity));
 }
 
 /**
@@ -480,7 +484,7 @@
 .glass-modal {
   backdrop-filter: blur(var(--glass-modal-content-blur));
   -webkit-backdrop-filter: blur(var(--glass-modal-content-blur));
-  background-color: rgba(255, 255, 255, var(--glass-modal-content-bg-opacity));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-modal-content-bg-opacity));
   border: var(--glass-border);
   border-radius: var(--glass-radius-xl);
   box-shadow: var(--glass-shadow-lg);
@@ -493,7 +497,7 @@
 .glass-popover {
   backdrop-filter: blur(var(--glass-popover-blur));
   -webkit-backdrop-filter: blur(var(--glass-popover-blur));
-  background-color: rgba(255, 255, 255, var(--glass-popover-bg-opacity));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-popover-bg-opacity));
   border: var(--glass-border);
   border-radius: var(--glass-radius-md);
   box-shadow: var(--glass-shadow-md);
@@ -506,11 +510,11 @@
 .glass-tooltip {
   backdrop-filter: blur(var(--glass-tooltip-blur));
   -webkit-backdrop-filter: blur(var(--glass-tooltip-blur));
-  background-color: rgba(30, 30, 30, var(--glass-tooltip-bg-opacity));
-  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-tooltip-bg-opacity));
+  border: var(--glass-border-width) solid var(--theme-glass-border-light);
   border-radius: var(--glass-radius-sm);
   box-shadow: var(--glass-shadow-sm);
-  color: white;
+  color: var(--theme-text-primary);
 }
 
 /**
@@ -520,7 +524,7 @@
 .glass-dropdown {
   backdrop-filter: blur(var(--glass-dropdown-blur));
   -webkit-backdrop-filter: blur(var(--glass-dropdown-blur));
-  background-color: rgba(255, 255, 255, var(--glass-dropdown-bg-opacity));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-dropdown-bg-opacity));
   border: var(--glass-border);
   border-radius: var(--glass-radius-md);
   box-shadow: var(--glass-shadow-md);
@@ -533,7 +537,7 @@
 .glass-badge {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(var(--glass-surface-rgb), 0.6);
   border: var(--glass-border);
   border-radius: var(--glass-radius-full);
   box-shadow: var(--glass-shadow-sm);
@@ -548,15 +552,15 @@
 .glass-input {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(var(--glass-surface-rgb), 0.4);
   border: var(--glass-border);
   border-radius: var(--glass-radius-md);
   transition: var(--glass-transition);
 }
 
 .glass-input:focus {
-  background-color: rgba(255, 255, 255, 0.6);
-  border-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(var(--glass-surface-rgb), 0.6);
+  border-color: var(--theme-glass-border-heavy);
   box-shadow: var(--glass-shadow-glow);
   outline: none;
 }
@@ -1024,107 +1028,107 @@
  */
 [data-theme="light"] .glass-effect,
 [data-theme="light"] .glass-card {
-  background-color: rgba(255, 255, 255, var(--glass-bg-opacity-medium));
-  border-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-bg-opacity-medium));
+  border-color: var(--theme-glass-border);
   color: var(--theme-text-primary);
 }
 
 [data-theme="light"] .glass-effect:hover,
 [data-theme="light"] .glass-card:hover {
-  background-color: rgba(255, 255, 255, calc(var(--glass-bg-opacity-medium) + 0.1));
+  background-color: rgba(var(--glass-surface-rgb), calc(var(--glass-bg-opacity-medium) + 0.1));
 }
 
 [data-theme="light"] .glass-card-dark {
-  background-color: rgba(255, 255, 255, var(--glass-card-bg-opacity));
-  border-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-card-bg-opacity));
+  border-color: var(--theme-glass-border);
   color: var(--theme-text-primary);
 }
 
 [data-theme="light"] .glass-card-dark:hover {
-  background-color: rgba(255, 255, 255, calc(var(--glass-card-bg-opacity) + var(--glass-card-hover-delta)));
+  background-color: rgba(var(--glass-surface-soft-rgb), calc(var(--glass-card-bg-opacity) + var(--glass-card-hover-delta)));
 }
 
 [data-theme="light"] .glass-button,
 [data-theme="light"] .glass-button-secondary,
 [data-theme="light"] .glass-button-icon {
-  background-color: rgba(255, 255, 255, var(--glass-btn-primary-bg-opacity));
-  border-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-btn-primary-bg-opacity));
+  border-color: var(--theme-glass-border);
   color: var(--theme-text-primary);
 }
 
 [data-theme="light"] .glass-button:hover {
-  background-color: rgba(255, 255, 255, calc(var(--glass-btn-primary-bg-opacity) + 0.1));
+  background-color: rgba(var(--glass-surface-rgb), calc(var(--glass-btn-primary-bg-opacity) + 0.1));
 }
 
 [data-theme="light"] .glass-nav,
 [data-theme="light"] .glass-nav-dark,
 [data-theme="light"] .glass-sidebar {
-  background-color: rgba(255, 255, 255, var(--glass-nav-bg-opacity));
-  border-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-nav-bg-opacity));
+  border-color: var(--theme-glass-border);
   color: var(--theme-text-primary);
 }
 
 [data-theme="light"] .glass-nav-item:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgba(var(--glass-tint-rgb), 0.08);
 }
 
 [data-theme="light"] .glass-nav-item.active {
-  background-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: rgba(var(--glass-tint-rgb), 0.14);
+  box-shadow: var(--theme-shadow-glow);
 }
 
 [data-theme="light"] .glass-table {
-  background-color: rgba(255, 255, 255, var(--glass-table-container-bg-opacity));
-  border-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-table-container-bg-opacity));
+  border-color: var(--theme-glass-border);
 }
 
 [data-theme="light"] .glass-table-header {
-  background-color: rgba(255, 255, 255, var(--glass-table-header-bg-opacity));
-  border-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-header-bg-opacity));
+  border-color: var(--theme-glass-border);
 }
 
 [data-theme="light"] .glass-table-row {
-  background-color: rgba(255, 255, 255, var(--glass-table-row-bg-opacity));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-table-row-bg-opacity));
 }
 
 [data-theme="light"] .glass-table-row:hover {
-  background-color: rgba(255, 255, 255, var(--glass-table-row-hover-opacity));
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-table-row-hover-opacity));
 }
 
 [data-theme="light"] .glass-modal {
-  background-color: rgba(255, 255, 255, var(--glass-modal-content-bg-opacity));
-  border-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-modal-content-bg-opacity));
+  border-color: var(--theme-glass-border);
   color: var(--theme-text-primary);
 }
 
 [data-theme="light"] .glass-popover,
 [data-theme="light"] .glass-dropdown {
-  background-color: rgba(255, 255, 255, var(--glass-popover-bg-opacity));
-  border-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(var(--glass-surface-rgb), var(--glass-popover-bg-opacity));
+  border-color: var(--theme-glass-border);
   color: var(--theme-text-primary);
 }
 
 [data-theme="light"] .glass-tooltip {
-  background-color: rgba(50, 50, 50, var(--glass-tooltip-bg-opacity));
-  border-color: rgba(255, 255, 255, 0.1);
-  color: white;
+  background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-tooltip-bg-opacity));
+  border-color: var(--theme-glass-border-light);
+  color: var(--theme-text-primary);
 }
 
 [data-theme="light"] .glass-input {
-  background-color: rgba(255, 255, 255, 0.6);
-  border-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(var(--glass-surface-rgb), 0.6);
+  border-color: var(--theme-glass-border);
   color: var(--theme-text-primary);
 }
 
 [data-theme="light"] .glass-input:focus {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-color: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  background-color: rgba(var(--glass-surface-rgb), 0.8);
+  border-color: var(--theme-glass-border-heavy);
+  box-shadow: var(--theme-shadow-glow);
 }
 
 [data-theme="light"] .glass-badge {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(var(--glass-surface-rgb), 0.8);
+  border-color: var(--theme-glass-border);
   color: var(--theme-text-primary);
 }
 
@@ -1133,11 +1137,11 @@
  * Light mode shadow adjustments
  */
 [data-theme="light"] {
-  --glass-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --glass-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --glass-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
-  --glass-shadow-glow: 0 0 20px rgba(0, 0, 0, 0.05);
-  --glass-shadow-inset: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  --glass-shadow-sm: var(--theme-shadow-sm);
+  --glass-shadow-md: var(--theme-shadow-md);
+  --glass-shadow-lg: var(--theme-shadow-lg);
+  --glass-shadow-glow: var(--theme-shadow-glow);
+  --glass-shadow-inset: inset 0 1px 1px rgba(var(--glass-on-surface-rgb), 0.05);
   
   --glass-fallback-bg: rgba(255, 255, 255, 0.95);
   --glass-fallback-border: rgba(0, 0, 0, 0.1);

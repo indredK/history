@@ -40,7 +40,7 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
   
   // 根据主题获取背景色
   const isDark = theme === 'dark';
-  const borderColor = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.12)';
+  const borderColor = isDark ? 'rgba(226, 198, 140, 0.16)' : 'rgba(118, 90, 51, 0.14)';
 
   const handleNavigation = (path: string) => {
     navigate(path);

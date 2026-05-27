@@ -33,8 +33,8 @@ export function AppLayout() {
   
   // 根据主题获取背景色
   const isDark = theme === 'dark';
-  const bgBase = isDark ? '30, 30, 30' : '255, 255, 255';
-  const borderColor = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.12)';
+  const bgBase = isDark ? '28, 24, 20' : '255, 251, 243';
+  const borderColor = isDark ? 'rgba(226, 198, 140, 0.16)' : 'rgba(118, 90, 51, 0.14)';
 
   // 根据路径确定当前活跃的标签
   const getActiveTabFromPath = (pathname: string): string => {

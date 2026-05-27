@@ -20,7 +20,7 @@
   /* 毛玻璃效果 */
   backdrop-filter: blur(var(--glass-btn-primary-blur));
   -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur));
-  background-color: rgba(255, 255, 255, var(--glass-btn-primary-bg-opacity));
+  background-color: rgba(var(--glass-surface-rgb, 255, 255, 255), var(--glass-btn-primary-bg-opacity));
   border: var(--glass-border);
   box-shadow: var(--glass-shadow-sm), var(--glass-shadow-inset);
 }
@@ -38,7 +38,7 @@
 
 .btn:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2), var(--glass-shadow-glow);
+  box-shadow: 0 0 0 3px rgba(var(--glass-tint-rgb, 100, 150, 255), 0.2), var(--glass-shadow-glow);
 }
 
 .btn:disabled {
@@ -50,7 +50,7 @@
 
 .btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  background-color: rgba(255, 255, 255, calc(var(--glass-btn-primary-bg-opacity) + 0.1));
+  background-color: rgba(var(--glass-surface-rgb, 255, 255, 255), calc(var(--glass-btn-primary-bg-opacity) + 0.1));
   box-shadow: var(--glass-shadow-md), var(--glass-shadow-glow);
 }
 
@@ -60,7 +60,7 @@
 
 .btn:active:not(:disabled) {
   transform: translateY(0);
-  background-color: rgba(255, 255, 255, calc(var(--glass-btn-primary-bg-opacity) - 0.05));
+  background-color: rgba(var(--glass-surface-rgb, 255, 255, 255), calc(var(--glass-btn-primary-bg-opacity) - 0.05));
 }
 
 /* 按钮变体 - 主要按钮 */
@@ -99,14 +99,14 @@
 .btn-outline {
   backdrop-filter: blur(var(--glass-btn-secondary-blur));
   -webkit-backdrop-filter: blur(var(--glass-btn-secondary-blur));
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(var(--glass-surface-rgb, 255, 255, 255), 0.1);
   color: var(--color-text-primary);
-  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.3);
+  border: var(--glass-border-width) solid var(--theme-glass-border-heavy);
 }
 
 .btn-outline:hover:not(:disabled) {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(var(--glass-surface-rgb, 255, 255, 255), 0.2);
+  border-color: var(--theme-glass-border-heavy);
   color: var(--color-text-primary);
 }
 
@@ -121,7 +121,7 @@
 }
 
 .btn-ghost:hover:not(:disabled) {
-  background-color: rgba(255, 255, 255, var(--glass-btn-icon-bg-opacity));
+  background-color: rgba(var(--glass-surface-rgb, 255, 255, 255), var(--glass-btn-icon-bg-opacity));
   color: var(--color-text-primary);
   box-shadow: var(--glass-shadow-sm);
 }
@@ -143,12 +143,12 @@
 .card {
   backdrop-filter: blur(var(--glass-card-blur));
   -webkit-backdrop-filter: blur(var(--glass-card-blur));
-  background-color: rgba(30, 30, 30, var(--glass-card-bg-opacity));
+  background-color: rgba(var(--glass-surface-soft-rgb, 30, 30, 30), var(--glass-card-bg-opacity));
   border-radius: var(--glass-radius-xl);
   box-shadow: var(--glass-shadow-md), var(--glass-shadow-inset);
   overflow: hidden;
   transition: all var(--glass-duration-normal) var(--glass-easing);
-  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
+  border: var(--glass-border-width) solid var(--theme-glass-border-light);
   position: relative;
 }
 
@@ -159,16 +159,16 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--glass-on-surface-rgb, 255, 255, 255), 0.14), transparent);
   opacity: 0;
   transition: opacity var(--glass-duration-normal) var(--glass-easing);
 }
 
 .card:hover {
   transform: translateY(-4px);
-  background-color: rgba(30, 30, 30, calc(var(--glass-card-bg-opacity) + var(--glass-card-hover-delta)));
+  background-color: rgba(var(--glass-surface-soft-rgb, 30, 30, 30), calc(var(--glass-card-bg-opacity) + var(--glass-card-hover-delta)));
   box-shadow: var(--glass-shadow-lg), var(--glass-shadow-glow);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: var(--theme-glass-border-heavy);
 }
 
 .card:hover::before {
@@ -177,10 +177,10 @@
 
 .card-header {
   padding: var(--space-6);
-  border-bottom: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
+  border-bottom: var(--glass-border-width) solid var(--theme-glass-border-light);
   backdrop-filter: blur(var(--glass-blur-light));
   -webkit-backdrop-filter: blur(var(--glass-blur-light));
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgba(var(--glass-on-surface-rgb, 255, 255, 255), 0.03);
 }
 
 .card-title {
@@ -193,7 +193,7 @@
 
 .card:hover .card-title {
   color: var(--color-text-primary);
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 10px rgba(var(--glass-tint-rgb, 100, 150, 255), 0.16);
 }
 
 .card-subtitle {
@@ -208,10 +208,10 @@
 
 .card-footer {
   padding: var(--space-6);
-  border-top: var(--glass-border-width) solid rgba(255, 255, 255, 0.1);
+  border-top: var(--glass-border-width) solid var(--theme-glass-border-light);
   backdrop-filter: blur(var(--glass-blur-light));
   -webkit-backdrop-filter: blur(var(--glass-blur-light));
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: rgba(var(--glass-on-surface-rgb, 255, 255, 255), 0.02);
 }
 
 /* 表单组件 - 毛玻璃风格 */

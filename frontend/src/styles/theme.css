@@ -30,15 +30,19 @@
 [data-theme="dark"],
 :root {
   /* 毛玻璃背景 */
-  --theme-glass-bg-base: 30, 30, 30;
-  --theme-glass-bg: rgba(var(--theme-glass-bg-base), 0.7);
-  --theme-glass-bg-light: rgba(var(--theme-glass-bg-base), 0.5);
-  --theme-glass-bg-heavy: rgba(var(--theme-glass-bg-base), 0.85);
+  --theme-glass-bg-base: 28, 24, 20;
+  --theme-glass-surface-rgb: 28, 24, 20;
+  --theme-glass-surface-soft-rgb: 43, 37, 31;
+  --theme-glass-on-surface-rgb: 245, 236, 216;
+  --theme-glass-tint-rgb: 199, 143, 69;
+  --theme-glass-bg: rgba(var(--theme-glass-bg-base), 0.72);
+  --theme-glass-bg-light: rgba(var(--theme-glass-surface-soft-rgb), 0.56);
+  --theme-glass-bg-heavy: rgba(var(--theme-glass-bg-base), 0.88);
   
   /* 毛玻璃边框 */
-  --theme-glass-border: rgba(255, 255, 255, 0.15);
-  --theme-glass-border-light: rgba(255, 255, 255, 0.1);
-  --theme-glass-border-heavy: rgba(255, 255, 255, 0.2);
+  --theme-glass-border: rgba(226, 198, 140, 0.16);
+  --theme-glass-border-light: rgba(226, 198, 140, 0.1);
+  --theme-glass-border-heavy: rgba(226, 198, 140, 0.24);
   
   /* UI 背景色 */
   --theme-bg-primary: rgba(20, 20, 20, 1);
@@ -58,14 +62,14 @@
   --theme-divider: rgba(255, 255, 255, 0.1);
   
   /* 阴影 */
-  --theme-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --theme-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --theme-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-  --theme-shadow-glow: 0 0 20px rgba(255, 255, 255, 0.1);
+  --theme-shadow-sm: 0 8px 18px rgba(0, 0, 0, 0.22);
+  --theme-shadow-md: 0 18px 36px rgba(0, 0, 0, 0.28);
+  --theme-shadow-lg: 0 28px 54px rgba(0, 0, 0, 0.34);
+  --theme-shadow-glow: 0 0 24px rgba(199, 143, 69, 0.14);
   
   /* 悬停效果 */
-  --theme-hover-bg: rgba(255, 255, 255, 0.1);
-  --theme-active-bg: rgba(255, 255, 255, 0.15);
+  --theme-hover-bg: rgba(199, 143, 69, 0.12);
+  --theme-active-bg: rgba(199, 143, 69, 0.18);
   
   /* 图标颜色 */
   --theme-icon-primary: rgba(255, 255, 255, 0.9);
@@ -79,15 +83,19 @@
    ============================================ */
 [data-theme="light"] {
   /* 毛玻璃背景 */
-  --theme-glass-bg-base: 255, 255, 255;
-  --theme-glass-bg: rgba(var(--theme-glass-bg-base), 0.7);
-  --theme-glass-bg-light: rgba(var(--theme-glass-bg-base), 0.5);
-  --theme-glass-bg-heavy: rgba(var(--theme-glass-bg-base), 0.85);
+  --theme-glass-bg-base: 255, 251, 243;
+  --theme-glass-surface-rgb: 255, 251, 243;
+  --theme-glass-surface-soft-rgb: 244, 236, 223;
+  --theme-glass-on-surface-rgb: 44, 36, 28;
+  --theme-glass-tint-rgb: 155, 97, 33;
+  --theme-glass-bg: rgba(var(--theme-glass-bg-base), 0.74);
+  --theme-glass-bg-light: rgba(var(--theme-glass-surface-soft-rgb), 0.62);
+  --theme-glass-bg-heavy: rgba(var(--theme-glass-bg-base), 0.9);
   
   /* 毛玻璃边框 */
-  --theme-glass-border: rgba(0, 0, 0, 0.12);
-  --theme-glass-border-light: rgba(0, 0, 0, 0.08);
-  --theme-glass-border-heavy: rgba(0, 0, 0, 0.18);
+  --theme-glass-border: rgba(118, 90, 51, 0.14);
+  --theme-glass-border-light: rgba(118, 90, 51, 0.1);
+  --theme-glass-border-heavy: rgba(118, 90, 51, 0.2);
   
   /* UI 背景色 */
   --theme-bg-primary: rgba(245, 245, 245, 1);
@@ -107,18 +115,38 @@
   --theme-divider: rgba(0, 0, 0, 0.08);
   
   /* 阴影 */
-  --theme-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --theme-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-  --theme-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
-  --theme-shadow-glow: 0 0 20px rgba(0, 0, 0, 0.05);
+  --theme-shadow-sm: 0 8px 18px rgba(82, 58, 28, 0.08);
+  --theme-shadow-md: 0 18px 36px rgba(82, 58, 28, 0.12);
+  --theme-shadow-lg: 0 28px 54px rgba(82, 58, 28, 0.16);
+  --theme-shadow-glow: 0 0 24px rgba(155, 97, 33, 0.1);
   
   /* 悬停效果 */
-  --theme-hover-bg: rgba(0, 0, 0, 0.04);
-  --theme-active-bg: rgba(0, 0, 0, 0.08);
+  --theme-hover-bg: rgba(155, 97, 33, 0.08);
+  --theme-active-bg: rgba(155, 97, 33, 0.14);
   
   /* 图标颜色 */
   --theme-icon-primary: rgba(0, 0, 0, 0.8);
   --theme-icon-secondary: rgba(0, 0, 0, 0.54);
+}
+
+[data-style="glass"] {
+  --app-panel-bg: var(--theme-glass-bg);
+  --app-panel-bg-soft: var(--theme-glass-bg-light);
+  --app-panel-bg-strong: var(--theme-glass-bg-heavy);
+  --app-panel-border: 1px solid var(--theme-glass-border);
+  --app-panel-shadow-sm: var(--theme-shadow-sm);
+  --app-panel-shadow-md: var(--theme-shadow-md);
+  --app-panel-shadow-lg: var(--theme-shadow-lg);
+}
+
+[data-style="classic"] {
+  --app-panel-bg: var(--theme-bg-secondary);
+  --app-panel-bg-soft: var(--theme-bg-surface);
+  --app-panel-bg-strong: var(--theme-bg-elevated);
+  --app-panel-border: 1px solid var(--theme-border-color);
+  --app-panel-shadow-sm: var(--theme-shadow-sm);
+  --app-panel-shadow-md: var(--theme-shadow-md);
+  --app-panel-shadow-lg: var(--theme-shadow-lg);
 }
 
 /* ============================================

@@ -87,10 +87,10 @@
 /* 事件项样式 - 毛玻璃风格 */
 /* Requirements: 5.1, 5.2 */
 .event-item {
-  background: rgba(255, 255, 255, var(--glass-card-bg-opacity, 0.6));
+  background: rgba(var(--glass-surface-rgb, 255, 255, 255), var(--glass-card-bg-opacity, 0.6));
   backdrop-filter: blur(var(--glass-card-blur, 12px));
   -webkit-backdrop-filter: blur(var(--glass-card-blur, 12px));
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--theme-glass-border, rgba(255, 255, 255, 0.18));
   border-radius: var(--glass-radius-xl, 24px);
   padding: var(--space-4);
   margin-bottom: var(--space-4);
@@ -117,9 +117,9 @@
 
 .event-item:hover {
   transform: translateY(-4px) scale(1.02);
-  background: rgba(255, 255, 255, calc(var(--glass-card-bg-opacity, 0.6) + var(--glass-card-hover-delta, 0.1)));
+  background: rgba(var(--glass-surface-rgb, 255, 255, 255), calc(var(--glass-card-bg-opacity, 0.6) + var(--glass-card-hover-delta, 0.1)));
   box-shadow: var(--glass-shadow-lg, 0 8px 32px rgba(0, 0, 0, 0.15)), var(--glass-shadow-glow, 0 0 20px rgba(255, 255, 255, 0.1));
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--theme-glass-border-heavy, rgba(255, 255, 255, 0.3));
 }
 
 .event-item:hover::before {
