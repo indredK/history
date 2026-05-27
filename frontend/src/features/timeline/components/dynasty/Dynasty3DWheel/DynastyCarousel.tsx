@@ -1,12 +1,17 @@
 /**
- * 朝代卡片轮播 —— 平滑插值位移
+ * 朝代卡片轮播 —— 环形轨道动画
  */
 
-import { useEffect, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { dynastyConfig } from '@/config';
 import type { Dynasty } from '@/services/culture/types';
+import {
+  buildCircularCarouselLayout,
+  getCircularTrackPoint,
+  type CircularCarouselOptions,
+} from '@/utils';
 import { DynastyCard } from './DynastyCard';
 
 interface DynastyCarouselProps {
@@ -20,44 +25,103 @@ export function DynastyCarousel({
   activeIndex,
   onCardClick,
 }: DynastyCarouselProps) {
-  const groupRef = useRef<THREE.Group>(null);
-  const targetPosition = useRef<number>(0);
-  const currentPosition = useRef<number>(0);
+  const cardRefs = useRef<Array<THREE.Group | null>>([]);
+  const currentIndex = useRef(activeIndex);
 
-  const spacing = dynastyConfig.threeDConfig.spacing;
-  const moveSpeed = dynastyConfig.threeDConfig.animation.moveSpeed;
+  const { geometry, animation } = dynastyConfig.threeDConfig;
+  const motionDamping = Math.max(8, animation.moveSpeed * 96);
 
-  useEffect(() => {
-    targetPosition.current = -activeIndex * spacing;
-  }, [activeIndex, spacing]);
+  const layoutOptions = useMemo<CircularCarouselOptions>(() => {
+    const requestedSlots = dynasties.length >= 7 ? 7 : dynasties.length;
 
-  useFrame(() => {
-    if (!groupRef.current) return;
-    // 平滑插值移动
-    currentPosition.current +=
-      (targetPosition.current - currentPosition.current) * moveSpeed;
-    groupRef.current.position.x = currentPosition.current;
+    return {
+      visibleSlots: requestedSlots > 2 && requestedSlots % 2 === 0
+        ? requestedSlots - 1
+        : requestedSlots,
+      radiusX: Math.max(4.3, geometry.cardWidth * 2.05),
+      radiusZ: Math.max(2.5, geometry.cardHeight * 0.98),
+      verticalLift: 0.18,
+      zOffset: Math.max(1.8, geometry.cardHeight * 0.8),
+    };
+  }, [dynasties.length, geometry.cardHeight, geometry.cardWidth]);
+
+  const depthBounds = useMemo(() => {
+    const radiusZ = layoutOptions.radiusZ ?? 2.5;
+    const zOffset = layoutOptions.zOffset ?? radiusZ * 0.72;
+
+    return {
+      min: -radiusZ - zOffset,
+      max: radiusZ - zOffset,
+    };
+  }, [layoutOptions.radiusZ, layoutOptions.zOffset]);
+
+  const orbitLine = useMemo(() => {
+    const points: THREE.Vector3[] = [];
+
+    for (let step = 0; step <= 72; step += 1) {
+      const angle = (step / 72) * Math.PI * 2;
+      const point = getCircularTrackPoint(angle, layoutOptions);
+      points.push(new THREE.Vector3(point.x, point.y, point.z));
+    }
+
+    const geometry = new THREE.BufferGeometry().setFromPoints(points);
+    const material = new THREE.LineBasicMaterial({
+      color: '#d2a05a',
+      transparent: true,
+      opacity: 0.14,
+    });
+
+    return new THREE.LineLoop(geometry, material);
+  }, [layoutOptions]);
+
+  cardRefs.current.length = dynasties.length;
+
+  useFrame((_, delta) => {
+    if (dynasties.length === 0) {
+      return;
+    }
+
+    currentIndex.current = THREE.MathUtils.damp(
+      currentIndex.current,
+      activeIndex,
+      motionDamping,
+      delta,
+    );
+
+    const layout = buildCircularCarouselLayout(
+      dynasties.length,
+      currentIndex.current,
+      layoutOptions,
+    );
+
+    layout.forEach((item, index) => {
+      const card = cardRefs.current[index];
+
+      if (!card) {
+        return;
+      }
+
+      card.position.set(item.x, item.y, item.z);
+      card.visible = item.visible;
+    });
   });
 
   return (
-    <group ref={groupRef}>
-      {dynasties.map((dynasty, index) => {
-        const x = index * spacing;
-        const isActive = index === activeIndex;
-        const distanceFromCenter = Math.abs(index - activeIndex);
-        const zOffset = -distanceFromCenter * 0.3;
+    <group>
+      <primitive object={orbitLine} />
 
-        return (
-          <DynastyCard
-            key={dynasty.id}
-            dynasty={dynasty}
-            position={[x, 0, zOffset]}
-            rotation={[0, 0, 0]}
-            isActive={isActive}
-            onClick={() => onCardClick(index)}
-          />
-        );
-      })}
+      {dynasties.map((dynasty, index) => (
+        <DynastyCard
+          key={dynasty.id}
+          ref={(node) => {
+            cardRefs.current[index] = node;
+          }}
+          dynasty={dynasty}
+          depthBounds={depthBounds}
+          isActive={index === activeIndex}
+          onClick={() => onCardClick(index)}
+        />
+      ))}
     </group>
   );
 }
