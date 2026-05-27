@@ -38,6 +38,8 @@ interface EChartsTimelineProps {
 const BAND_HEIGHT = 0.18;
 const BAND_TOP = 0.82;
 const EVENT_Y = 0.45;
+const GRID_LEFT = 48;
+const GRID_RIGHT = 24;
 
 function eventEnd(event: Event): number {
   return event.endYear ?? event.startYear;
@@ -70,6 +72,42 @@ function colorWithAlpha(color: string | undefined, alpha: number): string {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
   return color;
+}
+
+function buildBandData(
+  dynasties: Dynasty[],
+  shouldShowLabel: (dynasty: Dynasty) => boolean,
+) {
+  return dynasties.map((d) => {
+    const start = d.startYear;
+    const end = d.endYear ?? d.startYear;
+    return [
+      {
+        name: d.name,
+        xAxis: start,
+        yAxis: BAND_TOP,
+        itemStyle: {
+          color: colorWithAlpha(d.color, 0.28),
+          borderColor: colorWithAlpha(d.color, 0.6),
+          borderWidth: 1,
+        },
+        label: {
+          show: shouldShowLabel(d),
+          position: 'insideTop' as const,
+          distance: 4,
+          color: '#1e293b',
+          fontSize: 11,
+          fontWeight: 600,
+          overflow: 'truncate' as const,
+          formatter: d.name,
+        },
+      },
+      {
+        xAxis: end,
+        yAxis: BAND_TOP + BAND_HEIGHT,
+      },
+    ];
+  });
 }
 
 export function EChartsTimeline({
@@ -112,45 +150,75 @@ export function EChartsTimeline({
     [events, dynasties],
   );
 
+  // 事件按年份排序,供 LoD 贪心选标签用
+  const sortedEvents = useMemo(
+    () => [...events].sort((a, b) => a.startYear - b.startYear),
+    [events],
+  );
+
+  // 根据当前可视范围 + 容器宽度,贪心决定哪些事件显示文字标签
+  const applyLoD = useCallback(
+    (startValue: number, endValue: number) => {
+      const chart = chartRef.current;
+      const container = containerRef.current;
+      if (!chart || !container) return;
+      const span = endValue - startValue;
+      if (span <= 0) return;
+
+      const innerWidth = Math.max(container.clientWidth - GRID_LEFT - GRID_RIGHT, 1);
+      const pxPerYear = innerWidth / span;
+      const MIN_LABEL_GAP_PX = 88; // 相邻标签最小像素间距
+
+      let lastLabelPx = -Infinity;
+      const data = sortedEvents.map((ev) => {
+        const inView = ev.startYear >= startValue && ev.startYear <= endValue;
+        const px = (ev.startYear - startValue) * pxPerYear;
+        let showLabel = false;
+        if (inView && px - lastLabelPx >= MIN_LABEL_GAP_PX) {
+          showLabel = true;
+          lastLabelPx = px;
+        }
+        return {
+          value: [ev.startYear, EVENT_Y],
+          event: ev,
+          label: { show: showLabel },
+        };
+      });
+
+      // 朝代名:色带在视口内的可见像素宽度够放下名字才显示
+      const bandData = buildBandData(dynasties, (d) => {
+        const start = d.startYear;
+        const end = d.endYear ?? d.startYear;
+        const visStart = Math.max(start, startValue);
+        const visEnd = Math.min(end, endValue);
+        if (visEnd <= visStart) return false;
+        const visiblePx = (visEnd - visStart) * pxPerYear;
+        // 每个汉字约 11px,加上 padding,估算最小可显示宽度
+        const needPx = Math.max(d.name.length * 12 + 8, 28);
+        return visiblePx >= needPx;
+      });
+
+      chart.setOption({
+        series: [
+          { id: 'events', data },
+          { id: 'dynasty-bands', markArea: { silent: true, data: bandData } },
+        ],
+      });
+    },
+    [sortedEvents, dynasties],
+  );
+
   const option = useMemo(() => {
     const eventData = events.map((e) => ({
       value: [e.startYear, EVENT_Y],
       event: e,
     }));
 
-    const bandData = dynasties.map((d) => {
-      const start = d.startYear;
-      const end = d.endYear ?? d.startYear;
-      return [
-        {
-          name: d.name,
-          xAxis: start,
-          yAxis: BAND_TOP,
-          itemStyle: {
-            color: colorWithAlpha(d.color, 0.28),
-            borderColor: colorWithAlpha(d.color, 0.6),
-            borderWidth: 1,
-          },
-          label: {
-            show: true,
-            position: 'insideTop' as const,
-            distance: 4,
-            color: '#1e293b',
-            fontSize: 11,
-            fontWeight: 600,
-            formatter: d.name,
-          },
-        },
-        {
-          xAxis: end,
-          yAxis: BAND_TOP + BAND_HEIGHT,
-        },
-      ];
-    });
+    const bandData = buildBandData(dynasties, () => true);
 
     return {
       animation: false,
-      grid: { left: 48, right: 24, top: 16, bottom: 56, containLabel: false },
+      grid: { left: GRID_LEFT, right: GRID_RIGHT, top: 16, bottom: 56, containLabel: false },
       xAxis: {
         type: 'value' as const,
         min: boundsRange[0],
@@ -223,6 +291,18 @@ export function EChartsTimeline({
           type: 'scatter' as const,
           data: eventData,
           symbolSize: 9,
+          label: {
+            show: false,
+            position: 'top' as const,
+            distance: 6,
+            color: '#1e293b',
+            fontSize: 11,
+            fontWeight: 500,
+            backgroundColor: 'rgba(248, 250, 252, 0.85)',
+            padding: [2, 5],
+            borderRadius: 4,
+            formatter: (p: { data?: { event?: Event } }) => p.data?.event?.title ?? '',
+          },
           itemStyle: {
             color: '#6366f1',
             borderColor: '#fff',
@@ -233,6 +313,7 @@ export function EChartsTimeline({
           emphasis: {
             scale: 1.6,
             itemStyle: { color: '#f59e0b' },
+            label: { show: true },
           },
           z: 10,
         },
@@ -240,13 +321,34 @@ export function EChartsTimeline({
     };
   }, [events, dynasties, boundsRange]);
 
+  const getCurrentRange = useCallback((): [number, number] => {
+    const chart = chartRef.current;
+    if (!chart) return boundsRange;
+    const opt = chart.getOption() as { dataZoom?: Array<{ startValue?: number; endValue?: number; start?: number; end?: number }> };
+    const zoom = opt.dataZoom?.[0];
+    if (!zoom) return boundsRange;
+    let startValue = zoom.startValue;
+    let endValue = zoom.endValue;
+    if (startValue === undefined || endValue === undefined) {
+      const span = boundsRange[1] - boundsRange[0];
+      startValue = boundsRange[0] + ((zoom.start ?? 0) / 100) * span;
+      endValue = boundsRange[0] + ((zoom.end ?? 100) / 100) * span;
+    }
+    return [startValue, endValue];
+  }, [boundsRange]);
+
   useEffect(() => {
     if (!containerRef.current || loading) return;
     const chart = echarts.init(containerRef.current, undefined, { renderer: 'canvas' });
     chartRef.current = chart;
     chart.setOption(option);
+    applyLoD(boundsRange[0], boundsRange[1]);
 
-    const handleResize = () => chart.resize();
+    const handleResize = () => {
+      chart.resize();
+      const [s, e] = getCurrentRange();
+      applyLoD(s, e);
+    };
     const observer = new ResizeObserver(handleResize);
     observer.observe(containerRef.current);
 
@@ -255,25 +357,17 @@ export function EChartsTimeline({
       chart.dispose();
       chartRef.current = null;
     };
-  }, [loading, option]);
+  }, [loading, option, applyLoD, boundsRange, getCurrentRange]);
 
-  // dataZoom → upward sync
+  // dataZoom → LoD + upward sync
   useEffect(() => {
     const chart = chartRef.current;
     if (!chart) return;
 
     const handler = () => {
+      const [startValue, endValue] = getCurrentRange();
+      applyLoD(startValue, endValue);
       if (suppressDataZoomRef.current) return;
-      const opt = chart.getOption() as { dataZoom?: Array<{ startValue?: number; endValue?: number; start?: number; end?: number }> };
-      const zoom = opt.dataZoom?.[0];
-      if (!zoom) return;
-      let startValue = zoom.startValue;
-      let endValue = zoom.endValue;
-      if (startValue === undefined || endValue === undefined) {
-        const span = boundsRange[1] - boundsRange[0];
-        startValue = boundsRange[0] + ((zoom.start ?? 0) / 100) * span;
-        endValue = boundsRange[0] + ((zoom.end ?? 100) / 100) * span;
-      }
       onTimeRangeChange?.([startValue, endValue]);
     };
 
@@ -281,7 +375,7 @@ export function EChartsTimeline({
     return () => {
       chart.off('dataZoom', handler);
     };
-  }, [boundsRange, onTimeRangeChange]);
+  }, [getCurrentRange, applyLoD, onTimeRangeChange]);
 
   // event click → setSelectedDynasty by event year (and could open detail)
   useEffect(() => {
