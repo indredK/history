@@ -1,5 +1,11 @@
 import { z } from 'zod';
-import type { Feature, FeatureCollection, Polygon, MultiPolygon } from 'geojson';
+import type {
+  Feature,
+  FeatureCollection,
+  Geometry,
+  Polygon,
+  MultiPolygon,
+} from 'geojson';
 
 export interface SourceRef {
   id: string;
@@ -88,4 +94,32 @@ export interface LayerStyle {
   fillColor: [number, number, number, number];
   lineColor: [number, number, number];
   lineWidth: number;
+}
+
+export interface MapDataPoint {
+  name: string;
+  value: number;
+  coord?: [number, number];
+}
+
+export interface ProvinceData {
+  name: string;
+  value: number;
+  adcode?: string;
+  center?: [number, number];
+}
+
+export interface GeoJsonFeatureProperties {
+  adcode?: string;
+  name: string;
+  level?: string;
+  center?: [number, number];
+}
+
+export interface GeoJsonFeature extends Feature<Geometry> {
+  properties: GeoJsonFeatureProperties;
+}
+
+export interface GeoJsonData extends FeatureCollection<Geometry> {
+  features: GeoJsonFeature[];
 }

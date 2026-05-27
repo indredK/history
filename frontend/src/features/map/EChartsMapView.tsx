@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { EChartsMap } from './components/EChartsMap';
 import { DynastyTimeline } from './components/DynastyTimeline';
-import { ProvinceData } from './services/mapDataService';
+import type { ProvinceData } from '@/services/map/types';
 import { Dynasty } from '@/services/culture/types';
 
 export function EChartsMapView() {

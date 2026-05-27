@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import * as echarts from 'echarts';
-import { fetchGeoJson, extractProvinceData, extractCityMarkers, ProvinceData } from '../services/mapDataService';
+import { mapDataService } from '@/services/map/mapDataService';
+import type { ProvinceData } from '@/services/map/types';
 
 interface EChartsMapProps {
   width?: number | string;
@@ -18,153 +19,137 @@ export function EChartsMap({
   const onProvinceClickRef = useRef(onProvinceClick);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [reloadKey, setReloadKey] = useState(0);
 
   // 保持回调引用最新
   useEffect(() => {
     onProvinceClickRef.current = onProvinceClick;
   }, [onProvinceClick]);
 
-  // 初始化图表
+  const initChart = useCallback(async (mounted: () => boolean) => {
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    if (!chartRef.current || !mounted()) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError(null);
+
+      const [geoJson, provinces, cities] = await Promise.all([
+        mapDataService.loadChinaGeoJson(),
+        mapDataService.loadProvinceData(),
+        mapDataService.loadCityMarkers(),
+      ]);
+
+      if (!mounted() || !chartRef.current) return;
+
+      echarts.registerMap('china', geoJson as never);
+
+      if (chartInstance.current) {
+        chartInstance.current.dispose();
+      }
+
+      chartInstance.current = echarts.init(chartRef.current);
+
+      const option: echarts.EChartsOption = {
+        backgroundColor: 'transparent',
+        title: {
+          text: '中国地图',
+          subtext: '数据来源：地图数据服务',
+          left: 'center',
+          top: 10,
+          textStyle: { color: 'var(--color-text-primary, #333)', fontSize: 18 },
+          subtextStyle: { color: 'var(--color-text-secondary, #666)', fontSize: 12 },
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: (params: any) => {
+            if (params.seriesType === 'map') {
+              const data = provinces.find((p) => p.name === params.name);
+              if (data) {
+                return `<div style="padding:8px;"><strong>${params.name}</strong><br/>数值: ${data.value}<br/>行政代码: ${data.adcode || '-'}</div>`;
+              }
+              return params.name;
+            }
+            return `${params.name}: ${params.value}`;
+          },
+        },
+        visualMap: {
+          min: 0,
+          max: 15000,
+          left: 20,
+          bottom: 20,
+          text: ['高', '低'],
+          calculable: true,
+          inRange: { color: ['#e0f3f8', '#abd9e9', '#74add1', '#4575b4', '#313695'] },
+          textStyle: { color: 'var(--color-text-primary, #333)' },
+        },
+        geo: {
+          map: 'china',
+          roam: true,
+          zoom: 1.2,
+          scaleLimit: {
+            min: 0.8,
+            max: 5,
+          },
+          center: [104, 35],
+          label: { show: true, fontSize: 10, color: 'var(--color-text-primary, #333)' },
+          itemStyle: { areaColor: 'var(--color-bg-surface, #e3f2fd)', borderColor: 'var(--color-primary, #FF3D00)', borderWidth: 1 },
+          emphasis: {
+            label: { show: true, fontSize: 12, color: 'var(--color-text-primary, #000)' },
+            itemStyle: { areaColor: 'var(--color-bg-elevated, #bbdefb)', shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.3)' },
+          },
+          select: {
+            label: { show: true, color: 'var(--color-text-inverse, #fff)' },
+            itemStyle: { areaColor: 'var(--color-primary, #FF3D00)' },
+          },
+        },
+        series: [
+          {
+            name: '省份数据',
+            type: 'map',
+            map: 'china',
+            geoIndex: 0,
+            data: provinces.map((p) => ({ name: p.name, value: p.value })),
+          },
+          {
+            name: '省会城市',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            symbol: 'pin',
+            symbolSize: (val: number[]) => Math.max((val[2] ?? 0) / 5, 15),
+            label: { show: true, position: 'right', formatter: '{b}', fontSize: 10 },
+            itemStyle: { color: 'var(--color-error, #f44336)' },
+            data: cities.map((city) => ({
+              name: city.name,
+              value: [...(city.coord || [0, 0]), city.value],
+            })),
+          },
+        ],
+      };
+
+      chartInstance.current.setOption(option);
+      chartInstance.current.on('click', (params: any) => {
+        if (params.componentType === 'geo' || params.seriesType === 'map') {
+          const data = provinces.find((p) => p.name === params.name) || null;
+          onProvinceClickRef.current?.(params.name, data);
+        }
+      });
+
+      setLoading(false);
+    } catch (err) {
+      if (mounted()) {
+        setError(err instanceof Error ? err.message : '加载地图失败');
+        setLoading(false);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     let mounted = true;
-
-    const initChart = async () => {
-      // 等待 DOM 挂载
-      await new Promise(resolve => setTimeout(resolve, 0));
-      
-      if (!chartRef.current || !mounted) {
-        console.log('chartRef 不可用');
-        return;
-      }
-
-      try {
-        setError(null);
-        console.log('开始加载地图数据...');
-
-        // 获取 GeoJSON 数据
-        const geoJson = await fetchGeoJson();
-        
-        if (!mounted || !chartRef.current) return;
-        
-        // 从 GeoJSON 提取省份和城市数据
-        const provinces = extractProvinceData(geoJson);
-        const cities = extractCityMarkers(geoJson);
-        
-        console.log('地图数据加载完成', { 
-          features: geoJson?.features?.length,
-          provinces: provinces.length 
-        });
-
-        // 注册地图
-        echarts.registerMap('china', geoJson);
-
-        // 初始化 ECharts 实例
-        if (chartInstance.current) {
-          chartInstance.current.dispose();
-        }
-        
-        chartInstance.current = echarts.init(chartRef.current);
-
-        // 配置项
-        const option: echarts.EChartsOption = {
-          backgroundColor: 'transparent',
-          title: {
-            text: '中国地图',
-            subtext: '数据来源：模拟数据',
-            left: 'center',
-            top: 10,
-            textStyle: { color: 'var(--color-text-primary, #333)', fontSize: 18 },
-            subtextStyle: { color: 'var(--color-text-secondary, #666)', fontSize: 12 }
-          },
-          tooltip: {
-            trigger: 'item',
-            formatter: (params: any) => {
-              if (params.seriesType === 'map') {
-                const data = provinces.find((p: ProvinceData) => p.name === params.name);
-                if (data) {
-                  return `<div style="padding:8px;"><strong>${params.name}</strong><br/>数值: ${data.value}<br/>行政代码: ${data.adcode || '-'}</div>`;
-                }
-                return params.name;
-              }
-              return `${params.name}: ${params.value}`;
-            }
-          },
-          visualMap: {
-            min: 0,
-            max: 15000,
-            left: 20,
-            bottom: 20,
-            text: ['高', '低'],
-            calculable: true,
-            inRange: { color: ['#e0f3f8', '#abd9e9', '#74add1', '#4575b4', '#313695'] },
-            textStyle: { color: 'var(--color-text-primary, #333)' }
-          },
-          geo: {
-            map: 'china',
-            roam: true,
-            zoom: 1.2,
-            scaleLimit: {
-              min: 0.8,
-              max: 5
-            },
-            center: [104, 35],
-            label: { show: true, fontSize: 10, color: 'var(--color-text-primary, #333)' },
-            itemStyle: { areaColor: 'var(--color-bg-surface, #e3f2fd)', borderColor: 'var(--color-primary, #FF3D00)', borderWidth: 1 },
-            emphasis: {
-              label: { show: true, fontSize: 12, color: 'var(--color-text-primary, #000)' },
-              itemStyle: { areaColor: 'var(--color-bg-elevated, #bbdefb)', shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.3)' }
-            },
-            select: {
-              label: { show: true, color: 'var(--color-text-inverse, #fff)' },
-              itemStyle: { areaColor: 'var(--color-primary, #FF3D00)' }
-            }
-          },
-          series: [
-            {
-              name: '省份数据',
-              type: 'map',
-              map: 'china',
-              geoIndex: 0,
-              data: provinces.map((p: ProvinceData) => ({ name: p.name, value: p.value }))
-            },
-            {
-              name: '省会城市',
-              type: 'scatter',
-              coordinateSystem: 'geo',
-              symbol: 'pin',
-              symbolSize: (val: number[]) => Math.max((val[2] ?? 0) / 5, 15),
-              label: { show: true, position: 'right', formatter: '{b}', fontSize: 10 },
-              itemStyle: { color: 'var(--color-error, #f44336)' },
-              data: cities.map((c) => ({
-                name: c.name,
-                value: [...(c.coord || [0, 0]), c.value]
-              }))
-            }
-          ]
-        };
-
-        chartInstance.current.setOption(option);
-
-        // 点击事件
-        chartInstance.current.on('click', (params: any) => {
-          if (params.componentType === 'geo' || params.seriesType === 'map') {
-            const data = provinces.find((p: ProvinceData) => p.name === params.name) || null;
-            onProvinceClickRef.current?.(params.name, data);
-          }
-        });
-
-        setLoading(false);
-        console.log('地图渲染完成');
-      } catch (err) {
-        console.error('初始化地图失败:', err);
-        if (mounted) {
-          setError(err instanceof Error ? err.message : '加载地图失败');
-          setLoading(false);
-        }
-      }
-    };
-
-    initChart();
+    initChart(() => mounted);
 
     return () => {
       mounted = false;
@@ -173,7 +158,7 @@ export function EChartsMap({
         chartInstance.current = null;
       }
     };
-  }, []);
+  }, [initChart, reloadKey]);
 
   // 响应式调整
   useEffect(() => {
@@ -244,7 +229,7 @@ export function EChartsMap({
             <div>地图加载失败</div>
             <div style={{ fontSize: 12, marginTop: 5 }}>{error}</div>
             <button 
-              onClick={() => window.location.reload()}
+              onClick={() => setReloadKey((current) => current + 1)}
               style={{ 
                 marginTop: 10, 
                 padding: '8px 16px', 

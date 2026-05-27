@@ -4,7 +4,14 @@
  */
 
 import { loadJsonData } from '@/utils/services/dataLoaders';
-import type { Place, BoundaryGeoJSON, BoundaryMapping } from './types';
+import type {
+  Place,
+  BoundaryGeoJSON,
+  BoundaryMapping,
+  GeoJsonData,
+  MapDataPoint,
+  ProvinceData,
+} from './types';
 
 /**
  * 地图数据缓存管理器
@@ -72,6 +79,47 @@ export class MapDataService {
       const data = await loadJsonData<Place[]>('/data/json/places.json');
       console.log(`✅ 地点数据加载完成，共 ${data.length} 个地点`);
       return data;
+    });
+  }
+
+  async loadChinaGeoJson(): Promise<GeoJsonData> {
+    return this.cache.get('china-geojson', () =>
+      loadJsonData<GeoJsonData>('/data/json/100000.geoJson'),
+    );
+  }
+
+  async loadProvinceData(): Promise<ProvinceData[]> {
+    return this.cache.get('china-province-data', async () => {
+      const geoJson = await this.loadChinaGeoJson();
+      return geoJson.features.map((feature, index) => ({
+        name: feature.properties.name,
+        value: 500 + (index + 1) * 275,
+        ...(feature.properties.adcode
+          ? { adcode: feature.properties.adcode }
+          : {}),
+        ...(feature.properties.center
+          ? { center: feature.properties.center }
+          : {}),
+      }));
+    });
+  }
+
+  async loadCityMarkers(limit: number = 10): Promise<MapDataPoint[]> {
+    return this.cache.get(`china-city-markers-${limit}`, async () => {
+      const geoJson = await this.loadChinaGeoJson();
+      return geoJson.features
+        .filter((feature) => feature.properties.center)
+        .slice(0, limit)
+        .map((feature, index) => ({
+          name: feature.properties.name.replace(
+            /省|市|自治区|特别行政区|壮族|回族|维吾尔/g,
+            '',
+          ),
+          value: 50 + (index + 1) * 8,
+          ...(feature.properties.center
+            ? { coord: feature.properties.center }
+            : {}),
+        }));
     });
   }
 
