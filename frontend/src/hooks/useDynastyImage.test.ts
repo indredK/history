@@ -58,13 +58,13 @@ describe("useDynastyImage", () => {
     expect(result.current.isLoading).toBe(true);
     expect(result.current.imageUrl).toBeNull();
     expect(imageInstances).toHaveLength(1);
-    expect(imageInstances[0].src).toBe("/images/dynasties/tang-unique-1.svg");
+    expect(imageInstances[0]!.src).toBe("/images/dynasties/tang-unique-1.svg");
   });
 
   it("onload 触发 → imageUrl 写入 / isLoading=false / error 仍为 null", () => {
     const { result } = renderHook(() => useDynastyImage("song-unique-2"));
     act(() => {
-      imageInstances[0].onload?.();
+      imageInstances[0]!.onload?.();
     });
     expect(result.current.imageUrl).toBe("/images/dynasties/song-unique-2.svg");
     expect(result.current.isLoading).toBe(false);
@@ -74,7 +74,7 @@ describe("useDynastyImage", () => {
   it("onerror 触发 → error 写入 / imageUrl=null / isLoading=false", () => {
     const { result } = renderHook(() => useDynastyImage("missing-unique-3"));
     act(() => {
-      imageInstances[0].onerror?.();
+      imageInstances[0]!.onerror?.();
     });
     expect(result.current.imageUrl).toBeNull();
     expect(result.current.isLoading).toBe(false);
@@ -86,7 +86,7 @@ describe("useDynastyImage", () => {
     // 第一次:正常加载并 onload
     const first = renderHook(() => useDynastyImage("yuan-cache-4"));
     act(() => {
-      imageInstances[0].onload?.();
+      imageInstances[0]!.onload?.();
     });
     expect(first.result.current.imageUrl).toBe(
       "/images/dynasties/yuan-cache-4.svg",
@@ -109,7 +109,7 @@ describe("useDynastyImage", () => {
       { initialProps: { id: "ming-toggle-5" as string | null } },
     );
     act(() => {
-      imageInstances[0].onload?.();
+      imageInstances[0]!.onload?.();
     });
     expect(result.current.imageUrl).toBe("/images/dynasties/ming-toggle-5.svg");
 

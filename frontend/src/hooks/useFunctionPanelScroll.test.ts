@@ -93,7 +93,7 @@ describe("useFunctionPanelScroll", () => {
   });
 
   it("containerRef.current=null → 不挂载 listener,getScrollState 返回默认", () => {
-    const ref = { current: null } as React.RefObject<HTMLElement>;
+    const ref = { current: null } as unknown as React.RefObject<HTMLElement>;
     const { result } = renderHook(() =>
       useFunctionPanelScroll({ containerRef: ref }),
     );

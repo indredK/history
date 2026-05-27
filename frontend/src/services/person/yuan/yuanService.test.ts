@@ -13,12 +13,12 @@ import type { YuanFigure, YuanFigureRole } from "./types";
 const makeFigure = (overrides: Partial<YuanFigure> = {}): YuanFigure => ({
   id: overrides.id ?? "f1",
   name: overrides.name ?? "忽必烈",
-  courtesy: overrides.courtesy,
+  courtesy: overrides.courtesy ?? "字",
   birthYear: overrides.birthYear ?? 1215,
   deathYear: overrides.deathYear ?? 1294,
   role: overrides.role ?? "emperor",
   positions: overrides.positions ?? [],
-  faction: overrides.faction,
+  faction: overrides.faction ?? "",
   biography: overrides.biography ?? "",
   achievements: overrides.achievements ?? [],
   events: overrides.events ?? [],
@@ -127,7 +127,7 @@ describe("yuanFigureServiceHelper", () => {
     await expect(yuanFigureServiceHelper.getAll()).resolves.toEqual({
       data: [],
     });
-    await expect(yuanFigureServiceHelper.getById("xx")).resolves.toEqual({
+    await expect(yuanFigureServiceHelper.getById!("xx")).resolves.toEqual({
       data: null,
     });
   });

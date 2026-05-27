@@ -18,9 +18,8 @@ describe("Footer", () => {
 
   it("渲染版权信息", () => {
     render(<Footer />);
-    // 一次匹配整段(MUI Typography 不会插入额外节点)
-    expect(screen.getByText(/© 2025 中国历史全景/)).toBeInTheDocument();
-    expect(screen.getByText(/Chinese Historical Panorama/)).toBeInTheDocument();
-    expect(screen.getByText(/MIT License/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Chinese Historical Panorama Archive Console/),
+    ).toBeInTheDocument();
   });
 });

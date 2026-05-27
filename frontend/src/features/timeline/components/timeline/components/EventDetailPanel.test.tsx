@@ -18,9 +18,9 @@ const makeEvent = (overrides: Partial<Event> = {}): Event => ({
   id: overrides.id ?? "e1",
   title: overrides.title ?? "安史之乱",
   startYear: overrides.startYear ?? 755,
-  endYear: overrides.endYear,
-  description: overrides.description,
-  startDate: overrides.startDate,
+  endYear: overrides.endYear ?? 755,
+  description: overrides.description ?? "",
+  startDate: overrides.startDate ?? "",
   ...overrides,
 });
 
@@ -55,7 +55,7 @@ describe("EventDetailPanel", () => {
   it("description 缺失时不渲染描述区", () => {
     render(
       <EventDetailPanel
-        event={makeEvent({ description: undefined })}
+        event={makeEvent({ description: "" })}
         isFavorite={false}
         onToggleFavorite={() => {}}
         onShare={() => {}}
@@ -100,7 +100,7 @@ describe("EventDetailPanel", () => {
     );
     // 通过 button index 取按钮(第 0 个是收藏,第 1 个是分享)
     const buttons = screen.getAllByRole("button");
-    fireEvent.click(buttons[0]);
+    fireEvent.click(buttons[0]!);
     expect(onToggle).toHaveBeenCalledWith("ev-xxx");
   });
 
@@ -116,7 +116,7 @@ describe("EventDetailPanel", () => {
       />,
     );
     const buttons = screen.getAllByRole("button");
-    fireEvent.click(buttons[1]);
+    fireEvent.click(buttons[1]!);
     expect(onShare).toHaveBeenCalledWith(event);
   });
 });

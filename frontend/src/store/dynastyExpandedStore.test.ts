@@ -53,7 +53,7 @@ describe("dynastyExpandedStore", () => {
     it("写 state + 持久化到 localStorage", () => {
       useDynastiesStore.getState().setDynastyExpanded("tang", false);
 
-      expect(useDynastiesStore.getState().expandedStates.tang).toBe(false);
+      expect(useDynastiesStore.getState().expandedStates['tang']).toBe(false);
       const stored = JSON.parse(
         localStorage.getItem(STORAGE_KEYS.DYNASTIES_EXPANDED) ?? "{}",
       );
@@ -65,21 +65,21 @@ describe("dynastyExpandedStore", () => {
       useDynastiesStore.getState().setDynastyExpanded("song", true);
 
       const s = useDynastiesStore.getState().expandedStates;
-      expect(s.tang).toBe(false);
-      expect(s.song).toBe(true);
+      expect(s['tang']).toBe(false);
+      expect(s['song']).toBe(true);
     });
   });
 
   describe("toggleDynasty", () => {
     it("默认(true) → toggle 一次 → false", () => {
       useDynastiesStore.getState().toggleDynasty("tang");
-      expect(useDynastiesStore.getState().expandedStates.tang).toBe(false);
+      expect(useDynastiesStore.getState().expandedStates['tang']).toBe(false);
     });
 
     it("两次 toggle 回到原状(true)", () => {
       useDynastiesStore.getState().toggleDynasty("tang"); // → false
       useDynastiesStore.getState().toggleDynasty("tang"); // → true
-      expect(useDynastiesStore.getState().expandedStates.tang).toBe(true);
+      expect(useDynastiesStore.getState().expandedStates['tang']).toBe(true);
     });
 
     it("toggle 也走持久化路径", () => {
@@ -101,9 +101,9 @@ describe("dynastyExpandedStore", () => {
       useDynastiesStore.getState().expandAllDynasties();
 
       const s = useDynastiesStore.getState().expandedStates;
-      expect(s.tang).toBe(true);
-      expect(s.song).toBe(true);
-      expect(s.yuan).toBe(true);
+      expect(s['tang']).toBe(true);
+      expect(s['song']).toBe(true);
+      expect(s['yuan']).toBe(true);
     });
 
     it("collapseAll 把 dynastyIds 内全部置 false", () => {
@@ -115,8 +115,8 @@ describe("dynastyExpandedStore", () => {
       useDynastiesStore.getState().collapseAllDynasties();
 
       const s = useDynastiesStore.getState().expandedStates;
-      expect(s.tang).toBe(false);
-      expect(s.song).toBe(false);
+      expect(s['tang']).toBe(false);
+      expect(s['song']).toBe(false);
     });
 
     it("expandAll/collapseAll 不动 dynastyIds 之外的字段", () => {
@@ -128,8 +128,8 @@ describe("dynastyExpandedStore", () => {
       useDynastiesStore.getState().expandAllDynasties();
 
       const s = useDynastiesStore.getState().expandedStates;
-      expect(s.tang).toBe(true);
-      expect(s.alien).toBe(false); // 不在 ids 里,保持原状
+      expect(s['tang']).toBe(true);
+      expect(s['alien']).toBe(false); // 不在 ids 里,保持原状
     });
 
     it("expandAll 也写 localStorage", () => {
@@ -188,8 +188,8 @@ describe("dynastyExpandedStore", () => {
       window.dispatchEvent(event);
 
       const s = useDynastiesStore.getState().expandedStates;
-      expect(s.tang).toBe(false);
-      expect(s.song).toBe(true);
+      expect(s['tang']).toBe(false);
+      expect(s['song']).toBe(true);
     });
 
     it("无关 key 的 storage 事件 → 不影响 store", () => {

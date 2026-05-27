@@ -16,12 +16,12 @@ import type { TangFigure, TangFigureRole } from "./types";
 const makeFigure = (overrides: Partial<TangFigure> = {}): TangFigure => ({
   id: overrides.id ?? "f1",
   name: overrides.name ?? "李白",
-  courtesy: overrides.courtesy,
+  courtesy: overrides.courtesy ?? "字",
   birthYear: overrides.birthYear ?? 701,
   deathYear: overrides.deathYear ?? 762,
   role: overrides.role ?? "poet",
   positions: overrides.positions ?? [],
-  faction: overrides.faction,
+  faction: overrides.faction ?? "",
   biography: overrides.biography ?? "",
   achievements: overrides.achievements ?? [],
   events: overrides.events ?? [],
@@ -253,13 +253,7 @@ describe("tangFigureServiceHelper", () => {
     });
     it("undefined option 跳过对应 filter", () => {
       // 全 undefined 走原数组
-      const r = tangFigureServiceHelper.filterAndSort(figures, {
-        role: undefined,
-        period: undefined,
-        faction: undefined,
-        query: undefined,
-        sortBy: undefined,
-      });
+      const r = tangFigureServiceHelper.filterAndSort(figures, {});
       expect(r).toBe(figures);
     });
   });

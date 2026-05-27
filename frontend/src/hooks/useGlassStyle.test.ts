@@ -114,8 +114,8 @@ describe("useGlassStyle / useComponentGlassStyle / useGlassPerformance", () => {
       const style = result.current.style;
       expect(style.backdropFilter).toBe("blur(20px)");
       expect(style.WebkitBackdropFilter).toBe("blur(20px)");
-      // bgColor 默认 'rgba(255, 255, 255,' 与 opacityValue 拼接
-      expect(style.backgroundColor).toBe("rgba(255, 255, 255, 0.5)");
+      // bgColor 默认走 CSS 变量 'rgba(var(--glass-surface-rgb),' 与 opacityValue 拼接
+      expect(style.backgroundColor).toBe("rgba(var(--glass-surface-rgb), 0.5)");
       expect(style.borderRadius).toBe("12px"); // md
       expect(style.boxShadow).toBe("0 4px 16px rgba(0,0,0,0.12)");
       expect(result.current.className).toMatch(/glass-effect/);
@@ -162,7 +162,7 @@ describe("useGlassStyle / useComponentGlassStyle / useGlassPerformance", () => {
       expect(result.current.hoverStyle).toBeDefined();
       // 0.7 + 0.1 → 0.799999... (JS float),clamp 至 0.95 之内,直接断 toBeCloseTo
       const bg = result.current.hoverStyle?.backgroundColor as string;
-      const match = bg.match(/rgba\(255, 255, 255, ([\d.]+)\)/);
+      const match = bg.match(/rgba\(var\(--glass-surface-rgb\), ([\d.]+)\)/);
       expect(match).not.toBeNull();
       expect(Number(match![1])).toBeCloseTo(0.8, 5);
     });
@@ -173,7 +173,7 @@ describe("useGlassStyle / useComponentGlassStyle / useGlassPerformance", () => {
       );
       // 0.85 + 0.1 = 0.95 → clamp 命中 0.95
       expect(result.current.hoverStyle?.backgroundColor).toBe(
-        "rgba(255, 255, 255, 0.95)",
+        "rgba(var(--glass-surface-rgb), 0.95)",
       );
     });
 
@@ -189,7 +189,7 @@ describe("useGlassStyle / useComponentGlassStyle / useGlassPerformance", () => {
       );
       expect(result.current.style.transform).toBe("translateZ(0)");
       expect(
-        (result.current.style as Record<string, string>).backfaceVisibility,
+        (result.current.style as Record<string, string>)['backfaceVisibility'],
       ).toBe("hidden");
     });
 
@@ -201,7 +201,7 @@ describe("useGlassStyle / useComponentGlassStyle / useGlassPerformance", () => {
 
     it("enableContainment=true(默认)→ style.contain 被写", () => {
       const { result } = renderHook(() => useGlassStyle());
-      expect((result.current.style as Record<string, string>).contain).toBe(
+      expect((result.current.style as Record<string, string>)['contain']).toBe(
         "layout style paint",
       );
     });
@@ -212,11 +212,11 @@ describe("useGlassStyle / useComponentGlassStyle / useGlassPerformance", () => {
       const { result } = renderHook(() => useComponentGlassStyle("card"));
       expect(result.current.style.backdropFilter).toBe("blur(12px)");
       expect(result.current.style.backgroundColor).toBe(
-        "rgba(255, 255, 255, 0.6)",
+        "rgba(var(--glass-surface-rgb), 0.6)",
       );
       // 0.6 + 0.15 = 0.75(无 float 问题,因为只 1 次小数加法刚好对齐)
       const bg = result.current.hoverStyle?.backgroundColor as string;
-      const match = bg.match(/rgba\(255, 255, 255, ([\d.]+)\)/);
+      const match = bg.match(/rgba\(var\(--glass-surface-rgb\), ([\d.]+)\)/);
       expect(match).not.toBeNull();
       expect(Number(match![1])).toBeCloseTo(0.75, 5);
       expect(result.current.className).toMatch(/glass-card/);

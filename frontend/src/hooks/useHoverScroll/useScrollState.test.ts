@@ -87,7 +87,7 @@ describe("useScrollState", () => {
   });
 
   it("ref=null → getScrollState 返回零值默认", () => {
-    const ref = { current: null } as React.RefObject<HTMLElement>;
+    const ref = { current: null } as unknown as React.RefObject<HTMLElement>;
     const { result } = renderHook(() => useScrollState(ref));
     expect(result.current.getScrollState()).toEqual({
       scrollLeft: 0,

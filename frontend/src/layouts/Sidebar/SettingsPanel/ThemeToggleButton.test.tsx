@@ -11,7 +11,7 @@
  *   - dark/light 各自的 fontSize(collapsed 控制 small/medium)
  *   - 点击触发 useThemeStore.toggleTheme(状态翻转)
  */
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { ThemeToggleButton } from "./ThemeToggleButton";
 import { useThemeStore } from "@/store";

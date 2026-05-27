@@ -7,11 +7,7 @@
  *   - getMythologies()→ dynamic import './mythologyApi' 然后透传 .getMythologies()
  */
 import { describe, it, expect, vi } from "vitest";
-import {
-  validateMythology,
-  filterByCategory,
-  getMythologies,
-} from "./mythologyService";
+import { validateMythology, filterByCategory } from "./mythologyService";
 import type { Mythology } from "./types";
 
 const makeMythology = (overrides: Partial<Mythology> = {}): Mythology => ({

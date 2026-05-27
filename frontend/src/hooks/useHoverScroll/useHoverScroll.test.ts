@@ -123,7 +123,7 @@ describe("useHoverScroll (composite)", () => {
   });
 
   it("ref=null → setEnabled / setScrollPosition 不抛错,getScrollState 返回零值", () => {
-    const ref = { current: null } as React.RefObject<HTMLElement>;
+    const ref = { current: null } as unknown as React.RefObject<HTMLElement>;
     const { result } = renderHook(() => useHoverScroll(ref));
     expect(() => {
       act(() => {

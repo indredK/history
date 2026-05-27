@@ -157,7 +157,7 @@ describe("scholarServiceHelper", () => {
 
   it("getAll / getById 默认 stub", async () => {
     await expect(scholarServiceHelper.getAll()).resolves.toEqual({ data: [] });
-    await expect(scholarServiceHelper.getById("x")).resolves.toEqual({
+    await expect(scholarServiceHelper.getById!("x")).resolves.toEqual({
       data: null,
     });
   });

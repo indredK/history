@@ -38,7 +38,7 @@ describe("timeline/SearchBar", () => {
     ) as HTMLInputElement;
     fireEvent.focus(input);
     expect(input.style.borderColor).toBe("var(--color-primary)");
-    expect(input.style.boxShadow).toContain("rgba(255, 61, 0, 0.3)");
+    expect(input.style.boxShadow).toBe("0 0 20px rgba(var(--glass-tint-rgb), 0.26)");
   });
 
   it("onBlur 把 borderColor / boxShadow 还原到默认", () => {
@@ -49,6 +49,6 @@ describe("timeline/SearchBar", () => {
     fireEvent.focus(input);
     fireEvent.blur(input);
     expect(input.style.borderColor).toBe("var(--color-border-medium)");
-    expect(input.style.boxShadow).toBe("0 0 0 rgba(255, 61, 0, 0)");
+    expect(input.style.boxShadow).toBe("0 0 0 rgba(var(--glass-tint-rgb), 0)");
   });
 });

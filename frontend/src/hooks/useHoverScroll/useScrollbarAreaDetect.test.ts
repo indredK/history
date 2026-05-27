@@ -87,7 +87,7 @@ describe("useScrollbarAreaDetect", () => {
     });
     expect(inAreaRef.current).toBe(true);
     expect(onPositionChange).toHaveBeenCalledTimes(1);
-    const [target, ratio] = onPositionChange.mock.calls[0];
+    const [target, ratio] = onPositionChange.mock.calls[0]!;
     expect(target).toBeGreaterThan(0);
     expect(ratio).toBeCloseTo(0.5, 5);
   });

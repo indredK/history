@@ -15,10 +15,10 @@ import type { Emperor } from "./types";
 const makeEmperor = (overrides: Partial<Emperor> = {}): Emperor => ({
   id: overrides.id ?? "e1",
   name: overrides.name ?? "刘彻",
-  templeName: overrides.templeName,
-  posthumousName: overrides.posthumousName,
+  templeName: overrides.templeName ?? "",
+  posthumousName: overrides.posthumousName ?? "",
   dynasty: overrides.dynasty ?? "西汉",
-  dynastyPeriod: overrides.dynastyPeriod,
+  dynastyPeriod: overrides.dynastyPeriod ?? "",
   reignStart: overrides.reignStart ?? -141,
   reignEnd: overrides.reignEnd ?? -87,
   eraNames: overrides.eraNames ?? [],

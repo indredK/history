@@ -24,7 +24,7 @@ const useDynastyImageMock = vi.fn(() => ({
   error: null as Error | null,
 }));
 vi.mock("./useDynastyImage", () => ({
-  useDynastyImage: (id: string | null) => useDynastyImageMock(),
+  useDynastyImage: (_id: string | null) => useDynastyImageMock(),
 }));
 
 import {
@@ -122,7 +122,7 @@ describe("useDynastyBackground / useHasSelectedDynasty", () => {
 
     it("dynasty.color=undefined 时仍能拼出 background(走 dynastyUtils 默认色)", () => {
       useDynastyStore.setState({
-        selectedDynasty: fakeDynasty({ color: undefined }),
+        selectedDynasty: fakeDynasty({ color: undefined } as unknown as Partial<Dynasty>),
       });
       const { result } = renderHook(() => useDynastyBackground());
       expect(result.current.background).toBe("var(--color-bg-gradient)");

@@ -88,23 +88,23 @@ describe("useStyleAwareGlass 系列", () => {
       expect(result.current.backdropFilter).toBe("blur(20px)");
       expect(result.current.WebkitBackdropFilter).toBe("blur(20px)");
       expect(result.current.backgroundColor).toMatch(
-        /rgba\(255, 255, 255, 0\.5\)/,
+        /rgba\(255, 251, 243, 0\.5\)/,
       );
       expect(result.current.borderRadius).toBe("16px"); // desktop lg
     });
 
-    it("dark 主题:背景色 base 切到 30,30,30,border 用 rgba(255,255,255,0.15)", () => {
+    it("dark 主题:背景色 base 切到暖色暗底,border 用暖色高亮", () => {
       useThemeStore.setState({ theme: "dark" });
       const { result } = renderHook(() => useStyleAwareGlass());
       expect(result.current.backgroundColor).toMatch(
-        /rgba\(30, 30, 30, 0\.5\)/,
+        /rgba\(28, 24, 20, 0\.5\)/,
       );
-      expect(result.current.border).toContain("rgba(255, 255, 255, 0.15)");
+      expect(result.current.border).toContain("rgba(226, 198, 140, 0.15)");
     });
 
-    it("light 主题 border 用 rgba(0,0,0,0.12)", () => {
+    it("light 主题 border 用暖棕色低透明", () => {
       const { result } = renderHook(() => useStyleAwareGlass());
-      expect(result.current.border).toContain("rgba(0, 0, 0, 0.12)");
+      expect(result.current.border).toContain("rgba(118, 90, 51, 0.14)");
     });
 
     it("自定义 blur='heavy' → 32px(desktop)", () => {

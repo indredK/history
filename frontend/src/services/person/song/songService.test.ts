@@ -13,12 +13,12 @@ import type { SongFigure, SongFigureRole } from "./types";
 const makeFigure = (overrides: Partial<SongFigure> = {}): SongFigure => ({
   id: overrides.id ?? "f1",
   name: overrides.name ?? "苏轼",
-  courtesy: overrides.courtesy,
+  courtesy: overrides.courtesy ?? "字",
   birthYear: overrides.birthYear ?? 1037,
   deathYear: overrides.deathYear ?? 1101,
   role: overrides.role ?? "scholar",
   positions: overrides.positions ?? [],
-  faction: overrides.faction,
+  faction: overrides.faction ?? "",
   biography: overrides.biography ?? "",
   achievements: overrides.achievements ?? [],
   events: overrides.events ?? [],
@@ -135,7 +135,7 @@ describe("songFigureServiceHelper", () => {
     await expect(songFigureServiceHelper.getAll()).resolves.toEqual({
       data: [],
     });
-    await expect(songFigureServiceHelper.getById("xx")).resolves.toEqual({
+    await expect(songFigureServiceHelper.getById!("xx")).resolves.toEqual({
       data: null,
     });
   });

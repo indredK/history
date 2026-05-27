@@ -163,7 +163,7 @@ describe("qingRulerServiceHelper", () => {
     await expect(qingRulerServiceHelper.getAll()).resolves.toEqual({
       data: [],
     });
-    await expect(qingRulerServiceHelper.getById("x")).resolves.toEqual({
+    await expect(qingRulerServiceHelper.getById!("x")).resolves.toEqual({
       data: null,
     });
   });
