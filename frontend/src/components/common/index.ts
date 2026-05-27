@@ -6,8 +6,10 @@
 export { TabsContainer, type TabConfig } from './TabsContainer';
 export { FixedTabsPage } from './FixedTabsPage';
 export type { TabConfig as FixedTabConfig } from './FixedTabsPage';
+export { PageIntro } from './PageIntro';
 export { PersonCard, DEFAULT_TAG_COLOR } from './PersonCard';
 export type { PersonCardProps, TagColor, TagConfig, InfoLine } from './PersonCard';
+export { SectionToolbar } from './SectionToolbar';
 export { ContentCard } from './ContentCard';
 export type { ContentCardProps, ContentTagColor, ContentTagConfig } from './ContentCard';
 export { CommonTabs } from './CommonTabs';

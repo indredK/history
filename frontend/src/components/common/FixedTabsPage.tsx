@@ -7,9 +7,11 @@
  */
 
 import { useState, ReactNode, useEffect } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 import { CommonTabs, type CommonTabItem } from './CommonTabs';
+import { PageIntro } from './PageIntro';
+import { SectionToolbar } from './SectionToolbar';
 
 export interface TabConfig {
   value: string;
@@ -116,66 +118,17 @@ export function FixedTabsPage({
         p: { xs: 1.5, md: 2 },
       }}
     >
-      {(title || description) && (
-        <Box
-          sx={{
-            px: { xs: 1, md: 1.5 },
-            pt: { xs: 0.5, md: 1 },
-            pb: 1.5,
-            borderBottom: '1px solid var(--color-border-light)',
-            mb: 1.5,
-          }}
-        >
-          {title && (
-            <Typography
-              sx={{
-                fontFamily: 'var(--font-family-serif)',
-                fontSize: { xs: '1.2rem', md: '1.55rem' },
-                color: 'var(--color-text-primary)',
-                lineHeight: 1.2,
-                mb: description ? 0.5 : 0,
-              }}
-            >
-              {title}
-            </Typography>
-          )}
-          {description && (
-            <Typography
-              sx={{
-                color: 'var(--color-text-secondary)',
-                fontSize: { xs: '0.88rem', md: '0.95rem' },
-                maxWidth: 760,
-              }}
-            >
-              {description}
-            </Typography>
-          )}
-        </Box>
-      )}
+      <PageIntro title={title} description={description} />
 
       {/* 页面头部区域 - 固定在顶部 */}
-      <Box
-        sx={{
-          flexShrink: 0,
-          position: 'sticky',
-          top: 0,
-          zIndex: 10,
-          background: 'var(--app-panel-bg-soft)',
-          mb: 2,
-          border: 'var(--app-panel-border)',
-          borderRadius: '12px',
-          boxShadow: 'var(--app-panel-shadow-sm)',
-          px: 0.5,
-          py: 0.5,
-        }}
-      >
+      <SectionToolbar>
         <CommonTabs
           tabs={tabItems}
           value={activeTab}
           onChange={handleTabChange}
           ariaLabel="标签页导航"
         />
-      </Box>
+      </SectionToolbar>
 
       {/* 页面内容区域 - 可滚动 */}
       <Box
