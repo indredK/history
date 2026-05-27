@@ -4,6 +4,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
+import { PageHeaderBadge, PagePanel } from '@/components/common';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import { MobileTableContainer } from '@/components/ui/MobileTableContainer';
 import {
@@ -215,21 +216,23 @@ export function DynastiesList() {
 
 
   return (
-    <Box sx={{ 
-      height: '100%', // 使用100%高度占满父容器
-      display: 'flex',
-      flexDirection: 'column',
-      overflow: 'hidden',
-      background: 'var(--app-panel-bg-soft)',
-      border: 'var(--app-panel-border)',
-      borderRadius: 'var(--panel-radius)',
-      boxShadow: 'var(--app-panel-shadow-md)',
-      p: isMobile ? 0.5 : 1.5,
-      // 竖屏模式下移除内边距，让内容更贴近边缘
-      ...(isMobile && {
-        p: 0.25,
-      })
-    }}>
+    <PagePanel
+      title={data.title}
+      description={data.subtitle}
+      headerAside={
+        <PageHeaderBadge
+          label="Dynasties"
+          value={`${data.dynasties.length} 个朝代`}
+        />
+      }
+      sx={{
+        p: isMobile ? 0.5 : 1.5,
+        ...(isMobile && {
+          p: 0.25,
+        }),
+      }}
+      contentSx={{ minHeight: 0 }}
+    >
       <MobileTableContainer
         height="100%" // 使用100%高度
         showScrollIndicator={isMobile}
@@ -272,6 +275,6 @@ export function DynastiesList() {
           </ResponsiveTableBody>
         </ResponsiveTable>
       </MobileTableContainer>
-    </Box>
+    </PagePanel>
   );
 }

@@ -10,7 +10,7 @@ import { useState, ReactNode, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 import { CommonTabs, type CommonTabItem } from './CommonTabs';
-import { PageIntro } from './PageIntro';
+import { PagePanel } from './PagePanel';
 import { SectionToolbar } from './SectionToolbar';
 import { PerformanceMonitor } from '@/utils/performance';
 
@@ -155,23 +155,12 @@ export function FixedTabsPage({
   }));
 
   return (
-    <Box 
+    <PagePanel
+      title={title}
+      description={description}
       className={className}
-      sx={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-        background: 'var(--app-panel-bg-soft)',
-        border: 'var(--app-panel-border)',
-        borderRadius: 'var(--panel-radius)',
-        boxShadow: 'var(--app-panel-shadow-md)',
-        p: { xs: 1.5, md: 2 },
-      }}
+      contentSx={{ overflow: 'hidden' }}
     >
-      <PageIntro title={title} description={description} />
-
-      {/* 页面头部区域 - 固定在顶部 */}
       <SectionToolbar>
         <CommonTabs
           tabs={tabItems}
@@ -204,7 +193,7 @@ export function FixedTabsPage({
       >
         {activeTabConfig?.content}
       </Box>
-    </Box>
+    </PagePanel>
   );
 }
 
