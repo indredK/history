@@ -32,7 +32,7 @@ export const mobileConfig: GlassConfig = {
     solid: 0.9
   },
   border: {
-    color: 'rgba(255, 255, 255, 0.15)',
+    color: 'rgba(226, 198, 140, 0.15)',
     width: '0.5px',
     radius: {
       sm: '6px',
@@ -46,8 +46,8 @@ export const mobileConfig: GlassConfig = {
     sm: '0 1px 4px rgba(0, 0, 0, 0.08)',
     md: '0 2px 8px rgba(0, 0, 0, 0.1)',
     lg: '0 4px 16px rgba(0, 0, 0, 0.12)',
-    glow: '0 0 12px rgba(255, 255, 255, 0.08)',
-    inset: 'inset 0 0.5px 0.5px rgba(255, 255, 255, 0.08)'
+    glow: '0 0 12px rgba(199, 143, 69, 0.14)',
+    inset: 'inset 0 0.5px 0.5px rgba(245, 236, 216, 0.08)'
   },
   animation: {
     easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -75,7 +75,7 @@ export const mobileConfig: GlassConfig = {
       blur: '12px',
       bgOpacity: 0.8,
       itemHoverOpacity: 0.85,
-      activeGlow: '0 0 10px rgba(255, 255, 255, 0.15)'
+      activeGlow: '0 0 10px rgba(199, 143, 69, 0.18)'
     },
     button: {
       primary: { blur: '8px', bgOpacity: 0.75 },
@@ -105,7 +105,7 @@ export const mobileConfig: GlassConfig = {
     containment: 'layout style'
   },
   fallback: {
-    bgColor: 'rgba(30, 30, 30, 0.92)',
-    borderColor: 'rgba(255, 255, 255, 0.08)'
+    bgColor: 'rgba(28, 24, 20, 0.92)',
+    borderColor: 'rgba(226, 198, 140, 0.08)'
   }
 };

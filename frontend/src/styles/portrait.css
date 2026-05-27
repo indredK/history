@@ -131,7 +131,7 @@
     backdrop-filter: blur(var(--glass-table-container-blur, 8px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-table-container-blur, 8px)) !important;
     background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-container-bg-opacity, 0.6)) !important;
-    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15)) !important;
+    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15)) !important;
     border-radius: var(--glass-radius-md, 10px) !important;
   }
   
@@ -200,7 +200,7 @@
     backdrop-filter: blur(var(--glass-btn-icon-blur, 6px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-btn-icon-blur, 6px)) !important;
     background-color: rgba(var(--glass-surface-rgb), var(--glass-btn-icon-bg-opacity, 0.5)) !important;
-    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15)) !important;
+    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15)) !important;
     border-radius: var(--glass-radius-full, 9999px) !important;
   }
   
@@ -369,7 +369,7 @@
     /* 触摸反馈毛玻璃效果 */
     backdrop-filter: blur(var(--glass-btn-primary-blur, 8px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur, 8px)) !important;
-    background: linear-gradient(135deg, rgba(255, 61, 0, 0.9) 0%, rgba(255, 111, 61, 0.9) 100%) !important;
+    background: linear-gradient(135deg, rgba(var(--glass-tint-rgb), 0.9) 0%, rgba(166, 122, 68, 0.88) 100%) !important;
   }
   
   /* 平滑的方向切换过渡 */
@@ -391,8 +391,8 @@
   .nav-item:focus-visible {
     backdrop-filter: blur(var(--glass-btn-secondary-blur, 6px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-btn-secondary-blur, 6px)) !important;
-    background: linear-gradient(135deg, rgba(255, 61, 0, 0.3) 0%, rgba(255, 111, 61, 0.3) 100%) !important;
-    box-shadow: 0 0 0 3px rgba(255, 61, 0, 0.3), var(--glass-shadow-glow, 0 0 12px rgba(255, 255, 255, 0.08)) !important;
+    background: linear-gradient(135deg, rgba(var(--glass-tint-rgb), 0.24) 0%, rgba(166, 122, 68, 0.24) 100%) !important;
+    box-shadow: 0 0 0 3px rgba(var(--glass-tint-rgb), 0.24), var(--glass-shadow-glow, 0 0 12px rgba(199, 143, 69, 0.14)) !important;
   }
 }
 
@@ -469,20 +469,20 @@
 @media (orientation: portrait) {
   @supports not (backdrop-filter: blur(1px)) {
     .MuiDrawer-paper {
-      background: linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 30, 30, 0.95) 100%) !important;
+      background: linear-gradient(135deg, rgba(28, 24, 20, 0.95) 0%, rgba(43, 37, 31, 0.95) 100%) !important;
     }
     
     .nav-item:hover,
     .nav-item.active {
-      background: linear-gradient(135deg, rgba(255, 61, 0, 0.9) 0%, rgba(255, 111, 61, 0.9) 100%) !important;
+      background: linear-gradient(135deg, rgba(var(--glass-tint-rgb), 0.9) 0%, rgba(166, 122, 68, 0.88) 100%) !important;
     }
     
     .MuiTableContainer-root {
-      background-color: rgba(30, 30, 30, 0.9) !important;
+      background-color: rgba(28, 24, 20, 0.9) !important;
     }
     
     .MuiTableHead-root .MuiTableCell-root {
-      background-color: rgba(30, 30, 30, 0.95) !important;
+      background-color: rgba(28, 24, 20, 0.95) !important;
     }
   }
 }

@@ -68,7 +68,7 @@
     backdrop-filter: blur(var(--glass-table-container-blur, 8px));
     -webkit-backdrop-filter: blur(var(--glass-table-container-blur, 8px));
     background-color: rgba(var(--glass-surface-soft-rgb, 30, 30, 30), var(--glass-table-container-bg-opacity, 0.6));
-    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
+    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15));
     border-radius: var(--glass-radius-md, 10px);
     box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1));
   }
@@ -89,14 +89,14 @@
     backdrop-filter: blur(var(--glass-table-header-blur, 10px));
     -webkit-backdrop-filter: blur(var(--glass-table-header-blur, 10px));
     background-color: rgba(var(--glass-surface-soft-rgb, 30, 30, 30), var(--glass-table-header-bg-opacity, 0.75));
-    border-bottom: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
+    border-bottom: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15));
   }
   
   /* 表格单元格 */
   .MuiTableCell-root {
     padding: 8px 6px;
     font-size: var(--mobile-font-sm);
-    border-right: 1px solid rgba(255,255,255,0.1);
+    border-right: 1px solid rgba(226, 198, 140, 0.1);
     /* 毛玻璃行背景 */
     background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), var(--glass-table-row-bg-opacity, 0.4));
     transition: background-color var(--glass-duration-hover, 100ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
@@ -117,7 +117,7 @@
     z-index: 10;
     min-width: 80px;
     max-width: 100px;
-    border-right: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
+    border-right: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15));
   }
   
   /* 时期列 */
@@ -143,7 +143,7 @@
     backdrop-filter: blur(var(--glass-btn-primary-blur, 8px));
     -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur, 8px));
     background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), var(--glass-btn-primary-bg-opacity, 0.75));
-    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
+    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15));
     border-radius: var(--glass-radius-md, 10px);
     box-shadow: var(--glass-shadow-sm, 0 1px 4px rgba(0, 0, 0, 0.08));
     transition: all var(--glass-duration-normal, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
@@ -168,14 +168,14 @@
     backdrop-filter: blur(var(--glass-btn-icon-blur, 6px));
     -webkit-backdrop-filter: blur(var(--glass-btn-icon-blur, 6px));
     background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), var(--glass-btn-icon-bg-opacity, 0.5));
-    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
+    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15));
     border-radius: var(--glass-radius-full, 9999px);
     transition: all var(--glass-duration-normal, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
   }
   
   .MuiIconButton-root:hover {
     background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), calc(var(--glass-btn-icon-bg-opacity, 0.5) + 0.15));
-    box-shadow: var(--glass-shadow-glow, 0 0 12px rgba(255, 255, 255, 0.08));
+    box-shadow: var(--glass-shadow-glow, 0 0 12px rgba(199, 143, 69, 0.14));
   }
   
   /* ============================================
@@ -188,7 +188,7 @@
     backdrop-filter: blur(var(--glass-card-blur, 8px));
     -webkit-backdrop-filter: blur(var(--glass-card-blur, 8px));
     background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), var(--glass-card-bg-opacity, 0.7));
-    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
+    border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15));
     border-radius: var(--glass-radius-md, 10px);
     box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1));
     transition: all var(--glass-duration-normal, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
@@ -436,7 +436,7 @@
   backdrop-filter: blur(var(--glass-table-container-blur, 8px));
   -webkit-backdrop-filter: blur(var(--glass-table-container-blur, 8px));
   background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-container-bg-opacity, 0.6));
-  border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
+  border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15));
   border-radius: var(--glass-radius-md, 10px);
 }
 

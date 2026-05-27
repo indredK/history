@@ -29,7 +29,7 @@ export const desktopConfig: GlassConfig = {
     solid: 0.85
   },
   border: {
-    color: 'rgba(255, 255, 255, 0.18)',
+    color: 'rgba(226, 198, 140, 0.16)',
     width: '1px',
     radius: {
       sm: '8px',
@@ -43,8 +43,8 @@ export const desktopConfig: GlassConfig = {
     sm: '0 2px 8px rgba(0, 0, 0, 0.1)',
     md: '0 4px 16px rgba(0, 0, 0, 0.12)',
     lg: '0 8px 32px rgba(0, 0, 0, 0.15)',
-    glow: '0 0 20px rgba(255, 255, 255, 0.1)',
-    inset: 'inset 0 1px 1px rgba(255, 255, 255, 0.1)'
+    glow: '0 0 20px rgba(199, 143, 69, 0.16)',
+    inset: 'inset 0 1px 1px rgba(245, 236, 216, 0.08)'
   },
   animation: {
     easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -72,7 +72,7 @@ export const desktopConfig: GlassConfig = {
       blur: '20px',
       bgOpacity: 0.7,
       itemHoverOpacity: 0.8,
-      activeGlow: '0 0 15px rgba(255, 255, 255, 0.2)'
+      activeGlow: '0 0 15px rgba(199, 143, 69, 0.22)'
     },
     button: {
       primary: { blur: '12px', bgOpacity: 0.7 },
@@ -102,7 +102,7 @@ export const desktopConfig: GlassConfig = {
     containment: 'layout style paint'
   },
   fallback: {
-    bgColor: 'rgba(30, 30, 30, 0.9)',
-    borderColor: 'rgba(255, 255, 255, 0.1)'
+    bgColor: 'rgba(28, 24, 20, 0.9)',
+    borderColor: 'rgba(226, 198, 140, 0.1)'
   }
 };

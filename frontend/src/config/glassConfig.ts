@@ -49,7 +49,7 @@ import type { ThemeMode } from './themeConfig';
  * Gets glass background base color based on theme
  */
 export function getThemeGlassBgBase(theme: ThemeMode): string {
-  return theme === 'dark' ? '30, 30, 30' : '255, 255, 255';
+  return theme === 'dark' ? '28, 24, 20' : '255, 251, 243';
 }
 
 /**
@@ -58,8 +58,8 @@ export function getThemeGlassBgBase(theme: ThemeMode): string {
  */
 export function getThemeBorderColor(theme: ThemeMode): string {
   return theme === 'dark' 
-    ? 'rgba(255, 255, 255, 0.15)' 
-    : 'rgba(0, 0, 0, 0.12)';
+    ? 'rgba(226, 198, 140, 0.15)' 
+    : 'rgba(118, 90, 51, 0.14)';
 }
 
 /**
@@ -68,8 +68,8 @@ export function getThemeBorderColor(theme: ThemeMode): string {
  */
 export function getThemeTextColor(theme: ThemeMode): string {
   return theme === 'dark' 
-    ? 'rgba(255, 255, 255, 0.95)' 
-    : 'rgba(0, 0, 0, 0.87)';
+    ? 'rgba(245, 236, 216, 0.95)' 
+    : 'rgba(36, 28, 20, 0.9)';
 }
 
 /**

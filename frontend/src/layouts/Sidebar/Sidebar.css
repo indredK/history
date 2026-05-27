@@ -22,7 +22,7 @@
   /* 添加整体阴影效果 */
   box-shadow: 
     var(--shadow-md),
-    inset -1px 0 0 rgba(255, 255, 255, 0.04) !important;
+    inset -1px 0 0 rgba(var(--glass-on-surface-rgb), 0.04) !important;
 }
 
 /* 侧边栏标题区域优化 */

@@ -62,21 +62,21 @@ export interface ThemeConfig {
  */
 const darkTheme: ThemeColors = {
   glass: {
-    bgBase: '30, 30, 30',           // rgba(30, 30, 30, opacity)
+    bgBase: '28, 24, 20',
     bgOpacity: 0.7,
-    borderColor: 'rgba(255, 255, 255, 0.15)',
-    textColor: 'rgba(255, 255, 255, 0.95)',
-    textSecondary: 'rgba(255, 255, 255, 0.7)',
+    borderColor: 'rgba(226, 198, 140, 0.15)',
+    textColor: 'rgba(245, 236, 216, 0.95)',
+    textSecondary: 'rgba(245, 236, 216, 0.72)',
     hoverOpacityDelta: 0.1,
   },
   ui: {
     background: 'rgba(20, 20, 20, 1)',
-    surface: 'rgba(30, 30, 30, 1)',
-    text: 'rgba(255, 255, 255, 0.95)',
-    textSecondary: 'rgba(255, 255, 255, 0.7)',
-    textMuted: 'rgba(255, 255, 255, 0.5)',
-    border: 'rgba(255, 255, 255, 0.15)',
-    divider: 'rgba(255, 255, 255, 0.1)',
+    surface: 'rgb(30, 26, 22)',
+    text: 'rgba(245, 236, 216, 0.95)',
+    textSecondary: 'rgba(245, 236, 216, 0.72)',
+    textMuted: 'rgba(245, 236, 216, 0.5)',
+    border: 'rgba(226, 198, 140, 0.15)',
+    divider: 'rgba(226, 198, 140, 0.1)',
   },
 };
 
@@ -86,21 +86,21 @@ const darkTheme: ThemeColors = {
  */
 const lightTheme: ThemeColors = {
   glass: {
-    bgBase: '255, 255, 255',        // rgba(255, 255, 255, opacity)
+    bgBase: '255, 251, 243',
     bgOpacity: 0.7,
-    borderColor: 'rgba(0, 0, 0, 0.12)',
-    textColor: 'rgba(0, 0, 0, 0.87)',
-    textSecondary: 'rgba(0, 0, 0, 0.6)',
+    borderColor: 'rgba(118, 90, 51, 0.14)',
+    textColor: 'rgba(36, 28, 20, 0.9)',
+    textSecondary: 'rgba(76, 60, 44, 0.7)',
     hoverOpacityDelta: 0.1,
   },
   ui: {
-    background: 'rgba(245, 245, 245, 1)',
-    surface: 'rgba(255, 255, 255, 1)',
-    text: 'rgba(0, 0, 0, 0.87)',
-    textSecondary: 'rgba(0, 0, 0, 0.6)',
-    textMuted: 'rgba(0, 0, 0, 0.38)',
-    border: 'rgba(0, 0, 0, 0.12)',
-    divider: 'rgba(0, 0, 0, 0.08)',
+    background: 'rgb(248, 241, 229)',
+    surface: 'rgb(255, 251, 243)',
+    text: 'rgba(36, 28, 20, 0.9)',
+    textSecondary: 'rgba(76, 60, 44, 0.7)',
+    textMuted: 'rgba(97, 79, 59, 0.42)',
+    border: 'rgba(118, 90, 51, 0.14)',
+    divider: 'rgba(118, 90, 51, 0.08)',
   },
 };
 

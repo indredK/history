@@ -13,9 +13,9 @@
    ============================================ */
 :root {
   --glass-surface-rgb: var(--theme-glass-surface-rgb, 255, 255, 255);
-  --glass-surface-soft-rgb: var(--theme-glass-surface-soft-rgb, 30, 30, 30);
-  --glass-on-surface-rgb: var(--theme-glass-on-surface-rgb, 255, 255, 255);
-  --glass-tint-rgb: var(--theme-glass-tint-rgb, 100, 150, 255);
+  --glass-surface-soft-rgb: var(--theme-glass-surface-soft-rgb, 43, 37, 31);
+  --glass-on-surface-rgb: var(--theme-glass-on-surface-rgb, 245, 236, 216);
+  --glass-tint-rgb: var(--theme-glass-tint-rgb, 199, 143, 69);
   /* ------------------------------------------
      模糊级别 (Blur Levels)
      Requirements: 4.2
@@ -45,8 +45,8 @@
      边框样式 (Border Styles)
      Requirements: 4.4
      ------------------------------------------ */
-  --glass-border-color: var(--theme-glass-border, rgba(255, 255, 255, 0.18));
-  --glass-border-color-dark: var(--theme-glass-border-light, rgba(0, 0, 0, 0.1));
+  --glass-border-color: var(--theme-glass-border, rgba(226, 198, 140, 0.16));
+  --glass-border-color-dark: var(--theme-glass-border-light, rgba(118, 90, 51, 0.1));
   --glass-border-width: 1px;
   --glass-border: var(--glass-border-width) solid var(--glass-border-color);
 
@@ -67,7 +67,7 @@
   --glass-shadow-sm: var(--theme-shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.1));
   --glass-shadow-md: var(--theme-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12));
   --glass-shadow-lg: var(--theme-shadow-lg, 0 8px 32px rgba(0, 0, 0, 0.15));
-  --glass-shadow-glow: var(--theme-shadow-glow, 0 0 20px rgba(255, 255, 255, 0.1));
+  --glass-shadow-glow: var(--theme-shadow-glow, 0 0 20px rgba(199, 143, 69, 0.16));
   --glass-shadow-inset: inset 0 1px 1px rgba(var(--glass-on-surface-rgb), 0.08);
 
   /* ------------------------------------------
@@ -105,7 +105,7 @@
   --glass-nav-blur: var(--glass-blur-medium);
   --glass-nav-bg-opacity: 0.7;
   --glass-nav-item-hover-opacity: 0.8;
-  --glass-nav-active-glow: 0 0 15px rgba(255, 255, 255, 0.2);
+  --glass-nav-active-glow: 0 0 15px rgba(199, 143, 69, 0.22);
 
   /* 按钮 */
   --glass-btn-primary-blur: var(--glass-blur-light);
@@ -144,8 +144,8 @@
   /* ------------------------------------------
      降级配置 (Fallback Configuration)
      ------------------------------------------ */
-  --glass-fallback-bg: rgba(30, 30, 30, 0.9);
-  --glass-fallback-border: rgba(255, 255, 255, 0.1);
+  --glass-fallback-bg: rgba(28, 24, 20, 0.9);
+  --glass-fallback-border: rgba(226, 198, 140, 0.1);
 }
 
 
@@ -169,7 +169,7 @@
     --glass-bg-opacity-solid: 0.9;
 
     /* 边框 - 更细以适应小屏幕 */
-    --glass-border-color: rgba(255, 255, 255, 0.15);
+    --glass-border-color: rgba(226, 198, 140, 0.15);
     --glass-border-width: 0.5px;
 
     /* 圆角 - 略微减小 */
@@ -182,8 +182,8 @@
     --glass-shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.08);
     --glass-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
     --glass-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
-    --glass-shadow-glow: 0 0 12px rgba(255, 255, 255, 0.08);
-    --glass-shadow-inset: inset 0 0.5px 0.5px rgba(255, 255, 255, 0.08);
+    --glass-shadow-glow: 0 0 12px rgba(199, 143, 69, 0.14);
+    --glass-shadow-inset: inset 0 0.5px 0.5px rgba(245, 236, 216, 0.08);
 
     /* 动画时长 - 缩短以提升响应速度 */
     --glass-duration-fast: 100ms;
@@ -206,7 +206,7 @@
     --glass-nav-blur: 12px;
     --glass-nav-bg-opacity: 0.8;
     --glass-nav-item-hover-opacity: 0.85;
-    --glass-nav-active-glow: 0 0 10px rgba(255, 255, 255, 0.15);
+    --glass-nav-active-glow: 0 0 10px rgba(199, 143, 69, 0.18);
 
     --glass-btn-primary-blur: 8px;
     --glass-btn-primary-bg-opacity: 0.75;
@@ -238,8 +238,8 @@
     --glass-scrollbar-track-opacity: 0.25;
 
     /* 降级配置 */
-    --glass-fallback-bg: rgba(30, 30, 30, 0.92);
-    --glass-fallback-border: rgba(255, 255, 255, 0.08);
+    --glass-fallback-bg: rgba(28, 24, 20, 0.92);
+    --glass-fallback-border: rgba(226, 198, 140, 0.08);
   }
 }
 
@@ -1143,6 +1143,6 @@
   --glass-shadow-glow: var(--theme-shadow-glow);
   --glass-shadow-inset: inset 0 1px 1px rgba(var(--glass-on-surface-rgb), 0.05);
   
-  --glass-fallback-bg: rgba(255, 255, 255, 0.95);
+  --glass-fallback-bg: rgba(255, 251, 243, 0.95);
   --glass-fallback-border: rgba(0, 0, 0, 0.1);
 }
