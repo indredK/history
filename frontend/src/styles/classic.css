@@ -12,45 +12,45 @@
 [data-style="classic"][data-theme="dark"],
 [data-style="classic"] [data-theme="dark"] {
   /* 背景颜色 */
-  --classic-bg-primary: #121212;
-  --classic-bg-secondary: #1e1e1e;
-  --classic-bg-surface: #252525;
-  --classic-bg-elevated: #2d2d2d;
+  --classic-bg-primary: #16120f;
+  --classic-bg-secondary: #211b17;
+  --classic-bg-surface: #2a231d;
+  --classic-bg-elevated: #342b23;
   
   /* 边框颜色 */
-  --classic-border-color: rgba(255, 255, 255, 0.12);
+  --classic-border-color: rgba(226, 198, 140, 0.12);
   
   /* 焦点环 */
-  --classic-focus-ring: rgba(100, 150, 255, 0.4);
+  --classic-focus-ring: rgba(199, 143, 69, 0.32);
   
   /* 卡片 */
-  --classic-card-bg: #252525;
-  --classic-card-hover-bg: #2d2d2d;
+  --classic-card-bg: #2a231d;
+  --classic-card-hover-bg: #342b23;
   
   /* 导航 */
-  --classic-nav-bg: #1e1e1e;
-  --classic-nav-item-hover: rgba(255, 255, 255, 0.08);
-  --classic-nav-item-active: rgba(255, 255, 255, 0.12);
+  --classic-nav-bg: #211b17;
+  --classic-nav-item-hover: rgba(226, 198, 140, 0.08);
+  --classic-nav-item-active: rgba(226, 198, 140, 0.12);
   
   /* 按钮 */
-  --classic-btn-primary-bg: #3b82f6;
-  --classic-btn-secondary-bg: #374151;
-  --classic-btn-icon-bg: rgba(255, 255, 255, 0.08);
+  --classic-btn-primary-bg: #b6762b;
+  --classic-btn-secondary-bg: #4a433c;
+  --classic-btn-icon-bg: rgba(226, 198, 140, 0.08);
   
   /* 表格 */
-  --classic-table-bg: #1e1e1e;
-  --classic-table-header-bg: #252525;
+  --classic-table-bg: #211b17;
+  --classic-table-header-bg: #2a231d;
   --classic-table-row-bg: transparent;
-  --classic-table-row-hover: rgba(255, 255, 255, 0.04);
+  --classic-table-row-hover: rgba(226, 198, 140, 0.04);
   
   /* 模态框 */
   --classic-modal-backdrop: rgba(0, 0, 0, 0.75);
-  --classic-modal-bg: #252525;
+  --classic-modal-bg: #2a231d;
   
   /* 弹出层 */
-  --classic-popover-bg: #2d2d2d;
+  --classic-popover-bg: #342b23;
   --classic-tooltip-bg: #374151;
-  --classic-dropdown-bg: #2d2d2d;
+  --classic-dropdown-bg: #342b23;
 }
 
 /* ============================================
@@ -59,43 +59,43 @@
 [data-style="classic"][data-theme="light"],
 [data-style="classic"] [data-theme="light"] {
   /* 背景颜色 */
-  --classic-bg-primary: #ffffff;
-  --classic-bg-secondary: #f5f5f5;
-  --classic-bg-surface: #fafafa;
-  --classic-bg-elevated: #ffffff;
+  --classic-bg-primary: #fffaf2;
+  --classic-bg-secondary: #f3ebdf;
+  --classic-bg-surface: #fbf5ea;
+  --classic-bg-elevated: #fffdf8;
   
   /* 边框颜色 */
-  --classic-border-color: rgba(0, 0, 0, 0.12);
+  --classic-border-color: rgba(118, 90, 51, 0.14);
   
   /* 焦点环 */
-  --classic-focus-ring: rgba(59, 130, 246, 0.4);
+  --classic-focus-ring: rgba(155, 97, 33, 0.28);
   
   /* 卡片 */
-  --classic-card-bg: #ffffff;
-  --classic-card-hover-bg: #f5f5f5;
+  --classic-card-bg: #fffdf8;
+  --classic-card-hover-bg: #f6efe4;
   
   /* 导航 */
-  --classic-nav-bg: #ffffff;
-  --classic-nav-item-hover: rgba(0, 0, 0, 0.04);
-  --classic-nav-item-active: rgba(0, 0, 0, 0.08);
+  --classic-nav-bg: #fffdf8;
+  --classic-nav-item-hover: rgba(118, 90, 51, 0.04);
+  --classic-nav-item-active: rgba(118, 90, 51, 0.08);
   
   /* 按钮 */
-  --classic-btn-primary-bg: #3b82f6;
-  --classic-btn-secondary-bg: #e5e7eb;
-  --classic-btn-icon-bg: rgba(0, 0, 0, 0.04);
+  --classic-btn-primary-bg: #b6762b;
+  --classic-btn-secondary-bg: #ece2d3;
+  --classic-btn-icon-bg: rgba(118, 90, 51, 0.04);
   
   /* 表格 */
-  --classic-table-bg: #ffffff;
-  --classic-table-header-bg: #f5f5f5;
+  --classic-table-bg: #fffdf8;
+  --classic-table-header-bg: #f3ebdf;
   --classic-table-row-bg: transparent;
-  --classic-table-row-hover: rgba(0, 0, 0, 0.02);
+  --classic-table-row-hover: rgba(118, 90, 51, 0.03);
   
   /* 模态框 */
   --classic-modal-backdrop: rgba(0, 0, 0, 0.5);
-  --classic-modal-bg: #ffffff;
+  --classic-modal-bg: #fffdf8;
   
   /* 弹出层 */
-  --classic-popover-bg: #ffffff;
+  --classic-popover-bg: #fffdf8;
   --classic-tooltip-bg: #374151;
   --classic-dropdown-bg: #ffffff;
 }
@@ -104,29 +104,29 @@
    默认经典样式变量（暗黑模式为默认）
    ============================================ */
 [data-style="classic"] {
-  --classic-bg-primary: #121212;
-  --classic-bg-secondary: #1e1e1e;
-  --classic-bg-surface: #252525;
-  --classic-bg-elevated: #2d2d2d;
-  --classic-border-color: rgba(255, 255, 255, 0.12);
-  --classic-focus-ring: rgba(100, 150, 255, 0.4);
-  --classic-card-bg: #252525;
-  --classic-card-hover-bg: #2d2d2d;
-  --classic-nav-bg: #1e1e1e;
-  --classic-nav-item-hover: rgba(255, 255, 255, 0.08);
-  --classic-nav-item-active: rgba(255, 255, 255, 0.12);
-  --classic-btn-primary-bg: #3b82f6;
-  --classic-btn-secondary-bg: #374151;
-  --classic-btn-icon-bg: rgba(255, 255, 255, 0.08);
-  --classic-table-bg: #1e1e1e;
-  --classic-table-header-bg: #252525;
+  --classic-bg-primary: #16120f;
+  --classic-bg-secondary: #211b17;
+  --classic-bg-surface: #2a231d;
+  --classic-bg-elevated: #342b23;
+  --classic-border-color: rgba(226, 198, 140, 0.12);
+  --classic-focus-ring: rgba(199, 143, 69, 0.32);
+  --classic-card-bg: #2a231d;
+  --classic-card-hover-bg: #342b23;
+  --classic-nav-bg: #211b17;
+  --classic-nav-item-hover: rgba(226, 198, 140, 0.08);
+  --classic-nav-item-active: rgba(226, 198, 140, 0.12);
+  --classic-btn-primary-bg: #b6762b;
+  --classic-btn-secondary-bg: #4a433c;
+  --classic-btn-icon-bg: rgba(226, 198, 140, 0.08);
+  --classic-table-bg: #211b17;
+  --classic-table-header-bg: #2a231d;
   --classic-table-row-bg: transparent;
-  --classic-table-row-hover: rgba(255, 255, 255, 0.04);
+  --classic-table-row-hover: rgba(226, 198, 140, 0.04);
   --classic-modal-backdrop: rgba(0, 0, 0, 0.75);
-  --classic-modal-bg: #252525;
-  --classic-popover-bg: #2d2d2d;
+  --classic-modal-bg: #2a231d;
+  --classic-popover-bg: #342b23;
   --classic-tooltip-bg: #374151;
-  --classic-dropdown-bg: #2d2d2d;
+  --classic-dropdown-bg: #342b23;
 }
 
 /* ============================================

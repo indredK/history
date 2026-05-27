@@ -53,8 +53,8 @@ export function useStyleAwareGlass(options: GlassStyleOptions = {}): GlassStyleR
     } = options;
     
     // 根据主题获取背景色基础值
-    const bgBase = customBgBase || (isDark ? '30, 30, 30' : '255, 255, 255');
-    const borderColor = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.12)';
+    const bgBase = customBgBase || (isDark ? '28, 24, 20' : '255, 251, 243');
+    const borderColor = isDark ? 'rgba(226, 198, 140, 0.15)' : 'rgba(118, 90, 51, 0.14)';
     
     if (isClassicStyle) {
       // 经典样式 - 无模糊效果

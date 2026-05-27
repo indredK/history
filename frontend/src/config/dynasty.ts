@@ -77,10 +77,10 @@ export const dynastyConfig = {
     colors: {
       text: 'white',
       border: {
-        default: 'rgba(255,255,255,0.1)',
-        active: 'rgba(255,255,255,0.4)'
+        default: 'rgba(226, 198, 140, 0.12)',
+        active: 'rgba(245, 236, 216, 0.34)'
       },
-      periodBackground: 'rgba(255,255,255,0.2)'
+      periodBackground: 'rgba(245, 236, 216, 0.16)'
     }
   }
 };
