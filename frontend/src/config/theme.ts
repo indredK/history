@@ -28,7 +28,7 @@ export const navigationThemes: Record<string, NavigationTheme> = {
   timeline: {
     key: 'timeline',
     gradient: 'var(--color-primary-gradient)',
-    hoverBackground: 'rgba(199, 143, 69, 0.15)',
+    hoverBackground: 'rgba(199, 143, 69, 0.1)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,
@@ -38,8 +38,8 @@ export const navigationThemes: Record<string, NavigationTheme> = {
   },
   dynasties: {
     key: 'dynasties',
-    gradient: 'var(--color-dynasties-gradient)',
-    hoverBackground: 'rgba(181, 134, 70, 0.16)',
+    gradient: 'var(--color-primary-gradient)',
+    hoverBackground: 'rgba(199, 143, 69, 0.1)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,
@@ -49,8 +49,8 @@ export const navigationThemes: Record<string, NavigationTheme> = {
   },
   map: {
     key: 'map',
-    gradient: 'var(--color-secondary-gradient)',
-    hoverBackground: 'rgba(107, 135, 151, 0.16)',
+    gradient: 'var(--color-primary-gradient)',
+    hoverBackground: 'rgba(199, 143, 69, 0.1)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,
@@ -60,8 +60,8 @@ export const navigationThemes: Record<string, NavigationTheme> = {
   },
   people: {
     key: 'people',
-    gradient: 'var(--color-people-gradient)',
-    hoverBackground: 'rgba(111, 140, 116, 0.16)',
+    gradient: 'var(--color-primary-gradient)',
+    hoverBackground: 'rgba(199, 143, 69, 0.1)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,
@@ -71,8 +71,8 @@ export const navigationThemes: Record<string, NavigationTheme> = {
   },
   culture: {
     key: 'culture',
-    gradient: 'var(--color-culture-gradient)',
-    hoverBackground: 'rgba(140, 109, 130, 0.16)',
+    gradient: 'var(--color-primary-gradient)',
+    hoverBackground: 'rgba(199, 143, 69, 0.1)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,
@@ -82,8 +82,8 @@ export const navigationThemes: Record<string, NavigationTheme> = {
   },
   mythology: {
     key: 'mythology',
-    gradient: 'var(--color-mythology-gradient)',
-    hoverBackground: 'rgba(196, 146, 79, 0.16)',
+    gradient: 'var(--color-primary-gradient)',
+    hoverBackground: 'rgba(199, 143, 69, 0.1)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,
@@ -93,8 +93,8 @@ export const navigationThemes: Record<string, NavigationTheme> = {
   },
   events: {
     key: 'events',
-    gradient: 'var(--color-events-gradient)',
-    hoverBackground: 'rgba(107, 135, 151, 0.16)',
+    gradient: 'var(--color-primary-gradient)',
+    hoverBackground: 'rgba(199, 143, 69, 0.1)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,

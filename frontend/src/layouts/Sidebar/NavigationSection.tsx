@@ -34,7 +34,10 @@ export function NavigationSection({ activeTab }: NavigationSectionProps) {
               '&:hover': {
                 background: isActive ? undefined : theme?.hoverBackground,
                 ...navigationStyles.hoverEffect
-              }
+              },
+              '&:active': {
+                transform: 'translateY(-1px) scale(0.96)',
+              },
             }}
           >
             {item.label}

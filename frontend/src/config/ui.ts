@@ -75,11 +75,16 @@ export const buttonConfig = {
     borderRadius: '12px',
     padding: '6px 12px',
     borderColor: 'var(--theme-glass-border)',
+    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     '&:hover': {
-      backgroundColor: 'rgba(var(--glass-surface-rgb), 0.62)',
+      backgroundColor: 'rgba(199, 143, 69, 0.1)',
       borderColor: 'var(--color-primary)',
-      boxShadow: 'var(--app-panel-shadow-md)'
-    }
+      boxShadow: 'var(--shadow-md), var(--shadow-glow)',
+      transform: 'translateY(-2px)',
+    },
+    '&:active': {
+      transform: 'translateY(-1px) scale(0.96)',
+    },
   } as SxProps<Theme>,
 
   // 通用按钮样式（用于Popover内的按钮）

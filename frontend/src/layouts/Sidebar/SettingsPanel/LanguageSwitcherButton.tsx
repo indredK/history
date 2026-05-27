@@ -44,8 +44,12 @@ export function LanguageSwitcherButton({ collapsed }: LanguageSwitcherButtonProp
     minWidth: buttonSize,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
     '&:hover': {
-      background: 'var(--theme-glass-bg)',
+      background: 'rgba(199, 143, 69, 0.1)',
       boxShadow: glassConfig.shadow.glow,
+      transform: 'translateY(-2px)',
+    },
+    '&:active': {
+      transform: 'translateY(-1px) scale(0.92)',
     },
   };
 

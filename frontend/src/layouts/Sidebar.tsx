@@ -111,8 +111,12 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                     '&:hover': {
                       background: isClassicStyle 
                         ? (isDark ? 'var(--classic-nav-item-hover)' : 'var(--classic-nav-item-hover)')
-                        : `rgba(var(--glass-surface-rgb), ${glassConfig.bgOpacity.medium})`,
-                      boxShadow: isClassicStyle ? '0 2px 6px rgba(0, 0, 0, 0.15)' : glassConfig.shadow.glow
+                        : 'rgba(199, 143, 69, 0.1)',
+                      boxShadow: isClassicStyle ? '0 2px 6px rgba(0, 0, 0, 0.15)' : glassConfig.shadow.glow,
+                      transform: 'translateY(-2px)',
+                    },
+                    '&:active': {
+                      transform: 'translateY(-1px) scale(0.92)',
                     }
                   }}
                 >
@@ -177,7 +181,11 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                     ml: 1,
                     transition: `all ${glassConfig.animation.hoverDuration} ${glassConfig.animation.easing}`,
                     '&:hover': {
-                      background: 'rgba(199, 143, 69, 0.1)'
+                      background: 'rgba(199, 143, 69, 0.1)',
+                      transform: 'translateY(-2px)',
+                    },
+                    '&:active': {
+                      transform: 'translateY(-1px) scale(0.92)',
                     }
                   }}
                 >
@@ -228,9 +236,12 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                             ? undefined 
                             : (isClassicStyle 
                                 ? (isDark ? 'var(--classic-nav-item-hover)' : 'var(--classic-nav-item-hover)')
-                                : 'rgba(199, 143, 69, 0.14)'),
+                                : 'rgba(199, 143, 69, 0.1)'),
                           boxShadow: isClassicStyle ? '0 2px 6px rgba(0, 0, 0, 0.15)' : glassConfig.shadow.glow,
                           transform: 'translateY(-2px)'
+                        },
+                        '&:active': {
+                          transform: 'translateY(-1px) scale(0.92)',
                         }
                       }}
                     >
