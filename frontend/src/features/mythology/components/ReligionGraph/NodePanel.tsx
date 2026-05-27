@@ -82,9 +82,9 @@ export function NodePanel({ node, onClose, relatedNodes, relatedEdges }: NodePan
           right: 0,
           width: { xs: '100%', sm: 320 },
           height: '100%',
-          backgroundColor: 'var(--glass-bg-dark, rgba(30, 30, 30, 0.95))',
+          backgroundColor: 'rgba(var(--glass-surface-rgb), 0.95)',
           backdropFilter: 'blur(var(--glass-blur-medium, 20px))',
-          borderLeft: '1px solid var(--glass-border-color, rgba(255, 255, 255, 0.18))',
+          borderLeft: '1px solid var(--theme-glass-border)',
           overflow: 'auto',
           zIndex: 10,
         }}
@@ -96,7 +96,7 @@ export function NodePanel({ node, onClose, relatedNodes, relatedEdges }: NodePan
             display: 'flex',
             alignItems: 'flex-start',
             justifyContent: 'space-between',
-            borderBottom: '1px solid var(--glass-border-color, rgba(255, 255, 255, 0.1))',
+            borderBottom: '1px solid var(--theme-glass-border-light)',
             background: `linear-gradient(135deg, ${nodeColor}22 0%, transparent 100%)`,
           }}
         >
@@ -230,7 +230,7 @@ export function NodePanel({ node, onClose, relatedNodes, relatedEdges }: NodePan
         {/* 相关关系 */}
         {relatedEdges.length > 0 && (
           <>
-            <Divider sx={{ borderColor: 'var(--glass-border-color, rgba(255, 255, 255, 0.1))' }} />
+            <Divider sx={{ borderColor: 'var(--theme-glass-border-light)' }} />
             <Box sx={{ p: 2 }}>
               <Typography
                 variant="subtitle2"
@@ -261,10 +261,10 @@ export function NodePanel({ node, onClose, relatedNodes, relatedEdges }: NodePan
                         gap: 1,
                         p: 1,
                         borderRadius: 'var(--glass-radius-sm, 8px)',
-                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        backgroundColor: 'rgba(var(--glass-surface-rgb), 0.06)',
                         transition: 'background-color 0.2s ease',
                         '&:hover': {
-                          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                          backgroundColor: 'rgba(var(--glass-surface-rgb), 0.12)',
                         },
                       }}
                     >

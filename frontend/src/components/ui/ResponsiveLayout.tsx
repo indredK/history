@@ -77,7 +77,7 @@ export function ResponsiveLayout({
   const glassStyles = glassEffect ? {
     backdropFilter: `blur(${navConfig.blur})`,
     WebkitBackdropFilter: `blur(${navConfig.blur})`,
-    backgroundColor: `rgba(30, 30, 30, ${navConfig.bgOpacity})`,
+    backgroundColor: `rgba(var(--glass-surface-rgb), ${navConfig.bgOpacity})`,
     border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
     borderRadius: glassConfig.border.radius.lg,
     boxShadow: glassConfig.shadow.md,
@@ -142,7 +142,7 @@ export function ResponsiveGrid({
   const glassStyles = glassEffect ? {
     backdropFilter: `blur(${glassConfig.blur.light})`,
     WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
-    backgroundColor: `rgba(30, 30, 30, ${glassConfig.bgOpacity.light})`,
+    backgroundColor: `rgba(var(--glass-surface-rgb), ${glassConfig.bgOpacity.light})`,
     border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
     borderRadius: glassConfig.border.radius.lg,
     boxShadow: glassConfig.shadow.sm,
@@ -198,7 +198,7 @@ export function ResponsiveStack({
   const glassStyles = glassEffect ? {
     backdropFilter: `blur(${glassConfig.blur.light})`,
     WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
-    backgroundColor: `rgba(30, 30, 30, ${glassConfig.bgOpacity.light})`,
+    backgroundColor: `rgba(var(--glass-surface-rgb), ${glassConfig.bgOpacity.light})`,
     border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
     borderRadius: glassConfig.border.radius.md,
     boxShadow: glassConfig.shadow.sm,

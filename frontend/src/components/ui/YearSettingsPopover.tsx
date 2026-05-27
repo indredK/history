@@ -78,11 +78,11 @@ export function YearSettingsPopover({ anchorEl, onClose }: YearSettingsPopoverPr
                   border: '2px solid var(--color-border-medium)',
                   '&:hover': {
                     borderColor: 'var(--color-primary)',
-                    boxShadow: '0 0 10px rgba(255, 61, 0, 0.2)'
+                    boxShadow: '0 0 10px rgba(var(--glass-tint-rgb), 0.18)'
                   },
                   '&.Mui-focused': {
                     borderColor: 'var(--color-primary)',
-                    boxShadow: '0 0 20px rgba(255, 61, 0, 0.3), var(--shadow-glow)'
+                    boxShadow: '0 0 20px rgba(var(--glass-tint-rgb), 0.24), var(--shadow-glow)'
                   },
                   transition: 'all var(--transition-normal)'
                 },
@@ -113,11 +113,11 @@ export function YearSettingsPopover({ anchorEl, onClose }: YearSettingsPopoverPr
                   border: '2px solid var(--color-border-medium)',
                   '&:hover': {
                     borderColor: 'var(--color-primary)',
-                    boxShadow: '0 0 10px rgba(255, 61, 0, 0.2)'
+                    boxShadow: '0 0 10px rgba(var(--glass-tint-rgb), 0.18)'
                   },
                   '&.Mui-focused': {
                     borderColor: 'var(--color-primary)',
-                    boxShadow: '0 0 20px rgba(255, 61, 0, 0.3), var(--shadow-glow)'
+                    boxShadow: '0 0 20px rgba(var(--glass-tint-rgb), 0.24), var(--shadow-glow)'
                   },
                   transition: 'all var(--transition-normal)'
                 },

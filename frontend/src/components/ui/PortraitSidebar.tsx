@@ -43,10 +43,12 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
   
   // 根据主题获取背景色
   const isDark = theme === 'dark';
-  const bgBase = isDark ? '18, 18, 18' : '255, 255, 255';
-  const bgSecondary = isDark ? '30, 30, 30' : '245, 245, 245';
-  const textColor = isDark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)';
-  const borderColor = isDark ? 'rgba(255, 61, 0, 0.2)' : 'rgba(255, 61, 0, 0.15)';
+  const bgBase = isDark ? '28, 24, 20' : '255, 251, 243';
+  const bgSecondary = isDark ? '43, 37, 31' : '244, 236, 223';
+  const textColor = isDark ? 'rgba(245, 236, 216, 0.72)' : 'rgba(76, 60, 44, 0.78)';
+  const borderColor = isDark ? 'rgba(226, 198, 140, 0.18)' : 'rgba(118, 90, 51, 0.14)';
+  const activeGradient = 'linear-gradient(135deg, rgba(var(--glass-tint-rgb), 0.94) 0%, rgba(166, 122, 68, 0.9) 100%)';
+  const hoverGradient = 'linear-gradient(135deg, rgba(var(--glass-tint-rgb), 0.12) 0%, rgba(107, 135, 151, 0.1) 100%)';
 
   if (!shouldShow) {
     return null;
@@ -79,7 +81,7 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
     background: `linear-gradient(135deg, rgba(${bgBase}, 0.95) 0%, rgba(${bgSecondary}, 0.95) 100%)`,
     backdropFilter: 'blur(20px)',
     border: `1px solid ${borderColor}`,
-    boxShadow: `0 -4px 20px rgba(0, 0, 0, ${isDark ? 0.3 : 0.1}), 0 0 40px rgba(255, 61, 0, 0.1)`,
+    boxShadow: `0 -4px 20px rgba(0, 0, 0, ${isDark ? 0.3 : 0.1}), 0 0 40px rgba(var(--glass-tint-rgb), 0.12)`,
   };
 
   return (
@@ -113,15 +115,15 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
           const glassItemStyles = isClassicStyle ? {
             // 经典样式 - 无模糊效果
             background: isActive 
-              ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
+              ? activeGradient
               : 'transparent',
             boxShadow: isActive 
-              ? '0 2px 8px rgba(255, 61, 0, 0.3)'
+              ? '0 2px 8px rgba(var(--glass-tint-rgb), 0.28)'
               : 'none',
             transition: 'all 200ms ease',
             '&:hover': {
               background: isActive 
-                ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
+                ? activeGradient
                 : isDark ? 'var(--classic-nav-item-hover)' : 'var(--classic-nav-item-hover)',
               transform: 'translateY(-2px)',
               color: isActive ? 'white' : textColor,
@@ -131,7 +133,7 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
             },
           } : glassEffect ? {
             background: isActive 
-              ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
+              ? activeGradient
               : 'transparent',
             boxShadow: isActive 
               ? navConfig.activeGlow
@@ -139,8 +141,8 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
             transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
             '&:hover': {
               background: isActive 
-                ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
-                : `rgba(255, 255, 255, ${navConfig.itemHoverOpacity - navConfig.bgOpacity})`,
+                ? activeGradient
+                : `rgba(${isDark ? '245, 236, 216' : '255, 251, 243'}, ${navConfig.itemHoverOpacity - navConfig.bgOpacity})`,
               backdropFilter: isActive ? 'none' : `blur(${glassConfig.blur.light})`,
               transform: 'translateY(-2px)',
               color: 'white',
@@ -151,15 +153,15 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
             },
           } : {
             background: isActive 
-              ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
+              ? activeGradient
               : 'transparent',
             boxShadow: isActive 
-              ? '0 4px 15px rgba(255, 61, 0, 0.4)'
+              ? '0 4px 15px rgba(var(--glass-tint-rgb), 0.34)'
               : 'none',
             '&:hover': {
               background: isActive 
-                ? 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)'
-                : 'linear-gradient(135deg, rgba(255, 61, 0, 0.1) 0%, rgba(255, 111, 61, 0.1) 100%)',
+                ? activeGradient
+                : hoverGradient,
               transform: 'translateY(-2px)',
               color: 'white',
             },
@@ -189,7 +191,7 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
                 transform: isActive ? 'translateY(-2px)' : 'none',
                 ...glassItemStyles,
                 '&:focus': {
-                  outline: '2px solid #FF3D00',
+                  outline: '2px solid var(--color-primary)',
                   outlineOffset: '2px',
                 },
               }}

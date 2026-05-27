@@ -19,16 +19,16 @@ export function SearchBar() {
           color: 'var(--color-text-primary)',
           fontSize: 'var(--font-size-base)',
           transition: 'all var(--transition-normal)',
-          boxShadow: '0 0 0 rgba(255, 61, 0, 0)',
+          boxShadow: '0 0 0 rgba(var(--glass-tint-rgb), 0)',
           outline: 'none'
         }}
         onFocus={(e) => {
           e.target.style.borderColor = 'var(--color-primary)';
-          e.target.style.boxShadow = '0 0 20px rgba(255, 61, 0, 0.3)';
+          e.target.style.boxShadow = '0 0 20px rgba(var(--glass-tint-rgb), 0.26)';
         }}
         onBlur={(e) => {
           e.target.style.borderColor = 'var(--color-border-medium)';
-          e.target.style.boxShadow = '0 0 0 rgba(255, 61, 0, 0)';
+          e.target.style.boxShadow = '0 0 0 rgba(var(--glass-tint-rgb), 0)';
         }}
       />
     </div>

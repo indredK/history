@@ -121,22 +121,22 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #1890ff;
-  border: 3px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), 0 0 12px rgba(24, 144, 255, 0.4);
+  background: rgba(107, 135, 151, 1);
+  border: 3px solid rgba(var(--glass-on-surface-rgb), 0.82);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), 0 0 12px rgba(107, 135, 151, 0.34);
   cursor: grab;
   transition: all var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
 }
 
 .sliderHandle:hover {
   transform: scale(1.15);
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3), 0 0 16px rgba(24, 144, 255, 0.5);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3), 0 0 16px rgba(107, 135, 151, 0.42);
 }
 
 .slider.dragging .sliderHandle {
   cursor: grabbing;
   transform: scale(1.2);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 20px rgba(24, 144, 255, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 20px rgba(107, 135, 151, 0.5);
 }
 
 .yearMarkers {

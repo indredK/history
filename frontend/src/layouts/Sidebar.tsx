@@ -102,7 +102,7 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                     } : {
                       backdropFilter: `blur(${glassConfig.blur.light})`,
                       WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
-                      background: `rgba(255, 255, 255, ${glassConfig.bgOpacity.light})`,
+                      background: `rgba(var(--glass-surface-rgb), ${glassConfig.bgOpacity.light})`,
                       border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
                     }),
                     borderRadius: glassConfig.border.radius.lg,
@@ -111,7 +111,7 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                     '&:hover': {
                       background: isClassicStyle 
                         ? (isDark ? 'var(--classic-nav-item-hover)' : 'var(--classic-nav-item-hover)')
-                        : `rgba(255, 255, 255, ${glassConfig.bgOpacity.medium})`,
+                        : `rgba(var(--glass-surface-rgb), ${glassConfig.bgOpacity.medium})`,
                       boxShadow: isClassicStyle ? '0 2px 6px rgba(0, 0, 0, 0.15)' : glassConfig.shadow.glow
                     }
                   }}
@@ -220,7 +220,7 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                         }),
                         color: isActive ? 'white' : 'var(--color-text-primary)',
                         boxShadow: isActive 
-                          ? (isClassicStyle ? '0 2px 8px rgba(255, 61, 0, 0.3)' : `${glassConfig.shadow.md}, ${glassConfig.components.navigation.activeGlow}`)
+                          ? (isClassicStyle ? '0 2px 8px rgba(var(--glass-tint-rgb), 0.26)' : `${glassConfig.shadow.md}, ${glassConfig.components.navigation.activeGlow}`)
                           : (isClassicStyle ? '0 1px 3px rgba(0, 0, 0, 0.12)' : glassConfig.shadow.sm),
                         transition: `all ${glassConfig.animation.hoverDuration} ${glassConfig.animation.easing}`,
                         '&:hover': {

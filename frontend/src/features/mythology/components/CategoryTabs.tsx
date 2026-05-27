@@ -60,11 +60,11 @@ export function CategoryTabs({ activeTab, onTabChange }: CategoryTabsProps) {
           value={activeTab}
           onChange={handleSelectChange}
           sx={{
-            backgroundColor: 'var(--glass-bg-white, rgba(255, 255, 255, 0.1))',
+            backgroundColor: 'rgba(var(--glass-surface-rgb), 0.1)',
             backdropFilter: 'blur(var(--glass-blur-light, 12px))',
             borderRadius: 'var(--glass-radius-md, 12px)',
             '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: 'var(--glass-border-color, rgba(255, 255, 255, 0.18))',
+              borderColor: 'var(--theme-glass-border)',
             },
             '&:hover .MuiOutlinedInput-notchedOutline': {
               borderColor: 'var(--color-primary)',

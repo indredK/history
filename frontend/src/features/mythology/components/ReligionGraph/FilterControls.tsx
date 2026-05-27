@@ -72,7 +72,7 @@ export function FilterControls() {
             fontSize: '0.7rem',
             backgroundColor: selectedSects.includes(sect) 
               ? SECT_COLORS[sect] 
-              : 'rgba(255, 255, 255, 0.1)',
+              : 'rgba(var(--glass-surface-rgb), 0.1)',
             color: selectedSects.includes(sect) 
               ? '#fff' 
               : 'var(--color-text-secondary)',

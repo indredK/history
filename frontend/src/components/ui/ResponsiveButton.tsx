@@ -48,17 +48,17 @@ export function ResponsiveButton({
   const glassEffectStyles = glassEffect ? {
     backdropFilter: `blur(${buttonConfig.blur})`,
     WebkitBackdropFilter: `blur(${buttonConfig.blur})`,
-    backgroundColor: `rgba(255, 255, 255, ${buttonConfig.bgOpacity})`,
+    backgroundColor: `rgba(var(--glass-surface-rgb), ${buttonConfig.bgOpacity})`,
     border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
     boxShadow: glassConfig.shadow.sm,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
     '&:hover': {
-      backgroundColor: `rgba(255, 255, 255, ${Math.min(buttonConfig.bgOpacity + 0.1, 0.95)})`,
+      backgroundColor: `rgba(var(--glass-surface-rgb), ${Math.min(buttonConfig.bgOpacity + 0.1, 0.95)})`,
       boxShadow: glassConfig.shadow.md,
       transform: 'translateY(-1px)',
     },
     '&:active': {
-      backgroundColor: `rgba(255, 255, 255, ${Math.max(buttonConfig.bgOpacity - 0.05, 0.3)})`,
+      backgroundColor: `rgba(var(--glass-surface-rgb), ${Math.max(buttonConfig.bgOpacity - 0.05, 0.3)})`,
       boxShadow: glassConfig.shadow.sm,
       transform: 'translateY(0)',
     },
@@ -114,17 +114,17 @@ export function ResponsiveIconButton({
   const glassEffectStyles = glassEffect ? {
     backdropFilter: `blur(${iconConfig.blur})`,
     WebkitBackdropFilter: `blur(${iconConfig.blur})`,
-    backgroundColor: `rgba(255, 255, 255, ${iconConfig.bgOpacity})`,
+    backgroundColor: `rgba(var(--glass-surface-rgb), ${iconConfig.bgOpacity})`,
     border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
     boxShadow: glassConfig.shadow.sm,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
     '&:hover': {
-      backgroundColor: `rgba(255, 255, 255, ${Math.min(iconConfig.bgOpacity + 0.15, 0.95)})`,
+      backgroundColor: `rgba(var(--glass-surface-rgb), ${Math.min(iconConfig.bgOpacity + 0.15, 0.95)})`,
       boxShadow: glassConfig.shadow.md,
       transform: 'scale(1.05)',
     },
     '&:active': {
-      backgroundColor: `rgba(255, 255, 255, ${Math.max(iconConfig.bgOpacity - 0.05, 0.2)})`,
+      backgroundColor: `rgba(var(--glass-surface-rgb), ${Math.max(iconConfig.bgOpacity - 0.05, 0.2)})`,
       boxShadow: glassConfig.shadow.sm,
       transform: 'scale(0.95)',
     },

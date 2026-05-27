@@ -96,10 +96,10 @@
   bottom: 1rem;
   left: 1rem;
   padding: 0.75rem;
-  background: var(--glass-bg-dark, rgba(30, 30, 30, 0.8));
+  background: rgba(var(--glass-surface-rgb), 0.82);
   backdrop-filter: blur(var(--glass-blur-light, 12px));
   border-radius: var(--glass-radius-md, 12px);
-  border: 1px solid var(--glass-border-color, rgba(255, 255, 255, 0.18));
+  border: 1px solid var(--theme-glass-border);
 }
 
 .legend-item {
@@ -137,9 +137,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--glass-bg-dark, rgba(30, 30, 30, 0.8));
+  background: rgba(var(--glass-surface-rgb), 0.82);
   backdrop-filter: blur(var(--glass-blur-light, 12px));
-  border: 1px solid var(--glass-border-color, rgba(255, 255, 255, 0.18));
+  border: 1px solid var(--theme-glass-border);
   border-radius: var(--glass-radius-sm, 8px);
   color: var(--color-text-primary);
   cursor: pointer;
@@ -147,7 +147,7 @@
 }
 
 .zoom-button:hover {
-  background: var(--glass-bg-dark, rgba(50, 50, 50, 0.9));
+  background: rgba(var(--glass-surface-soft-rgb), 0.9);
   transform: scale(1.05);
 }
 
@@ -194,12 +194,12 @@
 /* 白天模式 */
 [data-theme="light"] .node-label {
   text-shadow: 
-    0 1px 2px rgba(255, 255, 255, 0.8),
-    0 0 10px rgba(255, 255, 255, 0.5);
+    0 1px 2px rgba(255, 251, 243, 0.8),
+    0 0 10px rgba(255, 251, 243, 0.45);
 }
 
 [data-theme="light"] .religion-graph-legend,
 [data-theme="light"] .zoom-button {
-  background: rgba(255, 255, 255, 0.8);
-  border-color: rgba(0, 0, 0, 0.12);
+  background: rgba(var(--glass-surface-rgb), 0.84);
+  border-color: var(--theme-glass-border);
 }

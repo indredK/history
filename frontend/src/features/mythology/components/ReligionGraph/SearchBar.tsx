@@ -79,12 +79,12 @@ export function SearchBar() {
         sx={{
           width: '100%',
           '& .MuiOutlinedInput-root': {
-            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+            backgroundColor: 'rgba(var(--glass-surface-rgb), 0.06)',
             backdropFilter: 'blur(var(--glass-blur-light, 12px))',
             borderRadius: 'var(--glass-radius-sm, 8px)',
             transition: 'all 0.2s ease',
             '& fieldset': {
-              borderColor: 'var(--glass-border-color, rgba(255, 255, 255, 0.18))',
+              borderColor: 'var(--theme-glass-border)',
             },
             '&:hover fieldset': {
               borderColor: 'var(--color-primary)',
@@ -94,7 +94,7 @@ export function SearchBar() {
               borderWidth: 1,
             },
             '&.Mui-focused': {
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              backgroundColor: 'rgba(var(--glass-surface-rgb), 0.12)',
             },
           },
           '& .MuiInputBase-input': {

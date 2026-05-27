@@ -32,12 +32,12 @@ export function ViewModeToggle() {
         sx={{
           '& .MuiToggleButton-root': {
             padding: '4px 8px',
-            border: '1px solid var(--glass-border-color, rgba(255, 255, 255, 0.18))',
+            border: '1px solid var(--theme-glass-border)',
             color: 'var(--color-text-secondary)',
-            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+            backgroundColor: 'rgba(var(--glass-surface-rgb), 0.06)',
             fontSize: '0.7rem',
             '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              backgroundColor: 'rgba(var(--glass-surface-rgb), 0.12)',
             },
             '&.Mui-selected': {
               color: 'var(--color-primary)',

@@ -117,7 +117,7 @@ export const columns: ColumnConfig[] = [
 export const tableStyles = {
   // 表头样式 - 毛玻璃效果
   headerCell: {
-    background: 'rgba(255, 61, 0, 0.85)',
+    background: 'rgba(var(--glass-tint-rgb), 0.84)',
     backdropFilter: 'blur(var(--glass-table-header-blur, 16px))',
     WebkitBackdropFilter: 'blur(var(--glass-table-header-blur, 16px))',
     color: 'white',
@@ -128,7 +128,7 @@ export const tableStyles = {
     py: 0.8,
     fontSize: '0.8rem',
     textAlign: 'center',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+    borderBottom: '1px solid rgba(var(--glass-on-surface-rgb), 0.18)',
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
   },
   
@@ -208,17 +208,17 @@ export const tableStyles = {
     width: 24,
     height: 24,
     color: 'var(--color-primary)',
-    backgroundColor: 'rgba(255, 61, 0, 0.15)',
+    backgroundColor: 'rgba(var(--glass-tint-rgb), 0.14)',
     backdropFilter: 'blur(4px)',
     WebkitBackdropFilter: 'blur(4px)',
     borderRadius: '6px',
-    border: '1px solid rgba(255, 61, 0, 0.2)',
+    border: '1px solid rgba(var(--glass-tint-rgb), 0.22)',
     flexShrink: 0,
     transition: 'all var(--glass-duration-hover, 150ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
     '&:hover': {
-      backgroundColor: 'rgba(255, 61, 0, 0.25)',
+      backgroundColor: 'rgba(var(--glass-tint-rgb), 0.22)',
       transform: 'scale(1.1)',
-      boxShadow: '0 0 12px rgba(255, 61, 0, 0.3)'
+      boxShadow: '0 0 12px rgba(var(--glass-tint-rgb), 0.24)'
     }
   },
   
@@ -276,10 +276,10 @@ export const tableConfig = {
     boxShadow: 'var(--glass-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12))',
     overflow: 'auto',
     borderRadius: 'var(--glass-radius-lg, 16px)',
-    border: '1px solid rgba(255, 255, 255, 0.18)',
+    border: '1px solid var(--theme-glass-border)',
     backdropFilter: 'blur(var(--glass-table-container-blur, 12px))',
     WebkitBackdropFilter: 'blur(var(--glass-table-container-blur, 12px))',
-    backgroundColor: 'rgba(255, 255, 255, var(--glass-table-container-bg-opacity, 0.5))'
+    backgroundColor: 'rgba(var(--glass-surface-rgb), var(--glass-table-container-bg-opacity, 0.5))'
   }
 };
 
