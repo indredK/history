@@ -202,53 +202,6 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
       <div className="dynasty-effect-switcher-anchor">
         <EffectSwitcher currentId={effectId} onChange={handleEffectChange} />
       </div>
-
-      <div className="dynasty-navigation">
-        <div className="dynasty-indicator">
-          <ResponsiveIconButton
-            aria-label="上一朝代"
-            onClick={() => stepIndex(-1)}
-            responsive={false}
-            sx={{
-              width: 26,
-              height: 26,
-              borderRadius: 1.25,
-              color: 'var(--color-text-secondary)',
-              flexShrink: 0,
-            }}
-          >
-            <KeyboardArrowLeft fontSize="small" />
-          </ResponsiveIconButton>
-
-          <div className="dynasty-indicator-copy">
-            <div className="dynasty-indicator-line dynasty-indicator-line-primary">
-              <span className="dynasty-indicator-name">{activeDynasty.name}</span>
-              <span className="dynasty-indicator-sep" aria-hidden="true">·</span>
-              <span className="dynasty-indicator-period">{activePeriod}</span>
-            </div>
-            <div className="dynasty-indicator-line dynasty-indicator-line-hint">
-              <span>{activeIndex + 1} / {dynasties.length}</span>
-              <span aria-hidden="true">·</span>
-              <span>滚轮 / 点击卡片 / 左右方向键</span>
-            </div>
-          </div>
-
-          <ResponsiveIconButton
-            aria-label="下一朝代"
-            onClick={() => stepIndex(1)}
-            responsive={false}
-            sx={{
-              width: 26,
-              height: 26,
-              borderRadius: 1.25,
-              color: 'var(--color-text-secondary)',
-              flexShrink: 0,
-            }}
-          >
-            <KeyboardArrowRight fontSize="small" />
-          </ResponsiveIconButton>
-        </div>
-      </div>
     </div>
   );
 }
