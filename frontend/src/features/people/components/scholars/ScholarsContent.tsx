@@ -3,14 +3,14 @@
  * Scholars Content Container Component
  */
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { useRequest } from 'ahooks';
 
 import { useScholarStore } from '@/store';
 import { getScholars } from '@/services/person/scholars';
 import type { Scholar } from '@/services/person/scholars/types';
+import { useCollectionResource } from '@/hooks';
 
 import { ScholarFilter, ScholarGrid, ScholarDetailModal } from '@/features/culture/components';
 
@@ -35,33 +35,20 @@ function ScholarsContent() {
   } = useScholarStore();
 
   // 加载学者数据
-  const { run: loadScholars, loading: scholarsRequestLoading } = useRequest(
-    async () => {
-      const result = await getScholars();
-      return result.data;
-    },
-    {
-      manual: true,
+  const { reload: loadScholars, requestLoading: scholarsRequestLoading } =
+    useCollectionResource({
       cacheKey: 'scholars',
-      onBefore: () => setScholarLoading(true),
-      onSuccess: (data) => {
-        setScholars(data);
-        setScholarError(null);
+      items: scholars,
+      loading: scholarLoading,
+      load: async () => {
+        const result = await getScholars();
+        return result.data;
       },
-      onError: (err) => {
-        console.error('获取学者数据失败:', err);
-        setScholarError(err);
-      },
-      onFinally: () => setScholarLoading(false),
-    }
-  );
-
-  // 组件挂载时加载数据
-  useEffect(() => {
-    if (scholars.length === 0 && !scholarLoading && !scholarsRequestLoading) {
-      loadScholars();
-    }
-  }, [scholars.length, scholarLoading, scholarsRequestLoading, loadScholars]);
+      setItems: setScholars,
+      setLoading: setScholarLoading,
+      setError: setScholarError,
+      errorMessage: '获取学者数据失败:',
+    });
 
   // 获取筛选后的学者列表
   const filteredScholars = useMemo(() => {

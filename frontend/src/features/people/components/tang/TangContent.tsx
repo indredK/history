@@ -2,14 +2,14 @@
  * 唐朝人物内容容器组件
  */
 
-import { useEffect, useMemo } from 'react';
-import { useRequest } from 'ahooks';
+import { useMemo } from 'react';
 
 import { useTangFigureStore } from '@/store/tangFigureStore';
 import { getTangFigures } from '@/services/person/tang';
 import type { TangFigure, TangFigureRole } from '@/services/person/tang/types';
 import type { TangFigureSortBy } from '@/services/person/tang';
 import { ROLE_LABELS } from '@/services/person/tang/types';
+import { useCollectionResource } from '@/hooks';
 
 import { PeopleCollectionContent } from '../common';
 import { TangFigureGrid } from './TangFigureGrid';
@@ -23,24 +23,19 @@ export function TangContent() {
     getFilteredFigures, getRoleOptions, getPeriodOptions,
   } = useTangFigureStore();
 
-  const { run: loadFigures, loading: requestLoading } = useRequest(
-    async () => {
+  const { reload: loadFigures, requestLoading } = useCollectionResource({
+    cacheKey: 'tangFigures',
+    items: figures,
+    loading,
+    load: async () => {
       const result = await getTangFigures();
       return result.data;
     },
-    {
-      manual: true,
-      cacheKey: 'tangFigures',
-      onBefore: () => setLoading(true),
-      onSuccess: (data) => { setFigures(data); setError(null); },
-      onError: (err) => { console.error('获取唐朝人物数据失败:', err); setError(err as Error); },
-      onFinally: () => setLoading(false),
-    }
-  );
-
-  useEffect(() => {
-    if (figures.length === 0 && !loading) loadFigures();
-  }, [figures.length, loading, loadFigures]);
+    setItems: setFigures,
+    setLoading,
+    setError,
+    errorMessage: '获取唐朝人物数据失败:',
+  });
 
   const filteredFigures = useMemo(() => getFilteredFigures(), [getFilteredFigures, figures, filters]);
   const roleOptions = useMemo(() => getRoleOptions().map(role => ({ value: role, label: role === '全部' ? '全部' : ROLE_LABELS[role as TangFigureRole] || role })), [getRoleOptions]);

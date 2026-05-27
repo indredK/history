@@ -8,15 +8,14 @@
  * Requirements: 2.1, 2.2, 2.3, 3.1, 4.1, 5.1, 5.2, 5.3
  */
 
-import { useEffect } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-import { useRequest } from 'ahooks';
 
 import { useSchoolStore } from '@/store';
 import { getSchools } from '@/services/school';
 import type { PhilosophicalSchool } from '@/services/school/types';
+import { useCollectionResource } from '@/hooks';
 
 import { FixedTabsPage, type FixedTabConfig } from '@/components/common';
 import {
@@ -40,33 +39,20 @@ function CulturePage() {
   } = useSchoolStore();
 
   // 加载思想流派数据
-  const { run: loadSchools, loading: schoolsRequestLoading } = useRequest(
-    async () => {
-      const result = await getSchools();
-      return result.data;
-    },
-    {
-      manual: true,
+  const { reload: loadSchools, requestLoading: schoolsRequestLoading } =
+    useCollectionResource({
       cacheKey: 'schools',
-      onBefore: () => setSchoolsLoading(true),
-      onSuccess: (data) => {
-        setSchools(data);
-        setSchoolsError(null);
+      items: schools,
+      loading: schoolsLoading,
+      load: async () => {
+        const result = await getSchools();
+        return result.data;
       },
-      onError: (err) => {
-        console.error('获取思想流派数据失败:', err);
-        setSchoolsError(err);
-      },
-      onFinally: () => setSchoolsLoading(false),
-    }
-  );
-
-  // 当组件挂载时加载数据
-  useEffect(() => {
-    if (schools.length === 0 && !schoolsLoading && !schoolsRequestLoading) {
-      loadSchools();
-    }
-  }, [schools.length, schoolsLoading, schoolsRequestLoading, loadSchools]);
+      setItems: setSchools,
+      setLoading: setSchoolsLoading,
+      setError: setSchoolsError,
+      errorMessage: '获取思想流派数据失败:',
+    });
 
   // 处理思想流派卡片点击
   const handleSchoolClick = (school: PhilosophicalSchool) => {

@@ -2,14 +2,14 @@
  * 元朝人物内容容器组件
  */
 
-import { useEffect, useMemo } from 'react';
-import { useRequest } from 'ahooks';
+import { useMemo } from 'react';
 
 import { useYuanFigureStore } from '@/store/yuanFigureStore';
 import { getYuanFigures } from '@/services/person/yuan';
 import type { YuanFigure, YuanFigureRole } from '@/services/person/yuan/types';
 import type { YuanFigureSortBy } from '@/services/person/yuan';
 import { ROLE_LABELS } from '@/services/person/yuan/types';
+import { useCollectionResource } from '@/hooks';
 
 import { PeopleCollectionContent } from '../common';
 import { YuanFigureGrid } from './YuanFigureGrid';
@@ -23,24 +23,19 @@ export function YuanContent() {
     getFilteredFigures, getRoleOptions, getPeriodOptions,
   } = useYuanFigureStore();
 
-  const { run: loadFigures, loading: requestLoading } = useRequest(
-    async () => {
+  const { reload: loadFigures, requestLoading } = useCollectionResource({
+    cacheKey: 'yuanFigures',
+    items: figures,
+    loading,
+    load: async () => {
       const result = await getYuanFigures();
       return result.data;
     },
-    {
-      manual: true,
-      cacheKey: 'yuanFigures',
-      onBefore: () => setLoading(true),
-      onSuccess: (data) => { setFigures(data); setError(null); },
-      onError: (err) => { console.error('获取元朝人物数据失败:', err); setError(err as Error); },
-      onFinally: () => setLoading(false),
-    }
-  );
-
-  useEffect(() => {
-    if (figures.length === 0 && !loading) loadFigures();
-  }, [figures.length, loading, loadFigures]);
+    setItems: setFigures,
+    setLoading,
+    setError,
+    errorMessage: '获取元朝人物数据失败:',
+  });
 
   const filteredFigures = useMemo(() => getFilteredFigures(), [getFilteredFigures, figures, filters]);
 

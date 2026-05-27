@@ -7,17 +7,15 @@
  * Requirements: 4.1-4.8
  */
 
-import { useEffect, useMemo } from 'react';
-import { Box, Typography, Button } from '@mui/material';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import { useRequest } from 'ahooks';
+import { useMemo } from 'react';
 
 import { useQingRulerStore } from '@/store';
 import { getQingRulers } from '@/services/person/qing';
 import type { QingRuler } from '@/services/person/qing/types';
 import type { QingRulerSortBy } from '@/services/person/qing';
+import { useCollectionResource } from '@/hooks';
 
-import { PeopleFilter } from '../common/PeopleFilter';
+import { PeopleCollectionContent } from '../common';
 import { QingRulerGrid } from './QingRulerGrid';
 import { QingRulerDetailModal } from './QingRulerDetailModal';
 
@@ -43,33 +41,19 @@ export function QingContent() {
   } = useQingRulerStore();
 
   // 加载数据
-  const { run: loadRulers, loading: requestLoading } = useRequest(
-    async () => {
+  const { reload: loadRulers, requestLoading } = useCollectionResource({
+    cacheKey: 'qingRulers',
+    items: rulers,
+    loading,
+    load: async () => {
       const result = await getQingRulers();
       return result.data;
     },
-    {
-      manual: true,
-      cacheKey: 'qingRulers',
-      onBefore: () => setLoading(true),
-      onSuccess: (data) => {
-        setRulers(data);
-        setError(null);
-      },
-      onError: (err) => {
-        console.error('获取清朝统治者数据失败:', err);
-        setError(err as Error);
-      },
-      onFinally: () => setLoading(false),
-    }
-  );
-
-  // 首次加载数据
-  useEffect(() => {
-    if (rulers.length === 0 && !loading) {
-      loadRulers();
-    }
-  }, [rulers.length, loading, loadRulers]);
+    setItems: setRulers,
+    setLoading,
+    setError,
+    errorMessage: '获取清朝统治者数据失败:',
+  });
 
   // 获取筛选后的统治者列表
   const filteredRulers = useMemo(() => {
@@ -94,80 +78,45 @@ export function QingContent() {
     setSelectedRuler(null);
   };
 
-  // 错误状态
-  if (error) {
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '200px',
-          color: 'var(--color-text-secondary)',
-        }}
-      >
-        <Typography variant="h6" sx={{ mb: 2 }}>
-          加载失败
-        </Typography>
-        <Typography variant="body2" sx={{ mb: 2 }}>
-          {error.message || '请检查网络连接后重试'}
-        </Typography>
-        <Button
-          variant="outlined"
-          startIcon={<RefreshIcon />}
-          onClick={() => loadRulers()}
-        >
-          重试
-        </Button>
-      </Box>
-    );
-  }
-
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      {/* 筛选器 - 固定 */}
-      <Box sx={{ flexShrink: 0 }}>
-        <PeopleFilter
-          searchQuery={filters.searchQuery}
-          onSearchChange={setSearchQuery}
-          searchPlaceholder="搜索清朝统治者姓名、庙号、年号..."
-          filters={[
-            {
-              name: 'period',
-              label: '时期',
-              value: filters.period,
-              options: periodOptions,
-              onChange: setPeriodFilter,
-            },
-          ]}
-          sortBy={filters.sortBy}
-          sortOptions={[
-            { value: 'chronological', label: '按时间顺序' },
-            { value: 'name', label: '按姓名' },
-          ]}
-          onSortChange={(value) => setSortBy(value as QingRulerSortBy)}
-          resultCount={filteredRulers.length}
-          resultLabel="位清朝统治者"
-        />
-      </Box>
-
-      {/* 统治者网格 - 可滚动 */}
-      <Box sx={{ flex: 1, overflow: 'auto', pr: 1 }}>
+    <PeopleCollectionContent
+      error={error}
+      onRetry={loadRulers}
+      searchQuery={filters.searchQuery}
+      onSearchChange={setSearchQuery}
+      searchPlaceholder="搜索清朝统治者姓名、庙号、年号..."
+      filters={[
+        {
+          name: 'period',
+          label: '时期',
+          value: filters.period,
+          options: periodOptions,
+          onChange: setPeriodFilter,
+        },
+      ]}
+      sortBy={filters.sortBy}
+      sortOptions={[
+        { value: 'chronological', label: '按时间顺序' },
+        { value: 'name', label: '按姓名' },
+      ]}
+      onSortChange={(value) => setSortBy(value as QingRulerSortBy)}
+      resultCount={filteredRulers.length}
+      resultLabel="位清朝统治者"
+      grid={
         <QingRulerGrid
           rulers={filteredRulers}
           onRulerClick={handleRulerClick}
           loading={loading || requestLoading}
         />
-      </Box>
-
-      {/* 详情弹窗 */}
-      <QingRulerDetailModal
-        ruler={selectedRuler}
-        open={selectedRuler !== null}
-        onClose={handleCloseModal}
-      />
-    </Box>
+      }
+      modal={
+        <QingRulerDetailModal
+          ruler={selectedRuler}
+          open={selectedRuler !== null}
+          onClose={handleCloseModal}
+        />
+      }
+    />
   );
 }
 
