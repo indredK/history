@@ -36,6 +36,13 @@ interface FixedTabsPageProps {
   };
 }
 
+function hasTab(
+  tabs: TabConfig[],
+  value?: string | null,
+): value is string {
+  return Boolean(value) && tabs.some((tab) => tab.value === value);
+}
+
 /**
  * 固定标签页页面组件
  */
@@ -50,63 +57,98 @@ export function FixedTabsPage({
 }: FixedTabsPageProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const requestedTab = searchParams.get(queryKey);
+  const requestedTabIsValid = hasTab(tabs, requestedTab);
+  const defaultTabIsValid = hasTab(tabs, defaultTab);
+  const firstTab = tabs[0]?.value || '';
   const [activeTab, setActiveTab] = useState<string>(
-    requestedTab && tabs.some((tab) => tab.value === requestedTab)
+    requestedTabIsValid
       ? requestedTab
-      : defaultTab || tabs[0]?.value || ''
+      : defaultTabIsValid
+        ? defaultTab
+        : firstTab
   );
 
   const handleTabChange = (newValue: string) => {
-    const monitor = PerformanceMonitor.getInstance();
-    monitor.mark(`fixed-tabs:${newValue}`);
+    if (newValue === activeTab) {
+      return;
+    }
     setActiveTab(newValue);
-    const nextParams = new URLSearchParams(searchParams);
-    nextParams.set(queryKey, newValue);
-    setSearchParams(nextParams, { replace: true });
+    setSearchParams(
+      (prevParams) => {
+        const nextParams = new URLSearchParams(prevParams);
+        nextParams.set(queryKey, newValue);
+        return nextParams;
+      },
+      { replace: true },
+    );
     onTabChange?.(newValue);
   };
 
-  // 当tabs变化时，确保activeTab是有效的
   useEffect(() => {
-    if (!tabs.find(tab => tab.value === activeTab)) {
-      const firstTab = tabs[0]?.value;
-      if (firstTab) {
-        setActiveTab(firstTab);
-      }
-    }
-  }, [tabs, activeTab]);
-
-  useEffect(() => {
-    if (!requestedTab || requestedTab === activeTab) {
+    if (requestedTabIsValid && requestedTab !== activeTab) {
+      setActiveTab(requestedTab);
       return;
     }
-    if (tabs.some((tab) => tab.value === requestedTab)) {
-      setActiveTab(requestedTab);
+
+    if (tabs.some((tab) => tab.value === activeTab)) {
+      return;
     }
-  }, [activeTab, requestedTab, tabs]);
+
+    const fallbackTab = requestedTabIsValid
+      ? requestedTab
+      : defaultTabIsValid
+        ? defaultTab
+        : firstTab;
+
+    if (fallbackTab !== activeTab) {
+      setActiveTab(fallbackTab);
+    }
+  }, [
+    activeTab,
+    defaultTab,
+    defaultTabIsValid,
+    firstTab,
+    requestedTab,
+    requestedTabIsValid,
+    tabs,
+  ]);
 
   useEffect(() => {
     if (!activeTab) {
       return;
     }
+
     PerformanceMonitor.getInstance().mark(`fixed-tabs:${activeTab}`);
     const timer = window.setTimeout(() => {
       PerformanceMonitor.getInstance().measure(`fixed-tabs:${activeTab}`);
     }, 0);
 
-    if (searchParams.get(queryKey) === activeTab) {
-      return () => window.clearTimeout(timer);
-    }
-    const nextParams = new URLSearchParams(searchParams);
-    nextParams.set(queryKey, activeTab);
-    setSearchParams(nextParams, { replace: true });
     return () => window.clearTimeout(timer);
-  }, [activeTab, queryKey, searchParams, setSearchParams]);
+  }, [activeTab]);
 
-  const activeTabConfig = tabs.find(tab => tab.value === activeTab);
+  useEffect(() => {
+    if (
+      !activeTab ||
+      !requestedTab ||
+      requestedTabIsValid ||
+      requestedTab === activeTab
+    ) {
+      return;
+    }
 
-  // 转换为 CommonTabItem 格式
-  const tabItems: CommonTabItem[] = tabs.map(tab => ({
+    setSearchParams(
+      (prevParams) => {
+        const nextParams = new URLSearchParams(prevParams);
+        nextParams.set(queryKey, activeTab);
+        return nextParams;
+      },
+      { replace: true },
+    );
+  }, [activeTab, queryKey, requestedTab, requestedTabIsValid, setSearchParams]);
+
+  const activeTabConfig = tabs.find((tab) => tab.value === activeTab);
+
+  const tabItems: CommonTabItem[] = tabs.map((tab) => ({
     value: tab.value,
     label: tab.label,
     icon: tab.icon,
