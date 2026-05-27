@@ -220,7 +220,11 @@ export function DynastiesList() {
       display: 'flex',
       flexDirection: 'column',
       overflow: 'hidden',
-      p: isMobile ? 0.5 : 1,
+      background: 'var(--app-panel-bg-soft)',
+      border: 'var(--app-panel-border)',
+      borderRadius: 'var(--panel-radius)',
+      boxShadow: 'var(--app-panel-shadow-md)',
+      p: isMobile ? 0.5 : 1.5,
       // 竖屏模式下移除内边距，让内容更贴近边缘
       ...(isMobile && {
         p: 0.25,
@@ -246,7 +250,7 @@ export function DynastiesList() {
                   sx={{
                     ...tableStyles.headerCell,
                     ...(column.width && { width: column.width }),
-                    borderRight: column.isLast ? 'none' : '1px solid rgba(255,255,255,0.2)'
+                    borderRight: column.isLast ? 'none' : '1px solid var(--theme-glass-border-heavy)'
                   }}
                 >
                   {isMobile && column.mobileLabel ? column.mobileLabel : column.label}

@@ -40,7 +40,7 @@ export interface CommonTabsProps {
 const tabsStyles = {
   minHeight: 44,
   '& .MuiTabs-indicator': {
-    backgroundColor: 'var(--color-primary)',
+    background: 'var(--color-primary-gradient)',
     height: 3,
     borderRadius: '3px 3px 0 0',
   },
@@ -54,14 +54,17 @@ const tabsStyles = {
     px: 2,
     py: 1,
     gap: 0.5,
+    borderRadius: '10px',
+    margin: '0 4px',
     transition: 'all 0.2s ease',
     '&.Mui-selected': {
       color: 'var(--color-primary)',
       fontWeight: 600,
+      backgroundColor: 'rgba(var(--glass-tint-rgb, 100, 150, 255), 0.1)',
     },
     '&:hover': {
       color: 'var(--color-primary)',
-      backgroundColor: 'rgba(var(--color-primary-rgb, 100, 150, 255), 0.08)',
+      backgroundColor: 'rgba(var(--glass-tint-rgb, 100, 150, 255), 0.08)',
     },
     '& .MuiSvgIcon-root': {
       fontSize: '1.1rem',
@@ -88,8 +91,7 @@ export function CommonTabs({
     <Box
       sx={{
         ...(showBorder && {
-          borderBottom: 1,
-          borderColor: 'var(--color-border)',
+          borderBottom: '1px solid var(--color-border-light)',
         }),
         ...(marginBottom > 0 && { mb: marginBottom }),
       }}

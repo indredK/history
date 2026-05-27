@@ -120,14 +120,16 @@ export function ContentCard({
         display: 'flex',
         flexDirection: 'column',
         cursor: 'pointer',
-        background: glassEffect ? 'var(--color-bg-card)' : undefined,
-        borderRadius: 'var(--radius-lg)',
-        boxShadow: 'var(--shadow-md)',
-        border: '1px solid transparent',
+        background: glassEffect ? 'var(--app-panel-bg)' : undefined,
+        backdropFilter: glassEffect ? 'blur(var(--glass-card-blur))' : undefined,
+        WebkitBackdropFilter: glassEffect ? 'blur(var(--glass-card-blur))' : undefined,
+        borderRadius: '12px',
+        boxShadow: 'var(--app-panel-shadow-sm)',
+        border: glassEffect ? 'var(--app-panel-border)' : '1px solid transparent',
         transition: 'all 0.3s ease-in-out',
         '&:hover': {
           transform: 'translateY(-3px)',
-          boxShadow: 'var(--shadow-lg)',
+          boxShadow: 'var(--app-panel-shadow-lg)',
           borderColor: primaryTag?.color?.text || icon?.color || 'var(--color-primary)',
         },
         '&:focus-visible': {
@@ -146,7 +148,7 @@ export function ContentCard({
                 height: 36,
                 mr: 1,
                 backgroundColor: icon.bgColor || icon.color || 'var(--color-primary)',
-                color: '#fff',
+                color: 'var(--color-text-inverse)',
                 fontWeight: 'bold',
                 fontSize: '1rem',
               }}
@@ -279,6 +281,7 @@ export function ContentCard({
                   fontSize: '0.65rem',
                   height: '20px',
                   borderColor: tag.color?.text || 'var(--color-border)',
+                  backgroundColor: 'rgba(var(--glass-surface-rgb), 0.08)',
                   color: tag.color?.text || 'var(--color-text-secondary)',
                 }}
               />
@@ -292,6 +295,7 @@ export function ContentCard({
                   fontSize: '0.65rem',
                   height: '20px',
                   borderColor: 'var(--color-border)',
+                  backgroundColor: 'rgba(var(--glass-surface-rgb), 0.08)',
                   color: 'var(--color-text-secondary)',
                 }}
               />

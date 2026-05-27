@@ -6,12 +6,14 @@
  */
 
 .mythology-page {
-  padding: 1rem;
   height: 100%;
   display: flex;
   flex-direction: column;
   animation: pageEnter 0.5s ease-out;
   overflow: hidden;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 /* 页面进入动画 */
@@ -153,7 +155,7 @@
 /* 平板适配 */
 @media (max-width: 1024px) {
   .mythology-page {
-    padding: 1.25rem;
+    max-width: none;
   }
   
   .mythology-page h1 {
@@ -168,7 +170,7 @@
 /* 手机适配 */
 @media (max-width: 768px) {
   .mythology-page {
-    padding: 1rem;
+    max-width: none;
   }
   
   .mythology-page h1 {
@@ -194,7 +196,7 @@
 /* 小屏手机适配 */
 @media (max-width: 375px) {
   .mythology-page {
-    padding: 0.75rem;
+    max-width: none;
   }
   
   .mythology-page h1 {

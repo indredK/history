@@ -7,7 +7,7 @@
  */
 
 import { useState, ReactNode, useEffect } from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { CommonTabs, type CommonTabItem } from './CommonTabs';
 
 export interface TabConfig {
@@ -21,6 +21,8 @@ interface FixedTabsPageProps {
   tabs: TabConfig[];
   defaultTab?: string;
   className?: string;
+  title?: string;
+  description?: string;
   onTabChange?: (tabValue: string) => void;
   tabsProps?: {
     variant?: 'standard' | 'scrollable' | 'fullWidth';
@@ -36,6 +38,8 @@ export function FixedTabsPage({
   tabs,
   defaultTab,
   className = '',
+  title,
+  description,
   onTabChange,
 }: FixedTabsPageProps) {
   const [activeTab, setActiveTab] = useState<string>(
@@ -74,8 +78,50 @@ export function FixedTabsPage({
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
+        background: 'var(--app-panel-bg-soft)',
+        border: 'var(--app-panel-border)',
+        borderRadius: 'var(--panel-radius)',
+        boxShadow: 'var(--app-panel-shadow-md)',
+        p: { xs: 1.5, md: 2 },
       }}
     >
+      {(title || description) && (
+        <Box
+          sx={{
+            px: { xs: 1, md: 1.5 },
+            pt: { xs: 0.5, md: 1 },
+            pb: 1.5,
+            borderBottom: '1px solid var(--color-border-light)',
+            mb: 1.5,
+          }}
+        >
+          {title && (
+            <Typography
+              sx={{
+                fontFamily: 'var(--font-family-serif)',
+                fontSize: { xs: '1.2rem', md: '1.55rem' },
+                color: 'var(--color-text-primary)',
+                lineHeight: 1.2,
+                mb: description ? 0.5 : 0,
+              }}
+            >
+              {title}
+            </Typography>
+          )}
+          {description && (
+            <Typography
+              sx={{
+                color: 'var(--color-text-secondary)',
+                fontSize: { xs: '0.88rem', md: '0.95rem' },
+                maxWidth: 760,
+              }}
+            >
+              {description}
+            </Typography>
+          )}
+        </Box>
+      )}
+
       {/* 页面头部区域 - 固定在顶部 */}
       <Box
         sx={{
@@ -83,8 +129,13 @@ export function FixedTabsPage({
           position: 'sticky',
           top: 0,
           zIndex: 10,
-          backgroundColor: 'var(--color-bg-primary)',
+          background: 'var(--app-panel-bg-soft)',
           mb: 2,
+          border: 'var(--app-panel-border)',
+          borderRadius: '12px',
+          boxShadow: 'var(--app-panel-shadow-sm)',
+          px: 0.5,
+          py: 0.5,
         }}
       >
         <CommonTabs
@@ -101,7 +152,8 @@ export function FixedTabsPage({
         sx={{
           flex: 1,
           overflow: 'auto',
-          pr: 1, // 为滚动条留出空间
+          pr: 1,
+          pl: 0.5,
           animation: 'tabContentEnter 0.4s ease-out',
           '@keyframes tabContentEnter': {
             from: {

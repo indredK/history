@@ -142,6 +142,8 @@ function CulturePage() {
       tabs={tabs}
       defaultTab="schools"
       className="culture-page"
+      title="思想与学派"
+      description="以诸子百家为轴，查看各学派的时代位置、代表人物与核心观念。"
     />
   );
 }

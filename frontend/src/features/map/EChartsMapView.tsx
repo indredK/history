@@ -28,16 +28,16 @@ export function EChartsMapView() {
         width: '100%', 
         height: '100%', 
         position: 'relative',
-        border: `1px solid rgba(255, 255, 255, 0.18)`,
+        border: 'var(--app-panel-border)',
         borderLeft: `4px solid ${selectedDynasty?.color || 'rgba(25, 118, 210, 0.8)'}`,
-        borderRadius: 'var(--glass-radius-lg, 16px)',
+        borderRadius: 'var(--panel-radius)',
         overflow: 'hidden',
         boxSizing: 'border-box',
         transition: 'all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
         backdropFilter: 'blur(var(--glass-blur-light, 12px))',
         WebkitBackdropFilter: 'blur(var(--glass-blur-light, 12px))',
-        backgroundColor: 'rgba(255, 255, 255, 0.3)',
-        boxShadow: 'var(--glass-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12))'
+        background: 'var(--app-panel-bg)',
+        boxShadow: 'var(--app-panel-shadow-lg)'
       }}
     >
       {/* 地图占满整个容器 */}
@@ -67,15 +67,15 @@ export function EChartsMapView() {
           className="glass-card"
           style={{
             position: 'absolute',
-            top: 60,
+            top: 24,
             right: 20,
-            background: 'rgba(255, 255, 255, var(--glass-card-bg-opacity, 0.6))',
+            background: 'var(--app-panel-bg)',
             backdropFilter: 'blur(var(--glass-card-blur, 12px))',
             WebkitBackdropFilter: 'blur(var(--glass-card-blur, 12px))',
             padding: '16px',
-            borderRadius: 'var(--glass-radius-lg, 16px)',
-            border: '1px solid rgba(255, 255, 255, 0.18)',
-            boxShadow: 'var(--glass-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12))',
+            borderRadius: '14px',
+            border: 'var(--app-panel-border)',
+            boxShadow: 'var(--app-panel-shadow-md)',
             minWidth: '200px',
             zIndex: 100,
             transition: 'all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))'
@@ -94,10 +94,10 @@ export function EChartsMapView() {
               onClick={() => setSelectedProvince(null)}
               className="glass-button-icon"
               style={{
-                background: 'rgba(255, 255, 255, 0.4)',
+                background: 'rgba(var(--glass-surface-rgb), 0.4)',
                 backdropFilter: 'blur(6px)',
                 WebkitBackdropFilter: 'blur(6px)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
+                border: '1px solid var(--theme-glass-border-heavy)',
                 borderRadius: 'var(--glass-radius-full, 9999px)',
                 cursor: 'pointer',
                 fontSize: '18px',
@@ -117,7 +117,7 @@ export function EChartsMapView() {
             <p style={{ 
               margin: '8px 0',
               padding: '8px 12px',
-              background: 'rgba(255, 255, 255, 0.4)',
+              background: 'rgba(var(--glass-surface-rgb), 0.4)',
               borderRadius: 'var(--glass-radius-sm, 8px)',
               backdropFilter: 'blur(4px)',
               WebkitBackdropFilter: 'blur(4px)'
@@ -128,7 +128,7 @@ export function EChartsMapView() {
             <p style={{ 
               margin: '8px 0',
               padding: '8px 12px',
-              background: 'rgba(255, 255, 255, 0.4)',
+              background: 'rgba(var(--glass-surface-rgb), 0.4)',
               borderRadius: 'var(--glass-radius-sm, 8px)',
               backdropFilter: 'blur(4px)',
               WebkitBackdropFilter: 'blur(4px)'
