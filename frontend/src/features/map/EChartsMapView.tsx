@@ -3,6 +3,7 @@ import { EChartsMap } from './components/EChartsMap';
 import { DynastyTimeline } from './components/DynastyTimeline';
 import type { ProvinceData } from '@/services/map/types';
 import { Dynasty } from '@/services/culture/types';
+import { usePerformanceTrace } from '@/utils/performance';
 
 export function EChartsMapView() {
   const [selectedProvince, setSelectedProvince] = useState<{
@@ -10,6 +11,7 @@ export function EChartsMapView() {
     data: ProvinceData | null;
   } | null>(null);
   const [selectedDynasty, setSelectedDynasty] = useState<Dynasty | null>(null);
+  usePerformanceTrace('map-page-mounted', []);
 
   const handleProvinceClick = (name: string, data: ProvinceData | null) => {
     setSelectedProvince({ name, data });

@@ -20,6 +20,7 @@ import PersonIcon from '@mui/icons-material/Person';
 
 import { FixedTabsPage, type FixedTabConfig } from '@/components/common';
 import { GridSkeleton } from './components';
+import { usePerformanceTrace } from '@/utils/performance';
 import './PeoplePage.css';
 
 // 懒加载标签页内容组件
@@ -36,6 +37,8 @@ const ScholarsContent = lazy(() => import('./components/scholars/ScholarsContent
  * 人物页面主组件
  */
 function PeoplePage() {
+  usePerformanceTrace('people-page-mounted', []);
+
   // 定义标签页配置
   const tabs: FixedTabConfig[] = [
     {

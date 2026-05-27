@@ -12,6 +12,7 @@ import { useSearchParams } from 'react-router-dom';
 import { CommonTabs, type CommonTabItem } from './CommonTabs';
 import { PageIntro } from './PageIntro';
 import { SectionToolbar } from './SectionToolbar';
+import { PerformanceMonitor } from '@/utils/performance';
 
 export interface TabConfig {
   value: string;
@@ -56,6 +57,8 @@ export function FixedTabsPage({
   );
 
   const handleTabChange = (newValue: string) => {
+    const monitor = PerformanceMonitor.getInstance();
+    monitor.mark(`fixed-tabs:${newValue}`);
     setActiveTab(newValue);
     const nextParams = new URLSearchParams(searchParams);
     nextParams.set(queryKey, newValue);
@@ -86,12 +89,18 @@ export function FixedTabsPage({
     if (!activeTab) {
       return;
     }
+    PerformanceMonitor.getInstance().mark(`fixed-tabs:${activeTab}`);
+    const timer = window.setTimeout(() => {
+      PerformanceMonitor.getInstance().measure(`fixed-tabs:${activeTab}`);
+    }, 0);
+
     if (searchParams.get(queryKey) === activeTab) {
-      return;
+      return () => window.clearTimeout(timer);
     }
     const nextParams = new URLSearchParams(searchParams);
     nextParams.set(queryKey, activeTab);
     setSearchParams(nextParams, { replace: true });
+    return () => window.clearTimeout(timer);
   }, [activeTab, queryKey, searchParams, setSearchParams]);
 
   const activeTabConfig = tabs.find(tab => tab.value === activeTab);

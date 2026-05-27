@@ -3,9 +3,11 @@ import { Dynasty3DWheel, D3Timeline } from './components';
 import { Box, Paper, Stack, Typography } from '@mui/material';
 import { useDynastyStore } from '@/store';
 import { dynastyUtils } from '@/config';
+import { usePerformanceTrace } from '@/utils/performance';
 
 export function TimelineList() {
   const { selectedDynasty } = useDynastyStore();
+  usePerformanceTrace('timeline-page-mounted', []);
   
   // 获取朝代背景颜色
   const dynastyColor = selectedDynasty?.color;

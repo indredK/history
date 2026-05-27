@@ -1,5 +1,7 @@
 import React from 'react';
 
+const isDev = import.meta.env.DEV;
+
 // 性能监控工具
 export class PerformanceMonitor {
   private static instance: PerformanceMonitor;
@@ -14,12 +16,14 @@ export class PerformanceMonitor {
 
   // 标记性能开始点
   mark(name: string): void {
+    if (typeof performance === 'undefined') return;
     performance.mark(`${name}-start`);
     this.metrics.set(`${name}-start`, performance.now());
   }
 
   // 测量性能
   measure(name: string): number {
+    if (typeof performance === 'undefined') return 0;
     const startTime = this.metrics.get(`${name}-start`);
     if (!startTime) {
       console.warn(`Performance mark ${name}-start not found`);
@@ -33,6 +37,9 @@ export class PerformanceMonitor {
     performance.measure(name, `${name}-start`, `${name}-end`);
     
     this.metrics.set(name, duration);
+    if (isDev) {
+      console.info(`[perf] ${name}: ${duration.toFixed(2)}ms`);
+    }
     return duration;
   }
 
@@ -48,6 +55,17 @@ export class PerformanceMonitor {
       console.log('Web Vitals reporting enabled');
     }
   }
+}
+
+export function usePerformanceTrace(name: string, deps: React.DependencyList = []) {
+  React.useEffect(() => {
+    const monitor = PerformanceMonitor.getInstance();
+    monitor.mark(name);
+
+    return () => {
+      monitor.measure(name);
+    };
+  }, deps);
 }
 
 // 组件性能 HOC
