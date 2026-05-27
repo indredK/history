@@ -46,20 +46,20 @@
   
   /* UI 背景色 */
   --theme-bg-primary: rgba(20, 20, 20, 1);
-  --theme-bg-secondary: rgba(30, 30, 30, 1);
-  --theme-bg-surface: rgba(40, 40, 40, 1);
-  --theme-bg-elevated: rgba(50, 50, 50, 1);
+  --theme-bg-secondary: rgb(30, 26, 22);
+  --theme-bg-surface: rgb(38, 33, 28);
+  --theme-bg-elevated: rgb(47, 40, 34);
   
   /* 文字颜色 */
-  --theme-text-primary: rgba(255, 255, 255, 0.95);
-  --theme-text-secondary: rgba(255, 255, 255, 0.7);
-  --theme-text-muted: rgba(255, 255, 255, 0.5);
-  --theme-text-disabled: rgba(255, 255, 255, 0.3);
+  --theme-text-primary: rgba(var(--theme-glass-on-surface-rgb), 0.95);
+  --theme-text-secondary: rgba(var(--theme-glass-on-surface-rgb), 0.72);
+  --theme-text-muted: rgba(var(--theme-glass-on-surface-rgb), 0.5);
+  --theme-text-disabled: rgba(var(--theme-glass-on-surface-rgb), 0.32);
   
   /* 边框和分割线 */
-  --theme-border-color: rgba(255, 255, 255, 0.15);
-  --theme-border-light: rgba(255, 255, 255, 0.1);
-  --theme-divider: rgba(255, 255, 255, 0.1);
+  --theme-border-color: rgba(226, 198, 140, 0.15);
+  --theme-border-light: rgba(226, 198, 140, 0.1);
+  --theme-divider: rgba(226, 198, 140, 0.1);
   
   /* 阴影 */
   --theme-shadow-sm: 0 8px 18px rgba(0, 0, 0, 0.22);
@@ -72,8 +72,8 @@
   --theme-active-bg: rgba(199, 143, 69, 0.18);
   
   /* 图标颜色 */
-  --theme-icon-primary: rgba(255, 255, 255, 0.9);
-  --theme-icon-secondary: rgba(255, 255, 255, 0.6);
+  --theme-icon-primary: rgba(var(--theme-glass-on-surface-rgb), 0.9);
+  --theme-icon-secondary: rgba(var(--theme-glass-on-surface-rgb), 0.62);
 }
 
 /* ============================================
@@ -99,9 +99,9 @@
   
   /* UI 背景色 */
   --theme-bg-primary: rgba(245, 245, 245, 1);
-  --theme-bg-secondary: rgba(255, 255, 255, 1);
+  --theme-bg-secondary: rgb(255, 251, 243);
   --theme-bg-surface: rgba(250, 250, 250, 1);
-  --theme-bg-elevated: rgba(255, 255, 255, 1);
+  --theme-bg-elevated: rgb(255, 253, 249);
   
   /* 文字颜色 */
   --theme-text-primary: rgba(0, 0, 0, 0.87);
@@ -360,7 +360,7 @@
 [data-theme="light"] .app-sider .MuiTypography-root,
 [data-theme="light"] .glass-sidebar .MuiTypography-root {
   color: var(--theme-text-primary);
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 2px rgba(255, 251, 243, 0.65);
 }
 
 /* 白天模式下导航项目 */
@@ -452,20 +452,20 @@
 /* 白天模式下增强文字对比度 */
 [data-theme="light"] {
   /* 更深的主文字颜色 */
-  --theme-text-primary: rgba(0, 0, 0, 0.9);
-  --theme-text-secondary: rgba(0, 0, 0, 0.7);
+  --theme-text-primary: rgba(36, 28, 20, 0.92);
+  --theme-text-secondary: rgba(76, 60, 44, 0.74);
   
   /* 毛玻璃背景更不透明以提高可读性 */
-  --theme-glass-bg: rgba(255, 255, 255, 0.85);
-  --theme-glass-bg-light: rgba(255, 255, 255, 0.7);
-  --theme-glass-bg-heavy: rgba(255, 255, 255, 0.95);
+  --theme-glass-bg: rgba(255, 251, 243, 0.85);
+  --theme-glass-bg-light: rgba(244, 236, 223, 0.7);
+  --theme-glass-bg-heavy: rgba(255, 251, 243, 0.95);
 }
 
 /* 暗黑模式下增强文字对比度 */
 [data-theme="dark"] {
   /* 更亮的主文字颜色 */
-  --theme-text-primary: rgba(255, 255, 255, 0.95);
-  --theme-text-secondary: rgba(255, 255, 255, 0.75);
+  --theme-text-primary: rgba(var(--theme-glass-on-surface-rgb), 0.95);
+  --theme-text-secondary: rgba(var(--theme-glass-on-surface-rgb), 0.75);
 }
 
 /* 文字背景增强 - 确保在任何背景上都可读 */
@@ -474,7 +474,7 @@
 }
 
 [data-theme="light"] .text-readable {
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 3px rgba(255, 249, 240, 0.55);
 }
 
 /* 卡片内文字确保可读 */
@@ -496,11 +496,11 @@
 
 /* 白天模式页面背景 */
 [data-theme="light"] .app {
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+  background: linear-gradient(135deg, #f8f1e5 0%, #e6dccf 100%);
 }
 
 [data-theme="light"] main {
-  background-color: rgba(245, 245, 245, 0.3);
+  background-color: rgba(255, 248, 239, 0.32);
 }
 
 /* 暗黑模式页面背景保持原样 */
@@ -516,25 +516,25 @@
 /* 分类标题区域 - 暗黑模式 */
 [data-theme="dark"] .category-header,
 [data-theme="dark"] .period-header {
-  background-color: rgba(30, 30, 30, 0.8) !important;
+  background-color: rgba(var(--glass-surface-soft-rgb), 0.8) !important;
   border-left-color: var(--color-primary) !important;
 }
 
 [data-theme="dark"] .category-header:hover,
 [data-theme="dark"] .period-header:hover {
-  background-color: rgba(40, 40, 40, 0.9) !important;
+  background-color: rgba(var(--glass-surface-soft-rgb), 0.9) !important;
 }
 
 /* 分类标题区域 - 白天模式 */
 [data-theme="light"] .category-header,
 [data-theme="light"] .period-header {
-  background-color: rgba(245, 245, 245, 0.9) !important;
+  background-color: rgba(var(--glass-surface-rgb), 0.9) !important;
   border-left-color: var(--color-primary) !important;
 }
 
 [data-theme="light"] .category-header:hover,
 [data-theme="light"] .period-header:hover {
-  background-color: rgba(232, 245, 232, 0.9) !important;
+  background-color: rgba(var(--glass-surface-rgb), 0.98) !important;
 }
 
 /* MUI Card 主题适配 */
@@ -544,13 +544,13 @@
 }
 
 [data-theme="light"] .MuiCard-root {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  background-color: var(--app-panel-bg) !important;
   color: var(--color-text-primary);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: var(--app-panel-shadow-sm) !important;
 }
 
 [data-theme="light"] .MuiCard-root:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: var(--app-panel-shadow-md) !important;
 }
 
 /* MUI Paper 主题适配 */
@@ -560,7 +560,7 @@
 }
 
 [data-theme="light"] .MuiPaper-root {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: var(--app-panel-bg-strong);
   color: var(--color-text-primary);
 }
 
@@ -625,20 +625,20 @@
 
 /* Avatar 主题适配 */
 [data-theme="dark"] .MuiAvatar-root {
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--theme-glass-border-light);
 }
 
 [data-theme="light"] .MuiAvatar-root {
-  border: 2px solid rgba(0, 0, 0, 0.08);
+  border: 2px solid var(--theme-glass-border-light);
 }
 
 /* Skeleton 加载状态主题适配 */
 [data-theme="dark"] .MuiSkeleton-root {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(var(--theme-glass-on-surface-rgb), 0.08) !important;
 }
 
 [data-theme="light"] .MuiSkeleton-root {
-  background-color: rgba(0, 0, 0, 0.08) !important;
+  background-color: rgba(118, 90, 51, 0.08) !important;
 }
 
 /* Container 主题适配 */
@@ -660,48 +660,48 @@
 
 [data-theme="light"] .timeline-item,
 [data-theme="light"] .timeline-card {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(var(--theme-glass-surface-rgb), 0.95);
   color: var(--color-text-primary);
   border-color: var(--color-border-light);
 }
 
 /* 地图组件主题适配 */
 [data-theme="dark"] .map-container {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--app-panel-bg);
 }
 
 [data-theme="light"] .map-container {
-  background-color: rgba(250, 250, 250, 0.95);
+  background-color: var(--app-panel-bg);
 }
 
 /* 搜索栏主题适配 */
 [data-theme="dark"] .search-bar,
 [data-theme="dark"] .MuiOutlinedInput-root {
-  background-color: rgba(30, 30, 30, 0.8);
+  background-color: rgba(var(--glass-surface-soft-rgb), 0.8);
   border-color: var(--color-border-medium);
 }
 
 [data-theme="light"] .search-bar,
 [data-theme="light"] .MuiOutlinedInput-root {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(var(--glass-surface-rgb), 0.9);
   border-color: var(--color-border-medium);
 }
 
 /* 下拉菜单主题适配 */
 [data-theme="dark"] .MuiMenu-paper,
 [data-theme="dark"] .MuiPopover-paper {
-  background-color: rgba(40, 40, 40, 0.95) !important;
+  background-color: rgba(var(--glass-surface-soft-rgb), 0.95) !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--theme-glass-border-light);
 }
 
 [data-theme="light"] .MuiMenu-paper,
 [data-theme="light"] .MuiPopover-paper {
-  background-color: rgba(255, 255, 255, 0.98) !important;
+  background-color: rgba(var(--glass-surface-rgb), 0.98) !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--theme-glass-border-light);
 }
 
 /* MenuItem 主题适配 */
@@ -710,7 +710,7 @@
 }
 
 [data-theme="dark"] .MuiMenuItem-root:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(var(--glass-tint-rgb), 0.08);
 }
 
 [data-theme="light"] .MuiMenuItem-root {
@@ -718,7 +718,7 @@
 }
 
 [data-theme="light"] .MuiMenuItem-root:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgba(var(--glass-tint-rgb), 0.08);
 }
 
 /* Select 主题适配 */
@@ -732,14 +732,14 @@
 
 /* Dialog 主题适配 */
 [data-theme="dark"] .MuiDialog-paper {
-  background-color: rgba(30, 30, 30, 0.95) !important;
+  background-color: rgba(var(--glass-surface-soft-rgb), 0.95) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   color: var(--color-text-primary);
 }
 
 [data-theme="light"] .MuiDialog-paper {
-  background-color: rgba(255, 255, 255, 0.98) !important;
+  background-color: rgba(var(--glass-surface-rgb), 0.98) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   color: var(--color-text-primary);
@@ -747,33 +747,33 @@
 
 /* Snackbar 主题适配 */
 [data-theme="dark"] .MuiSnackbarContent-root {
-  background-color: rgba(50, 50, 50, 0.95);
+  background-color: rgba(var(--glass-surface-soft-rgb), 0.95);
   color: var(--color-text-primary);
 }
 
 [data-theme="light"] .MuiSnackbarContent-root {
-  background-color: rgba(50, 50, 50, 0.95);
-  color: white;
+  background-color: rgba(var(--glass-surface-soft-rgb), 0.92);
+  color: var(--color-text-primary);
 }
 
 /* Alert 主题适配 */
 [data-theme="dark"] .MuiAlert-root {
-  background-color: rgba(40, 40, 40, 0.9);
+  background-color: rgba(var(--glass-surface-soft-rgb), 0.9);
 }
 
 [data-theme="light"] .MuiAlert-root {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(var(--glass-surface-rgb), 0.95);
 }
 
 /* Drawer 主题适配 */
 [data-theme="dark"] .MuiDrawer-paper {
-  background-color: rgba(25, 25, 25, 0.95) !important;
+  background-color: rgba(var(--glass-surface-soft-rgb), 0.95) !important;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
 
 [data-theme="light"] .MuiDrawer-paper {
-  background-color: rgba(255, 255, 255, 0.95) !important;
+  background-color: rgba(var(--glass-surface-rgb), 0.95) !important;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
@@ -788,7 +788,7 @@
 }
 
 [data-theme="dark"] .MuiListItem-root:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(var(--glass-tint-rgb), 0.08);
 }
 
 [data-theme="light"] .MuiList-root {
@@ -800,7 +800,7 @@
 }
 
 [data-theme="light"] .MuiListItem-root:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgba(var(--glass-tint-rgb), 0.08);
 }
 
 /* Breadcrumbs 主题适配 */
@@ -834,29 +834,29 @@
 
 /* Switch 主题适配 */
 [data-theme="dark"] .MuiSwitch-track {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(var(--glass-surface-rgb), 0.3);
 }
 
 [data-theme="light"] .MuiSwitch-track {
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(118, 90, 51, 0.22);
 }
 
 /* Slider 主题适配 */
 [data-theme="dark"] .MuiSlider-rail {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(var(--theme-glass-on-surface-rgb), 0.26);
 }
 
 [data-theme="light"] .MuiSlider-rail {
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(var(--glass-surface-soft-rgb), 0.25);
 }
 
 /* LinearProgress 主题适配 */
 [data-theme="dark"] .MuiLinearProgress-root {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(var(--glass-surface-rgb), 0.1);
 }
 
 [data-theme="light"] .MuiLinearProgress-root {
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: rgba(118, 90, 51, 0.08);
 }
 
 /* CircularProgress 主题适配 */
@@ -871,34 +871,34 @@
 /* Fab 主题适配 */
 [data-theme="dark"] .MuiFab-root {
   background-color: var(--color-primary);
-  color: white;
+  color: var(--color-text-inverse);
 }
 
 [data-theme="light"] .MuiFab-root {
   background-color: var(--color-primary);
-  color: white;
+  color: var(--color-text-inverse);
 }
 
 /* SpeedDial 主题适配 */
 [data-theme="dark"] .MuiSpeedDialAction-fab {
-  background-color: rgba(50, 50, 50, 0.95);
+  background-color: rgba(var(--glass-surface-soft-rgb), 0.95);
   color: var(--color-text-primary);
 }
 
 [data-theme="light"] .MuiSpeedDialAction-fab {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(var(--glass-surface-rgb), 0.95);
   color: var(--color-text-primary);
 }
 
 /* BottomNavigation 主题适配 */
 [data-theme="dark"] .MuiBottomNavigation-root {
-  background-color: rgba(25, 25, 25, 0.95);
+  background-color: rgba(var(--glass-surface-soft-rgb), 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
 [data-theme="light"] .MuiBottomNavigation-root {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(var(--glass-surface-rgb), 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -921,13 +921,13 @@
 
 /* AppBar 主题适配 */
 [data-theme="dark"] .MuiAppBar-root {
-  background-color: rgba(25, 25, 25, 0.9) !important;
+  background-color: rgba(var(--glass-surface-soft-rgb), 0.9) !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
 [data-theme="light"] .MuiAppBar-root {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  background-color: rgba(var(--glass-surface-rgb), 0.9) !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: var(--color-text-primary);

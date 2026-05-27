@@ -61,7 +61,7 @@
   height: 100%;
   overflow-y: auto;
   flex: 1;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(var(--glass-surface-rgb), 0.28);
   backdrop-filter: blur(var(--glass-blur-light, 12px));
   -webkit-backdrop-filter: blur(var(--glass-blur-light, 12px));
 }
@@ -87,7 +87,7 @@
 /* 事件项样式 - 毛玻璃风格 */
 /* Requirements: 5.1, 5.2 */
 .event-item {
-  background: rgba(var(--glass-surface-rgb, 255, 255, 255), var(--glass-card-bg-opacity, 0.6));
+  background: rgba(var(--glass-surface-rgb, 255, 255, 255), var(--glass-card-bg-opacity, 0.56));
   backdrop-filter: blur(var(--glass-card-blur, 12px));
   -webkit-backdrop-filter: blur(var(--glass-card-blur, 12px));
   border: 1px solid var(--theme-glass-border, rgba(255, 255, 255, 0.18));
@@ -110,14 +110,14 @@
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, rgba(255, 61, 0, 0.8), rgba(3, 169, 244, 0.8));
+  background: linear-gradient(90deg, rgba(var(--glass-tint-rgb), 0.82), rgba(107, 135, 151, 0.72));
   transform: scaleX(0);
   transition: transform var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
 }
 
 .event-item:hover {
   transform: translateY(-4px) scale(1.02);
-  background: rgba(var(--glass-surface-rgb, 255, 255, 255), calc(var(--glass-card-bg-opacity, 0.6) + var(--glass-card-hover-delta, 0.1)));
+  background: rgba(var(--glass-surface-rgb, 255, 255, 255), calc(var(--glass-card-bg-opacity, 0.56) + var(--glass-card-hover-delta, 0.1)));
   box-shadow: var(--glass-shadow-lg, 0 8px 32px rgba(0, 0, 0, 0.15)), var(--glass-shadow-glow, 0 0 20px rgba(255, 255, 255, 0.1));
   border-color: var(--theme-glass-border-heavy, rgba(255, 255, 255, 0.3));
 }
@@ -139,12 +139,12 @@
   min-width: 120px;
   text-align: center;
   padding: var(--space-3) var(--space-4);
-  background: rgba(255, 61, 0, 0.15);
+  background: rgba(var(--glass-tint-rgb), 0.14);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-radius: var(--glass-radius-lg, 16px);
-  border: 1px solid rgba(255, 61, 0, 0.3);
-  box-shadow: 0 0 12px rgba(255, 61, 0, 0.2);
+  border: 1px solid rgba(var(--glass-tint-rgb), 0.28);
+  box-shadow: 0 0 12px rgba(var(--glass-tint-rgb), 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,8 +152,8 @@
 }
 
 .event-item:hover .event-year {
-  background: rgba(255, 61, 0, 0.2);
-  box-shadow: 0 0 16px rgba(255, 61, 0, 0.3);
+  background: rgba(var(--glass-tint-rgb), 0.18);
+  box-shadow: 0 0 16px rgba(var(--glass-tint-rgb), 0.24);
 }
 
 .event-content {
@@ -169,7 +169,7 @@
 
 .event-item:hover .event-content h3 {
   color: var(--color-primary);
-  text-shadow: 0 0 10px rgba(255, 61, 0, 0.3);
+  text-shadow: 0 0 10px rgba(var(--glass-tint-rgb), 0.26);
 }
 
 .event-content p {
@@ -191,29 +191,29 @@
   padding: var(--space-2) var(--space-4);
   border-radius: var(--glass-radius-lg, 16px);
   transition: all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
-  background: rgba(255, 61, 0, 0.1);
+  background: rgba(var(--glass-tint-rgb), 0.12);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 61, 0, 0.3);
+  border: 1px solid rgba(var(--glass-tint-rgb), 0.28);
 }
 
 .event-content summary:hover {
-  background: rgba(255, 61, 0, 0.8);
+  background: rgba(var(--glass-tint-rgb), 0.82);
   color: var(--color-text-inverse);
-  box-shadow: var(--glass-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12)), 0 0 12px rgba(255, 61, 0, 0.3);
+  box-shadow: var(--glass-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12)), 0 0 12px rgba(var(--glass-tint-rgb), 0.24);
   transform: translateY(-2px);
 }
 
 .event-content details[open] summary {
-  background: rgba(255, 61, 0, 0.8);
+  background: rgba(var(--glass-tint-rgb), 0.82);
   color: var(--color-text-inverse);
 }
 
 .event-content details div {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(var(--glass-surface-rgb), 0.5);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--theme-glass-border);
   border-radius: var(--glass-radius-lg, 16px);
   padding: var(--space-3);
   margin-top: var(--space-2);
@@ -222,13 +222,13 @@
 
 .event-content details img {
   border-radius: var(--glass-radius-lg, 16px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(var(--glass-on-surface-rgb), 0.2);
   transition: all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
 }
 
 .event-content details img:hover {
-  border-color: rgba(255, 61, 0, 0.5);
-  box-shadow: 0 0 20px rgba(255, 61, 0, 0.3);
+  border-color: rgba(var(--glass-tint-rgb), 0.42);
+  box-shadow: 0 0 20px rgba(var(--glass-tint-rgb), 0.26);
   transform: scale(1.02);
 }
 
@@ -264,27 +264,27 @@
 .css-1q2qef8-MuiTimeline-root .MuiTimelineConnector-root {
   width: 100% !important;
   height: 2px !important;
-  background: linear-gradient(90deg, rgba(255, 61, 0, 0.8), rgba(3, 169, 244, 0.8)) !important;
+  background: linear-gradient(90deg, rgba(var(--glass-tint-rgb), 0.82), rgba(107, 135, 151, 0.72)) !important;
   border-radius: 1px !important;
   transition: all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) !important;
-  box-shadow: 0 0 10px rgba(255, 61, 0, 0.5) !important;
+  box-shadow: 0 0 10px rgba(var(--glass-tint-rgb), 0.32) !important;
   min-width: 50px;
   flex-grow: 1;
 }
 
 .css-1q2qef8-MuiTimeline-root .MuiTimelineDot-root {
-  background: linear-gradient(135deg, rgba(255, 61, 0, 0.9), rgba(255, 100, 50, 0.9)) !important;
-  box-shadow: 0 4px 15px rgba(255, 61, 0, 0.4), 0 0 20px rgba(255, 61, 0, 0.3) !important;
-  border: 2px solid rgba(255, 255, 255, 0.5) !important;
+  background: linear-gradient(135deg, rgba(var(--glass-tint-rgb), 0.9), rgba(166, 110, 47, 0.88)) !important;
+  box-shadow: 0 4px 15px rgba(var(--glass-tint-rgb), 0.32), 0 0 20px rgba(107, 135, 151, 0.2) !important;
+  border: 2px solid rgba(var(--glass-on-surface-rgb), 0.42) !important;
   transition: all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) !important;
 }
 
 /* 毛玻璃卡片效果 */
 .css-1q2qef8-MuiTimeline-root .MuiPaper-root {
-  background: rgba(255, 255, 255, var(--glass-card-bg-opacity, 0.6)) !important;
+  background: rgba(var(--glass-surface-rgb), var(--glass-card-bg-opacity, 0.6)) !important;
   backdrop-filter: blur(var(--glass-card-blur, 12px)) !important;
   -webkit-backdrop-filter: blur(var(--glass-card-blur, 12px)) !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border: 1px solid var(--theme-glass-border) !important;
   border-radius: var(--glass-radius-xl, 24px) !important;
   transition: all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) !important;
 }
@@ -309,30 +309,30 @@
 /* 时间轴项悬停效果 - 毛玻璃增强 */
 .css-1q2qef8-MuiTimeline-root .MuiTimelineItem-root:hover .MuiPaper-root {
   transform: translateY(-6px) scale(1.03) !important;
-  background: rgba(255, 255, 255, calc(var(--glass-card-bg-opacity, 0.6) + var(--glass-card-hover-delta, 0.1))) !important;
+  background: rgba(var(--glass-surface-rgb), calc(var(--glass-card-bg-opacity, 0.6) + var(--glass-card-hover-delta, 0.1))) !important;
   box-shadow: var(--glass-shadow-lg, 0 8px 32px rgba(0, 0, 0, 0.15)), var(--glass-shadow-glow, 0 0 20px rgba(255, 255, 255, 0.1)) !important;
   transition: all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
+  border-color: var(--theme-glass-border-heavy) !important;
 }
 
 .css-1q2qef8-MuiTimeline-root .MuiTimelineItem-root:hover .MuiTimelineDot-root {
   transform: scale(1.4) !important;
-  box-shadow: 0 6px 25px rgba(255, 61, 0, 0.6), 0 0 30px rgba(255, 61, 0, 0.4) !important;
+  box-shadow: 0 6px 25px rgba(var(--glass-tint-rgb), 0.48), 0 0 30px rgba(107, 135, 151, 0.28) !important;
   transition: all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) !important;
 }
 
 .css-1q2qef8-MuiTimeline-root .MuiTimelineItem-root:hover .MuiTimelineConnector-root {
   height: 5px !important;
-  box-shadow: 0 0 15px rgba(255, 61, 0, 0.6) !important;
+  box-shadow: 0 0 15px rgba(var(--glass-tint-rgb), 0.44) !important;
   transition: all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) !important;
 }
 
 /* 按钮悬停效果 - 毛玻璃风格 */
 .css-1q2qef8-MuiTimeline-root .MuiTimelineItem-root:hover .MuiButton-root {
   transform: scale(1.15) !important;
-  background: rgba(255, 61, 0, 0.8) !important;
+  background: rgba(var(--glass-tint-rgb), 0.82) !important;
   color: var(--color-text-inverse) !important;
-  box-shadow: var(--glass-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12)), 0 0 12px rgba(255, 61, 0, 0.3) !important;
+  box-shadow: var(--glass-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12)), 0 0 12px rgba(var(--glass-tint-rgb), 0.26) !important;
   transition: all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) !important;
 }
 
@@ -340,7 +340,7 @@
 .css-1q2qef8-MuiTimeline-root .MuiTimelineItem-root:hover .MuiTypography-h6 {
   color: var(--color-primary) !important;
   transform: scale(1.1) !important;
-  text-shadow: 0 0 10px rgba(255, 61, 0, 0.3) !important;
+  text-shadow: 0 0 10px rgba(var(--glass-tint-rgb), 0.26) !important;
   transition: all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) !important;
 }
 
@@ -354,7 +354,7 @@
   /* 基础样式 */
   backdrop-filter: blur(var(--glass-blur-light, 12px));
   -webkit-backdrop-filter: blur(var(--glass-blur-light, 12px));
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--theme-glass-border);
   border-radius: var(--glass-radius-lg, 16px);
   box-shadow: var(--glass-shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.1));
   transition: background-color 350ms cubic-bezier(0.4, 0, 0.2, 1),

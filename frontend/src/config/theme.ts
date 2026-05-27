@@ -28,78 +28,78 @@ export const navigationThemes: Record<string, NavigationTheme> = {
   timeline: {
     key: 'timeline',
     gradient: 'var(--color-primary-gradient)',
-    hoverBackground: 'rgba(255, 61, 0, 0.15)',
+    hoverBackground: 'rgba(199, 143, 69, 0.15)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,
-      borderColor: 'rgba(255, 61, 0, 0.2)',
-      activeGlow: '0 0 15px rgba(255, 61, 0, 0.3)'
+      borderColor: 'rgba(199, 143, 69, 0.22)',
+      activeGlow: '0 0 15px rgba(199, 143, 69, 0.24)'
     }
   },
   dynasties: {
     key: 'dynasties',
-    gradient: 'linear-gradient(135deg, #D32F2F 0%, #F44336 100%)',
-    hoverBackground: 'rgba(211, 47, 47, 0.15)',
+    gradient: 'var(--color-dynasties-gradient)',
+    hoverBackground: 'rgba(181, 134, 70, 0.16)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,
-      borderColor: 'rgba(211, 47, 47, 0.2)',
-      activeGlow: '0 0 15px rgba(211, 47, 47, 0.3)'
+      borderColor: 'rgba(181, 134, 70, 0.22)',
+      activeGlow: '0 0 15px rgba(181, 134, 70, 0.24)'
     }
   },
   map: {
     key: 'map',
     gradient: 'var(--color-secondary-gradient)',
-    hoverBackground: 'rgba(3, 169, 244, 0.15)',
+    hoverBackground: 'rgba(107, 135, 151, 0.16)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,
-      borderColor: 'rgba(3, 169, 244, 0.2)',
-      activeGlow: '0 0 15px rgba(3, 169, 244, 0.3)'
+      borderColor: 'rgba(107, 135, 151, 0.2)',
+      activeGlow: '0 0 15px rgba(107, 135, 151, 0.24)'
     }
   },
   people: {
     key: 'people',
-    gradient: 'linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%)',
-    hoverBackground: 'rgba(76, 175, 80, 0.15)',
+    gradient: 'var(--color-people-gradient)',
+    hoverBackground: 'rgba(111, 140, 116, 0.16)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,
-      borderColor: 'rgba(76, 175, 80, 0.2)',
-      activeGlow: '0 0 15px rgba(76, 175, 80, 0.3)'
+      borderColor: 'rgba(111, 140, 116, 0.22)',
+      activeGlow: '0 0 15px rgba(111, 140, 116, 0.24)'
     }
   },
   culture: {
     key: 'culture',
-    gradient: 'linear-gradient(135deg, #9C27B0 0%, #E91E63 100%)',
-    hoverBackground: 'rgba(156, 39, 176, 0.15)',
+    gradient: 'var(--color-culture-gradient)',
+    hoverBackground: 'rgba(140, 109, 130, 0.16)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,
-      borderColor: 'rgba(156, 39, 176, 0.2)',
-      activeGlow: '0 0 15px rgba(156, 39, 176, 0.3)'
+      borderColor: 'rgba(140, 109, 130, 0.22)',
+      activeGlow: '0 0 15px rgba(140, 109, 130, 0.24)'
     }
   },
   mythology: {
     key: 'mythology',
-    gradient: 'linear-gradient(135deg, #FF9800 0%, #FFC107 100%)',
-    hoverBackground: 'rgba(255, 152, 0, 0.15)',
+    gradient: 'var(--color-mythology-gradient)',
+    hoverBackground: 'rgba(196, 146, 79, 0.16)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,
-      borderColor: 'rgba(255, 152, 0, 0.2)',
-      activeGlow: '0 0 15px rgba(255, 152, 0, 0.3)'
+      borderColor: 'rgba(196, 146, 79, 0.22)',
+      activeGlow: '0 0 15px rgba(196, 146, 79, 0.24)'
     }
   },
   events: {
     key: 'events',
-    gradient: 'linear-gradient(135deg, #607D8B 0%, #90A4AE 100%)',
-    hoverBackground: 'rgba(96, 125, 139, 0.15)',
+    gradient: 'var(--color-events-gradient)',
+    hoverBackground: 'rgba(107, 135, 151, 0.16)',
     glass: {
       blur: '20px',
       bgOpacity: 0.7,
-      borderColor: 'rgba(96, 125, 139, 0.2)',
-      activeGlow: '0 0 15px rgba(96, 125, 139, 0.3)'
+      borderColor: 'rgba(107, 135, 151, 0.2)',
+      activeGlow: '0 0 15px rgba(107, 135, 151, 0.24)'
     }
   }
 };
@@ -157,11 +157,11 @@ export const colors = {
     evenRow: '#FAFAFA',
     dynastyCell: '#E8F5E8',
     // 毛玻璃背景色
-    glass: 'rgba(255, 255, 255, 0.6)',
-    glassDark: 'rgba(30, 30, 30, 0.7)',
-    glassLight: 'rgba(255, 255, 255, 0.3)',
-    glassHover: 'rgba(255, 255, 255, 0.75)',
-    glassActive: 'rgba(255, 255, 255, 0.85)'
+    glass: 'rgba(255, 251, 243, 0.74)',
+    glassDark: 'rgba(28, 24, 20, 0.72)',
+    glassLight: 'rgba(244, 236, 223, 0.62)',
+    glassHover: 'rgba(255, 251, 243, 0.9)',
+    glassActive: 'rgba(255, 251, 243, 0.96)'
   },
   
   // 边框色 - 毛玻璃友好的半透明色
@@ -170,29 +170,29 @@ export const colors = {
     medium: '#E3F2FD',
     dark: '#BDBDBD',
     // 毛玻璃边框色
-    glass: 'rgba(255, 255, 255, 0.18)',
-    glassDark: 'rgba(255, 255, 255, 0.1)',
-    glassLight: 'rgba(255, 255, 255, 0.25)'
+    glass: 'rgba(226, 198, 140, 0.16)',
+    glassDark: 'rgba(226, 198, 140, 0.1)',
+    glassLight: 'rgba(118, 90, 51, 0.14)'
   }
 };
 
 // 渐变配置 - 整合毛玻璃风格渐变
 export const gradients = {
-  primary: 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)',
-  secondary: 'linear-gradient(135deg, #03A9F4 0%, #4FC3F7 100%)',
-  dynasties: 'linear-gradient(135deg, #D32F2F 0%, #F44336 100%)',
-  people: 'linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%)',
-  culture: 'linear-gradient(135deg, #9C27B0 0%, #E91E63 100%)',
-  mythology: 'linear-gradient(135deg, #FF9800 0%, #FFC107 100%)',
-  events: 'linear-gradient(135deg, #607D8B 0%, #90A4AE 100%)',
-  sidebar: 'linear-gradient(135deg, rgba(255,61,0,0.1) 0%, rgba(3,169,244,0.1) 100%)',
-  sidebarHover: 'linear-gradient(135deg, rgba(255,61,0,0.2) 0%, rgba(3,169,244,0.2) 100%)',
-  tableHeader: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
+  primary: 'linear-gradient(135deg, #f3d29b 0%, #b6762b 100%)',
+  secondary: 'linear-gradient(135deg, #adc2cf 0%, #587286 100%)',
+  dynasties: 'linear-gradient(135deg, #c59b5b 0%, #8f5d24 100%)',
+  people: 'linear-gradient(135deg, #91ab96 0%, #536957 100%)',
+  culture: 'linear-gradient(135deg, #a98ea5 0%, #664b61 100%)',
+  mythology: 'linear-gradient(135deg, #e4bf81 0%, #9d6327 100%)',
+  events: 'linear-gradient(135deg, #9bb8c6 0%, #556f80 100%)',
+  sidebar: 'linear-gradient(135deg, rgba(199,143,69,0.12) 0%, rgba(107,135,151,0.1) 100%)',
+  sidebarHover: 'linear-gradient(135deg, rgba(199,143,69,0.2) 0%, rgba(107,135,151,0.16) 100%)',
+  tableHeader: 'linear-gradient(135deg, #c59b5b 0%, #8f5d24 100%)',
   // 毛玻璃渐变
-  glass: 'linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.3) 100%)',
-  glassDark: 'linear-gradient(135deg, rgba(30, 30, 30, 0.7) 0%, rgba(30, 30, 30, 0.5) 100%)',
-  glassShimmer: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%)',
-  glassOverlay: 'linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%)'
+  glass: 'linear-gradient(135deg, rgba(255, 251, 243, 0.82) 0%, rgba(244, 236, 223, 0.56) 100%)',
+  glassDark: 'linear-gradient(135deg, rgba(28, 24, 20, 0.8) 0%, rgba(43, 37, 31, 0.58) 100%)',
+  glassShimmer: 'linear-gradient(90deg, transparent 0%, rgba(241, 199, 132, 0.12) 50%, transparent 100%)',
+  glassOverlay: 'linear-gradient(180deg, rgba(241, 199, 132, 0.12) 0%, rgba(241, 199, 132, 0) 100%)'
 };
 
 // 阴影配置 - 更新为毛玻璃风格
@@ -201,20 +201,20 @@ export const shadows = {
   md: '0 4px 6px rgba(0, 0, 0, 0.1)',
   lg: '0 10px 15px rgba(0, 0, 0, 0.1)',
   xl: '0 20px 25px rgba(0, 0, 0, 0.15)',
-  glow: '0 0 20px rgba(255, 61, 0, 0.5)',
-  glowBlue: '0 0 20px rgba(3, 169, 244, 0.5)',
+  glow: '0 0 20px rgba(199, 143, 69, 0.28)',
+  glowBlue: '0 0 20px rgba(107, 135, 151, 0.24)',
   table: '0 4px 20px rgba(0,0,0,0.1)',
   // 毛玻璃阴影
   glass: {
-    sm: '0 2px 8px rgba(0, 0, 0, 0.1)',
-    md: '0 4px 16px rgba(0, 0, 0, 0.12)',
-    lg: '0 8px 32px rgba(0, 0, 0, 0.15)',
-    glow: '0 0 20px rgba(255, 255, 255, 0.1)',
-    inset: 'inset 0 1px 1px rgba(255, 255, 255, 0.1)',
+    sm: '0 8px 18px rgba(0, 0, 0, 0.18)',
+    md: '0 18px 36px rgba(0, 0, 0, 0.24)',
+    lg: '0 28px 54px rgba(0, 0, 0, 0.3)',
+    glow: '0 0 20px rgba(199, 143, 69, 0.16)',
+    inset: 'inset 0 1px 1px rgba(245, 236, 216, 0.08)',
     // 组合阴影 - 毛玻璃深度效果
-    card: '0 4px 16px rgba(0, 0, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.1)',
-    button: '0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.1)',
-    nav: '0 4px 24px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.1)'
+    card: '0 18px 36px rgba(0, 0, 0, 0.24), inset 0 1px 1px rgba(245, 236, 216, 0.08)',
+    button: '0 8px 18px rgba(0, 0, 0, 0.18), inset 0 1px 1px rgba(245, 236, 216, 0.08)',
+    nav: '0 24px 48px rgba(0, 0, 0, 0.28), inset 0 1px 1px rgba(245, 236, 216, 0.08)'
   }
 };
 
@@ -362,11 +362,11 @@ export const glassTheme = {
   
   // 毛玻璃背景样式
   backgrounds: {
-    card: `rgba(255, 255, 255, ${desktopConfig.components.card.bgOpacity})`,
-    navigation: `rgba(255, 255, 255, ${desktopConfig.components.navigation.bgOpacity})`,
-    modal: `rgba(255, 255, 255, ${desktopConfig.components.modal.content.bgOpacity})`,
-    tooltip: `rgba(255, 255, 255, ${desktopConfig.components.tooltip.bgOpacity})`,
-    dropdown: `rgba(255, 255, 255, ${desktopConfig.components.dropdown.bgOpacity})`
+    card: `rgba(255, 251, 243, ${desktopConfig.components.card.bgOpacity})`,
+    navigation: `rgba(28, 24, 20, ${desktopConfig.components.navigation.bgOpacity})`,
+    modal: `rgba(255, 251, 243, ${desktopConfig.components.modal.content.bgOpacity})`,
+    tooltip: `rgba(28, 24, 20, ${desktopConfig.components.tooltip.bgOpacity})`,
+    dropdown: `rgba(255, 251, 243, ${desktopConfig.components.dropdown.bgOpacity})`
   },
   
   // 毛玻璃模糊值
@@ -391,8 +391,8 @@ export const getNavigationGlassStyle = (key: string, isActive: boolean = false) 
     backdropFilter: `blur(${navTheme.glass.blur})`,
     WebkitBackdropFilter: `blur(${navTheme.glass.blur})`,
     backgroundColor: isActive 
-      ? `rgba(255, 255, 255, ${navTheme.glass.bgOpacity + 0.1})`
-      : `rgba(255, 255, 255, ${navTheme.glass.bgOpacity})`,
+      ? `rgba(255, 251, 243, ${navTheme.glass.bgOpacity + 0.1})`
+      : `rgba(255, 251, 243, ${navTheme.glass.bgOpacity})`,
     border: `${config.border.width} solid ${navTheme.glass.borderColor}`,
     boxShadow: isActive ? navTheme.glass.activeGlow : config.shadow.sm,
     transition: `all ${config.animation.duration.normal} ${config.animation.easing}`

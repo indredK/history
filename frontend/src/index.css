@@ -287,7 +287,7 @@ a::before {
 
 a:hover {
   color: var(--color-primary-light);
-  text-shadow: 0 0 10px rgba(255, 61, 0, 0.5);
+  text-shadow: 0 0 10px rgba(var(--glass-tint-rgb), 0.35);
 }
 
 a:hover::before {
@@ -614,10 +614,10 @@ input:hover, textarea:hover, select:hover {
 
 @keyframes textGlow {
   0%, 100% {
-    text-shadow: 0 0 5px rgba(255, 61, 0, 0.5), 0 0 10px rgba(255, 61, 0, 0.3), 0 0 15px rgba(255, 61, 0, 0.2);
+    text-shadow: 0 0 5px rgba(var(--glass-tint-rgb), 0.42), 0 0 10px rgba(var(--glass-tint-rgb), 0.24), 0 0 15px rgba(107, 135, 151, 0.14);
   }
   50% {
-    text-shadow: 0 0 10px rgba(255, 61, 0, 0.8), 0 0 20px rgba(255, 61, 0, 0.6), 0 0 30px rgba(255, 61, 0, 0.4);
+    text-shadow: 0 0 10px rgba(var(--glass-tint-rgb), 0.6), 0 0 20px rgba(var(--glass-tint-rgb), 0.38), 0 0 30px rgba(107, 135, 151, 0.22);
   }
 }
 
@@ -1010,7 +1010,7 @@ input:hover, textarea:hover, select:hover {
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--glass-tint-rgb), 0.12), transparent);
   background-size: 1000px 100%;
   animation: shimmer 1.5s infinite;
 }
@@ -1155,7 +1155,7 @@ input:hover, textarea:hover, select:hover {
 }
 
 .glass-hover-transition:hover {
-  background-color: rgba(255, 255, 255, calc(var(--glass-bg-opacity-medium, 0.5) + 0.1));
+  background-color: rgba(var(--glass-surface-rgb), calc(var(--glass-bg-opacity-medium, 0.5) + 0.1));
   box-shadow: var(--glass-shadow-lg, 0 8px 32px rgba(0, 0, 0, 0.15));
   transform: translateY(-2px);
 }

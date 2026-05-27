@@ -32,7 +32,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--glass-on-surface-rgb, 255, 255, 255), 0.16), transparent);
   transition: left var(--glass-duration-slow) var(--glass-easing);
 }
 
@@ -67,32 +67,32 @@
 .btn-primary {
   backdrop-filter: blur(var(--glass-btn-primary-blur));
   -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur));
-  background-color: rgba(255, 61, 0, var(--glass-btn-primary-bg-opacity));
+  background-color: rgba(var(--glass-tint-rgb, 199, 143, 69), var(--glass-btn-primary-bg-opacity));
   color: var(--color-text-inverse);
-  border: var(--glass-border-width) solid rgba(255, 111, 61, 0.3);
-  box-shadow: var(--glass-shadow-sm), 0 0 10px rgba(255, 61, 0, 0.2);
+  border: var(--glass-border-width) solid rgba(var(--glass-tint-rgb, 199, 143, 69), 0.32);
+  box-shadow: var(--glass-shadow-sm), 0 0 10px rgba(var(--glass-tint-rgb, 199, 143, 69), 0.18);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: rgba(255, 61, 0, calc(var(--glass-btn-primary-bg-opacity) + 0.1));
-  border-color: rgba(255, 111, 61, 0.5);
-  box-shadow: var(--glass-shadow-md), 0 0 20px rgba(255, 61, 0, 0.3);
+  background-color: rgba(var(--glass-tint-rgb, 199, 143, 69), calc(var(--glass-btn-primary-bg-opacity) + 0.1));
+  border-color: rgba(var(--glass-tint-rgb, 199, 143, 69), 0.46);
+  box-shadow: var(--glass-shadow-md), 0 0 20px rgba(var(--glass-tint-rgb, 199, 143, 69), 0.26);
 }
 
 /* 按钮变体 - 次要按钮 */
 .btn-secondary {
   backdrop-filter: blur(var(--glass-btn-secondary-blur));
   -webkit-backdrop-filter: blur(var(--glass-btn-secondary-blur));
-  background-color: rgba(3, 169, 244, var(--glass-btn-secondary-bg-opacity));
+  background-color: rgba(107, 135, 151, var(--glass-btn-secondary-bg-opacity));
   color: var(--color-text-inverse);
-  border: var(--glass-border-width) solid rgba(79, 195, 247, 0.3);
-  box-shadow: var(--glass-shadow-sm), 0 0 10px rgba(3, 169, 244, 0.2);
+  border: var(--glass-border-width) solid rgba(107, 135, 151, 0.3);
+  box-shadow: var(--glass-shadow-sm), 0 0 10px rgba(107, 135, 151, 0.2);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background-color: rgba(3, 169, 244, calc(var(--glass-btn-secondary-bg-opacity) + 0.1));
-  border-color: rgba(79, 195, 247, 0.5);
-  box-shadow: var(--glass-shadow-md), 0 0 20px rgba(3, 169, 244, 0.3);
+  background-color: rgba(107, 135, 151, calc(var(--glass-btn-secondary-bg-opacity) + 0.1));
+  border-color: rgba(107, 135, 151, 0.44);
+  box-shadow: var(--glass-shadow-md), 0 0 20px rgba(107, 135, 151, 0.28);
 }
 
 /* 按钮变体 - 轮廓按钮 */
@@ -193,7 +193,7 @@
 
 .card:hover .card-title {
   color: var(--color-text-primary);
-  text-shadow: 0 0 10px rgba(var(--glass-tint-rgb, 100, 150, 255), 0.16);
+  text-shadow: 0 0 10px rgba(var(--glass-tint-rgb, 199, 143, 69), 0.16);
 }
 
 .card-subtitle {
@@ -231,18 +231,18 @@
 
 .form-group:focus-within .form-label {
   color: var(--color-text-primary);
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 5px rgba(var(--glass-on-surface-rgb, 255, 255, 255), 0.22);
 }
 
 .form-input {
   width: 100%;
   padding: var(--space-3) var(--space-4);
   font-size: var(--font-size-sm);
-  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.15);
+  border: var(--glass-border-width) solid var(--theme-glass-border);
   border-radius: var(--glass-radius-lg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(var(--glass-surface-rgb, 255, 255, 255), 0.1);
   color: var(--color-text-primary);
   transition: all var(--glass-duration-normal) var(--glass-easing);
   position: relative;
@@ -254,16 +254,16 @@
 }
 
 .form-input:focus {
-  border-color: rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1), var(--glass-shadow-glow);
+  border-color: var(--theme-glass-border-heavy);
+  background-color: rgba(var(--glass-surface-rgb, 255, 255, 255), 0.15);
+  box-shadow: 0 0 0 3px rgba(var(--glass-tint-rgb, 199, 143, 69), 0.12), var(--glass-shadow-glow);
   outline: none;
   transform: translateY(-1px);
 }
 
 .form-input:hover:not(:focus) {
-  border-color: rgba(255, 255, 255, 0.25);
-  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(var(--glass-tint-rgb, 199, 143, 69), 0.22);
+  background-color: rgba(var(--glass-surface-rgb, 255, 255, 255), 0.12);
 }
 
 .form-error {
@@ -280,9 +280,9 @@
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(var(--glass-on-surface-rgb, 255, 255, 255), 0.22);
   border-radius: 50%;
-  border-top-color: rgba(255, 255, 255, 0.8);
+  border-top-color: rgba(var(--glass-on-surface-rgb, 255, 255, 255), 0.82);
   animation: spin 1s ease-in-out infinite;
 }
 
@@ -293,7 +293,7 @@
   padding: var(--space-8);
   backdrop-filter: blur(var(--glass-blur-light));
   -webkit-backdrop-filter: blur(var(--glass-blur-light));
-  background-color: rgba(30, 30, 30, 0.3);
+  background-color: rgba(var(--glass-surface-soft-rgb, 30, 30, 30), 0.3);
   border-radius: var(--glass-radius-lg);
 }
 
@@ -312,8 +312,8 @@
   transition: all var(--glass-duration-normal) var(--glass-easing);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  background-color: rgba(255, 255, 255, 0.15);
-  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(var(--glass-surface-rgb, 255, 255, 255), 0.15);
+  border: var(--glass-border-width) solid rgba(var(--glass-on-surface-rgb, 255, 255, 255), 0.16);
   box-shadow: var(--glass-shadow-sm);
 }
 
@@ -324,13 +324,13 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--glass-on-surface-rgb, 255, 255, 255), 0.24), transparent);
   transition: left var(--glass-duration-fast) var(--glass-easing);
 }
 
 .badge:hover {
   transform: translateY(-1px);
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(var(--glass-surface-rgb, 255, 255, 255), 0.2);
   box-shadow: var(--glass-shadow-md);
 }
 
@@ -341,17 +341,17 @@
 .badge-primary {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  background-color: rgba(255, 61, 0, 0.2);
+  background-color: rgba(var(--glass-tint-rgb, 199, 143, 69), 0.18);
   color: #FF6F3D;
-  border-color: rgba(255, 61, 0, 0.3);
+  border-color: rgba(var(--glass-tint-rgb, 199, 143, 69), 0.28);
 }
 
 .badge-secondary {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  background-color: rgba(3, 169, 244, 0.2);
+  background-color: rgba(107, 135, 151, 0.18);
   color: #4FC3F7;
-  border-color: rgba(3, 169, 244, 0.3);
+  border-color: rgba(107, 135, 151, 0.28);
 }
 
 .badge-accent {
@@ -403,8 +403,8 @@
   color: var(--color-text-primary);
   backdrop-filter: blur(var(--glass-tooltip-blur));
   -webkit-backdrop-filter: blur(var(--glass-tooltip-blur));
-  background-color: rgba(30, 30, 30, var(--glass-tooltip-bg-opacity));
-  border: var(--glass-border-width) solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(var(--glass-surface-soft-rgb, 30, 30, 30), var(--glass-tooltip-bg-opacity));
+  border: var(--glass-border-width) solid var(--theme-glass-border);
   border-radius: var(--glass-radius-md);
   white-space: nowrap;
   opacity: 0;
@@ -423,7 +423,7 @@
   left: 50%;
   transform: translateX(-50%);
   border: 5px solid transparent;
-  border-top-color: rgba(30, 30, 30, var(--glass-tooltip-bg-opacity));
+  border-top-color: rgba(var(--glass-surface-soft-rgb, 30, 30, 30), var(--glass-tooltip-bg-opacity));
   opacity: 0;
   visibility: hidden;
   transition: all var(--glass-duration-normal) var(--glass-easing);

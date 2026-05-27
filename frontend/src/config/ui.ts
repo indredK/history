@@ -10,24 +10,13 @@ export const popoverConfig = {
   // 通用的浮框样式配置
   paperStyles: {
     borderRadius: 'var(--radius-xl)',
-    background: 'rgba(255, 255, 255, 0.95)',
+    background: 'var(--app-panel-bg-strong)',
     backdropFilter: 'blur(20px)',
-    border: '1px solid rgba(255, 255, 255, 0.2)',
+    border: 'var(--app-panel-border)',
     boxShadow: `
-      0 8px 32px rgba(0, 0, 0, 0.12),
-      0 2px 8px rgba(0, 0, 0, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4)
+      var(--app-panel-shadow-lg),
+      inset 0 1px 0 rgba(var(--glass-on-surface-rgb), 0.12)
     `,
-    // 暗色模式适配
-    '@media (prefers-color-scheme: dark)': {
-      background: 'rgba(30, 30, 30, 0.95)',
-      border: '1px solid rgba(255, 255, 255, 0.1)',
-      boxShadow: `
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 2px 8px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1)
-      `,
-    },
     // 添加微妙的动画效果
     transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     // 确保在不同背景下都有良好的对比度
@@ -39,7 +28,7 @@ export const popoverConfig = {
       right: 0,
       bottom: 0,
       borderRadius: 'inherit',
-      background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+      background: 'linear-gradient(135deg, rgba(var(--glass-on-surface-rgb), 0.08) 0%, rgba(var(--glass-tint-rgb), 0.04) 100%)',
       pointerEvents: 'none',
       zIndex: -1,
     }
@@ -81,23 +70,24 @@ export const popoverConfig = {
 export const buttonConfig = {
   // 功能面板按钮的统一样式
   functionButton: {
-    backgroundColor: 'var(--color-bg-tertiary)',
-    borderRadius: 'var(--radius-lg)',
+    backgroundColor: 'rgba(var(--glass-surface-rgb), 0.45)',
+    backdropFilter: 'blur(10px)',
+    borderRadius: '12px',
     padding: '6px 12px',
-    borderColor: 'var(--color-border-medium)',
+    borderColor: 'var(--theme-glass-border)',
     '&:hover': {
-      backgroundColor: 'var(--color-bg-quaternary)',
+      backgroundColor: 'rgba(var(--glass-surface-rgb), 0.62)',
       borderColor: 'var(--color-primary)',
-      boxShadow: 'var(--shadow-md)'
+      boxShadow: 'var(--app-panel-shadow-md)'
     }
   } as SxProps<Theme>,
 
   // 通用按钮样式（用于Popover内的按钮）
   base: {
     borderRadius: 'var(--radius-md)',
-    borderColor: 'var(--color-border-medium)',
+    borderColor: 'var(--theme-glass-border)',
     color: 'var(--color-text-primary)',
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(var(--glass-surface-rgb), 0.14)',
     transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)'
   } as SxProps<Theme>,
 
@@ -175,8 +165,8 @@ export const commonStyles = {
 export const uiThemeColors = {
   timeline: {
     primary: 'var(--color-primary)', // #FF3D00
-    hover: 'rgba(255, 61, 0, 0.1)',
-    shadow: 'rgba(255, 61, 0, 0.2)'
+    hover: 'rgba(199, 143, 69, 0.1)',
+    shadow: 'rgba(199, 143, 69, 0.2)'
   },
   dynasties: {
     primary: '#D32F2F',
@@ -185,8 +175,8 @@ export const uiThemeColors = {
   },
   map: {
     primary: 'var(--color-secondary)', // #03A9F4
-    hover: 'rgba(3, 169, 244, 0.1)',
-    shadow: 'rgba(3, 169, 244, 0.2)'
+    hover: 'rgba(107, 135, 151, 0.1)',
+    shadow: 'rgba(107, 135, 151, 0.2)'
   },
   people: {
     primary: '#4CAF50',
