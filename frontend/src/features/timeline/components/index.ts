@@ -1,8 +1,8 @@
 // Dynasty components
 export { Dynasty3DWheel } from './dynasty';
 
-// Timeline components  
-export { D3Timeline } from './timeline';
+// Timeline components
+export { D3Timeline, EChartsTimeline } from './timeline';
 
 // General components
 export { EventCard } from './EventCard';

@@ -1,5 +1,5 @@
 import './TimelineList.css';
-import { Dynasty3DWheel, D3Timeline } from './components';
+import { Dynasty3DWheel, EChartsTimeline } from './components';
 import { Box, Paper } from '@mui/material';
 import { PageHeaderBadge, PagePanel } from '@/components/common';
 import { useDynastyStore } from '@/store';
@@ -86,7 +86,7 @@ export function TimelineList() {
             },
           }}
         >
-          <D3Timeline
+          <EChartsTimeline
             focusRange={focusRange}
             focusLabel={selectedDynasty?.name ?? null}
             onTimeRangeChange={handleTimeRangeChange}

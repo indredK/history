@@ -1,5 +1,6 @@
 // 主要组件导出
 export { D3Timeline } from './components/D3Timeline';
+export { EChartsTimeline } from './components/EChartsTimeline';
 export { TimelineChart } from './components/TimelineChart';
 export { EventDetailPanel } from './components/EventDetailPanel';
 
