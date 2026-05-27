@@ -114,7 +114,7 @@ export function DynastyCard({
               width: '200%',
               height: '200%',
               background:
-                'linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%)',
+                'linear-gradient(45deg, transparent 30%, rgba(241, 199, 132, 0.12) 50%, transparent 70%)',
               animation: isActive ? 'shimmer 3s ease-in-out infinite' : 'none',
               pointerEvents: 'none',
             }}

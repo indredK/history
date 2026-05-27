@@ -77,8 +77,8 @@ export function ResponsiveCard({
         // 应用毛玻璃效果
         ...glassEffectStyles,
         ...(isMobile && !glassEffect && {
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          boxShadow: 'var(--app-panel-shadow-sm)',
+          border: 'var(--app-panel-border)',
         }),
         ...sx,
       }}

@@ -8,9 +8,9 @@
   cursor: grab;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.1) 0%,
-    rgba(0, 0, 0, 0.05) 50%,
-    rgba(0, 0, 0, 0.1) 100%
+    rgba(var(--glass-surface-soft-rgb), 0.18) 0%,
+    rgba(var(--glass-surface-rgb), 0.08) 50%,
+    rgba(var(--glass-surface-soft-rgb), 0.18) 100%
   );
   border-radius: 16px;
 }
@@ -32,41 +32,41 @@
 }
 
 .dynasty-indicator {
-  background: rgba(0, 0, 0, 0.4);
-  color: white;
+  background: rgba(var(--glass-surface-soft-rgb), 0.72);
+  color: var(--color-text-primary);
   padding: 8px 20px;
   border-radius: 24px;
   font-size: 14px;
   font-weight: bold;
   backdrop-filter: blur(10px);
   box-shadow: 
-    0 4px 16px rgba(0, 0, 0, 0.4),
-    0 0 40px rgba(255, 215, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+    0 4px 16px rgba(0, 0, 0, 0.28),
+    0 0 40px rgba(199, 143, 69, 0.24);
+  border: 1px solid var(--theme-glass-border-heavy);
   animation: glow 2s ease-in-out infinite;
 }
 
 @keyframes glow {
   0%, 100% {
     box-shadow: 
-      0 4px 16px rgba(0, 0, 0, 0.4),
-      0 0 40px rgba(255, 215, 0, 0.3);
+      0 4px 16px rgba(0, 0, 0, 0.28),
+      0 0 40px rgba(199, 143, 69, 0.24);
   }
   50% {
     box-shadow: 
-      0 4px 16px rgba(0, 0, 0, 0.4),
-      0 0 60px rgba(255, 215, 0, 0.5);
+      0 4px 16px rgba(0, 0, 0, 0.28),
+      0 0 60px rgba(199, 143, 69, 0.36);
   }
 }
 
 .dynasty-hint {
-  background: rgba(0, 0, 0, 0.6);
-  color: rgba(255, 255, 255, 0.8);
+  background: rgba(var(--glass-surface-soft-rgb), 0.84);
+  color: var(--color-text-secondary);
   padding: 4px 12px;
   border-radius: 12px;
   font-size: 11px;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--theme-glass-border-light);
 }
 
 /* 加载动画 */

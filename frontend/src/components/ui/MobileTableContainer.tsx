@@ -129,13 +129,13 @@ export function MobileTableContainer({
           
           // 滚动阴影效果
           background: `
-            linear-gradient(90deg, white 30%, rgba(255,255,255,0)),
-            linear-gradient(90deg, rgba(255,255,255,0), white 70%),
+            linear-gradient(90deg, rgba(var(--glass-surface-rgb), 0.96) 30%, rgba(var(--glass-surface-rgb), 0)),
+            linear-gradient(90deg, rgba(var(--glass-surface-rgb), 0), rgba(var(--glass-surface-rgb), 0.96) 70%),
             linear-gradient(90deg, rgba(0,0,0,.2), rgba(0,0,0,0)),
             linear-gradient(270deg, rgba(0,0,0,.2), rgba(0,0,0,0))
           `,
           backgroundRepeat: 'no-repeat',
-          backgroundColor: 'white',
+          backgroundColor: 'rgba(var(--glass-surface-rgb), 0.96)',
           backgroundSize: '40px 100%, 40px 100%, 14px 100%, 14px 100%',
           backgroundPosition: '0 0, 100% 0, 0 0, 100% 0',
           backgroundAttachment: 'local, local, scroll, scroll',
@@ -156,8 +156,8 @@ export function MobileTableContainer({
               display: 'flex',
               alignItems: 'center',
               gap: 1,
-              background: 'rgba(0, 0, 0, 0.8)',
-              color: 'white',
+              background: 'rgba(var(--glass-surface-soft-rgb), 0.88)',
+              color: 'var(--color-text-primary)',
               padding: '8px 12px',
               borderRadius: '20px',
               fontSize: '0.75rem',
@@ -189,13 +189,13 @@ export function MobileTableContainer({
                 sx={{
                   width: 48,
                   height: 48,
-                  background: 'linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%)',
-                  color: 'white',
-                  boxShadow: '0 4px 20px rgba(255, 61, 0, 0.4)',
+                  background: 'var(--color-primary-gradient)',
+                  color: 'var(--color-text-inverse)',
+                  boxShadow: '0 4px 20px rgba(199, 143, 69, 0.3)',
                   '&:hover': {
-                    background: 'linear-gradient(135deg, #E63900 0%, #FF3D00 100%)',
+                    background: 'linear-gradient(135deg, #b6762b 0%, #f3d29b 100%)',
                     transform: 'translateY(-2px)',
-                    boxShadow: '0 6px 25px rgba(255, 61, 0, 0.5)',
+                    boxShadow: '0 6px 25px rgba(199, 143, 69, 0.4)',
                   },
                   transition: 'all 0.3s ease',
                 }}
@@ -215,8 +215,8 @@ export function MobileTableContainer({
             bottom: 0, // 回到正常位置
             left: 0,
             right: 0,
-            background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
-            color: 'white',
+            background: 'linear-gradient(to top, rgba(var(--glass-surface-soft-rgb), 0.92), transparent)',
+            color: 'var(--color-text-primary)',
             padding: '8px 12px',
             fontSize: '0.7rem',
             textAlign: 'center',

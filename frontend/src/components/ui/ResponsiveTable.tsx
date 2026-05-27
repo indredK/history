@@ -64,18 +64,18 @@ export function ResponsiveTable({
   const glassHeaderStyles = glassEffect ? {
     backdropFilter: `blur(${tableConfig.header.blur})`,
     WebkitBackdropFilter: `blur(${tableConfig.header.blur})`,
-    backgroundColor: `rgba(255, 61, 0, ${tableConfig.header.bgOpacity})`,
+    backgroundColor: `rgba(var(--glass-tint-rgb, 199, 143, 69), ${tableConfig.header.bgOpacity})`,
     borderBottom: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
   } : {
-    background: 'var(--color-primary-gradient, linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%))',
+    background: 'var(--color-primary-gradient)',
   };
 
   // 毛玻璃行样式
   const glassRowStyles = glassEffect ? {
-    backgroundColor: `rgba(255, 255, 255, ${tableConfig.row.bgOpacity})`,
+    backgroundColor: `rgba(var(--glass-surface-rgb), ${tableConfig.row.bgOpacity})`,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
     '&:hover': {
-      backgroundColor: `rgba(255, 255, 255, ${tableConfig.row.hoverOpacity})`,
+      backgroundColor: `rgba(var(--glass-surface-rgb), ${tableConfig.row.hoverOpacity})`,
     },
   } : {};
 
@@ -109,7 +109,7 @@ export function ResponsiveTable({
           fontWeight: 600,
           height: tableStyles.headerHeight,
           whiteSpace: 'nowrap',
-          color: 'white',
+          color: 'var(--color-text-inverse)',
           position: 'sticky',
           top: 0,
           zIndex: 100,
@@ -182,8 +182,8 @@ export function ResponsiveTableCell({
     backdropFilter: `blur(${tableConfig.container.blur})`,
     WebkitBackdropFilter: `blur(${tableConfig.container.blur})`,
     backgroundColor: component === 'th' 
-      ? `rgba(25, 118, 210, ${tableConfig.header.bgOpacity})`
-      : `rgba(30, 30, 30, ${tableConfig.container.bgOpacity})`,
+      ? `rgba(var(--glass-tint-rgb, 199, 143, 69), ${tableConfig.header.bgOpacity})`
+      : `rgba(var(--glass-surface-soft-rgb), ${tableConfig.container.bgOpacity})`,
     borderRight: `1px solid ${glassConfig.border.color}`,
     boxShadow: '2px 0 8px rgba(0,0,0,0.15)',
   } : {};
@@ -225,8 +225,8 @@ export function ResponsiveTableCell({
               backdropFilter: `blur(${tableConfig.container.blur})`,
               WebkitBackdropFilter: `blur(${tableConfig.container.blur})`,
               backgroundColor: component === 'th' 
-                ? `rgba(255, 61, 0, ${tableConfig.header.bgOpacity})`
-                : `rgba(30, 30, 30, ${tableConfig.container.bgOpacity})`,
+                ? `rgba(var(--glass-tint-rgb, 199, 143, 69), ${tableConfig.header.bgOpacity})`
+                : `rgba(var(--glass-surface-soft-rgb), ${tableConfig.container.bgOpacity})`,
               boxShadow: '2px 0 8px rgba(0,0,0,0.15)',
             } : {
               backgroundColor: component === 'th' 
@@ -276,7 +276,7 @@ export function GlassTableContainer({
   const glassStyles = glassEffect ? {
     backdropFilter: `blur(${tableConfig.container.blur})`,
     WebkitBackdropFilter: `blur(${tableConfig.container.blur})`,
-    backgroundColor: `rgba(30, 30, 30, ${tableConfig.container.bgOpacity})`,
+    backgroundColor: `rgba(var(--glass-surface-soft-rgb), ${tableConfig.container.bgOpacity})`,
     border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
     borderRadius: glassConfig.border.radius.lg,
     boxShadow: glassConfig.shadow.md,

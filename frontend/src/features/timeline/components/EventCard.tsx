@@ -8,6 +8,8 @@ type Props = {
 
 export function EventCard({ event, index }: Props) {
   const [isFav, setIsFav] = useState(false);
+  const panelBg = 'rgba(var(--glass-surface-rgb), 0.5)';
+  const panelBorder = '1px solid var(--theme-glass-border)';
 
   const handleShare = () => {
     const data = {
@@ -41,8 +43,9 @@ export function EventCard({ event, index }: Props) {
             style={{
               backdropFilter: 'blur(8px)',
               WebkitBackdropFilter: 'blur(8px)',
-              backgroundColor: isFav ? 'rgba(255, 61, 0, 0.8)' : 'rgba(255, 255, 255, 0.5)',
-              border: '1px solid rgba(255, 255, 255, 0.18)',
+              backgroundColor: isFav ? 'rgba(199, 143, 69, 0.78)' : panelBg,
+              color: isFav ? 'var(--color-text-inverse)' : 'var(--color-text-primary)',
+              border: isFav ? '1px solid rgba(199, 143, 69, 0.36)' : panelBorder,
               borderRadius: 'var(--glass-radius-md, 12px)',
               transition: 'all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))'
             }}
@@ -55,8 +58,9 @@ export function EventCard({ event, index }: Props) {
             style={{
               backdropFilter: 'blur(8px)',
               WebkitBackdropFilter: 'blur(8px)',
-              backgroundColor: 'rgba(255, 255, 255, 0.4)',
-              border: '1px solid rgba(255, 255, 255, 0.18)',
+              backgroundColor: 'rgba(var(--glass-surface-rgb), 0.4)',
+              color: 'var(--color-text-primary)',
+              border: panelBorder,
               borderRadius: 'var(--glass-radius-md, 12px)',
               transition: 'all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))'
             }}
@@ -69,8 +73,9 @@ export function EventCard({ event, index }: Props) {
               style={{
                 backdropFilter: 'blur(6px)',
                 WebkitBackdropFilter: 'blur(6px)',
-                backgroundColor: 'rgba(255, 61, 0, 0.1)',
-                border: '1px solid rgba(255, 61, 0, 0.3)',
+                backgroundColor: 'rgba(199, 143, 69, 0.12)',
+                color: 'var(--color-text-primary)',
+                border: '1px solid rgba(199, 143, 69, 0.28)',
                 borderRadius: 'var(--glass-radius-lg, 16px)'
               }}
             >
@@ -78,11 +83,11 @@ export function EventCard({ event, index }: Props) {
             </summary>
             <div style={{ 
               padding: 8,
-              background: 'rgba(255, 255, 255, 0.5)',
+              background: panelBg,
               backdropFilter: 'blur(8px)',
               WebkitBackdropFilter: 'blur(8px)',
               borderRadius: 'var(--glass-radius-lg, 16px)',
-              border: '1px solid rgba(255, 255, 255, 0.18)',
+              border: panelBorder,
               marginTop: 8
             }}>
               {event.startDate && <div>日期：{event.startDate}</div>}
@@ -94,7 +99,7 @@ export function EventCard({ event, index }: Props) {
                     maxWidth: '100%', 
                     borderRadius: 'var(--glass-radius-lg, 16px)', 
                     marginTop: 8,
-                    border: '1px solid rgba(255, 255, 255, 0.2)'
+                    border: '1px solid var(--theme-glass-border-heavy)'
                   }}
                 />
               )}
