@@ -4,13 +4,12 @@
  */
 
 import { useMemo } from 'react';
-import { Box, Typography, Button } from '@mui/material';
-import RefreshIcon from '@mui/icons-material/Refresh';
 
 import { useScholarStore } from '@/store';
 import { getScholars } from '@/services/person/scholars';
 import type { Scholar } from '@/services/person/scholars/types';
 import { useCollectionResource } from '@/hooks';
+import { StateView } from '@/components/ui';
 
 import { ScholarFilter, ScholarGrid, ScholarDetailModal } from '@/features/culture/components';
 
@@ -87,28 +86,13 @@ function ScholarsContent() {
   // 错误状态
   if (scholarError) {
     return (
-      <Box sx={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        minHeight: '200px',
-        color: 'var(--color-text-secondary)'
-      }}>
-        <Typography variant="h6" sx={{ mb: 2 }}>
-          加载失败
-        </Typography>
-        <Typography variant="body2" sx={{ mb: 2 }}>
-          {scholarError.message || '请检查网络连接后重试'}
-        </Typography>
-        <Button
-          variant="outlined"
-          startIcon={<RefreshIcon />}
-          onClick={() => loadScholars()}
-        >
-          重试
-        </Button>
-      </Box>
+      <StateView
+        mode="error"
+        title="加载失败"
+        description={scholarError.message || '请检查网络连接后重试'}
+        actionLabel="重试"
+        onAction={loadScholars}
+      />
     );
   }
 

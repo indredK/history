@@ -8,14 +8,13 @@
  * Requirements: 2.1, 2.2, 2.3, 3.1, 4.1, 5.1, 5.2, 5.3
  */
 
-import { Box, Typography, Button } from '@mui/material';
-import RefreshIcon from '@mui/icons-material/Refresh';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 
 import { useSchoolStore } from '@/store';
 import { getSchools } from '@/services/school';
 import type { PhilosophicalSchool } from '@/services/school/types';
 import { useCollectionResource } from '@/hooks';
+import { StateView } from '@/components/ui';
 
 import { FixedTabsPage, type FixedTabConfig } from '@/components/common';
 import {
@@ -69,28 +68,13 @@ function CulturePage() {
     // 错误状态 - Requirements 5.2
     if (schoolsError) {
       return (
-        <Box sx={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'center', 
-          justifyContent: 'center',
-          minHeight: '200px',
-          color: 'var(--color-text-secondary)'
-        }}>
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            加载失败
-          </Typography>
-          <Typography variant="body2" sx={{ mb: 2 }}>
-            {schoolsError.message || '请检查网络连接后重试'}
-          </Typography>
-          <Button
-            variant="outlined"
-            startIcon={<RefreshIcon />}
-            onClick={() => loadSchools()}
-          >
-            重试
-          </Button>
-        </Box>
+        <StateView
+          mode="error"
+          title="加载失败"
+          description={schoolsError.message || '请检查网络连接后重试'}
+          actionLabel="重试"
+          onAction={loadSchools}
+        />
       );
     }
 

@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
-import { Box, Button, Typography } from '@mui/material';
-import RefreshIcon from '@mui/icons-material/Refresh';
+import { Box } from '@mui/material';
 
 import { PeopleFilter } from './PeopleFilter';
+import { StateView } from '@/components/ui';
 
 interface FilterOption {
   value: string;
@@ -55,26 +55,13 @@ export function PeopleCollectionContent({
 }: PeopleCollectionContentProps) {
   if (error) {
     return (
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '200px',
-          color: 'var(--color-text-secondary)',
-        }}
-      >
-        <Typography variant="h6" sx={{ mb: 2 }}>
-          加载失败
-        </Typography>
-        <Typography variant="body2" sx={{ mb: 2 }}>
-          {error.message || '请检查网络连接后重试'}
-        </Typography>
-        <Button variant="outlined" startIcon={<RefreshIcon />} onClick={onRetry}>
-          重试
-        </Button>
-      </Box>
+      <StateView
+        mode="error"
+        title="加载失败"
+        description={error.message || '请检查网络连接后重试'}
+        actionLabel="重试"
+        onAction={onRetry}
+      />
     );
   }
 

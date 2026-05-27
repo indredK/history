@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { Box } from '@mui/material';
 import * as echarts from 'echarts';
 import { mapDataService } from '@/services/map/mapDataService';
 import type { ProvinceData } from '@/services/map/types';
+import { StateView } from '@/components/ui';
 
 interface EChartsMapProps {
   width?: number | string;
@@ -183,67 +185,29 @@ export function EChartsMap({
       
       {/* 加载状态覆盖层 */}
       {loading && (
-        <div style={{ 
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center',
-          background: 'var(--color-bg-tertiary, #f5f5f5)'
-        }}>
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ 
-              width: 40, 
-              height: 40, 
-              border: '4px solid var(--color-border-light, #f3f3f3)',
-              borderTop: '4px solid var(--color-primary, #FF3D00)',
-              borderRadius: '50%',
-              animation: 'spin 1s linear infinite',
-              margin: '0 auto 10px'
-            }} />
-            <div style={{ color: 'var(--color-text-primary)' }}>加载地图中...</div>
-          </div>
-          <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
-        </div>
+        <Box sx={{ position: 'absolute', inset: 0, background: 'var(--color-bg-tertiary, #f5f5f5)' }}>
+          <StateView mode="loading" title="加载地图中..." />
+        </Box>
       )}
       
       {/* 错误状态 */}
       {error && (
-        <div style={{ 
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center',
-          background: 'var(--color-bg-tertiary, #ffebee)',
-          color: 'var(--color-error, #d32f2f)'
-        }}>
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: 24, marginBottom: 10 }}>⚠️</div>
-            <div>地图加载失败</div>
-            <div style={{ fontSize: 12, marginTop: 5 }}>{error}</div>
-            <button 
-              onClick={() => setReloadKey((current) => current + 1)}
-              style={{ 
-                marginTop: 10, 
-                padding: '8px 16px', 
-                background: 'var(--color-primary, #FF3D00)', 
-                color: 'var(--color-text-inverse, #fff)', 
-                border: 'none', 
-                borderRadius: 4, 
-                cursor: 'pointer' 
-              }}
-            >
-              重试
-            </button>
-          </div>
-        </div>
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            background: 'var(--color-bg-tertiary, #ffebee)',
+            color: 'var(--color-error, #d32f2f)',
+          }}
+        >
+          <StateView
+            mode="error"
+            title="地图加载失败"
+            description={error}
+            actionLabel="重试"
+            onAction={() => setReloadKey((current) => current + 1)}
+          />
+        </Box>
       )}
     </div>
   );
