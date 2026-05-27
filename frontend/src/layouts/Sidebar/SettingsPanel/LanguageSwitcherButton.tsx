@@ -29,7 +29,7 @@ export function LanguageSwitcherButton({ collapsed }: LanguageSwitcherButtonProp
   };
   
   // 折叠状态下使用更小的按钮尺寸
-  const buttonSize = collapsed ? 36 : 44;
+  const buttonSize = collapsed ? 32 : 40;
   
   // 毛玻璃按钮样式
   const buttonStyle = {
@@ -57,7 +57,7 @@ export function LanguageSwitcherButton({ collapsed }: LanguageSwitcherButtonProp
           sx={buttonStyle}
           aria-label={label}
         >
-          <LanguageIcon fontSize={collapsed ? 'small' : 'medium'} />
+          <LanguageIcon fontSize="small" />
         </IconButton>
       </Tooltip>
       <Snackbar

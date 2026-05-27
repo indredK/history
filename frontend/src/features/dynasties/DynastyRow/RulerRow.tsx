@@ -7,15 +7,10 @@
 
 import { memo } from 'react';
 import {
-  Box,
-  IconButton,
-  Link,
   TableCell,
   TableRow,
-  Tooltip,
   Typography,
 } from '@mui/material';
-import MapIcon from '@mui/icons-material/Map';
 import { tableStyles } from '../config';
 import type { ResponsiveFlags, Ruler, YearName } from './types';
 
@@ -179,79 +174,6 @@ export const RulerRow = memo(
           {yearName?.startYear || ruler.startYear || muted}
         </span>
       </TableCell>
-
-      {/* 大事记列 */}
-      {isFirstYearName && (
-        <TableCell
-          sx={{
-            ...tableStyles.bodyCell,
-            maxWidth: isMobile ? '200px' : '400px',
-            verticalAlign: 'top',
-            ...(isMobile && {
-              fontSize: isSmallMobile ? '0.6rem' : '0.7rem',
-              padding: isSmallMobile ? '4px 3px' : '6px 8px',
-              lineHeight: 1.2,
-            }),
-          }}
-          rowSpan={rowSpan}
-        >
-          {ruler.events.length > 0 ? (
-            <Box>
-              {ruler.events.map((event, eventIndex) => (
-                <Box
-                  key={eventIndex}
-                  sx={{
-                    ...tableStyles.eventContainer,
-                    ...(isMobile && { marginBottom: '4px', gap: '4px' }),
-                  }}
-                >
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      ...tableStyles.eventDescription,
-                      fontSize: 'inherit',
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    • {event.description}
-                  </Typography>
-                  {event.mapUrl && (
-                    <Tooltip title="查看历史地图" arrow>
-                      <IconButton
-                        size="small"
-                        component={Link}
-                        href={event.mapUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        sx={{
-                          ...tableStyles.mapIconButton,
-                          ...(isMobile && {
-                            width: isSmallMobile ? 20 : 24,
-                            height: isSmallMobile ? 20 : 24,
-                            padding: '2px',
-                          }),
-                        }}
-                      >
-                        <MapIcon
-                          sx={{
-                            fontSize: isMobile
-                              ? isSmallMobile
-                                ? '0.7rem'
-                                : '0.8rem'
-                              : '0.9rem',
-                          }}
-                        />
-                      </IconButton>
-                    </Tooltip>
-                  )}
-                </Box>
-              ))}
-            </Box>
-          ) : (
-            muted
-          )}
-        </TableCell>
-      )}
     </TableRow>
   )
 );

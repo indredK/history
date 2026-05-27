@@ -26,7 +26,7 @@ export function ThemeToggleButton({ collapsed }: ThemeToggleButtonProps) {
   const label = isDark ? '切换到白天模式' : '切换到暗黑模式';
   
   // 折叠状态下使用更小的按钮尺寸
-  const buttonSize = collapsed ? 36 : 44;
+  const buttonSize = collapsed ? 32 : 40;
   
   // 毛玻璃按钮样式
   const buttonStyle = {
@@ -53,7 +53,7 @@ export function ThemeToggleButton({ collapsed }: ThemeToggleButtonProps) {
         sx={buttonStyle}
         aria-label={label}
       >
-        {isDark ? <LightModeIcon fontSize={collapsed ? 'small' : 'medium'} /> : <DarkModeIcon fontSize={collapsed ? 'small' : 'medium'} />}
+        {isDark ? <LightModeIcon fontSize="small" /> : <DarkModeIcon fontSize="small" />}
       </IconButton>
     </Tooltip>
   );

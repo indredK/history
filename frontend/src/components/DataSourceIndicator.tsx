@@ -1,21 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { Chip, Box, Tooltip, IconButton, Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography, Alert } from '@mui/material';
-import { Info as InfoIcon, Refresh as RefreshIcon } from '@mui/icons-material';
+import { Box, Tooltip, IconButton, Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography, Alert } from '@mui/material';
+import { Refresh as RefreshIcon, Science as ScienceIcon, Cloud as CloudIcon } from '@mui/icons-material';
 import { getDataSourceInfo, DATA_SOURCE_MODE } from '@/config/dataSource';
 import { testApiConnection, testAllApiEndpoints, testFrontendProxy } from '@/utils/apiTest';
-import { ApiStatusIndicator } from './ApiStatusIndicator';
+import { useResponsive } from '@/hooks';
+import { getGlassConfig } from '@/config/glassConfig';
+
+interface DataSourceIndicatorProps {
+  /** 是否为折叠状态 */
+  collapsed?: boolean;
+}
 
 /**
  * 数据源状态指示器组件
  * 显示当前使用的数据源，并提供测试功能
  */
-export const DataSourceIndicator: React.FC = () => {
+export const DataSourceIndicator: React.FC<DataSourceIndicatorProps> = ({ collapsed = false }) => {
   const [open, setOpen] = useState(false);
   const [testing, setTesting] = useState(false);
   const [testResults, setTestResults] = useState<any>(null);
 
+  const { screenWidth } = useResponsive();
+  const glassConfig = getGlassConfig(screenWidth);
+
   const dataSourceInfo = getDataSourceInfo();
   const isMockMode = dataSourceInfo.mode === 'mock';
+
+  // 与设置面板其他按钮保持一致的尺寸
+  const buttonSize = collapsed ? 32 : 40;
+
+  // 毛玻璃按钮样式
+  const buttonStyle = {
+    backdropFilter: `blur(${glassConfig.blur.light})`,
+    WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
+    background: 'var(--theme-glass-bg-light)',
+    border: '1px solid var(--theme-glass-border)',
+    borderRadius: glassConfig.border.radius.md,
+    color: 'var(--theme-icon-primary)',
+    width: buttonSize,
+    height: buttonSize,
+    minWidth: buttonSize,
+    transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
+    '&:hover': {
+      background: 'var(--theme-glass-bg)',
+      boxShadow: glassConfig.shadow.glow,
+    },
+  };
+
+  const label = isMockMode ? '模拟数据' : '真实API';
 
   /**
    * 关闭弹窗时同时清理本次测试结果与 testing 标志,
@@ -95,35 +127,15 @@ export const DataSourceIndicator: React.FC = () => {
   
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-        <Chip
-          label={isMockMode ? '🎭 模拟数据' : '🌐 真实API'}
-          color={isMockMode ? 'warning' : 'success'}
-          variant="outlined"
-          size="small"
-        />
-        
-        {/* API状态指示器（仅在API模式下显示） */}
-        {!isMockMode && <ApiStatusIndicator />}
-        
-        <Tooltip title="查看数据源详情">
-          <IconButton size="small" onClick={() => setOpen(true)}>
-            <InfoIcon fontSize="small" />
-          </IconButton>
-        </Tooltip>
-        
-        {!isMockMode && (
-          <Tooltip title="测试API连接">
-            <IconButton 
-              size="small" 
-              onClick={handleTestConnection}
-              disabled={testing}
-            >
-              <RefreshIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
-        )}
-      </Box>
+      <Tooltip title={`数据源：${label}（点击查看详情）`} placement={collapsed ? 'right' : 'top'}>
+        <IconButton
+          onClick={() => setOpen(true)}
+          sx={buttonStyle}
+          aria-label={`数据源：${label}`}
+        >
+          {isMockMode ? <ScienceIcon fontSize="small" /> : <CloudIcon fontSize="small" />}
+        </IconButton>
+      </Tooltip>
       
       <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
         <DialogTitle>

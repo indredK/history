@@ -98,17 +98,8 @@ export const columns: ColumnConfig[] = [
     minWidth: '80px',
     align: 'center',
     priority: 'high',
-    responsive: true
-  },
-  { 
-    key: 'events', 
-    label: '大事记/歷史地圖', 
-    mobileLabel: '大事记',
-    minWidth: '200px', 
-    align: 'center', 
-    isLast: true,
-    priority: 'medium',
-    responsive: true
+    responsive: true,
+    isLast: true
   }
 ];
 

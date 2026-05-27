@@ -15,9 +15,9 @@ interface DynastyHeaderRowProps extends ResponsiveFlags {
 
 /** 标题行右侧占用的列数 */
 function getColSpan(isMobile?: boolean, isSmallMobile?: boolean): number {
-  if (isSmallMobile) return 4; // 朝代、姓名、纪年、大事记
-  if (isMobile) return 5; // 朝代、名号、姓名、纪年、大事记
-  return 8; // 桌面端全部列
+  if (isSmallMobile) return 2; // 朝代、姓名、纪年
+  if (isMobile) return 4; // 朝代、名号、姓名、纪年
+  return 7; // 桌面端全部列
 }
 
 export function DynastyHeaderRow({

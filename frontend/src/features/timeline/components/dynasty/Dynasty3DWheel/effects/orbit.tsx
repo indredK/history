@@ -10,13 +10,32 @@ import { useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { DynastyCard } from '../shared/DynastyCard';
+import { getWrappedOffset } from '../shared/carouselMath';
 import type { DynastyEffect, EffectLayoutProps, EffectParticlesProps } from './types';
 
 const TRAIL_PARTICLES = 220;
-const RADIUS_RATIO = 0.32; // viewport 宽度的 32% 作为环半径
-const RADIUS_MIN = 2.4;
-const RADIUS_MAX = 6.5;
+const RADIUS_RATIO = 0.4; // viewport 宽度的 40% 作为环半径
+const RADIUS_MIN = 3.0;
+const RADIUS_MAX = 8.0;
 const Y_LIFT = 0.4;
+
+// 只显示前方一段弧内的卡片,其余淡出隐藏,避免后半环挤成一团
+const FRONT_VISIBLE_ANGLE = (110 * Math.PI) / 180; // 前方 ±110° 可见
+const FRONT_FADE_ANGLE = (70 * Math.PI) / 180; // 70° 内不衰减,之后渐隐
+
+// 依据离正前方的角距离计算缩放/可见性
+function frontFactor(angleFromFront: number): { scaleHint: number; visible: boolean } {
+  const a = Math.abs(angleFromFront);
+  if (a >= FRONT_VISIBLE_ANGLE) return { scaleHint: 0, visible: false };
+  if (a <= FRONT_FADE_ANGLE) {
+    // 0° → 1,70° → ~0.62 线性收缩,正前方最大
+    const t = a / FRONT_FADE_ANGLE;
+    return { scaleHint: 1 - t * 0.38, visible: true };
+  }
+  // 70°~110° 区间内从 0.62 衰减到 0
+  const t = (a - FRONT_FADE_ANGLE) / (FRONT_VISIBLE_ANGLE - FRONT_FADE_ANGLE);
+  return { scaleHint: 0.62 * (1 - t), visible: true };
+}
 
 function radiusForViewport(width: number): number {
   return THREE.MathUtils.clamp(width * RADIUS_RATIO, RADIUS_MIN, RADIUS_MAX);
@@ -47,11 +66,11 @@ function OrbitLayout({ dynasties, activeIndex, onCardClick }: EffectLayoutProps)
   }, [radius]);
 
   // 每张卡固定在自己的 baseAngle 上,group 整体旋转把 active 转到 angle=0(正前)
+  const step = useMemo(() => (total === 0 ? 0 : (Math.PI * 2) / total), [total]);
   const baseAngles = useMemo(() => {
     if (total === 0) return [];
-    const step = (Math.PI * 2) / total;
     return dynasties.map((_, i) => i * step);
-  }, [dynasties, total]);
+  }, [dynasties, total, step]);
 
   useFrame((_, delta) => {
     if (!groupRef.current || total === 0) return;
@@ -78,6 +97,11 @@ function OrbitLayout({ dynasties, activeIndex, onCardClick }: EffectLayoutProps)
         const z = Math.cos(angle) * radius;
         const isActive = index === activeIndex;
 
+        // 该卡相对正前方的角距离(环形最短路径),用于前方淡出
+        const offset = getWrappedOffset(index, activeIndex, total);
+        const angleFromFront = offset * step;
+        const { scaleHint, visible } = frontFactor(angleFromFront);
+
         return (
           <group
             key={dynasty.id}
@@ -89,8 +113,8 @@ function OrbitLayout({ dynasties, activeIndex, onCardClick }: EffectLayoutProps)
               position={[0, 0, 0]}
               faceCamera={false}
               rotationY={0}
-              scaleHint={isActive ? 1 : 0.7}
-              isVisible
+              scaleHint={isActive ? 1 : scaleHint}
+              isVisible={visible || isActive}
               isActive={isActive}
               onClick={() => onCardClick(index)}
             />

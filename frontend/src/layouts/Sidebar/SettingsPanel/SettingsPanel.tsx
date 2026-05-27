@@ -9,6 +9,7 @@ import { Box, Stack } from '@mui/material';
 import { ThemeToggleButton } from './ThemeToggleButton';
 import { LanguageSwitcherButton } from './LanguageSwitcherButton';
 import { StyleSwitcherButton } from './StyleSwitcherButton';
+import { DataSourceIndicator } from '@/components/DataSourceIndicator';
 import { useResponsive } from '@/hooks';
 import { getGlassConfig } from '@/config/glassConfig';
 
@@ -43,6 +44,7 @@ export function SettingsPanel({ collapsed }: SettingsPanelProps) {
         <ThemeToggleButton collapsed={collapsed} />
         <StyleSwitcherButton collapsed={collapsed} />
         <LanguageSwitcherButton collapsed={collapsed} />
+        <DataSourceIndicator collapsed={collapsed} />
       </Stack>
     </Box>
   );

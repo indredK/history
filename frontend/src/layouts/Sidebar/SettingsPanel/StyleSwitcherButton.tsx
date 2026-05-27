@@ -28,7 +28,7 @@ export function StyleSwitcherButton({ collapsed }: StyleSwitcherButtonProps) {
   const label = isGlass ? '切换到经典样式' : '切换到毛玻璃样式';
   
   // 折叠状态下使用更小的按钮尺寸
-  const buttonSize = collapsed ? 36 : 44;
+  const buttonSize = collapsed ? 32 : 40;
   
   // 按钮样式 - 根据当前样式模式调整
   const buttonStyle = {
@@ -68,9 +68,9 @@ export function StyleSwitcherButton({ collapsed }: StyleSwitcherButtonProps) {
         aria-label={label}
       >
         {isGlass ? (
-          <BlurOnIcon fontSize={collapsed ? 'small' : 'medium'} />
+          <BlurOnIcon fontSize="small" />
         ) : (
-          <BlurOffIcon fontSize={collapsed ? 'small' : 'medium'} />
+          <BlurOffIcon fontSize="small" />
         )}
       </IconButton>
     </Tooltip>

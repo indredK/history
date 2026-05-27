@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { PortraitSidebar } from '@/components/ui/PortraitSidebar';
 import { Footer } from './Footer';
-import { DataSourceIndicator } from '@/components/DataSourceIndicator';
 import { useThemeStore, useStyleStore } from '@/store';
 import { useSidebar, useResponsive, useOrientation } from '@/hooks';
 import type { RouteConfig } from '@/router/routes';
@@ -90,20 +89,6 @@ export function AppLayout({ routes }: AppLayoutProps) {
       position: 'relative', // 添加相对定位
       width: '100%',
     }} className="app">
-      {/* 数据源指示器 - 固定在右上角 */}
-      <Box sx={{
-        position: 'fixed',
-        top: 16,
-        right: 16,
-        zIndex: 1400,
-        ...(isMobile && {
-          top: 8,
-          right: 8,
-        })
-      }}>
-        <DataSourceIndicator />
-      </Box>
-      
       {/* 主内容区域 */}
       <Box sx={{ 
         display: 'flex', 
