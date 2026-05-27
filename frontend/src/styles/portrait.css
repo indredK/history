@@ -33,9 +33,9 @@
     /* 毛玻璃效果 */
     backdrop-filter: blur(var(--glass-nav-blur, 12px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-nav-blur, 12px)) !important;
-    background: linear-gradient(135deg, rgba(18, 18, 18, var(--glass-nav-bg-opacity, 0.8)) 0%, rgba(30, 30, 30, var(--glass-nav-bg-opacity, 0.8)) 100%) !important;
-    border: var(--glass-border-width, 0.5px) solid rgba(255, 61, 0, 0.2) !important;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3), var(--glass-nav-active-glow, 0 0 10px rgba(255, 255, 255, 0.15)) !important;
+    background: linear-gradient(135deg, rgba(var(--glass-surface-soft-rgb), var(--glass-nav-bg-opacity, 0.8)) 0%, rgba(var(--glass-surface-rgb), var(--glass-nav-bg-opacity, 0.8)) 100%) !important;
+    border: var(--glass-border-width, 0.5px) solid var(--theme-glass-border-heavy) !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3), var(--glass-nav-active-glow, 0 0 10px rgba(199, 143, 69, 0.18)) !important;
     z-index: auto !important;
     margin: 0 !important;
   }
@@ -73,7 +73,7 @@
     border-radius: var(--glass-radius-md, 10px) !important;
     transition: all var(--glass-duration-normal, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) !important;
     text-decoration: none !important;
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: var(--color-text-secondary) !important;
     /* 毛玻璃效果 */
     backdrop-filter: blur(0px) !important;
     -webkit-backdrop-filter: blur(0px) !important;
@@ -84,21 +84,21 @@
   .nav-item:hover {
     backdrop-filter: blur(var(--glass-btn-secondary-blur, 6px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-btn-secondary-blur, 6px)) !important;
-    background: linear-gradient(135deg, rgba(255, 61, 0, 0.6) 0%, rgba(255, 111, 61, 0.6) 100%) !important;
-    color: white !important;
+    background: linear-gradient(135deg, rgba(199, 143, 69, 0.66) 0%, rgba(241, 199, 132, 0.56) 100%) !important;
+    color: var(--color-text-inverse) !important;
     transform: translateY(-2px) !important;
-    box-shadow: 0 4px 15px rgba(255, 61, 0, 0.4), var(--glass-shadow-glow, 0 0 12px rgba(255, 255, 255, 0.08)) !important;
+    box-shadow: 0 4px 15px rgba(199, 143, 69, 0.32), var(--glass-shadow-glow, 0 0 12px rgba(199, 143, 69, 0.18)) !important;
   }
   
   /* 导航项目活动状态 - 增强毛玻璃效果 */
   .nav-item.active {
     backdrop-filter: blur(var(--glass-btn-primary-blur, 8px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur, 8px)) !important;
-    background: linear-gradient(135deg, rgba(255, 61, 0, 0.85) 0%, rgba(255, 111, 61, 0.85) 100%) !important;
-    color: white !important;
+    background: linear-gradient(135deg, rgba(199, 143, 69, 0.86) 0%, rgba(241, 199, 132, 0.82) 100%) !important;
+    color: var(--color-text-inverse) !important;
     transform: translateY(-2px) !important;
-    box-shadow: 0 4px 15px rgba(255, 61, 0, 0.5), var(--glass-nav-active-glow, 0 0 10px rgba(255, 255, 255, 0.15)) !important;
-    border: var(--glass-border-width, 0.5px) solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 15px rgba(199, 143, 69, 0.4), var(--glass-nav-active-glow, 0 0 10px rgba(199, 143, 69, 0.2)) !important;
+    border: var(--glass-border-width, 0.5px) solid var(--theme-glass-border-heavy) !important;
   }
   
   .nav-item .nav-icon {
@@ -130,7 +130,7 @@
     /* 毛玻璃效果 */
     backdrop-filter: blur(var(--glass-table-container-blur, 8px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-table-container-blur, 8px)) !important;
-    background-color: rgba(30, 30, 30, var(--glass-table-container-bg-opacity, 0.6)) !important;
+    background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-container-bg-opacity, 0.6)) !important;
     border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15)) !important;
     border-radius: var(--glass-radius-md, 10px) !important;
   }
@@ -167,7 +167,7 @@
     font-size: 0.65rem !important;
     line-height: 1.2 !important;
     /* 毛玻璃行背景 */
-    background-color: rgba(30, 30, 30, var(--glass-table-row-bg-opacity, 0.4)) !important;
+    background-color: rgba(var(--glass-surface-rgb), var(--glass-table-row-bg-opacity, 0.4)) !important;
     transition: background-color var(--glass-duration-hover, 100ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) !important;
   }
   
@@ -178,7 +178,7 @@
     /* 毛玻璃表头 */
     backdrop-filter: blur(var(--glass-table-header-blur, 10px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-table-header-blur, 10px)) !important;
-    background-color: rgba(30, 30, 30, var(--glass-table-header-bg-opacity, 0.75)) !important;
+    background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-header-bg-opacity, 0.75)) !important;
   }
   
   /* 朝代标题行优化 */
@@ -199,7 +199,7 @@
     padding: 2px !important;
     backdrop-filter: blur(var(--glass-btn-icon-blur, 6px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-btn-icon-blur, 6px)) !important;
-    background-color: rgba(30, 30, 30, var(--glass-btn-icon-bg-opacity, 0.5)) !important;
+    background-color: rgba(var(--glass-surface-rgb), var(--glass-btn-icon-bg-opacity, 0.5)) !important;
     border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15)) !important;
     border-radius: var(--glass-radius-full, 9999px) !important;
   }
@@ -233,7 +233,7 @@
     /* 小屏毛玻璃优化 - 减少模糊以提升性能 */
     backdrop-filter: blur(8px) !important;
     -webkit-backdrop-filter: blur(8px) !important;
-    background: linear-gradient(135deg, rgba(18, 18, 18, 0.85) 0%, rgba(30, 30, 30, 0.85) 100%) !important;
+    background: linear-gradient(135deg, rgba(var(--glass-surface-soft-rgb), 0.85) 0%, rgba(var(--glass-surface-rgb), 0.85) 100%) !important;
   }
   
   .nav-item {
@@ -285,7 +285,7 @@
     /* 平板毛玻璃效果 - 可以使用更强的模糊 */
     backdrop-filter: blur(var(--glass-nav-blur, 12px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-nav-blur, 12px)) !important;
-    background: linear-gradient(135deg, rgba(18, 18, 18, var(--glass-nav-bg-opacity, 0.8)) 0%, rgba(30, 30, 30, var(--glass-nav-bg-opacity, 0.8)) 100%) !important;
+    background: linear-gradient(135deg, rgba(var(--glass-surface-soft-rgb), var(--glass-nav-bg-opacity, 0.8)) 0%, rgba(var(--glass-surface-rgb), var(--glass-nav-bg-opacity, 0.8)) 100%) !important;
     border-radius: var(--glass-radius-xl, 20px) !important;
   }
   
@@ -301,14 +301,14 @@
   .nav-item:hover {
     backdrop-filter: blur(8px) !important;
     -webkit-backdrop-filter: blur(8px) !important;
-    background: linear-gradient(135deg, rgba(255, 61, 0, 0.6) 0%, rgba(255, 111, 61, 0.6) 100%) !important;
+    background: linear-gradient(135deg, rgba(199, 143, 69, 0.66) 0%, rgba(241, 199, 132, 0.56) 100%) !important;
   }
   
   .nav-item.active {
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
-    background: linear-gradient(135deg, rgba(255, 61, 0, 0.85) 0%, rgba(255, 111, 61, 0.85) 100%) !important;
-    box-shadow: 0 4px 20px rgba(255, 61, 0, 0.5), var(--glass-nav-active-glow, 0 0 10px rgba(255, 255, 255, 0.15)) !important;
+    background: linear-gradient(135deg, rgba(199, 143, 69, 0.86) 0%, rgba(241, 199, 132, 0.82) 100%) !important;
+    box-shadow: 0 4px 20px rgba(199, 143, 69, 0.38), var(--glass-nav-active-glow, 0 0 10px rgba(199, 143, 69, 0.2)) !important;
   }
   
   .nav-item .nav-icon {
@@ -331,7 +331,7 @@
     /* 平板毛玻璃效果 */
     backdrop-filter: blur(var(--glass-table-container-blur, 8px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-table-container-blur, 8px)) !important;
-    background-color: rgba(30, 30, 30, var(--glass-table-container-bg-opacity, 0.6)) !important;
+    background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-container-bg-opacity, 0.6)) !important;
     border-radius: var(--glass-radius-lg, 14px) !important;
   }
   
@@ -342,7 +342,7 @@
   .MuiTableCell-root {
     padding: 6px 8px !important;
     font-size: 0.75rem !important;
-    background-color: rgba(30, 30, 30, var(--glass-table-row-bg-opacity, 0.4)) !important;
+    background-color: rgba(var(--glass-surface-rgb), var(--glass-table-row-bg-opacity, 0.4)) !important;
   }
   
   .MuiTableHead-root .MuiTableCell-root {
@@ -350,7 +350,7 @@
     font-size: 0.7rem !important;
     backdrop-filter: blur(var(--glass-table-header-blur, 10px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-table-header-blur, 10px)) !important;
-    background-color: rgba(30, 30, 30, var(--glass-table-header-bg-opacity, 0.75)) !important;
+    background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-header-bg-opacity, 0.75)) !important;
   }
   
   .scroll-indicator {

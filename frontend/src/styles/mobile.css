@@ -253,7 +253,7 @@
     max-width: 80px;
     backdrop-filter: blur(var(--glass-table-header-blur, 10px));
     -webkit-backdrop-filter: blur(var(--glass-table-header-blur, 10px));
-    background-color: rgba(30, 30, 30, var(--glass-table-header-bg-opacity, 0.75));
+    background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-header-bg-opacity, 0.75));
   }
   
   /* 时期列更窄 */
@@ -265,7 +265,7 @@
   .MuiPaper-root {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    background-color: rgba(30, 30, 30, 0.75);
+    background-color: rgba(var(--glass-surface-soft-rgb), 0.75);
   }
   
   /* 小屏按钮毛玻璃优化 */
@@ -316,31 +316,31 @@
   
   /* 毛玻璃触摸反馈效果 */
   .MuiTableRow-root:active {
-    background-color: rgba(255, 61, 0, var(--mobile-touch-feedback-opacity, 0.15));
+    background-color: rgba(var(--glass-tint-rgb), var(--mobile-touch-feedback-opacity, 0.15));
     transition: background-color var(--mobile-touch-feedback-duration, 100ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
   }
   
   .MuiTableRow-root:active .MuiTableCell-root {
-    background-color: rgba(255, 61, 0, var(--mobile-touch-feedback-opacity, 0.15));
+    background-color: rgba(var(--glass-tint-rgb), var(--mobile-touch-feedback-opacity, 0.15));
   }
   
   /* 按钮触摸反馈 */
   .MuiButton-root:active {
-    background-color: rgba(255, 61, 0, 0.3);
+    background-color: rgba(var(--glass-tint-rgb), 0.24);
     transform: scale(0.96);
     box-shadow: var(--glass-shadow-sm, 0 1px 4px rgba(0, 0, 0, 0.08));
   }
   
   /* 图标按钮触摸反馈 */
   .MuiIconButton-root:active {
-    background-color: rgba(255, 61, 0, 0.25);
+    background-color: rgba(var(--glass-tint-rgb), 0.22);
     transform: scale(0.92);
-    box-shadow: 0 0 8px rgba(255, 61, 0, 0.3);
+    box-shadow: 0 0 8px rgba(var(--glass-tint-rgb), 0.24);
   }
   
   /* 卡片触摸反馈 */
   .MuiPaper-root:active {
-    background-color: rgba(30, 30, 30, calc(var(--glass-card-bg-opacity, 0.7) + 0.1));
+    background-color: rgba(var(--glass-surface-rgb), calc(var(--glass-card-bg-opacity, 0.7) + 0.1));
     transform: scale(0.99);
     box-shadow: var(--glass-shadow-lg, 0 4px 16px rgba(0, 0, 0, 0.12));
   }
@@ -435,7 +435,7 @@
   /* 毛玻璃效果 */
   backdrop-filter: blur(var(--glass-table-container-blur, 8px));
   -webkit-backdrop-filter: blur(var(--glass-table-container-blur, 8px));
-  background-color: rgba(30, 30, 30, var(--glass-table-container-bg-opacity, 0.6));
+  background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-container-bg-opacity, 0.6));
   border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(255, 255, 255, 0.15));
   border-radius: var(--glass-radius-md, 10px);
 }
@@ -447,7 +447,7 @@
   right: 0;
   width: 20px;
   height: 100%;
-  background: linear-gradient(to left, rgba(30, 30, 30, 0.6), transparent);
+  background: linear-gradient(to left, rgba(var(--glass-surface-soft-rgb), 0.6), transparent);
   pointer-events: none;
   z-index: 1;
   border-radius: 0 var(--glass-radius-md, 10px) var(--glass-radius-md, 10px) 0;
@@ -489,15 +489,15 @@
     /* 毛玻璃效果 */
     backdrop-filter: blur(var(--glass-btn-icon-blur, 6px));
     -webkit-backdrop-filter: blur(var(--glass-btn-icon-blur, 6px));
-    background: linear-gradient(135deg, rgba(255, 61, 0, 0.8) 0%, rgba(255, 111, 61, 0.8) 100%);
-    border: var(--glass-border-width, 0.5px) solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(199, 143, 69, 0.82) 0%, rgba(241, 199, 132, 0.76) 100%);
+    border: var(--glass-border-width, 0.5px) solid var(--theme-glass-border-heavy);
     border-radius: var(--glass-radius-full, 9999px);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--color-text-inverse);
     font-size: 18px;
-    box-shadow: var(--glass-shadow-lg, 0 4px 16px rgba(0, 0, 0, 0.12)), 0 0 20px rgba(255, 61, 0, 0.3);
+    box-shadow: var(--glass-shadow-lg, 0 4px 16px rgba(0, 0, 0, 0.12)), 0 0 20px rgba(199, 143, 69, 0.24);
     z-index: 1000;
     opacity: 0;
     transform: translateY(20px);
@@ -511,7 +511,7 @@
   
   .scroll-indicator:active {
     transform: scale(0.92);
-    box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1)), 0 0 15px rgba(255, 61, 0, 0.4);
+    box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1)), 0 0 15px rgba(199, 143, 69, 0.28);
   }
 }
 
