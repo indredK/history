@@ -3,8 +3,6 @@
  */
 
 import { useEffect, useMemo } from 'react';
-import { Box, Typography, Button } from '@mui/material';
-import RefreshIcon from '@mui/icons-material/Refresh';
 import { useRequest } from 'ahooks';
 
 import { useYuanFigureStore } from '@/store/yuanFigureStore';
@@ -13,7 +11,7 @@ import type { YuanFigure, YuanFigureRole } from '@/services/person/yuan/types';
 import type { YuanFigureSortBy } from '@/services/person/yuan';
 import { ROLE_LABELS } from '@/services/person/yuan/types';
 
-import { PeopleFilter } from '../common/PeopleFilter';
+import { PeopleCollectionContent } from '../common';
 import { YuanFigureGrid } from './YuanFigureGrid';
 import { YuanFigureDetailModal } from './YuanFigureDetailModal';
 
@@ -56,43 +54,33 @@ export function YuanContent() {
   const handleFigureClick = (figure: YuanFigure) => setSelectedFigure(figure);
   const handleCloseModal = () => setSelectedFigure(null);
 
-  if (error) {
-    return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '200px', color: 'var(--color-text-secondary)' }}>
-        <Typography variant="h6" sx={{ mb: 2 }}>加载失败</Typography>
-        <Typography variant="body2" sx={{ mb: 2 }}>{error.message || '请检查网络连接后重试'}</Typography>
-        <Button variant="outlined" startIcon={<RefreshIcon />} onClick={() => loadFigures()}>重试</Button>
-      </Box>
-    );
-  }
-
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <Box sx={{ flexShrink: 0 }}>
-        <PeopleFilter
-          searchQuery={filters.searchQuery}
-          onSearchChange={setSearchQuery}
-          searchPlaceholder="搜索元朝人物姓名、字号..."
-          filters={[
-            { name: 'role', label: '角色', value: filters.role, options: roleOptions, onChange: (value) => setRoleFilter(value as YuanFigureRole | '全部') },
-            { name: 'period', label: '时期', value: filters.period, options: periodOptions, onChange: setPeriodFilter },
-          ]}
-          sortBy={filters.sortBy}
-          sortOptions={[
-            { value: 'birthYear', label: '按出生年' },
-            { value: 'name', label: '按姓名' },
-            { value: 'role', label: '按角色' },
-          ]}
-          onSortChange={(value) => setSortBy(value as YuanFigureSortBy)}
-          resultCount={filteredFigures.length}
-          resultLabel="位元朝人物"
-        />
-      </Box>
-      <Box sx={{ flex: 1, overflow: 'auto', pr: 1 }}>
+    <PeopleCollectionContent
+      error={error}
+      onRetry={loadFigures}
+      searchQuery={filters.searchQuery}
+      onSearchChange={setSearchQuery}
+      searchPlaceholder="搜索元朝人物姓名、字号..."
+      filters={[
+        { name: 'role', label: '角色', value: filters.role, options: roleOptions, onChange: (value) => setRoleFilter(value as YuanFigureRole | '全部') },
+        { name: 'period', label: '时期', value: filters.period, options: periodOptions, onChange: setPeriodFilter },
+      ]}
+      sortBy={filters.sortBy}
+      sortOptions={[
+        { value: 'birthYear', label: '按出生年' },
+        { value: 'name', label: '按姓名' },
+        { value: 'role', label: '按角色' },
+      ]}
+      onSortChange={(value) => setSortBy(value as YuanFigureSortBy)}
+      resultCount={filteredFigures.length}
+      resultLabel="位元朝人物"
+      grid={
         <YuanFigureGrid figures={filteredFigures} onFigureClick={handleFigureClick} loading={loading || requestLoading} />
-      </Box>
-      <YuanFigureDetailModal figure={selectedFigure} open={selectedFigure !== null} onClose={handleCloseModal} />
-    </Box>
+      }
+      modal={
+        <YuanFigureDetailModal figure={selectedFigure} open={selectedFigure !== null} onClose={handleCloseModal} />
+      }
+    />
   );
 }
 
