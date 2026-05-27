@@ -120,6 +120,8 @@ export interface TimelineChartRef {
 export interface TimelineChartProps {
   events: Event[];
   favorites: string[];
+  focusRange?: [number, number] | null | undefined;
+  focusLabel?: string | null | undefined;
   onZoomChange: (zoomLevel: number) => void;
   zoomLevel: number;
   onZoomIn: () => void;

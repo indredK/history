@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useRequest } from 'ahooks';
-import { Box, Typography } from '@mui/material';
+import { StateView } from '@/components/ui';
 
 import { getEvents } from '@/services/dataClient';
 import { TimelineChart } from './TimelineChart';
@@ -8,7 +8,12 @@ import type { TimelineChartRef } from '../types';
 import type { Event } from '@/services/timeline/types';
 import '../styles/D3Timeline.css';
 
-export function D3Timeline() {
+interface D3TimelineProps {
+  focusRange?: [number, number] | null;
+  focusLabel?: string | null;
+}
+
+export function D3Timeline({ focusRange, focusLabel }: D3TimelineProps) {
   const chartRef = useRef<TimelineChartRef>(null);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [events, setEvents] = useState<Event[]>([]);
@@ -27,33 +32,31 @@ export function D3Timeline() {
     }
   );
 
-  // 缩放控制函数
   const handleZoomIn = () => chartRef.current?.zoomIn();
   const handleZoomOut = () => chartRef.current?.zoomOut();
   const handleResetZoom = () => chartRef.current?.resetZoom();
-  
-  // 滚动控制函数
   const handlePanLeft = () => chartRef.current?.panLeft();
   const handlePanRight = () => chartRef.current?.panRight();
 
-  // 如果正在加载或没有数据，显示相应状态
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-        <Typography variant="body1" color="text.secondary">
-          正在加载历史事件数据...
-        </Typography>
-      </Box>
+      <StateView
+        mode="loading"
+        title="正在加载历史事件数据..."
+        description="整理事件索引与时间刻度。"
+        minHeight="100%"
+      />
     );
   }
 
   if (events.length === 0) {
     return (
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-        <Typography variant="body1" color="text.secondary">
-          暂无匹配的历史事件
-        </Typography>
-      </Box>
+      <StateView
+        mode="empty"
+        title="暂无匹配的历史事件"
+        description="调整朝代或稍后重试。"
+        minHeight="100%"
+      />
     );
   }
 
@@ -62,6 +65,8 @@ export function D3Timeline() {
       ref={chartRef}
       events={events}
       favorites={favorites}
+      focusRange={focusRange}
+      focusLabel={focusLabel}
       onZoomChange={setZoomLevel}
       zoomLevel={zoomLevel}
       onZoomIn={handleZoomIn}

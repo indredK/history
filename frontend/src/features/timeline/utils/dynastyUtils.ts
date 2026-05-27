@@ -1,2 +1,43 @@
-// 朝代工具函数
-// 此文件保留用于未来可能的朝代相关工具函数
+import type { Dynasty } from '@/services/culture/types';
+
+export type TimelineRange = [number, number];
+
+export function buildDynastyFocusRange(
+  dynasty: Dynasty | null | undefined,
+  minPadding = 40,
+): TimelineRange | null {
+  if (!dynasty) {
+    return null;
+  }
+
+  const start = dynasty.startYear;
+  const end = dynasty.endYear ?? dynasty.startYear;
+  const span = Math.max(end - start, 1);
+  const padding = Math.max(minPadding, Math.round(span * 0.12));
+
+  return [start - padding, end + padding];
+}
+
+interface FormatTimelineYearOptions {
+  short?: boolean | undefined;
+}
+
+export function formatTimelineYear(
+  year: number,
+  options: FormatTimelineYearOptions = {},
+): string {
+  const normalizedYear = Math.round(year);
+  const absoluteYear = Math.abs(normalizedYear);
+
+  if (options.short) {
+    return normalizedYear < 0 ? `前${absoluteYear}` : `${normalizedYear}`;
+  }
+
+  return normalizedYear < 0
+    ? `公元前${absoluteYear}年`
+    : `公元${normalizedYear}年`;
+}
+
+export function formatTimelineRange(range: TimelineRange): string {
+  return `${formatTimelineYear(range[0])} - ${formatTimelineYear(range[1])}`;
+}

@@ -16,7 +16,6 @@ interface UseTimelineInteractionArgs {
   timeRange: TimeRange | null;
   setTimeRange: (range: TimeRange) => void;
   originalRangeRef: RefObject<TimeRange | null>;
-  onZoomChange: (zoom: number) => void;
 }
 
 export function useTimelineInteraction({
@@ -25,7 +24,6 @@ export function useTimelineInteraction({
   timeRange,
   setTimeRange,
   originalRangeRef,
-  onZoomChange,
 }: UseTimelineInteractionArgs) {
   // 拖拽状态
   const [dragState, setDragState] = useState<{
@@ -38,66 +36,37 @@ export function useTimelineInteraction({
     startRange: null,
   });
 
-  // 滚轮 —— 缩放 / Shift+滚轮水平滚动
+  // 滚轮 —— 仅在 Shift 按下时做水平平移，避免误触把时间轴缩成极窄范围
   const handleWheel = useCallback(
     (event: WheelEvent) => {
+      if (!timeRange || !originalRangeRef.current) return;
+      if (!event.shiftKey) {
+        return;
+      }
+
       event.preventDefault();
       event.stopPropagation();
-
-      if (!timeRange || !originalRangeRef.current) return;
 
       const [start, end] = timeRange;
       const currentRange = end - start;
 
-      // Shift + 滚轮 —— 水平平移
-      if (event.shiftKey) {
-        const { pan } = TIMELINE_CONFIG;
-        const panStep = Math.max(currentRange * pan.factor * 2, pan.minStep * 2);
-        const [originalStart, originalEnd] = originalRangeRef.current;
-        const scrollDelta =
-          Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-
-        let newStart: number, newEnd: number;
-        if (scrollDelta > 0) {
-          newEnd = Math.min(originalEnd, end + panStep);
-          newStart = newEnd - currentRange;
-        } else {
-          newStart = Math.max(originalStart, start - panStep);
-          newEnd = newStart + currentRange;
-        }
-        setTimeRange([newStart, newEnd]);
-        return;
-      }
-
-      // 以鼠标位置为中心缩放
-      const svgElement = svgRef.current;
-      if (!svgElement) return;
-
-      const rect = svgElement.getBoundingClientRect();
-      const { dimensions } = TIMELINE_CONFIG;
-      const mouseX = event.clientX - rect.left - dimensions.margin.left;
-      const chartWidth = rect.width - dimensions.margin.left - dimensions.margin.right;
-      const mouseRatio = mouseX / chartWidth;
-      const mouseYear = start + (end - start) * mouseRatio;
-
-      const { zoom } = TIMELINE_CONFIG;
-      const zoomFactor = event.deltaY > 0 ? zoom.factor.out : zoom.factor.in;
-      const newRange = currentRange * zoomFactor;
-
-      const leftRatio = (mouseYear - start) / currentRange;
-      const rightRatio = (end - mouseYear) / currentRange;
-
-      let newStart = mouseYear - newRange * leftRatio;
-      let newEnd = mouseYear + newRange * rightRatio;
-
+      const { pan } = TIMELINE_CONFIG;
+      const panStep = Math.max(currentRange * pan.factor * 2, pan.minStep * 2);
       const [originalStart, originalEnd] = originalRangeRef.current;
-      newStart = Math.max(originalStart, newStart);
-      newEnd = Math.min(originalEnd, newEnd);
+      const scrollDelta =
+        Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
 
+      let newStart: number, newEnd: number;
+      if (scrollDelta > 0) {
+        newEnd = Math.min(originalEnd, end + panStep);
+        newStart = newEnd - currentRange;
+      } else {
+        newStart = Math.max(originalStart, start - panStep);
+        newEnd = newStart + currentRange;
+      }
       setTimeRange([newStart, newEnd]);
-      onZoomChange((originalEnd - originalStart) / (newEnd - newStart));
     },
-    [timeRange, onZoomChange, originalRangeRef, setTimeRange, svgRef]
+    [timeRange, originalRangeRef, setTimeRange]
   );
 
   // 鼠标按下 —— 开始拖拽

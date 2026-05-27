@@ -3,6 +3,7 @@ import type { Event } from '@/services/timeline/types';
 import type { LabelLayout } from '../types';
 import { TIMELINE_CONFIG, createTimelineGradient } from '../config/timelineConfig';
 import { calculateLabelLayout, calculateYearLayout } from './layoutAlgorithms';
+import { formatTimelineYear } from '@/features/timeline/utils/dynastyUtils';
 
 /**
  * 时间轴渲染器类
@@ -68,7 +69,7 @@ export class TimelineRenderer {
     const { styles } = TIMELINE_CONFIG;
     
     const xAxis = d3.axisBottom(this.xScale)
-      .tickFormat(d => `${d}年`)
+      .tickFormat((d) => formatTimelineYear(Number(d), { short: true }))
       .ticks(Math.min(8, Math.floor(this.width / 120)))
       .tickSize(styles.axis.tick.size);
 
