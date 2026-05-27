@@ -67,12 +67,12 @@ export const dynastyConfig = {
     transition: 'all 0.3s ease',
     fontSize: {
       title: {
-        default: '15px',
-        active: '18px'
+        default: '20px',
+        active: '32px'
       },
-      subtitle: '9px',
-      period: '10px',
-      description: '8px'
+      subtitle: '11px',
+      period: '13px',
+      description: '11px'
     },
     colors: {
       text: 'white',

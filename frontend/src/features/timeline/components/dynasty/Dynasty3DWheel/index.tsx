@@ -2,7 +2,7 @@
  * 朝代 3D 立体轮播 —— 顶层组件
  * Dynasty 3D Wheel
  *
- * 数据获取 + 滚轮节流 + Three.js Canvas 渲染
+ * 数据获取 + 滚轮节流 + Three.js Canvas 渲染 + 效果切换
  */
 
 import {
@@ -18,9 +18,7 @@ import {
   KeyboardArrowLeft,
   KeyboardArrowRight,
 } from '@mui/icons-material';
-import { Tooltip } from '@mui/material';
 import { Canvas } from '@react-three/fiber';
-import { useRequest } from 'ahooks';
 import { ResponsiveIconButton } from '@/components/ui';
 import { useDynastyStore } from '@/store';
 import { getDynasties } from '@/services/dataClient';
@@ -28,58 +26,71 @@ import type { Dynasty } from '@/services/culture/types';
 import { formatTimelineYear } from '@/features/timeline/utils/dynastyUtils';
 import { Scene } from './Scene';
 import { useDynastyWheelScroll } from './useDynastyWheelScroll';
+import { EffectSwitcher } from './EffectSwitcher';
+import { DEFAULT_EFFECT_ID, getEffectById } from './effects/registry';
 import './Dynasty3DWheel.css';
 
 interface Dynasty3DWheelProps {
   className?: string;
 }
 
+const EFFECT_STORAGE_KEY = 'dynasty3DWheel.effectId';
+
 export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
   const { selectedDynasty, setSelectedDynasty } = useDynastyStore();
   const [allDynasties, setAllDynasties] = useState<Dynasty[]>([]);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [effectId, setEffectId] = useState<string>(() => {
+    if (typeof window === 'undefined') return DEFAULT_EFFECT_ID;
+    return window.localStorage.getItem(EFFECT_STORAGE_KEY) ?? DEFAULT_EFFECT_ID;
+  });
   const containerRef = useRef<HTMLDivElement>(null);
+  const hasInitializedIndexRef = useRef(false);
   const selectedDynastyId = selectedDynasty?.id ?? null;
 
-  // 获取朝代数据
-  useRequest(
-    async () => {
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadDynasties = async () => {
       const result = await getDynasties();
-      return result.data;
-    },
-    {
-      cacheKey: 'dynasties_all',
-      manual: false,
-      onSuccess: (dynasties: Dynasty[]) => setAllDynasties(dynasties),
-    }
-  );
+
+      if (!cancelled) {
+        setAllDynasties(result.data);
+      }
+    };
+
+    void loadDynasties();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const dynasties = allDynasties;
+  const effect = useMemo(() => getEffectById(effectId), [effectId]);
+
+  const handleEffectChange = useCallback((id: string) => {
+    setEffectId(id);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(EFFECT_STORAGE_KEY, id);
+    }
+  }, []);
 
   useEffect(() => {
-    if (dynasties.length === 0) {
+    if (dynasties.length === 0 || hasInitializedIndexRef.current) {
       return;
     }
 
-    if (selectedDynastyId) {
-      const matchedIndex = dynasties.findIndex(
-        (dynasty) => dynasty.id === selectedDynastyId,
-      );
+    const matchedIndex = selectedDynastyId
+      ? dynasties.findIndex((dynasty) => dynasty.id === selectedDynastyId)
+      : -1;
 
-      if (matchedIndex >= 0 && matchedIndex !== activeIndex) {
-        setActiveIndex(matchedIndex);
-        return;
-      }
-    }
+    setActiveIndex(matchedIndex >= 0 ? matchedIndex : 0);
+    hasInitializedIndexRef.current = true;
+  }, [dynasties, selectedDynastyId]);
 
-    if (activeIndex < 0) {
-      setActiveIndex(0);
-    }
-  }, [activeIndex, dynasties, selectedDynastyId]);
-
-  // 同步当前激活朝代到全局 store
   useEffect(() => {
-    if (activeIndex < 0) {
+    if (activeIndex < 0 || activeIndex >= dynasties.length) {
       return;
     }
 
@@ -125,7 +136,6 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
     return `${formatTimelineYear(activeDynasty.startYear, { short: true })} - ${endLabel}`;
   }, [activeDynasty]);
 
-  // 滚轮切换
   useDynastyWheelScroll({
     containerRef,
     total: dynasties.length,
@@ -181,6 +191,7 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
       <Canvas shadows gl={{ antialias: true, alpha: true }} style={{ background: 'transparent' }}>
         <Suspense fallback={null}>
           <Scene
+            effect={effect}
             dynasties={dynasties}
             activeIndex={activeIndex}
             onCardClick={(index) => setActiveIndex(index)}
@@ -188,52 +199,54 @@ export function Dynasty3DWheel({ className }: Dynasty3DWheelProps) {
         </Suspense>
       </Canvas>
 
+      <div className="dynasty-effect-switcher-anchor">
+        <EffectSwitcher currentId={effectId} onChange={handleEffectChange} />
+      </div>
+
       <div className="dynasty-navigation">
         <div className="dynasty-indicator">
-          <Tooltip title="上一朝代" arrow>
-            <ResponsiveIconButton
-              aria-label="上一朝代"
-              onClick={() => stepIndex(-1)}
-              responsive={false}
-              sx={{
-                width: 34,
-                height: 34,
-                borderRadius: 1.5,
-                color: 'var(--color-text-secondary)',
-                flexShrink: 0,
-              }}
-            >
-              <KeyboardArrowLeft fontSize="small" />
-            </ResponsiveIconButton>
-          </Tooltip>
+          <ResponsiveIconButton
+            aria-label="上一朝代"
+            onClick={() => stepIndex(-1)}
+            responsive={false}
+            sx={{
+              width: 26,
+              height: 26,
+              borderRadius: 1.25,
+              color: 'var(--color-text-secondary)',
+              flexShrink: 0,
+            }}
+          >
+            <KeyboardArrowLeft fontSize="small" />
+          </ResponsiveIconButton>
 
           <div className="dynasty-indicator-copy">
-            <span className="dynasty-indicator-name">{activeDynasty.name}</span>
-            <span className="dynasty-indicator-period">{activePeriod}</span>
+            <div className="dynasty-indicator-line dynasty-indicator-line-primary">
+              <span className="dynasty-indicator-name">{activeDynasty.name}</span>
+              <span className="dynasty-indicator-sep" aria-hidden="true">·</span>
+              <span className="dynasty-indicator-period">{activePeriod}</span>
+            </div>
+            <div className="dynasty-indicator-line dynasty-indicator-line-hint">
+              <span>{activeIndex + 1} / {dynasties.length}</span>
+              <span aria-hidden="true">·</span>
+              <span>滚轮 / 点击卡片 / 左右方向键</span>
+            </div>
           </div>
 
-          <Tooltip title="下一朝代" arrow>
-            <ResponsiveIconButton
-              aria-label="下一朝代"
-              onClick={() => stepIndex(1)}
-              responsive={false}
-              sx={{
-                width: 34,
-                height: 34,
-                borderRadius: 1.5,
-                color: 'var(--color-text-secondary)',
-                flexShrink: 0,
-              }}
-            >
-              <KeyboardArrowRight fontSize="small" />
-            </ResponsiveIconButton>
-          </Tooltip>
-        </div>
-
-        <div className="dynasty-hint">
-          <span>{activeIndex + 1} / {dynasties.length}</span>
-          <span aria-hidden="true">·</span>
-          <span>滚轮 / 点击卡片 / 左右方向键</span>
+          <ResponsiveIconButton
+            aria-label="下一朝代"
+            onClick={() => stepIndex(1)}
+            responsive={false}
+            sx={{
+              width: 26,
+              height: 26,
+              borderRadius: 1.25,
+              color: 'var(--color-text-secondary)',
+              flexShrink: 0,
+            }}
+          >
+            <KeyboardArrowRight fontSize="small" />
+          </ResponsiveIconButton>
         </div>
       </div>
     </div>
