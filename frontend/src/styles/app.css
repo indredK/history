@@ -8,6 +8,7 @@
   background: var(--color-bg-gradient);
   position: relative;
   overflow: hidden;
+  isolation: isolate;
 }
 
 /* 平滑滚动效果 */
@@ -24,28 +25,26 @@ html {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+    linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), var(--panel-grid) calc(100% - 1px)),
+    linear-gradient(0deg, transparent 0, transparent calc(100% - 1px), var(--panel-grid) calc(100% - 1px)),
+    radial-gradient(circle at 18% 20%, rgba(227, 193, 129, 0.12) 0%, transparent 32%),
+    radial-gradient(circle at 82% 16%, rgba(107, 135, 151, 0.12) 0%, transparent 28%);
+  background-size: 72px 72px, 72px 72px, auto, auto;
   backdrop-filter: blur(var(--glass-blur-none));
   -webkit-backdrop-filter: blur(var(--glass-blur-none));
   pointer-events: none;
   z-index: 0;
+  opacity: 0.65;
 }
 
 /* 毛玻璃装饰层 - 顶部光晕 */
 .app::after {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 255, 255, 0.02) 0%,
-    transparent 50%
-  );
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 248, 232, 0.06), transparent 18%),
+    radial-gradient(circle at center, transparent 58%, rgba(0, 0, 0, 0.22) 100%);
   pointer-events: none;
   z-index: 0;
 }

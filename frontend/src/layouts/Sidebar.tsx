@@ -40,7 +40,6 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
   
   // 根据主题获取背景色
   const isDark = theme === 'dark';
-  const bgBase = isDark ? '30, 30, 30' : '255, 255, 255';
   const borderColor = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.12)';
 
   const handleNavigation = (path: string) => {
@@ -52,7 +51,7 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
   const sidebarGlassStyle = isClassicStyle ? {} : {
     backdropFilter: `blur(${glassConfig.components.navigation.blur})`,
     WebkitBackdropFilter: `blur(${glassConfig.components.navigation.blur})`,
-    background: `linear-gradient(135deg, rgba(${bgBase}, ${glassConfig.components.navigation.bgOpacity}) 0%, rgba(${bgBase}, ${glassConfig.components.navigation.bgOpacity + 0.1}) 100%)`,
+    background: 'var(--panel-bg)',
     borderRight: `${glassConfig.border.width} solid ${borderColor}`,
     boxShadow: glassConfig.shadow.md,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`
@@ -135,30 +134,40 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
               } : {
                 backdropFilter: `blur(${glassConfig.blur.light})`,
                 WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
-                background: `rgba(255, 255, 255, ${glassConfig.bgOpacity.light})`,
-                border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+                background: 'var(--panel-bg-soft)',
+                border: 'var(--panel-border)',
               }),
               borderRadius: glassConfig.border.radius.lg,
-              boxShadow: isClassicStyle ? '0 1px 3px rgba(0, 0, 0, 0.12)' : glassConfig.shadow.sm,
-              padding: '8px',
+              boxShadow: isClassicStyle ? '0 1px 3px rgba(0, 0, 0, 0.12)' : 'var(--shadow-sm)',
+              padding: '10px 12px',
               transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`
             }}>
-              <Typography 
-                variant="h6" 
-                component="div" 
-                sx={{ 
-                  fontWeight: 'bold',
-                  color: 'var(--color-text-primary)',
-                  textShadow: '0 2px 4px rgba(0,0,0,0.2)',
-                  letterSpacing: '0.5px',
-                  cursor: 'pointer',
-                  flex: 1,
-                  textAlign: 'center'
-                }}
-                onClick={onToggle}
-              >
-                中国历史全景
-              </Typography>
+              <Box sx={{ flex: 1, minWidth: 0, cursor: 'pointer' }} onClick={onToggle}>
+                <Typography
+                  component="div"
+                  sx={{
+                    fontFamily: 'var(--font-family-serif)',
+                    fontSize: '1.1rem',
+                    fontWeight: 700,
+                    color: 'var(--color-text-primary)',
+                    lineHeight: 1.2,
+                  }}
+                >
+                  中国历史全视界
+                </Typography>
+                <Typography
+                  component="div"
+                  sx={{
+                    fontSize: '0.68rem',
+                    color: 'var(--color-text-tertiary)',
+                    letterSpacing: '0.18em',
+                    textTransform: 'uppercase',
+                    mt: 0.5,
+                  }}
+                >
+                  Historical Panorama
+                </Typography>
+              </Box>
               <Tooltip title="收起菜单">
                 <IconButton 
                   onClick={onToggle}
@@ -168,7 +177,7 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                     ml: 1,
                     transition: `all ${glassConfig.animation.hoverDuration} ${glassConfig.animation.easing}`,
                     '&:hover': {
-                      background: `rgba(255, 255, 255, ${glassConfig.bgOpacity.ultraLight})`
+                      background: 'rgba(199, 143, 69, 0.1)'
                     }
                   }}
                 >
@@ -206,7 +215,7 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                           WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
                           background: isActive 
                             ? theme?.gradient 
-                            : `rgba(255, 255, 255, ${glassConfig.bgOpacity.ultraLight})`,
+                            : 'rgba(199, 143, 69, 0.08)',
                           border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
                         }),
                         color: isActive ? 'white' : 'var(--color-text-primary)',
@@ -219,7 +228,7 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                             ? undefined 
                             : (isClassicStyle 
                                 ? (isDark ? 'var(--classic-nav-item-hover)' : 'var(--classic-nav-item-hover)')
-                                : `rgba(255, 255, 255, ${glassConfig.components.navigation.itemHoverOpacity})`),
+                                : 'rgba(199, 143, 69, 0.14)'),
                           boxShadow: isClassicStyle ? '0 2px 6px rgba(0, 0, 0, 0.15)' : glassConfig.shadow.glow,
                           transform: 'translateY(-2px)'
                         }

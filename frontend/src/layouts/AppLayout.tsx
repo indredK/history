@@ -92,6 +92,7 @@ export function AppLayout() {
       position: 'relative', // 添加相对定位
       touchAction: 'none', // 防止触摸滚动
       overscrollBehavior: 'none', // 防止过度滚动
+      width: '100%',
     }} className="app">
       {/* 数据源指示器 - 固定在右上角 */}
       <Box sx={{
@@ -114,6 +115,9 @@ export function AppLayout() {
         overflow: 'hidden',
         position: 'relative', // 添加相对定位
         touchAction: 'pan-x pan-y', // 允许组件内部滚动
+        width: '100%',
+        maxWidth: 'var(--app-shell-max-width)',
+        margin: '0 auto',
         // 竖屏模式下调整布局
         ...(showPortraitSidebar && {
           flexDirection: 'column',
@@ -134,9 +138,7 @@ export function AppLayout() {
           overflow: 'hidden',
           padding: isMobile ? (isSmallMobile ? '8px' : '12px') : '16px',
           marginTop: 0,
-          // 移除朝代背景颜色，使用默认背景
-          background: 'var(--color-bg-gradient)',
-          backgroundSize: 'cover',
+          background: 'transparent',
           transition: `all ${glassConfig.animation.duration.slow} ${glassConfig.animation.easing}`,
           touchAction: 'pan-x pan-y', // 允许内部滚动
           // 移动端优化

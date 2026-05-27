@@ -11,31 +11,33 @@
 /* 导入竖屏布局优化样式 */
 @import './styles/portrait.css';
 
+/* 中国历史全景 - 全局设计系统 */
+
 :root,
 [data-theme="dark"] {
-  /* 颜色系统 - 炫酷现代色彩 */
-  --color-primary: #FF3D00; /* 炫酷橙红 */
-  --color-primary-light: #FF6F3D;
-  --color-primary-dark: #E63900;
-  --color-primary-gradient: linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%);
-  
-  --color-secondary: #03A9F4; /* 炫酷蓝 */
-  --color-secondary-light: #4FC3F7;
-  --color-secondary-dark: #0288D1;
-  --color-secondary-gradient: linear-gradient(135deg, #03A9F4 0%, #4FC3F7 100%);
-  
-  --color-accent: #FFEA00; /* 亮黄 */
-  --color-accent-light: #FFF176;
-  --color-accent-dark: #FFD600;
-  --color-accent-gradient: linear-gradient(135deg, #FFEA00 0%, #FFF176 100%);
-  
-  --color-purple: #9C27B0; /* 紫色 */
-  --color-purple-light: #BA68C8;
-  --color-purple-gradient: linear-gradient(135deg, #9C27B0 0%, #BA68C8 100%);
-  
-  --color-green: #4CAF50; /* 绿色 */
-  --color-green-light: #81C784;
-  --color-green-gradient: linear-gradient(135deg, #4CAF50 0%, #81C784 100%);
+  /* 颜色系统 - 夜航档案馆 */
+  --color-primary: #c78f45;
+  --color-primary-light: #e1b879;
+  --color-primary-dark: #94652f;
+  --color-primary-gradient: linear-gradient(135deg, #f3d29b 0%, #b6762b 100%);
+
+  --color-secondary: #6b8797;
+  --color-secondary-light: #97b4c6;
+  --color-secondary-dark: #465c6a;
+  --color-secondary-gradient: linear-gradient(135deg, #9bb8c6 0%, #556f80 100%);
+
+  --color-accent: #d7c08d;
+  --color-accent-light: #ede0bc;
+  --color-accent-dark: #a98d54;
+  --color-accent-gradient: linear-gradient(135deg, #f3e6c0 0%, #c9aa68 100%);
+
+  --color-purple: #7c5f78;
+  --color-purple-light: #aa8aa5;
+  --color-purple-gradient: linear-gradient(135deg, #a98ea5 0%, #664b61 100%);
+
+  --color-green: #5f7565;
+  --color-green-light: #95ab97;
+  --color-green-gradient: linear-gradient(135deg, #91ab96 0%, #536957 100%);
   
   /* 中性色调 */
   --color-gray-50: #FAFAFA;
@@ -50,49 +52,52 @@
   --color-gray-900: #212121;
   
   /* 背景色 */
-  --color-bg-primary: #121212;
-  --color-bg-secondary: #1E1E1E;
-  --color-bg-tertiary: #2D2D2D;
-  --color-bg-card: #1E1E1E;
-  --color-bg-overlay: rgba(0, 0, 0, 0.8);
-  --color-bg-gradient: linear-gradient(135deg, #121212 0%, #1E1E1E 100%);
+  --color-bg-primary: #120f0d;
+  --color-bg-secondary: #1b1714;
+  --color-bg-tertiary: #26211d;
+  --color-bg-card: rgba(33, 27, 22, 0.82);
+  --color-bg-overlay: rgba(7, 6, 5, 0.72);
+  --color-bg-gradient:
+    radial-gradient(circle at top, rgba(199, 143, 69, 0.14), transparent 34%),
+    radial-gradient(circle at 82% 18%, rgba(107, 135, 151, 0.16), transparent 30%),
+    linear-gradient(180deg, #16120f 0%, #110e0d 52%, #1c1714 100%);
   
   /* 文字颜色 - 暗黑模式 */
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #E0E0E0;
-  --color-text-tertiary: #BDBDBD;
-  --color-text-inverse: #121212;
-  --color-text-accent: #FF3D00;
+  --color-text-primary: #f5ecd8;
+  --color-text-secondary: #d2c3a3;
+  --color-text-tertiary: #95856e;
+  --color-text-inverse: #16120f;
+  --color-text-accent: #f1c784;
   
   /* 边框颜色 - 暗黑模式 */
-  --color-border-light: #3D3D3D;
-  --color-border-medium: #4A4A4A;
-  --color-border-dark: #616161;
+  --color-border-light: rgba(226, 198, 140, 0.12);
+  --color-border-medium: rgba(226, 198, 140, 0.2);
+  --color-border-dark: rgba(226, 198, 140, 0.34);
   
   /* 状态颜色 */
-  --color-success: #4CAF50;
-  --color-success-gradient: linear-gradient(135deg, #4CAF50 0%, #81C784 100%);
-  --color-warning: #FF9800;
-  --color-warning-gradient: linear-gradient(135deg, #FF9800 0%, #FFB74D 100%);
-  --color-error: #F44336;
-  --color-error-gradient: linear-gradient(135deg, #F44336 0%, #EF5350 100%);
-  --color-info: #03A9F4;
-  --color-info-gradient: linear-gradient(135deg, #03A9F4 0%, #4FC3F7 100%);
+  --color-success: #7ea47d;
+  --color-success-gradient: linear-gradient(135deg, #a8c0a5 0%, #5c7a5c 100%);
+  --color-warning: #c89049;
+  --color-warning-gradient: linear-gradient(135deg, #e4bf81 0%, #9d6327 100%);
+  --color-error: #b76558;
+  --color-error-gradient: linear-gradient(135deg, #d79e94 0%, #8b463f 100%);
+  --color-info: #7595a9;
+  --color-info-gradient: linear-gradient(135deg, #adc2cf 0%, #587286 100%);
   
   /* 阴影 - 增强版 */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 0 10px rgba(255, 61, 0, 0.1);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 61, 0, 0.15);
-  --shadow-md: 0 8px 16px -3px rgba(0, 0, 0, 0.2), 0 0 30px rgba(255, 61, 0, 0.2);
-  --shadow-lg: 0 15px 30px -5px rgba(0, 0, 0, 0.25), 0 0 40px rgba(255, 61, 0, 0.25);
-  --shadow-xl: 0 25px 50px -10px rgba(0, 0, 0, 0.3), 0 0 60px rgba(255, 61, 0, 0.3);
-  --shadow-glow: 0 0 30px rgba(255, 61, 0, 0.4), 0 0 60px rgba(255, 61, 0, 0.2);
-  --shadow-glow-blue: 0 0 30px rgba(3, 169, 244, 0.4), 0 0 60px rgba(3, 169, 244, 0.2);
-  --shadow-glow-purple: 0 0 30px rgba(156, 39, 176, 0.4), 0 0 60px rgba(156, 39, 176, 0.2);
+  --shadow-sm: 0 6px 16px rgba(0, 0, 0, 0.18);
+  --shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+  --shadow-md: 0 20px 42px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 28px 56px rgba(0, 0, 0, 0.34);
+  --shadow-xl: 0 36px 76px rgba(0, 0, 0, 0.42);
+  --shadow-glow: 0 0 30px rgba(199, 143, 69, 0.18);
+  --shadow-glow-blue: 0 0 30px rgba(107, 135, 151, 0.18);
+  --shadow-glow-purple: 0 0 30px rgba(124, 95, 120, 0.18);
   
   /* 字体系统 */
-  --font-family-primary: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  --font-family-serif: 'Noto Serif SC', Georgia, 'Times New Roman', serif;
-  --font-family-mono: 'Noto Sans SC', 'SF Mono', Monaco, Inconsolata, 'Roboto Mono', 'Source Code Pro', monospace;
+  --font-family-primary: 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', sans-serif;
+  --font-family-serif: 'Songti SC', 'STSong', 'Noto Serif SC', serif;
+  --font-family-mono: 'SF Mono', 'JetBrains Mono', 'Source Code Pro', monospace;
   
   /* 字体大小 */
   --font-size-xs: 0.75rem;    /* 12px */
@@ -139,6 +144,14 @@
   --radius-xl: 0.75rem;   /* 12px */
   --radius-2xl: 1rem;     /* 16px */
   --radius-full: 9999px;
+
+  --panel-radius: 18px;
+  --panel-border: 1px solid rgba(221, 193, 135, 0.16);
+  --panel-bg: linear-gradient(180deg, rgba(38, 31, 25, 0.9) 0%, rgba(24, 20, 17, 0.9) 100%);
+  --panel-bg-soft: linear-gradient(180deg, rgba(43, 36, 30, 0.78) 0%, rgba(21, 18, 15, 0.8) 100%);
+  --panel-highlight: linear-gradient(90deg, rgba(227, 194, 134, 0.24), rgba(107, 135, 151, 0.1));
+  --panel-grid: rgba(244, 227, 194, 0.06);
+  --app-shell-max-width: 1920px;
   
   /* 过渡动画 */
   --transition-fast: 150ms ease;
@@ -173,35 +186,40 @@
    Light Mode Color Overrides
    ============================================ */
 [data-theme="light"] {
-  /* 背景色 - 白天模式 */
-  --color-bg-primary: #F5F5F5;
-  --color-bg-secondary: #FFFFFF;
-  --color-bg-tertiary: #FAFAFA;
-  --color-bg-card: #FFFFFF;
-  --color-bg-overlay: rgba(255, 255, 255, 0.9);
-  --color-bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-  
-  /* 文字颜色 - 白天模式 (高对比度) */
-  --color-text-primary: rgba(0, 0, 0, 0.9);
-  --color-text-secondary: rgba(0, 0, 0, 0.7);
-  --color-text-tertiary: rgba(0, 0, 0, 0.5);
-  --color-text-inverse: #FFFFFF;
-  --color-text-accent: #E63900;
-  
-  /* 边框颜色 - 白天模式 */
-  --color-border-light: rgba(0, 0, 0, 0.08);
-  --color-border-medium: rgba(0, 0, 0, 0.12);
-  --color-border-dark: rgba(0, 0, 0, 0.2);
-  
-  /* 阴影 - 白天模式 (更柔和) */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 0 10px rgba(0, 0, 0, 0.02);
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 0 20px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 8px 16px -3px rgba(0, 0, 0, 0.1), 0 0 30px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 15px 30px -5px rgba(0, 0, 0, 0.12), 0 0 40px rgba(0, 0, 0, 0.06);
-  --shadow-xl: 0 25px 50px -10px rgba(0, 0, 0, 0.15), 0 0 60px rgba(0, 0, 0, 0.08);
-  --shadow-glow: 0 0 30px rgba(255, 61, 0, 0.15), 0 0 60px rgba(255, 61, 0, 0.08);
-  --shadow-glow-blue: 0 0 30px rgba(3, 169, 244, 0.15), 0 0 60px rgba(3, 169, 244, 0.08);
-  --shadow-glow-purple: 0 0 30px rgba(156, 39, 176, 0.15), 0 0 60px rgba(156, 39, 176, 0.08);
+  --color-bg-primary: #f5efdf;
+  --color-bg-secondary: #fbf7ef;
+  --color-bg-tertiary: #efe5d3;
+  --color-bg-card: rgba(255, 251, 243, 0.88);
+  --color-bg-overlay: rgba(255, 251, 243, 0.84);
+  --color-bg-gradient:
+    radial-gradient(circle at top, rgba(199, 143, 69, 0.12), transparent 32%),
+    radial-gradient(circle at 85% 12%, rgba(107, 135, 151, 0.12), transparent 28%),
+    linear-gradient(180deg, #f8f2e7 0%, #efe5d4 55%, #e8dbc9 100%);
+
+  --color-text-primary: #2c241c;
+  --color-text-secondary: #57483a;
+  --color-text-tertiary: #887864;
+  --color-text-inverse: #fbf7ef;
+  --color-text-accent: #9b6121;
+
+  --color-border-light: rgba(118, 90, 51, 0.1);
+  --color-border-medium: rgba(118, 90, 51, 0.16);
+  --color-border-dark: rgba(118, 90, 51, 0.24);
+
+  --shadow-sm: 0 6px 16px rgba(82, 58, 28, 0.08);
+  --shadow: 0 14px 28px rgba(82, 58, 28, 0.1);
+  --shadow-md: 0 20px 42px rgba(82, 58, 28, 0.12);
+  --shadow-lg: 0 28px 56px rgba(82, 58, 28, 0.14);
+  --shadow-xl: 0 36px 76px rgba(82, 58, 28, 0.18);
+  --shadow-glow: 0 0 30px rgba(199, 143, 69, 0.12);
+  --shadow-glow-blue: 0 0 30px rgba(107, 135, 151, 0.12);
+  --shadow-glow-purple: 0 0 30px rgba(124, 95, 120, 0.12);
+
+  --panel-bg: linear-gradient(180deg, rgba(255, 252, 247, 0.94) 0%, rgba(244, 236, 223, 0.95) 100%);
+  --panel-bg-soft: linear-gradient(180deg, rgba(255, 252, 247, 0.8) 0%, rgba(244, 236, 223, 0.84) 100%);
+  --panel-border: 1px solid rgba(118, 90, 51, 0.14);
+  --panel-highlight: linear-gradient(90deg, rgba(184, 131, 63, 0.22), rgba(107, 135, 151, 0.08));
+  --panel-grid: rgba(118, 90, 51, 0.06);
 }
 
 /* 全局重置与基础样式 */
@@ -241,6 +259,7 @@ body {
   overscroll-behavior: none;
   -webkit-overscroll-behavior: none;
   touch-action: none; /* 防止触摸滚动 */
+  background-attachment: fixed;
 }
 
 /* 链接样式 */

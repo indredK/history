@@ -12,20 +12,17 @@
   position: relative;
   
   /* 添加微妙的边框光效 */
-  border-right: 2px solid transparent !important;
-  background-image: 
-    linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-card) 100%),
-    linear-gradient(90deg, 
-      rgba(255, 61, 0, 0.1) 0%,
-      rgba(3, 169, 244, 0.1) 50%,
-      rgba(76, 175, 80, 0.1) 100%);
+  border-right: 1px solid rgba(227, 193, 129, 0.12) !important;
+  background-image:
+    linear-gradient(180deg, rgba(255, 249, 236, 0.02) 0%, transparent 18%),
+    var(--panel-bg);
   background-origin: border-box;
   background-clip: padding-box, border-box;
   
   /* 添加整体阴影效果 */
   box-shadow: 
     var(--shadow-md),
-    inset -1px 0 0 rgba(255, 255, 255, 0.1) !important;
+    inset -1px 0 0 rgba(255, 255, 255, 0.04) !important;
 }
 
 /* 侧边栏标题区域优化 */
@@ -43,7 +40,7 @@
   height: 100%;
   background: linear-gradient(90deg, 
     transparent 0%, 
-    rgba(255, 255, 255, 0.2) 50%, 
+    rgba(241, 199, 132, 0.16) 50%, 
     transparent 100%);
   animation: titleShimmer 4s ease-in-out infinite;
 }
@@ -59,6 +56,7 @@
   background: linear-gradient(90deg, 
     transparent 0%,
     var(--color-border-medium) 20%,
+    rgba(107, 135, 151, 0.34) 50%,
     var(--color-border-medium) 80%,
     transparent 100%) !important;
   height: 1px !important;
@@ -142,6 +140,15 @@
 /* 侧边栏整体动画效果 */
 .app-sider {
   animation: sidebarSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-sider::after {
+  content: '';
+  position: absolute;
+  inset: 24px 12px 24px auto;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(227, 193, 129, 0.18), transparent);
+  pointer-events: none;
 }
 
 @keyframes sidebarSlideIn {

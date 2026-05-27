@@ -1,6 +1,6 @@
 import './TimelineList.css';
 import { Dynasty3DWheel, D3Timeline } from './components';
-import { Box, Paper } from '@mui/material';
+import { Box, Paper, Stack, Typography } from '@mui/material';
 import { useDynastyStore } from '@/store';
 import { dynastyUtils } from '@/config';
 
@@ -15,36 +15,63 @@ export function TimelineList() {
     <Paper 
       className="timeline-list-container glass-card animate__animated animate__fadeIn" 
       sx={{ 
-        padding: 2, 
+        padding: { xs: 2, md: 3 },
         overflow: 'hidden', 
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%', 
-        backgroundColor: 'rgba(255, 255, 255, var(--glass-card-bg-opacity, 0.6))', 
-        backdropFilter: 'blur(var(--glass-card-blur, 12px))',
-        WebkitBackdropFilter: 'blur(var(--glass-card-blur, 12px))',
-        border: '1px solid rgba(255, 255, 255, 0.18)',
-        borderRadius: 'var(--glass-radius-xl, 24px)',
-        boxShadow: 'var(--glass-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12))'
+        background: 'var(--panel-bg)',
+        border: 'var(--panel-border)',
+        borderRadius: 'var(--panel-radius)',
+        boxShadow: 'var(--shadow-lg)'
       }}
     >
+      <Stack
+        direction={{ xs: 'column', lg: 'row' }}
+        spacing={2}
+        sx={{ mb: 2, alignItems: { xs: 'flex-start', lg: 'flex-end' } }}
+      >
+        <Box sx={{ flex: 1, minWidth: 0 }}>
+          <Typography
+            sx={{
+              fontFamily: 'var(--font-family-serif)',
+              fontSize: { xs: '1.4rem', md: '1.9rem' },
+              color: 'var(--color-text-primary)',
+              lineHeight: 1.15,
+              mb: 0.5,
+            }}
+          >
+            历史时间轴
+          </Typography>
+          <Typography
+            sx={{
+              color: 'var(--color-text-secondary)',
+              maxWidth: 760,
+              fontSize: { xs: '0.9rem', md: '0.98rem' },
+            }}
+          >
+            以朝代切片进入中国历史的长时段叙事，联动人物、疆域与事件脉络。
+          </Typography>
+        </Box>
+        <Box className="timeline-list-meta">
+          <span>Chronology</span>
+          <strong>{selectedDynasty?.name ?? '全时段'}</strong>
+        </Box>
+      </Stack>
 
-      
       {/* 上下布局容器 */}
       <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 2, overflow: 'hidden' }}>
         {/* 朝代选择区域 - 毛玻璃效果 */}
         <Paper 
           className="glass-card"
           sx={{ 
-            padding: 2, 
+            padding: { xs: 1.5, md: 2 }, 
             overflow: 'hidden', 
             maxHeight: '30vh', 
-            backgroundColor: 'rgba(255, 255, 255, 0.5)', 
-            backdropFilter: 'blur(var(--glass-blur-light, 12px))',
-            WebkitBackdropFilter: 'blur(var(--glass-blur-light, 12px))',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
-            borderRadius: 'var(--glass-radius-lg, 16px)',
-            boxShadow: 'var(--glass-shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.1))'
+            background: 'var(--panel-bg-soft)',
+            border: 'var(--panel-border)',
+            borderRadius: '14px',
+            boxShadow: 'var(--shadow-sm)'
           }}
         >
           <Dynasty3DWheel />
@@ -55,21 +82,21 @@ export function TimelineList() {
           className="timeline-content-area"
           sx={{ 
             flex: 1, 
-            padding: 2, 
+            padding: { xs: 1.5, md: 2 }, 
             overflow: 'hidden', 
             display: 'flex', 
             flexDirection: 'column', 
-            // 应用朝代背景颜色，如果没有选中朝代则使用默认颜色
-            backgroundColor: selectedDynasty ? `${bgColor} !important` : 'rgba(255, 255, 255, 0.5)',
-            backdropFilter: 'blur(var(--glass-blur-light, 12px))',
-            WebkitBackdropFilter: 'blur(var(--glass-blur-light, 12px))',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
-            borderRadius: 'var(--glass-radius-lg, 16px)',
-            boxShadow: 'var(--glass-shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.1))',
-            transition: 'background-color 350ms cubic-bezier(0.4, 0, 0.2, 1)',
-            // 禁用悬停时的背景颜色变化
+            background: selectedDynasty
+              ? `linear-gradient(180deg, ${bgColor} 0%, var(--color-bg-card) 100%)`
+              : 'var(--panel-bg-soft)',
+            border: 'var(--panel-border)',
+            borderRadius: '14px',
+            boxShadow: 'var(--shadow-sm)',
+            transition: 'background 350ms cubic-bezier(0.4, 0, 0.2, 1)',
             '&:hover': {
-              backgroundColor: selectedDynasty ? `${bgColor} !important` : 'rgba(255, 255, 255, 0.6)',
+              background: selectedDynasty
+                ? `linear-gradient(180deg, ${bgColor} 0%, var(--color-bg-card) 100%)`
+                : 'var(--panel-bg-soft)',
             }
           }}
         >

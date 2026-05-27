@@ -3,23 +3,24 @@ import { Box, Typography } from '@mui/material';
 export function Footer() {
   return (
     <Box component="footer" sx={{ 
-      py: 1, 
+      py: 1.25,
       px: 3, 
       mt: 'auto', 
-      background: 'linear-gradient(135deg, var(--color-bg-secondary) 0%, var(--color-bg-tertiary) 100%)',
-      borderTop: '1px solid var(--color-border-medium)',
-      boxShadow: '0 -4px 20px rgba(0,0,0,0.1)',
+      background: 'linear-gradient(180deg, rgba(18, 15, 13, 0) 0%, rgba(18, 15, 13, 0.72) 100%)',
+      borderTop: '1px solid var(--color-border-light)',
+      boxShadow: 'none',
       textAlign: 'center',
       transition: 'all var(--transition-normal)'
     }} className="app-footer">
       <Typography variant="caption" align="center" sx={{ 
-        fontSize: '0.7rem',
+        fontSize: '0.72rem',
         color: 'var(--color-text-tertiary)',
-        textShadow: '0 1px 2px rgba(0,0,0,0.3)',
+        letterSpacing: '0.14em',
+        textTransform: 'uppercase',
         transition: 'all var(--transition-normal)',
         display: 'block'
       }}>
-        © 2025 中国历史全景 | Chinese Historical Panorama | MIT License
+        Chinese Historical Panorama Archive Console
       </Typography>
     </Box>
   );
