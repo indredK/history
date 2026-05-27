@@ -21,7 +21,7 @@
 
 /* 滚动时显示滚动条 */
 .scroll-container.scrolling {
-  scrollbar-color: var(--glass-scrollbar-thumb, rgba(255, 255, 255, 0.5)) transparent;
+  scrollbar-color: var(--glass-scrollbar-thumb, rgba(226, 198, 140, 0.5)) transparent;
 }
 
 /* Webkit 浏览器滚动条样式 */
@@ -43,29 +43,29 @@
 
 /* 滚动时显示滚动条滑块 */
 .scroll-container.scrolling::-webkit-scrollbar-thumb {
-  background: var(--glass-scrollbar-thumb, rgba(255, 255, 255, 0.5));
+  background: var(--glass-scrollbar-thumb, rgba(226, 198, 140, 0.5));
 }
 
 /* 悬停时显示滚动条 */
 .scroll-container:hover::-webkit-scrollbar-thumb {
-  background: var(--glass-scrollbar-thumb, rgba(255, 255, 255, 0.4));
+  background: var(--glass-scrollbar-thumb, rgba(226, 198, 140, 0.4));
 }
 
 .scroll-container:hover::-webkit-scrollbar-thumb:hover {
-  background: var(--glass-scrollbar-thumb-hover, rgba(255, 255, 255, 0.6));
+  background: var(--glass-scrollbar-thumb-hover, rgba(226, 198, 140, 0.6));
 }
 
 /* 白天模式滚动条 */
 [data-theme="light"] .scroll-container.scrolling::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(118, 90, 51, 0.3);
 }
 
 [data-theme="light"] .scroll-container:hover::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(118, 90, 51, 0.2);
 }
 
 [data-theme="light"] .scroll-container:hover::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(118, 90, 51, 0.4);
 }
 
 /* 移动端优化 */

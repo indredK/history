@@ -92,7 +92,7 @@ export function useGlassStyle(
     const {
       blur = 'medium',
       bgOpacity = 'medium',
-      bgColor = 'rgba(255, 255, 255,',
+      bgColor = 'rgba(var(--glass-surface-rgb),',
       borderRadius = 'md',
       shadow = 'md',
       hover = false
@@ -259,7 +259,7 @@ export function useComponentGlassStyle(
         ? {
             backdropFilter: `blur(${blur})`,
             WebkitBackdropFilter: `blur(${blur})`,
-            backgroundColor: `rgba(255, 255, 255, ${bgOpacity})`,
+            backgroundColor: `rgba(var(--glass-surface-rgb), ${bgOpacity})`,
             border: `${config.border.width} solid ${config.border.color}`,
             borderRadius: config.border.radius.md,
             boxShadow: config.shadow.md,
@@ -296,7 +296,7 @@ export function useComponentGlassStyle(
         
         hoverStyle = enableBlur
           ? {
-              backgroundColor: `rgba(255, 255, 255, ${hoverOpacity})`,
+              backgroundColor: `rgba(var(--glass-surface-rgb), ${hoverOpacity})`,
               boxShadow: config.shadow.lg,
               transition: `all ${hoverTransition} ${config.animation.easing}`
             }

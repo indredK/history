@@ -82,7 +82,7 @@ export function getGlassStyle(
   const {
     blur = 'medium',
     bgOpacity = 'medium',
-    bgColor = 'rgba(255, 255, 255,',
+    bgColor = 'rgba(var(--glass-surface-rgb),',
     borderRadius = 'md',
     shadow = 'md'
   } = options;
@@ -125,7 +125,7 @@ export function getComponentGlassStyle(
     return {
       backdropFilter: `blur(${componentConfig.blur})`,
       WebkitBackdropFilter: `blur(${componentConfig.blur})`,
-      backgroundColor: `rgba(255, 255, 255, ${componentConfig.bgOpacity})`,
+      backgroundColor: `rgba(var(--glass-surface-rgb), ${componentConfig.bgOpacity})`,
       border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
       borderRadius: glassConfig.border.radius.md,
       boxShadow: glassConfig.shadow.md,

@@ -93,7 +93,7 @@ export function ResponsiveTable({
           padding: tableStyles.cellPadding,
           fontSize: tableStyles.fontSize,
           lineHeight: 1.2,
-          borderRight: `1px solid ${glassEffect ? glassConfig.border.color : 'rgba(255,255,255,0.1)'}`,
+          borderRight: `1px solid ${glassEffect ? glassConfig.border.color : 'rgba(226, 198, 140, 0.1)'}`,
           
           // 移动端优化
           ...(isMobile && {
@@ -203,7 +203,7 @@ export function ResponsiveTableCell({
             backgroundColor: component === 'th' 
               ? 'var(--color-primary-gradient, linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%))'
               : 'var(--color-bg-card)',
-            borderRight: '1px solid rgba(255,255,255,0.2)',
+            borderRight: '1px solid rgba(226, 198, 140, 0.18)',
             boxShadow: '2px 0 4px rgba(0,0,0,0.1)',
           }),
         }),

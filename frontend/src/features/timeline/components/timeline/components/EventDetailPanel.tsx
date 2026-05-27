@@ -15,8 +15,9 @@ export function EventDetailPanel({ event, isFavorite, onToggleFavorite, onShare 
       sx={{ 
         mt: 2, 
         p: 2, 
-        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        backgroundColor: 'rgba(var(--glass-surface-rgb), 0.95)',
         backdropFilter: 'blur(10px)',
+        border: '1px solid var(--theme-glass-border)',
         maxHeight: '200px',
         overflow: 'auto'
       }}
