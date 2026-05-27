@@ -45,6 +45,30 @@ function eventEnd(event: Event): number {
   return event.endYear ?? event.startYear;
 }
 
+// 第一个 startYear >= year 的下标(已按 startYear 升序)
+function lowerBound(events: Event[], year: number): number {
+  let lo = 0;
+  let hi = events.length;
+  while (lo < hi) {
+    const mid = (lo + hi) >>> 1;
+    if (events[mid]!.startYear < year) lo = mid + 1;
+    else hi = mid;
+  }
+  return lo;
+}
+
+// 第一个 startYear > year 的下标
+function upperBound(events: Event[], year: number): number {
+  let lo = 0;
+  let hi = events.length;
+  while (lo < hi) {
+    const mid = (lo + hi) >>> 1;
+    if (events[mid]!.startYear <= year) lo = mid + 1;
+    else hi = mid;
+  }
+  return lo;
+}
+
 function buildBoundsRange(events: Event[], dynasties: Dynasty[]): [number, number] {
   const years: number[] = [];
   for (const e of events) {
@@ -157,7 +181,8 @@ export function EChartsTimeline({
   );
 
   // 根据当前可视范围 + 容器宽度,贪心决定哪些事件显示文字标签
-  const applyLoD = useCallback(
+  // 上千条事件时:① 视口裁剪只渲染可见范围 ② rAF 节流避免高频重算
+  const applyLoDImmediate = useCallback(
     (startValue: number, endValue: number) => {
       const chart = chartRef.current;
       const container = containerRef.current;
@@ -169,8 +194,19 @@ export function EChartsTimeline({
       const pxPerYear = innerWidth / span;
       const MIN_LABEL_GAP_PX = 88; // 相邻标签最小像素间距
 
+      // 视口裁剪:左右各留 10% 边距,避免边缘点突然弹出/消失
+      const margin = span * 0.1;
+      const lo = startValue - margin;
+      const hi = endValue + margin;
+
+      // sortedEvents 已按 startYear 升序,二分定位可见区间
+      const startIdx = lowerBound(sortedEvents, lo);
+      const endIdx = upperBound(sortedEvents, hi);
+
       let lastLabelPx = -Infinity;
-      const data = sortedEvents.map((ev) => {
+      const data = [];
+      for (let i = startIdx; i < endIdx; i++) {
+        const ev = sortedEvents[i]!;
         const inView = ev.startYear >= startValue && ev.startYear <= endValue;
         const px = (ev.startYear - startValue) * pxPerYear;
         let showLabel = false;
@@ -178,12 +214,12 @@ export function EChartsTimeline({
           showLabel = true;
           lastLabelPx = px;
         }
-        return {
+        data.push({
           value: [ev.startYear, EVENT_Y],
           event: ev,
           label: { show: showLabel },
-        };
-      });
+        });
+      }
 
       // 朝代名:色带在视口内的可见像素宽度够放下名字才显示
       const bandData = buildBandData(dynasties, (d) => {
@@ -207,6 +243,28 @@ export function EChartsTimeline({
     },
     [sortedEvents, dynasties],
   );
+
+  // rAF 节流:同一帧内多次 dataZoom 只跑最后一次
+  const rafRef = useRef<number | null>(null);
+  const pendingRangeRef = useRef<[number, number] | null>(null);
+  const applyLoD = useCallback(
+    (startValue: number, endValue: number) => {
+      pendingRangeRef.current = [startValue, endValue];
+      if (rafRef.current !== null) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        const range = pendingRangeRef.current;
+        if (range) applyLoDImmediate(range[0], range[1]);
+      });
+    },
+    [applyLoDImmediate],
+  );
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   const option = useMemo(() => {
     const eventData = events.map((e) => ({
