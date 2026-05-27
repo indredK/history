@@ -7,11 +7,15 @@ import { Footer } from './Footer';
 import { DataSourceIndicator } from '@/components/DataSourceIndicator';
 import { useThemeStore, useStyleStore } from '@/store';
 import { useSidebar, useResponsive, useOrientation } from '@/hooks';
-import { routes } from '@/router/routes';
+import type { RouteConfig } from '@/router/routes';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import { getGlassConfig } from '@/config/glassConfig';
 
-export function AppLayout() {
+interface AppLayoutProps {
+  routes: RouteConfig[];
+}
+
+export function AppLayout({ routes }: AppLayoutProps) {
   const location = useLocation();
   const { collapsed: sidebarCollapsed, toggle: toggleSidebar } = useSidebar();
   const { isMobile, isSmallMobile, screenWidth } = useResponsive();

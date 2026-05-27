@@ -1,8 +1,9 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { routes } from './routes';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
+import { AppLayout } from '@/layouts/AppLayout';
 
 // 404 页同样走懒加载,首屏不必下载
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
@@ -16,33 +17,19 @@ const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
  */
 export function AppRouter() {
   return (
-    <BrowserRouter>
-      <Suspense fallback={<LoadingSkeleton variant="page" />}>
-        <Routes>
-          {/* 根路径重定向到时间轴 */}
-          <Route path="/" element={<Navigate to="/timeline" replace />} />
-          {routes.map((route) => (
-            <Route
-              key={route.key}
-              path={route.path}
-              element={
-                <ErrorBoundary>
-                  <route.component />
-                </ErrorBoundary>
-              }
-            />
-          ))}
-          {/* 未匹配路径渲染 404 */}
-          <Route
-            path="*"
-            element={
-              <ErrorBoundary>
-                <NotFoundPage />
-              </ErrorBoundary>
-            }
-          />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <Suspense fallback={<LoadingSkeleton variant="page" />}>
+      <Routes>
+        <Route path="/" element={<Navigate to="/timeline" replace />} />
+        <Route path="/*" element={<AppLayout routes={routes} />} />
+        <Route
+          path="*"
+          element={
+            <ErrorBoundary>
+              <NotFoundPage />
+            </ErrorBoundary>
+          }
+        />
+      </Routes>
+    </Suspense>
   );
 }
