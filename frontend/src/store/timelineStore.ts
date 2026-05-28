@@ -18,14 +18,14 @@ interface TimelineState {
   currentTimeRange: [number, number] | null;
   expandedClusterId: string | null;
 
-  setSelectedDynastyIds: (_dynastyIds: string[]) => void;
+  setSelectedDynastyIds: (_dynastyIds: string[] | ((current: string[]) => string[])) => void;
   toggleSelectedDynastyId: (_dynastyId: string) => void;
   setSelectedEventTypes: (_eventTypes: string[]) => void;
   toggleSelectedEventType: (_eventType: string) => void;
   setKeyword: (_keyword: string) => void;
   setJumpRange: (_jumpRange: TimelineJumpRange | null) => void;
   setSelectedEventId: (_eventId: string | null) => void;
-  setHighlightedDynastyId: (_dynastyId: string | null) => void;
+  setHighlightedDynastyId: (_dynastyId: string | null | ((current: string | null) => string | null)) => void;
   setDensityMode: (_mode: TimelineDensityMode) => void;
   setCurrentTimeRange: (_range: [number, number] | null) => void;
   setExpandedClusterId: (_clusterId: string | null) => void;
@@ -48,7 +48,11 @@ export const useTimelineStore = create<TimelineState>((set) => ({
   currentTimeRange: null,
   expandedClusterId: null,
 
-  setSelectedDynastyIds: (_dynastyIds) => set({ selectedDynastyIds: _dynastyIds }),
+  setSelectedDynastyIds: (_dynastyIds) =>
+    set((state) => ({
+      selectedDynastyIds:
+        typeof _dynastyIds === 'function' ? _dynastyIds(state.selectedDynastyIds) : _dynastyIds,
+    })),
   toggleSelectedDynastyId: (_dynastyId) =>
     set((state) => ({
       selectedDynastyIds: state.selectedDynastyIds.includes(_dynastyId)
@@ -67,7 +71,11 @@ export const useTimelineStore = create<TimelineState>((set) => ({
   setKeyword: (_keyword) => set({ keyword: _keyword }),
   setJumpRange: (_jumpRange) => set({ jumpRange: _jumpRange }),
   setSelectedEventId: (_eventId) => set({ selectedEventId: _eventId }),
-  setHighlightedDynastyId: (_dynastyId) => set({ highlightedDynastyId: _dynastyId }),
+  setHighlightedDynastyId: (_dynastyId) =>
+    set((state) => ({
+      highlightedDynastyId:
+        typeof _dynastyId === 'function' ? _dynastyId(state.highlightedDynastyId) : _dynastyId,
+    })),
   setDensityMode: (_mode) => set({ densityMode: _mode }),
   setCurrentTimeRange: (_range) => set({ currentTimeRange: _range }),
   setExpandedClusterId: (_clusterId) => set({ expandedClusterId: _clusterId }),

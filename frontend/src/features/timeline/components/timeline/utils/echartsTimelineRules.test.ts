@@ -8,6 +8,7 @@ import {
   findDynastyContainingYear,
   findDynastyForRangeStart,
   focusRangeToDynasty,
+  focusRangeToDynastyWithPadding,
   getHighlightedDynastyIdsForRange,
   moveRangeToDynasty,
   moveRangeToEvent,
@@ -51,6 +52,12 @@ describe('echartsTimelineRules', () => {
     const dynasty = makeDynasty({ id: 'tang', name: '唐', startYear: 618, endYear: 907 });
 
     expect(focusRangeToDynasty(dynasty, [-500, 1200])).toEqual([618, 907]);
+  });
+
+  it('focuses to a dynasty range with small context padding on both sides', () => {
+    const dynasty = makeDynasty({ id: 'tang', name: '唐', startYear: 618, endYear: 907 });
+
+    expect(focusRangeToDynastyWithPadding(dynasty, [-500, 1200])).toEqual([595, 930]);
   });
 
   it('aligns an oversized window to the dynasty start without changing the span', () => {

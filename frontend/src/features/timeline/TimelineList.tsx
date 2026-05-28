@@ -11,6 +11,8 @@ import {
   buildTimelineYearClusters,
   deriveTimelineEvents,
   filterTimelineEvents,
+  shouldUseClusterMode,
+  shouldUseMajorOnlyMode,
 } from './utils/timelineFilters';
 import { useMemo } from 'react';
 
@@ -22,6 +24,7 @@ export function TimelineList() {
     keyword,
     jumpRange,
     densityMode,
+    currentTimeRange,
     setSelectedDynastyIds,
     setHighlightedDynastyId,
     setCurrentTimeRange,
@@ -54,19 +57,22 @@ export function TimelineList() {
     [derivedEvents, jumpRange, keyword, selectedDynastyIds, selectedEventTypes],
   );
   const densityFilteredEvents = useMemo(() => {
-    if (densityMode === 'major-only') {
+    if (shouldUseMajorOnlyMode(densityMode, currentTimeRange)) {
       return filteredEvents.filter((event) => event.isMajor);
     }
 
     return filteredEvents;
-  }, [densityMode, filteredEvents]);
+  }, [currentTimeRange, densityMode, filteredEvents]);
   const yearClusters = useMemo(
-    () => buildTimelineYearClusters(densityFilteredEvents),
-    [densityFilteredEvents],
+    () => (shouldUseClusterMode(currentTimeRange) ? buildTimelineYearClusters(densityFilteredEvents) : []),
+    [currentTimeRange, densityFilteredEvents],
   );
   const dynastyClusters = useMemo(
-    () => buildTimelineDynastyClusters(densityFilteredEvents, data?.dynasties ?? []),
-    [data?.dynasties, densityFilteredEvents],
+    () =>
+      shouldUseClusterMode(currentTimeRange)
+        ? buildTimelineDynastyClusters(densityFilteredEvents, data?.dynasties ?? [])
+        : [],
+    [currentTimeRange, data?.dynasties, densityFilteredEvents],
   );
 
   const timelineContent = (() => {
@@ -100,8 +106,10 @@ export function TimelineList() {
         dynastiesData={data?.dynasties ?? []}
         onTimeRangeChange={setCurrentTimeRange}
         onDynastyClick={(dynasty) => {
-          setSelectedDynastyIds([dynasty.id]);
-          setHighlightedDynastyId(dynasty.id);
+          setSelectedDynastyIds((current) =>
+            current.length === 1 && current[0] === dynasty.id ? [] : [dynasty.id],
+          );
+          setHighlightedDynastyId((current) => (current === dynasty.id ? null : dynasty.id));
         }}
         onDynastyDoubleClick={(dynasty) => {
           setHighlightedDynastyId(dynasty.id);

@@ -59,6 +59,18 @@ export function focusRangeToDynasty(dynasty: Dynasty, bounds: TimeRange): TimeRa
   return clampRangeToBounds(getDynastyRange(dynasty), bounds);
 }
 
+export function focusRangeToDynastyWithPadding(
+  dynasty: Dynasty,
+  bounds: TimeRange,
+  paddingRatio = 0.08,
+  minPadding = 10,
+): TimeRange {
+  const [start, end] = getDynastyRange(dynasty);
+  const span = Math.max(end - start, 1);
+  const padding = Math.max(Math.round(span * paddingRatio), minPadding);
+  return shiftRangeWithinBounds([start - padding, end + padding], bounds);
+}
+
 export function clampRangeToBounds(range: TimeRange, bounds: TimeRange): TimeRange {
   return [
     Math.max(bounds[0], Math.min(range[0], range[1])),

@@ -138,6 +138,33 @@ export function buildTimelineYearClusters(events: TimelineDerivedEvent[]): Timel
     });
 }
 
+export function shouldUseMajorOnlyMode(
+  densityMode: 'auto' | 'major-only' | 'all',
+  range: [number, number] | null,
+  threshold = 300,
+): boolean {
+  if (densityMode === 'major-only') {
+    return true;
+  }
+
+  if (densityMode === 'all' || !range) {
+    return false;
+  }
+
+  return Math.abs(range[1] - range[0]) > threshold;
+}
+
+export function shouldUseClusterMode(
+  range: [number, number] | null,
+  threshold = 180,
+): boolean {
+  if (!range) {
+    return false;
+  }
+
+  return Math.abs(range[1] - range[0]) > threshold;
+}
+
 export function buildTimelineDynastyClusters(
   events: TimelineDerivedEvent[],
   dynasties: Dynasty[],

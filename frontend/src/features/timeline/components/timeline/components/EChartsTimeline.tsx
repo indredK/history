@@ -20,6 +20,7 @@ import {
   eventEnd,
   eventOverlapsRange,
   focusRangeToDynasty,
+  focusRangeToDynastyWithPadding,
   getDynastyRange,
   getHighlightedDynastyIdsForRange,
   isSameRange,
@@ -1498,7 +1499,7 @@ export function EChartsTimeline({
 
   const handleDynastyDoubleClick = useCallback(
     (dynasty: Dynasty) => {
-      const nextRange = focusRangeToDynasty(dynasty, boundsRange);
+      const nextRange = focusRangeToDynastyWithPadding(dynasty, boundsRange);
       applyNextRange(nextRange);
     },
     [applyNextRange, boundsRange],
