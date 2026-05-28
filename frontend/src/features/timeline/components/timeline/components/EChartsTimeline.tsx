@@ -19,6 +19,7 @@ import {
   clampRangeToBounds,
   eventEnd,
   eventOverlapsRange,
+  focusRangeToDynastyWithContext,
   focusRangeToDynasty,
   focusRangeToDynastyWithPadding,
   getDynastyRange,
@@ -1590,7 +1591,7 @@ export function EChartsTimeline({
     : highlightedDynastyNames.length > 0
       ? highlightedDynastyNames.join('、')
       : '未高亮';
-  const hasDynastyEventHighlight = highlightedDynastyId !== null;
+  const hasDynastyFocus = highlightedDynastyId !== null;
   const selectedEvent = useMemo(
     () => (selectedEventId ? events.find((e) => e.id === selectedEventId) ?? null : null),
     [events, selectedEventId],
@@ -1681,11 +1682,13 @@ export function EChartsTimeline({
 
   const handleDynastySingleClick = useCallback(
     (dynasty: Dynasty) => {
+      const nextRange = focusRangeToDynastyWithContext(dynasty, boundsRange);
       setHighlightedDynastyId((current) =>
         current === dynasty.id ? null : dynasty.id,
       );
+      applyNextRange(nextRange);
     },
-    [],
+    [applyNextRange, boundsRange],
   );
 
   const handleDynastyDoubleClick = useCallback(
@@ -1880,7 +1883,7 @@ export function EChartsTimeline({
             }}
           >
             <Box component="span" sx={{ color: colors.headerMuted, whiteSpace: 'nowrap', flexShrink: 0 }}>
-              {hasDynastyEventHighlight ? '筛选事件' : '当前焦点'}
+              {hasDynastyFocus ? '朝代聚焦' : '当前焦点'}
             </Box>
             <Box
               component="span"

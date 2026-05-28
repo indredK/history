@@ -71,6 +71,25 @@ export function focusRangeToDynastyWithPadding(
   return shiftRangeWithinBounds([start - padding, end + padding], bounds);
 }
 
+export function focusRangeToDynastyWithContext(
+  dynasty: Dynasty,
+  bounds: TimeRange,
+  contextRatio = 0.35,
+  minContext = 40,
+  centerBias = 0.08,
+): TimeRange {
+  const [start, end] = getDynastyRange(dynasty);
+  const span = Math.max(end - start, 1);
+  const context = Math.max(Math.round(span * contextRatio), minContext);
+  const shiftedCenter = ((start + end) / 2) + (span * centerBias);
+  const halfSpan = (span + context * 2) / 2;
+
+  return shiftRangeWithinBounds(
+    [shiftedCenter - halfSpan, shiftedCenter + halfSpan],
+    bounds,
+  );
+}
+
 export function clampRangeToBounds(range: TimeRange, bounds: TimeRange): TimeRange {
   return [
     Math.max(bounds[0], Math.min(range[0], range[1])),

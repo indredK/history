@@ -26,8 +26,6 @@ export function TimelineList() {
     densityMode,
     currentTimeRange,
     selectedEventId,
-    setSelectedDynastyIds,
-    setHighlightedDynastyId,
     setCurrentTimeRange,
     setSelectedEventId,
     resetViewState,
@@ -133,15 +131,6 @@ export function TimelineList() {
         showEventDetail={false}
         onTimeRangeChange={setCurrentTimeRange}
         onEventClick={(event) => setSelectedEventId(event.id)}
-        onDynastyClick={(dynasty) => {
-          setSelectedDynastyIds((current) =>
-            current.length === 1 && current[0] === dynasty.id ? [] : [dynasty.id],
-          );
-          setHighlightedDynastyId((current) => (current === dynasty.id ? null : dynasty.id));
-        }}
-        onDynastyDoubleClick={(dynasty) => {
-          setHighlightedDynastyId(dynasty.id);
-        }}
         onReset={() => {
           resetViewState();
           setStableTimeRange(null);
