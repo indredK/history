@@ -1,0 +1,30 @@
+{
+  "dynasty": {
+    "id": "13cbf547-ce68-4d81-9d28-b8576f08b26b",
+    "name": "东晋朝",
+    "name_en": "Eastern Jin",
+    "slug": "eastern-jin",
+    "startYear": 317,
+    "endYear": 420,
+    "color": "#B8860B",
+    "capital": null,
+    "founder": null,
+    "description": "晋朝后期，定都建康"
+  },
+  "events": [
+    {
+      "id": "a807a640-4643-4fc5-aff6-2cbd04441f8e",
+      "dynastyId": "13cbf547-ce68-4d81-9d28-b8576f08b26b",
+      "time": {
+        "startYear": 383,
+        "endYear": 383
+      },
+      "title": "淝水之战",
+      "description": "东晋以少胜多，击败前秦苻坚的百万大军，阻止了北方游牧民族的南侵。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "dynasty": {
+    "id": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+    "name": "东周朝",
+    "name_en": "Eastern Zhou",
+    "slug": "eastern-zhou",
+    "startYear": -770,
+    "endYear": -256,
+    "color": "#5F9EA0",
+    "capital": null,
+    "founder": null,
+    "description": "周朝后期，定都洛邑，包括春秋战国时期"
+  },
+  "events": [
+    {
+      "id": "a9e3a4bb-f391-4738-849d-c7d929efe6c4",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -770,
+        "endYear": -770
+      },
+      "title": "周平王东迁",
+      "description": "周平王将都城从镐京迁至洛邑，东周开始，春秋战国时期拉开序幕。",
+      "eventType": [
+        "political_event",
+        "capital_move"
+      ]
+    },
+    {
+      "id": "bf6bd645-2d26-4747-aae8-57ecb16e9d40",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -685,
+        "endYear": -643
+      },
+      "title": "齐桓公称霸",
+      "description": "齐桓公任用管仲为相，推行改革，提出'尊王攘夷'的口号，成为春秋时期第一位霸主。",
+      "eventType": [
+        "political_event",
+        "hegemony"
+      ]
+    },
+    {
+      "id": "bf3ba46c-dc64-4eba-aeb0-f729dda9361d",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -632,
+        "endYear": -632
+      },
+      "title": "晋文公践土之盟",
+      "description": "晋文公在城濮之战击败楚军后，在践土与诸侯会盟，被周襄王策命为'侯伯'，成为春秋第二位霸主。",
+      "eventType": [
+        "political_event",
+        "alliance"
+      ]
+    },
+    {
+      "id": "6032ae3f-a88a-4be0-89c3-ffdf585e179a",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -606,
+        "endYear": -606
+      },
+      "title": "楚庄王问鼎中原",
+      "description": "楚庄王率军北伐至洛邑，向周王使者询问九鼎的大小轻重，显示了其取代周室的野心。",
+      "eventType": [
+        "political_event",
+        "challenge"
+      ]
+    },
+    {
+      "id": "8d3c019e-9755-4ebc-a0cd-84d9ef5d6502",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -453,
+        "endYear": -403
+      },
+      "title": "三家分晋",
+      "description": "韩、赵、魏三家大夫瓜分了晋国，标志着春秋时期结束，战国时期开始。",
+      "eventType": [
+        "political_event",
+        "state_formation"
+      ]
+    },
+    {
+      "id": "dd225d18-6dd3-4ecb-9b9d-758e72b3925c",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -386,
+        "endYear": -386
+      },
+      "title": "田氏代齐",
+      "description": "田氏家族取代姜姓吕氏成为齐国国君，战国七雄格局正式形成。",
+      "eventType": [
+        "political_event",
+        "coup"
+      ]
+    },
+    {
+      "id": "9f02da17-178f-410c-b623-42b50ab4b915",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -356,
+        "endYear": -338
+      },
+      "title": "商鞅变法",
+      "description": "商鞅在秦国推行变法，包括废除世卿世禄制、实行郡县制、奖励耕战等，使秦国逐渐强大。",
+      "eventType": [
+        "political_reform",
+        "legalist"
+      ]
+    },
+    {
+      "id": "1242ffcf-3050-4ea4-95d3-38d4ec1763ac",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -354,
+        "endYear": -353
+      },
+      "title": "围魏救赵",
+      "description": "孙膑采用'围魏救赵'的策略，率军围攻魏国都城大梁，迫使魏军回援，解了赵国之围。",
+      "eventType": [
+        "war",
+        "military_strategy"
+      ]
+    },
+    {
+      "id": "6cef7dd2-2b47-4bda-a6ba-5351b1a1edce",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -260,
+        "endYear": -260
+      },
+      "title": "长平之战",
+      "description": "秦国与赵国在长平展开决战，最终秦国获胜，坑杀赵军四十万，赵国从此一蹶不振。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    }
+  ]
+}

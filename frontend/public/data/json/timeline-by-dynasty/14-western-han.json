@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "1a1bd155-e073-4826-8127-e33d283cfa50",
+    "name": "西汉朝",
+    "name_en": "Western Han",
+    "slug": "western-han",
+    "startYear": -202,
+    "endYear": 8,
+    "color": "#DC143C",
+    "capital": null,
+    "founder": null,
+    "description": "汉朝前期，定都长安"
+  },
+  "events": []
+}

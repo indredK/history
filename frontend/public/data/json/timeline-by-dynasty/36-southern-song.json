@@ -1,0 +1,86 @@
+{
+  "dynasty": {
+    "id": "4cddf56f-f748-4f2d-892a-98d73a144f63",
+    "name": "南宋朝",
+    "name_en": "Southern Song",
+    "slug": "southern-song",
+    "startYear": 1127,
+    "endYear": 1279,
+    "color": "#808000",
+    "capital": null,
+    "founder": null,
+    "description": "宋朝后期，定都临安"
+  },
+  "events": [
+    {
+      "id": "1944e77a-094b-49d4-af7a-9d8b542f4da5",
+      "dynastyId": "4cddf56f-f748-4f2d-892a-98d73a144f63",
+      "time": {
+        "startYear": 1127,
+        "endYear": 1127
+      },
+      "title": "南宋建立",
+      "description": "赵构在应天府称帝，建立南宋政权，后迁都临安。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "dad1f995-ccfa-4733-b874-af9f974e14d8",
+      "dynastyId": "4cddf56f-f748-4f2d-892a-98d73a144f63",
+      "time": {
+        "startYear": 1127,
+        "endYear": 1142
+      },
+      "title": "岳飞抗金",
+      "description": "岳飞率领岳家军抗击金兵，收复失地，是南宋抗金名将。",
+      "eventType": [
+        "war",
+        "military_campaign"
+      ]
+    },
+    {
+      "id": "0fb251ed-164f-4d27-851b-003541f4c2cc",
+      "dynastyId": "4cddf56f-f748-4f2d-892a-98d73a144f63",
+      "time": {
+        "startYear": 1141,
+        "endYear": 1141
+      },
+      "title": "绍兴和议",
+      "description": "南宋与金国签订和约，南宋向金国称臣纳贡，双方以淮水-大散关为界。",
+      "eventType": [
+        "diplomatic_event",
+        "treaty"
+      ]
+    },
+    {
+      "id": "1e16ddcf-8dd0-483f-80c5-89b922a36929",
+      "dynastyId": "4cddf56f-f748-4f2d-892a-98d73a144f63",
+      "time": {
+        "startYear": 1206,
+        "endYear": 1206
+      },
+      "title": "蒙古统一",
+      "description": "铁木真统一蒙古各部，建立大蒙古国，被尊称为成吉思汗。",
+      "eventType": [
+        "political_event",
+        "unification"
+      ]
+    },
+    {
+      "id": "1d5b619d-8817-4d84-a266-30ecbfaa51af",
+      "dynastyId": "4cddf56f-f748-4f2d-892a-98d73a144f63",
+      "time": {
+        "startYear": 1235,
+        "endYear": 1279
+      },
+      "title": "蒙宋战争",
+      "description": "蒙古帝国对南宋的征服战争，最终南宋灭亡。",
+      "eventType": [
+        "war",
+        "conquest"
+      ]
+    }
+  ]
+}

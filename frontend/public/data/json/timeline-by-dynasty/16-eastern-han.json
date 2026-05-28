@@ -1,0 +1,86 @@
+{
+  "dynasty": {
+    "id": "50126885-0214-4d92-a42a-e3d5ed258018",
+    "name": "东汉朝",
+    "name_en": "Eastern Han",
+    "slug": "eastern-han",
+    "startYear": 25,
+    "endYear": 220,
+    "color": "#B22222",
+    "capital": null,
+    "founder": null,
+    "description": "汉朝后期，定都洛阳"
+  },
+  "events": [
+    {
+      "id": "7b2a4b60-193a-4d2c-b350-9917f012ca1b",
+      "dynastyId": "50126885-0214-4d92-a42a-e3d5ed258018",
+      "time": {
+        "startYear": 140,
+        "endYear": 89
+      },
+      "title": "汉-匈奴战争",
+      "description": "西汉对匈奴进行的大规模军事行动。汉武帝时期派遣卫青、霍去病等将领打击匈奴，开拓了丝绸之路。",
+      "eventType": [
+        "war",
+        "military_conflict"
+      ]
+    },
+    {
+      "id": "7ee5eb6f-465c-4d48-bba8-ddba041bb14b",
+      "dynastyId": "50126885-0214-4d92-a42a-e3d5ed258018",
+      "time": {
+        "startYear": 200,
+        "endYear": 200
+      },
+      "title": "官渡之战",
+      "description": "曹操与袁绍在官渡进行的决战，曹操以少胜多，击败袁绍主力，为统一北方奠定了基础。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    },
+    {
+      "id": "02cd2ca3-0265-455a-9ade-5239095144e5",
+      "dynastyId": "50126885-0214-4d92-a42a-e3d5ed258018",
+      "time": {
+        "startYear": 206,
+        "endYear": 202
+      },
+      "title": "秦汉战争",
+      "description": "项羽与刘邦争夺天下的战争。经过四年的激战，最终刘邦击败项羽，建立了汉朝。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "89923e9c-d6c3-416e-a347-485c395a9321",
+      "dynastyId": "50126885-0214-4d92-a42a-e3d5ed258018",
+      "time": {
+        "startYear": 208,
+        "endYear": 208
+      },
+      "title": "赤壁之战",
+      "description": "孙权、刘备联军在赤壁大败曹操，为三国鼎立局面的形成奠定了基础。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    },
+    {
+      "id": "5f4ea85f-10be-426c-a2aa-c49ecfe39db0",
+      "dynastyId": "50126885-0214-4d92-a42a-e3d5ed258018",
+      "time": {
+        "startYear": 209,
+        "endYear": 206
+      },
+      "title": "秦末农民起义",
+      "description": "陈胜、吴广领导的反秦农民起义。因征役不满，在大泽乡起义，震撼了秦朝统治的基础，加速了秦朝的灭亡。",
+      "eventType": [
+        "war",
+        "peasant_uprising"
+      ]
+    }
+  ]
+}

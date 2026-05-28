@@ -61,10 +61,10 @@ export async function loadDynastyData(dataFile: string) {
 }
 
 /**
- * 加载时间轴事件数据
+ * 加载时间轴事件数据（已迁移至 timelineApi，此函数仅作向后兼容）
  */
-export async function loadTimelineEvents() {
-  return loadJsonArray('/data/json/events.json');
+export async function loadTimelineEvents(): Promise<unknown[]> {
+  return []; // 数据已迁移至 timeline-by-dynasty 分文件存储
 }
 
 /**

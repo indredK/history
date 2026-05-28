@@ -49,5 +49,24 @@ describe("dynastyStore", () => {
       useDynastyStore.getState().setSelectedDynasty(null);
       expect(useDynastyStore.getState().selectedDynasty).toBeNull();
     });
+
+    it("可根据最早开始时间补齐默认选中朝代", () => {
+      const list = [
+        makeDynasty({ id: "qing", name: "清", startYear: 1644 }),
+        makeDynasty({ id: "han", name: "汉", startYear: -206 }),
+        makeDynasty({ id: "tang", name: "唐", startYear: 618 }),
+      ];
+      useDynastyStore.getState().setDynasties(list);
+
+      const firstDynasty = [...useDynastyStore.getState().dynasties].sort(
+        (left, right) => left.startYear - right.startYear
+      )[0];
+      if (!firstDynasty) {
+        throw new Error("expected a dynasty");
+      }
+      useDynastyStore.getState().setSelectedDynasty(firstDynasty);
+
+      expect(useDynastyStore.getState().selectedDynasty?.id).toBe("han");
+    });
   });
 });

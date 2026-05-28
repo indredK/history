@@ -1,0 +1,30 @@
+{
+  "dynasty": {
+    "id": "a3ffadb3-aa29-4b3d-9113-4cb18f05e705",
+    "name": "北周朝",
+    "name_en": "Northern Zhou",
+    "slug": "北周",
+    "startYear": 557,
+    "endYear": 581,
+    "color": "#556B2F",
+    "capital": null,
+    "founder": null,
+    "description": "西魏权臣宇文泰之子建立的北朝政权"
+  },
+  "events": [
+    {
+      "id": "74a12c02-944e-439a-a7ce-46324ad52056",
+      "dynastyId": "a3ffadb3-aa29-4b3d-9113-4cb18f05e705",
+      "time": {
+        "startYear": 581,
+        "endYear": 581
+      },
+      "title": "隋朝建立",
+      "description": "杨坚取代北周，建立隋朝，定都长安。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    }
+  ]
+}

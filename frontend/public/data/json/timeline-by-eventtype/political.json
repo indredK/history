@@ -1,0 +1,788 @@
+{
+  "category": "political",
+  "eventCount": 56,
+  "events": [
+    {
+      "id": "866f07df-5fd9-4b75-88da-e73cab9feb07",
+      "dynastyId": "ab422e72-886a-4971-ad81-ec668695d98a",
+      "time": {
+        "startYear": -2070,
+        "endYear": -2070
+      },
+      "title": "禹建立夏朝",
+      "description": "禹被推举为夏王，建立中国历史上第一个王朝夏朝，标志着原始社会结束，奴隶社会开始。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "68d69685-3278-4b89-af78-e5df1792618d",
+      "dynastyId": "ab422e72-886a-4971-ad81-ec668695d98a",
+      "time": {
+        "startYear": -2070,
+        "endYear": -2070
+      },
+      "title": "启继承父位",
+      "description": "启继承父位，世袭制代替禅让制，公天下变成了家天下。",
+      "eventType": [
+        "political_event",
+        "succession"
+      ]
+    },
+    {
+      "id": "5024aaac-209d-4243-a217-1faa639dbfb2",
+      "dynastyId": "ab422e72-886a-4971-ad81-ec668695d98a",
+      "time": {
+        "startYear": -1600,
+        "endYear": -1600
+      },
+      "title": "商汤建立商朝",
+      "description": "商汤在鸣条之战胜利后，建立商朝，定都于亳。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "58f1ed31-0a5f-4f3f-8090-77ca0e27b8da",
+      "dynastyId": "2b393757-6b2c-40c8-84d2-ad48d7f2da09",
+      "time": {
+        "startYear": -1300,
+        "endYear": -1300
+      },
+      "title": "盘庚迁殷",
+      "description": "商王盘庚将商朝都城迁至殷，从此商朝又称殷商，政治经济进入稳定发展时期。",
+      "eventType": [
+        "political_event",
+        "capital_move"
+      ]
+    },
+    {
+      "id": "a4e32299-7558-4a20-99e4-f0f27084eb9c",
+      "dynastyId": "f578c38f-84d3-416f-932a-5f16a3450fbf",
+      "time": {
+        "startYear": -1046,
+        "endYear": -1046
+      },
+      "title": "周武王建立西周",
+      "description": "周武王在牧野之战胜利后，建立西周，定都于镐京。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "ccf67973-f71f-4a4a-a2b9-f90e8388d63d",
+      "dynastyId": "f578c38f-84d3-416f-932a-5f16a3450fbf",
+      "time": {
+        "startYear": -771,
+        "endYear": -771
+      },
+      "title": "烽火戏诸侯",
+      "description": "周幽王为博褒姒一笑，多次点燃烽火戏弄诸侯，最终犬戎入侵时无人救援，西周灭亡。",
+      "eventType": [
+        "political_event",
+        "tragedy"
+      ]
+    },
+    {
+      "id": "a9e3a4bb-f391-4738-849d-c7d929efe6c4",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -770,
+        "endYear": -770
+      },
+      "title": "周平王东迁",
+      "description": "周平王将都城从镐京迁至洛邑，东周开始，春秋战国时期拉开序幕。",
+      "eventType": [
+        "political_event",
+        "capital_move"
+      ]
+    },
+    {
+      "id": "bf6bd645-2d26-4747-aae8-57ecb16e9d40",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -685,
+        "endYear": -643
+      },
+      "title": "齐桓公称霸",
+      "description": "齐桓公任用管仲为相，推行改革，提出'尊王攘夷'的口号，成为春秋时期第一位霸主。",
+      "eventType": [
+        "political_event",
+        "hegemony"
+      ]
+    },
+    {
+      "id": "bf3ba46c-dc64-4eba-aeb0-f729dda9361d",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -632,
+        "endYear": -632
+      },
+      "title": "晋文公践土之盟",
+      "description": "晋文公在城濮之战击败楚军后，在践土与诸侯会盟，被周襄王策命为'侯伯'，成为春秋第二位霸主。",
+      "eventType": [
+        "political_event",
+        "alliance"
+      ]
+    },
+    {
+      "id": "6032ae3f-a88a-4be0-89c3-ffdf585e179a",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -606,
+        "endYear": -606
+      },
+      "title": "楚庄王问鼎中原",
+      "description": "楚庄王率军北伐至洛邑，向周王使者询问九鼎的大小轻重，显示了其取代周室的野心。",
+      "eventType": [
+        "political_event",
+        "challenge"
+      ]
+    },
+    {
+      "id": "8d3c019e-9755-4ebc-a0cd-84d9ef5d6502",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -453,
+        "endYear": -403
+      },
+      "title": "三家分晋",
+      "description": "韩、赵、魏三家大夫瓜分了晋国，标志着春秋时期结束，战国时期开始。",
+      "eventType": [
+        "political_event",
+        "state_formation"
+      ]
+    },
+    {
+      "id": "dd225d18-6dd3-4ecb-9b9d-758e72b3925c",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -386,
+        "endYear": -386
+      },
+      "title": "田氏代齐",
+      "description": "田氏家族取代姜姓吕氏成为齐国国君，战国七雄格局正式形成。",
+      "eventType": [
+        "political_event",
+        "coup"
+      ]
+    },
+    {
+      "id": "9f02da17-178f-410c-b623-42b50ab4b915",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -356,
+        "endYear": -338
+      },
+      "title": "商鞅变法",
+      "description": "商鞅在秦国推行变法，包括废除世卿世禄制、实行郡县制、奖励耕战等，使秦国逐渐强大。",
+      "eventType": [
+        "political_reform",
+        "legalist"
+      ]
+    },
+    {
+      "id": "1a748724-a0c2-495c-9a1e-18e440ff5e05",
+      "dynastyId": "10306f9d-43d3-43af-b48e-a5e964da409e",
+      "time": {
+        "startYear": 220,
+        "endYear": 280
+      },
+      "title": "三国鼎立",
+      "description": "曹丕建魏(220年)、刘备建汉(221年)、孙权建吴(229年)，三国鼎立局面正式形成。",
+      "eventType": [
+        "political_event",
+        "state_formation"
+      ]
+    },
+    {
+      "id": "27ae5c74-f4fb-4c1a-807c-200ed73c0235",
+      "dynastyId": "8cafb119-a327-4d47-9cb3-406980c0c33e",
+      "time": {
+        "startYear": 280,
+        "endYear": 280
+      },
+      "title": "晋朝统一",
+      "description": "西晋灭吴，结束了三国鼎立的局面，实现了全国统一。",
+      "eventType": [
+        "political_event",
+        "unification"
+      ]
+    },
+    {
+      "id": "74a12c02-944e-439a-a7ce-46324ad52056",
+      "dynastyId": "a3ffadb3-aa29-4b3d-9113-4cb18f05e705",
+      "time": {
+        "startYear": 581,
+        "endYear": 581
+      },
+      "title": "隋朝建立",
+      "description": "杨坚取代北周，建立隋朝，定都长安。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "94a4c810-222b-4f70-99a9-bde41169b586",
+      "dynastyId": "366e2bbf-df01-4301-89e3-8a2fb08ad122",
+      "time": {
+        "startYear": 589,
+        "endYear": 589
+      },
+      "title": "隋朝统一全国",
+      "description": "隋军南下，灭掉陈朝，结束了自西晋末年以来长达近300年的分裂局面，实现了全国统一。",
+      "eventType": [
+        "political_event",
+        "unification"
+      ]
+    },
+    {
+      "id": "1a54f622-5b4b-439c-aad6-3b84a1b26a48",
+      "dynastyId": "a7fc9f24-7e3e-4ccf-a564-f6df4ab8414d",
+      "time": {
+        "startYear": 618,
+        "endYear": 618
+      },
+      "title": "唐朝建立",
+      "description": "李渊在长安称帝，建立唐朝，取代隋朝。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "68c9690a-723b-438e-9f59-23114ee5592b",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 626,
+        "endYear": 626
+      },
+      "title": "玄武门之变",
+      "description": "唐太宗李世民在长安玄武门发动的政变。通过这场政变，李世民打败了兄长太子李建成和弟弟齐王李元吉，夺得了王位。",
+      "eventType": [
+        "political_event",
+        "coup_d'etat"
+      ]
+    },
+    {
+      "id": "52d0a9ff-2607-41ca-8a4c-da5d8161cf78",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 626,
+        "endYear": 649
+      },
+      "title": "贞观之治",
+      "description": "唐太宗推行的一个以儒家思想为指导的治国政策。强调民本和谦虚，使唐朝的政治、经济、文化达到了新的高度。",
+      "eventType": [
+        "political_reform",
+        "cultural_flourishing"
+      ]
+    },
+    {
+      "id": "84db28fe-f9b8-41aa-98e6-f2c134a7c550",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 627,
+        "endYear": 649
+      },
+      "title": "贞观之治",
+      "description": "唐太宗李世民统治时期的政治清明、经济繁荣时期。",
+      "eventType": [
+        "political"
+      ]
+    },
+    {
+      "id": "bffe3550-acde-4a72-9fa0-a4b07a0f5c1f",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 641,
+        "endYear": 641
+      },
+      "title": "文成公主入藏",
+      "description": "唐太宗将文成公主嫁给吐蕃赞普松赞干布，促进了唐蕃友好和文化交流。",
+      "eventType": [
+        "diplomatic_event",
+        "cultural_exchange"
+      ]
+    },
+    {
+      "id": "01eeec36-34b4-4030-9ae5-d9255c617324",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 690,
+        "endYear": 690
+      },
+      "title": "武则天称帝",
+      "description": "武则天改唐为周，自称圣神皇帝，成为中国历史上唯一的女皇帝。",
+      "eventType": [
+        "political_event",
+        "gender_milestone"
+      ]
+    },
+    {
+      "id": "0c15e955-8e64-4c45-a94c-6289502ce5e0",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 713,
+        "endYear": 741
+      },
+      "title": "开元盛世",
+      "description": "唐玄宗统治前期，政治清明，经济繁荣，文化昌盛，唐朝进入全盛时期，史称'开元盛世'。",
+      "eventType": [
+        "political_reform",
+        "cultural_flourishing"
+      ]
+    },
+    {
+      "id": "b97e5c74-7dbd-432d-a61e-520b55eb074d",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 763,
+        "endYear": 907
+      },
+      "title": "藩镇割据",
+      "description": "安史之乱后，唐朝在地方上设置了众多藩镇，这些藩镇逐渐形成割据势力，不听从中央命令，严重削弱了唐朝的统治。",
+      "eventType": [
+        "political_fragmentation",
+        "regionalism"
+      ]
+    },
+    {
+      "id": "ac4d6257-26cf-4124-9115-dfa3a7936d19",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 808,
+        "endYear": 846
+      },
+      "title": "牛李党争",
+      "description": "唐朝后期以牛僧孺、李宗闵为首的牛党与李德裕、郑覃为首的李党之间的长期政治斗争，加速了唐朝的衰落。",
+      "eventType": [
+        "political_event",
+        "factional_conflict"
+      ]
+    },
+    {
+      "id": "71636f2a-9a60-48ba-8860-aca7d4887e72",
+      "dynastyId": "3572594a-d2d4-4139-ab03-bf9c4c97631f",
+      "time": {
+        "startYear": 960,
+        "endYear": 960
+      },
+      "title": "陈桥兵变",
+      "description": "赵匡胤发动兵变，黄袍加身，取代后周，建立宋朝，定都开封。",
+      "eventType": [
+        "political_event",
+        "coup_d'etat"
+      ]
+    },
+    {
+      "id": "46085a1c-2adf-4dee-9b00-5aa66b4fa72e",
+      "dynastyId": "6739e76f-2446-4181-943f-f024280fe90f",
+      "time": {
+        "startYear": 961,
+        "endYear": 961
+      },
+      "title": "杯酒释兵权",
+      "description": "赵匡胤通过酒宴的方式，威胁利诱高级将领交出兵权，加强中央集权。",
+      "eventType": [
+        "political_event",
+        "military_reform"
+      ]
+    },
+    {
+      "id": "2c98e905-9986-4eda-a3bd-695a10ca6d9d",
+      "dynastyId": "6739e76f-2446-4181-943f-f024280fe90f",
+      "time": {
+        "startYear": 1005,
+        "endYear": 1005
+      },
+      "title": "澶渊之盟",
+      "description": "北宋与辽朝在澶州签订和约，结束了长达25年的战争，开启了长达120年的和平局面。",
+      "eventType": [
+        "diplomatic_event",
+        "treaty"
+      ]
+    },
+    {
+      "id": "587192d1-90dd-4a55-bb59-9940828a042b",
+      "dynastyId": "6739e76f-2446-4181-943f-f024280fe90f",
+      "time": {
+        "startYear": 1069,
+        "endYear": 1085
+      },
+      "title": "王安石变法",
+      "description": "宋神宗时期，王安石发起的旨在富国强兵的社会改革运动，涉及政治、经济、军事等多个领域。",
+      "eventType": [
+        "political_reform",
+        "economic_reform"
+      ]
+    },
+    {
+      "id": "1944e77a-094b-49d4-af7a-9d8b542f4da5",
+      "dynastyId": "4cddf56f-f748-4f2d-892a-98d73a144f63",
+      "time": {
+        "startYear": 1127,
+        "endYear": 1127
+      },
+      "title": "南宋建立",
+      "description": "赵构在应天府称帝，建立南宋政权，后迁都临安。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "0fb251ed-164f-4d27-851b-003541f4c2cc",
+      "dynastyId": "4cddf56f-f748-4f2d-892a-98d73a144f63",
+      "time": {
+        "startYear": 1141,
+        "endYear": 1141
+      },
+      "title": "绍兴和议",
+      "description": "南宋与金国签订和约，南宋向金国称臣纳贡，双方以淮水-大散关为界。",
+      "eventType": [
+        "diplomatic_event",
+        "treaty"
+      ]
+    },
+    {
+      "id": "1e16ddcf-8dd0-483f-80c5-89b922a36929",
+      "dynastyId": "4cddf56f-f748-4f2d-892a-98d73a144f63",
+      "time": {
+        "startYear": 1206,
+        "endYear": 1206
+      },
+      "title": "蒙古统一",
+      "description": "铁木真统一蒙古各部，建立大蒙古国，被尊称为成吉思汗。",
+      "eventType": [
+        "political_event",
+        "unification"
+      ]
+    },
+    {
+      "id": "554e964d-c1e3-4149-8f85-e523af626203",
+      "dynastyId": "7a1cb0b2-b2ec-4100-ad66-468a924a2922",
+      "time": {
+        "startYear": 1271,
+        "endYear": 1271
+      },
+      "title": "元朝建立",
+      "description": "忽必烈改国号为元，定都大都，元朝正式建立。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "1b17c63f-be70-41b7-8fd5-5f29945ec551",
+      "dynastyId": "7a1cb0b2-b2ec-4100-ad66-468a924a2922",
+      "time": {
+        "startYear": 1368,
+        "endYear": 1368
+      },
+      "title": "明朝建立",
+      "description": "朱元璋在南京称帝，建立明朝，元朝灭亡。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "c60849ce-3597-4a39-b9f3-e120c0fb99bb",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1572,
+        "endYear": 1582
+      },
+      "title": "张居正改革",
+      "description": "张居正推行的一系列改革，包括一条鞭法等，使明朝经济得到恢复和发展。",
+      "eventType": [
+        "political_reform",
+        "economic_reform"
+      ]
+    },
+    {
+      "id": "dd42fffd-b0c0-4f4a-8790-fe38f39a6764",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1616,
+        "endYear": 1644
+      },
+      "title": "女真兴起",
+      "description": "满族（女真）的努尔哈赤建立的后金政权，最终由其子皇太极改国号为清，并最终入主中原。",
+      "eventType": [
+        "political_event",
+        "ethnic_migration"
+      ]
+    },
+    {
+      "id": "9e906b04-0be7-42a4-82e5-2c5b3597b13c",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1644,
+        "endYear": 1644
+      },
+      "title": "清朝建立",
+      "description": "清军入关，顺治帝在北京即位，建立清朝，明朝灭亡。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "6e4cdfff-e7f3-48c4-b496-d04ddf27ea21",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1662,
+        "endYear": 1722
+      },
+      "title": "康熙盛世",
+      "description": "康熙帝统治时期，国家统一，经济繁荣，文化昌盛，是清朝的鼎盛时期之一。",
+      "eventType": [
+        "political_stability",
+        "cultural_flourishing"
+      ]
+    },
+    {
+      "id": "d1e1a0ab-4630-456c-a640-290c28235230",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1735,
+        "endYear": 1796
+      },
+      "title": "乾隆盛世",
+      "description": "乾隆帝统治时期，清朝达到鼎盛，国家统一，经济繁荣，文化发展。",
+      "eventType": [
+        "political_stability",
+        "cultural_flourishing"
+      ]
+    },
+    {
+      "id": "ff0af3f7-c44e-42d3-9323-6952153814e2",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1793,
+        "endYear": 1794
+      },
+      "title": "马戛尔尼使团访华",
+      "description": "英国派遣马戛尔尼使团访华，试图与清朝建立贸易关系，但由于礼仪问题和贸易分歧而失败。",
+      "eventType": [
+        "diplomatic_event",
+        "cultural_exchange"
+      ]
+    },
+    {
+      "id": "e0b00ddb-f3e9-4028-b94c-1955928fa8dd",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1898,
+        "endYear": 1898
+      },
+      "title": "戊戌变法",
+      "description": "光绪帝和康有为等维新派进行的政治改革运动。试图学习西方制度，但最终被慈禧太后镇压。",
+      "eventType": [
+        "political_reform",
+        "cultural_change"
+      ]
+    },
+    {
+      "id": "c810d2a7-2fa7-44b7-b435-0b663464cdfa",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1911,
+        "endYear": 1912
+      },
+      "title": "辛亥革命",
+      "description": "推翻满清统治，建立共和制政体的伟大革命。孙中山领导的革命者发动起义，推动了中国从帝制向共和的转变。",
+      "eventType": [
+        "political_revolution",
+        "military_action"
+      ]
+    },
+    {
+      "id": "079c1780-311c-46c0-addc-e6c7f38ca0f8",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1912,
+        "endYear": 1912
+      },
+      "title": "中华民国临时政府成立",
+      "description": "孙中山在南京宣布成立中华民国临时政府，就任临时大总统，标志着中国历史上第一个资产阶级共和国的诞生。",
+      "eventType": [
+        "political_event",
+        "government_formation"
+      ]
+    },
+    {
+      "id": "0348c6b4-10fc-48be-9c3e-f5cbfe2ef786",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1912,
+        "endYear": 1912
+      },
+      "title": "袁世凯就任临时大总统",
+      "description": "袁世凯在北京就任中华民国临时大总统，临时政府迁都北京，北洋政府统治时期开始。",
+      "eventType": [
+        "political_event",
+        "leadership_change"
+      ]
+    },
+    {
+      "id": "fa1ab4f7-deb9-4fb2-98bb-af74db2d74c5",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1915,
+        "endYear": 1916
+      },
+      "title": "袁世凯称帝",
+      "description": "袁世凯宣布复辟帝制，改国号为中华帝国，引发全国反对。",
+      "eventType": [
+        "political_event",
+        "emperor_claim"
+      ]
+    },
+    {
+      "id": "663317ed-bf07-48e7-8154-9196a71cd487",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1916,
+        "endYear": 1916
+      },
+      "title": "袁世凯去世",
+      "description": "袁世凯因尿毒症在北京去世，北洋军阀开始分裂为直系、皖系、奉系等派系。",
+      "eventType": [
+        "political_event",
+        "leadership_change"
+      ]
+    },
+    {
+      "id": "38dfbb53-d307-4f90-babd-fa156a2403a0",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1917,
+        "endYear": 1917
+      },
+      "title": "张勋复辟",
+      "description": "张勋率辫子军入京，拥戴溥仪复辟帝制，仅12天即被段祺瑞击败。",
+      "eventType": [
+        "political_event",
+        "restoration_attempt"
+      ]
+    },
+    {
+      "id": "f41082f0-1996-43aa-a613-a810768fda8a",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1917,
+        "endYear": 1922
+      },
+      "title": "护法运动",
+      "description": "孙中山在广州组织护法军政府，反对段祺瑞破坏《临时约法》，维护共和制度。",
+      "eventType": [
+        "political_movement"
+      ]
+    },
+    {
+      "id": "2c970fa5-ab72-4918-a183-d35abec8a1bd",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1919,
+        "endYear": 1919
+      },
+      "title": "五四运动",
+      "description": "北京学生因巴黎和会外交失败举行游行示威，抗议北洋政府卖国行径，随后演变为全国性的爱国运动。",
+      "eventType": [
+        "social_movement",
+        "cultural_revolution"
+      ]
+    },
+    {
+      "id": "3848979b-2c5d-4fc8-b2b5-a5feac7f0f0d",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1928,
+        "endYear": 1928
+      },
+      "title": "北洋政府结束",
+      "description": "国民革命军占领北京，北洋政府统治结束，南京国民政府形式上统一全国。",
+      "eventType": [
+        "political_event",
+        "government_end"
+      ]
+    },
+    {
+      "id": "6cb5ab2e-f8d6-4c88-be0d-31d3a42c647c",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1928,
+        "endYear": 1928
+      },
+      "title": "东北易帜",
+      "description": "张学良宣布东北易帜，服从国民政府，国民政府形式上统一全国。",
+      "eventType": [
+        "political_event",
+        "unification"
+      ]
+    },
+    {
+      "id": "ceb634e1-518c-4d78-a19a-5fcffa6155a1",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1936,
+        "endYear": 1936
+      },
+      "title": "西安事变",
+      "description": "张学良、杨虎城发动西安事变，扣留蒋介石，逼蒋抗日，最终促成抗日民族统一战线形成。",
+      "eventType": [
+        "political_event",
+        "peaceful_resolution"
+      ]
+    },
+    {
+      "id": "79bd4887-039d-466e-a712-2157dab02c06",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1945,
+        "endYear": 1945
+      },
+      "title": "重庆谈判",
+      "description": "毛泽东与蒋介石在重庆进行和平谈判，签订《双十协定》，但未能阻止内战爆发。",
+      "eventType": [
+        "political_event",
+        "negotiations"
+      ]
+    },
+    {
+      "id": "e4f838d0-33b8-4ecf-9cec-4d75bc17861c",
+      "dynastyId": "881a0fc2-e872-47fa-ab63-b5a54b4214b2",
+      "time": {
+        "startYear": 1949,
+        "endYear": 1949
+      },
+      "title": "中国人民政治协商会议第一次全体会议",
+      "description": "中国人民政治协商会议第一次全体会议在北平召开，通过了《中国人民政治协商会议共同纲领》，确定了新中国的国体、政体和各项基本政策。",
+      "eventType": [
+        "political_event",
+        "constitution"
+      ]
+    },
+    {
+      "id": "78e3e887-1bf0-4114-bd3e-ed5c0a13acaa",
+      "dynastyId": "881a0fc2-e872-47fa-ab63-b5a54b4214b2",
+      "time": {
+        "startYear": 1949,
+        "endYear": 1949
+      },
+      "title": "中华人民共和国成立",
+      "description": "毛泽东在天安门城楼宣布中华人民共和国成立，标志着中国新民主主义革命的胜利和半殖民地半封建社会的结束，中国进入了人民当家作主的新纪元。",
+      "eventType": [
+        "political_event",
+        "foundation"
+      ]
+    }
+  ]
+}

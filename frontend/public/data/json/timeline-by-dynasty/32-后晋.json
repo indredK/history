@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "cf556b11-3b9a-4386-a389-72380d4696b7",
+    "name": "后晋朝",
+    "name_en": "Later Jin",
+    "slug": "后晋",
+    "startYear": 936,
+    "endYear": 947,
+    "color": "#8B7355",
+    "capital": null,
+    "founder": null,
+    "description": "五代十国时期第三个朝代，石敬瑭建立"
+  },
+  "events": []
+}

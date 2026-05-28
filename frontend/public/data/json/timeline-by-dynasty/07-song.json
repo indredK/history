@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "cd6e2494-c17c-4060-a2be-df3a070a5a6f",
+    "name": "宋朝",
+    "name_en": null,
+    "slug": "song",
+    "startYear": 960,
+    "endYear": 1279,
+    "color": null,
+    "capital": "开封",
+    "founder": "赵匡胤",
+    "description": "中国历史上商品经济、文化教育、科学创新高度繁荣的时代"
+  },
+  "events": []
+}

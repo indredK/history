@@ -1,0 +1,179 @@
+[
+  {
+    "canonical_name": "广东",
+    "alt_names": "广东省, 粤",
+    "description": "用于近代沿海事件演示的区域锚点。",
+    "latitude": 23.13,
+    "longitude": 113.27,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "南方沿海",
+    "alt_names": "东南沿海, 华南沿海",
+    "description": "近代海防和通商口岸相关事件的区域代表点。",
+    "latitude": 22.8,
+    "longitude": 113.8,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "南京",
+    "alt_names": "建邺, 建康, 应天",
+    "description": "近现代演示中的重要都城与战场节点。",
+    "latitude": 32.06,
+    "longitude": 118.8,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "长江流域",
+    "alt_names": "长江中下游",
+    "description": "用于太平天国、渡江战役等事件的区域代表点。",
+    "latitude": 30.5,
+    "longitude": 114.0,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "江南",
+    "alt_names": "东南财赋区",
+    "description": "用于江南地区相关事件的区域代表点。",
+    "latitude": 31.2,
+    "longitude": 120.4,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "北京",
+    "alt_names": "北平, 燕京",
+    "description": "近现代演示中的核心政治中心。",
+    "latitude": 39.9,
+    "longitude": 116.41,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "武汉",
+    "alt_names": "武昌, 汉口, 汉阳",
+    "description": "辛亥革命和抗战时期的重要城市节点。",
+    "latitude": 30.59,
+    "longitude": 114.3,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "全国各地",
+    "alt_names": "全国, 各地",
+    "description": "用于全国性事件的中心代表点。",
+    "latitude": 35.0,
+    "longitude": 104.0,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "朝鲜半岛",
+    "alt_names": "朝鲜, 韩半岛",
+    "description": "用于甲午战争和抗美援朝战争的国际区域锚点。",
+    "latitude": 39.0,
+    "longitude": 127.0,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "云南",
+    "alt_names": "滇",
+    "description": "护国战争的重要区域。",
+    "latitude": 25.04,
+    "longitude": 102.71,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "四川",
+    "alt_names": "蜀",
+    "description": "护国战争的重要区域。",
+    "latitude": 30.67,
+    "longitude": 104.06,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "广州",
+    "alt_names": "番禺, 羊城",
+    "description": "护法运动和北伐战争的起点城市。",
+    "latitude": 23.13,
+    "longitude": 113.26,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "上海",
+    "alt_names": "申城",
+    "description": "近现代演示中的东部核心城市节点。",
+    "latitude": 31.23,
+    "longitude": 121.47,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "华北地区",
+    "alt_names": "华北, 北方平原",
+    "description": "用于全面抗战和解放战争的区域代表点。",
+    "latitude": 39.0,
+    "longitude": 114.8,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "中原地区",
+    "alt_names": "中原, 黄淮地区",
+    "description": "用于解放战争与国民政府时期内战的区域代表点。",
+    "latitude": 34.7,
+    "longitude": 113.6,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "东北地区",
+    "alt_names": "东北, 东北战场",
+    "description": "辽沈战役和近代东北格局变化的区域代表点。",
+    "latitude": 41.8,
+    "longitude": 123.4,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "重庆",
+    "alt_names": "陪都",
+    "description": "抗战时期的重要后方中心。",
+    "latitude": 29.56,
+    "longitude": 106.55,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "拉萨",
+    "alt_names": "逻些",
+    "description": "西藏和平解放演示点位。",
+    "latitude": 29.65,
+    "longitude": 91.13,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "深圳",
+    "alt_names": "鹏城",
+    "description": "改革开放与经济特区演示点位。",
+    "latitude": 22.55,
+    "longitude": 114.06,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "香港",
+    "alt_names": "香港特别行政区, Xianggang",
+    "description": "香港回归进程演示点位。",
+    "latitude": 22.32,
+    "longitude": 114.17,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "澳门",
+    "alt_names": "澳门特别行政区, Aomen",
+    "description": "澳门回归进程演示点位。",
+    "latitude": 22.2,
+    "longitude": 113.55,
+    "source": "Map Timeline Demo Mock"
+  },
+  {
+    "canonical_name": "多哈",
+    "alt_names": "Doha",
+    "description": "加入 WTO 的国际会场点位。",
+    "latitude": 25.29,
+    "longitude": 51.53,
+    "source": "Map Timeline Demo Mock"
+  }
+]
+

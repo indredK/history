@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "838b3916-783e-427e-8eb7-25a0abcea45b",
+    "name": "秦朝",
+    "name_en": "Qin",
+    "slug": "qin",
+    "startYear": -221,
+    "endYear": -207,
+    "color": "#2F4F4F",
+    "capital": "咸阳",
+    "founder": "秦始皇",
+    "description": "中国历史上第一个统一的中央集权制王朝"
+  },
+  "events": []
+}

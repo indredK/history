@@ -1,98 +1,89 @@
 import './TimelineList.css';
 import { Dynasty3DWheel, EChartsTimeline } from './components';
 import { Box, Paper } from '@mui/material';
-import { PageHeaderBadge, PagePanel } from '@/components/common';
-import { useDynastyStore } from '@/store';
-import { dynastyUtils } from '@/config';
+import { useRequest } from 'ahooks';
+import { StateView } from '@/components/ui';
+import { getDynasties, getEvents } from '@/services/dataClient';
 import { usePerformanceTrace } from '@/utils/performance';
-import { buildDynastyFocusRange, findDynastyByYear } from './utils/dynastyUtils';
-import { useCallback } from 'react';
 
 export function TimelineList() {
-  const { selectedDynasty, dynasties, setSelectedDynasty } = useDynastyStore();
   usePerformanceTrace('timeline-page-mounted', []);
+  const {
+    data,
+    loading,
+    error,
+    refresh,
+  } = useRequest(async () => {
+    const [eventsResult, dynastiesResult] = await Promise.all([getEvents(), getDynasties()]);
+    return {
+      events: eventsResult.data,
+      dynasties: dynastiesResult.data,
+    };
+  });
 
-  // 获取朝代背景颜色
-  const dynastyColor = selectedDynasty?.color;
-  const bgColor = dynastyUtils.getBackgroundColor(dynastyColor);
-  const focusRange = buildDynastyFocusRange(selectedDynasty);
+  const timelineContent = (() => {
+    if (loading) {
+      return (
+        <StateView
+          mode="loading"
+          title="正在加载时间轴数据..."
+          description="整理朝代与事件索引。"
+          minHeight="320px"
+        />
+      );
+    }
 
-  const handleTimeRangeChange = useCallback(
-    (range: [number, number]) => {
-      if (dynasties.length === 0) return;
-      const center = (range[0] + range[1]) / 2;
-      const found = findDynastyByYear(center, dynasties);
-      if (found && found.id !== selectedDynasty?.id) {
-        setSelectedDynasty(found);
-      }
-    },
-    [dynasties, selectedDynasty, setSelectedDynasty],
-  );
+    if (error) {
+      return (
+        <StateView
+          mode="error"
+          title="时间轴数据加载失败"
+          description={error instanceof Error ? error.message : '请稍后重试'}
+          actionLabel="重试"
+          onAction={refresh}
+          minHeight="320px"
+        />
+      );
+    }
+
+    return (
+      <EChartsTimeline
+        eventsData={data?.events ?? []}
+        dynastiesData={data?.dynasties ?? []}
+      />
+    );
+  })();
 
   return (
-    <PagePanel
-      title="历史时间轴"
-      description="以朝代切片进入中国历史的长时段叙事，联动人物、疆域与事件脉络。"
-      headerAside={
-        <PageHeaderBadge
-          label="Chronology"
-          value={selectedDynasty?.name ?? '全时段'}
-        />
-      }
+    <Box
       className="timeline-list-container glass-card animate__animated animate__fadeIn"
       sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+        gap: 2,
+        p: { xs: 2, md: 3 },
         background: 'var(--panel-bg)',
         border: 'var(--panel-border)',
         boxShadow: 'var(--shadow-lg)',
-        p: { xs: 2, md: 3 },
       }}
-      contentSx={{ gap: 2 }}
     >
-      <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, gap: 2, overflow: 'hidden' }}>
-        <Paper
-          className="glass-card"
-          sx={{
-            padding: { xs: 1.5, md: 2 },
-            overflow: 'hidden',
-            maxHeight: '30vh',
-            background: 'var(--panel-bg-soft)',
-            border: 'var(--panel-border)',
-            borderRadius: '14px',
-            boxShadow: 'var(--shadow-sm)',
-          }}
-        >
-          <Dynasty3DWheel />
-        </Paper>
+      <Paper
+        className="glass-card dynasty-wheel-container"
+        sx={{
+          padding: { xs: 1.5, md: 2 },
+          overflow: 'hidden',
+          maxHeight: '30vh',
+          background: 'var(--panel-bg-soft)',
+          border: 'var(--panel-border)',
+          borderRadius: '14px',
+          boxShadow: 'var(--shadow-sm)',
+        }}
+      >
+        <Dynasty3DWheel />
+      </Paper>
 
-        <Paper
-          className="timeline-content-area"
-          sx={{
-            flex: 1,
-            padding: { xs: 1.5, md: 2 },
-            overflow: 'hidden',
-            display: 'flex',
-            flexDirection: 'column',
-            background: selectedDynasty
-              ? `linear-gradient(180deg, ${bgColor} 0%, var(--color-bg-card) 100%)`
-              : 'var(--panel-bg-soft)',
-            border: 'var(--panel-border)',
-            borderRadius: '14px',
-            boxShadow: 'var(--shadow-sm)',
-            transition: 'background 350ms cubic-bezier(0.4, 0, 0.2, 1)',
-            '&:hover': {
-              background: selectedDynasty
-                ? `linear-gradient(180deg, ${bgColor} 0%, var(--color-bg-card) 100%)`
-                : 'var(--panel-bg-soft)',
-            },
-          }}
-        >
-          <EChartsTimeline
-            focusRange={focusRange}
-            focusLabel={selectedDynasty?.name ?? null}
-            onTimeRangeChange={handleTimeRangeChange}
-          />
-        </Paper>
-      </Box>
-    </PagePanel>
+      {timelineContent}
+    </Box>
   );
 }

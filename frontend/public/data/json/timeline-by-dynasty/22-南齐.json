@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "23369e9a-4de7-41fc-9913-ea0e6fe7c8e2",
+    "name": "南齐朝",
+    "name_en": "Southern Qi",
+    "slug": "南齐",
+    "startYear": 479,
+    "endYear": 502,
+    "color": "#48D1CC",
+    "capital": null,
+    "founder": null,
+    "description": "南朝第二个政权，萧道成建立"
+  },
+  "events": []
+}

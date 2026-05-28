@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "be26245c-1119-49ea-a21a-8381c133e552",
+    "name": "梁朝",
+    "name_en": "Liang",
+    "slug": "梁",
+    "startYear": 502,
+    "endYear": 557,
+    "color": "#40E0D0",
+    "capital": null,
+    "founder": null,
+    "description": "南朝第三个政权，萧衍建立"
+  },
+  "events": []
+}

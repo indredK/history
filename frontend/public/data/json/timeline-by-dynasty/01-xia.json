@@ -1,0 +1,72 @@
+{
+  "dynasty": {
+    "id": "ab422e72-886a-4971-ad81-ec668695d98a",
+    "name": "夏朝",
+    "name_en": "Xia",
+    "slug": "xia",
+    "startYear": -2070,
+    "endYear": -1600,
+    "color": "#8B4513",
+    "capital": "阳城",
+    "founder": "禹",
+    "description": "中国史书记载的第一个世袭制朝代"
+  },
+  "events": [
+    {
+      "id": "866f07df-5fd9-4b75-88da-e73cab9feb07",
+      "dynastyId": "ab422e72-886a-4971-ad81-ec668695d98a",
+      "time": {
+        "startYear": -2070,
+        "endYear": -2070
+      },
+      "title": "禹建立夏朝",
+      "description": "禹被推举为夏王，建立中国历史上第一个王朝夏朝，标志着原始社会结束，奴隶社会开始。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "68d69685-3278-4b89-af78-e5df1792618d",
+      "dynastyId": "ab422e72-886a-4971-ad81-ec668695d98a",
+      "time": {
+        "startYear": -2070,
+        "endYear": -2070
+      },
+      "title": "启继承父位",
+      "description": "启继承父位，世袭制代替禅让制，公天下变成了家天下。",
+      "eventType": [
+        "political_event",
+        "succession"
+      ]
+    },
+    {
+      "id": "76d5a497-55fb-495b-bb53-bdad3567a07c",
+      "dynastyId": "ab422e72-886a-4971-ad81-ec668695d98a",
+      "time": {
+        "startYear": -1600,
+        "endYear": -1600
+      },
+      "title": "鸣条之战",
+      "description": "商汤率领部落联军在鸣条之战中击败夏朝最后一位君主桀，夏朝灭亡。",
+      "eventType": [
+        "war",
+        "dynasty_overthrow"
+      ]
+    },
+    {
+      "id": "5024aaac-209d-4243-a217-1faa639dbfb2",
+      "dynastyId": "ab422e72-886a-4971-ad81-ec668695d98a",
+      "time": {
+        "startYear": -1600,
+        "endYear": -1600
+      },
+      "title": "商汤建立商朝",
+      "description": "商汤在鸣条之战胜利后，建立商朝，定都于亳。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    }
+  ]
+}

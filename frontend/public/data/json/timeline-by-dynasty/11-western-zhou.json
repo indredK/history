@@ -1,0 +1,86 @@
+{
+  "dynasty": {
+    "id": "f578c38f-84d3-416f-932a-5f16a3450fbf",
+    "name": "西周朝",
+    "name_en": "Western Zhou",
+    "slug": "western-zhou",
+    "startYear": -1046,
+    "endYear": -771,
+    "color": "#4682B4",
+    "capital": null,
+    "founder": null,
+    "description": "周朝前期，定都镐京"
+  },
+  "events": [
+    {
+      "id": "0a409208-3bf0-495a-a155-9a149b36994b",
+      "dynastyId": "f578c38f-84d3-416f-932a-5f16a3450fbf",
+      "time": {
+        "startYear": -1046,
+        "endYear": -1046
+      },
+      "title": "牧野之战",
+      "description": "周武王率领诸侯联军在牧野之战中击败商朝最后一位君主纣，商朝灭亡。",
+      "eventType": [
+        "war",
+        "dynasty_overthrow"
+      ]
+    },
+    {
+      "id": "a4e32299-7558-4a20-99e4-f0f27084eb9c",
+      "dynastyId": "f578c38f-84d3-416f-932a-5f16a3450fbf",
+      "time": {
+        "startYear": -1046,
+        "endYear": -1046
+      },
+      "title": "周武王建立西周",
+      "description": "周武王在牧野之战胜利后，建立西周，定都于镐京。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "9844443d-7dcf-4a1a-9b84-a89539a8cb9e",
+      "dynastyId": "f578c38f-84d3-416f-932a-5f16a3450fbf",
+      "time": {
+        "startYear": -1042,
+        "endYear": -1039
+      },
+      "title": "周公东征",
+      "description": "周公旦率军东征，平定三监之乱，巩固了西周的统治。",
+      "eventType": [
+        "war",
+        "military_campaign"
+      ]
+    },
+    {
+      "id": "32de389c-90b9-4a4a-b389-4b42a18a8a0b",
+      "dynastyId": "f578c38f-84d3-416f-932a-5f16a3450fbf",
+      "time": {
+        "startYear": -841,
+        "endYear": -841
+      },
+      "title": "国人暴动",
+      "description": "西周都城镐京的国人发动暴动，赶走周厉王，实行共和执政，这是中国历史有确切纪年的开始。",
+      "eventType": [
+        "war",
+        "rebellion"
+      ]
+    },
+    {
+      "id": "ccf67973-f71f-4a4a-a2b9-f90e8388d63d",
+      "dynastyId": "f578c38f-84d3-416f-932a-5f16a3450fbf",
+      "time": {
+        "startYear": -771,
+        "endYear": -771
+      },
+      "title": "烽火戏诸侯",
+      "description": "周幽王为博褒姒一笑，多次点燃烽火戏弄诸侯，最终犬戎入侵时无人救援，西周灭亡。",
+      "eventType": [
+        "political_event",
+        "tragedy"
+      ]
+    }
+  ]
+}

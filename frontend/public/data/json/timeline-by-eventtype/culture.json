@@ -1,0 +1,89 @@
+{
+  "category": "culture",
+  "eventCount": 6,
+  "events": [
+    {
+      "id": "be3d49b1-187b-468d-ac22-262f4a0c1f27",
+      "dynastyId": "a7fc9f24-7e3e-4ccf-a564-f6df4ab8414d",
+      "time": {
+        "startYear": 605,
+        "endYear": 610
+      },
+      "title": "开凿大运河",
+      "description": "隋炀帝下令开凿大运河，以洛阳为中心，北起涿郡（今北京），南至余杭（今杭州），连接海河、黄河、淮河、长江和钱塘江五大水系，全长约2700公里。",
+      "eventType": [
+        "engineering",
+        "economic_infrastructure"
+      ]
+    },
+    {
+      "id": "49bca116-405e-448b-8374-c69f58083996",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 627,
+        "endYear": 645
+      },
+      "title": "玄奘西行",
+      "description": "玄奘法师从长安出发，西行天竺（今印度）取经，历时18年，带回大量佛经，促进了中印文化交流。",
+      "eventType": [
+        "cultural_event",
+        "religious_pilgrimage"
+      ]
+    },
+    {
+      "id": "dac75b2e-e0e3-46e2-970a-b38eb392a38f",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 629,
+        "endYear": 645
+      },
+      "title": "玄奘西行取经",
+      "description": "唐朝高僧玄奘前往印度取经的历史事件。",
+      "eventType": [
+        "cultural"
+      ]
+    },
+    {
+      "id": "c73dcbad-1b22-4cd8-af40-36efd7715b61",
+      "dynastyId": "7a1cb0b2-b2ec-4100-ad66-468a924a2922",
+      "time": {
+        "startYear": 1275,
+        "endYear": 1292
+      },
+      "title": "马可波罗来华",
+      "description": "意大利旅行家马可波罗来到中国，在元朝任职，回国后著《马可波罗游记》。",
+      "eventType": [
+        "cultural_event",
+        "diplomatic_visit"
+      ]
+    },
+    {
+      "id": "4450ca8d-1345-4e06-8d76-fa557921e45d",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1402,
+        "endYear": 1424
+      },
+      "title": "永乐盛世",
+      "description": "明成祖朱棣统治时期。这一时期国力强盛，经济繁荣，郑和下西洋开拓了海外贸易，使明朝成为当时最强大的国家。",
+      "eventType": [
+        "cultural_flourishing",
+        "political_stability"
+      ]
+    },
+    {
+      "id": "b3c0562b-d709-4733-a6e1-daf72c652bb3",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1405,
+        "endYear": 1433
+      },
+      "title": "郑和下西洋",
+      "description": "郑和率领船队七次下西洋，到达亚非30多个国家和地区，是世界航海史上的壮举。",
+      "eventType": [
+        "cultural_event",
+        "diplomatic_expedition"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "9df115de-c98e-4670-b511-396cb9431c36",
+    "name": "后汉朝",
+    "name_en": "Later Han",
+    "slug": "后汉",
+    "startYear": 947,
+    "endYear": 950,
+    "color": "#CD5C5C",
+    "capital": null,
+    "founder": null,
+    "description": "五代十国时期第四个朝代，刘知远建立"
+  },
+  "events": []
+}

@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "29d40d9a-6b04-4a57-955c-47df45be6fef",
+    "name": "新朝",
+    "name_en": "Xin",
+    "slug": "xin",
+    "startYear": 9,
+    "endYear": 23,
+    "color": "#8B008B",
+    "capital": null,
+    "founder": null,
+    "description": "王莽建立的短暂朝代"
+  },
+  "events": []
+}

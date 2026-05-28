@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "446e3915-c998-4e1d-b832-8a04f6f6dbf2",
+    "name": "后梁朝",
+    "name_en": "Later Liang",
+    "slug": "后梁",
+    "startYear": 907,
+    "endYear": 923,
+    "color": "#8B4789",
+    "capital": null,
+    "founder": null,
+    "description": "五代十国时期第一个朝代，朱温建立"
+  },
+  "events": []
+}

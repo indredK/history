@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "fa319889-9064-43f9-92b1-4d60084a76a8",
+    "name": "北齐朝",
+    "name_en": "Northern Qi",
+    "slug": "北齐",
+    "startYear": 550,
+    "endYear": 577,
+    "color": "#2F4F4F",
+    "capital": null,
+    "founder": null,
+    "description": "东魏权臣高洋建立的北朝政权"
+  },
+  "events": []
+}

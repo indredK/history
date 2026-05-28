@@ -1,0 +1,197 @@
+{
+  "dynasty": {
+    "id": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+    "name": "中华民国北洋政府朝",
+    "name_en": "Beiyang Government",
+    "slug": "中华民国北洋政府",
+    "startYear": 1912,
+    "endYear": 1928,
+    "color": "#8B0000",
+    "capital": null,
+    "founder": null,
+    "description": "中华民国初期由北洋军阀控制的中央政府"
+  },
+  "events": [
+    {
+      "id": "079c1780-311c-46c0-addc-e6c7f38ca0f8",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1912,
+        "endYear": 1912
+      },
+      "title": "中华民国临时政府成立",
+      "description": "孙中山在南京宣布成立中华民国临时政府，就任临时大总统，标志着中国历史上第一个资产阶级共和国的诞生。",
+      "eventType": [
+        "political_event",
+        "government_formation"
+      ]
+    },
+    {
+      "id": "0348c6b4-10fc-48be-9c3e-f5cbfe2ef786",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1912,
+        "endYear": 1912
+      },
+      "title": "袁世凯就任临时大总统",
+      "description": "袁世凯在北京就任中华民国临时大总统，临时政府迁都北京，北洋政府统治时期开始。",
+      "eventType": [
+        "political_event",
+        "leadership_change"
+      ]
+    },
+    {
+      "id": "fa1ab4f7-deb9-4fb2-98bb-af74db2d74c5",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1915,
+        "endYear": 1916
+      },
+      "title": "袁世凯称帝",
+      "description": "袁世凯宣布复辟帝制，改国号为中华帝国，引发全国反对。",
+      "eventType": [
+        "political_event",
+        "emperor_claim"
+      ]
+    },
+    {
+      "id": "9913eea2-1852-40d5-9c99-7cf9aa08674f",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1915,
+        "endYear": 1916
+      },
+      "title": "护国运动",
+      "description": "蔡锷等宣布云南独立，组织护国军讨伐袁世凯，各地纷纷响应，最终迫使袁世凯取消帝制。",
+      "eventType": [
+        "war",
+        "rebellion"
+      ]
+    },
+    {
+      "id": "663317ed-bf07-48e7-8154-9196a71cd487",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1916,
+        "endYear": 1916
+      },
+      "title": "袁世凯去世",
+      "description": "袁世凯因尿毒症在北京去世，北洋军阀开始分裂为直系、皖系、奉系等派系。",
+      "eventType": [
+        "political_event",
+        "leadership_change"
+      ]
+    },
+    {
+      "id": "38dfbb53-d307-4f90-babd-fa156a2403a0",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1917,
+        "endYear": 1917
+      },
+      "title": "张勋复辟",
+      "description": "张勋率辫子军入京，拥戴溥仪复辟帝制，仅12天即被段祺瑞击败。",
+      "eventType": [
+        "political_event",
+        "restoration_attempt"
+      ]
+    },
+    {
+      "id": "f41082f0-1996-43aa-a613-a810768fda8a",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1917,
+        "endYear": 1922
+      },
+      "title": "护法运动",
+      "description": "孙中山在广州组织护法军政府，反对段祺瑞破坏《临时约法》，维护共和制度。",
+      "eventType": [
+        "political_movement"
+      ]
+    },
+    {
+      "id": "2c970fa5-ab72-4918-a183-d35abec8a1bd",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1919,
+        "endYear": 1919
+      },
+      "title": "五四运动",
+      "description": "北京学生因巴黎和会外交失败举行游行示威，抗议北洋政府卖国行径，随后演变为全国性的爱国运动。",
+      "eventType": [
+        "social_movement",
+        "cultural_revolution"
+      ]
+    },
+    {
+      "id": "2c9ed2f8-261d-4922-9248-87a15423966d",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1922,
+        "endYear": 1922
+      },
+      "title": "第一次直奉战争",
+      "description": "直系军阀吴佩孚与奉系军阀张作霖之间的战争，直系获胜，控制了北京政府。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "44fca5d4-ca78-416c-9ddb-bb56074f889c",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1924,
+        "endYear": 1924
+      },
+      "title": "第二次直奉战争",
+      "description": "直系与奉系再次爆发战争，冯玉祥发动北京政变，直系失败，奉系控制北京政府。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "97a3a6b0-fe7f-4f40-acb0-0935c4d60ab6",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1926,
+        "endYear": 1926
+      },
+      "title": "北伐战争开始",
+      "description": "国民革命军在广州誓师北伐，讨伐北洋军阀吴佩孚、孙传芳、张作霖。",
+      "eventType": [
+        "war",
+        "military_campaign"
+      ]
+    },
+    {
+      "id": "3848979b-2c5d-4fc8-b2b5-a5feac7f0f0d",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1928,
+        "endYear": 1928
+      },
+      "title": "北洋政府结束",
+      "description": "国民革命军占领北京，北洋政府统治结束，南京国民政府形式上统一全国。",
+      "eventType": [
+        "political_event",
+        "government_end"
+      ]
+    },
+    {
+      "id": "6cb5ab2e-f8d6-4c88-be0d-31d3a42c647c",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1928,
+        "endYear": 1928
+      },
+      "title": "东北易帜",
+      "description": "张学良宣布东北易帜，服从国民政府，国民政府形式上统一全国。",
+      "eventType": [
+        "political_event",
+        "unification"
+      ]
+    }
+  ]
+}

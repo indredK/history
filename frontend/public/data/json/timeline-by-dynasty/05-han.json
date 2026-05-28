@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "ad86c3a8-90b4-43fa-8361-5c6231556ce1",
+    "name": "汉朝",
+    "name_en": null,
+    "slug": "han",
+    "startYear": -206,
+    "endYear": 220,
+    "color": null,
+    "capital": "长安",
+    "founder": "刘邦",
+    "description": "中国历史上最重要的朝代之一，分为西汉和东汉"
+  },
+  "events": []
+}

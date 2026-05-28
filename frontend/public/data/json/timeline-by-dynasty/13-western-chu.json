@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "61134e1a-d269-4a41-962d-4ed5c2a5b1d1",
+    "name": "西楚朝",
+    "name_en": "Western Chu",
+    "slug": "western-chu",
+    "startYear": -206,
+    "endYear": -202,
+    "color": "#800000",
+    "capital": null,
+    "founder": null,
+    "description": "秦朝灭亡后项羽建立的政权，楚汉之争时期"
+  },
+  "events": []
+}

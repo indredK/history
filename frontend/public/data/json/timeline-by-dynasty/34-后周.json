@@ -1,0 +1,30 @@
+{
+  "dynasty": {
+    "id": "3572594a-d2d4-4139-ab03-bf9c4c97631f",
+    "name": "后周朝",
+    "name_en": "Later Zhou",
+    "slug": "后周",
+    "startYear": 951,
+    "endYear": 960,
+    "color": "#4682B4",
+    "capital": null,
+    "founder": null,
+    "description": "五代十国时期第五个朝代，郭威建立"
+  },
+  "events": [
+    {
+      "id": "71636f2a-9a60-48ba-8860-aca7d4887e72",
+      "dynastyId": "3572594a-d2d4-4139-ab03-bf9c4c97631f",
+      "time": {
+        "startYear": 960,
+        "endYear": 960
+      },
+      "title": "陈桥兵变",
+      "description": "赵匡胤发动兵变，黄袍加身，取代后周，建立宋朝，定都开封。",
+      "eventType": [
+        "political_event",
+        "coup_d'etat"
+      ]
+    }
+  ]
+}

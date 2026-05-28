@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "name": "国民政府疆域 (1928-1949)",
+  "period": "nationalist",
+  "valid_from": 1928,
+  "valid_to": 1949,
+  "description": "用于地图页时间轴联动演示的国民政府疆域 mock 数据。",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "nationalist_core",
+      "properties": {
+        "name": "国民政府疆域",
+        "admin_level": "empire",
+        "year": 1928,
+        "source": "Map Timeline Demo Mock"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [74.0, 22.0],
+            [83.0, 18.0],
+            [111.0, 18.0],
+            [122.0, 22.0],
+            [125.0, 28.0],
+            [132.0, 46.0],
+            [123.0, 50.0],
+            [109.0, 49.0],
+            [92.0, 48.0],
+            [79.0, 34.0],
+            [74.0, 22.0]
+          ]
+        ]
+      }
+    }
+  ]
+}
+

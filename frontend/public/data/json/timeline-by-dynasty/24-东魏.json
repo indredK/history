@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "fc8e6ff7-5efd-45a6-9d10-b3cc9bab9940",
+    "name": "东魏朝",
+    "name_en": "Eastern Wei",
+    "slug": "东魏",
+    "startYear": 534,
+    "endYear": 550,
+    "color": "#778899",
+    "capital": null,
+    "founder": null,
+    "description": "北魏分裂后的东部政权"
+  },
+  "events": []
+}

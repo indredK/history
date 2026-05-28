@@ -1,0 +1,44 @@
+{
+  "dynasty": {
+    "id": "8cafb119-a327-4d47-9cb3-406980c0c33e",
+    "name": "西晋朝",
+    "name_en": "Western Jin",
+    "slug": "western-jin",
+    "startYear": 266,
+    "endYear": 316,
+    "color": "#DAA520",
+    "capital": null,
+    "founder": null,
+    "description": "晋朝前期，定都洛阳"
+  },
+  "events": [
+    {
+      "id": "27ae5c74-f4fb-4c1a-807c-200ed73c0235",
+      "dynastyId": "8cafb119-a327-4d47-9cb3-406980c0c33e",
+      "time": {
+        "startYear": 280,
+        "endYear": 280
+      },
+      "title": "晋朝统一",
+      "description": "西晋灭吴，结束了三国鼎立的局面，实现了全国统一。",
+      "eventType": [
+        "political_event",
+        "unification"
+      ]
+    },
+    {
+      "id": "db883615-9880-44dd-aaed-106a5d2a2160",
+      "dynastyId": "8cafb119-a327-4d47-9cb3-406980c0c33e",
+      "time": {
+        "startYear": 291,
+        "endYear": 306
+      },
+      "title": "八王之乱",
+      "description": "西晋皇室内部发生的权力争斗，导致西晋国力急剧衰落，引发了五胡乱华。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    }
+  ]
+}

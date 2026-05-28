@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "bbf75b74-5a40-45a6-99ad-1b1908d64f15",
+    "name": "北魏朝",
+    "name_en": "Northern Wei",
+    "slug": "northern-wei",
+    "startYear": 386,
+    "endYear": 534,
+    "color": "#708090",
+    "capital": null,
+    "founder": null,
+    "description": "鲜卑族拓跋氏建立的北朝政权"
+  },
+  "events": []
+}

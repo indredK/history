@@ -1,0 +1,86 @@
+{
+  "dynasty": {
+    "id": "6739e76f-2446-4181-943f-f024280fe90f",
+    "name": "北宋朝",
+    "name_en": "Northern Song",
+    "slug": "northern-song",
+    "startYear": 960,
+    "endYear": 1127,
+    "color": "#6B8E23",
+    "capital": null,
+    "founder": null,
+    "description": "宋朝前期，定都开封"
+  },
+  "events": [
+    {
+      "id": "46085a1c-2adf-4dee-9b00-5aa66b4fa72e",
+      "dynastyId": "6739e76f-2446-4181-943f-f024280fe90f",
+      "time": {
+        "startYear": 961,
+        "endYear": 961
+      },
+      "title": "杯酒释兵权",
+      "description": "赵匡胤通过酒宴的方式，威胁利诱高级将领交出兵权，加强中央集权。",
+      "eventType": [
+        "political_event",
+        "military_reform"
+      ]
+    },
+    {
+      "id": "8956a499-c5e4-4dfa-82cb-670b5a225a95",
+      "dynastyId": "6739e76f-2446-4181-943f-f024280fe90f",
+      "time": {
+        "startYear": 962,
+        "endYear": 979
+      },
+      "title": "北宋统一战争",
+      "description": "宋朝建立后，对剩余割据政权进行的一系列军事行动，结束了五代十国的分裂局面。",
+      "eventType": [
+        "war",
+        "unification"
+      ]
+    },
+    {
+      "id": "2c98e905-9986-4eda-a3bd-695a10ca6d9d",
+      "dynastyId": "6739e76f-2446-4181-943f-f024280fe90f",
+      "time": {
+        "startYear": 1005,
+        "endYear": 1005
+      },
+      "title": "澶渊之盟",
+      "description": "北宋与辽朝在澶州签订和约，结束了长达25年的战争，开启了长达120年的和平局面。",
+      "eventType": [
+        "diplomatic_event",
+        "treaty"
+      ]
+    },
+    {
+      "id": "587192d1-90dd-4a55-bb59-9940828a042b",
+      "dynastyId": "6739e76f-2446-4181-943f-f024280fe90f",
+      "time": {
+        "startYear": 1069,
+        "endYear": 1085
+      },
+      "title": "王安石变法",
+      "description": "宋神宗时期，王安石发起的旨在富国强兵的社会改革运动，涉及政治、经济、军事等多个领域。",
+      "eventType": [
+        "political_reform",
+        "economic_reform"
+      ]
+    },
+    {
+      "id": "2a53c1b4-9051-42ed-ac78-62b30c0e5f2e",
+      "dynastyId": "6739e76f-2446-4181-943f-f024280fe90f",
+      "time": {
+        "startYear": 1125,
+        "endYear": 1127
+      },
+      "title": "靖康之变",
+      "description": "金兵南下，攻占宋朝都城开封。宋徽宗和宋钦宗都被金人掠去，北宋灭亡。",
+      "eventType": [
+        "war",
+        "military_defeat"
+      ]
+    }
+  ]
+}

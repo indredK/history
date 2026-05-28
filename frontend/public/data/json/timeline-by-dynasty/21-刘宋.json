@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "47585ac4-7d03-451b-a5df-d5553858ba61",
+    "name": "刘宋朝",
+    "name_en": "Liu Song",
+    "slug": "刘宋",
+    "startYear": 420,
+    "endYear": 479,
+    "color": "#20B2AA",
+    "capital": null,
+    "founder": null,
+    "description": "南朝第一个政权，刘裕建立"
+  },
+  "events": []
+}

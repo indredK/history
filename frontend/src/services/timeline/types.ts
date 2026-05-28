@@ -22,6 +22,13 @@ export interface Event {
   categories?: string[][];
   sources?: SourceRef[];
   source_ids?: string[];
+  rawLocations?: string[];
+  rawParticipants?: string[];
+  mapFocusStartYear?: number;
+  mapFocusEndYear?: number;
+  mapLocationHints?: string[];
+  dynastyId?: string;
+  demoPriority?: number;
   confidence?: number;
   created_at?: string;
   updated_at?: string;
@@ -51,6 +58,13 @@ export const EventSchema = z.object({
     )
     .optional(),
   source_ids: z.array(z.string()).optional(),
+  rawLocations: z.array(z.string()).optional(),
+  rawParticipants: z.array(z.string()).optional(),
+  mapFocusStartYear: z.number().optional(),
+  mapFocusEndYear: z.number().optional(),
+  mapLocationHints: z.array(z.string()).optional(),
+  dynastyId: z.string().optional(),
+  demoPriority: z.number().optional(),
   confidence: z.number().min(0).max(1).optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),

@@ -1,0 +1,58 @@
+{
+  "dynasty": {
+    "id": "a7fc9f24-7e3e-4ccf-a564-f6df4ab8414d",
+    "name": "隋朝",
+    "name_en": "Sui",
+    "slug": "sui",
+    "startYear": 581,
+    "endYear": 618,
+    "color": "#FF8C00",
+    "capital": null,
+    "founder": null,
+    "description": "结束南北朝分裂局面，重新统一中国"
+  },
+  "events": [
+    {
+      "id": "be3d49b1-187b-468d-ac22-262f4a0c1f27",
+      "dynastyId": "a7fc9f24-7e3e-4ccf-a564-f6df4ab8414d",
+      "time": {
+        "startYear": 605,
+        "endYear": 610
+      },
+      "title": "开凿大运河",
+      "description": "隋炀帝下令开凿大运河，以洛阳为中心，北起涿郡（今北京），南至余杭（今杭州），连接海河、黄河、淮河、长江和钱塘江五大水系，全长约2700公里。",
+      "eventType": [
+        "engineering",
+        "economic_infrastructure"
+      ]
+    },
+    {
+      "id": "fbab03a8-6617-47c7-a604-904966e4c12a",
+      "dynastyId": "a7fc9f24-7e3e-4ccf-a564-f6df4ab8414d",
+      "time": {
+        "startYear": 611,
+        "endYear": 618
+      },
+      "title": "隋末农民起义",
+      "description": "由于隋炀帝的暴政，各地爆发大规模农民起义，最终导致隋朝灭亡。",
+      "eventType": [
+        "war",
+        "peasant_uprising"
+      ]
+    },
+    {
+      "id": "1a54f622-5b4b-439c-aad6-3b84a1b26a48",
+      "dynastyId": "a7fc9f24-7e3e-4ccf-a564-f6df4ab8414d",
+      "time": {
+        "startYear": 618,
+        "endYear": 618
+      },
+      "title": "唐朝建立",
+      "description": "李渊在长安称帝，建立唐朝，取代隋朝。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    }
+  ]
+}

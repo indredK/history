@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "7223215d-7568-443e-86b0-9d7dfee23113",
+    "name": "后唐朝",
+    "name_en": "Later Tang",
+    "slug": "后唐",
+    "startYear": 923,
+    "endYear": 936,
+    "color": "#CD9B1D",
+    "capital": null,
+    "founder": null,
+    "description": "五代十国时期第二个朝代，李存勖建立"
+  },
+  "events": []
+}

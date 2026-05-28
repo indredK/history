@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "fc345bb7-8e8e-40fb-904b-b8caedad467f",
+    "name": "西魏朝",
+    "name_en": "Western Wei",
+    "slug": "西魏",
+    "startYear": 535,
+    "endYear": 556,
+    "color": "#696969",
+    "capital": null,
+    "founder": null,
+    "description": "北魏分裂后的西部政权"
+  },
+  "events": []
+}

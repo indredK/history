@@ -1,0 +1,30 @@
+{
+  "dynasty": {
+    "id": "366e2bbf-df01-4301-89e3-8a2fb08ad122",
+    "name": "陈朝",
+    "name_en": "Chen",
+    "slug": "陈",
+    "startYear": 557,
+    "endYear": 589,
+    "color": "#008B8B",
+    "capital": null,
+    "founder": null,
+    "description": "南朝第四个政权，陈霸先建立"
+  },
+  "events": [
+    {
+      "id": "94a4c810-222b-4f70-99a9-bde41169b586",
+      "dynastyId": "366e2bbf-df01-4301-89e3-8a2fb08ad122",
+      "time": {
+        "startYear": 589,
+        "endYear": 589
+      },
+      "title": "隋朝统一全国",
+      "description": "隋军南下，灭掉陈朝，结束了自西晋末年以来长达近300年的分裂局面，实现了全国统一。",
+      "eventType": [
+        "political_event",
+        "unification"
+      ]
+    }
+  ]
+}

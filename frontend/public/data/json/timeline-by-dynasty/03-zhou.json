@@ -1,0 +1,15 @@
+{
+  "dynasty": {
+    "id": "487f1293-5c91-4f9b-8179-b30857d22bce",
+    "name": "周朝",
+    "name_en": null,
+    "slug": "zhou",
+    "startYear": -1046,
+    "endYear": -256,
+    "color": null,
+    "capital": "镐京",
+    "founder": "周武王",
+    "description": "中国历史上最长的朝代，分为西周和东周"
+  },
+  "events": []
+}

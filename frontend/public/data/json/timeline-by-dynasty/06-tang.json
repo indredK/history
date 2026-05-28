@@ -1,0 +1,195 @@
+{
+  "dynasty": {
+    "id": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+    "name": "唐朝",
+    "name_en": "Tang",
+    "slug": "tang",
+    "startYear": 618,
+    "endYear": 907,
+    "color": "#FFD700",
+    "capital": "长安",
+    "founder": "李渊",
+    "description": "中国历史上最强盛的朝代之一"
+  },
+  "events": [
+    {
+      "id": "68c9690a-723b-438e-9f59-23114ee5592b",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 626,
+        "endYear": 626
+      },
+      "title": "玄武门之变",
+      "description": "唐太宗李世民在长安玄武门发动的政变。通过这场政变，李世民打败了兄长太子李建成和弟弟齐王李元吉，夺得了王位。",
+      "eventType": [
+        "political_event",
+        "coup_d'etat"
+      ]
+    },
+    {
+      "id": "52d0a9ff-2607-41ca-8a4c-da5d8161cf78",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 626,
+        "endYear": 649
+      },
+      "title": "贞观之治",
+      "description": "唐太宗推行的一个以儒家思想为指导的治国政策。强调民本和谦虚，使唐朝的政治、经济、文化达到了新的高度。",
+      "eventType": [
+        "political_reform",
+        "cultural_flourishing"
+      ]
+    },
+    {
+      "id": "49bca116-405e-448b-8374-c69f58083996",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 627,
+        "endYear": 645
+      },
+      "title": "玄奘西行",
+      "description": "玄奘法师从长安出发，西行天竺（今印度）取经，历时18年，带回大量佛经，促进了中印文化交流。",
+      "eventType": [
+        "cultural_event",
+        "religious_pilgrimage"
+      ]
+    },
+    {
+      "id": "84db28fe-f9b8-41aa-98e6-f2c134a7c550",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 627,
+        "endYear": 649
+      },
+      "title": "贞观之治",
+      "description": "唐太宗李世民统治时期的政治清明、经济繁荣时期。",
+      "eventType": [
+        "political"
+      ]
+    },
+    {
+      "id": "dac75b2e-e0e3-46e2-970a-b38eb392a38f",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 629,
+        "endYear": 645
+      },
+      "title": "玄奘西行取经",
+      "description": "唐朝高僧玄奘前往印度取经的历史事件。",
+      "eventType": [
+        "cultural"
+      ]
+    },
+    {
+      "id": "bffe3550-acde-4a72-9fa0-a4b07a0f5c1f",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 641,
+        "endYear": 641
+      },
+      "title": "文成公主入藏",
+      "description": "唐太宗将文成公主嫁给吐蕃赞普松赞干布，促进了唐蕃友好和文化交流。",
+      "eventType": [
+        "diplomatic_event",
+        "cultural_exchange"
+      ]
+    },
+    {
+      "id": "01eeec36-34b4-4030-9ae5-d9255c617324",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 690,
+        "endYear": 690
+      },
+      "title": "武则天称帝",
+      "description": "武则天改唐为周，自称圣神皇帝，成为中国历史上唯一的女皇帝。",
+      "eventType": [
+        "political_event",
+        "gender_milestone"
+      ]
+    },
+    {
+      "id": "0c15e955-8e64-4c45-a94c-6289502ce5e0",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 713,
+        "endYear": 741
+      },
+      "title": "开元盛世",
+      "description": "唐玄宗统治前期，政治清明，经济繁荣，文化昌盛，唐朝进入全盛时期，史称'开元盛世'。",
+      "eventType": [
+        "political_reform",
+        "cultural_flourishing"
+      ]
+    },
+    {
+      "id": "66fc7a50-1407-438e-ac2f-09f7d8891ecf",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 755,
+        "endYear": 763
+      },
+      "title": "安史之乱",
+      "description": "唐朝中期的一次重大叛乱，严重削弱了唐朝的国力。",
+      "eventType": [
+        "war"
+      ]
+    },
+    {
+      "id": "43c2c5ef-c7cf-4084-9c3e-8b746ce6b4d0",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 755,
+        "endYear": 763
+      },
+      "title": "安史之乱",
+      "description": "安禄山和史思明在唐玄宗统治时期发动的大规模叛乱。虽然最终被平定，但使唐朝元气大伤，标志着唐朝由盛转衰。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "b97e5c74-7dbd-432d-a61e-520b55eb074d",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 763,
+        "endYear": 907
+      },
+      "title": "藩镇割据",
+      "description": "安史之乱后，唐朝在地方上设置了众多藩镇，这些藩镇逐渐形成割据势力，不听从中央命令，严重削弱了唐朝的统治。",
+      "eventType": [
+        "political_fragmentation",
+        "regionalism"
+      ]
+    },
+    {
+      "id": "ac4d6257-26cf-4124-9115-dfa3a7936d19",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 808,
+        "endYear": 846
+      },
+      "title": "牛李党争",
+      "description": "唐朝后期以牛僧孺、李宗闵为首的牛党与李德裕、郑覃为首的李党之间的长期政治斗争，加速了唐朝的衰落。",
+      "eventType": [
+        "political_event",
+        "factional_conflict"
+      ]
+    },
+    {
+      "id": "f8bdc6b2-72cd-4336-88cf-229d717eb594",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 875,
+        "endYear": 884
+      },
+      "title": "黄巢起义",
+      "description": "黄巢领导的大规模农民起义。一度攻占长安，建立大齐政权，虽最终失败，但动摇了唐末政权的基础。",
+      "eventType": [
+        "war",
+        "peasant_uprising"
+      ]
+    }
+  ]
+}

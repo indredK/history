@@ -1,0 +1,86 @@
+{
+  "dynasty": {
+    "id": "7a1cb0b2-b2ec-4100-ad66-468a924a2922",
+    "name": "元朝",
+    "name_en": "Yuan",
+    "slug": "yuan",
+    "startYear": 1271,
+    "endYear": 1368,
+    "color": "#4169E1",
+    "capital": "大都",
+    "founder": "忽必烈",
+    "description": "蒙古族建立的大一统王朝"
+  },
+  "events": [
+    {
+      "id": "554e964d-c1e3-4149-8f85-e523af626203",
+      "dynastyId": "7a1cb0b2-b2ec-4100-ad66-468a924a2922",
+      "time": {
+        "startYear": 1271,
+        "endYear": 1271
+      },
+      "title": "元朝建立",
+      "description": "忽必烈改国号为元，定都大都，元朝正式建立。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "c73dcbad-1b22-4cd8-af40-36efd7715b61",
+      "dynastyId": "7a1cb0b2-b2ec-4100-ad66-468a924a2922",
+      "time": {
+        "startYear": 1275,
+        "endYear": 1292
+      },
+      "title": "马可波罗来华",
+      "description": "意大利旅行家马可波罗来到中国，在元朝任职，回国后著《马可波罗游记》。",
+      "eventType": [
+        "cultural_event",
+        "diplomatic_visit"
+      ]
+    },
+    {
+      "id": "13eeac1a-623f-4f8f-95ff-f52b2f5e118f",
+      "dynastyId": "7a1cb0b2-b2ec-4100-ad66-468a924a2922",
+      "time": {
+        "startYear": 1279,
+        "endYear": 1279
+      },
+      "title": "崖山海战",
+      "description": "元朝军队与南宋残余势力在崖山进行的决战，南宋灭亡，元朝统一全国。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    },
+    {
+      "id": "c3609e36-9739-4b6b-98ee-ab57f74f9abf",
+      "dynastyId": "7a1cb0b2-b2ec-4100-ad66-468a924a2922",
+      "time": {
+        "startYear": 1351,
+        "endYear": 1368
+      },
+      "title": "元末农民起义",
+      "description": "元朝末期的大规模农民起义，其中最重要的是朱元璋所参加的起义。最终导致了元朝的灭亡和明朝的建立。",
+      "eventType": [
+        "war",
+        "peasant_uprising"
+      ]
+    },
+    {
+      "id": "1b17c63f-be70-41b7-8fd5-5f29945ec551",
+      "dynastyId": "7a1cb0b2-b2ec-4100-ad66-468a924a2922",
+      "time": {
+        "startYear": 1368,
+        "endYear": 1368
+      },
+      "title": "明朝建立",
+      "description": "朱元璋在南京称帝，建立明朝，元朝灭亡。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    }
+  ]
+}

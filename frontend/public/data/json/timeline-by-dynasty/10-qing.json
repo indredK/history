@@ -1,0 +1,143 @@
+{
+  "dynasty": {
+    "id": "48dd8769-bec5-4243-bc02-048467bc06a7",
+    "name": "清朝",
+    "name_en": "Qing",
+    "slug": "qing",
+    "startYear": 1644,
+    "endYear": 1912,
+    "color": "#191970",
+    "capital": "北京",
+    "founder": "努尔哈赤",
+    "description": "中国历史上最后一个封建王朝"
+  },
+  "events": [
+    {
+      "id": "9e906b04-0be7-42a4-82e5-2c5b3597b13c",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1644,
+        "endYear": 1644
+      },
+      "title": "清朝建立",
+      "description": "清军入关，顺治帝在北京即位，建立清朝，明朝灭亡。",
+      "eventType": [
+        "political_event",
+        "dynasty_founding"
+      ]
+    },
+    {
+      "id": "6e4cdfff-e7f3-48c4-b496-d04ddf27ea21",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1662,
+        "endYear": 1722
+      },
+      "title": "康熙盛世",
+      "description": "康熙帝统治时期，国家统一，经济繁荣，文化昌盛，是清朝的鼎盛时期之一。",
+      "eventType": [
+        "political_stability",
+        "cultural_flourishing"
+      ]
+    },
+    {
+      "id": "4f048d23-3d13-42b6-b6b7-991e9b09a34b",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1673,
+        "endYear": 1681
+      },
+      "title": "三藩之乱",
+      "description": "清初平定的三位藩王（吴三桂、尚可喜、耿精忠）发动的大规模反抗。康熙通过这一战争加强了中央集权。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "d1e1a0ab-4630-456c-a640-290c28235230",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1735,
+        "endYear": 1796
+      },
+      "title": "乾隆盛世",
+      "description": "乾隆帝统治时期，清朝达到鼎盛，国家统一，经济繁荣，文化发展。",
+      "eventType": [
+        "political_stability",
+        "cultural_flourishing"
+      ]
+    },
+    {
+      "id": "ff0af3f7-c44e-42d3-9323-6952153814e2",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1793,
+        "endYear": 1794
+      },
+      "title": "马戛尔尼使团访华",
+      "description": "英国派遣马戛尔尼使团访华，试图与清朝建立贸易关系，但由于礼仪问题和贸易分歧而失败。",
+      "eventType": [
+        "diplomatic_event",
+        "cultural_exchange"
+      ]
+    },
+    {
+      "id": "1bd21a0b-455c-42bd-926f-82d937a00846",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1840,
+        "endYear": 1842
+      },
+      "title": "鸦片战争",
+      "description": "英国为了打开中国市场而对华发动的战争。中国战败后被迫签订《南京条约》，开放了五个通商口岸。",
+      "eventType": [
+        "war",
+        "foreign_aggression"
+      ]
+    },
+    {
+      "id": "3973e1ab-9fe7-4a19-8a44-234ee0958373",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1851,
+        "endYear": 1864
+      },
+      "title": "太平天国",
+      "description": "洪秀全领导的大规模农民起义，建立了地跨多省的政权。虽然最终被清军镇压，但震撼了整个中国。",
+      "eventType": [
+        "war",
+        "rebellion",
+        "political_state"
+      ]
+    },
+    {
+      "id": "e0b00ddb-f3e9-4028-b94c-1955928fa8dd",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1898,
+        "endYear": 1898
+      },
+      "title": "戊戌变法",
+      "description": "光绪帝和康有为等维新派进行的政治改革运动。试图学习西方制度，但最终被慈禧太后镇压。",
+      "eventType": [
+        "political_reform",
+        "cultural_change"
+      ]
+    },
+    {
+      "id": "c810d2a7-2fa7-44b7-b435-0b663464cdfa",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1911,
+        "endYear": 1912
+      },
+      "title": "辛亥革命",
+      "description": "推翻满清统治，建立共和制政体的伟大革命。孙中山领导的革命者发动起义，推动了中国从帝制向共和的转变。",
+      "eventType": [
+        "political_revolution",
+        "military_action"
+      ]
+    }
+  ]
+}

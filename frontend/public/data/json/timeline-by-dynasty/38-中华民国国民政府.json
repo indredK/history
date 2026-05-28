@@ -1,0 +1,283 @@
+{
+  "dynasty": {
+    "id": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+    "name": "中华民国国民政府朝",
+    "name_en": "Nationalist Government",
+    "slug": "中华民国国民政府",
+    "startYear": 1928,
+    "endYear": 1949,
+    "color": "#FF0000",
+    "capital": null,
+    "founder": null,
+    "description": "国民党统治时期的中华民国中央政府"
+  },
+  "events": [
+    {
+      "id": "b18d5bbf-f892-4a60-b018-424e188ddcb2",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1930,
+        "endYear": 1930
+      },
+      "title": "中原大战",
+      "description": "蒋介石与冯玉祥、阎锡山、李宗仁等军阀的战争，是中国近代史上规模最大的军阀混战。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "2f866631-a339-408f-be23-223fb49f2f35",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1931,
+        "endYear": 1931
+      },
+      "title": "九一八事变",
+      "description": "日本发动九一八事变，侵占中国东北，标志着日本局部侵华战争的开始。",
+      "eventType": [
+        "war",
+        "invasion"
+      ]
+    },
+    {
+      "id": "7076af91-18e1-4bc8-9347-722369dd47a9",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1932,
+        "endYear": 1932
+      },
+      "title": "一二八事变",
+      "description": "日本发动一二八事变，进攻上海，中国第十九路军奋起抵抗。",
+      "eventType": [
+        "war",
+        "battle"
+      ]
+    },
+    {
+      "id": "c9b80c24-b23e-4aaa-bddc-b014d72600fd",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1933,
+        "endYear": 1933
+      },
+      "title": "长城抗战",
+      "description": "中国军队在长城沿线抵抗日本侵略，是中国人民局部抗战的重要组成部分。",
+      "eventType": [
+        "war",
+        "defense"
+      ]
+    },
+    {
+      "id": "ceb634e1-518c-4d78-a19a-5fcffa6155a1",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1936,
+        "endYear": 1936
+      },
+      "title": "西安事变",
+      "description": "张学良、杨虎城发动西安事变，扣留蒋介石，逼蒋抗日，最终促成抗日民族统一战线形成。",
+      "eventType": [
+        "political_event",
+        "peaceful_resolution"
+      ]
+    },
+    {
+      "id": "c7029f41-9940-4afb-aef0-c9add445548d",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1937,
+        "endYear": 1937
+      },
+      "title": "七七卢沟桥事变",
+      "description": "日本发动七七卢沟桥事变，进攻北平，标志着日本全面侵华战争的开始，中国全面抗战开始。",
+      "eventType": [
+        "war",
+        "full-scale_invasion"
+      ]
+    },
+    {
+      "id": "5a7393aa-2c15-4e1c-9789-d2c06919031d",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1937,
+        "endYear": 1937
+      },
+      "title": "淞沪会战",
+      "description": "中国军队在上海抵抗日本侵略，是抗日战争中规模最大、战斗最激烈的战役之一。",
+      "eventType": [
+        "war",
+        "battle"
+      ]
+    },
+    {
+      "id": "7ba58805-e093-4504-8458-29fdeb05ccab",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1937,
+        "endYear": 1938
+      },
+      "title": "南京大屠杀",
+      "description": "日军占领南京后，进行了长达6周的惨绝人寰的大屠杀，杀害中国平民和放下武器的士兵超过30万人。",
+      "eventType": [
+        "war",
+        "genocide"
+      ]
+    },
+    {
+      "id": "63f36eea-ac3a-4a42-85ea-d075494f8816",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1938,
+        "endYear": 1938
+      },
+      "title": "武汉会战",
+      "description": "中国军队在武汉地区抵抗日本侵略，是抗日战争中规模最大的战役之一，标志着抗日战争进入相持阶段。",
+      "eventType": [
+        "war",
+        "battle"
+      ]
+    },
+    {
+      "id": "5bae104a-4ae3-4011-966f-53898d8948e5",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1940,
+        "endYear": 1940
+      },
+      "title": "百团大战",
+      "description": "八路军发动百团大战，大规模破袭日军交通线，沉重打击了日本侵略者的嚣张气焰。",
+      "eventType": [
+        "war",
+        "offensive"
+      ]
+    },
+    {
+      "id": "e9d01156-bfa0-4f8f-8bed-58393d1cd8e6",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1941,
+        "endYear": 1941
+      },
+      "title": "太平洋战争爆发",
+      "description": "日本偷袭珍珠港，太平洋战争爆发，中国抗战进入新阶段，成为世界反法西斯战争的重要组成部分。",
+      "eventType": [
+        "war",
+        "international_conflict"
+      ]
+    },
+    {
+      "id": "ef0040f2-f3a7-4677-9579-5d7044559b93",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1942,
+        "endYear": 1945
+      },
+      "title": "中国远征军入缅作战",
+      "description": "中国远征军入缅作战，支援盟军，打通中印公路，为世界反法西斯战争作出重要贡献。",
+      "eventType": [
+        "war",
+        "allied_campaign"
+      ]
+    },
+    {
+      "id": "76055b6d-0cc2-4706-b0a8-c9cc810689de",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1945,
+        "endYear": 1945
+      },
+      "title": "日本投降",
+      "description": "1945年8月15日，日本宣布无条件投降；9月2日，正式签署投降书，标志着中国抗日战争和第二次世界大战的胜利结束。",
+      "eventType": [
+        "war",
+        "ceasefire",
+        "surrender"
+      ]
+    },
+    {
+      "id": "79bd4887-039d-466e-a712-2157dab02c06",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1945,
+        "endYear": 1945
+      },
+      "title": "重庆谈判",
+      "description": "毛泽东与蒋介石在重庆进行和平谈判，签订《双十协定》，但未能阻止内战爆发。",
+      "eventType": [
+        "political_event",
+        "negotiations"
+      ]
+    },
+    {
+      "id": "09675565-3367-4213-b1d0-cbfe54cd9e46",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1945,
+        "endYear": 1945
+      },
+      "title": "上党战役",
+      "description": "中国共产党领导的晋冀鲁豫军区部队在山西上党地区反击国民党军进攻的战役，是解放战争的第一仗。",
+      "eventType": [
+        "war",
+        "battle"
+      ]
+    },
+    {
+      "id": "c26136c2-177e-4550-8d5e-2f4196bcb303",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1946,
+        "endYear": 1946
+      },
+      "title": "全面内战爆发",
+      "description": "国民党军向中原解放区发动大规模进攻，标志着全面内战爆发。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "211fb0fa-811a-4397-baa7-b844aa066f4b",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1948,
+        "endYear": 1948
+      },
+      "title": "辽沈战役",
+      "description": "中国人民解放军在东北战场进行的战略决战，解放了东北全境，使解放战争形势发生根本转折。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    },
+    {
+      "id": "8b893f7a-55b7-42c3-ab5c-b4950cd48fc6",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1948,
+        "endYear": 1949
+      },
+      "title": "淮海战役",
+      "description": "中国人民解放军在华东、中原战场进行的战略决战，歼灭国民党军主力，加速了解放战争胜利进程。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    },
+    {
+      "id": "393a860e-ee68-4273-8c97-ca8c52fd2f45",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1948,
+        "endYear": 1949
+      },
+      "title": "平津战役",
+      "description": "中国人民解放军在华北战场进行的战略决战，和平解放北平，基本解放华北地区。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    }
+  ]
+}

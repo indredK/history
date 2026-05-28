@@ -1,0 +1,142 @@
+{
+  "dynasty": {
+    "id": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+    "name": "明朝",
+    "name_en": "Ming",
+    "slug": "ming",
+    "startYear": 1368,
+    "endYear": 1644,
+    "color": "#FF4500",
+    "capital": "南京",
+    "founder": "朱元璋",
+    "description": "汉族复兴建立的大一统王朝"
+  },
+  "events": [
+    {
+      "id": "1e08c641-4c17-449e-ab24-29da3004e17c",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1399,
+        "endYear": 1402
+      },
+      "title": "靖难之役",
+      "description": "朱元璋之子朱棣为夺取侄子朱允炆的皇位而发动的军事行动。经过三年战争，朱棣最终成功夺得皇位。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "4450ca8d-1345-4e06-8d76-fa557921e45d",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1402,
+        "endYear": 1424
+      },
+      "title": "永乐盛世",
+      "description": "明成祖朱棣统治时期。这一时期国力强盛，经济繁荣，郑和下西洋开拓了海外贸易，使明朝成为当时最强大的国家。",
+      "eventType": [
+        "cultural_flourishing",
+        "political_stability"
+      ]
+    },
+    {
+      "id": "b3c0562b-d709-4733-a6e1-daf72c652bb3",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1405,
+        "endYear": 1433
+      },
+      "title": "郑和下西洋",
+      "description": "郑和率领船队七次下西洋，到达亚非30多个国家和地区，是世界航海史上的壮举。",
+      "eventType": [
+        "cultural_event",
+        "diplomatic_expedition"
+      ]
+    },
+    {
+      "id": "627702ac-1a1c-460c-b343-b8878cc4fc56",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1449,
+        "endYear": 1449
+      },
+      "title": "土木堡之变",
+      "description": "明英宗朱祁镇亲征瓦剌，在土木堡被瓦剌军队俘虏，明朝国力大损。",
+      "eventType": [
+        "war",
+        "military_defeat"
+      ]
+    },
+    {
+      "id": "78e34282-e8ed-4e98-af60-73e445cd5758",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1555,
+        "endYear": 1567
+      },
+      "title": "戚继光抗倭",
+      "description": "戚继光率领戚家军抗击倭寇，扫平了东南沿海的倭患。",
+      "eventType": [
+        "war",
+        "anti_piracy"
+      ]
+    },
+    {
+      "id": "c60849ce-3597-4a39-b9f3-e120c0fb99bb",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1572,
+        "endYear": 1582
+      },
+      "title": "张居正改革",
+      "description": "张居正推行的一系列改革，包括一条鞭法等，使明朝经济得到恢复和发展。",
+      "eventType": [
+        "political_reform",
+        "economic_reform"
+      ]
+    },
+    {
+      "id": "023730d5-9b70-4c6c-9f18-ec8ab912964a",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1592,
+        "endYear": 1598
+      },
+      "title": "万历朝鲜战争",
+      "description": "明朝援助朝鲜抗击日本侵略的战争，最终以明朝和朝鲜的胜利告终。",
+      "eventType": [
+        "war",
+        "international_conflict"
+      ]
+    },
+    {
+      "id": "dd42fffd-b0c0-4f4a-8790-fe38f39a6764",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1616,
+        "endYear": 1644
+      },
+      "title": "女真兴起",
+      "description": "满族（女真）的努尔哈赤建立的后金政权，最终由其子皇太极改国号为清，并最终入主中原。",
+      "eventType": [
+        "political_event",
+        "ethnic_migration"
+      ]
+    },
+    {
+      "id": "55b7519a-040d-463d-a5be-22f84dc7ff48",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1627,
+        "endYear": 1644
+      },
+      "title": "明末农民起义",
+      "description": "明朝末期的大规模农民起义，以李自成和张献忠的起义最为著名，最终导致明朝灭亡。",
+      "eventType": [
+        "war",
+        "peasant_uprising"
+      ]
+    }
+  ]
+}

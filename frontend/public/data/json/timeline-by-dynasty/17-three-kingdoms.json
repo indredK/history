@@ -1,0 +1,30 @@
+{
+  "dynasty": {
+    "id": "10306f9d-43d3-43af-b48e-a5e964da409e",
+    "name": "三国朝",
+    "name_en": "Three Kingdoms",
+    "slug": "three-kingdoms",
+    "startYear": 220,
+    "endYear": 280,
+    "color": "#FF6347",
+    "capital": null,
+    "founder": null,
+    "description": "魏、蜀、吴三国鼎立时期"
+  },
+  "events": [
+    {
+      "id": "1a748724-a0c2-495c-9a1e-18e440ff5e05",
+      "dynastyId": "10306f9d-43d3-43af-b48e-a5e964da409e",
+      "time": {
+        "startYear": 220,
+        "endYear": 280
+      },
+      "title": "三国鼎立",
+      "description": "曹丕建魏(220年)、刘备建汉(221年)、孙权建吴(229年)，三国鼎立局面正式形成。",
+      "eventType": [
+        "political_event",
+        "state_formation"
+      ]
+    }
+  ]
+}

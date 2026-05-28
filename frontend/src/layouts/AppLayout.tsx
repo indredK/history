@@ -138,9 +138,11 @@ export function AppLayout({ routes }: AppLayoutProps) {
             boxShadow: mainContentGlassStyle.boxShadow,
           })
         }}>
-          <div className="content" style={{ 
-            height: '100%', 
+          <div className="content" style={{
+            height: '100%',
             position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
             overflow: 'auto',
             overscrollBehavior: 'contain',
           }}>

@@ -1,0 +1,30 @@
+{
+  "dynasty": {
+    "id": "2b393757-6b2c-40c8-84d2-ad48d7f2da09",
+    "name": "商朝",
+    "name_en": "Shang",
+    "slug": "shang",
+    "startYear": -1600,
+    "endYear": -1046,
+    "color": "#CD853F",
+    "capital": "殷",
+    "founder": "汤",
+    "description": "中国历史上第一个有直接文字记载的朝代"
+  },
+  "events": [
+    {
+      "id": "58f1ed31-0a5f-4f3f-8090-77ca0e27b8da",
+      "dynastyId": "2b393757-6b2c-40c8-84d2-ad48d7f2da09",
+      "time": {
+        "startYear": -1300,
+        "endYear": -1300
+      },
+      "title": "盘庚迁殷",
+      "description": "商王盘庚将商朝都城迁至殷，从此商朝又称殷商，政治经济进入稳定发展时期。",
+      "eventType": [
+        "political_event",
+        "capital_move"
+      ]
+    }
+  ]
+}

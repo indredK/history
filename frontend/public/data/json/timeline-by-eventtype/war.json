@@ -1,0 +1,779 @@
+{
+  "category": "war",
+  "eventCount": 55,
+  "events": [
+    {
+      "id": "76d5a497-55fb-495b-bb53-bdad3567a07c",
+      "dynastyId": "ab422e72-886a-4971-ad81-ec668695d98a",
+      "time": {
+        "startYear": -1600,
+        "endYear": -1600
+      },
+      "title": "鸣条之战",
+      "description": "商汤率领部落联军在鸣条之战中击败夏朝最后一位君主桀，夏朝灭亡。",
+      "eventType": [
+        "war",
+        "dynasty_overthrow"
+      ]
+    },
+    {
+      "id": "0a409208-3bf0-495a-a155-9a149b36994b",
+      "dynastyId": "f578c38f-84d3-416f-932a-5f16a3450fbf",
+      "time": {
+        "startYear": -1046,
+        "endYear": -1046
+      },
+      "title": "牧野之战",
+      "description": "周武王率领诸侯联军在牧野之战中击败商朝最后一位君主纣，商朝灭亡。",
+      "eventType": [
+        "war",
+        "dynasty_overthrow"
+      ]
+    },
+    {
+      "id": "9844443d-7dcf-4a1a-9b84-a89539a8cb9e",
+      "dynastyId": "f578c38f-84d3-416f-932a-5f16a3450fbf",
+      "time": {
+        "startYear": -1042,
+        "endYear": -1039
+      },
+      "title": "周公东征",
+      "description": "周公旦率军东征，平定三监之乱，巩固了西周的统治。",
+      "eventType": [
+        "war",
+        "military_campaign"
+      ]
+    },
+    {
+      "id": "32de389c-90b9-4a4a-b389-4b42a18a8a0b",
+      "dynastyId": "f578c38f-84d3-416f-932a-5f16a3450fbf",
+      "time": {
+        "startYear": -841,
+        "endYear": -841
+      },
+      "title": "国人暴动",
+      "description": "西周都城镐京的国人发动暴动，赶走周厉王，实行共和执政，这是中国历史有确切纪年的开始。",
+      "eventType": [
+        "war",
+        "rebellion"
+      ]
+    },
+    {
+      "id": "1242ffcf-3050-4ea4-95d3-38d4ec1763ac",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -354,
+        "endYear": -353
+      },
+      "title": "围魏救赵",
+      "description": "孙膑采用'围魏救赵'的策略，率军围攻魏国都城大梁，迫使魏军回援，解了赵国之围。",
+      "eventType": [
+        "war",
+        "military_strategy"
+      ]
+    },
+    {
+      "id": "6cef7dd2-2b47-4bda-a6ba-5351b1a1edce",
+      "dynastyId": "1d3cf5ca-c5b5-4014-905e-00603ba1bfd3",
+      "time": {
+        "startYear": -260,
+        "endYear": -260
+      },
+      "title": "长平之战",
+      "description": "秦国与赵国在长平展开决战，最终秦国获胜，坑杀赵军四十万，赵国从此一蹶不振。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    },
+    {
+      "id": "7b2a4b60-193a-4d2c-b350-9917f012ca1b",
+      "dynastyId": "50126885-0214-4d92-a42a-e3d5ed258018",
+      "time": {
+        "startYear": 140,
+        "endYear": 89
+      },
+      "title": "汉-匈奴战争",
+      "description": "西汉对匈奴进行的大规模军事行动。汉武帝时期派遣卫青、霍去病等将领打击匈奴，开拓了丝绸之路。",
+      "eventType": [
+        "war",
+        "military_conflict"
+      ]
+    },
+    {
+      "id": "7ee5eb6f-465c-4d48-bba8-ddba041bb14b",
+      "dynastyId": "50126885-0214-4d92-a42a-e3d5ed258018",
+      "time": {
+        "startYear": 200,
+        "endYear": 200
+      },
+      "title": "官渡之战",
+      "description": "曹操与袁绍在官渡进行的决战，曹操以少胜多，击败袁绍主力，为统一北方奠定了基础。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    },
+    {
+      "id": "02cd2ca3-0265-455a-9ade-5239095144e5",
+      "dynastyId": "50126885-0214-4d92-a42a-e3d5ed258018",
+      "time": {
+        "startYear": 206,
+        "endYear": 202
+      },
+      "title": "秦汉战争",
+      "description": "项羽与刘邦争夺天下的战争。经过四年的激战，最终刘邦击败项羽，建立了汉朝。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "89923e9c-d6c3-416e-a347-485c395a9321",
+      "dynastyId": "50126885-0214-4d92-a42a-e3d5ed258018",
+      "time": {
+        "startYear": 208,
+        "endYear": 208
+      },
+      "title": "赤壁之战",
+      "description": "孙权、刘备联军在赤壁大败曹操，为三国鼎立局面的形成奠定了基础。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    },
+    {
+      "id": "5f4ea85f-10be-426c-a2aa-c49ecfe39db0",
+      "dynastyId": "50126885-0214-4d92-a42a-e3d5ed258018",
+      "time": {
+        "startYear": 209,
+        "endYear": 206
+      },
+      "title": "秦末农民起义",
+      "description": "陈胜、吴广领导的反秦农民起义。因征役不满，在大泽乡起义，震撼了秦朝统治的基础，加速了秦朝的灭亡。",
+      "eventType": [
+        "war",
+        "peasant_uprising"
+      ]
+    },
+    {
+      "id": "db883615-9880-44dd-aaed-106a5d2a2160",
+      "dynastyId": "8cafb119-a327-4d47-9cb3-406980c0c33e",
+      "time": {
+        "startYear": 291,
+        "endYear": 306
+      },
+      "title": "八王之乱",
+      "description": "西晋皇室内部发生的权力争斗，导致西晋国力急剧衰落，引发了五胡乱华。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "a807a640-4643-4fc5-aff6-2cbd04441f8e",
+      "dynastyId": "13cbf547-ce68-4d81-9d28-b8576f08b26b",
+      "time": {
+        "startYear": 383,
+        "endYear": 383
+      },
+      "title": "淝水之战",
+      "description": "东晋以少胜多，击败前秦苻坚的百万大军，阻止了北方游牧民族的南侵。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    },
+    {
+      "id": "fbab03a8-6617-47c7-a604-904966e4c12a",
+      "dynastyId": "a7fc9f24-7e3e-4ccf-a564-f6df4ab8414d",
+      "time": {
+        "startYear": 611,
+        "endYear": 618
+      },
+      "title": "隋末农民起义",
+      "description": "由于隋炀帝的暴政，各地爆发大规模农民起义，最终导致隋朝灭亡。",
+      "eventType": [
+        "war",
+        "peasant_uprising"
+      ]
+    },
+    {
+      "id": "66fc7a50-1407-438e-ac2f-09f7d8891ecf",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 755,
+        "endYear": 763
+      },
+      "title": "安史之乱",
+      "description": "唐朝中期的一次重大叛乱，严重削弱了唐朝的国力。",
+      "eventType": [
+        "war"
+      ]
+    },
+    {
+      "id": "43c2c5ef-c7cf-4084-9c3e-8b746ce6b4d0",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 755,
+        "endYear": 763
+      },
+      "title": "安史之乱",
+      "description": "安禄山和史思明在唐玄宗统治时期发动的大规模叛乱。虽然最终被平定，但使唐朝元气大伤，标志着唐朝由盛转衰。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "f8bdc6b2-72cd-4336-88cf-229d717eb594",
+      "dynastyId": "36094b47-0ae8-4104-927c-c319bcd2c5e1",
+      "time": {
+        "startYear": 875,
+        "endYear": 884
+      },
+      "title": "黄巢起义",
+      "description": "黄巢领导的大规模农民起义。一度攻占长安，建立大齐政权，虽最终失败，但动摇了唐末政权的基础。",
+      "eventType": [
+        "war",
+        "peasant_uprising"
+      ]
+    },
+    {
+      "id": "8956a499-c5e4-4dfa-82cb-670b5a225a95",
+      "dynastyId": "6739e76f-2446-4181-943f-f024280fe90f",
+      "time": {
+        "startYear": 962,
+        "endYear": 979
+      },
+      "title": "北宋统一战争",
+      "description": "宋朝建立后，对剩余割据政权进行的一系列军事行动，结束了五代十国的分裂局面。",
+      "eventType": [
+        "war",
+        "unification"
+      ]
+    },
+    {
+      "id": "2a53c1b4-9051-42ed-ac78-62b30c0e5f2e",
+      "dynastyId": "6739e76f-2446-4181-943f-f024280fe90f",
+      "time": {
+        "startYear": 1125,
+        "endYear": 1127
+      },
+      "title": "靖康之变",
+      "description": "金兵南下，攻占宋朝都城开封。宋徽宗和宋钦宗都被金人掠去，北宋灭亡。",
+      "eventType": [
+        "war",
+        "military_defeat"
+      ]
+    },
+    {
+      "id": "dad1f995-ccfa-4733-b874-af9f974e14d8",
+      "dynastyId": "4cddf56f-f748-4f2d-892a-98d73a144f63",
+      "time": {
+        "startYear": 1127,
+        "endYear": 1142
+      },
+      "title": "岳飞抗金",
+      "description": "岳飞率领岳家军抗击金兵，收复失地，是南宋抗金名将。",
+      "eventType": [
+        "war",
+        "military_campaign"
+      ]
+    },
+    {
+      "id": "1d5b619d-8817-4d84-a266-30ecbfaa51af",
+      "dynastyId": "4cddf56f-f748-4f2d-892a-98d73a144f63",
+      "time": {
+        "startYear": 1235,
+        "endYear": 1279
+      },
+      "title": "蒙宋战争",
+      "description": "蒙古帝国对南宋的征服战争，最终南宋灭亡。",
+      "eventType": [
+        "war",
+        "conquest"
+      ]
+    },
+    {
+      "id": "13eeac1a-623f-4f8f-95ff-f52b2f5e118f",
+      "dynastyId": "7a1cb0b2-b2ec-4100-ad66-468a924a2922",
+      "time": {
+        "startYear": 1279,
+        "endYear": 1279
+      },
+      "title": "崖山海战",
+      "description": "元朝军队与南宋残余势力在崖山进行的决战，南宋灭亡，元朝统一全国。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    },
+    {
+      "id": "c3609e36-9739-4b6b-98ee-ab57f74f9abf",
+      "dynastyId": "7a1cb0b2-b2ec-4100-ad66-468a924a2922",
+      "time": {
+        "startYear": 1351,
+        "endYear": 1368
+      },
+      "title": "元末农民起义",
+      "description": "元朝末期的大规模农民起义，其中最重要的是朱元璋所参加的起义。最终导致了元朝的灭亡和明朝的建立。",
+      "eventType": [
+        "war",
+        "peasant_uprising"
+      ]
+    },
+    {
+      "id": "1e08c641-4c17-449e-ab24-29da3004e17c",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1399,
+        "endYear": 1402
+      },
+      "title": "靖难之役",
+      "description": "朱元璋之子朱棣为夺取侄子朱允炆的皇位而发动的军事行动。经过三年战争，朱棣最终成功夺得皇位。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "627702ac-1a1c-460c-b343-b8878cc4fc56",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1449,
+        "endYear": 1449
+      },
+      "title": "土木堡之变",
+      "description": "明英宗朱祁镇亲征瓦剌，在土木堡被瓦剌军队俘虏，明朝国力大损。",
+      "eventType": [
+        "war",
+        "military_defeat"
+      ]
+    },
+    {
+      "id": "78e34282-e8ed-4e98-af60-73e445cd5758",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1555,
+        "endYear": 1567
+      },
+      "title": "戚继光抗倭",
+      "description": "戚继光率领戚家军抗击倭寇，扫平了东南沿海的倭患。",
+      "eventType": [
+        "war",
+        "anti_piracy"
+      ]
+    },
+    {
+      "id": "023730d5-9b70-4c6c-9f18-ec8ab912964a",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1592,
+        "endYear": 1598
+      },
+      "title": "万历朝鲜战争",
+      "description": "明朝援助朝鲜抗击日本侵略的战争，最终以明朝和朝鲜的胜利告终。",
+      "eventType": [
+        "war",
+        "international_conflict"
+      ]
+    },
+    {
+      "id": "55b7519a-040d-463d-a5be-22f84dc7ff48",
+      "dynastyId": "6ed4dfd2-99ff-4f94-97b9-71844b51b57d",
+      "time": {
+        "startYear": 1627,
+        "endYear": 1644
+      },
+      "title": "明末农民起义",
+      "description": "明朝末期的大规模农民起义，以李自成和张献忠的起义最为著名，最终导致明朝灭亡。",
+      "eventType": [
+        "war",
+        "peasant_uprising"
+      ]
+    },
+    {
+      "id": "4f048d23-3d13-42b6-b6b7-991e9b09a34b",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1673,
+        "endYear": 1681
+      },
+      "title": "三藩之乱",
+      "description": "清初平定的三位藩王（吴三桂、尚可喜、耿精忠）发动的大规模反抗。康熙通过这一战争加强了中央集权。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "1bd21a0b-455c-42bd-926f-82d937a00846",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1840,
+        "endYear": 1842
+      },
+      "title": "鸦片战争",
+      "description": "英国为了打开中国市场而对华发动的战争。中国战败后被迫签订《南京条约》，开放了五个通商口岸。",
+      "eventType": [
+        "war",
+        "foreign_aggression"
+      ]
+    },
+    {
+      "id": "3973e1ab-9fe7-4a19-8a44-234ee0958373",
+      "dynastyId": "48dd8769-bec5-4243-bc02-048467bc06a7",
+      "time": {
+        "startYear": 1851,
+        "endYear": 1864
+      },
+      "title": "太平天国",
+      "description": "洪秀全领导的大规模农民起义，建立了地跨多省的政权。虽然最终被清军镇压，但震撼了整个中国。",
+      "eventType": [
+        "war",
+        "rebellion",
+        "political_state"
+      ]
+    },
+    {
+      "id": "9913eea2-1852-40d5-9c99-7cf9aa08674f",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1915,
+        "endYear": 1916
+      },
+      "title": "护国运动",
+      "description": "蔡锷等宣布云南独立，组织护国军讨伐袁世凯，各地纷纷响应，最终迫使袁世凯取消帝制。",
+      "eventType": [
+        "war",
+        "rebellion"
+      ]
+    },
+    {
+      "id": "2c9ed2f8-261d-4922-9248-87a15423966d",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1922,
+        "endYear": 1922
+      },
+      "title": "第一次直奉战争",
+      "description": "直系军阀吴佩孚与奉系军阀张作霖之间的战争，直系获胜，控制了北京政府。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "44fca5d4-ca78-416c-9ddb-bb56074f889c",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1924,
+        "endYear": 1924
+      },
+      "title": "第二次直奉战争",
+      "description": "直系与奉系再次爆发战争，冯玉祥发动北京政变，直系失败，奉系控制北京政府。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "97a3a6b0-fe7f-4f40-acb0-0935c4d60ab6",
+      "dynastyId": "f1b30bfa-8c4a-47de-a2df-ab39628ee089",
+      "time": {
+        "startYear": 1926,
+        "endYear": 1926
+      },
+      "title": "北伐战争开始",
+      "description": "国民革命军在广州誓师北伐，讨伐北洋军阀吴佩孚、孙传芳、张作霖。",
+      "eventType": [
+        "war",
+        "military_campaign"
+      ]
+    },
+    {
+      "id": "b18d5bbf-f892-4a60-b018-424e188ddcb2",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1930,
+        "endYear": 1930
+      },
+      "title": "中原大战",
+      "description": "蒋介石与冯玉祥、阎锡山、李宗仁等军阀的战争，是中国近代史上规模最大的军阀混战。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "2f866631-a339-408f-be23-223fb49f2f35",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1931,
+        "endYear": 1931
+      },
+      "title": "九一八事变",
+      "description": "日本发动九一八事变，侵占中国东北，标志着日本局部侵华战争的开始。",
+      "eventType": [
+        "war",
+        "invasion"
+      ]
+    },
+    {
+      "id": "7076af91-18e1-4bc8-9347-722369dd47a9",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1932,
+        "endYear": 1932
+      },
+      "title": "一二八事变",
+      "description": "日本发动一二八事变，进攻上海，中国第十九路军奋起抵抗。",
+      "eventType": [
+        "war",
+        "battle"
+      ]
+    },
+    {
+      "id": "c9b80c24-b23e-4aaa-bddc-b014d72600fd",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1933,
+        "endYear": 1933
+      },
+      "title": "长城抗战",
+      "description": "中国军队在长城沿线抵抗日本侵略，是中国人民局部抗战的重要组成部分。",
+      "eventType": [
+        "war",
+        "defense"
+      ]
+    },
+    {
+      "id": "c7029f41-9940-4afb-aef0-c9add445548d",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1937,
+        "endYear": 1937
+      },
+      "title": "七七卢沟桥事变",
+      "description": "日本发动七七卢沟桥事变，进攻北平，标志着日本全面侵华战争的开始，中国全面抗战开始。",
+      "eventType": [
+        "war",
+        "full-scale_invasion"
+      ]
+    },
+    {
+      "id": "5a7393aa-2c15-4e1c-9789-d2c06919031d",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1937,
+        "endYear": 1937
+      },
+      "title": "淞沪会战",
+      "description": "中国军队在上海抵抗日本侵略，是抗日战争中规模最大、战斗最激烈的战役之一。",
+      "eventType": [
+        "war",
+        "battle"
+      ]
+    },
+    {
+      "id": "7ba58805-e093-4504-8458-29fdeb05ccab",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1937,
+        "endYear": 1938
+      },
+      "title": "南京大屠杀",
+      "description": "日军占领南京后，进行了长达6周的惨绝人寰的大屠杀，杀害中国平民和放下武器的士兵超过30万人。",
+      "eventType": [
+        "war",
+        "genocide"
+      ]
+    },
+    {
+      "id": "63f36eea-ac3a-4a42-85ea-d075494f8816",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1938,
+        "endYear": 1938
+      },
+      "title": "武汉会战",
+      "description": "中国军队在武汉地区抵抗日本侵略，是抗日战争中规模最大的战役之一，标志着抗日战争进入相持阶段。",
+      "eventType": [
+        "war",
+        "battle"
+      ]
+    },
+    {
+      "id": "5bae104a-4ae3-4011-966f-53898d8948e5",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1940,
+        "endYear": 1940
+      },
+      "title": "百团大战",
+      "description": "八路军发动百团大战，大规模破袭日军交通线，沉重打击了日本侵略者的嚣张气焰。",
+      "eventType": [
+        "war",
+        "offensive"
+      ]
+    },
+    {
+      "id": "e9d01156-bfa0-4f8f-8bed-58393d1cd8e6",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1941,
+        "endYear": 1941
+      },
+      "title": "太平洋战争爆发",
+      "description": "日本偷袭珍珠港，太平洋战争爆发，中国抗战进入新阶段，成为世界反法西斯战争的重要组成部分。",
+      "eventType": [
+        "war",
+        "international_conflict"
+      ]
+    },
+    {
+      "id": "ef0040f2-f3a7-4677-9579-5d7044559b93",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1942,
+        "endYear": 1945
+      },
+      "title": "中国远征军入缅作战",
+      "description": "中国远征军入缅作战，支援盟军，打通中印公路，为世界反法西斯战争作出重要贡献。",
+      "eventType": [
+        "war",
+        "allied_campaign"
+      ]
+    },
+    {
+      "id": "76055b6d-0cc2-4706-b0a8-c9cc810689de",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1945,
+        "endYear": 1945
+      },
+      "title": "日本投降",
+      "description": "1945年8月15日，日本宣布无条件投降；9月2日，正式签署投降书，标志着中国抗日战争和第二次世界大战的胜利结束。",
+      "eventType": [
+        "war",
+        "ceasefire",
+        "surrender"
+      ]
+    },
+    {
+      "id": "09675565-3367-4213-b1d0-cbfe54cd9e46",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1945,
+        "endYear": 1945
+      },
+      "title": "上党战役",
+      "description": "中国共产党领导的晋冀鲁豫军区部队在山西上党地区反击国民党军进攻的战役，是解放战争的第一仗。",
+      "eventType": [
+        "war",
+        "battle"
+      ]
+    },
+    {
+      "id": "c26136c2-177e-4550-8d5e-2f4196bcb303",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1946,
+        "endYear": 1946
+      },
+      "title": "全面内战爆发",
+      "description": "国民党军向中原解放区发动大规模进攻，标志着全面内战爆发。",
+      "eventType": [
+        "war",
+        "civil_war"
+      ]
+    },
+    {
+      "id": "211fb0fa-811a-4397-baa7-b844aa066f4b",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1948,
+        "endYear": 1948
+      },
+      "title": "辽沈战役",
+      "description": "中国人民解放军在东北战场进行的战略决战，解放了东北全境，使解放战争形势发生根本转折。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    },
+    {
+      "id": "8b893f7a-55b7-42c3-ab5c-b4950cd48fc6",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1948,
+        "endYear": 1949
+      },
+      "title": "淮海战役",
+      "description": "中国人民解放军在华东、中原战场进行的战略决战，歼灭国民党军主力，加速了解放战争胜利进程。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    },
+    {
+      "id": "393a860e-ee68-4273-8c97-ca8c52fd2f45",
+      "dynastyId": "8866abb4-cf19-4c4d-98a6-f8bdf5e37d23",
+      "time": {
+        "startYear": 1948,
+        "endYear": 1949
+      },
+      "title": "平津战役",
+      "description": "中国人民解放军在华北战场进行的战略决战，和平解放北平，基本解放华北地区。",
+      "eventType": [
+        "war",
+        "decisive_battle"
+      ]
+    },
+    {
+      "id": "c5ab5784-4d9c-489a-9718-78cad199abb2",
+      "dynastyId": "881a0fc2-e872-47fa-ab63-b5a54b4214b2",
+      "time": {
+        "startYear": 1949,
+        "endYear": 1949
+      },
+      "title": "渡江战役",
+      "description": "中国人民解放军百万雄师横渡长江，解放南京，推翻了国民党政权在大陆的统治。",
+      "eventType": [
+        "war",
+        "offensive"
+      ]
+    },
+    {
+      "id": "c718afb7-8225-4309-8551-637a38561980",
+      "dynastyId": "881a0fc2-e872-47fa-ab63-b5a54b4214b2",
+      "time": {
+        "startYear": 1949,
+        "endYear": 1949
+      },
+      "title": "南京解放",
+      "description": "中国人民解放军第三野战军解放南京，标志着国民党政权在大陆的统治结束。",
+      "eventType": [
+        "war",
+        "offensive",
+        "occupation"
+      ]
+    },
+    {
+      "id": "ff5e216d-5a87-4b62-b311-e7690394ebca",
+      "dynastyId": "881a0fc2-e872-47fa-ab63-b5a54b4214b2",
+      "time": {
+        "startYear": 1949,
+        "endYear": 1949
+      },
+      "title": "上海解放",
+      "description": "中国人民解放军解放上海，是渡江战役的重要组成部分，标志着华东地区的解放。",
+      "eventType": [
+        "war",
+        "offensive",
+        "occupation"
+      ]
+    }
+  ]
+}

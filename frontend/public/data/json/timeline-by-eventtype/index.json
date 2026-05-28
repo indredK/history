@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-05-28T17:49:04.150Z",
+  "totalEvents": 117,
+  "categories": [
+    {
+      "category": "war",
+      "file": "/data/json/timeline-by-eventtype/war.json",
+      "eventCount": 55
+    },
+    {
+      "category": "political",
+      "file": "/data/json/timeline-by-eventtype/political.json",
+      "eventCount": 56
+    },
+    {
+      "category": "culture",
+      "file": "/data/json/timeline-by-eventtype/culture.json",
+      "eventCount": 6
+    }
+  ]
+}
