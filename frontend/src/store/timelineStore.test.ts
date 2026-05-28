@@ -59,4 +59,24 @@ describe('timelineStore', () => {
     expect(state.jumpRange).toBeNull();
     expect(state.currentTimeRange).toEqual([1000, 1200]);
   });
+
+  it('resetViewState 会清空筛选并重置当前视图区间', () => {
+    const store = useTimelineStore.getState();
+    store.setSelectedDynastyIds(['ming']);
+    store.setSelectedEventTypes(['政治']);
+    store.setKeyword('变法');
+    store.setJumpRange({ startYear: 1000, endYear: 1200 });
+    store.setCurrentTimeRange([1000, 1200]);
+    store.setHighlightedDynastyId('ming');
+
+    store.resetViewState();
+
+    const state = useTimelineStore.getState();
+    expect(state.selectedDynastyIds).toEqual([]);
+    expect(state.selectedEventTypes).toEqual([]);
+    expect(state.keyword).toBe('');
+    expect(state.jumpRange).toBeNull();
+    expect(state.highlightedDynastyId).toBeNull();
+    expect(state.currentTimeRange).toBeNull();
+  });
 });

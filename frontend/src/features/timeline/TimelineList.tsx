@@ -1,6 +1,6 @@
 import './TimelineList.css';
 import { Dynasty3DWheel, EChartsTimeline } from './components';
-import { Box, Paper } from '@mui/material';
+import { Box, Drawer, Paper } from '@mui/material';
 import { useRequest } from 'ahooks';
 import { StateView } from '@/components/ui';
 import { getDynasties, getEvents } from '@/services/dataClient';
@@ -14,7 +14,7 @@ import {
   shouldUseClusterMode,
   shouldUseMajorOnlyMode,
 } from './utils/timelineFilters';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export function TimelineList() {
   usePerformanceTrace('timeline-page-mounted', []);
@@ -25,9 +25,12 @@ export function TimelineList() {
     jumpRange,
     densityMode,
     currentTimeRange,
+    selectedEventId,
     setSelectedDynastyIds,
     setHighlightedDynastyId,
     setCurrentTimeRange,
+    setSelectedEventId,
+    resetViewState,
   } = useTimelineStore();
   const {
     data,
@@ -41,6 +44,15 @@ export function TimelineList() {
       dynasties: dynastiesResult.data,
     };
   });
+  const [stableTimeRange, setStableTimeRange] = useState<[number, number] | null>(null);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setStableTimeRange(currentTimeRange);
+    }, 80);
+
+    return () => window.clearTimeout(timer);
+  }, [currentTimeRange]);
 
   const derivedEvents = useMemo(
     () => deriveTimelineEvents(data?.events ?? []),
@@ -57,22 +69,35 @@ export function TimelineList() {
     [derivedEvents, jumpRange, keyword, selectedDynastyIds, selectedEventTypes],
   );
   const densityFilteredEvents = useMemo(() => {
-    if (shouldUseMajorOnlyMode(densityMode, currentTimeRange)) {
-      return filteredEvents.filter((event) => event.isMajor);
+    if (shouldUseMajorOnlyMode(densityMode, stableTimeRange)) {
+      const majorEvents = filteredEvents.filter((event) => event.isMajor);
+      return majorEvents.length > 0 ? majorEvents : filteredEvents;
     }
 
     return filteredEvents;
-  }, [currentTimeRange, densityMode, filteredEvents]);
+  }, [densityMode, filteredEvents, stableTimeRange]);
   const yearClusters = useMemo(
-    () => (shouldUseClusterMode(currentTimeRange) ? buildTimelineYearClusters(densityFilteredEvents) : []),
-    [currentTimeRange, densityFilteredEvents],
+    () => (shouldUseClusterMode(stableTimeRange) ? buildTimelineYearClusters(densityFilteredEvents) : []),
+    [densityFilteredEvents, stableTimeRange],
   );
   const dynastyClusters = useMemo(
     () =>
-      shouldUseClusterMode(currentTimeRange)
+      shouldUseClusterMode(stableTimeRange)
         ? buildTimelineDynastyClusters(densityFilteredEvents, data?.dynasties ?? [])
         : [],
-    [currentTimeRange, data?.dynasties, densityFilteredEvents],
+    [data?.dynasties, densityFilteredEvents, stableTimeRange],
+  );
+  const filteredDynasties = useMemo(() => {
+    const allDynasties = data?.dynasties ?? [];
+    if (selectedDynastyIds.length === 0) {
+      return allDynasties;
+    }
+
+    return allDynasties.filter((dynasty) => selectedDynastyIds.includes(dynasty.id));
+  }, [data?.dynasties, selectedDynastyIds]);
+  const selectedEvent = useMemo(
+    () => densityFilteredEvents.find((event) => event.id === selectedEventId) ?? null,
+    [densityFilteredEvents, selectedEventId],
   );
 
   const timelineContent = (() => {
@@ -103,8 +128,11 @@ export function TimelineList() {
     return (
       <EChartsTimeline
         eventsData={densityFilteredEvents}
-        dynastiesData={data?.dynasties ?? []}
+        dynastiesData={filteredDynasties}
+        selectedEventId={selectedEventId}
+        showEventDetail={false}
         onTimeRangeChange={setCurrentTimeRange}
+        onEventClick={(event) => setSelectedEventId(event.id)}
         onDynastyClick={(dynasty) => {
           setSelectedDynastyIds((current) =>
             current.length === 1 && current[0] === dynasty.id ? [] : [dynasty.id],
@@ -113,6 +141,10 @@ export function TimelineList() {
         }}
         onDynastyDoubleClick={(dynasty) => {
           setHighlightedDynastyId(dynasty.id);
+        }}
+        onReset={() => {
+          resetViewState();
+          setStableTimeRange(null);
         }}
         clusterData={{
           yearClusters,
@@ -153,6 +185,115 @@ export function TimelineList() {
       </Paper>
 
       {timelineContent}
+
+      <Drawer
+        anchor="right"
+        open={Boolean(selectedEvent)}
+        onClose={() => setSelectedEventId(null)}
+        slotProps={{
+          paper: {
+            sx: {
+              width: { xs: '100%', sm: 360, md: 400 },
+              background: 'var(--app-panel-bg)',
+              borderLeft: 'var(--app-panel-border)',
+              boxShadow: 'var(--app-panel-shadow-lg)',
+              color: 'var(--color-text-primary)',
+            },
+          },
+        }}
+      >
+        {selectedEvent && (
+          <Box
+            sx={{
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              p: 2.25,
+              gap: 1.5,
+              overflowY: 'auto',
+              boxSizing: 'border-box',
+            }}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 1.5 }}>
+              <Box>
+                <Box sx={{ fontSize: 20, fontWeight: 700, lineHeight: 1.35 }}>
+                  {selectedEvent.title}
+                </Box>
+                <Box sx={{ mt: 0.75, fontSize: 13, color: 'var(--color-text-secondary)' }}>
+                  {selectedEvent.startYear}
+                  {selectedEvent.endYear && selectedEvent.endYear !== selectedEvent.startYear
+                    ? ` - ${selectedEvent.endYear}`
+                    : ''}年
+                </Box>
+              </Box>
+              <button
+                onClick={() => setSelectedEventId(null)}
+                style={{
+                  border: '1px solid var(--color-border-medium)',
+                  background: 'transparent',
+                  color: 'var(--color-text-secondary)',
+                  borderRadius: '8px',
+                  width: '32px',
+                  height: '32px',
+                  cursor: 'pointer',
+                  fontSize: '18px',
+                }}
+              >
+                ×
+              </button>
+            </Box>
+
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+              {selectedEvent.dynastyId && (
+                <Box
+                  component="span"
+                  sx={{
+                    px: 1.2,
+                    py: 0.45,
+                    borderRadius: '999px',
+                    background: 'rgba(59, 130, 246, 0.12)',
+                    fontSize: 12,
+                    fontWeight: 600,
+                  }}
+                >
+                  {filteredDynasties.find((dynasty) => dynasty.id === selectedEvent.dynastyId)?.name ?? selectedEvent.dynastyId}
+                </Box>
+              )}
+              {selectedEvent.eventType && (
+                <Box
+                  component="span"
+                  sx={{
+                    px: 1.2,
+                    py: 0.45,
+                    borderRadius: '999px',
+                    background: 'rgba(148, 163, 184, 0.14)',
+                    fontSize: 12,
+                    fontWeight: 600,
+                    color: 'var(--color-text-secondary)',
+                  }}
+                >
+                  {selectedEvent.eventType}
+                </Box>
+              )}
+            </Box>
+
+            {selectedEvent.description && (
+              <Box
+                sx={{
+                  p: '14px 16px',
+                  borderRadius: '12px',
+                  background: 'rgba(var(--glass-surface-rgb), 0.35)',
+                  color: 'var(--color-text-secondary)',
+                  lineHeight: 1.7,
+                  fontSize: 14,
+                }}
+              >
+                {selectedEvent.description}
+              </Box>
+            )}
+          </Box>
+        )}
+      </Drawer>
     </Box>
   );
 }

@@ -39,10 +39,18 @@ export function FunctionPanel({ activeTab }: FunctionPanelProps) {
       {/* 功能面板内容区域 */}
       <Box 
         className="function-panel-content"
-        sx={{ minHeight: "fit-content", paddingTop: 2 }}
+        sx={{
+          flex: 1,
+          minHeight: 0,
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          paddingTop: 1.5,
+          paddingBottom: 1,
+          pr: 0.5,
+        }}
       >
         <Fade in={true} timeout={300} key={activeTab}>
-          <Box>{renderFunctionPanel()}</Box>
+          <Box sx={{ pb: 1.5 }}>{renderFunctionPanel()}</Box>
         </Fade>
       </Box>
     </Box>

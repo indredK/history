@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRequest } from 'ahooks';
+import { Drawer } from '@mui/material';
 import { EChartsMap } from './components/EChartsMap';
 import type { EChartsMapLayerVisibility } from './components/EChartsMap';
 import type { ProvinceData } from '@/services/map/types';
@@ -292,6 +293,36 @@ export function EChartsMapView({
     () => resolveEventLocations(selectedEvent, places),
     [places, selectedEvent],
   );
+  const visibleEventMarkers = useMemo(() => {
+    const sourceEvents = events.filter((event) => {
+      if (selectedEventId) {
+        return event.id === selectedEventId;
+      }
+
+      if (selectedDynastyId && event.dynastyId && event.dynastyId !== selectedDynastyId) {
+        return false;
+      }
+
+      if (eventFocusRange) {
+        const endYear = event.endYear ?? event.startYear;
+        return event.startYear <= eventFocusRange[1] && endYear >= eventFocusRange[0];
+      }
+
+      return true;
+    });
+
+    return sourceEvents.flatMap((event) => {
+      const resolved = resolveEventLocations(event, places);
+      return resolved.matchedPlaces.map((place) => ({
+        ...place,
+        event,
+      }));
+    });
+  }, [eventFocusRange, events, focusYear, places, selectedDynastyId, selectedEventId]);
+  const selectedEventDynasty = useMemo(
+    () => (selectedEvent?.dynastyId ? dynasties.find((item) => item.id === selectedEvent.dynastyId) ?? null : null),
+    [dynasties, selectedEvent],
+  );
 
   useEffect(() => {
     setSelectedProvince(null);
@@ -347,13 +378,24 @@ export function EChartsMapView({
         onProvinceClick={handleProvinceClick}
         historicalBoundary={boundarySnapshot?.boundary ?? null}
         historicalBoundaryName={activeBoundaryName}
-        eventPlaces={resolvedEventLocations.matchedPlaces}
+        eventPlaces={visibleEventMarkers}
         loadingHistoricalBoundary={boundaryLoading}
         adminBoundaryVisible={adminBoundaryVisible}
         adminBoundaryOpacity={adminBoundaryOpacity}
         dynastyBoundaryVisible={dynastyBoundaryVisible}
         dynastyBoundaryOpacity={dynastyBoundaryOpacity}
         eventMarkersVisible={eventMarkersVisible}
+        onEventMarkerClick={(event) => {
+          setSelectedEventId(event.id);
+          setHistoricalFocusMode('event');
+          setFocusYear(event.mapFocusStartYear ?? event.startYear);
+          setEventFocusRange([
+            event.mapFocusStartYear ?? event.startYear,
+            event.mapFocusEndYear ?? event.endYear ?? event.startYear,
+          ]);
+          setPlayheadYear(event.mapFocusStartYear ?? event.startYear);
+          setPlaybackState('idle');
+        }}
       />
 
       {/* ── Status overlay ── */}
@@ -389,12 +431,7 @@ export function EChartsMapView({
             </div>
             <div>地图年份：{boundaryYear ?? '-'}</div>
             <div>疆域阶段：{activeBoundaryName ?? '暂无疆域快照'}</div>
-            {selectedEvent && eventFocusRange && (
-              <div>事件范围：{eventFocusRange[0]} - {eventFocusRange[1]}</div>
-            )}
-            {selectedEvent && resolvedEventLocations.unmatchedNames.length > 0 && (
-              <div>未匹配地点：{resolvedEventLocations.unmatchedNames.join(' / ')}</div>
-            )}
+            {selectedEvent && <div>已打开事件详情</div>}
           </div>
         </div>
       )}
@@ -413,6 +450,19 @@ export function EChartsMapView({
             eventsData={events}
             minHeight={minTimelineHeight}
             showEventPoints={showTimelineEvents}
+            showEventDetail={false}
+            selectedEventId={selectedEventId}
+            onEventClick={(event) => {
+              setSelectedEventId(event.id);
+              setHistoricalFocusMode('event');
+              setFocusYear(event.mapFocusStartYear ?? event.startYear);
+              setEventFocusRange([
+                event.mapFocusStartYear ?? event.startYear,
+                event.mapFocusEndYear ?? event.endYear ?? event.startYear,
+              ]);
+              setPlayheadYear(event.mapFocusStartYear ?? event.startYear);
+              setPlaybackState('idle');
+            }}
             {...(timelineProps ?? {})}
           />
         </div>
@@ -496,6 +546,147 @@ export function EChartsMapView({
           </div>
         </div>
       )}
+
+      <Drawer
+        anchor="right"
+        open={Boolean(selectedEvent)}
+        onClose={() => setSelectedEventId(null)}
+        slotProps={{
+          paper: {
+            sx: {
+              width: { xs: '100%', sm: 360, md: 400 },
+              background: 'var(--app-panel-bg)',
+              borderLeft: 'var(--app-panel-border)',
+              boxShadow: 'var(--app-panel-shadow-lg)',
+              color: 'var(--color-text-primary)',
+            },
+          },
+        }}
+      >
+        {selectedEvent && (
+          <div
+            style={{
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '20px 18px',
+              gap: '14px',
+              overflowY: 'auto',
+              boxSizing: 'border-box',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
+              <div>
+                <div style={{ fontSize: 20, fontWeight: 700, lineHeight: 1.35 }}>
+                  {selectedEvent.title}
+                </div>
+                <div style={{ marginTop: 8, fontSize: 13, color: 'var(--color-text-secondary)' }}>
+                  {selectedEvent.startYear}
+                  {selectedEvent.endYear && selectedEvent.endYear !== selectedEvent.startYear
+                    ? ` - ${selectedEvent.endYear}`
+                    : ''}年
+                </div>
+              </div>
+              <button
+                onClick={() => setSelectedEventId(null)}
+                style={{
+                  border: '1px solid var(--color-border-medium)',
+                  background: 'transparent',
+                  color: 'var(--color-text-secondary)',
+                  borderRadius: 8,
+                  width: 32,
+                  height: 32,
+                  cursor: 'pointer',
+                  fontSize: 18,
+                }}
+              >
+                ×
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {selectedEventDynasty && (
+                <span
+                  style={{
+                    padding: '4px 10px',
+                    borderRadius: 999,
+                    background: 'rgba(59, 130, 246, 0.12)',
+                    color: 'var(--color-text-primary)',
+                    fontSize: 12,
+                    fontWeight: 600,
+                  }}
+                >
+                  {selectedEventDynasty.name}
+                </span>
+              )}
+              {selectedEvent.eventType && (
+                <span
+                  style={{
+                    padding: '4px 10px',
+                    borderRadius: 999,
+                    background: 'rgba(148, 163, 184, 0.14)',
+                    color: 'var(--color-text-secondary)',
+                    fontSize: 12,
+                    fontWeight: 600,
+                  }}
+                >
+                  {selectedEvent.eventType}
+                </span>
+              )}
+              {eventFocusRange && (
+                <span
+                  style={{
+                    padding: '4px 10px',
+                    borderRadius: 999,
+                    background: 'rgba(16, 185, 129, 0.12)',
+                    color: 'var(--color-text-secondary)',
+                    fontSize: 12,
+                    fontWeight: 600,
+                  }}
+                >
+                  地图聚焦 {eventFocusRange[0]} - {eventFocusRange[1]}
+                </span>
+              )}
+            </div>
+
+            {selectedEvent.description && (
+              <div
+                style={{
+                  padding: '14px 16px',
+                  borderRadius: 12,
+                  background: 'rgba(var(--glass-surface-rgb), 0.35)',
+                  color: 'var(--color-text-secondary)',
+                  lineHeight: 1.7,
+                  fontSize: 14,
+                }}
+              >
+                {selectedEvent.description}
+              </div>
+            )}
+
+            <div
+              style={{
+                padding: '14px 16px',
+                borderRadius: 12,
+                border: '1px solid var(--color-border-light)',
+                background: 'rgba(var(--glass-surface-rgb), 0.22)',
+              }}
+            >
+              <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 10 }}>地点匹配</div>
+              <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.7 }}>
+                {resolvedEventLocations.matchedPlaces.length > 0
+                  ? resolvedEventLocations.matchedPlaces.map((place) => place.canonical_name).join(' / ')
+                  : '暂无已匹配地点'}
+              </div>
+              {resolvedEventLocations.unmatchedNames.length > 0 && (
+                <div style={{ marginTop: 10, fontSize: 12, color: 'var(--color-text-tertiary)' }}>
+                  未匹配地点：{resolvedEventLocations.unmatchedNames.join(' / ')}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </Drawer>
     </div>
   );
 }

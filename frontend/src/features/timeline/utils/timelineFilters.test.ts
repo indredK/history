@@ -20,6 +20,10 @@ const sourceEvents = [
 describe('timelineFilters', () => {
   it('derives normalized category, major flag, and search text', () => {
     const [first] = deriveTimelineEvents(sourceEvents as never);
+    expect(first).toBeDefined();
+    if (!first) {
+      throw new Error('expected derived event');
+    }
     expect(first.normalizedCategory).toBe('政治');
     expect(first.isMajor).toBe(true);
     expect(first.searchText).toContain('统一');

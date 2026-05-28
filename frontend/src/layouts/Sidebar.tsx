@@ -159,18 +159,6 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                 >
                   中国历史全视界
                 </Typography>
-                <Typography
-                  component="div"
-                  sx={{
-                    fontSize: '0.68rem',
-                    color: 'var(--color-text-tertiary)',
-                    letterSpacing: '0.18em',
-                    textTransform: 'uppercase',
-                    mt: 0.5,
-                  }}
-                >
-                  Historical Panorama
-                </Typography>
               </Box>
               <Tooltip title="收起菜单">
                 <IconButton 

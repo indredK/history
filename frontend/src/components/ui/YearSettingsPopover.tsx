@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Box,
   Popover,
   Button,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from '@mui/material';
-import { useTimelineStore } from '../../store';
+import { useTimelineStore } from '@/store';
 
 interface YearSettingsPopoverProps {
   anchorEl: HTMLButtonElement | null;
@@ -15,17 +15,19 @@ interface YearSettingsPopoverProps {
 }
 
 export function YearSettingsPopover({ anchorEl, onClose }: YearSettingsPopoverProps) {
-  const { startYear, endYear, setYears } = useTimelineStore();
-  const [tempStartYear, setTempStartYear] = useState<number>(startYear);
-  const [tempEndYear, setTempEndYear] = useState<number>(endYear);
+  const { jumpRange, currentTimeRange, setJumpRange } = useTimelineStore();
+  const initialStartYear = jumpRange?.startYear ?? currentTimeRange?.[0] ?? -500;
+  const initialEndYear = jumpRange?.endYear ?? currentTimeRange?.[1] ?? 2000;
+  const [tempStartYear, setTempStartYear] = useState<number>(initialStartYear);
+  const [tempEndYear, setTempEndYear] = useState<number>(initialEndYear);
 
   useEffect(() => {
-    setTempStartYear(startYear);
-    setTempEndYear(endYear);
-  }, [startYear, endYear]);
+    setTempStartYear(initialStartYear);
+    setTempEndYear(initialEndYear);
+  }, [initialEndYear, initialStartYear]);
 
   const handleApply = () => {
-    setYears(tempStartYear, tempEndYear);
+    setJumpRange({ startYear: tempStartYear, endYear: tempEndYear });
     onClose();
   };
 
@@ -47,9 +49,9 @@ export function YearSettingsPopover({ anchorEl, onClose }: YearSettingsPopoverPr
             background: 'linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-secondary) 100%)',
             border: '1px solid var(--color-border-medium)',
             boxShadow: 'var(--shadow-xl), var(--shadow-glow)',
-            backdropFilter: 'blur(10px)'
-          }
-        }
+            backdropFilter: 'blur(10px)',
+          },
+        },
       }}
     >
       <Box sx={{ p: 3, minWidth: 250 }}>
@@ -58,10 +60,7 @@ export function YearSettingsPopover({ anchorEl, onClose }: YearSettingsPopoverPr
         </Typography>
         <Stack spacing={3} sx={{ mb: 3 }}>
           <Box>
-            <Typography variant="body2" gutterBottom sx={{ 
-              color: 'var(--color-text-secondary)',
-              fontWeight: 'medium'
-            }}>
+            <Typography variant="body2" gutterBottom sx={{ color: 'var(--color-text-secondary)', fontWeight: 'medium' }}>
               开始年份
             </Typography>
             <TextField
@@ -69,34 +68,11 @@ export function YearSettingsPopover({ anchorEl, onClose }: YearSettingsPopoverPr
               type="number"
               value={tempStartYear}
               onChange={(e) => setTempStartYear(Number(e.target.value))}
-              slotProps={{ htmlInput: { min: 1000, max: 2025 } }}
               size="small"
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 'var(--radius-lg)',
-                  backgroundColor: 'var(--color-bg-tertiary)',
-                  border: '2px solid var(--color-border-medium)',
-                  '&:hover': {
-                    borderColor: 'var(--color-primary)',
-                    boxShadow: '0 0 10px rgba(var(--glass-tint-rgb), 0.18)'
-                  },
-                  '&.Mui-focused': {
-                    borderColor: 'var(--color-primary)',
-                    boxShadow: '0 0 20px rgba(var(--glass-tint-rgb), 0.24), var(--shadow-glow)'
-                  },
-                  transition: 'all var(--transition-normal)'
-                },
-                '& .MuiInputBase-input': {
-                  color: 'var(--color-text-primary)'
-                }
-              }}
             />
           </Box>
           <Box>
-            <Typography variant="body2" gutterBottom sx={{ 
-              color: 'var(--color-text-secondary)',
-              fontWeight: 'medium'
-            }}>
+            <Typography variant="body2" gutterBottom sx={{ color: 'var(--color-text-secondary)', fontWeight: 'medium' }}>
               结束年份
             </Typography>
             <TextField
@@ -104,53 +80,15 @@ export function YearSettingsPopover({ anchorEl, onClose }: YearSettingsPopoverPr
               type="number"
               value={tempEndYear}
               onChange={(e) => setTempEndYear(Number(e.target.value))}
-              slotProps={{ htmlInput: { min: tempStartYear, max: 2025 } }}
               size="small"
-              sx={{
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 'var(--radius-lg)',
-                  backgroundColor: 'var(--color-bg-tertiary)',
-                  border: '2px solid var(--color-border-medium)',
-                  '&:hover': {
-                    borderColor: 'var(--color-primary)',
-                    boxShadow: '0 0 10px rgba(var(--glass-tint-rgb), 0.18)'
-                  },
-                  '&.Mui-focused': {
-                    borderColor: 'var(--color-primary)',
-                    boxShadow: '0 0 20px rgba(var(--glass-tint-rgb), 0.24), var(--shadow-glow)'
-                  },
-                  transition: 'all var(--transition-normal)'
-                },
-                '& .MuiInputBase-input': {
-                  color: 'var(--color-text-primary)'
-                }
-              }}
             />
           </Box>
         </Stack>
         <Stack direction="row" spacing={2} sx={{ justifyContent: 'flex-end' }}>
-          <Button onClick={onClose} size="small" sx={{
-            borderRadius: 'var(--radius-md)',
-            '&:hover': {
-              background: 'var(--color-bg-tertiary)',
-              boxShadow: 'var(--shadow-md)',
-              transform: 'translateY(-1px)'
-            },
-            transition: 'all var(--transition-normal)'
-          }}>
+          <Button onClick={onClose} size="small">
             取消
           </Button>
-          <Button onClick={handleApply} size="small" variant="contained" sx={{
-            borderRadius: 'var(--radius-md)',
-            background: 'var(--color-primary-gradient)',
-            boxShadow: 'var(--shadow-md), var(--shadow-glow)',
-            '&:hover': {
-              background: 'var(--color-primary-gradient)',
-              boxShadow: 'var(--shadow-lg), var(--shadow-glow)',
-              transform: 'translateY(-1px)'
-            },
-            transition: 'all var(--transition-normal)'
-          }}>
+          <Button onClick={handleApply} size="small" variant="contained">
             应用
           </Button>
         </Stack>

@@ -41,6 +41,18 @@ const defaultFilterState = {
   densityMode: 'auto' as TimelineDensityMode,
 };
 
+function isSameRange(
+  left: [number, number] | null,
+  right: [number, number] | null,
+  tolerance = 0.5,
+) {
+  if (!left || !right) {
+    return left === right;
+  }
+
+  return Math.abs(left[0] - right[0]) <= tolerance && Math.abs(left[1] - right[1]) <= tolerance;
+}
+
 export const useTimelineStore = create<TimelineState>((set) => ({
   ...defaultFilterState,
   selectedEventId: null,
@@ -77,7 +89,8 @@ export const useTimelineStore = create<TimelineState>((set) => ({
         typeof _dynastyId === 'function' ? _dynastyId(state.highlightedDynastyId) : _dynastyId,
     })),
   setDensityMode: (_mode) => set({ densityMode: _mode }),
-  setCurrentTimeRange: (_range) => set({ currentTimeRange: _range }),
+  setCurrentTimeRange: (_range) =>
+    set((state) => (isSameRange(state.currentTimeRange, _range) ? state : { currentTimeRange: _range })),
   setExpandedClusterId: (_clusterId) => set({ expandedClusterId: _clusterId }),
 
   clearFilters: () =>

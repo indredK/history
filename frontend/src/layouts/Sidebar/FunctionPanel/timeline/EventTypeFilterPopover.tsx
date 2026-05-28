@@ -60,14 +60,14 @@ export function EventTypeFilterPopover({
       {...uiUtils.getPopoverProps()}
     >
       <Box sx={{ ...popoverConfig.contentStyles, minWidth: 260 }}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 1 }}>
+        <Box sx={{ mb: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="subtitle1">
             {isDynastyMode ? '朝代筛选' : '事件类型'}
           </Typography>
           <Button size="small" onClick={handleSelectAll}>
             全部
           </Button>
-        </Stack>
+        </Box>
         <Stack spacing={1}>
           {options.map((option) => {
             const checked = selectedValues.includes(option.value);

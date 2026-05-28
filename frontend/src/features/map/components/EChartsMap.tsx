@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Box } from '@mui/material';
 import * as echarts from 'echarts';
 import type { MapSeriesOption, ScatterSeriesOption } from 'echarts';
+import type { Event } from '@/services/timeline/types';
 import { mapDataService } from '@/services/map/mapDataService';
 import type {
   BoundaryGeoJSON,
@@ -25,8 +26,9 @@ interface EChartsMapProps extends EChartsMapLayerVisibility {
   onProvinceClick?: (name: string, data: ProvinceData | null) => void;
   historicalBoundary?: BoundaryGeoJSON | null;
   historicalBoundaryName?: string | null;
-  eventPlaces?: Place[];
+  eventPlaces?: Array<Place & { event?: Event }>;
   loadingHistoricalBoundary?: boolean;
+  onEventMarkerClick?: (event: Event) => void;
 }
 
 interface TooltipPayload {
@@ -35,6 +37,7 @@ interface TooltipPayload {
   data?:
     | {
         place?: Place | undefined;
+        event?: Event | undefined;
         feature?: BoundaryGeoJSON['features'][number] | undefined;
       }
     | undefined;
@@ -48,6 +51,7 @@ export function EChartsMap({
   historicalBoundaryName = null,
   eventPlaces = [],
   loadingHistoricalBoundary = false,
+  onEventMarkerClick,
   adminBoundaryVisible = true,
   adminBoundaryOpacity = 0.3,
   dynastyBoundaryVisible = true,
@@ -93,6 +97,7 @@ export function EChartsMap({
                 80,
               ],
               place,
+              event: place.event,
             }))
         : [],
     [eventMarkersVisible, eventPlaces],
@@ -181,7 +186,10 @@ export function EChartsMap({
         formatter: (params: unknown) => {
           const payload = params as TooltipPayload;
           if (payload.seriesType === 'scatter' && payload.data?.place) {
-            return `<div style="padding:8px;"><strong>${payload.data.place.canonical_name}</strong><br/>事件地点</div>`;
+            const eventLine = payload.data.event?.title
+              ? `<br/>事件：${payload.data.event.title}`
+              : '';
+            return `<div style="padding:8px;"><strong>${payload.data.place.canonical_name}</strong><br/>事件地点${eventLine}</div>`;
           }
 
           if (showHistoricalBoundary) {
@@ -307,14 +315,25 @@ export function EChartsMap({
 
     chart.setOption(option, true);
     chart.off('click');
-    chart.on('click', (params: { componentType?: string; seriesType?: string; name?: string }) => {
-      if (params.seriesType === 'scatter') return;
-      if (params.componentType === 'geo' || params.seriesType === 'map') {
+    chart.on('click', (params: unknown) => {
+      const eventParams = params as {
+        componentType?: string | undefined;
+        seriesType?: string | undefined;
+        name?: string | undefined;
+        data?: { event?: Event | undefined } | undefined;
+      };
+      if (eventParams.seriesType === 'scatter') {
+        if (eventParams.data?.event) {
+          onEventMarkerClick?.(eventParams.data.event);
+        }
+        return;
+      }
+      if (eventParams.componentType === 'geo' || eventParams.seriesType === 'map') {
         if (!showHistoricalBoundary && !showModernBoundary) return;
         const data = showHistoricalBoundary
           ? null
-          : provinces.find((item) => item.name === params.name) || null;
-        onProvinceClickRef.current?.(params.name ?? '', data);
+          : provinces.find((item) => item.name === eventParams.name) || null;
+        onProvinceClickRef.current?.(eventParams.name ?? '', data);
       }
     });
   }, [
@@ -328,6 +347,7 @@ export function EChartsMap({
     historicalMapKey,
     historicalBoundaryName,
     markerData,
+    onEventMarkerClick,
     provinces,
   ]);
 

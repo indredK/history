@@ -70,7 +70,7 @@ describe("TimelineFunctions", () => {
 
   it('输入搜索词会更新时间轴 store', () => {
     render(<TimelineFunctions />);
-    fireEvent.change(screen.getByPlaceholderText('搜索事件名称或描述'), {
+    fireEvent.change(screen.getByPlaceholderText('搜索事件'), {
       target: { value: '赤壁' },
     });
     expect(useTimelineStore.getState().keyword).toBe('赤壁');
