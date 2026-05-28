@@ -2,7 +2,7 @@ import type { Dynasty } from '@/services/culture/types';
 import type { Event } from '@/services/timeline/types';
 
 export interface TimelineDerivedEvent extends Event {
-  normalizedCategory: string;
+  normalizedCategory: TimelineEventCategory;
   isMajor: boolean;
   searchText: string;
 }
@@ -10,7 +10,7 @@ export interface TimelineDerivedEvent extends Event {
 export interface TimelineYearCluster {
   id: string;
   year: number;
-  category: string;
+  category: TimelineEventCategory;
   events: TimelineDerivedEvent[];
   dynastyIds: string[];
 }
@@ -18,7 +18,7 @@ export interface TimelineYearCluster {
 export interface TimelineDynastyCluster {
   id: string;
   dynastyId: string;
-  category: string;
+  category: TimelineEventCategory;
   startYear: number;
   endYear: number;
   events: TimelineDerivedEvent[];
@@ -33,7 +33,10 @@ export const EVENT_TYPE_LABELS = [
   '其他',
 ] as const;
 
-export const EVENT_TYPE_MAP: Record<string, string> = {
+export type TimelineEventCategory = (typeof EVENT_TYPE_LABELS)[number];
+const EVENT_TYPE_LABEL_SET = new Set<string>(EVENT_TYPE_LABELS);
+
+export const EVENT_TYPE_MAP: Record<string, TimelineEventCategory> = {
   war: '战争',
   military: '战争',
   battle: '战争',
@@ -59,8 +62,16 @@ export const EVENT_TYPE_MAP: Record<string, string> = {
   foreign_affairs: '外交',
 };
 
-function normalizeCategory(event: Event): string {
-  return EVENT_TYPE_MAP[event.eventType ?? ''] ?? '其他';
+export function getTimelineEventCategory(eventType?: string | null): TimelineEventCategory {
+  if (eventType && EVENT_TYPE_LABEL_SET.has(eventType)) {
+    return eventType as TimelineEventCategory;
+  }
+
+  return EVENT_TYPE_MAP[eventType ?? ''] ?? '其他';
+}
+
+function normalizeCategory(event: Event): TimelineEventCategory {
+  return getTimelineEventCategory(event.eventType);
 }
 
 function buildSearchText(event: Event): string {
@@ -131,7 +142,7 @@ export function buildTimelineYearClusters(events: TimelineDerivedEvent[]): Timel
       return {
         id: `year:${key}`,
         year: Number(yearText),
-        category: category ?? '其他',
+        category: getTimelineEventCategory(category),
         events: group,
         dynastyIds: [...new Set(group.map((event) => event.dynastyId).filter(Boolean) as string[])],
       };
@@ -204,7 +215,7 @@ export function buildTimelineDynastyClusters(
       return {
         id: `dynasty:${key}`,
         dynastyId: dynastyId ?? '',
-        category: category ?? '其他',
+        category: getTimelineEventCategory(category),
         startYear,
         endYear,
         events: group,

@@ -14,6 +14,11 @@ import type { Dynasty } from '@/services/culture/types';
 import type { Event } from '@/services/timeline/types';
 import { formatTimelineYear } from '@/features/timeline/utils/dynastyUtils';
 import {
+  EVENT_TYPE_LABELS,
+  getTimelineEventCategory,
+  type TimelineEventCategory,
+} from '@/features/timeline/utils/timelineFilters';
+import {
   buildDefaultWindowRange,
   buildBoundsRange,
   clampRangeToBounds,
@@ -227,24 +232,15 @@ const GRID_RIGHT = 24;
 const COLLAPSED_CHART_HEIGHT = 82;
 const EVENT_LABEL_SPAN_THRESHOLD = 300;
 
-const EVENT_CATEGORY_MAP: Record<string, string> = {
-  // 战争
-  war: '战争',
-  // 政治
-  political_event: '政治', political_reform: '政治', diplomatic_event: '政治',
-  political_stability: '政治', political: '政治', political_fragmentation: '政治',
-  political_revolution: '政治', political_movement: '政治', social_movement: '政治',
-  // 文化/科技
-  cultural_event: '文化/科技', cultural: '文化/科技',
-  cultural_flourishing: '文化/科技', engineering: '文化/科技',
-};
+const EVENT_CATEGORY_ORDER = EVENT_TYPE_LABELS;
 
-const EVENT_CATEGORY_ORDER = ['战争', '政治', '文化/科技'] as const;
-
-const CATEGORY_SYMBOL: Record<string, string> = {
+const CATEGORY_SYMBOL: Record<TimelineEventCategory, string> = {
   '战争': 'diamond',
   '政治': 'rect',
   '文化/科技': 'triangle',
+  '外交': 'pin',
+  '经济': 'roundRect',
+  '其他': 'circle',
 };
 
 interface CategoryLabelItem {
@@ -462,7 +458,7 @@ function buildCategorizedEventRenderData(
   // 1. Group events by category
   const categoryGroups = new Map<string, Event[]>();
   for (const event of events) {
-    const cat = EVENT_CATEGORY_MAP[event.eventType ?? ''] ?? '其他';
+    const cat = getTimelineEventCategory(event.eventType);
     if (!categoryGroups.has(cat)) {
       categoryGroups.set(cat, []);
     }
@@ -572,7 +568,7 @@ function buildCategorizedEventRenderData(
 
 function buildEventPointData(renderData: EventRenderDataItem[]) {
   return renderData.map((item) => {
-    const category = EVENT_CATEGORY_MAP[item.event.eventType ?? ''] ?? '其他';
+    const category = getTimelineEventCategory(item.event.eventType);
     return {
       value: [item.event.startYear, item.yValue],
       event: item.event,
@@ -1599,7 +1595,7 @@ export function EChartsTimeline({
     [dynasties, selectedEvent],
   );
   const selectedEventCategory = useMemo(
-    () => (selectedEvent ? (EVENT_CATEGORY_MAP[selectedEvent.eventType ?? ''] ?? '其他') : null),
+    () => (selectedEvent ? getTimelineEventCategory(selectedEvent.eventType) : null),
     [selectedEvent],
   );
   const selectedEventYearText = useMemo(() => {
@@ -1648,15 +1644,26 @@ export function EChartsTimeline({
     });
   }, [
     boundsRange,
-    chartHeight,
     clusterData,
     colors,
     dynasties,
+    enableAnimation,
+    animationDuration,
+    enablePan,
+    enableZoom,
+    eventLabelThreshold,
     events,
     highlightedDynastyIds,
     highlightedDynastyId,
     isCondensed,
     selectedEventId,
+    showCategoryLabels,
+    showCategorySeparators,
+    showDynastyBands,
+    showDynastyCountBadge,
+    showEventLabelsProp,
+    showEventPoints,
+    showSliderZoom,
     timeRange,
   ]);
 
@@ -1673,7 +1680,7 @@ export function EChartsTimeline({
     const nextRange = readCurrentRangeFromChart(chart, boundsRange);
     setTimeRange((current) => (isSameRange(current, nextRange) ? current : nextRange));
     setHighlightedRange(nextRange);
-  }, [boundsRange]);
+  }, [boundsRange, setTimeRange]);
 
   const applyNextRange = useCallback((nextRange: TimeRange) => {
     setHighlightedRange(nextRange);
