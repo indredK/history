@@ -4,10 +4,28 @@ import { Box, Paper } from '@mui/material';
 import { useRequest } from 'ahooks';
 import { StateView } from '@/components/ui';
 import { getDynasties, getEvents } from '@/services/dataClient';
+import { useTimelineStore } from '@/store';
 import { usePerformanceTrace } from '@/utils/performance';
+import {
+  buildTimelineDynastyClusters,
+  buildTimelineYearClusters,
+  deriveTimelineEvents,
+  filterTimelineEvents,
+} from './utils/timelineFilters';
+import { useMemo } from 'react';
 
 export function TimelineList() {
   usePerformanceTrace('timeline-page-mounted', []);
+  const {
+    selectedDynastyIds,
+    selectedEventTypes,
+    keyword,
+    jumpRange,
+    densityMode,
+    setSelectedDynastyIds,
+    setHighlightedDynastyId,
+    setCurrentTimeRange,
+  } = useTimelineStore();
   const {
     data,
     loading,
@@ -20,6 +38,36 @@ export function TimelineList() {
       dynasties: dynastiesResult.data,
     };
   });
+
+  const derivedEvents = useMemo(
+    () => deriveTimelineEvents(data?.events ?? []),
+    [data?.events],
+  );
+  const filteredEvents = useMemo(
+    () =>
+      filterTimelineEvents(derivedEvents, {
+        selectedDynastyIds,
+        selectedEventTypes,
+        keyword,
+        jumpRange,
+      }),
+    [derivedEvents, jumpRange, keyword, selectedDynastyIds, selectedEventTypes],
+  );
+  const densityFilteredEvents = useMemo(() => {
+    if (densityMode === 'major-only') {
+      return filteredEvents.filter((event) => event.isMajor);
+    }
+
+    return filteredEvents;
+  }, [densityMode, filteredEvents]);
+  const yearClusters = useMemo(
+    () => buildTimelineYearClusters(densityFilteredEvents),
+    [densityFilteredEvents],
+  );
+  const dynastyClusters = useMemo(
+    () => buildTimelineDynastyClusters(densityFilteredEvents, data?.dynasties ?? []),
+    [data?.dynasties, densityFilteredEvents],
+  );
 
   const timelineContent = (() => {
     if (loading) {
@@ -48,8 +96,21 @@ export function TimelineList() {
 
     return (
       <EChartsTimeline
-        eventsData={data?.events ?? []}
+        eventsData={densityFilteredEvents}
         dynastiesData={data?.dynasties ?? []}
+        onTimeRangeChange={setCurrentTimeRange}
+        onDynastyClick={(dynasty) => {
+          setSelectedDynastyIds([dynasty.id]);
+          setHighlightedDynastyId(dynasty.id);
+        }}
+        onDynastyDoubleClick={(dynasty) => {
+          setHighlightedDynastyId(dynasty.id);
+        }}
+        clusterData={{
+          yearClusters,
+          dynastyClusters,
+          densityMode,
+        }}
       />
     );
   })();

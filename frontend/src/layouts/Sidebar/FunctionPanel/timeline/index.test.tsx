@@ -1,14 +1,7 @@
-/**
- * TimelineFunctions 单元测试 (§2.8)
- *
- * 顶层 Popover 触发按钮的开关状态机:
- *   - 点击 "事件类型" 按钮时,popover 通过 anchorEl 打开
- *   - 子 Popover 调用 onClose 时关闭
- */
-import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { useTimelineStore } from '@/store';
 
-// 用一个简单受控 stub 替换 EventTypeFilterPopover,以便观察 anchorEl/onClose
 let lastAnchorEl: HTMLElement | null = null;
 let lastOnClose: (() => void) | null = null;
 vi.mock("./EventTypeFilterPopover", () => ({
@@ -30,26 +23,32 @@ vi.mock("./EventTypeFilterPopover", () => ({
   },
 }));
 
+vi.mock('ahooks', () => ({
+  useRequest: () => ({
+    data: [],
+  }),
+}));
+
 import { TimelineFunctions } from "./index";
 
 describe("TimelineFunctions", () => {
+  beforeEach(() => {
+    useTimelineStore.getState().resetViewState();
+  });
+
   it("初始 anchorEl=null", () => {
     lastAnchorEl = null;
     render(<TimelineFunctions />);
-    expect(screen.getByTestId("evt-popover-stub")).toHaveAttribute(
-      "data-open",
-      "false",
-    );
+    expect(screen.getAllByTestId("evt-popover-stub")).toHaveLength(2);
+    expect(screen.getAllByTestId("evt-popover-stub").every((node) => node.getAttribute('data-open') === 'false')).toBe(true);
   });
 
   it("点击 '事件类型' 按钮设置 anchorEl 为该按钮", () => {
     render(<TimelineFunctions />);
     const btn = screen.getByRole("button", { name: /事件类型/ });
     fireEvent.click(btn);
-    expect(screen.getByTestId("evt-popover-stub")).toHaveAttribute(
-      "data-open",
-      "true",
-    );
+    const popovers = screen.getAllByTestId("evt-popover-stub");
+    expect(popovers[1]).toHaveAttribute("data-open", "true");
     // anchorEl 应是这个按钮元素
     expect(lastAnchorEl).toBe(btn);
   });
@@ -58,7 +57,7 @@ describe("TimelineFunctions", () => {
     render(<TimelineFunctions />);
     const btn = screen.getByRole("button", { name: /事件类型/ });
     fireEvent.click(btn);
-    expect(screen.getByTestId("evt-popover-stub")).toHaveAttribute(
+    expect(screen.getAllByTestId("evt-popover-stub")[1]).toHaveAttribute(
       "data-open",
       "true",
     );
@@ -66,9 +65,14 @@ describe("TimelineFunctions", () => {
     act(() => {
       lastOnClose?.();
     });
-    expect(screen.getByTestId("evt-popover-stub")).toHaveAttribute(
-      "data-open",
-      "false",
-    );
+    expect(screen.getAllByTestId("evt-popover-stub")[1]).toHaveAttribute("data-open", "false");
+  });
+
+  it('输入搜索词会更新时间轴 store', () => {
+    render(<TimelineFunctions />);
+    fireEvent.change(screen.getByPlaceholderText('搜索事件名称或描述'), {
+      target: { value: '赤壁' },
+    });
+    expect(useTimelineStore.getState().keyword).toBe('赤壁');
   });
 });

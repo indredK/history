@@ -1,47 +1,62 @@
-/**
- * timelineStore 单元测试 (§2.8)
- *
- * 覆盖目标:
- * - 初始 state:startYear=-500 / endYear=2000(覆盖中国通史范围)
- * - setYears:一次性写入两端年份(无任何校验,允许任意正负 / 倒置区间)
- */
-import { describe, it, expect, beforeEach } from "vitest";
-import { useTimelineStore } from "./timelineStore";
+import { beforeEach, describe, expect, it } from 'vitest';
+import { useTimelineStore } from './timelineStore';
 
-describe("timelineStore", () => {
+describe('timelineStore', () => {
   beforeEach(() => {
-    useTimelineStore.setState({ startYear: -500, endYear: 2000 });
+    useTimelineStore.getState().resetViewState();
   });
 
-  describe("初始 state", () => {
-    it("默认 startYear=-500 / endYear=2000", () => {
-      const s = useTimelineStore.getState();
-      expect(s.startYear).toBe(-500);
-      expect(s.endYear).toBe(2000);
-    });
+  it('默认使用空筛选与自动密度模式', () => {
+    const state = useTimelineStore.getState();
+    expect(state.selectedDynastyIds).toEqual([]);
+    expect(state.selectedEventTypes).toEqual([]);
+    expect(state.keyword).toBe('');
+    expect(state.jumpRange).toBeNull();
+    expect(state.densityMode).toBe('auto');
   });
 
-  describe("setYears", () => {
-    it("一次性更新两端年份", () => {
-      useTimelineStore.getState().setYears(618, 907);
-      const s = useTimelineStore.getState();
-      expect(s.startYear).toBe(618);
-      expect(s.endYear).toBe(907);
-    });
+  it('支持切换朝代和事件类型筛选', () => {
+    const store = useTimelineStore.getState();
+    store.toggleSelectedDynastyId('tang');
+    store.toggleSelectedEventType('战争');
 
-    it("允许负数(BC)", () => {
-      useTimelineStore.getState().setYears(-2000, -1000);
-      const s = useTimelineStore.getState();
-      expect(s.startYear).toBe(-2000);
-      expect(s.endYear).toBe(-1000);
-    });
+    let state = useTimelineStore.getState();
+    expect(state.selectedDynastyIds).toEqual(['tang']);
+    expect(state.selectedEventTypes).toEqual(['战争']);
 
-    it("不校验先后顺序(倒置区间也接受)", () => {
-      // 锁定行为:store 不做防呆,由调用方负责
-      useTimelineStore.getState().setYears(2000, -500);
-      const s = useTimelineStore.getState();
-      expect(s.startYear).toBe(2000);
-      expect(s.endYear).toBe(-500);
-    });
+    store.toggleSelectedDynastyId('tang');
+    store.toggleSelectedEventType('战争');
+
+    state = useTimelineStore.getState();
+    expect(state.selectedDynastyIds).toEqual([]);
+    expect(state.selectedEventTypes).toEqual([]);
+  });
+
+  it('支持设置搜索词与跳转区间', () => {
+    const store = useTimelineStore.getState();
+    store.setKeyword('赤壁');
+    store.setJumpRange({ startYear: 200, endYear: 300 });
+
+    const state = useTimelineStore.getState();
+    expect(state.keyword).toBe('赤壁');
+    expect(state.jumpRange).toEqual({ startYear: 200, endYear: 300 });
+  });
+
+  it('clearFilters 会清空筛选但保留当前视图区间', () => {
+    const store = useTimelineStore.getState();
+    store.setSelectedDynastyIds(['ming']);
+    store.setSelectedEventTypes(['政治']);
+    store.setKeyword('变法');
+    store.setJumpRange({ startYear: 1000, endYear: 1200 });
+    store.setCurrentTimeRange([1000, 1200]);
+
+    store.clearFilters();
+
+    const state = useTimelineStore.getState();
+    expect(state.selectedDynastyIds).toEqual([]);
+    expect(state.selectedEventTypes).toEqual([]);
+    expect(state.keyword).toBe('');
+    expect(state.jumpRange).toBeNull();
+    expect(state.currentTimeRange).toEqual([1000, 1200]);
   });
 });

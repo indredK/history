@@ -103,6 +103,24 @@ interface EChartsTimelineProps {
   onDynastyDoubleClick?: (dynasty: Dynasty) => void;
   onEventClick?: (event: Event) => void;
   onReset?: () => void;
+  clusterData?: {
+    yearClusters: Array<{
+      id: string;
+      year: number;
+      category: string;
+      events: Event[];
+      dynastyIds: string[];
+    }>;
+    dynastyClusters: Array<{
+      id: string;
+      dynastyId: string;
+      category: string;
+      startYear: number;
+      endYear: number;
+      events: Event[];
+    }>;
+    densityMode: 'auto' | 'major-only' | 'all';
+  };
 }
 
 interface EventRenderDataItem {
@@ -1212,6 +1230,7 @@ export function EChartsTimeline({
   onDynastyDoubleClick: onDynastyDoubleClickProp,
   onEventClick: onEventClickProp,
   onReset: onResetProp,
+  clusterData,
 }: EChartsTimelineProps) {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<ECharts | null>(null);
@@ -1352,6 +1371,20 @@ export function EChartsTimeline({
   const visibleEventCount = useMemo(
     () => events.filter((event) => eventOverlapsRange(event, effectiveRange)).length,
     [effectiveRange, events],
+  );
+  const visibleYearClusterCount = useMemo(
+    () =>
+      (clusterData?.yearClusters ?? []).filter(
+        (cluster) => cluster.year >= effectiveRange[0] && cluster.year <= effectiveRange[1],
+      ).length,
+    [clusterData?.yearClusters, effectiveRange],
+  );
+  const visibleDynastyClusterCount = useMemo(
+    () =>
+      (clusterData?.dynastyClusters ?? []).filter(
+        (cluster) => cluster.startYear <= effectiveRange[1] && cluster.endYear >= effectiveRange[0],
+      ).length,
+    [clusterData?.dynastyClusters, effectiveRange],
   );
   const highlightedDynastyNames = useMemo(
     () =>
@@ -1714,6 +1747,23 @@ export function EChartsTimeline({
           >
             窗口内 {visibleEventCount} / 共 {events.length} 个事件
           </Box>
+          {clusterData && (
+            <Box
+              component="span"
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                px: 0.75,
+                py: 0.3,
+                borderRadius: '999px',
+                backgroundColor: colors.countPillBg,
+                color: colors.countPillText,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              聚合 {visibleYearClusterCount} 年组 / 折叠 {visibleDynastyClusterCount} 朝代组 / 模式 {clusterData.densityMode}
+            </Box>
+          )}
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, flexShrink: 0 }}>
           {showResetButton && (
