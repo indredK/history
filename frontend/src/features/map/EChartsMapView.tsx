@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { EChartsMap } from './components/EChartsMap';
-import { DynastyTimeline } from './components/DynastyTimeline';
 import type { ProvinceData } from '@/services/map/types';
-import { Dynasty } from '@/services/culture/types';
+import { EChartsTimeline } from '@/features/timeline/components';
 import { usePerformanceTrace } from '@/utils/performance';
 
 export function EChartsMapView() {
@@ -10,17 +9,11 @@ export function EChartsMapView() {
     name: string;
     data: ProvinceData | null;
   } | null>(null);
-  const [selectedDynasty, setSelectedDynasty] = useState<Dynasty | null>(null);
   usePerformanceTrace('map-page-mounted', []);
 
   const handleProvinceClick = (name: string, data: ProvinceData | null) => {
     setSelectedProvince({ name, data });
     console.log('点击省份:', name, data);
-  };
-
-  const handleDynastySelect = (dynasty: Dynasty) => {
-    setSelectedDynasty(dynasty);
-    console.log('选择朝代:', dynasty.name, `(${dynasty.startYear} - ${dynasty.endYear})`);
   };
 
   return (
@@ -31,7 +24,7 @@ export function EChartsMapView() {
         height: '100%', 
         position: 'relative',
         border: 'var(--app-panel-border)',
-        borderLeft: `4px solid ${selectedDynasty?.color || 'rgba(25, 118, 210, 0.8)'}`,
+        borderLeft: '4px solid rgba(25, 118, 210, 0.8)',
         borderRadius: 'var(--panel-radius)',
         overflow: 'hidden',
         boxSizing: 'border-box',
@@ -55,12 +48,26 @@ export function EChartsMapView() {
         bottom: 16,
         left: 16,
         right: 16,
-        zIndex: 100 
+        zIndex: 100,
+        maxHeight: '36%'
       }}>
-        <DynastyTimeline 
-          onDynastySelect={handleDynastySelect}
-          selectedDynastyId={selectedDynasty?.id}
-        />
+        <div
+          className="glass-card"
+          style={{
+            background: 'rgba(var(--glass-surface-rgb), var(--glass-card-bg-opacity, 0.6))',
+            backdropFilter: 'blur(var(--glass-card-blur, 12px))',
+            WebkitBackdropFilter: 'blur(var(--glass-card-blur, 12px))',
+            borderRadius: 'var(--glass-radius-lg, 16px)',
+            border: '1px solid var(--theme-glass-border)',
+            boxShadow: 'var(--glass-shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12))',
+            padding: '10px 12px',
+          }}
+        >
+          <EChartsTimeline
+            minHeight={220}
+            syncSelectedDynasty={false}
+          />
+        </div>
       </div>
           
       {/* 省份信息面板 - 毛玻璃效果 */}

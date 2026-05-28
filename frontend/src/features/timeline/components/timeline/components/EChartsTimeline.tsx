@@ -33,6 +33,8 @@ interface EChartsTimelineProps {
   focusRange?: [number, number] | null;
   focusLabel?: string | null;
   onTimeRangeChange?: (range: [number, number]) => void;
+  minHeight?: number;
+  syncSelectedDynasty?: boolean;
 }
 
 const BAND_HEIGHT = 0.18;
@@ -138,6 +140,8 @@ export function EChartsTimeline({
   focusRange,
   focusLabel,
   onTimeRangeChange,
+  minHeight = 280,
+  syncSelectedDynasty = true,
 }: EChartsTimelineProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<ECharts | null>(null);
@@ -437,6 +441,7 @@ export function EChartsTimeline({
 
   // event click → setSelectedDynasty by event year (and could open detail)
   useEffect(() => {
+    if (!syncSelectedDynasty) return;
     const chart = chartRef.current;
     if (!chart) return;
     const handler = (params: unknown) => {
@@ -453,7 +458,7 @@ export function EChartsTimeline({
     return () => {
       chart.off('click', handler);
     };
-  }, [dynasties, selectedDynasty, setSelectedDynasty]);
+  }, [dynasties, selectedDynasty, setSelectedDynasty, syncSelectedDynasty]);
 
   // focusRange → dispatch dataZoom (only if center is outside target, to avoid yanking user)
   useEffect(() => {
@@ -567,7 +572,7 @@ export function EChartsTimeline({
           重置视图
         </button>
       </Box>
-      <Box ref={containerRef} sx={{ flex: 1, minHeight: 280 }} />
+      <Box ref={containerRef} sx={{ flex: 1, minHeight }} />
     </Box>
   );
 }
