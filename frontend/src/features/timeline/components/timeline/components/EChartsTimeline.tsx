@@ -163,6 +163,7 @@ interface DynastyClusterRenderDataItem {
   clusterId: string;
   dynastyId: string;
   category: string;
+  yValue: number;
   count: number;
   events: Event[];
 }
@@ -616,6 +617,7 @@ function buildDynastyClusterRenderData(
       clusterId: cluster.id,
       dynastyId: cluster.dynastyId,
       category: cluster.category,
+      yValue,
       count: cluster.events.length,
       events: cluster.events,
     };
@@ -684,8 +686,11 @@ function createDynastyClusterRenderItem(
       return null;
     }
 
-    const [startX, y] = api.coord([item.value[0], 0]);
-    const [endX] = api.coord([item.value[1], 0]);
+    const [startX, y] = api.coord([item.value[0], item.yValue]);
+    const [endX] = api.coord([item.value[1], item.yValue]);
+    if (startX === undefined || endX === undefined || y === undefined) {
+      return null;
+    }
     const width = Math.max(endX - startX, 20);
     const x = startX;
     const yTop = y - 9;
@@ -1005,6 +1010,7 @@ function buildOption(args: {
   showEventLabels: boolean | null;
   eventLabelThreshold: number;
   showEventPoints: boolean;
+  clusterData?: EChartsTimelineProps['clusterData'];
   enableAnimation: boolean;
   animationDuration: number;
   enablePan: boolean;
@@ -1028,6 +1034,7 @@ function buildOption(args: {
     showEventLabels: _showEventLabels,
     eventLabelThreshold: _eventLabelThreshold,
     showEventPoints: _showEventPoints,
+    clusterData,
     enableAnimation: _enableAnimation,
     animationDuration: _animationDuration,
     enablePan: _enablePan,
@@ -1813,7 +1820,7 @@ export function EChartsTimeline({
     setIsCondensed((current) => !current);
   }, [setIsCondensed]);
 
-  if (events.length === 0 || dynasties.length === 0) {
+  if (events.length === 0 && dynasties.length === 0) {
     return (
       <StateView
         mode="empty"
@@ -1843,7 +1850,7 @@ export function EChartsTimeline({
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'space-between',
           gap: 1,
           flexWrap: 'wrap',
@@ -1859,111 +1866,141 @@ export function EChartsTimeline({
             minWidth: 0,
             flex: '1 1 320px',
             display: 'flex',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            gap: 0.75,
+            flexDirection: 'column',
+            alignItems: 'stretch',
+            gap: 0.6,
           }}
         >
-          <Box component="span" sx={{ color: colors.headerMuted, whiteSpace: 'nowrap' }}>
-            {hasDynastyEventHighlight ? '筛选事件' : '当前焦点'}
-          </Box>
           <Box
-            component="span"
             sx={{
-              display: 'inline-flex',
+              minWidth: 0,
+              display: 'flex',
               alignItems: 'center',
-              maxWidth: 'min(100%, 280px)',
-              px: 0.9,
-              py: 0.35,
-              borderRadius: '999px',
-              backgroundColor: colors.focusPillBg,
-              color: colors.focusPillText,
-              fontWeight: 600,
-              lineHeight: 1.2,
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-            }}
-            title={displayedDynastyLabel}
-          >
-            {displayedDynastyLabel}
-          </Box>
-          <Box component="span" sx={{ color: colors.headerMuted, whiteSpace: 'nowrap' }}>
-            事件选中
-          </Box>
-          <Box
-            component="span"
-            sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              maxWidth: 'min(100%, 280px)',
-              px: 0.9,
-              py: 0.35,
-              borderRadius: '999px',
-              backgroundColor: colors.countPillBg,
-              color: colors.countPillText,
-              fontWeight: 600,
-              lineHeight: 1.2,
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-            }}
-            title={selectedEvent?.title ?? '未选择'}
-          >
-            {selectedEvent?.title ?? '未选择'}
-          </Box>
-          <Box component="span" sx={{ color: colors.headerMuted, whiteSpace: 'nowrap' }}>
-            时间范围
-          </Box>
-          <Box
-            component="span"
-            sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              px: 0.75,
-              py: 0.3,
-              borderRadius: '999px',
-              backgroundColor: colors.countPillBg,
-              color: colors.countPillText,
-              fontWeight: 600,
-              whiteSpace: 'nowrap',
-            }}
-            title={formatRangeLabel(effectiveRange)}
-          >
-            {formatRangeLabel(effectiveRange)}
-          </Box>
-          <Box
-            component="span"
-            sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              px: 0.75,
-              py: 0.3,
-              borderRadius: '999px',
-              backgroundColor: colors.countPillBg,
-              color: colors.countPillText,
-              whiteSpace: 'nowrap',
+              gap: 0.75,
             }}
           >
-            窗口内 {visibleEventCount} / 共 {events.length} 个事件
-          </Box>
-          {clusterData && (
+            <Box component="span" sx={{ color: colors.headerMuted, whiteSpace: 'nowrap', flexShrink: 0 }}>
+              {hasDynastyEventHighlight ? '筛选事件' : '当前焦点'}
+            </Box>
             <Box
               component="span"
               sx={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                minWidth: 0,
+                maxWidth: 'min(100%, 280px)',
+                px: 0.9,
+                py: 0.35,
+                borderRadius: '999px',
+                backgroundColor: colors.focusPillBg,
+                color: colors.focusPillText,
+                fontWeight: 600,
+                lineHeight: 1.2,
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+              title={displayedDynastyLabel}
+            >
+              {displayedDynastyLabel}
+            </Box>
+            <Box component="span" sx={{ color: colors.headerMuted, whiteSpace: 'nowrap', flexShrink: 0 }}>
+              事件选中
+            </Box>
+            <Box
+              component="span"
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                minWidth: 0,
+                maxWidth: 'min(100%, 280px)',
+                px: 0.9,
+                py: 0.35,
+                borderRadius: '999px',
+                backgroundColor: colors.countPillBg,
+                color: colors.countPillText,
+                fontWeight: 600,
+                lineHeight: 1.2,
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+              title={selectedEvent?.title ?? '未选择'}
+            >
+              {selectedEvent?.title ?? '未选择'}
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              minWidth: 0,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 0.75,
+            }}
+          >
+            <Box component="span" sx={{ color: colors.headerMuted, whiteSpace: 'nowrap', flexShrink: 0 }}>
+              时间范围
+            </Box>
+            <Box
+              component="span"
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                minWidth: 0,
+                px: 0.75,
+                py: 0.3,
+                borderRadius: '999px',
+                backgroundColor: colors.countPillBg,
+                color: colors.countPillText,
+                fontWeight: 600,
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+              title={formatRangeLabel(effectiveRange)}
+            >
+              {formatRangeLabel(effectiveRange)}
+            </Box>
+            <Box
+              component="span"
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                minWidth: 0,
                 px: 0.75,
                 py: 0.3,
                 borderRadius: '999px',
                 backgroundColor: colors.countPillBg,
                 color: colors.countPillText,
                 whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
               }}
             >
-              聚合 {visibleYearClusterCount} 年组 / 折叠 {visibleDynastyClusterCount} 朝代组 / 模式 {clusterData.densityMode}
+              窗口内 {visibleEventCount} / 共 {events.length} 个事件
             </Box>
-          )}
+            {clusterData && (
+              <Box
+                component="span"
+                sx={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  minWidth: 0,
+                  px: 0.75,
+                  py: 0.3,
+                  borderRadius: '999px',
+                  backgroundColor: colors.countPillBg,
+                  color: colors.countPillText,
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}
+                title={`聚合 ${visibleYearClusterCount} 年组 / 折叠 ${visibleDynastyClusterCount} 朝代组 / 模式 ${clusterData.densityMode}`}
+              >
+                聚合 {visibleYearClusterCount} 年组 / 折叠 {visibleDynastyClusterCount} 朝代组 / 模式 {clusterData.densityMode}
+              </Box>
+            )}
+          </Box>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, flexShrink: 0 }}>
           {showResetButton && (
