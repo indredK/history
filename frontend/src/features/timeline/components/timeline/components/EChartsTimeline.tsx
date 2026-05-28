@@ -149,6 +149,24 @@ interface EventRenderDataItem {
   isActive: boolean;
 }
 
+interface YearClusterRenderDataItem {
+  value: [number, number];
+  clusterId: string;
+  year: number;
+  category: string;
+  count: number;
+  events: Event[];
+}
+
+interface DynastyClusterRenderDataItem {
+  value: [number, number];
+  clusterId: string;
+  dynastyId: string;
+  category: string;
+  count: number;
+  events: Event[];
+}
+
 interface TimelineThemeColors {
   axisText: string;
   axisLine: string;
@@ -566,6 +584,144 @@ function buildEventPointData(renderData: EventRenderDataItem[]) {
   });
 }
 
+function buildYearClusterRenderData(
+  yearClusters: NonNullable<EChartsTimelineProps['clusterData']>['yearClusters'],
+  categoryLabels: CategoryLabelItem[],
+): YearClusterRenderDataItem[] {
+  const categoryIndexMap = new Map(categoryLabels.map((item) => [item.label, item]));
+  return yearClusters.map((cluster) => {
+    const catInfo = categoryIndexMap.get(cluster.category);
+    const yValue = catInfo ? getCategoryLaneY(0, 1, catInfo.catIndex, catInfo.catCount) : EVENT_AREA_TOP + 0.04;
+    return {
+      value: [cluster.year, yValue],
+      clusterId: cluster.id,
+      year: cluster.year,
+      category: cluster.category,
+      count: cluster.events.length,
+      events: cluster.events,
+    };
+  });
+}
+
+function buildDynastyClusterRenderData(
+  dynastyClusters: NonNullable<EChartsTimelineProps['clusterData']>['dynastyClusters'],
+  categoryLabels: CategoryLabelItem[],
+): DynastyClusterRenderDataItem[] {
+  const categoryIndexMap = new Map(categoryLabels.map((item) => [item.label, item]));
+  return dynastyClusters.map((cluster) => {
+    const catInfo = categoryIndexMap.get(cluster.category);
+    const yValue = catInfo ? getCategoryLaneY(0, 1, catInfo.catIndex, catInfo.catCount) : EVENT_AREA_TOP + 0.08;
+    return {
+      value: [cluster.startYear, cluster.endYear],
+      clusterId: cluster.id,
+      dynastyId: cluster.dynastyId,
+      category: cluster.category,
+      count: cluster.events.length,
+      events: cluster.events,
+    };
+  });
+}
+
+function createYearClusterRenderItem(
+  renderData: YearClusterRenderDataItem[],
+  colors: TimelineThemeColors,
+) {
+  return (
+    params: { dataIndex: number; coordSys?: { x: number; y: number; width: number; height: number } },
+    api: { coord: (_value: [number, number]) => number[] },
+  ) => {
+    const item = renderData[params.dataIndex];
+    if (!item) {
+      return null;
+    }
+
+    const [x, y] = api.coord(item.value);
+    return {
+      type: 'group',
+      info: { cluster: item },
+      children: [
+        {
+          type: 'circle',
+          shape: { cx: x, cy: y, r: Math.min(10 + item.count, 18) },
+          style: {
+            fill: colors.focusPillBg,
+            stroke: colors.eventActive,
+            lineWidth: 2,
+            shadowBlur: 8,
+            shadowColor: colors.eventActiveShadow,
+          },
+          info: { cluster: item },
+        },
+        {
+          type: 'text',
+          style: {
+            x,
+            y,
+            text: `${item.count}`,
+            textAlign: 'center',
+            textVerticalAlign: 'middle',
+            fill: colors.focusPillText,
+            fontSize: 11,
+            fontWeight: 700,
+          },
+          info: { cluster: item },
+        },
+      ],
+    };
+  };
+}
+
+function createDynastyClusterRenderItem(
+  renderData: DynastyClusterRenderDataItem[],
+  colors: TimelineThemeColors,
+) {
+  return (
+    params: { dataIndex: number; coordSys?: { x: number; y: number; width: number; height: number } },
+    api: { coord: (_value: [number, number]) => number[] },
+  ) => {
+    const item = renderData[params.dataIndex];
+    if (!item || !params.coordSys) {
+      return null;
+    }
+
+    const [startX, y] = api.coord([item.value[0], 0]);
+    const [endX] = api.coord([item.value[1], 0]);
+    const width = Math.max(endX - startX, 20);
+    const x = startX;
+    const yTop = y - 9;
+    return {
+      type: 'group',
+      info: { cluster: item },
+      children: [
+        {
+          type: 'rect',
+          shape: { x, y: yTop, width, height: 18, r: 9 },
+          style: {
+            fill: colorWithAlpha(colors.countPillBg, 0.96),
+            stroke: colors.eventStroke,
+            lineWidth: 1.5,
+          },
+          info: { cluster: item },
+        },
+        {
+          type: 'text',
+          style: {
+            x: x + width / 2,
+            y,
+            text: `${item.count} 条`,
+            textAlign: 'center',
+            textVerticalAlign: 'middle',
+            fill: colors.countPillText,
+            fontSize: 10,
+            fontWeight: 700,
+          },
+          info: { cluster: item },
+        },
+      ],
+    };
+  };
+}
+
 function createDynastyBandRenderItem(
   dynastyBandData: DynastyBandDataItem[],
   colors: TimelineThemeColors,
@@ -900,6 +1056,8 @@ function buildOption(args: {
     ? buildCategorizedEventRenderData(events, timeRange, selectedEventId, highlightedDynastyId, showEventLabels, colors)
     : { renderData: [] as EventRenderDataItem[], categoryLabels: [] as CategoryLabelItem[] };
   const eventPointData = showEvents ? buildEventPointData(eventRenderData) : [];
+  const yearClusterData = showEvents && clusterData ? buildYearClusterRenderData(clusterData.yearClusters, categoryLabels) : [];
+  const dynastyClusterData = showEvents && clusterData ? buildDynastyClusterRenderData(clusterData.dynastyClusters, categoryLabels) : [];
   const separatorYData = showEvents && categoryLabels.length > 1
     ? (() => {
         const eventAreaHeight = EVENT_AREA_BOTTOM - EVENT_AREA_TOP;
@@ -1162,6 +1320,32 @@ function buildOption(args: {
         z: 8,
         renderItem: createEventRangeRenderItem(eventRenderData, colors),
       },
+      ...(!isCondensed && yearClusterData.length > 0
+        ? [
+            {
+              id: 'year-clusters',
+              type: 'custom' as const,
+              xAxisIndex: 0,
+              yAxisIndex: 0,
+              data: yearClusterData,
+              z: 11,
+              renderItem: createYearClusterRenderItem(yearClusterData, colors),
+            },
+          ]
+        : []),
+      ...(!isCondensed && dynastyClusterData.length > 0
+        ? [
+            {
+              id: 'dynasty-clusters',
+              type: 'custom' as const,
+              xAxisIndex: 0,
+              yAxisIndex: 0,
+              data: dynastyClusterData,
+              z: 10,
+              renderItem: createDynastyClusterRenderItem(dynastyClusterData, colors),
+            },
+          ]
+        : []),
       {
         id: 'events',
         type: 'scatter',
@@ -1509,10 +1693,10 @@ export function EChartsTimeline({
     (params: unknown) => {
       const payload = params as {
         data?: { dynasty?: Dynasty; event?: Event };
-        info?: { dynasty?: Dynasty; event?: Event };
+        info?: { dynasty?: Dynasty; event?: Event; cluster?: YearClusterRenderDataItem | DynastyClusterRenderDataItem };
         event?: {
-          target?: { info?: { dynasty?: Dynasty; event?: Event } };
-          topTarget?: { info?: { dynasty?: Dynasty; event?: Event } };
+          target?: { info?: { dynasty?: Dynasty; event?: Event; cluster?: YearClusterRenderDataItem | DynastyClusterRenderDataItem } };
+          topTarget?: { info?: { dynasty?: Dynasty; event?: Event; cluster?: YearClusterRenderDataItem | DynastyClusterRenderDataItem } };
         };
       };
 
@@ -1527,6 +1711,10 @@ export function EChartsTimeline({
           payload.info?.event ??
           payload.event?.target?.info?.event ??
           payload.event?.topTarget?.info?.event,
+        cluster:
+          payload.info?.cluster ??
+          payload.event?.target?.info?.cluster ??
+          payload.event?.topTarget?.info?.cluster,
       };
     },
     [],
@@ -1534,7 +1722,7 @@ export function EChartsTimeline({
 
   const handleChartClick = useCallback(
     (params: unknown) => {
-      const { dynasty, eventData } = resolvePayload(params);
+      const { dynasty, eventData, cluster } = resolvePayload(params);
 
       if (!timeRange) {
         return;
@@ -1557,6 +1745,17 @@ export function EChartsTimeline({
         onEventClickProp?.(eventData);
         const nextRange = moveRangeToEvent(timeRange ?? boundsRange, eventData, boundsRange);
         applyNextRange(nextRange);
+        return;
+      }
+
+      if (cluster?.events?.length) {
+        const firstEvent = cluster.events[0];
+        if (firstEvent) {
+          setSelectedEventId(firstEvent.id);
+          onEventClickProp?.(firstEvent);
+          const nextRange = moveRangeToEvent(timeRange ?? boundsRange, firstEvent, boundsRange);
+          applyNextRange(nextRange);
+        }
         return;
       }
 
