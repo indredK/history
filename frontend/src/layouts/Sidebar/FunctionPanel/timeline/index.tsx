@@ -154,7 +154,7 @@ export function TimelineFunctions() {
             px: 1,
             fontSize: 11.5,
             py: 0.3,
-            justifyContent: 'flex-start',
+            justifyContent: 'center',
           }}
         >
           {selectedDynastyIds.length === 0 ? '全部朝代' : `朝代 ${selectedDynastyIds.length}`}
@@ -170,7 +170,7 @@ export function TimelineFunctions() {
             px: 1,
             fontSize: 11.5,
             py: 0.3,
-            justifyContent: 'flex-start',
+            justifyContent: 'center',
           }}
         >
           事件类型
