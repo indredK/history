@@ -8,7 +8,7 @@ import {
   ToggleButtonGroup,
   Divider,
 } from '@mui/material';
-import { FilterList, Search, RestartAlt, Timeline } from '@mui/icons-material';
+import { Search, RestartAlt } from '@mui/icons-material';
 import { useEffect, useMemo, useState } from 'react';
 import { useRequest } from 'ahooks';
 import { EventTypeFilterPopover } from './EventTypeFilterPopover';
@@ -145,7 +145,6 @@ export function TimelineFunctions() {
         }}
       >
         <Button
-          startIcon={<Timeline />}
           variant="outlined"
           size="small"
           onClick={handleDynastyClick}
@@ -162,7 +161,6 @@ export function TimelineFunctions() {
         </Button>
 
         <Button
-          startIcon={<FilterList />}
           variant="outlined"
           size="small"
           onClick={handleEventTypeClick}
