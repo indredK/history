@@ -346,20 +346,20 @@ function buildTimelineThemeColors(isLight: boolean): TimelineThemeColors {
     dynastyFill: colorWithAlpha(secondary, isLight ? 0.14 : 0.18),
     dynastyStroke: colorWithAlpha(secondary, isLight ? 0.24 : 0.32),
     dynastyLabel: textPrimary,
-    dynastyWindowFill: colorWithAlpha(primary, isLight ? 0.12 : 0.18),
-    dynastyWindowStroke: colorWithAlpha(primary, isLight ? 0.54 : 0.62),
-    dynastyWindowShadow: colorWithAlpha(primary, isLight ? 0.18 : 0.24),
-    dynastySelectedFill: colorWithAlpha(primary, isLight ? 0.18 : 0.28),
-    dynastySelectedStroke: colorWithAlpha(primary, 0.92),
-    dynastySelectedShadow: colorWithAlpha(primary, isLight ? 0.22 : 0.34),
+    dynastyWindowFill: colorWithAlpha(primary, isLight ? 0.18 : 0.24),
+    dynastyWindowStroke: colorWithAlpha(primary, isLight ? 0.72 : 0.82),
+    dynastyWindowShadow: colorWithAlpha(primary, isLight ? 0.28 : 0.38),
+    dynastySelectedFill: colorWithAlpha(primary, isLight ? 0.34 : 0.44),
+    dynastySelectedStroke: colorWithAlpha(primary, 1),
+    dynastySelectedShadow: colorWithAlpha(primary, isLight ? 0.38 : 0.52),
     event: colorWithAlpha(secondary, isLight ? 0.92 : 0.94),
     eventStroke: colorWithAlpha(secondary, isLight ? 0.74 : 0.82),
     eventShadow: colorWithAlpha(secondary, isLight ? 0.18 : 0.3),
     eventMuted: colorWithAlpha(textTertiary, isLight ? 0.28 : 0.34),
     eventMutedStroke: colorWithAlpha(textTertiary, isLight ? 0.18 : 0.24),
     eventMutedShadow: colorWithAlpha(textTertiary, 0.08),
-    eventActive: primary,
-    eventActiveShadow: colorWithAlpha(primary, isLight ? 0.28 : 0.42),
+    eventActive: isLight ? '#b86b1f' : '#f0b35c',
+    eventActiveShadow: colorWithAlpha(primary, isLight ? 0.42 : 0.62),
     eventLabel: textPrimary,
     eventLabelBg: colorWithAlpha(surface, isLight ? 0.92 : 0.84),
     panelBorder: borderLight,
@@ -638,6 +638,15 @@ function createDynastyBandRenderItem(
             shadowBlur,
             shadowColor,
           },
+          emphasis: {
+            style: {
+              fill: colors.dynastySelectedFill,
+              stroke: colors.dynastySelectedStroke,
+              lineWidth: 2.5,
+              shadowBlur: 18,
+              shadowColor: colors.dynastySelectedShadow,
+            },
+          },
           info: { dynasty },
         },
         ...(showLabel
@@ -663,7 +672,10 @@ function createDynastyBandRenderItem(
   };
 }
 
-function createEventRangeRenderItem(renderData: EventRenderDataItem[]) {
+function createEventRangeRenderItem(
+  renderData: EventRenderDataItem[],
+  colors: TimelineThemeColors,
+) {
   return (
     params: {
       dataIndex: number;
@@ -729,6 +741,15 @@ function createEventRangeRenderItem(renderData: EventRenderDataItem[]) {
             lineCap: 'round',
             shadowBlur: item.rangeStyle.shadowBlur,
             shadowColor: item.rangeStyle.shadowColor,
+          },
+          emphasis: {
+            style: {
+              stroke: colors.eventActive,
+              lineWidth: Math.max(item.rangeStyle.lineWidth + 2.5, 5),
+              opacity: 1,
+              shadowBlur: 14,
+              shadowColor: colors.eventActiveShadow,
+            },
           },
         },
       ],
@@ -1104,18 +1125,9 @@ function buildOption(args: {
         xAxisIndex: 0,
         yAxisIndex: 0,
         data: eventRenderData,
-        silent: true,
+        silent: false,
         z: 8,
-        emphasis: {
-          disabled: true,
-        },
-        blur: {
-          disabled: true,
-        },
-        select: {
-          disabled: true,
-        },
-        renderItem: createEventRangeRenderItem(eventRenderData),
+        renderItem: createEventRangeRenderItem(eventRenderData, colors),
       },
       ...(!isCondensed && eventLabelData.length > 0
         ? [

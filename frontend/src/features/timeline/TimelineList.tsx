@@ -16,6 +16,7 @@ import {
 import { useEffect, useMemo, useState } from 'react';
 
 export function TimelineList() {
+  const currentYear = new Date().getFullYear();
   usePerformanceTrace('timeline-page-mounted', []);
   const {
     selectedDynastyIds,
@@ -77,12 +78,24 @@ export function TimelineList() {
   );
   const filteredDynasties = useMemo(() => {
     const allDynasties = data?.dynasties ?? [];
-    if (selectedDynastyIds.length === 0) {
-      return allDynasties;
+    const scopedDynasties = selectedDynastyIds.length === 0
+      ? allDynasties
+      : allDynasties.filter((dynasty) => selectedDynastyIds.includes(dynasty.id));
+
+    if (scopedDynasties.length === 0) {
+      return scopedDynasties;
     }
 
-    return allDynasties.filter((dynasty) => selectedDynastyIds.includes(dynasty.id));
-  }, [data?.dynasties, selectedDynastyIds]);
+    const lastDynasty = scopedDynasties.reduce((latest, dynasty) =>
+      dynasty.startYear > latest.startYear ? dynasty : latest,
+    scopedDynasties[0]!);
+
+    return scopedDynasties.map((dynasty) =>
+      dynasty.id === lastDynasty.id
+        ? { ...dynasty, endYear: Math.max(dynasty.endYear ?? dynasty.startYear, currentYear) }
+        : dynasty,
+    );
+  }, [currentYear, data?.dynasties, selectedDynastyIds]);
 
   const timelineContent = (() => {
     if (loading) {
