@@ -6,9 +6,10 @@ import {
   Box,
   ToggleButton,
   ToggleButtonGroup,
+  Divider,
 } from '@mui/material';
 import { FilterList, Search, RestartAlt, Timeline } from '@mui/icons-material';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRequest } from 'ahooks';
 import { EventTypeFilterPopover } from './EventTypeFilterPopover';
 import { buttonConfig } from '@/config';
@@ -23,6 +24,23 @@ function parseYearValue(value: string): number | null {
 
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : null;
+}
+
+function syncRangeFromInputs(
+  startText: string,
+  endText: string,
+  setJumpRange: (_range: { startYear: number; endYear: number } | null) => void,
+  setCurrentTimeRange: (_range: [number, number] | null) => void,
+) {
+  const startYear = parseYearValue(startText);
+  const endYear = parseYearValue(endText);
+
+  if (startYear === null || endYear === null || startYear > endYear) {
+    return;
+  }
+
+  setJumpRange({ startYear, endYear });
+  setCurrentTimeRange([startYear, endYear]);
 }
 
 export function TimelineFunctions() {
@@ -42,16 +60,14 @@ export function TimelineFunctions() {
     selectedDynastyIds,
     keyword,
     jumpRange,
+    currentTimeRange,
     densityMode,
     setKeyword,
     setJumpRange,
+    setCurrentTimeRange,
     setDensityMode,
     clearFilters,
   } = useTimelineStore();
-
-  const selectedDynastyLabel = selectedDynastyIds.length === 0
-    ? '全部朝代'
-    : `${selectedDynastyIds.length} 个朝代`;
 
   const handleEventTypeClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setEventTypeAnchorEl(event.currentTarget);
@@ -62,44 +78,106 @@ export function TimelineFunctions() {
   };
 
   const handleJump = () => {
-    const startYear = parseYearValue(jumpStartYear);
-    const endYear = parseYearValue(jumpEndYear);
-
-    if (startYear === null || endYear === null || startYear > endYear) {
-      return;
-    }
-
-    setJumpRange({ startYear, endYear });
+    syncRangeFromInputs(jumpStartYear, jumpEndYear, setJumpRange, setCurrentTimeRange);
   };
 
   const handleJumpReset = () => {
     setJumpStartYear('');
     setJumpEndYear('');
     setJumpRange(null);
+    setCurrentTimeRange(null);
   };
 
+  useEffect(() => {
+    if (currentTimeRange) {
+      setJumpStartYear(String(Math.round(currentTimeRange[0])));
+      setJumpEndYear(String(Math.round(currentTimeRange[1])));
+      return;
+    }
+
+    if (jumpRange) {
+      setJumpStartYear(String(jumpRange.startYear));
+      setJumpEndYear(String(jumpRange.endYear));
+      return;
+    }
+
+    setJumpStartYear('');
+    setJumpEndYear('');
+  }, [currentTimeRange, jumpRange]);
+
   return (
-    <Stack spacing={1.5}>
+    <Stack
+      spacing={1}
+      sx={{
+        p: 1.1,
+        borderRadius: '12px',
+        background: 'rgba(var(--glass-surface-rgb), 0.12)',
+        border: '1px solid rgba(148, 163, 184, 0.12)',
+      }}
+    >
       <TextField
         size="small"
         value={keyword}
         onChange={(event) => setKeyword(event.target.value)}
-        placeholder="搜索事件名称或描述"
-        InputProps={{
-          startAdornment: <Search fontSize="small" sx={{ mr: 1, color: 'var(--color-text-tertiary)' }} />,
+        placeholder="搜索事件"
+        sx={{
+          '& .MuiInputBase-root': {
+            minHeight: 32,
+            fontSize: 12.5,
+            borderRadius: '10px',
+          },
+          '& .MuiInputBase-input': {
+            py: 0.6,
+          },
+        }}
+        slotProps={{
+          input: {
+            startAdornment: <Search fontSize="small" sx={{ mr: 0.75, color: 'var(--color-text-tertiary)' }} />,
+          },
         }}
       />
 
-      <Button
-        startIcon={<Timeline />}
-        variant="outlined"
-        fullWidth
-        size="small"
-        onClick={handleDynastyClick}
-        sx={buttonConfig.functionButton}
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: 0.8,
+        }}
       >
-        朝代筛选：{selectedDynastyLabel}
-      </Button>
+        <Button
+          startIcon={<Timeline />}
+          variant="outlined"
+          size="small"
+          onClick={handleDynastyClick}
+          sx={{
+            ...buttonConfig.functionButton,
+            minHeight: 32,
+            px: 1,
+            fontSize: 11.5,
+            py: 0.3,
+            justifyContent: 'flex-start',
+          }}
+        >
+          {selectedDynastyIds.length === 0 ? '全部朝代' : `朝代 ${selectedDynastyIds.length}`}
+        </Button>
+
+        <Button
+          startIcon={<FilterList />}
+          variant="outlined"
+          size="small"
+          onClick={handleEventTypeClick}
+          sx={{
+            ...buttonConfig.functionButton,
+            minHeight: 32,
+            px: 1,
+            fontSize: 11.5,
+            py: 0.3,
+            justifyContent: 'flex-start',
+          }}
+        >
+          事件类型
+        </Button>
+      </Box>
 
       <EventTypeFilterPopover
         mode="dynasty"
@@ -108,59 +186,69 @@ export function TimelineFunctions() {
         dynasties={dynasties as Dynasty[]}
       />
 
-      <Button
-        startIcon={<FilterList />}
-        variant="outlined"
-        fullWidth
-        size="small"
-        onClick={handleEventTypeClick}
-        sx={buttonConfig.functionButton}
-      >
-        事件类型
-      </Button>
       <EventTypeFilterPopover
         mode="eventType"
         anchorEl={eventTypeAnchorEl}
         onClose={() => setEventTypeAnchorEl(null)}
       />
 
+      <Divider sx={{ borderColor: 'rgba(148, 163, 184, 0.12)' }} />
+
       <Box>
-        <Typography variant="caption" sx={{ color: 'var(--color-text-secondary)', mb: 0.75, display: 'block' }}>
-          时间范围跳转
-        </Typography>
-        <Stack direction="row" spacing={1}>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 0.6,
+          }}
+        >
           <TextField
             size="small"
             placeholder="起始年"
             value={jumpStartYear}
-            onChange={(event) => setJumpStartYear(event.target.value)}
+            onChange={(event) => {
+              const next = event.target.value;
+              setJumpStartYear(next);
+              syncRangeFromInputs(next, jumpEndYear, setJumpRange, setCurrentTimeRange);
+            }}
+            sx={{ '& .MuiInputBase-root': { minHeight: 32, fontSize: 12 } }}
           />
           <TextField
             size="small"
             placeholder="结束年"
             value={jumpEndYear}
-            onChange={(event) => setJumpEndYear(event.target.value)}
+            onChange={(event) => {
+              const next = event.target.value;
+              setJumpEndYear(next);
+              syncRangeFromInputs(jumpStartYear, next, setJumpRange, setCurrentTimeRange);
+            }}
+            sx={{ '& .MuiInputBase-root': { minHeight: 32, fontSize: 12 } }}
           />
-        </Stack>
-        <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-          <Button size="small" variant="contained" onClick={handleJump}>
+        </Box>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 0.6,
+            alignItems: 'center',
+            mt: 0.6,
+          }}
+        >
+          <Button size="small" variant="contained" onClick={handleJump} sx={{ minHeight: 32, minWidth: 0, px: 1.1, fontSize: 11.5 }}>
             跳转
           </Button>
-          <Button size="small" variant="text" onClick={handleJumpReset}>
+          <Button size="small" variant="text" onClick={handleJumpReset} sx={{ minHeight: 32, minWidth: 0, px: 0.8, fontSize: 11.5 }}>
             清除
           </Button>
-        </Stack>
+        </Box>
         {jumpRange && (
-          <Typography variant="caption" sx={{ mt: 0.75, display: 'block', color: 'var(--color-text-tertiary)' }}>
-            当前跳转区间：{jumpRange.startYear} ~ {jumpRange.endYear}
+          <Typography variant="caption" sx={{ mt: 0.5, display: 'block', color: 'var(--color-text-tertiary)', fontSize: 10.5 }}>
+            {jumpRange.startYear} ~ {jumpRange.endYear}
           </Typography>
         )}
       </Box>
 
       <Box>
-        <Typography variant="caption" sx={{ color: 'var(--color-text-secondary)', mb: 0.75, display: 'block' }}>
-          显示模式
-        </Typography>
         <ToggleButtonGroup
           exclusive
           size="small"
@@ -171,6 +259,14 @@ export function TimelineFunctions() {
             }
           }}
           fullWidth
+          sx={{
+            '& .MuiToggleButton-root': {
+              minHeight: 30,
+              fontSize: 11.5,
+              py: 0.2,
+              px: 0.6,
+            },
+          }}
         >
           <ToggleButton value="auto">自动</ToggleButton>
           <ToggleButton value="major-only">重大</ToggleButton>
@@ -184,7 +280,13 @@ export function TimelineFunctions() {
         fullWidth
         size="small"
         onClick={clearFilters}
-        sx={buttonConfig.functionButton}
+        sx={{
+          ...buttonConfig.functionButton,
+          minHeight: 30,
+          fontSize: 11.5,
+          py: 0.15,
+          opacity: 0.9,
+        }}
       >
         清空筛选
       </Button>
