@@ -129,6 +129,8 @@ export function TimelineList() {
         dynastiesData={filteredDynasties}
         selectedEventId={selectedEventId}
         showEventDetail={false}
+        enableAnimation
+        animationDuration={320}
         onTimeRangeChange={setCurrentTimeRange}
         onEventClick={(event) => setSelectedEventId(event.id)}
         onReset={() => {

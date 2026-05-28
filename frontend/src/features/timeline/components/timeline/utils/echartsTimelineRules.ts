@@ -76,12 +76,11 @@ export function focusRangeToDynastyWithContext(
   bounds: TimeRange,
   contextRatio = 0.35,
   minContext = 40,
-  centerBias = 0.08,
 ): TimeRange {
   const [start, end] = getDynastyRange(dynasty);
   const span = Math.max(end - start, 1);
   const context = Math.max(Math.round(span * contextRatio), minContext);
-  const shiftedCenter = ((start + end) / 2) + (span * centerBias);
+  const shiftedCenter = (start + end) / 2;
   const halfSpan = (span + context * 2) / 2;
 
   return shiftRangeWithinBounds(

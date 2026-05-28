@@ -61,10 +61,10 @@ describe('echartsTimelineRules', () => {
     expect(focusRangeToDynastyWithPadding(dynasty, [-500, 1200])).toEqual([595, 930]);
   });
 
-  it('focuses to a dynasty with broader surrounding context and a slight forward bias', () => {
+  it('focuses to a dynasty with broader surrounding context while keeping it centered', () => {
     const dynasty = makeDynasty({ id: 'tang', name: '唐', startYear: 618, endYear: 907 });
 
-    expect(focusRangeToDynastyWithContext(dynasty, [-500, 1200])).toEqual([540.12, 1031.12]);
+    expect(focusRangeToDynastyWithContext(dynasty, [-500, 1200])).toEqual([517, 1008]);
   });
 
   it('aligns an oversized window to the dynasty start without changing the span', () => {

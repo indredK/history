@@ -21,7 +21,6 @@ import {
   eventOverlapsRange,
   focusRangeToDynastyWithContext,
   focusRangeToDynasty,
-  focusRangeToDynastyWithPadding,
   getDynastyRange,
   getHighlightedDynastyIdsForRange,
   isSameRange,
@@ -102,7 +101,6 @@ interface EChartsTimelineProps {
   onDynastyHighlight?: (dynastyId: string | null) => void;
   onCondensedChange?: (condensed: boolean) => void;
   onDynastyClick?: (dynasty: Dynasty) => void;
-  onDynastyDoubleClick?: (dynasty: Dynasty) => void;
   onEventClick?: (event: Event) => void;
   onReset?: () => void;
   clusterData?: {
@@ -1170,6 +1168,7 @@ function buildOption(args: {
         type: 'inside',
         xAxisIndex: 0,
         filterMode: 'none',
+        zoomLock: true,
         zoomOnMouseWheel: _enableZoom,
         moveOnMouseWheel: false,
         moveOnMouseMove: _enablePan,
@@ -1182,6 +1181,7 @@ function buildOption(args: {
         type: 'slider',
         xAxisIndex: 0,
         filterMode: 'none',
+        zoomLock: true,
         height: isCondensed ? 16 : 22,
         bottom: isCondensed ? 6 : 8,
         brushSelect: false,
@@ -1420,7 +1420,6 @@ export function EChartsTimeline({
   onDynastyHighlight,
   onCondensedChange,
   onDynastyClick: onDynastyClickProp,
-  onDynastyDoubleClick: onDynastyDoubleClickProp,
   onEventClick: onEventClickProp,
   onReset: onResetProp,
   clusterData,
@@ -1428,7 +1427,6 @@ export function EChartsTimeline({
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<ECharts | null>(null);
   const suppressDataZoomRef = useRef(false);
-  const dynastyClickTimerRef = useRef<number | null>(null);
 
   // ── Internal state (uncontrolled mode) ──
   const [_isCondensed, _setIsCondensed] = useState(initialIsCondensed);
@@ -1691,14 +1689,6 @@ export function EChartsTimeline({
     [applyNextRange, boundsRange],
   );
 
-  const handleDynastyDoubleClick = useCallback(
-    (dynasty: Dynasty) => {
-      const nextRange = focusRangeToDynastyWithPadding(dynasty, boundsRange);
-      applyNextRange(nextRange);
-    },
-    [applyNextRange, boundsRange],
-  );
-
   const resolvePayload = useCallback(
     (params: unknown) => {
       const payload = params as {
@@ -1739,14 +1729,8 @@ export function EChartsTimeline({
       }
 
       if (dynasty) {
-        if (dynastyClickTimerRef.current) {
-          window.clearTimeout(dynastyClickTimerRef.current);
-        }
-        dynastyClickTimerRef.current = window.setTimeout(() => {
-          handleDynastySingleClick(dynasty);
-          onDynastyClickProp?.(dynasty);
-          dynastyClickTimerRef.current = null;
-        }, 220);
+        handleDynastySingleClick(dynasty);
+        onDynastyClickProp?.(dynasty);
         return;
       }
 
@@ -1776,24 +1760,6 @@ export function EChartsTimeline({
     [applyNextRange, handleDynastySingleClick, resolvePayload, timeRange, boundsRange],
   );
 
-  const handleChartDoubleClick = useCallback(
-    (params: unknown) => {
-      const { dynasty } = resolvePayload(params);
-      if (!dynasty) {
-        return;
-      }
-
-      if (dynastyClickTimerRef.current) {
-        window.clearTimeout(dynastyClickTimerRef.current);
-        dynastyClickTimerRef.current = null;
-      }
-
-      handleDynastyDoubleClick(dynasty);
-      onDynastyDoubleClickProp?.(dynasty);
-    },
-    [handleDynastyDoubleClick, onDynastyDoubleClickProp, resolvePayload],
-  );
-
   useEffect(() => {
     const chart = chartRef.current;
     if (!chart) {
@@ -1802,14 +1768,12 @@ export function EChartsTimeline({
 
     chart.on('dataZoom', handleDataZoom);
     chart.on('click', handleChartClick);
-    chart.on('dblclick', handleChartDoubleClick);
 
     return () => {
       chart.off('dataZoom', handleDataZoom);
       chart.off('click', handleChartClick);
-      chart.off('dblclick', handleChartDoubleClick);
     };
-  }, [handleChartClick, handleChartDoubleClick, handleDataZoom]);
+  }, [handleChartClick, handleDataZoom]);
 
   const handleReset = useCallback(() => {
     setSelectedEventId(null);
