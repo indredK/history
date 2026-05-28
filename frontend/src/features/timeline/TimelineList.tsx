@@ -126,6 +126,7 @@ export function TimelineList() {
       <EChartsTimeline
         eventsData={densityFilteredEvents}
         dynastiesData={filteredDynasties}
+        timeRange={currentTimeRange}
         onTimeRangeChange={setCurrentTimeRange}
         onReset={() => {
           resetViewState();

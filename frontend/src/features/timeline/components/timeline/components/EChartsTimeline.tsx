@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Box, IconButton, Tooltip } from '@mui/material';
+import { Box, Drawer, IconButton, Tooltip } from '@mui/material';
 import ZoomInMapIcon from '@mui/icons-material/ZoomInMap';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import * as echarts from 'echarts/core';
@@ -13,6 +13,7 @@ import { useThemeStore } from '@/store';
 import type { Dynasty } from '@/services/culture/types';
 import type { Event } from '@/services/timeline/types';
 import { formatTimelineYear } from '@/features/timeline/utils/dynastyUtils';
+import { EventDetailPanel } from './EventDetailPanel';
 import {
   EVENT_TYPE_LABELS,
   getTimelineEventCategory,
@@ -96,6 +97,7 @@ interface EChartsTimelineProps {
   onTimeRangeChange?: (range: TimeRange) => void;
   onCondensedChange?: (condensed: boolean) => void;
   onReset?: () => void;
+  onEventClick?: (event: Event) => void;
   clusterData?: {
     yearClusters: Array<{
       id: string;
@@ -422,6 +424,7 @@ function buildCategorizedEventRenderData(
   timeRange: TimeRange,
   showLabels: boolean,
   colors: TimelineThemeColors,
+  selectedEventId?: string | null,
 ): { renderData: EventRenderDataItem[]; categoryLabels: CategoryLabelItem[] } {
   // 1. Group events by category
   const categoryGroups = new Map<string, Event[]>();
@@ -468,6 +471,7 @@ function buildCategorizedEventRenderData(
     for (let i = 0; i < catEvents.length; i++) {
       const event = catEvents[i]!;
       const inWindow = eventOverlapsRange(event, timeRange);
+      const isSelected = selectedEventId === event.id;
       const laneIndex = laneIndexes[i] ?? 0;
 
       renderData.push({
@@ -476,12 +480,12 @@ function buildCategorizedEventRenderData(
         yValue: getCategoryLaneY(laneIndex, laneCount, catIndex, catCount),
         label: { show: showLabels && inWindow },
         rangeStyle: {
-          fill: inWindow ? colors.event : colors.eventMuted,
-          stroke: inWindow ? colors.eventStroke : colors.eventMutedStroke,
-          lineWidth: inWindow ? 3 : 2,
-          shadowColor: inWindow ? colors.eventShadow : colors.eventMutedShadow,
-          shadowBlur: inWindow ? 4 : 0,
-          opacity: inWindow ? 0.82 : 0.44,
+          fill: isSelected ? colors.eventActive : (inWindow ? colors.event : colors.eventMuted),
+          stroke: isSelected ? colors.eventActive : (inWindow ? colors.eventStroke : colors.eventMutedStroke),
+          lineWidth: isSelected ? 5 : (inWindow ? 3 : 2),
+          shadowColor: isSelected ? colors.eventActiveShadow : (inWindow ? colors.eventShadow : colors.eventMutedShadow),
+          shadowBlur: isSelected ? 14 : (inWindow ? 4 : 0),
+          opacity: isSelected ? 1 : (inWindow ? 0.82 : 0.44),
         },
       });
     }
@@ -812,6 +816,7 @@ function buildOption(args: {
   showEventLabels: boolean | null;
   eventLabelThreshold: number;
   showEventPoints: boolean;
+  selectedEventId?: string | null;
   clusterData?: EChartsTimelineProps['clusterData'];
   enableAnimation: boolean;
   animationDuration: number;
@@ -833,6 +838,7 @@ function buildOption(args: {
     showEventLabels: _showEventLabels,
     eventLabelThreshold: _eventLabelThreshold,
     showEventPoints: _showEventPoints,
+    selectedEventId,
     clusterData,
     enableAnimation: _enableAnimation,
     animationDuration: _animationDuration,
@@ -858,7 +864,7 @@ function buildOption(args: {
   const showEventLabels = showEvents
     && (_showEventLabels ?? visibleSpan <= _eventLabelThreshold);
   const { renderData: eventRenderData, categoryLabels } = showEvents
-    ? buildCategorizedEventRenderData(events, timeRange, showEventLabels, colors)
+    ? buildCategorizedEventRenderData(events, timeRange, showEventLabels, colors, selectedEventId)
     : { renderData: [] as EventRenderDataItem[], categoryLabels: [] as CategoryLabelItem[] };
   const eventLabelData = showEvents ? buildEventLabelData(eventRenderData) : [];
   const dynastyClusterData = showEvents && clusterData ? buildDynastyClusterRenderData(clusterData.dynastyClusters, categoryLabels) : [];
@@ -1222,6 +1228,7 @@ export function EChartsTimeline({
   onTimeRangeChange,
   onCondensedChange,
   onReset: onResetProp,
+  onEventClick,
   clusterData,
 }: EChartsTimelineProps) {
   const chartContainerRef = useRef<HTMLDivElement>(null);
@@ -1233,6 +1240,7 @@ export function EChartsTimeline({
   // ── Internal state (uncontrolled mode) ──
   const [_isCondensed, _setIsCondensed] = useState(initialIsCondensed);
   const [_timeRange, _setTimeRange] = useState<TimeRange | null>(initialTimeRange ?? null);
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
   // ── Resolved values (controlled > uncontrolled) ──
   const isCondensed = isCondensedProp !== undefined ? isCondensedProp : _isCondensed;
@@ -1302,6 +1310,10 @@ export function EChartsTimeline({
   const colors = useMemo(() => buildTimelineThemeColors(themeMode === 'light'), [themeMode]);
 
   useEffect(() => {
+    if (timeRangeProp !== undefined) {
+      return;
+    }
+
     setTimeRange((current) => {
       if (!current) {
         return defaultWindowRange;
@@ -1309,7 +1321,7 @@ export function EChartsTimeline({
 
       return clampRangeToBounds(current, boundsRange);
     });
-  }, [boundsRange, defaultWindowRange]);
+  }, [boundsRange, defaultWindowRange, setTimeRange, timeRangeProp]);
 
   useEffect(() => {
     if (!chartContainerRef.current || chartRef.current) {
@@ -1340,6 +1352,7 @@ export function EChartsTimeline({
   }, []);
 
   const effectiveRange = timeRange ?? boundsRange;
+  const selectedEventId = selectedEvent?.id ?? null;
   const visibleEventCount = useMemo(
     () => events.filter((event) => eventOverlapsRange(event, effectiveRange)).length,
     [effectiveRange, events],
@@ -1371,6 +1384,7 @@ export function EChartsTimeline({
       showEventLabels: showEventLabelsProp,
       eventLabelThreshold,
       showEventPoints,
+      selectedEventId,
       enableAnimation,
       animationDuration,
       enablePan,
@@ -1402,6 +1416,7 @@ export function EChartsTimeline({
     showEventLabelsProp,
     showEventPoints,
     showSliderZoom,
+    selectedEventId,
     timeRange,
   ]);
 
@@ -1439,6 +1454,29 @@ export function EChartsTimeline({
       chart.off('dataZoom', handleDataZoom);
     };
   }, [handleDataZoom]);
+
+  const handleChartClick = useCallback((params: unknown) => {
+    const event = (params as { data?: { event?: Event } })?.data?.event;
+    if (!event) {
+      return;
+    }
+
+    setSelectedEvent(event);
+    onEventClick?.(event);
+  }, [onEventClick]);
+
+  useEffect(() => {
+    const chart = chartRef.current;
+    if (!chart) {
+      return;
+    }
+
+    chart.on('click', handleChartClick);
+
+    return () => {
+      chart.off('click', handleChartClick);
+    };
+  }, [handleChartClick]);
 
   const handleReset = useCallback(() => {
     setTimeRange(defaultWindowRange);
@@ -1609,6 +1647,29 @@ export function EChartsTimeline({
           height: isCondensed ? chartHeight : '100%',
         }}
       />
+
+      <Drawer
+        anchor="right"
+        open={selectedEvent !== null}
+        onClose={() => setSelectedEvent(null)}
+        PaperProps={{
+          sx: {
+            width: { xs: '100%', sm: 420 },
+            p: 2,
+            background: 'var(--app-panel-bg-soft, var(--color-bg-card))',
+            borderLeft: 'var(--app-panel-border, 1px solid rgba(148, 163, 184, 0.18))',
+          },
+        }}
+      >
+        {selectedEvent ? (
+          <EventDetailPanel
+            event={selectedEvent}
+            isFavorite={false}
+            onToggleFavorite={() => {}}
+            onShare={() => {}}
+          />
+        ) : null}
+      </Drawer>
     </Box>
   );
 }

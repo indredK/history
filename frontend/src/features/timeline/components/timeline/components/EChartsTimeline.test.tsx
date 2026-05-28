@@ -351,4 +351,17 @@ describe('EChartsTimeline', () => {
 
     expect(chart?.setOption.mock.calls.length).toBe(initialCallCount);
   });
+
+  it('registers an official echarts click handler for event selection', () => {
+    render(
+      <EChartsTimeline
+        eventsData={[makeEvent({ id: 'single', startYear: 700 })]}
+        dynastiesData={[makeDynasty()]}
+        timeRange={[618, 907]}
+      />,
+    );
+
+    const chart = chartInstances[chartInstances.length - 1];
+    expect(chart?.on).toHaveBeenCalledWith('click', expect.any(Function));
+  });
 });
