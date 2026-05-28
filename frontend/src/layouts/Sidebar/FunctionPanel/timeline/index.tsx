@@ -89,15 +89,15 @@ export function TimelineFunctions() {
   };
 
   useEffect(() => {
-    if (currentTimeRange) {
-      setJumpStartYear(String(Math.round(currentTimeRange[0])));
-      setJumpEndYear(String(Math.round(currentTimeRange[1])));
-      return;
-    }
-
     if (jumpRange) {
       setJumpStartYear(String(jumpRange.startYear));
       setJumpEndYear(String(jumpRange.endYear));
+      return;
+    }
+
+    if (currentTimeRange) {
+      setJumpStartYear(String(Math.round(currentTimeRange[0])));
+      setJumpEndYear(String(Math.round(currentTimeRange[1])));
       return;
     }
 

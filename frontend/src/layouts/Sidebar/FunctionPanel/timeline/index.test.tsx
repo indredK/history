@@ -75,4 +75,28 @@ describe("TimelineFunctions", () => {
     });
     expect(useTimelineStore.getState().keyword).toBe('赤壁');
   });
+
+  it('存在 jumpRange 时，输入框保持显示手动选择的时间窗口', () => {
+    useTimelineStore.setState({
+      jumpRange: { startYear: 618, endYear: 907 },
+      currentTimeRange: [700, 800],
+    });
+
+    render(<TimelineFunctions />);
+
+    expect(screen.getByPlaceholderText('起始年')).toHaveValue('618');
+    expect(screen.getByPlaceholderText('结束年')).toHaveValue('907');
+  });
+
+  it('没有 jumpRange 时，输入框跟随当前视窗范围', () => {
+    useTimelineStore.setState({
+      jumpRange: null,
+      currentTimeRange: [700, 800],
+    });
+
+    render(<TimelineFunctions />);
+
+    expect(screen.getByPlaceholderText('起始年')).toHaveValue('700');
+    expect(screen.getByPlaceholderText('结束年')).toHaveValue('800');
+  });
 });

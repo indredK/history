@@ -67,7 +67,6 @@ describe('timelineStore', () => {
     store.setKeyword('变法');
     store.setJumpRange({ startYear: 1000, endYear: 1200 });
     store.setCurrentTimeRange([1000, 1200]);
-    store.setHighlightedDynastyId('ming');
 
     store.resetViewState();
 
@@ -76,7 +75,6 @@ describe('timelineStore', () => {
     expect(state.selectedEventTypes).toEqual([]);
     expect(state.keyword).toBe('');
     expect(state.jumpRange).toBeNull();
-    expect(state.highlightedDynastyId).toBeNull();
     expect(state.currentTimeRange).toBeNull();
   });
 });

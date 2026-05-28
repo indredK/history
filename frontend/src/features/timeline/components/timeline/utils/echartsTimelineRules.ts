@@ -5,8 +5,13 @@ export type TimeRange = [number, number];
 
 const MIN_WINDOW_SPAN = 1;
 
+export function normalizeEventRange(event: Event): TimeRange {
+  const end = event.endYear ?? event.startYear;
+  return [Math.min(event.startYear, end), Math.max(event.startYear, end)];
+}
+
 export function eventEnd(event: Event): number {
-  return event.endYear ?? event.startYear;
+  return normalizeEventRange(event)[1];
 }
 
 export function sortDynasties(items: Dynasty[]): Dynasty[] {
@@ -136,7 +141,8 @@ export function isSameRange(
 }
 
 export function eventOverlapsRange(event: Event, range: TimeRange): boolean {
-  return event.startYear <= range[1] && eventEnd(event) >= range[0];
+  const [eventStart, eventFinish] = normalizeEventRange(event);
+  return eventStart <= range[1] && eventFinish >= range[0];
 }
 
 export function getHighlightedDynastyIdsForRange(
@@ -204,8 +210,7 @@ export function moveRangeToEvent(
   }
 
   const span = Math.max(currentRange[1] - currentRange[0], 1);
-  const eventStart = event.startYear;
-  const eventFinish = eventEnd(event);
+  const [eventStart, eventFinish] = normalizeEventRange(event);
 
   if (eventFinish < currentRange[0]) {
     return shiftRangeWithinBounds([eventFinish - span, eventFinish], bounds);

@@ -450,19 +450,6 @@ export function EChartsMapView({
             eventsData={events}
             minHeight={minTimelineHeight}
             showEventPoints={showTimelineEvents}
-            showEventDetail={false}
-            selectedEventId={selectedEventId}
-            onEventClick={(event) => {
-              setSelectedEventId(event.id);
-              setHistoricalFocusMode('event');
-              setFocusYear(event.mapFocusStartYear ?? event.startYear);
-              setEventFocusRange([
-                event.mapFocusStartYear ?? event.startYear,
-                event.mapFocusEndYear ?? event.endYear ?? event.startYear,
-              ]);
-              setPlayheadYear(event.mapFocusStartYear ?? event.startYear);
-              setPlaybackState('idle');
-            }}
             {...(timelineProps ?? {})}
           />
         </div>

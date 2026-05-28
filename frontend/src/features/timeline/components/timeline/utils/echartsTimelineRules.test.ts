@@ -13,6 +13,7 @@ import {
   getHighlightedDynastyIdsForRange,
   moveRangeToDynasty,
   moveRangeToEvent,
+  normalizeEventRange,
 } from './echartsTimelineRules';
 
 function makeDynasty(overrides: Partial<Dynasty>): Dynasty {
@@ -104,6 +105,14 @@ describe('echartsTimelineRules', () => {
     expect(eventEnd(event)).toBe(763);
     expect(moveRangeToEvent([0, 100], event, [-500, 1200])).toEqual([755, 855]);
     expect(moveRangeToEvent([900, 1000], event, [-500, 1200])).toEqual([663, 763]);
+  });
+
+  it('normalizes reversed event ranges before overlap and focus calculations', () => {
+    const event = makeEvent({ id: 'evt', title: 'Reversed', startYear: 209, endYear: 206 });
+
+    expect(normalizeEventRange(event)).toEqual([206, 209]);
+    expect(eventEnd(event)).toBe(209);
+    expect(moveRangeToEvent([0, 100], event, [-500, 1200])).toEqual([206, 306]);
   });
 
   it('builds a deterministic default window from the full bounds range', () => {

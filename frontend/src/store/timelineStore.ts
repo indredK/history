@@ -12,8 +12,6 @@ interface TimelineState {
   selectedEventTypes: string[];
   keyword: string;
   jumpRange: TimelineJumpRange | null;
-  selectedEventId: string | null;
-  highlightedDynastyId: string | null;
   densityMode: TimelineDensityMode;
   currentTimeRange: [number, number] | null;
   expandedClusterId: string | null;
@@ -24,8 +22,6 @@ interface TimelineState {
   toggleSelectedEventType: (_eventType: string) => void;
   setKeyword: (_keyword: string) => void;
   setJumpRange: (_jumpRange: TimelineJumpRange | null) => void;
-  setSelectedEventId: (_eventId: string | null) => void;
-  setHighlightedDynastyId: (_dynastyId: string | null | ((current: string | null) => string | null)) => void;
   setDensityMode: (_mode: TimelineDensityMode) => void;
   setCurrentTimeRange: (_range: [number, number] | null) => void;
   setExpandedClusterId: (_clusterId: string | null) => void;
@@ -55,8 +51,6 @@ function isSameRange(
 
 export const useTimelineStore = create<TimelineState>((set) => ({
   ...defaultFilterState,
-  selectedEventId: null,
-  highlightedDynastyId: null,
   currentTimeRange: null,
   expandedClusterId: null,
 
@@ -82,12 +76,6 @@ export const useTimelineStore = create<TimelineState>((set) => ({
 
   setKeyword: (_keyword) => set({ keyword: _keyword }),
   setJumpRange: (_jumpRange) => set({ jumpRange: _jumpRange }),
-  setSelectedEventId: (_eventId) => set({ selectedEventId: _eventId }),
-  setHighlightedDynastyId: (_dynastyId) =>
-    set((state) => ({
-      highlightedDynastyId:
-        typeof _dynastyId === 'function' ? _dynastyId(state.highlightedDynastyId) : _dynastyId,
-    })),
   setDensityMode: (_mode) => set({ densityMode: _mode }),
   setCurrentTimeRange: (_range) =>
     set((state) => (isSameRange(state.currentTimeRange, _range) ? state : { currentTimeRange: _range })),
@@ -96,16 +84,12 @@ export const useTimelineStore = create<TimelineState>((set) => ({
   clearFilters: () =>
     set({
       ...defaultFilterState,
-      selectedEventId: null,
-      highlightedDynastyId: null,
       expandedClusterId: null,
     }),
 
   resetViewState: () =>
     set({
       ...defaultFilterState,
-      selectedEventId: null,
-      highlightedDynastyId: null,
       currentTimeRange: null,
       expandedClusterId: null,
     }),

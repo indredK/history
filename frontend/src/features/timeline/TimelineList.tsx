@@ -1,6 +1,6 @@
 import './TimelineList.css';
 import { Dynasty3DWheel, EChartsTimeline } from './components';
-import { Box, Drawer, Paper } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import { useRequest } from 'ahooks';
 import { StateView } from '@/components/ui';
 import { getDynasties, getEvents } from '@/services/dataClient';
@@ -8,7 +8,6 @@ import { useTimelineStore } from '@/store';
 import { usePerformanceTrace } from '@/utils/performance';
 import {
   buildTimelineDynastyClusters,
-  buildTimelineYearClusters,
   deriveTimelineEvents,
   filterTimelineEvents,
   shouldUseClusterMode,
@@ -25,9 +24,7 @@ export function TimelineList() {
     jumpRange,
     densityMode,
     currentTimeRange,
-    selectedEventId,
     setCurrentTimeRange,
-    setSelectedEventId,
     resetViewState,
   } = useTimelineStore();
   const {
@@ -74,16 +71,9 @@ export function TimelineList() {
 
     return filteredEvents;
   }, [densityMode, filteredEvents, stableTimeRange]);
-  const yearClusters = useMemo(
-    () => (shouldUseClusterMode(stableTimeRange) ? buildTimelineYearClusters(densityFilteredEvents) : []),
-    [densityFilteredEvents, stableTimeRange],
-  );
   const dynastyClusters = useMemo(
-    () =>
-      shouldUseClusterMode(stableTimeRange)
-        ? buildTimelineDynastyClusters(densityFilteredEvents, data?.dynasties ?? [])
-        : [],
-    [data?.dynasties, densityFilteredEvents, stableTimeRange],
+    () => [],
+    [],
   );
   const filteredDynasties = useMemo(() => {
     const allDynasties = data?.dynasties ?? [];
@@ -93,10 +83,6 @@ export function TimelineList() {
 
     return allDynasties.filter((dynasty) => selectedDynastyIds.includes(dynasty.id));
   }, [data?.dynasties, selectedDynastyIds]);
-  const selectedEvent = useMemo(
-    () => densityFilteredEvents.find((event) => event.id === selectedEventId) ?? null,
-    [densityFilteredEvents, selectedEventId],
-  );
 
   const timelineContent = (() => {
     if (loading) {
@@ -127,18 +113,13 @@ export function TimelineList() {
       <EChartsTimeline
         eventsData={densityFilteredEvents}
         dynastiesData={filteredDynasties}
-        selectedEventId={selectedEventId}
-        showEventDetail={false}
-        enableAnimation
-        animationDuration={320}
         onTimeRangeChange={setCurrentTimeRange}
-        onEventClick={(event) => setSelectedEventId(event.id)}
         onReset={() => {
           resetViewState();
           setStableTimeRange(null);
         }}
         clusterData={{
-          yearClusters,
+          yearClusters: [],
           dynastyClusters,
           densityMode,
         }}
@@ -176,115 +157,6 @@ export function TimelineList() {
       </Paper>
 
       {timelineContent}
-
-      <Drawer
-        anchor="right"
-        open={Boolean(selectedEvent)}
-        onClose={() => setSelectedEventId(null)}
-        slotProps={{
-          paper: {
-            sx: {
-              width: { xs: '100%', sm: 360, md: 400 },
-              background: 'var(--app-panel-bg)',
-              borderLeft: 'var(--app-panel-border)',
-              boxShadow: 'var(--app-panel-shadow-lg)',
-              color: 'var(--color-text-primary)',
-            },
-          },
-        }}
-      >
-        {selectedEvent && (
-          <Box
-            sx={{
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              p: 2.25,
-              gap: 1.5,
-              overflowY: 'auto',
-              boxSizing: 'border-box',
-            }}
-          >
-            <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 1.5 }}>
-              <Box>
-                <Box sx={{ fontSize: 20, fontWeight: 700, lineHeight: 1.35 }}>
-                  {selectedEvent.title}
-                </Box>
-                <Box sx={{ mt: 0.75, fontSize: 13, color: 'var(--color-text-secondary)' }}>
-                  {selectedEvent.startYear}
-                  {selectedEvent.endYear && selectedEvent.endYear !== selectedEvent.startYear
-                    ? ` - ${selectedEvent.endYear}`
-                    : ''}年
-                </Box>
-              </Box>
-              <button
-                onClick={() => setSelectedEventId(null)}
-                style={{
-                  border: '1px solid var(--color-border-medium)',
-                  background: 'transparent',
-                  color: 'var(--color-text-secondary)',
-                  borderRadius: '8px',
-                  width: '32px',
-                  height: '32px',
-                  cursor: 'pointer',
-                  fontSize: '18px',
-                }}
-              >
-                ×
-              </button>
-            </Box>
-
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-              {selectedEvent.dynastyId && (
-                <Box
-                  component="span"
-                  sx={{
-                    px: 1.2,
-                    py: 0.45,
-                    borderRadius: '999px',
-                    background: 'rgba(59, 130, 246, 0.12)',
-                    fontSize: 12,
-                    fontWeight: 600,
-                  }}
-                >
-                  {filteredDynasties.find((dynasty) => dynasty.id === selectedEvent.dynastyId)?.name ?? selectedEvent.dynastyId}
-                </Box>
-              )}
-              {selectedEvent.eventType && (
-                <Box
-                  component="span"
-                  sx={{
-                    px: 1.2,
-                    py: 0.45,
-                    borderRadius: '999px',
-                    background: 'rgba(148, 163, 184, 0.14)',
-                    fontSize: 12,
-                    fontWeight: 600,
-                    color: 'var(--color-text-secondary)',
-                  }}
-                >
-                  {selectedEvent.eventType}
-                </Box>
-              )}
-            </Box>
-
-            {selectedEvent.description && (
-              <Box
-                sx={{
-                  p: '14px 16px',
-                  borderRadius: '12px',
-                  background: 'rgba(var(--glass-surface-rgb), 0.35)',
-                  color: 'var(--color-text-secondary)',
-                  lineHeight: 1.7,
-                  fontSize: 14,
-                }}
-              >
-                {selectedEvent.description}
-              </Box>
-            )}
-          </Box>
-        )}
-      </Drawer>
     </Box>
   );
 }

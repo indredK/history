@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Dynasty } from '@/services/culture/types';
 import type { Event } from '@/services/timeline/types';
@@ -105,7 +105,7 @@ describe('EChartsTimeline', () => {
     );
   });
 
-  it('renders cluster series when clusterData is provided', () => {
+  it('renders dynasty cluster series when clusterData is provided', () => {
     render(
       <EChartsTimeline
         eventsData={[
@@ -146,11 +146,35 @@ describe('EChartsTimeline', () => {
 
     const option = latestOption();
     const seriesIds = option.series.map((series) => series.id);
-    expect(seriesIds).toContain('year-clusters');
     expect(seriesIds).toContain('dynasty-clusters');
+
+    const dynastyClusterSeries = option.series.find((series) => series.id === 'dynasty-clusters') as
+      | { renderItem?: (params: { dataIndex: number; coordSys?: { x: number; y: number; width: number; height: number } }, api: { coord: (_value: [number, number]) => number[] }) => { children?: Array<{ type?: string }> } }
+      | undefined;
+
+    const dynastyRendered = dynastyClusterSeries?.renderItem?.(
+      { dataIndex: 0, coordSys: { x: 0, y: 0, width: 100, height: 20 } },
+      { coord: (value) => value },
+    );
+
+    expect(dynastyRendered?.children?.some((child) => child.type === 'text')).toBe(false);
   });
 
-  it('places diplomatic clusters in the diplomatic lane instead of falling back', () => {
+  it('disables chart animation by default', () => {
+    render(
+      <EChartsTimeline
+        eventsData={[makeEvent({ id: 'single', startYear: 700 })]}
+        dynastiesData={[makeDynasty()]}
+        timeRange={[618, 907]}
+      />,
+    );
+
+    const option = latestOption() as { animation?: boolean; animationDuration?: number };
+    expect(option.animation).toBe(false);
+    expect(option.animationDuration).toBe(0);
+  });
+
+  it('does not render year cluster series when clusterData is provided', () => {
     render(
       <EChartsTimeline
         eventsData={[
@@ -177,9 +201,7 @@ describe('EChartsTimeline', () => {
 
     const option = latestOption();
     const yearSeries = option.series.find((series) => series.id === 'year-clusters');
-    const value = yearSeries?.data?.[0]?.value;
-    expect(value).toBeDefined();
-    expect(value?.[1]).toBeCloseTo(0.525, 4);
+    expect(yearSeries).toBeUndefined();
   });
 
   it('rebuilds chart option when event point visibility changes', () => {
@@ -211,6 +233,122 @@ describe('EChartsTimeline', () => {
     expect(chart?.setOption.mock.calls.length).toBe(initialCallCount + 1);
     const option = latestOption();
     const eventSeries = option.series.find((series) => series.id === 'events');
-    expect(eventSeries?.data).toEqual([]);
+    expect(eventSeries).toBeUndefined();
+  });
+
+  it('renders event titles with a dedicated native label series', () => {
+    render(
+      <EChartsTimeline
+        eventsData={[makeEvent({ id: 'single', startYear: 700, title: '安史之乱' })]}
+        dynastiesData={[makeDynasty()]}
+        timeRange={[618, 907]}
+        showEventLabels
+      />,
+    );
+
+    const option = latestOption() as {
+      series: Array<{ id?: string; type?: string; label?: { formatter?: (params: { data?: { event?: Event } }) => string } }>;
+    };
+
+    const labelSeries = option.series.find((series) => series.id === 'event-labels');
+    expect(labelSeries?.type).toBe('scatter');
+    expect(labelSeries?.label?.formatter?.({ data: { event: makeEvent({ title: '安史之乱' }) } })).toBe('安史之乱');
+  });
+
+  it('splits overlapping event ranges into separate lanes within the same category', () => {
+    render(
+      <EChartsTimeline
+        eventsData={[
+          makeEvent({ id: 'a', startYear: 700, endYear: 710, eventType: 'political_event' }),
+          makeEvent({ id: 'b', startYear: 705, endYear: 715, eventType: 'political_event' }),
+        ]}
+        dynastiesData={[makeDynasty()]}
+        timeRange={[618, 907]}
+      />,
+    );
+
+    const option = latestOption() as {
+      series: Array<{ id?: string; data?: Array<{ event?: Event; value: [number, number] }> }>;
+    };
+
+    const rangeSeries = option.series.find((series) => series.id === 'event-ranges');
+    expect(rangeSeries?.data).toHaveLength(2);
+
+    const firstY = rangeSeries?.data?.find((item) => item.event?.id === 'a')?.value[1];
+    const secondY = rangeSeries?.data?.find((item) => item.event?.id === 'b')?.value[1];
+
+    expect(firstY).toBeDefined();
+    expect(secondY).toBeDefined();
+    expect(firstY).not.toBe(secondY);
+  });
+
+  it('keeps zoom unlocked when zoom is enabled so the current window can be resized', () => {
+    render(
+      <EChartsTimeline
+        eventsData={[makeEvent({ id: 'single', startYear: 700 })]}
+        dynastiesData={[makeDynasty()]}
+        timeRange={[618, 907]}
+        enableZoom
+        showSliderZoom
+      />,
+    );
+
+    const option = latestOption() as {
+      dataZoom: Array<{ id?: string; zoomLock?: boolean }>;
+      series: Array<{ id?: string; data?: Array<{ value: [number, number] }> }>;
+    };
+
+    expect(option.dataZoom[0]?.zoomLock).toBe(false);
+    expect(option.dataZoom.find((item) => item.id === 'timeline-slider-range')?.zoomLock).toBe(false);
+  });
+
+  it('enables official drag-to-pan behavior on chart content', () => {
+    render(
+      <EChartsTimeline
+        eventsData={[makeEvent({ id: 'single', startYear: 700 })]}
+        dynastiesData={[makeDynasty()]}
+        timeRange={[618, 907]}
+        enablePan
+      />,
+    );
+
+    const option = latestOption() as unknown as {
+      dataZoom: Array<{
+        type?: string;
+        moveOnMouseMove?: boolean;
+        preventDefaultMouseMove?: boolean;
+        cursorGrab?: string;
+        cursorGrabbing?: string;
+      }>;
+    };
+
+    const insideZoom = option.dataZoom.find((item) => item.type === 'inside');
+    expect(insideZoom?.moveOnMouseMove).toBe(true);
+    expect(insideZoom?.preventDefaultMouseMove).toBe(true);
+    expect(insideZoom?.cursorGrab).toBe('grab');
+    expect(insideZoom?.cursorGrabbing).toBe('grabbing');
+  });
+
+  it('does not immediately rebuild the full option after an in-progress dataZoom update', () => {
+    render(
+      <EChartsTimeline
+        eventsData={[makeEvent({ id: 'single', startYear: 700 })]}
+        dynastiesData={[makeDynasty()]}
+        timeRange={[618, 907]}
+      />,
+    );
+
+    const chart = chartInstances[chartInstances.length - 1];
+    expect(chart).toBeDefined();
+    const initialCallCount = chart?.setOption.mock.calls.length ?? 0;
+    const dataZoomHandler = chart?.on.mock.calls.find((call) => call[0] === 'dataZoom')?.[1] as (() => void) | undefined;
+
+    expect(dataZoomHandler).toBeDefined();
+
+    act(() => {
+      dataZoomHandler?.();
+    });
+
+    expect(chart?.setOption.mock.calls.length).toBe(initialCallCount);
   });
 });

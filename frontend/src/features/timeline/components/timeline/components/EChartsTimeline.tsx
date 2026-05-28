@@ -24,12 +24,10 @@ import {
   clampRangeToBounds,
   eventEnd,
   eventOverlapsRange,
-  focusRangeToDynastyWithContext,
   focusRangeToDynasty,
   getDynastyRange,
-  getHighlightedDynastyIdsForRange,
   isSameRange,
-  moveRangeToEvent,
+  normalizeEventRange,
   sortDynasties,
   sortEvents,
   type TimeRange,
@@ -52,14 +50,10 @@ interface EChartsTimelineProps {
 
   // ── Controlled state (parent takes over when provided) ──
   timeRange?: TimeRange | null;
-  selectedEventId?: string | null;
-  highlightedDynastyId?: string | null;
   isCondensed?: boolean;
 
   // ── Initial state (only for uncontrolled mode) ──
   initialTimeRange?: TimeRange;
-  initialSelectedEventId?: string | null;
-  initialHighlightedDynastyId?: string | null;
   initialIsCondensed?: boolean;
 
   // ── Feature toggles ──
@@ -73,8 +67,6 @@ interface EChartsTimelineProps {
   showDynastyBands?: boolean;
   /** 朝代色带上显示事件计数，默认 true */
   showDynastyCountBadge?: boolean;
-  /** 点击事件后显示详情卡片，默认 true */
-  showEventDetail?: boolean;
   /** 显示左侧分类标签（战争/政治/文化科技），默认 true */
   showCategoryLabels?: boolean;
   /** 显示分类泳道之间的分隔线，默认 true */
@@ -102,11 +94,7 @@ interface EChartsTimelineProps {
 
   // ── Callbacks ──
   onTimeRangeChange?: (range: TimeRange) => void;
-  onEventSelect?: (eventId: string | null) => void;
-  onDynastyHighlight?: (dynastyId: string | null) => void;
   onCondensedChange?: (condensed: boolean) => void;
-  onDynastyClick?: (dynasty: Dynasty) => void;
-  onEventClick?: (event: Event) => void;
   onReset?: () => void;
   clusterData?: {
     yearClusters: Array<{
@@ -133,15 +121,6 @@ interface EventRenderDataItem {
   event: Event;
   yValue: number;
   label: { show: boolean };
-  isDynastyHighlighted: boolean;
-  pointSymbolSize: number;
-  pointItemStyle: {
-    color: string;
-    borderColor: string;
-    borderWidth: number;
-    shadowColor: string;
-    shadowBlur: number;
-  };
   rangeStyle: {
     fill: string;
     stroke: string;
@@ -150,16 +129,13 @@ interface EventRenderDataItem {
     shadowBlur: number;
     opacity: number;
   };
-  isActive: boolean;
 }
 
-interface YearClusterRenderDataItem {
+interface EventLabelDataItem {
   value: [number, number];
-  clusterId: string;
-  year: number;
-  category: string;
-  count: number;
-  events: Event[];
+  event: Event;
+  label: { show: boolean };
+  symbol: string;
 }
 
 interface DynastyClusterRenderDataItem {
@@ -208,10 +184,8 @@ interface TimelineThemeColors {
   eventMutedShadow: string;
   eventActive: string;
   eventActiveShadow: string;
-  eventPointBorder: string;
   eventLabel: string;
   eventLabelBg: string;
-  eventLabelActiveBg: string;
   panelBorder: string;
   headerText: string;
   headerMuted: string;
@@ -360,14 +334,14 @@ function buildTimelineThemeColors(isLight: boolean): TimelineThemeColors {
     tooltipDescription: textSecondary,
     sliderBg: colorWithAlpha(surfaceSecondary, isLight ? 0.52 : 0.36),
     sliderBorder: borderMedium,
-    sliderFiller: colorWithAlpha(primary, isLight ? 0.18 : 0.24),
+    sliderFiller: colorWithAlpha(secondary, isLight ? 0.14 : 0.18),
     sliderDataLine: colorWithAlpha(secondary, isLight ? 0.26 : 0.34),
     sliderDataArea: colorWithAlpha(secondary, isLight ? 0.08 : 0.14),
-    sliderSelectedLine: colorWithAlpha(primary, isLight ? 0.48 : 0.58),
-    sliderSelectedArea: colorWithAlpha(primary, isLight ? 0.18 : 0.24),
-    sliderHandle: primary,
+    sliderSelectedLine: colorWithAlpha(secondary, isLight ? 0.34 : 0.42),
+    sliderSelectedArea: colorWithAlpha(secondary, isLight ? 0.12 : 0.18),
+    sliderHandle: colorWithAlpha(secondary, isLight ? 0.78 : 0.86),
     sliderHandleBorder: colorWithAlpha(surface, 0.96),
-    sliderMoveHandle: colorWithAlpha(primary, isLight ? 0.4 : 0.5),
+    sliderMoveHandle: colorWithAlpha(secondary, isLight ? 0.3 : 0.4),
     sliderMoveHandleBorder: colorWithAlpha(surface, 0.88),
     dynastyFill: colorWithAlpha(secondary, isLight ? 0.14 : 0.18),
     dynastyStroke: colorWithAlpha(secondary, isLight ? 0.24 : 0.32),
@@ -386,16 +360,14 @@ function buildTimelineThemeColors(isLight: boolean): TimelineThemeColors {
     eventMutedShadow: colorWithAlpha(textTertiary, 0.08),
     eventActive: primary,
     eventActiveShadow: colorWithAlpha(primary, isLight ? 0.28 : 0.42),
-    eventPointBorder: colorWithAlpha(surface, 0.96),
     eventLabel: textPrimary,
     eventLabelBg: colorWithAlpha(surface, isLight ? 0.92 : 0.84),
-    eventLabelActiveBg: colorWithAlpha(primary, isLight ? 0.16 : 0.22),
     panelBorder: borderLight,
     headerText: textSecondary,
     headerMuted: textTertiary,
     focusPillBg: activeBg,
     focusPillText: textPrimary,
-    countPillBg: hoverBg,
+    countPillBg: colorWithAlpha(secondary, isLight ? 0.16 : 0.22),
     countPillText: textSecondary,
     resetButtonBorder: borderMedium,
     resetButtonText: textSecondary,
@@ -448,13 +420,9 @@ function buildDynastyBandData(dynasties: Dynasty[], laneIndexes: number[]): Dyna
 function buildCategorizedEventRenderData(
   events: Event[],
   timeRange: TimeRange,
-  selectedEventId: string | null,
-  highlightedDynastyId: string | null,
   showLabels: boolean,
   colors: TimelineThemeColors,
 ): { renderData: EventRenderDataItem[]; categoryLabels: CategoryLabelItem[] } {
-  const hasDynastyHighlight = highlightedDynastyId !== null;
-
   // 1. Group events by category
   const categoryGroups = new Map<string, Event[]>();
   for (const event of events) {
@@ -482,14 +450,13 @@ function buildCategorizedEventRenderData(
     const laneEnds: number[] = [];
     const laneIndexes: number[] = [];
     for (const event of catEvents) {
-      const start = event.startYear;
-      const end = eventEnd(event);
-      let laneIndex = laneEnds.findIndex((laneEnd) => start > laneEnd);
+      const [start, end] = normalizeEventRange(event);
+      let laneIndex = laneEnds.findIndex((laneEnd) => start > laneEnd + 1);
       if (laneIndex === -1) {
         laneIndex = laneEnds.length;
         laneEnds.push(end);
       } else {
-        laneEnds[laneIndex] = end;
+        laneEnds[laneIndex] = Math.max(laneEnds[laneIndex]!, end);
       }
       laneIndexes.push(laneIndex);
     }
@@ -501,64 +468,21 @@ function buildCategorizedEventRenderData(
     for (let i = 0; i < catEvents.length; i++) {
       const event = catEvents[i]!;
       const inWindow = eventOverlapsRange(event, timeRange);
-      const isActive = event.id === selectedEventId;
-      const isDynastyHighlighted = hasDynastyHighlight && event.dynastyId === highlightedDynastyId;
-      const isHighlightActive = isActive || (hasDynastyHighlight && isDynastyHighlighted);
       const laneIndex = laneIndexes[i] ?? 0;
 
       renderData.push({
-        value: [event.startYear, eventEnd(event)],
+        value: normalizeEventRange(event),
         event,
         yValue: getCategoryLaneY(laneIndex, laneCount, catIndex, catCount),
-        label: { show: (isHighlightActive || showLabels) && inWindow },
-        isDynastyHighlighted,
-        pointSymbolSize: isHighlightActive ? 13 : isDynastyHighlighted ? 11 : inWindow ? 9 : 7,
-        pointItemStyle: {
-          color: isHighlightActive
-            ? colors.eventActive
-            : isDynastyHighlighted
-              ? colors.event
-              : inWindow
-                ? colors.event
-                : colors.eventMuted,
-          borderColor: colors.eventPointBorder,
-          borderWidth: isHighlightActive ? 2 : 1.5,
-          shadowColor: isHighlightActive
-            ? colors.eventActiveShadow
-            : isDynastyHighlighted
-              ? colors.eventShadow
-              : inWindow
-                ? colors.eventShadow
-                : colors.eventMutedShadow,
-          shadowBlur: isHighlightActive ? 10 : isDynastyHighlighted ? 8 : inWindow ? 6 : 0,
-        },
+        label: { show: showLabels && inWindow },
         rangeStyle: {
-          fill: isHighlightActive
-            ? colors.eventActive
-            : isDynastyHighlighted
-              ? colors.event
-              : inWindow
-                ? colors.event
-                : colors.eventMuted,
-          stroke: isHighlightActive
-            ? colors.eventActive
-            : isDynastyHighlighted
-              ? colors.eventStroke
-              : inWindow
-                ? colors.eventStroke
-                : colors.eventMutedStroke,
-          lineWidth: isHighlightActive ? 5 : isDynastyHighlighted ? 4 : inWindow ? 3 : 2,
-          shadowColor: isHighlightActive
-            ? colors.eventActiveShadow
-            : isDynastyHighlighted
-              ? colors.eventShadow
-              : inWindow
-                ? colors.eventShadow
-                : colors.eventMutedShadow,
-          shadowBlur: isHighlightActive ? 10 : isDynastyHighlighted ? 8 : inWindow ? 4 : 0,
-          opacity: isHighlightActive ? 0.95 : isDynastyHighlighted ? 0.9 : inWindow ? 0.82 : 0.44,
+          fill: inWindow ? colors.event : colors.eventMuted,
+          stroke: inWindow ? colors.eventStroke : colors.eventMutedStroke,
+          lineWidth: inWindow ? 3 : 2,
+          shadowColor: inWindow ? colors.eventShadow : colors.eventMutedShadow,
+          shadowBlur: inWindow ? 4 : 0,
+          opacity: inWindow ? 0.82 : 0.44,
         },
-        isActive,
       });
     }
   }
@@ -566,35 +490,15 @@ function buildCategorizedEventRenderData(
   return { renderData, categoryLabels };
 }
 
-function buildEventPointData(renderData: EventRenderDataItem[]) {
+function buildEventLabelData(renderData: EventRenderDataItem[]): EventLabelDataItem[] {
   return renderData.map((item) => {
     const category = getTimelineEventCategory(item.event.eventType);
+    const [start, end] = item.value;
     return {
-      value: [item.event.startYear, item.yValue],
+      value: [(start + end) / 2, item.yValue],
       event: item.event,
-      symbolSize: item.pointSymbolSize,
-      itemStyle: item.pointItemStyle,
-      z: item.isActive ? 20 : item.isDynastyHighlighted ? 16 : 10,
+      label: item.label,
       symbol: CATEGORY_SYMBOL[category] ?? 'circle',
-    };
-  });
-}
-
-function buildYearClusterRenderData(
-  yearClusters: NonNullable<EChartsTimelineProps['clusterData']>['yearClusters'],
-  categoryLabels: CategoryLabelItem[],
-): YearClusterRenderDataItem[] {
-  const categoryIndexMap = new Map(categoryLabels.map((item) => [item.label, item]));
-  return yearClusters.map((cluster) => {
-    const catInfo = categoryIndexMap.get(cluster.category);
-    const yValue = catInfo ? getCategoryLaneY(0, 1, catInfo.catIndex, catInfo.catCount) : EVENT_AREA_TOP + 0.04;
-    return {
-      value: [cluster.year, yValue],
-      clusterId: cluster.id,
-      year: cluster.year,
-      category: cluster.category,
-      count: cluster.events.length,
-      events: cluster.events,
     };
   });
 }
@@ -617,55 +521,6 @@ function buildDynastyClusterRenderData(
       events: cluster.events,
     };
   });
-}
-
-function createYearClusterRenderItem(
-  renderData: YearClusterRenderDataItem[],
-  colors: TimelineThemeColors,
-) {
-  return (
-    params: { dataIndex: number; coordSys?: { x: number; y: number; width: number; height: number } },
-    api: { coord: (_value: [number, number]) => number[] },
-  ) => {
-    const item = renderData[params.dataIndex];
-    if (!item) {
-      return null;
-    }
-
-    const [x, y] = api.coord(item.value);
-    return {
-      type: 'group',
-      info: { cluster: item },
-      children: [
-        {
-          type: 'circle',
-          shape: { cx: x, cy: y, r: Math.min(10 + item.count, 18) },
-          style: {
-            fill: colors.focusPillBg,
-            stroke: colors.eventActive,
-            lineWidth: 2,
-            shadowBlur: 8,
-            shadowColor: colors.eventActiveShadow,
-          },
-          info: { cluster: item },
-        },
-        {
-          type: 'text',
-          style: {
-            x,
-            y,
-            text: `${item.count}`,
-            textAlign: 'center',
-            textVerticalAlign: 'middle',
-            fill: colors.focusPillText,
-            fontSize: 11,
-            fontWeight: 700,
-          },
-          info: { cluster: item },
-        },
-      ],
-    };
-  };
 }
 
 function createDynastyClusterRenderItem(
@@ -703,20 +558,6 @@ function createDynastyClusterRenderItem(
           },
           info: { cluster: item },
         },
-        {
-          type: 'text',
-          style: {
-            x: x + width / 2,
-            y,
-            text: `${item.count} 条`,
-            textAlign: 'center',
-            textVerticalAlign: 'middle',
-            fill: colors.countPillText,
-            fontSize: 10,
-            fontWeight: 700,
-          },
-          info: { cluster: item },
-        },
       ],
     };
   };
@@ -725,7 +566,6 @@ function createDynastyClusterRenderItem(
 function createDynastyBandRenderItem(
   dynastyBandData: DynastyBandDataItem[],
   colors: TimelineThemeColors,
-  highlightedDynastyIds: Set<string>,
   laneCount: number,
   eventCountByDynastyId: Map<string, number>,
 ) {
@@ -775,20 +615,11 @@ function createDynastyBandRenderItem(
       return null;
     }
 
-    const isWindowHighlighted = highlightedDynastyIds.has(dynasty.id);
-    let fill = colors.dynastyFill;
-    let stroke = colors.dynastyStroke;
-    let shadowColor = 'transparent';
-    let shadowBlur = 0;
-    let lineWidth = 1;
-
-    if (isWindowHighlighted) {
-      fill = colors.dynastyWindowFill;
-      stroke = colors.dynastyWindowStroke;
-      shadowColor = colors.dynastyWindowShadow;
-      shadowBlur = 6;
-      lineWidth = 1.5;
-    }
+    const fill = colors.dynastyFill;
+    const stroke = colors.dynastyStroke;
+    const shadowColor = 'transparent';
+    const shadowBlur = 0;
+    const lineWidth = 1;
 
     const showLabel = shape.width >= Math.max(dynasty.name.length * 12 + 12, 36);
     const eventCount = eventCountByDynastyId.get(dynasty.id) ?? 0;
@@ -821,7 +652,7 @@ function createDynastyBandRenderItem(
                   textVerticalAlign: 'middle',
                   fill: colors.dynastyLabel,
                   fontSize: 11,
-                  fontWeight: isWindowHighlighted ? 650 : 600,
+                  fontWeight: 600,
                 },
                 info: { dynasty },
               },
@@ -832,10 +663,7 @@ function createDynastyBandRenderItem(
   };
 }
 
-function createEventRangeRenderItem(
-  renderData: EventRenderDataItem[],
-  colors: TimelineThemeColors,
-) {
+function createEventRangeRenderItem(renderData: EventRenderDataItem[]) {
   return (
     params: {
       dataIndex: number;
@@ -878,11 +706,6 @@ function createEventRangeRenderItem(
       return null;
     }
 
-    const centerX = (left + right) / 2;
-    const renderedWidth = right - left;
-
-    const showLabel = item.label.show && renderedWidth >= 40;
-
     return {
       type: 'group',
       children: [
@@ -908,40 +731,6 @@ function createEventRangeRenderItem(
             shadowColor: item.rangeStyle.shadowColor,
           },
         },
-        ...(start === end
-          ? []
-          : [
-              {
-                type: 'circle',
-                shape: { cx: right, cy: y, r: item.isActive ? 4.4 : 3.4 },
-                style: {
-                  fill: item.rangeStyle.fill,
-                  opacity: 0.72,
-                },
-              },
-            ]),
-        ...(showLabel
-          ? [
-              {
-                type: 'text',
-                style: {
-                  x: centerX,
-                  y: y - 12,
-                  text: item.event.title,
-                  textAlign: 'center',
-                  textVerticalAlign: 'bottom',
-                  fill: colors.eventLabel,
-                  fontSize: 11,
-                  fontWeight: 700,
-                  backgroundColor: colors.eventLabelActiveBg,
-                  padding: [2, 6],
-                  borderRadius: 4,
-                  width: Math.max(renderedWidth - 12, 40),
-                  overflow: 'truncate' as const,
-                },
-              },
-            ]
-          : []),
       ],
     };
   };
@@ -992,9 +781,6 @@ function buildOption(args: {
   isCondensed: boolean;
   dynasties: Dynasty[];
   events: Event[];
-  selectedEventId: string | null;
-  highlightedDynastyIds: string[];
-  highlightedDynastyId: string | null;
   colors: TimelineThemeColors;
   // feature flags
   showDynastyBands: boolean;
@@ -1017,9 +803,6 @@ function buildOption(args: {
     isCondensed,
     dynasties,
     events,
-    selectedEventId,
-    highlightedDynastyIds,
-    highlightedDynastyId,
     colors,
     showDynastyBands: _showDynastyBands,
     showDynastyCountBadge: _showDynastyCountBadge,
@@ -1036,7 +819,6 @@ function buildOption(args: {
     enableZoom: _enableZoom,
   } = args;
 
-  const highlightedDynastyIdSet = new Set(highlightedDynastyIds);
   const { laneIndexes, laneCount } = assignDynastyLanes(dynasties);
   const dynastyBandData = isCondensed || !_showDynastyBands ? [] : buildDynastyBandData(dynasties, laneIndexes);
   const eventCountByDynastyId = isCondensed || !_showDynastyCountBadge
@@ -1055,10 +837,9 @@ function buildOption(args: {
   const showEventLabels = showEvents
     && (_showEventLabels ?? visibleSpan <= _eventLabelThreshold);
   const { renderData: eventRenderData, categoryLabels } = showEvents
-    ? buildCategorizedEventRenderData(events, timeRange, selectedEventId, highlightedDynastyId, showEventLabels, colors)
+    ? buildCategorizedEventRenderData(events, timeRange, showEventLabels, colors)
     : { renderData: [] as EventRenderDataItem[], categoryLabels: [] as CategoryLabelItem[] };
-  const eventPointData = showEvents ? buildEventPointData(eventRenderData) : [];
-  const yearClusterData = showEvents && clusterData ? buildYearClusterRenderData(clusterData.yearClusters, categoryLabels) : [];
+  const eventLabelData = showEvents ? buildEventLabelData(eventRenderData) : [];
   const dynastyClusterData = showEvents && clusterData ? buildDynastyClusterRenderData(clusterData.dynastyClusters, categoryLabels) : [];
   const separatorYData = showEvents && categoryLabels.length > 1
     ? (() => {
@@ -1131,6 +912,7 @@ function buildOption(args: {
     tooltip: {
       show: !isCondensed,
       trigger: 'item',
+      triggerOn: 'mousemove|click',
       backgroundColor: colors.tooltipBg,
       borderColor: colors.tooltipBorder,
       textStyle: { color: colors.tooltipText, fontSize: 12 },
@@ -1147,11 +929,11 @@ function buildOption(args: {
           return '';
         }
 
-        const eventFinish = eventEnd(event);
+        const [eventStart, eventFinish] = normalizeEventRange(event);
         const yearText =
-          eventFinish !== event.startYear
-            ? `${formatTimelineYear(event.startYear)} - ${formatTimelineYear(eventFinish)}`
-            : formatTimelineYear(event.startYear);
+          eventFinish !== eventStart
+            ? `${formatTimelineYear(eventStart)} - ${formatTimelineYear(eventFinish)}`
+            : formatTimelineYear(eventStart);
         const desc = event.description
           ? `<div style="margin-top:4px;color:${colors.tooltipDescription};max-width:240px;white-space:normal;">${event.description}</div>`
           : '';
@@ -1164,10 +946,13 @@ function buildOption(args: {
         type: 'inside',
         xAxisIndex: 0,
         filterMode: 'none',
-        zoomLock: true,
+        zoomLock: !_enableZoom,
         zoomOnMouseWheel: _enableZoom,
         moveOnMouseWheel: false,
         moveOnMouseMove: _enablePan,
+        preventDefaultMouseMove: _enablePan,
+        cursorGrab: _enablePan ? 'grab' : 'default',
+        cursorGrabbing: _enablePan ? 'grabbing' : 'default',
         startValue: timeRange[0],
         endValue: timeRange[1],
       },
@@ -1177,7 +962,7 @@ function buildOption(args: {
         type: 'slider',
         xAxisIndex: 0,
         filterMode: 'none',
-        zoomLock: true,
+        zoomLock: false,
         height: isCondensed ? 16 : 22,
         bottom: isCondensed ? 6 : 8,
         brushSelect: false,
@@ -1309,7 +1094,6 @@ function buildOption(args: {
         renderItem: createDynastyBandRenderItem(
           dynastyBandData,
           colors,
-          highlightedDynastyIdSet,
           laneCount,
           eventCountByDynastyId,
         ),
@@ -1320,20 +1104,59 @@ function buildOption(args: {
         xAxisIndex: 0,
         yAxisIndex: 0,
         data: eventRenderData,
-        silent: isCondensed,
+        silent: true,
         z: 8,
-        renderItem: createEventRangeRenderItem(eventRenderData, colors),
+        emphasis: {
+          disabled: true,
+        },
+        blur: {
+          disabled: true,
+        },
+        select: {
+          disabled: true,
+        },
+        renderItem: createEventRangeRenderItem(eventRenderData),
       },
-      ...(!isCondensed && yearClusterData.length > 0
+      ...(!isCondensed && eventLabelData.length > 0
         ? [
             {
-              id: 'year-clusters',
-              type: 'custom' as const,
+              id: 'event-labels',
+              type: 'scatter' as const,
               xAxisIndex: 0,
               yAxisIndex: 0,
-              data: yearClusterData,
-              z: 11,
-              renderItem: createYearClusterRenderItem(yearClusterData, colors),
+              data: eventLabelData,
+              silent: true,
+              symbolSize: 1,
+              labelLayout: {
+                hideOverlap: true,
+              },
+              itemStyle: {
+                opacity: 0,
+                color: 'transparent',
+              },
+              label: {
+                show: true,
+                position: 'top' as const,
+                distance: 10,
+                color: colors.eventLabel,
+                fontSize: 11,
+                fontWeight: 700,
+                backgroundColor: colors.eventLabelBg,
+                borderColor: colorWithAlpha(colors.eventStroke, 0.34),
+                borderWidth: 1,
+                borderRadius: 4,
+                padding: [2, 6],
+                overflow: 'truncate' as const,
+                width: 120,
+                formatter: (params: { data?: { event?: Event } }) => params.data?.event?.title ?? '',
+              },
+              emphasis: {
+                disabled: true,
+              },
+              tooltip: {
+                show: false,
+              },
+              z: 15,
             },
           ]
         : []),
@@ -1346,33 +1169,11 @@ function buildOption(args: {
               yAxisIndex: 0,
               data: dynastyClusterData,
               z: 10,
+              silent: true,
               renderItem: createDynastyClusterRenderItem(dynastyClusterData, colors),
             },
           ]
         : []),
-      {
-        id: 'events',
-        type: 'scatter',
-        xAxisIndex: 0,
-        yAxisIndex: 0,
-        data: eventPointData,
-        silent: isCondensed,
-        symbolSize: (_value: unknown, params: { data?: { symbolSize?: number } }) =>
-          params.data?.symbolSize ?? 9,
-        label: { show: false },
-        itemStyle: {
-          color: colors.event,
-          borderColor: colors.eventPointBorder,
-          borderWidth: 1.5,
-          shadowColor: colors.eventShadow,
-          shadowBlur: 6,
-        },
-        emphasis: {
-          scale: 1.35,
-          itemStyle: { color: colors.eventActive },
-        },
-        z: 14,
-      },
     ],
   };
 }
@@ -1383,13 +1184,9 @@ export function EChartsTimeline({
   dynastiesData = [],
   // controlled state
   timeRange: timeRangeProp,
-  selectedEventId: selectedEventIdProp,
-  highlightedDynastyId: highlightedDynastyIdProp,
   isCondensed: isCondensedProp,
   // initial state (uncontrolled)
   initialTimeRange,
-  initialSelectedEventId = null,
-  initialHighlightedDynastyId = null,
   initialIsCondensed = false,
   // features
   showHeader = true,
@@ -1397,7 +1194,6 @@ export function EChartsTimeline({
   showCondenseToggle = true,
   showDynastyBands = true,
   showDynastyCountBadge = true,
-  showEventDetail = true,
   showCategoryLabels = true,
   showCategorySeparators = true,
   showSliderZoom = true,
@@ -1412,30 +1208,23 @@ export function EChartsTimeline({
   enableZoom = true,
   // callbacks
   onTimeRangeChange,
-  onEventSelect,
-  onDynastyHighlight,
   onCondensedChange,
-  onDynastyClick: onDynastyClickProp,
-  onEventClick: onEventClickProp,
   onReset: onResetProp,
   clusterData,
 }: EChartsTimelineProps) {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<ECharts | null>(null);
   const suppressDataZoomRef = useRef(false);
+  const skipNextOptionSyncRef = useRef(false);
+  const pendingRangeCommitRef = useRef<number | null>(null);
 
   // ── Internal state (uncontrolled mode) ──
   const [_isCondensed, _setIsCondensed] = useState(initialIsCondensed);
   const [_timeRange, _setTimeRange] = useState<TimeRange | null>(initialTimeRange ?? null);
-  const [_selectedEventId, _setSelectedEventId] = useState<string | null>(initialSelectedEventId);
-  const [_highlightedDynastyId, _setHighlightedDynastyId] = useState<string | null>(initialHighlightedDynastyId);
-  const [highlightedRange, setHighlightedRange] = useState<TimeRange | null>(null);
 
   // ── Resolved values (controlled > uncontrolled) ──
   const isCondensed = isCondensedProp !== undefined ? isCondensedProp : _isCondensed;
   const timeRange = timeRangeProp !== undefined ? timeRangeProp : _timeRange;
-  const selectedEventId = selectedEventIdProp !== undefined ? selectedEventIdProp : _selectedEventId;
-  const highlightedDynastyId = highlightedDynastyIdProp !== undefined ? highlightedDynastyIdProp : _highlightedDynastyId;
 
   const themeMode = useThemeStore((state) => state.theme);
 
@@ -1459,31 +1248,23 @@ export function EChartsTimeline({
     }
   }, [timeRangeProp, onTimeRangeChange]);
 
-  const setSelectedEventId = useCallback((value: string | null | ((p: string | null) => string | null)) => {
+  const setTimeRangeLocal = useCallback((value: TimeRange | null | ((p: TimeRange | null) => TimeRange | null)) => {
     if (typeof value === 'function') {
-      _setSelectedEventId((current) => {
-        const resolved = (value as (p: string | null) => string | null)(current);
-        onEventSelect?.(resolved);
-        return resolved;
-      });
-    } else {
-      if (selectedEventIdProp === undefined) _setSelectedEventId(value);
-      onEventSelect?.(value);
+      _setTimeRange((current) => (value as (p: TimeRange | null) => TimeRange | null)(current));
+      return;
     }
-  }, [selectedEventIdProp, onEventSelect]);
 
-  const setHighlightedDynastyId = useCallback((value: string | null | ((p: string | null) => string | null)) => {
-    if (typeof value === 'function') {
-      _setHighlightedDynastyId((current) => {
-        const resolved = (value as (p: string | null) => string | null)(current);
-        onDynastyHighlight?.(resolved);
-        return resolved;
-      });
-    } else {
-      if (highlightedDynastyIdProp === undefined) _setHighlightedDynastyId(value);
-      onDynastyHighlight?.(value);
+    if (timeRangeProp === undefined) {
+      _setTimeRange(value);
     }
-  }, [highlightedDynastyIdProp, onDynastyHighlight]);
+  }, [timeRangeProp]);
+
+  const commitRangeToParent = useCallback((range: TimeRange | null) => {
+    if (!range) {
+      return;
+    }
+    onTimeRangeChange?.(range);
+  }, [onTimeRangeChange]);
 
   const dynasties = useMemo(() => sortDynasties(dynastiesData), [dynastiesData]);
   const events = useMemo(() => sortEvents(eventsData), [eventsData]);
@@ -1519,16 +1300,6 @@ export function EChartsTimeline({
   }, [boundsRange, defaultWindowRange]);
 
   useEffect(() => {
-    setHighlightedRange((current) => {
-      if (!timeRange) {
-        return current;
-      }
-
-      return isSameRange(current, timeRange) ? current : timeRange;
-    });
-  }, [timeRange]);
-
-  useEffect(() => {
     if (!chartContainerRef.current || chartRef.current) {
       return;
     }
@@ -1550,65 +1321,26 @@ export function EChartsTimeline({
     };
   }, []);
 
+  useEffect(() => () => {
+    if (pendingRangeCommitRef.current !== null) {
+      window.clearTimeout(pendingRangeCommitRef.current);
+    }
+  }, []);
+
   const effectiveRange = timeRange ?? boundsRange;
-  const highlightedDynastyIds = useMemo(
-    () => (highlightedRange ? getHighlightedDynastyIdsForRange(highlightedRange, dynasties) : []),
-    [dynasties, highlightedRange],
-  );
   const visibleEventCount = useMemo(
     () => events.filter((event) => eventOverlapsRange(event, effectiveRange)).length,
     [effectiveRange, events],
   );
-  const visibleYearClusterCount = useMemo(
-    () =>
-      (clusterData?.yearClusters ?? []).filter(
-        (cluster) => cluster.year >= effectiveRange[0] && cluster.year <= effectiveRange[1],
-      ).length,
-    [clusterData?.yearClusters, effectiveRange],
-  );
-  const visibleDynastyClusterCount = useMemo(
-    () =>
-      (clusterData?.dynastyClusters ?? []).filter(
-        (cluster) => cluster.startYear <= effectiveRange[1] && cluster.endYear >= effectiveRange[0],
-      ).length,
-    [clusterData?.dynastyClusters, effectiveRange],
-  );
-  const highlightedDynastyNames = useMemo(
-    () =>
-      highlightedDynastyIds
-        .map((id) => dynasties.find((dynasty) => dynasty.id === id)?.name)
-        .filter((name): name is string => Boolean(name)),
-    [dynasties, highlightedDynastyIds],
-  );
-  const displayedDynastyLabel = highlightedDynastyId
-    ? dynasties.find((d) => d.id === highlightedDynastyId)?.name ?? '未高亮'
-    : highlightedDynastyNames.length > 0
-      ? highlightedDynastyNames.join('、')
-      : '未高亮';
-  const hasDynastyFocus = highlightedDynastyId !== null;
-  const selectedEvent = useMemo(
-    () => (selectedEventId ? events.find((e) => e.id === selectedEventId) ?? null : null),
-    [events, selectedEventId],
-  );
-  const selectedEventDynasty = useMemo(
-    () => (selectedEvent?.dynastyId ? dynasties.find((d) => d.id === selectedEvent.dynastyId) : null),
-    [dynasties, selectedEvent],
-  );
-  const selectedEventCategory = useMemo(
-    () => (selectedEvent ? getTimelineEventCategory(selectedEvent.eventType) : null),
-    [selectedEvent],
-  );
-  const selectedEventYearText = useMemo(() => {
-    if (!selectedEvent) return '';
-    const finish = eventEnd(selectedEvent);
-    return finish !== selectedEvent.startYear
-      ? `${formatTimelineYear(selectedEvent.startYear)} - ${formatTimelineYear(finish)}`
-      : formatTimelineYear(selectedEvent.startYear);
-  }, [selectedEvent]);
 
   useEffect(() => {
     const chart = chartRef.current;
     if (!chart || !timeRange) {
+      return;
+    }
+
+    if (skipNextOptionSyncRef.current) {
+      skipNextOptionSyncRef.current = false;
       return;
     }
 
@@ -1618,9 +1350,6 @@ export function EChartsTimeline({
       isCondensed,
       dynasties,
       events,
-      selectedEventId,
-      highlightedDynastyIds,
-      highlightedDynastyId,
       colors,
       showDynastyBands,
       showDynastyCountBadge,
@@ -1653,10 +1382,7 @@ export function EChartsTimeline({
     enableZoom,
     eventLabelThreshold,
     events,
-    highlightedDynastyIds,
-    highlightedDynastyId,
     isCondensed,
-    selectedEventId,
     showCategoryLabels,
     showCategorySeparators,
     showDynastyBands,
@@ -1678,96 +1404,16 @@ export function EChartsTimeline({
     }
 
     const nextRange = readCurrentRangeFromChart(chart, boundsRange);
-    setTimeRange((current) => (isSameRange(current, nextRange) ? current : nextRange));
-    setHighlightedRange(nextRange);
-  }, [boundsRange, setTimeRange]);
-
-  const applyNextRange = useCallback((nextRange: TimeRange) => {
-    setHighlightedRange(nextRange);
-    setTimeRange(nextRange);
-  }, []);
-
-  const handleDynastySingleClick = useCallback(
-    (dynasty: Dynasty) => {
-      const nextRange = focusRangeToDynastyWithContext(dynasty, boundsRange);
-      setHighlightedDynastyId((current) =>
-        current === dynasty.id ? null : dynasty.id,
-      );
-      applyNextRange(nextRange);
-    },
-    [applyNextRange, boundsRange],
-  );
-
-  const resolvePayload = useCallback(
-    (params: unknown) => {
-      const payload = params as {
-        data?: { dynasty?: Dynasty; event?: Event };
-        info?: { dynasty?: Dynasty; event?: Event; cluster?: YearClusterRenderDataItem | DynastyClusterRenderDataItem };
-        event?: {
-          target?: { info?: { dynasty?: Dynasty; event?: Event; cluster?: YearClusterRenderDataItem | DynastyClusterRenderDataItem } };
-          topTarget?: { info?: { dynasty?: Dynasty; event?: Event; cluster?: YearClusterRenderDataItem | DynastyClusterRenderDataItem } };
-        };
-      };
-
-      return {
-        dynasty:
-          payload.data?.dynasty ??
-          payload.info?.dynasty ??
-          payload.event?.target?.info?.dynasty ??
-          payload.event?.topTarget?.info?.dynasty,
-        eventData:
-          payload.data?.event ??
-          payload.info?.event ??
-          payload.event?.target?.info?.event ??
-          payload.event?.topTarget?.info?.event,
-        cluster:
-          payload.info?.cluster ??
-          payload.event?.target?.info?.cluster ??
-          payload.event?.topTarget?.info?.cluster,
-      };
-    },
-    [],
-  );
-
-  const handleChartClick = useCallback(
-    (params: unknown) => {
-      const { dynasty, eventData, cluster } = resolvePayload(params);
-
-      if (!timeRange) {
-        return;
-      }
-
-      if (dynasty) {
-        handleDynastySingleClick(dynasty);
-        onDynastyClickProp?.(dynasty);
-        return;
-      }
-
-      if (eventData) {
-        setSelectedEventId((current) => (current === eventData.id ? null : eventData.id));
-        onEventClickProp?.(eventData);
-        const nextRange = moveRangeToEvent(timeRange ?? boundsRange, eventData, boundsRange);
-        applyNextRange(nextRange);
-        return;
-      }
-
-      if (cluster?.events?.length) {
-        const firstEvent = cluster.events[0];
-        if (firstEvent) {
-          setSelectedEventId(firstEvent.id);
-          onEventClickProp?.(firstEvent);
-          const nextRange = moveRangeToEvent(timeRange ?? boundsRange, firstEvent, boundsRange);
-          applyNextRange(nextRange);
-        }
-        return;
-      }
-
-      // 点击空白区域清除高亮
-      setHighlightedDynastyId(null);
-      setSelectedEventId(null);
-    },
-    [applyNextRange, handleDynastySingleClick, resolvePayload, timeRange, boundsRange],
-  );
+    skipNextOptionSyncRef.current = true;
+    setTimeRangeLocal((current) => (isSameRange(current, nextRange) ? current : nextRange));
+    if (pendingRangeCommitRef.current !== null) {
+      window.clearTimeout(pendingRangeCommitRef.current);
+    }
+    pendingRangeCommitRef.current = window.setTimeout(() => {
+      pendingRangeCommitRef.current = null;
+      commitRangeToParent(nextRange);
+    }, 120);
+  }, [boundsRange, commitRangeToParent, setTimeRangeLocal]);
 
   useEffect(() => {
     const chart = chartRef.current;
@@ -1776,21 +1422,16 @@ export function EChartsTimeline({
     }
 
     chart.on('dataZoom', handleDataZoom);
-    chart.on('click', handleChartClick);
 
     return () => {
       chart.off('dataZoom', handleDataZoom);
-      chart.off('click', handleChartClick);
     };
-  }, [handleChartClick, handleDataZoom]);
+  }, [handleDataZoom]);
 
   const handleReset = useCallback(() => {
-    setSelectedEventId(null);
-    setHighlightedDynastyId(null);
-    setHighlightedRange(defaultWindowRange);
     setTimeRange(defaultWindowRange);
     onResetProp?.();
-  }, [defaultWindowRange, onResetProp, setSelectedEventId, setHighlightedDynastyId, setTimeRange]);
+  }, [defaultWindowRange, onResetProp, setTimeRange]);
 
   const handleToggleCondensed = useCallback(() => {
     setIsCondensed((current) => !current);
@@ -1856,65 +1497,6 @@ export function EChartsTimeline({
             }}
           >
             <Box component="span" sx={{ color: colors.headerMuted, whiteSpace: 'nowrap', flexShrink: 0 }}>
-              {hasDynastyFocus ? '朝代聚焦' : '当前焦点'}
-            </Box>
-            <Box
-              component="span"
-              sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                minWidth: 0,
-                maxWidth: 'min(100%, 280px)',
-                px: 0.9,
-                py: 0.35,
-                borderRadius: '999px',
-                backgroundColor: colors.focusPillBg,
-                color: colors.focusPillText,
-                fontWeight: 600,
-                lineHeight: 1.2,
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-              }}
-              title={displayedDynastyLabel}
-            >
-              {displayedDynastyLabel}
-            </Box>
-            <Box component="span" sx={{ color: colors.headerMuted, whiteSpace: 'nowrap', flexShrink: 0 }}>
-              事件选中
-            </Box>
-            <Box
-              component="span"
-              sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                minWidth: 0,
-                maxWidth: 'min(100%, 280px)',
-                px: 0.9,
-                py: 0.35,
-                borderRadius: '999px',
-                backgroundColor: colors.countPillBg,
-                color: colors.countPillText,
-                fontWeight: 600,
-                lineHeight: 1.2,
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-              }}
-              title={selectedEvent?.title ?? '未选择'}
-            >
-              {selectedEvent?.title ?? '未选择'}
-            </Box>
-          </Box>
-          <Box
-            sx={{
-              minWidth: 0,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 0.75,
-            }}
-          >
-            <Box component="span" sx={{ color: colors.headerMuted, whiteSpace: 'nowrap', flexShrink: 0 }}>
               时间范围
             </Box>
             <Box
@@ -1955,27 +1537,6 @@ export function EChartsTimeline({
             >
               窗口内 {visibleEventCount} / 共 {events.length} 个事件
             </Box>
-            {clusterData && (
-              <Box
-                component="span"
-                sx={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  minWidth: 0,
-                  px: 0.75,
-                  py: 0.3,
-                  borderRadius: '999px',
-                  backgroundColor: colors.countPillBg,
-                  color: colors.countPillText,
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                }}
-                title={`聚合 ${visibleYearClusterCount} 年组 / 折叠 ${visibleDynastyClusterCount} 朝代组 / 模式 ${clusterData.densityMode}`}
-              >
-                聚合 {visibleYearClusterCount} 年组 / 折叠 {visibleDynastyClusterCount} 朝代组 / 模式 {clusterData.densityMode}
-              </Box>
-            )}
           </Box>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, flexShrink: 0 }}>
@@ -2025,147 +1586,6 @@ export function EChartsTimeline({
           )}
         </Box>
       </Box>
-      )}
-
-      {showEventDetail && selectedEvent && !isCondensed && (
-        <Box
-          sx={{
-            display: 'flex',
-            gap: 2,
-            px: 2,
-            py: 1.5,
-            borderBottom: `1px solid ${colors.panelBorder}`,
-            backgroundColor: colorWithAlpha(
-              readCssVar('--color-bg-card', themeMode === 'light' ? 'rgba(255,251,243,0.88)' : 'rgba(33,27,22,0.82)'),
-              themeMode === 'light' ? 0.6 : 0.5,
-            ),
-            alignItems: 'flex-start',
-          }}
-        >
-          {/* 类型图标 */}
-          <Box
-            sx={{
-              flexShrink: 0,
-              mt: 0.3,
-              width: 32,
-              height: 32,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: '8px',
-              backgroundColor: colors.focusPillBg,
-              fontSize: 16,
-            }}
-          >
-            {selectedEventCategory === '战争' ? '⚔' : selectedEventCategory === '政治' ? '🏛' : selectedEventCategory === '文化/科技' ? '📖' : '📋'}
-          </Box>
-
-          {/* 信息区域 */}
-          <Box sx={{ flex: 1, minWidth: 0 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap', mb: 0.5 }}>
-              <Box component="span" sx={{ fontWeight: 700, fontSize: 14, color: colors.tooltipText }}>
-                {selectedEvent.title}
-              </Box>
-              <Box
-                component="span"
-                sx={{
-                  px: 1,
-                  py: 0.2,
-                  borderRadius: '999px',
-                  fontSize: 11,
-                  backgroundColor: colors.countPillBg,
-                  color: colors.countPillText,
-                  fontWeight: 600,
-                }}
-              >
-                {selectedEventYearText}
-              </Box>
-              {selectedEventCategory && (
-                <Box
-                  component="span"
-                  sx={{
-                    px: 1,
-                    py: 0.2,
-                    borderRadius: '999px',
-                    fontSize: 11,
-                    backgroundColor: colors.focusPillBg,
-                    color: colors.focusPillText,
-                    fontWeight: 600,
-                  }}
-                >
-                  {selectedEventCategory}
-                </Box>
-              )}
-              {selectedEventDynasty && (
-                <Box
-                  component="button"
-                  type="button"
-                  onClick={() => {
-                    setHighlightedDynastyId((current) =>
-                      current === selectedEventDynasty.id ? null : selectedEventDynasty.id,
-                    );
-                  }}
-                  sx={{
-                    px: 1,
-                    py: 0.2,
-                    borderRadius: '999px',
-                    fontSize: 11,
-                    backgroundColor: 'transparent',
-                    border: `1px solid ${colors.resetButtonBorder}`,
-                    color: colors.resetButtonText,
-                    cursor: 'pointer',
-                    fontWeight: 600,
-                    '&:hover': {
-                      backgroundColor: colors.countPillBg,
-                    },
-                  }}
-                >
-                  {selectedEventDynasty.name}
-                </Box>
-              )}
-            </Box>
-
-            {selectedEvent.description && (
-              <Box
-                sx={{
-                  fontSize: 12,
-                  color: colors.headerText,
-                  lineHeight: 1.5,
-                  maxHeight: 48,
-                  overflow: 'hidden',
-                }}
-              >
-                {selectedEvent.description}
-              </Box>
-            )}
-          </Box>
-
-          {/* 关闭按钮 */}
-          <Box
-            component="button"
-            type="button"
-            onClick={() => {
-              setSelectedEventId(null);
-            }}
-            sx={{
-              flexShrink: 0,
-              backgroundColor: 'transparent',
-              border: 'none',
-              color: colors.resetButtonText,
-              cursor: 'pointer',
-              fontSize: 18,
-              lineHeight: 1,
-              p: 0.5,
-              borderRadius: '4px',
-              '&:hover': {
-                backgroundColor: colors.countPillBg,
-                color: colors.tooltipText,
-              },
-            }}
-          >
-            ✕
-          </Box>
-        </Box>
       )}
 
       <Box
