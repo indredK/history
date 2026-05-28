@@ -1638,6 +1638,7 @@ export function EChartsTimeline({
       animationDuration,
       enablePan,
       enableZoom,
+      clusterData,
     });
 
     suppressDataZoomRef.current = true;
@@ -1648,6 +1649,7 @@ export function EChartsTimeline({
   }, [
     boundsRange,
     chartHeight,
+    clusterData,
     colors,
     dynasties,
     events,
