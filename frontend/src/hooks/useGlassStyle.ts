@@ -61,7 +61,7 @@ export interface PerformanceOptions {
  * return <div style={style} className={className}>Content</div>;
  * ```
  */
-export function useGlassStyle(
+function useGlassStyle(
   options: GlassStyleOptions = {},
   performanceOptions: PerformanceOptions = {}
 ): GlassStyleResult {

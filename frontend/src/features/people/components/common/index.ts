@@ -4,6 +4,7 @@
 
 export { GridSkeleton } from './GridSkeleton';
 export { PeopleCollectionContent } from './PeopleCollectionContent';
-export { FigureGrid, FIGURE_GRID_SX } from './FigureGrid';
-export { DynastyFigureCard, DEFAULT_TAG_COLOR } from './DynastyFigureCard';
-export type { DynastyFigureData, DynastyFigureCardProps } from './DynastyFigureCard';
+export { FigureGrid } from './FigureGrid';
+export { DynastyFigureCard } from './DynastyFigureCard';
+export { useFigureCollection } from './useFigureCollection';
+export type { FilterOption, FilterConfig, SortOption, FigureCollectionOptions } from './useFigureCollection';

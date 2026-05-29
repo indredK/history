@@ -2,78 +2,74 @@
  * 宋朝人物内容容器组件
  */
 
-import { useMemo } from 'react';
-
 import { useSongFigureStore } from '@/store/songFigureStore';
 import { getSongFigures } from '@/services/person/song';
 import type { SongFigure, SongFigureRole } from '@/services/person/song/types';
 import type { SongFigureSortBy } from '@/services/person/song';
 import { ROLE_LABELS } from '@/services/person/song/types';
-import { useCollectionResource } from '@/hooks';
 
-import { PeopleCollectionContent } from '../common';
+import { PeopleCollectionContent, useFigureCollection } from '../common';
 import { SongFigureGrid } from './SongFigureGrid';
 import { SongFigureDetailModal } from './SongFigureDetailModal';
 
 export function SongContent() {
+  const store = useSongFigureStore();
+
   const {
-    figures, selectedFigure, loading, error, filters,
-    setFigures, setSelectedFigure, setLoading, setError,
-    setRoleFilter, setPeriodFilter, setSearchQuery, setSortBy,
-    getFilteredFigures, getRoleOptions, getPeriodOptions,
-  } = useSongFigureStore();
-
-  const { reload: loadFigures, requestLoading } = useCollectionResource({
+    error, reload, requestLoading,
+    searchQuery, onSearchChange, searchPlaceholder,
+    filters, sortBy, sortOptions, onSortChange,
+    resultCount, resultLabel,
+    filteredItems, selectedItem, handleItemClick, handleCloseModal,
+  } = useFigureCollection<SongFigure>({
     cacheKey: 'songFigures',
-    items: figures,
-    loading,
-    load: async () => {
-      const result = await getSongFigures();
-      return result.data;
-    },
-    setItems: setFigures,
-    setLoading,
-    setError,
+    store,
+    loadData: getSongFigures,
     errorMessage: '获取宋朝人物数据失败:',
+    searchPlaceholder: '搜索宋朝人物姓名、字号...',
+    resultLabel: '位宋朝人物',
+    filterConfigs: [
+      {
+        field: 'role',
+        label: '角色',
+        getOptions: () => store.getRoleOptions().map(role => ({
+          value: role,
+          label: role === '全部' ? '全部' : ROLE_LABELS[role as SongFigureRole] || role,
+        })),
+        setFilter: (value) => store.setRoleFilter(value as SongFigureRole | '全部'),
+      },
+      {
+        field: 'period',
+        label: '时期',
+        getOptions: () => store.getPeriodOptions().map(period => ({ value: period, label: period })),
+        setFilter: store.setPeriodFilter,
+      },
+    ],
+    sortOptions: [
+      { value: 'birthYear', label: '按出生年' },
+      { value: 'name', label: '按姓名' },
+      { value: 'role', label: '按角色' },
+    ],
   });
-
-  const filteredFigures = useMemo(() => getFilteredFigures(), [getFilteredFigures, figures, filters]);
-
-  const roleOptions = useMemo(() => getRoleOptions().map(role => ({
-    value: role,
-    label: role === '全部' ? '全部' : ROLE_LABELS[role as SongFigureRole] || role
-  })), [getRoleOptions]);
-
-  const periodOptions = useMemo(() => getPeriodOptions().map(period => ({ value: period, label: period })), [getPeriodOptions]);
-
-  const handleFigureClick = (figure: SongFigure) => setSelectedFigure(figure);
-  const handleCloseModal = () => setSelectedFigure(null);
 
   return (
     <PeopleCollectionContent
       error={error}
-      onRetry={loadFigures}
-      searchQuery={filters.searchQuery}
-      onSearchChange={setSearchQuery}
-      searchPlaceholder="搜索宋朝人物姓名、字号..."
-      filters={[
-        { name: 'role', label: '角色', value: filters.role, options: roleOptions, onChange: (value) => setRoleFilter(value as SongFigureRole | '全部') },
-        { name: 'period', label: '时期', value: filters.period, options: periodOptions, onChange: setPeriodFilter },
-      ]}
-      sortBy={filters.sortBy}
-      sortOptions={[
-        { value: 'birthYear', label: '按出生年' },
-        { value: 'name', label: '按姓名' },
-        { value: 'role', label: '按角色' },
-      ]}
-      onSortChange={(value) => setSortBy(value as SongFigureSortBy)}
-      resultCount={filteredFigures.length}
-      resultLabel="位宋朝人物"
+      onRetry={reload}
+      searchQuery={searchQuery}
+      onSearchChange={onSearchChange}
+      searchPlaceholder={searchPlaceholder}
+      filters={filters}
+      sortBy={sortBy}
+      sortOptions={sortOptions}
+      onSortChange={(value) => onSortChange(value as SongFigureSortBy)}
+      resultCount={resultCount}
+      resultLabel={resultLabel}
       grid={
-        <SongFigureGrid figures={filteredFigures} onFigureClick={handleFigureClick} loading={loading || requestLoading} />
+        <SongFigureGrid figures={filteredItems} onFigureClick={handleItemClick} loading={requestLoading} />
       }
       modal={
-        <SongFigureDetailModal figure={selectedFigure} open={selectedFigure !== null} onClose={handleCloseModal} />
+        <SongFigureDetailModal figure={selectedItem} open={selectedItem !== null} onClose={handleCloseModal} />
       }
     />
   );

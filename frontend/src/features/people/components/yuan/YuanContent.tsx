@@ -2,78 +2,74 @@
  * 元朝人物内容容器组件
  */
 
-import { useMemo } from 'react';
-
 import { useYuanFigureStore } from '@/store/yuanFigureStore';
 import { getYuanFigures } from '@/services/person/yuan';
 import type { YuanFigure, YuanFigureRole } from '@/services/person/yuan/types';
 import type { YuanFigureSortBy } from '@/services/person/yuan';
 import { ROLE_LABELS } from '@/services/person/yuan/types';
-import { useCollectionResource } from '@/hooks';
 
-import { PeopleCollectionContent } from '../common';
+import { PeopleCollectionContent, useFigureCollection } from '../common';
 import { YuanFigureGrid } from './YuanFigureGrid';
 import { YuanFigureDetailModal } from './YuanFigureDetailModal';
 
 export function YuanContent() {
+  const store = useYuanFigureStore();
+
   const {
-    figures, selectedFigure, loading, error, filters,
-    setFigures, setSelectedFigure, setLoading, setError,
-    setRoleFilter, setPeriodFilter, setSearchQuery, setSortBy,
-    getFilteredFigures, getRoleOptions, getPeriodOptions,
-  } = useYuanFigureStore();
-
-  const { reload: loadFigures, requestLoading } = useCollectionResource({
+    error, reload, requestLoading,
+    searchQuery, onSearchChange, searchPlaceholder,
+    filters, sortBy, sortOptions, onSortChange,
+    resultCount, resultLabel,
+    filteredItems, selectedItem, handleItemClick, handleCloseModal,
+  } = useFigureCollection<YuanFigure>({
     cacheKey: 'yuanFigures',
-    items: figures,
-    loading,
-    load: async () => {
-      const result = await getYuanFigures();
-      return result.data;
-    },
-    setItems: setFigures,
-    setLoading,
-    setError,
+    store,
+    loadData: getYuanFigures,
     errorMessage: '获取元朝人物数据失败:',
+    searchPlaceholder: '搜索元朝人物姓名、字号...',
+    resultLabel: '位元朝人物',
+    filterConfigs: [
+      {
+        field: 'role',
+        label: '角色',
+        getOptions: () => store.getRoleOptions().map(role => ({
+          value: role,
+          label: role === '全部' ? '全部' : ROLE_LABELS[role as YuanFigureRole] || role,
+        })),
+        setFilter: (value) => store.setRoleFilter(value as YuanFigureRole | '全部'),
+      },
+      {
+        field: 'period',
+        label: '时期',
+        getOptions: () => store.getPeriodOptions().map(period => ({ value: period, label: period })),
+        setFilter: store.setPeriodFilter,
+      },
+    ],
+    sortOptions: [
+      { value: 'birthYear', label: '按出生年' },
+      { value: 'name', label: '按姓名' },
+      { value: 'role', label: '按角色' },
+    ],
   });
-
-  const filteredFigures = useMemo(() => getFilteredFigures(), [getFilteredFigures, figures, filters]);
-
-  const roleOptions = useMemo(() => getRoleOptions().map(role => ({
-    value: role,
-    label: role === '全部' ? '全部' : ROLE_LABELS[role as YuanFigureRole] || role
-  })), [getRoleOptions]);
-
-  const periodOptions = useMemo(() => getPeriodOptions().map(period => ({ value: period, label: period })), [getPeriodOptions]);
-
-  const handleFigureClick = (figure: YuanFigure) => setSelectedFigure(figure);
-  const handleCloseModal = () => setSelectedFigure(null);
 
   return (
     <PeopleCollectionContent
       error={error}
-      onRetry={loadFigures}
-      searchQuery={filters.searchQuery}
-      onSearchChange={setSearchQuery}
-      searchPlaceholder="搜索元朝人物姓名、字号..."
-      filters={[
-        { name: 'role', label: '角色', value: filters.role, options: roleOptions, onChange: (value) => setRoleFilter(value as YuanFigureRole | '全部') },
-        { name: 'period', label: '时期', value: filters.period, options: periodOptions, onChange: setPeriodFilter },
-      ]}
-      sortBy={filters.sortBy}
-      sortOptions={[
-        { value: 'birthYear', label: '按出生年' },
-        { value: 'name', label: '按姓名' },
-        { value: 'role', label: '按角色' },
-      ]}
-      onSortChange={(value) => setSortBy(value as YuanFigureSortBy)}
-      resultCount={filteredFigures.length}
-      resultLabel="位元朝人物"
+      onRetry={reload}
+      searchQuery={searchQuery}
+      onSearchChange={onSearchChange}
+      searchPlaceholder={searchPlaceholder}
+      filters={filters}
+      sortBy={sortBy}
+      sortOptions={sortOptions}
+      onSortChange={(value) => onSortChange(value as YuanFigureSortBy)}
+      resultCount={resultCount}
+      resultLabel={resultLabel}
       grid={
-        <YuanFigureGrid figures={filteredFigures} onFigureClick={handleFigureClick} loading={loading || requestLoading} />
+        <YuanFigureGrid figures={filteredItems} onFigureClick={handleItemClick} loading={requestLoading} />
       }
       modal={
-        <YuanFigureDetailModal figure={selectedFigure} open={selectedFigure !== null} onClose={handleCloseModal} />
+        <YuanFigureDetailModal figure={selectedItem} open={selectedItem !== null} onClose={handleCloseModal} />
       }
     />
   );

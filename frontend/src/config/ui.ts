@@ -107,16 +107,6 @@ export const buttonConfig = {
 
 // 表单控件配置
 export const formConfig = {
-  // 搜索框的统一样式
-  searchField: {
-    '& .MuiOutlinedInput-root': {
-      borderRadius: 'var(--radius-lg)',
-      backgroundColor: 'var(--color-bg-tertiary)',
-      border: '2px solid var(--color-border-medium)',
-      transition: 'all var(--transition-normal)'
-    }
-  } as SxProps<Theme>,
-
   // 通用的FormControlLabel样式
   controlLabel: {
     margin: 0
@@ -137,14 +127,6 @@ export const formConfig = {
   slider: {
     '& .MuiSlider-rail': {
       backgroundColor: 'var(--color-border-medium)',
-    }
-  } as SxProps<Theme>,
-
-  // ToggleButton基础样式
-  toggleButton: {
-    '& .MuiToggleButton-root': {
-      borderColor: 'var(--color-border-medium)',
-      color: 'var(--color-text-primary)'
     }
   } as SxProps<Theme>
 };
@@ -252,21 +234,6 @@ export const uiUtils = {
     }
   }),
 
-  // 根据主题生成Slider样式
-  getThemedSliderStyles: (theme: keyof typeof uiThemeColors): SxProps<Theme> => ({
-    color: uiThemeColors[theme].primary,
-    '& .MuiSlider-thumb': {
-      backgroundColor: uiThemeColors[theme].primary,
-      '&:hover': {
-        boxShadow: `0 0 0 8px ${uiThemeColors[theme].hover}`,
-      }
-    },
-    '& .MuiSlider-track': {
-      backgroundColor: uiThemeColors[theme].primary,
-    },
-    ...formConfig.slider
-  }),
-
   // 根据主题生成ToggleButton样式
   getThemedToggleButtonStyles: (theme: keyof typeof uiThemeColors): SxProps<Theme> => ({
     '& .MuiToggleButton-root': {
@@ -283,16 +250,6 @@ export const uiUtils = {
           backgroundColor: uiThemeColors[theme].primary,
         }
       }
-    }
-  }),
-
-  // 根据主题生成Button样式（用于Popover内的按钮）
-  getThemedButtonStyles: (theme: keyof typeof uiThemeColors): SxProps<Theme> => ({
-    ...buttonConfig.base,
-    '&:hover': {
-      borderColor: uiThemeColors[theme].primary,
-      backgroundColor: uiThemeColors[theme].hover,
-      color: uiThemeColors[theme].primary
     }
   }),
 

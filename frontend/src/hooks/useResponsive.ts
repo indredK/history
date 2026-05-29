@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react';
 
-export interface ResponsiveState {
+interface ResponsiveState {
   isMobile: boolean;
   isTablet: boolean;
   isDesktop: boolean;
@@ -15,7 +15,7 @@ export interface ResponsiveState {
   screenHeight: number;
 }
 
-export interface Breakpoints {
+interface Breakpoints {
   mobileXs: number;
   mobileSm: number;
   mobileMd: number;
@@ -95,7 +95,7 @@ export function useResponsive(breakpoints: Breakpoints = defaultBreakpoints): Re
  * @param query 媒体查询字符串
  * @returns 是否匹配
  */
-export function useMediaQuery(query: string): boolean {
+function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.matchMedia(query).matches;
@@ -199,7 +199,7 @@ export function useOrientation() {
  * 使用视口尺寸
  * @returns 视口宽度和高度
  */
-export function useViewport() {
+function useViewport() {
   const [viewport, setViewport] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
