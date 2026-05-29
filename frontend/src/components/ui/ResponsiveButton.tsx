@@ -10,6 +10,7 @@ import { Button, ButtonProps, IconButton, IconButtonProps } from '@mui/material'
 import { useResponsive, useTouchDevice } from '@/hooks/useResponsive';
 import { getButtonStyles } from '@/config/responsive';
 import { getGlassConfig } from '@/config/glassConfig';
+import { useStyleStore } from '@/store';
 
 interface ResponsiveButtonProps extends ButtonProps {
   responsive?: boolean;
@@ -35,6 +36,7 @@ export function ResponsiveButton({
 }: ResponsiveButtonProps) {
   const { screenWidth, isMobile } = useResponsive();
   const isTouch = useTouchDevice();
+  const isClassicStyle = useStyleStore((state) => state.style) === 'classic';
   
   const buttonStyles = responsive 
     ? getButtonStyles(screenWidth)
@@ -46,20 +48,26 @@ export function ResponsiveButton({
 
   // 构建毛玻璃样式
   const glassEffectStyles = glassEffect ? {
-    backdropFilter: `blur(${buttonConfig.blur})`,
-    WebkitBackdropFilter: `blur(${buttonConfig.blur})`,
-    backgroundColor: `rgba(var(--glass-surface-rgb), ${buttonConfig.bgOpacity})`,
-    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
-    boxShadow: glassConfig.shadow.sm,
+    backdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${buttonConfig.blur})`,
+    WebkitBackdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${buttonConfig.blur})`,
+    backgroundColor: isClassicStyle
+      ? 'var(--app-interactive-bg-soft)'
+      : `rgba(var(--glass-surface-rgb), ${buttonConfig.bgOpacity})`,
+    border: isClassicStyle ? 'var(--app-panel-border)' : `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    boxShadow: isClassicStyle ? 'var(--app-panel-shadow-sm)' : glassConfig.shadow.sm,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
     '&:hover': {
-      backgroundColor: `rgba(var(--glass-surface-rgb), ${Math.min(buttonConfig.bgOpacity + 0.1, 0.95)})`,
-      boxShadow: glassConfig.shadow.md,
+      backgroundColor: isClassicStyle
+        ? 'var(--app-interactive-hover-bg)'
+        : `rgba(var(--glass-surface-rgb), ${Math.min(buttonConfig.bgOpacity + 0.1, 0.95)})`,
+      boxShadow: isClassicStyle ? 'var(--app-panel-shadow-md)' : glassConfig.shadow.md,
       transform: 'translateY(-1px)',
     },
     '&:active': {
-      backgroundColor: `rgba(var(--glass-surface-rgb), ${Math.max(buttonConfig.bgOpacity - 0.05, 0.3)})`,
-      boxShadow: glassConfig.shadow.sm,
+      backgroundColor: isClassicStyle
+        ? 'var(--app-interactive-active-bg)'
+        : `rgba(var(--glass-surface-rgb), ${Math.max(buttonConfig.bgOpacity - 0.05, 0.3)})`,
+      boxShadow: isClassicStyle ? 'var(--app-panel-shadow-sm)' : glassConfig.shadow.sm,
       transform: 'translateY(0)',
     },
   } : {};
@@ -101,6 +109,7 @@ export function ResponsiveIconButton({
 }: ResponsiveIconButtonProps) {
   const { screenWidth, isMobile } = useResponsive();
   const isTouch = useTouchDevice();
+  const isClassicStyle = useStyleStore((state) => state.style) === 'classic';
   
   const buttonStyles = responsive 
     ? getButtonStyles(screenWidth)
@@ -112,20 +121,26 @@ export function ResponsiveIconButton({
 
   // 构建毛玻璃样式
   const glassEffectStyles = glassEffect ? {
-    backdropFilter: `blur(${iconConfig.blur})`,
-    WebkitBackdropFilter: `blur(${iconConfig.blur})`,
-    backgroundColor: `rgba(var(--glass-surface-rgb), ${iconConfig.bgOpacity})`,
-    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
-    boxShadow: glassConfig.shadow.sm,
+    backdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${iconConfig.blur})`,
+    WebkitBackdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${iconConfig.blur})`,
+    backgroundColor: isClassicStyle
+      ? 'var(--app-interactive-bg-soft)'
+      : `rgba(var(--glass-surface-rgb), ${iconConfig.bgOpacity})`,
+    border: isClassicStyle ? 'var(--app-panel-border)' : `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    boxShadow: isClassicStyle ? 'var(--app-panel-shadow-sm)' : glassConfig.shadow.sm,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
     '&:hover': {
-      backgroundColor: `rgba(var(--glass-surface-rgb), ${Math.min(iconConfig.bgOpacity + 0.15, 0.95)})`,
-      boxShadow: glassConfig.shadow.md,
+      backgroundColor: isClassicStyle
+        ? 'var(--app-interactive-hover-bg)'
+        : `rgba(var(--glass-surface-rgb), ${Math.min(iconConfig.bgOpacity + 0.15, 0.95)})`,
+      boxShadow: isClassicStyle ? 'var(--app-panel-shadow-md)' : glassConfig.shadow.md,
       transform: 'scale(1.05)',
     },
     '&:active': {
-      backgroundColor: `rgba(var(--glass-surface-rgb), ${Math.max(iconConfig.bgOpacity - 0.05, 0.2)})`,
-      boxShadow: glassConfig.shadow.sm,
+      backgroundColor: isClassicStyle
+        ? 'var(--app-interactive-active-bg)'
+        : `rgba(var(--glass-surface-rgb), ${Math.max(iconConfig.bgOpacity - 0.05, 0.2)})`,
+      boxShadow: isClassicStyle ? 'var(--app-panel-shadow-sm)' : glassConfig.shadow.sm,
       transform: 'scale(0.95)',
     },
   } : {};

@@ -17,9 +17,12 @@
   --theme-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
   --theme-transition: 
     background-color var(--theme-transition-duration) var(--theme-transition-easing),
+    background-image var(--theme-transition-duration) var(--theme-transition-easing),
     border-color var(--theme-transition-duration) var(--theme-transition-easing),
     color var(--theme-transition-duration) var(--theme-transition-easing),
-    box-shadow var(--theme-transition-duration) var(--theme-transition-easing);
+    box-shadow var(--theme-transition-duration) var(--theme-transition-easing),
+    backdrop-filter var(--theme-transition-duration) var(--theme-transition-easing),
+    -webkit-backdrop-filter var(--theme-transition-duration) var(--theme-transition-easing);
 }
 
 /* ============================================
@@ -129,7 +132,18 @@
   --theme-icon-secondary: rgba(0, 0, 0, 0.54);
 }
 
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
 [data-style="glass"] {
+  --app-backdrop-light: blur(var(--glass-blur-light));
+  --app-backdrop-medium: blur(var(--glass-blur-medium));
+  --app-backdrop-heavy: blur(var(--glass-blur-heavy));
   --app-panel-bg: var(--theme-glass-bg);
   --app-panel-bg-soft: var(--theme-glass-bg-light);
   --app-panel-bg-strong: var(--theme-glass-bg-heavy);
@@ -137,9 +151,24 @@
   --app-panel-shadow-sm: var(--theme-shadow-sm);
   --app-panel-shadow-md: var(--theme-shadow-md);
   --app-panel-shadow-lg: var(--theme-shadow-lg);
+  --app-interactive-bg: var(--theme-glass-bg);
+  --app-interactive-bg-soft: var(--theme-glass-bg-light);
+  --app-interactive-bg-strong: var(--theme-glass-bg-heavy);
+  --app-interactive-border: var(--theme-glass-border);
+  --app-interactive-border-strong: var(--theme-glass-border-heavy);
+  --app-interactive-text: var(--theme-text-primary);
+  --app-interactive-hover-bg: var(--theme-hover-bg);
+  --app-interactive-active-bg: var(--theme-active-bg);
+  --glass-surface-rgb: var(--theme-glass-surface-rgb);
+  --glass-surface-soft-rgb: var(--theme-glass-surface-soft-rgb);
+  --glass-on-surface-rgb: var(--theme-glass-on-surface-rgb);
+  --glass-tint-rgb: var(--theme-glass-tint-rgb);
 }
 
 [data-style="classic"] {
+  --app-backdrop-light: none;
+  --app-backdrop-medium: none;
+  --app-backdrop-heavy: none;
   --app-panel-bg: var(--theme-bg-secondary);
   --app-panel-bg-soft: var(--theme-bg-surface);
   --app-panel-bg-strong: var(--theme-bg-elevated);
@@ -147,6 +176,157 @@
   --app-panel-shadow-sm: var(--theme-shadow-sm);
   --app-panel-shadow-md: var(--theme-shadow-md);
   --app-panel-shadow-lg: var(--theme-shadow-lg);
+  --app-interactive-bg: var(--theme-bg-secondary);
+  --app-interactive-bg-soft: var(--theme-bg-surface);
+  --app-interactive-bg-strong: var(--theme-bg-elevated);
+  --app-interactive-border: var(--theme-border-color);
+  --app-interactive-border-strong: var(--theme-border-color);
+  --app-interactive-text: var(--theme-text-primary);
+  --app-interactive-hover-bg: var(--theme-hover-bg);
+  --app-interactive-active-bg: var(--theme-active-bg);
+
+  /* 让仍然引用旧玻璃变量的组件在经典模式下自动回落到实体面板。 */
+  --theme-glass-bg: var(--theme-bg-secondary);
+  --theme-glass-bg-light: var(--theme-bg-surface);
+  --theme-glass-bg-heavy: var(--theme-bg-elevated);
+  --theme-glass-border: var(--theme-border-color);
+  --theme-glass-border-light: var(--theme-border-light);
+  --theme-glass-border-heavy: var(--theme-border-color);
+  --glass-surface-rgb: var(--theme-glass-bg-base);
+  --glass-surface-soft-rgb: var(--theme-glass-bg-base);
+  --glass-on-surface-rgb: var(--theme-glass-on-surface-rgb);
+  --glass-tint-rgb: var(--theme-glass-tint-rgb);
+  --glass-border-color: var(--theme-border-color);
+  --glass-border-color-dark: var(--theme-border-light);
+  --glass-shadow-sm: var(--theme-shadow-sm);
+  --glass-shadow-md: var(--theme-shadow-md);
+  --glass-shadow-lg: var(--theme-shadow-lg);
+  --glass-shadow-glow: none;
+  --glass-shadow-inset: none;
+  --glass-blur-light: 0px;
+  --glass-blur-medium: 0px;
+  --glass-blur-heavy: 0px;
+  --glass-blur-ultra: 0px;
+  --glass-card-blur: 0px;
+  --glass-nav-blur: 0px;
+  --glass-btn-primary-blur: 0px;
+  --glass-btn-secondary-blur: 0px;
+  --glass-btn-icon-blur: 0px;
+  --glass-table-container-blur: 0px;
+  --glass-table-header-blur: 0px;
+  --glass-modal-backdrop-blur: 0px;
+  --glass-modal-content-blur: 0px;
+  --glass-popover-blur: 0px;
+  --glass-tooltip-blur: 0px;
+  --glass-dropdown-blur: 0px;
+  --glass-bg-opacity-ultra-light: 0.92;
+  --glass-bg-opacity-light: 0.94;
+  --glass-bg-opacity-medium: 0.96;
+  --glass-bg-opacity-high: 0.98;
+  --glass-bg-opacity-solid: 1;
+  --glass-card-bg-opacity: 0.96;
+  --glass-table-container-bg-opacity: 0.98;
+  --glass-table-header-bg-opacity: 1;
+  --glass-table-row-bg-opacity: 0.92;
+  --glass-table-row-hover-opacity: 1;
+  --glass-btn-primary-bg-opacity: 1;
+  --glass-btn-secondary-bg-opacity: 0.96;
+  --glass-btn-icon-bg-opacity: 0.96;
+  --glass-nav-bg-opacity: 1;
+  --glass-popover-bg-opacity: 1;
+  --glass-tooltip-bg-opacity: 1;
+  --glass-dropdown-bg-opacity: 1;
+  --glass-modal-content-bg-opacity: 1;
+  --glass-nav-active-glow: none;
+}
+
+[data-style="glass"][data-theme="dark"] {
+  --app-topbar-bg: linear-gradient(180deg, rgba(148, 110, 52, 0.94), rgba(166, 129, 71, 0.9));
+  --app-topbar-border: rgba(176, 138, 87, 0.18);
+  --app-topbar-text: #fff7eb;
+  --app-topbar-shadow: 0 8px 26px rgba(88, 59, 18, 0.18);
+  --app-topbar-pill-bg: rgba(255, 247, 235, 0.16);
+  --app-topbar-pill-border: rgba(255, 245, 225, 0.45);
+  --app-topbar-pill-text: #fff7eb;
+  --app-topbar-pill-hover-bg: rgba(255, 247, 235, 0.3);
+  --app-topbar-pill-active-bg: rgba(255, 248, 236, 0.92);
+  --app-topbar-pill-active-border: rgba(255, 248, 236, 0.96);
+  --app-topbar-pill-active-text: #73491d;
+  --app-topbar-pill-shadow: 0 10px 18px rgba(92, 61, 20, 0.18);
+  --app-page-surface:
+    linear-gradient(180deg, rgba(255, 248, 236, 0.08), rgba(255, 248, 236, 0.02)),
+    radial-gradient(circle at top right, rgba(179, 138, 74, 0.12), transparent 28%);
+}
+
+[data-style="glass"][data-theme="light"] {
+  --app-topbar-bg: linear-gradient(180deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+  --app-topbar-border: var(--color-border-medium);
+  --app-topbar-text: var(--color-text-primary);
+  --app-topbar-shadow: var(--shadow-sm);
+  --app-topbar-pill-bg: rgba(var(--color-glass-surface-rgb), 0.5);
+  --app-topbar-pill-border: var(--color-border-medium);
+  --app-topbar-pill-text: var(--color-text-primary);
+  --app-topbar-pill-hover-bg: rgba(var(--color-glass-surface-rgb), 0.75);
+  --app-topbar-pill-active-bg: rgba(var(--color-glass-surface-rgb), 0.92);
+  --app-topbar-pill-active-border: var(--color-border-dark);
+  --app-topbar-pill-active-text: var(--color-primary-dark);
+  --app-topbar-pill-shadow: var(--shadow-sm);
+  --app-page-surface:
+    linear-gradient(180deg, rgba(var(--color-glass-surface-rgb), 0.5), rgba(var(--color-glass-surface-soft-rgb), 0.3)),
+    radial-gradient(circle at top right, rgba(var(--color-glass-tint-rgb), 0.06), transparent 28%);
+}
+
+[data-style="classic"][data-theme="dark"] {
+  --app-topbar-bg: linear-gradient(180deg, var(--theme-bg-elevated), var(--theme-bg-secondary));
+  --app-topbar-border: var(--theme-border-color);
+  --app-topbar-text: var(--theme-text-primary);
+  --app-topbar-shadow: var(--theme-shadow-sm);
+  --app-topbar-pill-bg: var(--theme-bg-surface);
+  --app-topbar-pill-border: var(--theme-border-color);
+  --app-topbar-pill-text: var(--theme-text-primary);
+  --app-topbar-pill-hover-bg: var(--theme-hover-bg);
+  --app-topbar-pill-active-bg: var(--color-primary-gradient);
+  --app-topbar-pill-active-border: transparent;
+  --app-topbar-pill-active-text: var(--color-text-inverse);
+  --app-topbar-pill-shadow: var(--theme-shadow-sm);
+  --app-page-surface: var(--theme-bg-primary);
+}
+
+[data-style="classic"][data-theme="light"] {
+  --app-topbar-bg: linear-gradient(180deg, var(--theme-bg-elevated), var(--theme-bg-secondary));
+  --app-topbar-border: var(--theme-border-color);
+  --app-topbar-text: var(--theme-text-primary);
+  --app-topbar-shadow: var(--theme-shadow-sm);
+  --app-topbar-pill-bg: var(--theme-bg-surface);
+  --app-topbar-pill-border: var(--theme-border-color);
+  --app-topbar-pill-text: var(--theme-text-primary);
+  --app-topbar-pill-hover-bg: var(--theme-hover-bg);
+  --app-topbar-pill-active-bg: var(--color-primary-gradient);
+  --app-topbar-pill-active-border: transparent;
+  --app-topbar-pill-active-text: var(--color-text-inverse);
+  --app-topbar-pill-shadow: var(--theme-shadow-sm);
+  --app-page-surface: var(--theme-bg-primary);
+}
+
+html.theme-transitioning body,
+html.theme-transitioning body *,
+html.style-transitioning body,
+html.style-transitioning body * {
+  transition:
+    background-color var(--theme-transition-duration) var(--theme-transition-easing),
+    background-image var(--theme-transition-duration) var(--theme-transition-easing),
+    border-color var(--theme-transition-duration) var(--theme-transition-easing),
+    color var(--theme-transition-duration) var(--theme-transition-easing),
+    box-shadow var(--theme-transition-duration) var(--theme-transition-easing),
+    backdrop-filter var(--theme-transition-duration) var(--theme-transition-easing),
+    -webkit-backdrop-filter var(--theme-transition-duration) var(--theme-transition-easing) !important;
+}
+
+[data-style="classic"] *,
+[data-style="classic"] *::before,
+[data-style="classic"] *::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 /* ============================================
@@ -160,6 +340,13 @@
   [data-theme="light"] {
     --theme-transition-duration: 0ms;
     --theme-transition: none;
+  }
+
+  html.theme-transitioning body,
+  html.theme-transitioning body *,
+  html.style-transitioning body,
+  html.style-transitioning body * {
+    transition: none !important;
   }
 }
 

@@ -9,8 +9,8 @@ type Props = {
 
 export function EventCard({ event, index }: Props) {
   const [isFav, setIsFav] = useState(false);
-  const panelBg = 'rgba(var(--glass-surface-rgb), 0.5)';
-  const panelBorder = '1px solid var(--theme-glass-border)';
+  const panelBg = 'var(--app-panel-bg)';
+  const panelBorder = 'var(--app-panel-border)';
 
   const handleShare = () => {
     const data = {
@@ -42,8 +42,8 @@ export function EventCard({ event, index }: Props) {
             className={`btn glass-button ${isFav ? 'btn-primary' : 'btn-outline'}`}
             onClick={() => setIsFav(!isFav)}
             style={{
-              backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)',
+              backdropFilter: 'var(--app-backdrop-light)',
+              WebkitBackdropFilter: 'var(--app-backdrop-light)',
               backgroundColor: isFav ? 'rgba(199, 143, 69, 0.78)' : panelBg,
               color: isFav ? 'var(--color-text-inverse)' : 'var(--color-text-primary)',
               border: isFav ? '1px solid rgba(199, 143, 69, 0.36)' : panelBorder,
@@ -57,9 +57,9 @@ export function EventCard({ event, index }: Props) {
             className="btn btn-outline glass-button-secondary" 
             onClick={handleShare}
             style={{
-              backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)',
-              backgroundColor: 'rgba(var(--glass-surface-rgb), 0.4)',
+              backdropFilter: 'var(--app-backdrop-light)',
+              WebkitBackdropFilter: 'var(--app-backdrop-light)',
+              backgroundColor: 'var(--app-interactive-bg-soft)',
               color: 'var(--color-text-primary)',
               border: panelBorder,
               borderRadius: 'var(--glass-radius-md, 12px)',
@@ -72,9 +72,9 @@ export function EventCard({ event, index }: Props) {
             <summary 
               className="btn btn-ghost glass-button"
               style={{
-                backdropFilter: 'blur(6px)',
-                WebkitBackdropFilter: 'blur(6px)',
-                backgroundColor: 'var(--color-hover-bg)',
+                backdropFilter: 'var(--app-backdrop-light)',
+                WebkitBackdropFilter: 'var(--app-backdrop-light)',
+                backgroundColor: 'var(--app-interactive-hover-bg)',
                 color: 'var(--color-text-primary)',
                 border: '1px solid rgba(199, 143, 69, 0.28)',
                 borderRadius: 'var(--glass-radius-lg, 16px)'
@@ -85,8 +85,8 @@ export function EventCard({ event, index }: Props) {
             <div style={{ 
               padding: 8,
               background: panelBg,
-              backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)',
+              backdropFilter: 'var(--app-backdrop-light)',
+              WebkitBackdropFilter: 'var(--app-backdrop-light)',
               borderRadius: 'var(--glass-radius-lg, 16px)',
               border: panelBorder,
               marginTop: 8

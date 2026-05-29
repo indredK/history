@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
@@ -21,13 +21,8 @@ function routeMatches(pathname: string, routePath: string) {
 export function MapFirstLayout({ routes }: MapFirstLayoutProps) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { theme, toggleTheme, initializeTheme } = useThemeStore();
-  const { style, toggleStyle, initializeStyle } = useStyleStore();
-
-  useEffect(() => {
-    initializeTheme();
-    initializeStyle();
-  }, [initializeStyle, initializeTheme]);
+  const { theme, toggleTheme } = useThemeStore();
+  const { style, toggleStyle } = useStyleStore();
 
   const primaryRoutes = useMemo(
     () =>

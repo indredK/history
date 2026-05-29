@@ -24,12 +24,13 @@ export function SettingsPanel({ collapsed }: SettingsPanelProps) {
 
   // 毛玻璃面板样式
   const panelStyle = {
-    backdropFilter: `blur(${glassConfig.blur.light})`,
-    WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
-    background: 'var(--theme-glass-bg-light)',
-    border: '1px solid var(--theme-glass-border)',
+    backdropFilter: 'var(--app-backdrop-light)',
+    WebkitBackdropFilter: 'var(--app-backdrop-light)',
+    background: 'var(--app-panel-bg-soft)',
+    border: 'var(--app-panel-border)',
     borderRadius: glassConfig.border.radius.lg,
     padding: collapsed ? '4px' : '8px',
+    boxShadow: 'var(--app-panel-shadow-sm)',
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
   };
 

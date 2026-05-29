@@ -19,6 +19,7 @@ import {
 import { useResponsive } from '@/hooks/useResponsive';
 import { getTableStyles } from '@/config/responsive';
 import { getGlassConfig } from '@/config/glassConfig';
+import { useStyleStore } from '@/store';
 
 interface ResponsiveTableProps {
   children: React.ReactNode;
@@ -54,6 +55,7 @@ export function ResponsiveTable({
   ...props
 }: ResponsiveTableProps) {
   const { isMobile, screenWidth } = useResponsive();
+  const isClassicStyle = useStyleStore((state) => state.style) === 'classic';
   const tableStyles = getTableStyles(screenWidth);
   
   // 获取毛玻璃配置
@@ -62,20 +64,28 @@ export function ResponsiveTable({
 
   // 毛玻璃表头样式
   const glassHeaderStyles = glassEffect ? {
-    backdropFilter: `blur(${tableConfig.header.blur})`,
-    WebkitBackdropFilter: `blur(${tableConfig.header.blur})`,
-    backgroundColor: `rgba(var(--glass-tint-rgb, 199, 143, 69), ${tableConfig.header.bgOpacity})`,
-    borderBottom: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    backdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${tableConfig.header.blur})`,
+    WebkitBackdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${tableConfig.header.blur})`,
+    backgroundColor: isClassicStyle
+      ? 'var(--app-panel-bg-strong)'
+      : `rgba(var(--glass-tint-rgb, 199, 143, 69), ${tableConfig.header.bgOpacity})`,
+    borderBottom: isClassicStyle
+      ? '1px solid var(--app-interactive-border)'
+      : `${glassConfig.border.width} solid ${glassConfig.border.color}`,
   } : {
     background: 'var(--color-primary-gradient)',
   };
 
   // 毛玻璃行样式
   const glassRowStyles = glassEffect ? {
-    backgroundColor: `rgba(var(--glass-surface-rgb), ${tableConfig.row.bgOpacity})`,
+    backgroundColor: isClassicStyle
+      ? 'var(--app-panel-bg)'
+      : `rgba(var(--glass-surface-rgb), ${tableConfig.row.bgOpacity})`,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
     '&:hover': {
-      backgroundColor: `rgba(var(--glass-surface-rgb), ${tableConfig.row.hoverOpacity})`,
+      backgroundColor: isClassicStyle
+        ? 'var(--app-interactive-hover-bg)'
+        : `rgba(var(--glass-surface-rgb), ${tableConfig.row.hoverOpacity})`,
     },
   } : {};
 
@@ -93,7 +103,7 @@ export function ResponsiveTable({
           padding: tableStyles.cellPadding,
           fontSize: tableStyles.fontSize,
           lineHeight: 1.2,
-          borderRight: `1px solid ${glassEffect ? glassConfig.border.color : 'rgba(226, 198, 140, 0.1)'}`,
+          borderRight: `1px solid ${glassEffect ? (isClassicStyle ? 'var(--app-interactive-border)' : glassConfig.border.color) : 'rgba(226, 198, 140, 0.1)'}`,
           
           // 移动端优化
           ...(isMobile && {
@@ -109,7 +119,7 @@ export function ResponsiveTable({
           fontWeight: 600,
           height: tableStyles.headerHeight,
           whiteSpace: 'nowrap',
-          color: 'var(--color-text-inverse)',
+          color: isClassicStyle ? 'var(--color-text-primary)' : 'var(--color-text-inverse)',
           position: 'sticky',
           top: 0,
           zIndex: 100,
@@ -143,6 +153,7 @@ export function ResponsiveTableCell({
   ...props
 }: ResponsiveTableCellProps) {
   const { isMobile, isSmallMobile, screenWidth } = useResponsive();
+  const isClassicStyle = useStyleStore((state) => state.style) === 'classic';
   
   // 获取毛玻璃配置
   const glassConfig = getGlassConfig(screenWidth);
@@ -166,13 +177,17 @@ export function ResponsiveTableCell({
 
   // 毛玻璃粘性单元格样式
   const glassStickyStyles = glassEffect && sticky ? {
-    backdropFilter: `blur(${tableConfig.container.blur})`,
-    WebkitBackdropFilter: `blur(${tableConfig.container.blur})`,
-    backgroundColor: component === 'th' 
-      ? `rgba(var(--glass-tint-rgb, 199, 143, 69), ${tableConfig.header.bgOpacity})`
-      : `rgba(var(--glass-surface-soft-rgb), ${tableConfig.container.bgOpacity})`,
-    borderRight: `1px solid ${glassConfig.border.color}`,
-    boxShadow: '2px 0 8px rgba(0,0,0,0.15)',
+    backdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${tableConfig.container.blur})`,
+    WebkitBackdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${tableConfig.container.blur})`,
+    backgroundColor: isClassicStyle
+      ? component === 'th'
+        ? 'var(--app-panel-bg-strong)'
+        : 'var(--app-panel-bg)'
+      : component === 'th'
+        ? `rgba(var(--glass-tint-rgb, 199, 143, 69), ${tableConfig.header.bgOpacity})`
+        : `rgba(var(--glass-surface-soft-rgb), ${tableConfig.container.bgOpacity})`,
+    borderRight: isClassicStyle ? '1px solid var(--app-interactive-border)' : `1px solid ${glassConfig.border.color}`,
+    boxShadow: isClassicStyle ? 'var(--app-panel-shadow-sm)' : '2px 0 8px rgba(0,0,0,0.15)',
   } : {};
 
   return (
@@ -209,12 +224,16 @@ export function ResponsiveTableCell({
             minWidth: isSmallMobile ? '60px' : '80px',
             maxWidth: isSmallMobile ? '80px' : '120px',
             ...(glassEffect ? {
-              backdropFilter: `blur(${tableConfig.container.blur})`,
-              WebkitBackdropFilter: `blur(${tableConfig.container.blur})`,
-              backgroundColor: component === 'th' 
-                ? `rgba(var(--glass-tint-rgb, 199, 143, 69), ${tableConfig.header.bgOpacity})`
-                : `rgba(var(--glass-surface-soft-rgb), ${tableConfig.container.bgOpacity})`,
-              boxShadow: '2px 0 8px rgba(0,0,0,0.15)',
+              backdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${tableConfig.container.blur})`,
+              WebkitBackdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${tableConfig.container.blur})`,
+              backgroundColor: isClassicStyle
+                ? component === 'th'
+                  ? 'var(--app-panel-bg-strong)'
+                  : 'var(--app-panel-bg)'
+                : component === 'th'
+                  ? `rgba(var(--glass-tint-rgb, 199, 143, 69), ${tableConfig.header.bgOpacity})`
+                  : `rgba(var(--glass-surface-soft-rgb), ${tableConfig.container.bgOpacity})`,
+              boxShadow: isClassicStyle ? 'var(--app-panel-shadow-sm)' : '2px 0 8px rgba(0,0,0,0.15)',
             } : {
               backgroundColor: component === 'th' 
                 ? 'var(--color-primary-gradient, linear-gradient(135deg, #FF3D00 0%, #FF6F3D 100%))'
@@ -257,16 +276,19 @@ export function GlassTableContainer({
   glassEffect = true,
 }: GlassTableContainerProps) {
   const { screenWidth } = useResponsive();
+  const isClassicStyle = useStyleStore((state) => state.style) === 'classic';
   const glassConfig = getGlassConfig(screenWidth);
   const tableConfig = glassConfig.components.table;
 
   const glassStyles = glassEffect ? {
-    backdropFilter: `blur(${tableConfig.container.blur})`,
-    WebkitBackdropFilter: `blur(${tableConfig.container.blur})`,
-    backgroundColor: `rgba(var(--glass-surface-soft-rgb), ${tableConfig.container.bgOpacity})`,
-    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    backdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${tableConfig.container.blur})`,
+    WebkitBackdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${tableConfig.container.blur})`,
+    backgroundColor: isClassicStyle
+      ? 'var(--app-panel-bg)'
+      : `rgba(var(--glass-surface-soft-rgb), ${tableConfig.container.bgOpacity})`,
+    border: isClassicStyle ? 'var(--app-panel-border)' : `${glassConfig.border.width} solid ${glassConfig.border.color}`,
     borderRadius: glassConfig.border.radius.lg,
-    boxShadow: glassConfig.shadow.md,
+    boxShadow: isClassicStyle ? 'var(--app-panel-shadow-md)' : glassConfig.shadow.md,
   } : {};
 
   return (

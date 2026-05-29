@@ -14,6 +14,13 @@ import {
   STYLE_STORAGE_KEY, 
   isValidStyle 
 } from '../config/styles/types';
+import {
+  applyStyleToDOM,
+  bindStorageSync,
+  readStoredMode,
+  runRootTransition,
+  writeStoredMode,
+} from '@/theme/domAppearance';
 
 interface StyleState {
   /** 当前样式模式 */
@@ -26,20 +33,14 @@ interface StyleState {
   initializeStyle: () => void;
 }
 
+let detachStyleStorageSync: (() => void) | null = null;
+
 /**
  * 从 localStorage 获取保存的样式
  * Requirements: 2.2, 2.3
  */
 function getSavedStyle(): StyleMode {
-  try {
-    const saved = localStorage.getItem(STYLE_STORAGE_KEY);
-    if (saved && isValidStyle(saved)) {
-      return saved;
-    }
-  } catch (error) {
-    console.warn('Failed to read style from localStorage:', error);
-  }
-  return DEFAULT_STYLE;
+  return readStoredMode(STYLE_STORAGE_KEY, isValidStyle, DEFAULT_STYLE);
 }
 
 /**
@@ -47,21 +48,19 @@ function getSavedStyle(): StyleMode {
  * Requirements: 2.4
  */
 function saveStyle(style: StyleMode): void {
-  try {
-    localStorage.setItem(STYLE_STORAGE_KEY, style);
-  } catch (error) {
-    console.warn('Failed to save style to localStorage:', error);
-  }
+  writeStoredMode(STYLE_STORAGE_KEY, style);
 }
 
 /**
  * 应用样式到 DOM
  * Requirements: 2.6
  */
-function applyStyleToDOM(style: StyleMode): void {
-  if (typeof document !== 'undefined') {
-    document.documentElement.setAttribute('data-style', style);
+function ensureStyleStorageSync(setStyle: (style: StyleMode) => void): void {
+  if (detachStyleStorageSync) {
+    return;
   }
+
+  detachStyleStorageSync = bindStorageSync(STYLE_STORAGE_KEY, isValidStyle, setStyle);
 }
 
 /**
@@ -76,22 +75,30 @@ export const useStyleStore = create<StyleState>((set, get) => ({
       console.warn(`Invalid style value: ${style}`);
       return;
     }
-    saveStyle(style);
-    applyStyleToDOM(style);
-    set({ style });
+    runRootTransition('style-transitioning', () => {
+      saveStyle(style);
+      applyStyleToDOM(style);
+      set({ style });
+    });
   },
   
   toggleStyle: () => {
     const currentStyle = get().style;
     const newStyle: StyleMode = currentStyle === 'glass' ? 'classic' : 'glass';
-    saveStyle(newStyle);
-    applyStyleToDOM(newStyle);
-    set({ style: newStyle });
+    runRootTransition('style-transitioning', () => {
+      saveStyle(newStyle);
+      applyStyleToDOM(newStyle);
+      set({ style: newStyle });
+    });
   },
   
   initializeStyle: () => {
     const style = getSavedStyle();
     applyStyleToDOM(style);
+    ensureStyleStorageSync((nextStyle) => {
+      applyStyleToDOM(nextStyle);
+      set({ style: nextStyle });
+    });
     set({ style });
   },
 }));
@@ -103,4 +110,8 @@ export const useStyleStore = create<StyleState>((set, get) => ({
 export function initializeStyle(): void {
   const style = getSavedStyle();
   applyStyleToDOM(style);
+  ensureStyleStorageSync((nextStyle) => {
+    applyStyleToDOM(nextStyle);
+    useStyleStore.setState({ style: nextStyle });
+  });
 }

@@ -32,19 +32,19 @@ export function StyleSwitcherButton({ collapsed }: StyleSwitcherButtonProps) {
   
   // 按钮样式 - 根据当前样式模式调整
   const buttonStyle = {
-    backdropFilter: isGlass ? `blur(${glassConfig.blur.light})` : 'none',
-    WebkitBackdropFilter: isGlass ? `blur(${glassConfig.blur.light})` : 'none',
-    background: 'var(--theme-glass-bg-light)',
-    border: '1px solid var(--theme-glass-border)',
+    backdropFilter: 'var(--app-backdrop-light)',
+    WebkitBackdropFilter: 'var(--app-backdrop-light)',
+    background: 'var(--app-interactive-bg-soft)',
+    border: '1px solid var(--app-interactive-border)',
     borderRadius: glassConfig.border.radius.md,
-    color: 'var(--theme-icon-primary)',
+    color: 'var(--app-interactive-text)',
     width: buttonSize,
     height: buttonSize,
     minWidth: buttonSize,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
     '&:hover': {
-      background: 'rgba(199, 143, 69, 0.1)',
-      boxShadow: glassConfig.shadow.glow,
+      background: 'var(--app-interactive-hover-bg)',
+      boxShadow: 'var(--app-panel-shadow-sm)',
       transform: 'translateY(-2px)',
     },
     '&:active': {
@@ -52,22 +52,10 @@ export function StyleSwitcherButton({ collapsed }: StyleSwitcherButtonProps) {
     },
   };
 
-  const handleClick = () => {
-    // 添加过渡类以实现平滑切换
-    document.documentElement.classList.add('style-transitioning');
-    
-    toggleStyle();
-    
-    // 过渡完成后移除类
-    setTimeout(() => {
-      document.documentElement.classList.remove('style-transitioning');
-    }, 200);
-  };
-
   return (
     <Tooltip title={label} placement={collapsed ? 'right' : 'top'}>
       <IconButton
-        onClick={handleClick}
+        onClick={toggleStyle}
         sx={buttonStyle}
         aria-label={label}
       >

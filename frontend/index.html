@@ -28,6 +28,23 @@
         }
       }(window.location))
     </script>
+    <script type="text/javascript">
+      (function() {
+        try {
+          var root = document.documentElement;
+          var theme = window.localStorage.getItem('app-theme');
+          var style = window.localStorage.getItem('app-style');
+          var resolvedTheme = theme === 'light' || theme === 'dark' ? theme : 'dark';
+          var resolvedStyle = style === 'classic' || style === 'glass' ? style : 'glass';
+
+          root.setAttribute('data-theme', resolvedTheme);
+          root.setAttribute('data-style', resolvedStyle);
+          root.style.colorScheme = resolvedTheme;
+        } catch (error) {
+          console.warn('Failed to restore theme/style before app boot:', error);
+        }
+      })();
+    </script>
     
     <!-- 使用系统字体，无需外部字体加载 -->
   </head>

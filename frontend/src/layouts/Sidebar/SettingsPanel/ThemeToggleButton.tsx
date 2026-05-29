@@ -30,19 +30,19 @@ export function ThemeToggleButton({ collapsed }: ThemeToggleButtonProps) {
   
   // 毛玻璃按钮样式
   const buttonStyle = {
-    backdropFilter: `blur(${glassConfig.blur.light})`,
-    WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
-    background: 'var(--theme-glass-bg-light)',
-    border: '1px solid var(--theme-glass-border)',
+    backdropFilter: 'var(--app-backdrop-light)',
+    WebkitBackdropFilter: 'var(--app-backdrop-light)',
+    background: 'var(--app-interactive-bg-soft)',
+    border: '1px solid var(--app-interactive-border)',
     borderRadius: glassConfig.border.radius.md,
-    color: 'var(--theme-icon-primary)',
+    color: 'var(--app-interactive-text)',
     width: buttonSize,
     height: buttonSize,
     minWidth: buttonSize,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
     '&:hover': {
-      background: 'rgba(199, 143, 69, 0.1)',
-      boxShadow: glassConfig.shadow.glow,
+      background: 'var(--app-interactive-hover-bg)',
+      boxShadow: 'var(--app-panel-shadow-sm)',
       transform: 'translateY(-2px)',
     },
     '&:active': {

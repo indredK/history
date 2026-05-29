@@ -11,7 +11,8 @@ export const popoverConfig = {
   paperStyles: {
     borderRadius: 'var(--radius-xl)',
     background: 'var(--app-panel-bg-strong)',
-    backdropFilter: 'blur(20px)',
+    backdropFilter: 'var(--app-backdrop-medium)',
+    WebkitBackdropFilter: 'var(--app-backdrop-medium)',
     border: 'var(--app-panel-border)',
     boxShadow: `
       var(--app-panel-shadow-lg),
@@ -70,16 +71,17 @@ export const popoverConfig = {
 export const buttonConfig = {
   // 功能面板按钮的统一样式
   functionButton: {
-    backgroundColor: 'rgba(var(--glass-surface-rgb), 0.45)',
-    backdropFilter: 'blur(10px)',
+    backgroundColor: 'var(--app-interactive-bg-soft)',
+    backdropFilter: 'var(--app-backdrop-light)',
+    WebkitBackdropFilter: 'var(--app-backdrop-light)',
     borderRadius: '12px',
     padding: '6px 12px',
-    borderColor: 'var(--theme-glass-border)',
+    borderColor: 'var(--app-interactive-border)',
     transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     '&:hover': {
-      backgroundColor: 'rgba(199, 143, 69, 0.1)',
+      backgroundColor: 'var(--app-interactive-hover-bg)',
       borderColor: 'var(--color-primary)',
-      boxShadow: 'var(--shadow-md), var(--shadow-glow)',
+      boxShadow: 'var(--app-panel-shadow-sm)',
       transform: 'translateY(-2px)',
     },
     '&:active': {
@@ -90,9 +92,9 @@ export const buttonConfig = {
   // 通用按钮样式（用于Popover内的按钮）
   base: {
     borderRadius: 'var(--radius-md)',
-    borderColor: 'var(--theme-glass-border)',
+    borderColor: 'var(--app-interactive-border)',
     color: 'var(--color-text-primary)',
-    backgroundColor: 'rgba(var(--glass-surface-rgb), 0.14)',
+    backgroundColor: 'var(--app-interactive-bg)',
     transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)'
   } as SxProps<Theme>,
 

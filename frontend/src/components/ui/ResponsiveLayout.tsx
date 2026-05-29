@@ -10,6 +10,7 @@ import React from 'react';
 import { Box, Stack, StackProps } from '@mui/material';
 import { useResponsive } from '@/hooks/useResponsive';
 import { getGlassConfig } from '@/config/glassConfig';
+import { useStyleStore } from '@/store';
 
 interface ResponsiveLayoutProps {
   children: React.ReactNode;
@@ -52,6 +53,7 @@ export function ResponsiveLayout({
   glassEffect = false,
 }: ResponsiveLayoutProps) {
   const { isMobile, isTablet, screenWidth } = useResponsive();
+  const isClassicStyle = useStyleStore((state) => state.style) === 'classic';
   
   // 获取毛玻璃配置
   const glassConfig = getGlassConfig(screenWidth);
@@ -75,12 +77,14 @@ export function ResponsiveLayout({
 
   // 毛玻璃样式
   const glassStyles = glassEffect ? {
-    backdropFilter: `blur(${navConfig.blur})`,
-    WebkitBackdropFilter: `blur(${navConfig.blur})`,
-    backgroundColor: `rgba(var(--glass-surface-rgb), ${navConfig.bgOpacity})`,
-    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    backdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${navConfig.blur})`,
+    WebkitBackdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${navConfig.blur})`,
+    backgroundColor: isClassicStyle
+      ? 'var(--app-panel-bg)'
+      : `rgba(var(--glass-surface-rgb), ${navConfig.bgOpacity})`,
+    border: isClassicStyle ? 'var(--app-panel-border)' : `${glassConfig.border.width} solid ${glassConfig.border.color}`,
     borderRadius: glassConfig.border.radius.lg,
-    boxShadow: glassConfig.shadow.md,
+    boxShadow: isClassicStyle ? 'var(--app-panel-shadow-md)' : glassConfig.shadow.md,
     padding: isMobile ? '12px' : '16px',
   } : {};
 
@@ -116,6 +120,7 @@ export function ResponsiveGrid({
   ...props
 }: ResponsiveGridProps) {
   const { isMobile, isTablet, screenWidth } = useResponsive();
+  const isClassicStyle = useStyleStore((state) => state.style) === 'classic';
   
   // 获取毛玻璃配置
   const glassConfig = getGlassConfig(screenWidth);
@@ -140,12 +145,14 @@ export function ResponsiveGrid({
 
   // 毛玻璃样式
   const glassStyles = glassEffect ? {
-    backdropFilter: `blur(${glassConfig.blur.light})`,
-    WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
-    backgroundColor: `rgba(var(--glass-surface-rgb), ${glassConfig.bgOpacity.light})`,
-    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    backdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${glassConfig.blur.light})`,
+    WebkitBackdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${glassConfig.blur.light})`,
+    backgroundColor: isClassicStyle
+      ? 'var(--app-panel-bg)'
+      : `rgba(var(--glass-surface-rgb), ${glassConfig.bgOpacity.light})`,
+    border: isClassicStyle ? 'var(--app-panel-border)' : `${glassConfig.border.width} solid ${glassConfig.border.color}`,
     borderRadius: glassConfig.border.radius.lg,
-    boxShadow: glassConfig.shadow.sm,
+    boxShadow: isClassicStyle ? 'var(--app-panel-shadow-sm)' : glassConfig.shadow.sm,
     padding: isMobile ? '8px' : '12px',
   } : {};
 
@@ -175,6 +182,7 @@ export function ResponsiveStack({
   ...props
 }: ResponsiveStackProps) {
   const { isMobile, isTablet, screenWidth } = useResponsive();
+  const isClassicStyle = useStyleStore((state) => state.style) === 'classic';
   
   // 获取毛玻璃配置
   const glassConfig = getGlassConfig(screenWidth);
@@ -196,12 +204,14 @@ export function ResponsiveStack({
 
   // 毛玻璃样式
   const glassStyles = glassEffect ? {
-    backdropFilter: `blur(${glassConfig.blur.light})`,
-    WebkitBackdropFilter: `blur(${glassConfig.blur.light})`,
-    backgroundColor: `rgba(var(--glass-surface-rgb), ${glassConfig.bgOpacity.light})`,
-    border: `${glassConfig.border.width} solid ${glassConfig.border.color}`,
+    backdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${glassConfig.blur.light})`,
+    WebkitBackdropFilter: isClassicStyle ? 'var(--app-backdrop-light)' : `blur(${glassConfig.blur.light})`,
+    backgroundColor: isClassicStyle
+      ? 'var(--app-panel-bg)'
+      : `rgba(var(--glass-surface-rgb), ${glassConfig.bgOpacity.light})`,
+    border: isClassicStyle ? 'var(--app-panel-border)' : `${glassConfig.border.width} solid ${glassConfig.border.color}`,
     borderRadius: glassConfig.border.radius.md,
-    boxShadow: glassConfig.shadow.sm,
+    boxShadow: isClassicStyle ? 'var(--app-panel-shadow-sm)' : glassConfig.shadow.sm,
     padding: isMobile ? '8px' : '12px',
   } : {};
 

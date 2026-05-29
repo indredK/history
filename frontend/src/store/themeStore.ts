@@ -14,6 +14,13 @@ import {
   THEME_STORAGE_KEY, 
   isValidTheme 
 } from '../config/themeConfig';
+import {
+  applyThemeToDOM,
+  bindStorageSync,
+  readStoredMode,
+  runRootTransition,
+  writeStoredMode,
+} from '@/theme/domAppearance';
 
 interface ThemeState {
   /** 当前主题模式 */
@@ -28,20 +35,14 @@ interface ThemeState {
   initializeTheme: () => void;
 }
 
+let detachThemeStorageSync: (() => void) | null = null;
+
 /**
  * 从 localStorage 获取保存的主题
  * Requirements: 1.2, 1.3
  */
 function getSavedTheme(): ThemeMode {
-  try {
-    const saved = localStorage.getItem(THEME_STORAGE_KEY);
-    if (saved && isValidTheme(saved)) {
-      return saved;
-    }
-  } catch (error) {
-    console.warn('Failed to read theme from localStorage:', error);
-  }
-  return DEFAULT_THEME;
+  return readStoredMode(THEME_STORAGE_KEY, isValidTheme, DEFAULT_THEME);
 }
 
 /**
@@ -49,11 +50,7 @@ function getSavedTheme(): ThemeMode {
  * Requirements: 1.4
  */
 function saveTheme(theme: ThemeMode): void {
-  try {
-    localStorage.setItem(THEME_STORAGE_KEY, theme);
-  } catch (error) {
-    console.warn('Failed to save theme to localStorage:', error);
-  }
+  writeStoredMode(THEME_STORAGE_KEY, theme);
 }
 
 /**
@@ -69,10 +66,12 @@ function detectReducedMotion(): boolean {
  * 应用主题到 DOM
  * Requirements: 8.4
  */
-function applyThemeToDOM(theme: ThemeMode): void {
-  if (typeof document !== 'undefined') {
-    document.documentElement.setAttribute('data-theme', theme);
+function ensureThemeStorageSync(setTheme: (theme: ThemeMode) => void): void {
+  if (detachThemeStorageSync) {
+    return;
   }
+
+  detachThemeStorageSync = bindStorageSync(THEME_STORAGE_KEY, isValidTheme, setTheme);
 }
 
 /**
@@ -88,23 +87,31 @@ export const useThemeStore = create<ThemeState>((set, get) => ({
       console.warn(`Invalid theme value: ${theme}`);
       return;
     }
-    saveTheme(theme);
-    applyThemeToDOM(theme);
-    set({ theme });
+    runRootTransition('theme-transitioning', () => {
+      saveTheme(theme);
+      applyThemeToDOM(theme);
+      set({ theme });
+    });
   },
   
   toggleTheme: () => {
     const currentTheme = get().theme;
     const newTheme: ThemeMode = currentTheme === 'dark' ? 'light' : 'dark';
-    saveTheme(newTheme);
-    applyThemeToDOM(newTheme);
-    set({ theme: newTheme });
+    runRootTransition('theme-transitioning', () => {
+      saveTheme(newTheme);
+      applyThemeToDOM(newTheme);
+      set({ theme: newTheme });
+    });
   },
   
   initializeTheme: () => {
     const theme = getSavedTheme();
     const prefersReducedMotion = detectReducedMotion();
     applyThemeToDOM(theme);
+    ensureThemeStorageSync((nextTheme) => {
+      applyThemeToDOM(nextTheme);
+      set({ theme: nextTheme });
+    });
     set({ theme, prefersReducedMotion });
   },
 }));
@@ -116,4 +123,8 @@ export const useThemeStore = create<ThemeState>((set, get) => ({
 export function initializeTheme(): void {
   const theme = getSavedTheme();
   applyThemeToDOM(theme);
+  ensureThemeStorageSync((nextTheme) => {
+    applyThemeToDOM(nextTheme);
+    useThemeStore.setState({ theme: nextTheme });
+  });
 }

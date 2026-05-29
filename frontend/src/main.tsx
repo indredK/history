@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 import { AppProviders } from './components/AppProviders.tsx'
+import { initializeStyle, initializeTheme } from './store'
 import './index.css'
 import './styles/ui.css'
 import 'animate.css'
@@ -25,6 +26,9 @@ console.info('Build info', {
 // 自有服务器: VITE_BASE_PATH='/' 
 // GitHub Pages: VITE_BASE_PATH='/history'
 const basename = import.meta.env.VITE_BASE_PATH || '/'
+
+initializeTheme()
+initializeStyle()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

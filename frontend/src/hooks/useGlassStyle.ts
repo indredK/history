@@ -11,6 +11,7 @@
 
 import { useMemo, useEffect, useState } from 'react';
 import { useResponsive } from './useResponsive';
+import { useStyleStore } from '@/store';
 import { 
   getGlassConfig, 
   supportsBackdropFilter, 
@@ -62,12 +63,12 @@ export interface PerformanceOptions {
  * ```
  */
 // useGlassStyle 已弃用，保留函数定义以备未来使用
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function useGlassStyle(
   options: GlassStyleOptions = {},
   performanceOptions: PerformanceOptions = {}
 ): GlassStyleResult {
   const { screenWidth } = useResponsive();
+  const styleMode = useStyleStore((state) => state.style);
   
   // 检测性能相关状态
   const [performanceState, setPerformanceState] = useState({
@@ -117,7 +118,8 @@ export function useGlassStyle(
     const transitionDuration = reducedMotion ? '0ms' : config.animation.duration.normal;
     
     // 确定是否应该启用模糊效果
-    const enableBlur = supportsBlur && shouldBlur && !forceDisableBlur && !isLowEnd;
+    const enableBlur =
+      styleMode === 'glass' && supportsBlur && shouldBlur && !forceDisableBlur && !isLowEnd;
     
     // 基础样式
     const baseStyle: React.CSSProperties = enableBlur
@@ -131,11 +133,14 @@ export function useGlassStyle(
           transition: reducedMotion ? 'none' : `all ${transitionDuration} ${config.animation.easing}`
         }
       : {
-          // 降级样式（不支持 backdrop-filter 或低端设备）
-          backgroundColor: config.fallback.bgColor,
+          backgroundColor:
+            styleMode === 'classic' ? 'var(--app-panel-bg)' : config.fallback.bgColor,
           borderRadius: radiusValue,
-          border: `${config.border.width} solid ${config.fallback.borderColor}`,
-          boxShadow: shadowValue,
+          border:
+            styleMode === 'classic'
+              ? 'var(--app-panel-border)'
+              : `${config.border.width} solid ${config.fallback.borderColor}`,
+          boxShadow: shadow === 'none' ? 'none' : 'var(--app-panel-shadow-sm)',
           transition: reducedMotion ? 'none' : `all ${transitionDuration} ${config.animation.easing}`
         };
     
@@ -180,8 +185,9 @@ export function useGlassStyle(
             transition: `all ${hoverTransition} ${config.animation.easing}`
           }
         : {
-            backgroundColor: config.fallback.bgColor,
-            boxShadow: config.shadow.lg,
+            backgroundColor:
+              styleMode === 'classic' ? 'var(--app-panel-bg-strong)' : config.fallback.bgColor,
+            boxShadow: styleMode === 'classic' ? 'var(--app-panel-shadow-md)' : config.shadow.lg,
             transition: `all ${hoverTransition} ${config.animation.easing}`
           };
     }
@@ -191,7 +197,7 @@ export function useGlassStyle(
       className: classNames,
       hoverStyle
     };
-  }, [screenWidth, performanceState, options.blur, options.bgOpacity, options.bgColor, options.borderRadius, options.shadow, options.hover, performanceOptions.enableWillChange, performanceOptions.enableContainment, performanceOptions.forceDisableBlur, performanceOptions.enableGPUAcceleration]);
+  }, [screenWidth, performanceState, styleMode, options.blur, options.bgOpacity, options.bgColor, options.borderRadius, options.shadow, options.hover, performanceOptions.enableWillChange, performanceOptions.enableContainment, performanceOptions.forceDisableBlur, performanceOptions.enableGPUAcceleration]);
 
   return result;
 }
@@ -214,6 +220,7 @@ export function useComponentGlassStyle(
   performanceOptions: PerformanceOptions = {}
 ): GlassStyleResult {
   const { screenWidth } = useResponsive();
+  const styleMode = useStyleStore((state) => state.style);
   
   // 检测性能相关状态
   const [performanceState, setPerformanceState] = useState({
@@ -248,7 +255,8 @@ export function useComponentGlassStyle(
     const transitionDuration = reducedMotion ? '0ms' : config.animation.duration.normal;
     
     // 确定是否应该启用模糊效果
-    const enableBlur = supportsBlur && shouldBlur && !forceDisableBlur && !isLowEnd;
+    const enableBlur =
+      styleMode === 'glass' && supportsBlur && shouldBlur && !forceDisableBlur && !isLowEnd;
     
     let baseStyle: React.CSSProperties = {};
     let hoverStyle: React.CSSProperties | undefined;
@@ -268,10 +276,14 @@ export function useComponentGlassStyle(
             transition: reducedMotion ? 'none' : `all ${transitionDuration} ${config.animation.easing}`
           }
         : {
-            backgroundColor: config.fallback.bgColor,
-            border: `${config.border.width} solid ${config.fallback.borderColor}`,
+            backgroundColor:
+              styleMode === 'classic' ? 'var(--app-panel-bg)' : config.fallback.bgColor,
+            border:
+              styleMode === 'classic'
+                ? 'var(--app-panel-border)'
+                : `${config.border.width} solid ${config.fallback.borderColor}`,
             borderRadius: config.border.radius.md,
-            boxShadow: config.shadow.md,
+            boxShadow: styleMode === 'classic' ? 'var(--app-panel-shadow-md)' : config.shadow.md,
             transition: reducedMotion ? 'none' : `all ${transitionDuration} ${config.animation.easing}`
           };
       
@@ -303,8 +315,9 @@ export function useComponentGlassStyle(
               transition: `all ${hoverTransition} ${config.animation.easing}`
             }
           : {
-              backgroundColor: config.fallback.bgColor,
-              boxShadow: config.shadow.lg,
+              backgroundColor:
+                styleMode === 'classic' ? 'var(--app-panel-bg-strong)' : config.fallback.bgColor,
+              boxShadow: styleMode === 'classic' ? 'var(--app-panel-shadow-lg)' : config.shadow.lg,
               transition: `all ${hoverTransition} ${config.animation.easing}`
             };
       }
@@ -323,7 +336,7 @@ export function useComponentGlassStyle(
       className: classNames,
       hoverStyle
     };
-  }, [screenWidth, componentType, performanceState, performanceOptions.enableWillChange, performanceOptions.enableContainment, performanceOptions.forceDisableBlur, performanceOptions.enableGPUAcceleration]);
+  }, [screenWidth, componentType, performanceState, styleMode, performanceOptions.enableWillChange, performanceOptions.enableContainment, performanceOptions.forceDisableBlur, performanceOptions.enableGPUAcceleration]);
 
   return result;
 }

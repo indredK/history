@@ -25,9 +25,10 @@ function DynastyBoundariesPage() {
         sx={{
           p: 2,
           borderRadius: 2,
-          background: 'var(--app-panel-bg, rgba(255,255,255,0.8))',
-          backdropFilter: 'blur(12px)',
-          border: '1px solid var(--theme-glass-border, rgba(0,0,0,0.1))',
+          background: 'var(--app-panel-bg)',
+          backdropFilter: 'var(--app-backdrop-light)',
+          WebkitBackdropFilter: 'var(--app-backdrop-light)',
+          border: 'var(--app-panel-border)',
         }}
       >
         <Typography variant="h5" sx={{ fontWeight: 'bold' }} gutterBottom>
@@ -46,9 +47,10 @@ function DynastyBoundariesPage() {
           minHeight: 0,
           borderRadius: 2,
           overflow: 'hidden',
-          background: 'var(--app-panel-bg, rgba(255,255,255,0.9))',
-          backdropFilter: 'blur(12px)',
-          border: '1px solid var(--theme-glass-border, rgba(0,0,0,0.1))',
+          background: 'var(--app-panel-bg-strong)',
+          backdropFilter: 'var(--app-backdrop-light)',
+          WebkitBackdropFilter: 'var(--app-backdrop-light)',
+          border: 'var(--app-panel-border)',
           position: 'relative',
         }}
       >
@@ -66,9 +68,10 @@ function DynastyBoundariesPage() {
         sx={{
           p: 2,
           borderRadius: 2,
-          background: 'var(--app-panel-bg, rgba(255,255,255,0.8))',
-          backdropFilter: 'blur(12px)',
-          border: '1px solid var(--theme-glass-border, rgba(0,0,0,0.1))',
+          background: 'var(--app-panel-bg)',
+          backdropFilter: 'var(--app-backdrop-light)',
+          WebkitBackdropFilter: 'var(--app-backdrop-light)',
+          border: 'var(--app-panel-border)',
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>

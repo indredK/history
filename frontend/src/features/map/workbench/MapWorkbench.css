@@ -19,12 +19,12 @@
 
 .map-workbench__filter-panel,
 .map-workbench__timeline-dock {
-  border: 1px solid rgba(153, 115, 58, 0.16);
+  border: var(--app-panel-border);
   border-radius: 8px;
-  background: linear-gradient(180deg, rgba(255, 251, 244, 0.95), rgba(244, 236, 222, 0.96));
-  box-shadow: 0 18px 38px rgba(84, 60, 27, 0.12);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--app-panel-bg-strong);
+  box-shadow: var(--app-panel-shadow-lg);
+  backdrop-filter: var(--app-backdrop-light);
+  -webkit-backdrop-filter: var(--app-backdrop-light);
 }
 
 .map-workbench__filter-panel {
@@ -61,9 +61,9 @@
   gap: 8px;
   height: 42px;
   padding: 0 12px;
-  border: 1px solid rgba(153, 115, 58, 0.18);
+  border: 1px solid var(--app-interactive-border);
   border-radius: 8px;
-  background: rgba(255, 250, 242, 0.88);
+  background: var(--app-interactive-bg-soft);
   color: var(--color-text-secondary);
 }
 
@@ -94,9 +94,9 @@
 .map-workbench__range-grid input {
   height: 38px;
   padding: 0 10px;
-  border: 1px solid rgba(153, 115, 58, 0.18);
+  border: 1px solid var(--app-interactive-border);
   border-radius: 8px;
-  background: rgba(255, 250, 242, 0.84);
+  background: var(--app-interactive-bg-soft);
 }
 
 .map-workbench__type-grid {
@@ -135,9 +135,9 @@
 .map-workbench__speed-tab,
 .map-workbench__icon-button {
   appearance: none;
-  border: 1px solid rgba(153, 115, 58, 0.18);
-  background: rgba(255, 251, 244, 0.84);
-  color: var(--color-text-primary);
+  border: 1px solid var(--app-interactive-border);
+  background: var(--app-interactive-bg-soft);
+  color: var(--app-interactive-text);
   cursor: pointer;
   transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
@@ -147,7 +147,8 @@
 .map-workbench__speed-tab:hover,
 .map-workbench__icon-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 18px rgba(92, 61, 20, 0.12);
+  background: var(--app-interactive-hover-bg);
+  box-shadow: var(--app-panel-shadow-sm);
 }
 
 .map-workbench__text-button {
@@ -174,9 +175,9 @@
   min-height: 34px;
   padding: 0 14px;
   border-radius: 999px;
-  background: rgba(255, 251, 244, 0.94);
-  border: 1px solid rgba(153, 115, 58, 0.18);
-  box-shadow: 0 12px 20px rgba(92, 61, 20, 0.08);
+  background: var(--app-panel-bg);
+  border: var(--app-panel-border);
+  box-shadow: var(--app-panel-shadow-sm);
   color: var(--color-text-primary);
   font-size: 13px;
 }
