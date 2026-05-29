@@ -2,10 +2,11 @@
  * 宋朝人物卡片组件
  */
 
-import { PersonCard, type TagColor } from '@/components/common';
+import type { TagColor } from '@/components/common';
 import type { SongFigure } from '@/services/person/song/types';
 import { ROLE_LABELS } from '@/services/person/song/types';
 import { songFigureService } from '@/services/person/song';
+import { DynastyFigureCard } from '../common';
 
 interface SongFigureCardProps {
   figure: SongFigure;
@@ -21,37 +22,14 @@ const roleColors: Record<string, TagColor> = {
   other: { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e' },
 };
 
-const defaultColor: TagColor = { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e' };
-
 export function SongFigureCard({ figure, onClick }: SongFigureCardProps) {
-  const roleColor = roleColors[figure.role] || roleColors['other']!;
-  const lifespan = songFigureService.formatLifespan(figure);
-  const roleLabel = ROLE_LABELS[figure.role];
-
-  const secondaryTags = figure.faction
-    ? [{ label: figure.faction, color: defaultColor, variant: 'outlined' as const }]
-    : [];
-
-  const infoLines = [
-    { value: lifespan },
-    ...(figure.positions.length > 0
-      ? [{
-          value: figure.positions.slice(0, 2).join('、') + (figure.positions.length > 2 ? '...' : ''),
-          truncate: true,
-        }]
-      : []),
-  ];
-
   return (
-    <PersonCard
-      name={figure.name}
-      subtitle={figure.courtesy ? `字 ${figure.courtesy}` : undefined}
-      portraitUrl={figure.portraitUrl}
-      primaryTag={{ label: roleLabel, color: roleColor }}
-      secondaryTags={secondaryTags}
-      infoLines={infoLines}
-      biography={figure.biography}
+    <DynastyFigureCard
+      figure={figure}
       onClick={onClick}
+      roleColors={roleColors}
+      roleLabels={ROLE_LABELS}
+      formatLifespan={(f) => songFigureService.formatLifespan(f)}
     />
   );
 }

@@ -12,7 +12,7 @@ export function SectionToolbar({ children }: PropsWithChildren) {
         background: 'var(--app-panel-bg-soft)',
         mb: 2,
         border: 'var(--app-panel-border)',
-        borderRadius: '12px',
+        borderRadius: 'var(--radius-unified-md)',
         boxShadow: 'var(--app-panel-shadow-sm)',
         px: 0.5,
         py: 0.5,

@@ -34,7 +34,7 @@ export function PagePanel({
           overflow: 'hidden',
           background: 'var(--app-panel-bg-soft)',
           border: 'var(--app-panel-border)',
-          borderRadius: 'var(--panel-radius)',
+          borderRadius: 'var(--radius-unified-xl)',
           boxShadow: 'var(--app-panel-shadow-md)',
           p: { xs: 1.5, md: 2 },
         },
