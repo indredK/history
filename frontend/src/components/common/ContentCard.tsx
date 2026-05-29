@@ -17,6 +17,7 @@
  */
 
 import { Card, CardContent, Box, Typography, Chip, Avatar } from '@mui/material';
+import { getCardHeight } from '@/config/responsive';
 
 /**
  * 颜色配置
@@ -94,7 +95,7 @@ export function ContentCard({
   footerTags = [],
   footerTagsMax = 3,
   onClick,
-  minHeight = 140,
+  minHeight = getCardHeight('content'),
   glassEffect = true,
 }: ContentCardProps) {
   const visibleTagCloud = tagCloud.slice(0, tagCloudMax);

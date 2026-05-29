@@ -11,6 +11,7 @@
  */
 
 import { Card, CardContent, Box, Typography, Chip, Avatar } from '@mui/material';
+import { getCardHeight } from '@/config/responsive';
 
 /**
  * 颜色配置
@@ -87,7 +88,7 @@ export function PersonCard({
   biography,
   biographyLines = 2,
   onClick,
-  minHeight = 200,
+  minHeight = getCardHeight('figure'),
   avatarColor,
 }: PersonCardProps) {
   const hasPortrait = portraitUrl && portraitUrl.trim() !== '';

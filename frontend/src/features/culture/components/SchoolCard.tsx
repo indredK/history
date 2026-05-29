@@ -9,6 +9,7 @@
 
 import { ContentCard, type ContentTagColor } from '@/components/common';
 import type { PhilosophicalSchool } from '@/services/school/types';
+import { getCardHeight } from '@/config/responsive';
 
 interface SchoolCardProps {
   school: PhilosophicalSchool;
@@ -53,7 +54,7 @@ export function SchoolCard({ school, onClick }: SchoolCardProps) {
       description={school.description || ''}
       footerText={footerText}
       onClick={onClick}
-      minHeight={140}
+      minHeight={getCardHeight('compact')}
     />
   );
 }

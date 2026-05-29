@@ -89,6 +89,11 @@ export interface ResponsiveConfig {
       md: { padding: string; borderRadius: string; margin: string };
       lg: { padding: string; borderRadius: string; margin: string };
     };
+    cardHeight: {
+      figure: string;   // 人物卡片
+      content: string;  // 内容卡片（神话/学派）
+      compact: string;  // 紧凑卡片
+    };
   };
 }
 
@@ -184,6 +189,12 @@ export const responsiveConfig: ResponsiveConfig = {
       md: { padding: '16px', borderRadius: '10px', margin: '8px' },
       lg: { padding: '20px', borderRadius: '12px', margin: '12px' },
     },
+    
+    cardHeight: {
+      figure: '200px',     // 人物卡片
+      content: '160px',    // 内容卡片（神话/学派）
+      compact: '140px',    // 紧凑卡片
+    },
   },
 };
 
@@ -215,6 +226,11 @@ export function getSidebarStyles(width: number) {
 export function getCardStyles(width: number) {
   const key = getResponsiveKey(width);
   return responsiveConfig.components.card[key];
+}
+
+// 获取卡片高度配置
+export function getCardHeight(type: keyof ResponsiveConfig['components']['cardHeight']): string {
+  return responsiveConfig.components.cardHeight[type];
 }
 
 // 通用获取函数（保留向后兼容）

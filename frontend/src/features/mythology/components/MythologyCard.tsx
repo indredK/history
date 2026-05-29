@@ -7,6 +7,7 @@
 
 import { ContentCard, type ContentTagColor } from '@/components/common';
 import type { Mythology } from '@/services/mythology';
+import { getCardHeight } from '@/config/responsive';
 
 interface MythologyCardProps {
   mythology: Mythology;
@@ -47,7 +48,7 @@ export function MythologyCard({ mythology, onClick }: MythologyCardProps) {
       footerTags={footerTags}
       footerTagsMax={3}
       onClick={() => onClick(mythology)}
-      minHeight={160}
+      minHeight={getCardHeight('content')}
     />
   );
 }
