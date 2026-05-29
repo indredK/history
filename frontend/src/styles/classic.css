@@ -362,3 +362,19 @@ html.style-transitioning .glass-badge {
     transition: none !important;
   }
 }
+
+/* ========================================
+ * 经典模式 - MapFirstLayout 适配
+ * ======================================== */
+
+[data-style="classic"] .map-first-layout__topbar {
+  background: linear-gradient(180deg, 
+    var(--color-bg-tertiary, #26211d), 
+    var(--color-bg-secondary, #1b1714)
+  );
+  border-bottom-color: var(--color-border-medium, rgba(226, 198, 140, 0.2));
+}
+
+[data-style="classic"] .map-first-layout__route-content--page {
+  background: var(--color-bg-primary, #120f0d);
+}

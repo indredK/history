@@ -53,7 +53,7 @@ export function ResponsiveTable({
   glassEffect = true,
   ...props
 }: ResponsiveTableProps) {
-  const { isMobile, isSmallMobile, screenWidth } = useResponsive();
+  const { isMobile, screenWidth } = useResponsive();
   const tableStyles = getTableStyles(screenWidth);
   
   // 获取毛玻璃配置
@@ -119,19 +119,6 @@ export function ResponsiveTable({
         '& .MuiTableBody-root .MuiTableRow-root': {
           ...glassRowStyles,
         },
-        
-        // 小屏设备进一步优化
-        ...(isSmallMobile && {
-          '& .MuiTableCell-root': {
-            padding: '2px 4px',
-            fontSize: '0.6rem',
-          },
-          '& .MuiTableHead-root .MuiTableCell-root': {
-            padding: '4px 6px',
-            fontSize: '0.55rem',
-            height: '28px',
-          },
-        }),
       }}
       className={className}
       {...props}

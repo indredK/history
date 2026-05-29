@@ -22,7 +22,7 @@ export function ResponsiveContainer({
   sx,
   ...props
 }: ResponsiveContainerProps) {
-  const { screenWidth, isMobile, isSmallMobile } = useResponsive();
+  const { screenWidth } = useResponsive();
   const spacing = getResponsiveSpacing(screenWidth);
 
   return (
@@ -33,9 +33,6 @@ export function ResponsiveContainer({
         ...(maxWidth && {
           maxWidth,
           margin: centerContent ? '0 auto' : undefined,
-        }),
-        ...(isMobile && {
-          padding: disablePadding ? 0 : isSmallMobile ? '4px' : '8px',
         }),
         ...sx,
       }}
