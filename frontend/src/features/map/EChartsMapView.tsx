@@ -52,6 +52,14 @@ export interface EChartsMapViewProps extends EChartsMapLayerVisibility {
   timelineProps?: Record<string, unknown>;
   /** 是否在嵌入的时间轴中显示事件散点，默认 false（地图中时间轴以朝代为主） */
   showTimelineEvents?: boolean;
+  /** 显示全部事件标记，忽略当前历史聚焦过滤 */
+  showAllEventMarkers?: boolean;
+  /** 事件点数量上限，避免一次性渲染过多标记 */
+  maxVisibleEventMarkers?: number;
+  /** 地图作为主舞台时，移除旧卡片外框 */
+  stageMode?: boolean;
+  /** 是否显示地图标题 */
+  showMapTitle?: boolean;
 
   // ── Callbacks ──
   onProvinceClick?: (name: string, data: ProvinceData | null) => void;
@@ -103,6 +111,10 @@ export function EChartsMapView({
   // ── Timeline props ──
   timelineProps,
   showTimelineEvents: _showTimelineEvents = false,
+  showAllEventMarkers = false,
+  maxVisibleEventMarkers,
+  stageMode = false,
+  showMapTitle = !stageMode,
 
   // ── Callbacks ──
   onProvinceClick,
@@ -275,31 +287,56 @@ export function EChartsMapView({
     [places, selectedEvent],
   );
   const visibleEventMarkers = useMemo(() => {
+    if (
+      !showAllEventMarkers
+      && !selectedEventId
+      && !selectedDynastyId
+      && !eventFocusRange
+    ) {
+      return [];
+    }
+
     const sourceEvents = events.filter((event) => {
-      if (selectedEventId) {
-        return event.id === selectedEventId;
-      }
+      if (!showAllEventMarkers) {
+        if (selectedEventId) {
+          return event.id === selectedEventId;
+        }
 
-      if (selectedDynastyId && event.dynastyId && event.dynastyId !== selectedDynastyId) {
-        return false;
-      }
+        if (selectedDynastyId && event.dynastyId && event.dynastyId !== selectedDynastyId) {
+          return false;
+        }
 
-      if (eventFocusRange) {
-        const endYear = event.endYear ?? event.startYear;
-        return event.startYear <= eventFocusRange[1] && endYear >= eventFocusRange[0];
+        if (eventFocusRange) {
+          const endYear = event.endYear ?? event.startYear;
+          return event.startYear <= eventFocusRange[1] && endYear >= eventFocusRange[0];
+        }
       }
 
       return true;
     });
 
-    return sourceEvents.flatMap((event) => {
+    const markers = sourceEvents.flatMap((event) => {
       const resolved = resolveEventLocations(event, places);
       return resolved.matchedPlaces.map((place) => ({
         ...place,
         event,
       }));
     });
-  }, [eventFocusRange, events, focusYear, places, selectedDynastyId, selectedEventId]);
+
+    if (typeof maxVisibleEventMarkers === 'number' && markers.length > maxVisibleEventMarkers) {
+      return markers.slice(0, maxVisibleEventMarkers);
+    }
+
+    return markers;
+  }, [
+    eventFocusRange,
+    events,
+    maxVisibleEventMarkers,
+    places,
+    selectedDynastyId,
+    selectedEventId,
+    showAllEventMarkers,
+  ]);
   const selectedEventDynasty = useMemo(
     () => (selectedEvent?.dynastyId ? dynasties.find((item) => item.id === selectedEvent.dynastyId) ?? null : null),
     [dynasties, selectedEvent],
@@ -323,21 +360,22 @@ export function EChartsMapView({
         width: '100%',
         height: '100%',
         position: 'relative',
-        border: 'var(--app-panel-border)',
-        borderLeft: '4px solid rgba(25, 118, 210, 0.8)',
-        borderRadius: 'var(--panel-radius)',
+        border: stageMode ? 'none' : 'var(--app-panel-border)',
+        borderLeft: stageMode ? 'none' : '4px solid rgba(25, 118, 210, 0.8)',
+        borderRadius: stageMode ? 0 : 'var(--panel-radius)',
         overflow: 'hidden',
         boxSizing: 'border-box',
         transition: 'all var(--glass-duration-normal, 250ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1))',
-        backdropFilter: 'blur(var(--glass-blur-light, 12px))',
-        WebkitBackdropFilter: 'blur(var(--glass-blur-light, 12px))',
-        background: 'var(--app-panel-bg)',
-        boxShadow: 'var(--app-panel-shadow-lg)',
+        backdropFilter: stageMode ? 'none' : 'blur(var(--glass-blur-light, 12px))',
+        WebkitBackdropFilter: stageMode ? 'none' : 'blur(var(--glass-blur-light, 12px))',
+        background: stageMode ? 'transparent' : 'var(--app-panel-bg)',
+        boxShadow: stageMode ? 'none' : 'var(--app-panel-shadow-lg)',
       }}
     >
       <EChartsMap
         width="100%"
         height="100%"
+        showTitle={showMapTitle}
         onProvinceClick={handleProvinceClick}
         historicalBoundary={boundarySnapshot ?? null}
         historicalBoundaryName={activeBoundaryName}

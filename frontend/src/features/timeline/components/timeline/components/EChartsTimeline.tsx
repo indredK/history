@@ -1285,16 +1285,11 @@ export function EChartsTimeline({
 
   const setTimeRange = useCallback((value: TimeRange | null | ((p: TimeRange | null) => TimeRange | null)) => {
     if (typeof value === 'function') {
-      _setTimeRange((current) => {
-        const resolved = (value as (p: TimeRange | null) => TimeRange | null)(current);
-        if (resolved) onTimeRangeChange?.(resolved);
-        return resolved;
-      });
+      _setTimeRange((current) => (value as (p: TimeRange | null) => TimeRange | null)(current));
     } else {
       if (timeRangeProp === undefined) _setTimeRange(value);
-      if (value) onTimeRangeChange?.(value);
     }
-  }, [timeRangeProp, onTimeRangeChange]);
+  }, [timeRangeProp]);
 
   const setTimeRangeLocal = useCallback((value: TimeRange | null | ((p: TimeRange | null) => TimeRange | null)) => {
     if (typeof value === 'function') {

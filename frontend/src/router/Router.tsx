@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { routes } from './routes';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
-import { AppLayout } from '@/layouts/AppLayout';
+import { MapFirstLayout } from '@/layouts/map-first/MapFirstLayout';
 
 // 404 页同样走懒加载,首屏不必下载
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
@@ -19,8 +19,8 @@ export function AppRouter() {
   return (
     <Suspense fallback={<LoadingSkeleton variant="page" />}>
       <Routes>
-        <Route path="/" element={<Navigate to="/timeline" replace />} />
-        <Route path="/" element={<AppLayout routes={routes} />}>
+        <Route path="/" element={<Navigate to="/map" replace />} />
+        <Route path="/" element={<MapFirstLayout routes={routes} />}>
           {routes.map((route) => (
             <Route
               key={route.key}

@@ -19,46 +19,46 @@ const DynastyBoundariesPage = lazy(() => import('../pages/DynastyBoundariesPage'
 
 export const routes: RouteConfig[] = [
   {
-    key: 'timeline',
-    path: '/timeline',
-    label: '时间轴',
-    component: TimelinePage,
-    index: true
-  },
-  {
-    key: 'dynasties',
-    path: '/dynasties',
-    label: '历代纪元',
-    component: DynastiesPage
-  },
-  {
     key: 'map',
     path: '/map',
-    label: '地图',
-    component: MapPage
-  },
-  {
-    key: 'dynasty-boundaries',
-    path: '/dynasty-boundaries',
-    label: '朝代疆域',
-    component: DynastyBoundariesPage
+    label: '历史地图',
+    component: MapPage,
+    index: true,
   },
   {
     key: 'people',
     path: '/people',
     label: '人物',
-    component: PeoplePage
-  },
-  {
-    key: 'culture',
-    path: '/culture',
-    label: '文化',
-    component: CulturePage
+    component: PeoplePage,
   },
   {
     key: 'mythology',
     path: '/mythology',
     label: '神话',
-    component: MythologyPage
-  }
+    component: MythologyPage,
+  },
+  {
+    key: 'culture',
+    path: '/culture',
+    label: '文化',
+    component: CulturePage,
+  },
+  {
+    key: 'dynasties',
+    path: '/dynasties',
+    label: '朝代',
+    component: DynastiesPage,
+  },
+  {
+    key: 'timeline',
+    path: '/timeline',
+    label: '时间轴',
+    component: TimelinePage,
+  },
+  {
+    key: 'dynasty-boundaries',
+    path: '/dynasty-boundaries',
+    label: '疆域',
+    component: DynastyBoundariesPage,
+  },
 ];

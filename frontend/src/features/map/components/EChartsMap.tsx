@@ -24,6 +24,7 @@ export interface EChartsMapLayerVisibility {
 interface EChartsMapProps extends EChartsMapLayerVisibility {
   width?: number | string;
   height?: number | string;
+  showTitle?: boolean;
   onProvinceClick?: (name: string, data: ProvinceData | null) => void;
   historicalBoundary?: BoundaryGeoJSON | null;
   historicalBoundaryName?: string | null;
@@ -71,6 +72,7 @@ function normalizeGeoJSON(geoJSON: BoundaryGeoJSON): BoundaryGeoJSON {
 export function EChartsMap({
   width = '100%',
   height = '100%',
+  showTitle = true,
   onProvinceClick,
   historicalBoundary = null,
   historicalBoundaryName = null,
@@ -205,18 +207,22 @@ export function EChartsMap({
 
     const option: echarts.EChartsOption = {
       backgroundColor: 'transparent',
-      title: {
-        text: showHistoricalOverlay
-          ? (historicalBoundaryName || '历史疆域')
-          : '中国地图',
-        subtext: showHistoricalOverlay
-          ? `年份切片：${historicalBoundary?.valid_from ?? '-'} - ${historicalBoundary?.valid_to ?? '-'}`
-          : (adminBoundaryVisible ? '现代行政区底图' : ''),
-        left: 'center',
-        top: 10,
-        textStyle: { color: 'var(--color-text-primary, #333)', fontSize: 18 },
-        subtextStyle: { color: 'var(--color-text-secondary, #666)', fontSize: 12 },
-      },
+      ...(showTitle
+        ? {
+            title: {
+              text: showHistoricalOverlay
+                ? (historicalBoundaryName || '历史疆域')
+                : '中国地图',
+              subtext: showHistoricalOverlay
+                ? `年份切片：${historicalBoundary?.valid_from ?? '-'} - ${historicalBoundary?.valid_to ?? '-'}`
+                : (adminBoundaryVisible ? '现代行政区底图' : ''),
+              left: 'center',
+              top: 10,
+              textStyle: { color: 'var(--color-text-primary, #333)', fontSize: 18 },
+              subtextStyle: { color: 'var(--color-text-secondary, #666)', fontSize: 12 },
+            },
+          }
+        : {}),
       tooltip: {
         trigger: 'item',
         formatter: (params: unknown) => {

@@ -16,40 +16,40 @@ export interface NavigationItemConfig {
 // 导航菜单基础配置
 export const navigationItemsConfig: NavigationItemConfig[] = [
   {
-    key: 'timeline',
-    label: '时间轴',
-    path: '/timeline',
-    description: '按时间顺序浏览历史事件'
-  },
-  {
-    key: 'dynasties',
-    label: '历代纪元',
-    path: '/dynasties',
-    description: '中国历代王朝纪元表'
-  },
-  {
     key: 'map',
-    label: '地图',
+    label: '历史地图',
     path: '/map',
-    description: '历史地图和地理信息'
+    description: '地图为主的历史地理工作台'
   },
   {
     key: 'people',
     label: '人物',
     path: '/people',
-    description: '历史人物传记'
-  },
-  {
-    key: 'culture',
-    label: '文化',
-    path: '/culture',
-    description: '文化艺术和传统'
+    description: '历史人物谱系与传记'
   },
   {
     key: 'mythology',
     label: '神话',
     path: '/mythology',
-    description: '神话传说和民间故事'
+    description: '神话传说与信仰谱系'
+  },
+  {
+    key: 'culture',
+    label: '文化',
+    path: '/culture',
+    description: '文化艺术和思想传统'
+  },
+  {
+    key: 'dynasties',
+    label: '朝代',
+    path: '/dynasties',
+    description: '中国历代王朝纪元表'
+  },
+  {
+    key: 'timeline',
+    label: '时间轴',
+    path: '/timeline',
+    description: '按时间顺序浏览历史事件'
   }
 ];
 
