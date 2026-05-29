@@ -1,0 +1,335 @@
+{
+  "id": "sanguo",
+  "name": "三国",
+  "period": "220年-280年",
+  "summary": "东汉末年群雄割据后形成的三足鼎立局面：魏、蜀、吴三国。政治军事斗争激烈，英雄辈出，为后世文学创作提供丰富素材。",
+  "subDynasties": [
+    {
+      "id": "wei",
+      "name": "魏",
+      "period": "220年-265年",
+      "rulers": [
+        {
+          "title": "文帝",
+          "name": "曹丕",
+          "yearName": "黄初",
+          "duration": "7",
+          "ganZhi": "庚子",
+          "changeMonth": "十月",
+          "startYear": "220年",
+          "events": [
+            {
+              "description": "三国鼎立形势",
+              "mapUrl": "hstrymap/02290263.jpg"
+            }
+          ]
+        },
+        {
+          "title": "明帝",
+          "name": "曹叡",
+          "yearNames": [
+            {
+              "name": "太和",
+              "duration": "7",
+              "ganZhi": "丁未",
+              "changeMonth": "正月",
+              "startYear": "227年"
+            },
+            {
+              "name": "青龙",
+              "duration": "5",
+              "ganZhi": "癸丑",
+              "changeMonth": "二月",
+              "startYear": "233年"
+            },
+            {
+              "name": "景初",
+              "duration": "3",
+              "ganZhi": "丁巳",
+              "changeMonth": "三月",
+              "startYear": "237年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "齐王",
+          "name": "曹芳",
+          "yearNames": [
+            {
+              "name": "正始",
+              "duration": "10",
+              "ganZhi": "庚申",
+              "changeMonth": "正月",
+              "startYear": "240年"
+            },
+            {
+              "name": "嘉平",
+              "duration": "6",
+              "ganZhi": "己巳",
+              "changeMonth": "四月",
+              "startYear": "249年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "高贵乡公",
+          "name": "曹髦",
+          "yearNames": [
+            {
+              "name": "正元",
+              "duration": "3",
+              "ganZhi": "甲戌",
+              "changeMonth": "十月",
+              "startYear": "254年"
+            },
+            {
+              "name": "甘露",
+              "duration": "5",
+              "ganZhi": "丙子",
+              "changeMonth": "六月",
+              "startYear": "256年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "元帝(陈留王)",
+          "name": "曹奂",
+          "yearNames": [
+            {
+              "name": "景元",
+              "duration": "5",
+              "ganZhi": "庚辰",
+              "changeMonth": "六月",
+              "startYear": "260年"
+            },
+            {
+              "name": "咸熙",
+              "duration": "2",
+              "ganZhi": "甲申",
+              "changeMonth": "五月",
+              "startYear": "264年"
+            }
+          ],
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "shuhan",
+      "name": "蜀汉",
+      "period": "221年-263年",
+      "rulers": [
+        {
+          "title": "昭烈帝",
+          "name": "刘备",
+          "yearName": "章武",
+          "duration": "3",
+          "ganZhi": "辛丑",
+          "changeMonth": "四月",
+          "startYear": "221年",
+          "events": []
+        },
+        {
+          "title": "后主",
+          "name": "刘禅",
+          "yearNames": [
+            {
+              "name": "建兴",
+              "duration": "15",
+              "ganZhi": "癸卯",
+              "changeMonth": "五月",
+              "startYear": "223年"
+            },
+            {
+              "name": "延熙",
+              "duration": "20",
+              "ganZhi": "戊午",
+              "changeMonth": "正月",
+              "startYear": "238年"
+            },
+            {
+              "name": "景耀",
+              "duration": "6",
+              "ganZhi": "戊寅",
+              "changeMonth": "正月",
+              "startYear": "258年"
+            },
+            {
+              "name": "炎兴",
+              "duration": "1",
+              "ganZhi": "癸未",
+              "changeMonth": "八月",
+              "startYear": "263年"
+            }
+          ],
+          "events": [
+            {
+              "description": "魏灭蜀形势",
+              "mapUrl": "hstrymap/02630263.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wu",
+      "name": "吴",
+      "period": "222年-280年",
+      "rulers": [
+        {
+          "title": "大帝",
+          "name": "孙权",
+          "yearNames": [
+            {
+              "name": "黄武",
+              "duration": "8",
+              "ganZhi": "壬寅",
+              "changeMonth": "十月",
+              "startYear": "222年"
+            },
+            {
+              "name": "黄龙",
+              "duration": "3",
+              "ganZhi": "己酉",
+              "changeMonth": "四月",
+              "startYear": "229年"
+            },
+            {
+              "name": "嘉禾",
+              "duration": "7",
+              "ganZhi": "壬子",
+              "changeMonth": "正月",
+              "startYear": "232年"
+            },
+            {
+              "name": "赤乌",
+              "duration": "14",
+              "ganZhi": "戊午",
+              "changeMonth": "九月",
+              "startYear": "238年"
+            },
+            {
+              "name": "太元",
+              "duration": "2",
+              "ganZhi": "辛未",
+              "changeMonth": "五月",
+              "startYear": "251年"
+            },
+            {
+              "name": "神凤",
+              "duration": "1",
+              "ganZhi": "壬申",
+              "changeMonth": "二月",
+              "startYear": "252年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "会稽王",
+          "name": "孙亮",
+          "yearNames": [
+            {
+              "name": "建兴",
+              "duration": "2",
+              "ganZhi": "壬申",
+              "changeMonth": "四月",
+              "startYear": "252年"
+            },
+            {
+              "name": "五凤",
+              "duration": "3",
+              "ganZhi": "甲戌",
+              "changeMonth": "正月",
+              "startYear": "254年"
+            },
+            {
+              "name": "太平",
+              "duration": "3",
+              "ganZhi": "丙子",
+              "changeMonth": "十月",
+              "startYear": "256年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "景帝",
+          "name": "孙休",
+          "yearName": "永安",
+          "duration": "7",
+          "ganZhi": "戊寅",
+          "changeMonth": "十月",
+          "startYear": "258年",
+          "events": []
+        },
+        {
+          "title": "乌程侯",
+          "name": "孙皓",
+          "yearNames": [
+            {
+              "name": "元兴",
+              "duration": "2",
+              "ganZhi": "甲申",
+              "changeMonth": "七月",
+              "startYear": "264年"
+            },
+            {
+              "name": "甘露",
+              "duration": "2",
+              "ganZhi": "乙酉",
+              "changeMonth": "四月",
+              "startYear": "265年"
+            },
+            {
+              "name": "宝鼎",
+              "duration": "4",
+              "ganZhi": "丙戌",
+              "changeMonth": "八月",
+              "startYear": "266年"
+            },
+            {
+              "name": "建衡",
+              "duration": "3",
+              "ganZhi": "己丑",
+              "changeMonth": "十月",
+              "startYear": "269年"
+            },
+            {
+              "name": "凤凰",
+              "duration": "3",
+              "ganZhi": "壬辰",
+              "changeMonth": "正月",
+              "startYear": "272年"
+            },
+            {
+              "name": "天册",
+              "duration": "2",
+              "ganZhi": "乙未",
+              "changeMonth": "正月",
+              "startYear": "275年"
+            },
+            {
+              "name": "天玺",
+              "duration": "1",
+              "ganZhi": "丙申",
+              "changeMonth": "七月",
+              "startYear": "276年"
+            },
+            {
+              "name": "天纪",
+              "duration": "4",
+              "ganZhi": "丁酉",
+              "changeMonth": "正月",
+              "startYear": "277年"
+            }
+          ],
+          "events": []
+        }
+      ]
+    }
+  ]
+}

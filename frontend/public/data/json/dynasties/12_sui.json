@@ -1,0 +1,67 @@
+{
+  "id": "sui",
+  "name": "隋",
+  "period": "581年-618年",
+  "summary": "杨坚建立的短暂统一王朝，结束了南北朝分裂局面。开凿大运河，建立科举制度，为唐朝繁荣奠定基础。",
+  "rulers": [
+    {
+      "title": "文帝",
+      "name": "杨坚",
+      "yearNames": [
+        {
+          "name": "开皇",
+          "duration": "20",
+          "ganZhi": "辛丑",
+          "changeMonth": "二月",
+          "startYear": "581年"
+        },
+        {
+          "name": "仁寿",
+          "duration": "4",
+          "ganZhi": "辛酉",
+          "changeMonth": "正月",
+          "startYear": "601年"
+        }
+      ],
+      "events": [
+        {
+          "description": "589年灭陈,完成统一",
+          "mapUrl": "hstrymap/05890618.jpg"
+        },
+        {
+          "description": "隋洛阳城",
+          "mapUrl": "hstrymap/05810618.jpg"
+        }
+      ]
+    },
+    {
+      "title": "炀帝",
+      "name": "杨广",
+      "yearName": "大业",
+      "duration": "14",
+      "ganZhi": "乙丑",
+      "changeMonth": "正月",
+      "startYear": "605年",
+      "events": [
+        {
+          "description": "隋朝运河,广通渠",
+          "mapUrl": "hstrymap/06050618.jpg"
+        },
+        {
+          "description": "隋末农民战争",
+          "mapUrl": "hstrymap/06110618.jpg"
+        }
+      ]
+    },
+    {
+      "title": "恭帝",
+      "name": "杨侑",
+      "yearName": "义宁",
+      "duration": "2",
+      "ganZhi": "丁丑",
+      "changeMonth": "十一月",
+      "startYear": "617年",
+      "events": []
+    }
+  ]
+}

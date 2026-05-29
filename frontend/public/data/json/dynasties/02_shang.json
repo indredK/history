@@ -1,0 +1,332 @@
+{
+  "id": "shang",
+  "name": "商",
+  "period": "约前1600年-前1046年",
+  "summary": "中国历史上第二个王朝，由汤建立。青铜文明高度发达，甲骨文是现存最早的成熟汉字系统，为中华文字奠定基础。",
+  "rulers": [
+    {
+      "title": "汤",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": [
+        {
+          "description": "商朝形势",
+          "mapUrl": "hstrymap/bc22bc11.jpg"
+        }
+      ]
+    },
+    {
+      "title": "太丁",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "外丙",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "仲壬",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "太甲",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "沃丁",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "太庚",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "小甲",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "雍己",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "太戊",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "仲丁",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "外壬",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "河亶甲",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "祖乙",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "祖辛",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "沃甲",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "祖丁",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "南庚",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "阳甲",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "盘庚",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": [
+        {
+          "description": "约前1300年迁都至殷"
+        }
+      ]
+    },
+    {
+      "title": "小辛",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "小乙",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "武丁",
+      "name": "",
+      "yearName": "",
+      "duration": "59",
+      "ganZhi": "辛未",
+      "changeMonth": "",
+      "startYear": "前1250年",
+      "events": [
+        {
+          "description": "甲骨文",
+          "mapUrl": "zi1liao4/jiaguw24.jpg"
+        }
+      ]
+    },
+    {
+      "title": "祖庚",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "庚午",
+      "changeMonth": "",
+      "startYear": "前1191年",
+      "events": []
+    },
+    {
+      "title": "祖甲",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "廪辛",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "康丁",
+      "name": "",
+      "yearName": "",
+      "duration": "",
+      "ganZhi": "",
+      "changeMonth": "",
+      "startYear": "",
+      "events": []
+    },
+    {
+      "title": "武乙",
+      "name": "",
+      "yearName": "",
+      "duration": "35",
+      "ganZhi": "甲寅",
+      "changeMonth": "",
+      "startYear": "前1147年",
+      "events": []
+    },
+    {
+      "title": "文丁",
+      "name": "",
+      "yearName": "",
+      "duration": "11",
+      "ganZhi": "己丑",
+      "changeMonth": "",
+      "startYear": "前1112年",
+      "events": []
+    },
+    {
+      "title": "帝乙",
+      "name": "",
+      "yearName": "",
+      "duration": "26",
+      "ganZhi": "庚子",
+      "changeMonth": "",
+      "startYear": "前1101年",
+      "events": []
+    },
+    {
+      "title": "帝辛",
+      "name": "纣",
+      "yearName": "",
+      "duration": "30",
+      "ganZhi": "丙寅",
+      "changeMonth": "",
+      "startYear": "前1075年",
+      "events": []
+    }
+  ]
+}

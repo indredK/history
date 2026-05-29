@@ -1,0 +1,373 @@
+{
+  "id": "dongzhou",
+  "name": "东周",
+  "period": "前770年-前256年",
+  "summary": "西周灭亡后周王室东迁洛邑建立的王朝。分为春秋和战国两个时期，诸侯争霸，百家争鸣，是中国思想文化的黄金时代。",
+  "rulers": [
+    {
+      "title": "平王",
+      "name": "姬宜臼",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "51",
+          "ganZhi": "辛未",
+          "changeMonth": "",
+          "startYear": "前770年"
+        }
+      ],
+      "events": [
+        {
+          "description": "春秋列国形势",
+          "mapUrl": "hstrymap/b770b476.jpg"
+        }
+      ]
+    },
+    {
+      "title": "桓王",
+      "name": "姬林",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "23",
+          "ganZhi": "壬戌",
+          "changeMonth": "",
+          "startYear": "前719年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "庄王",
+      "name": "姬佗",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "15",
+          "ganZhi": "乙酉",
+          "changeMonth": "",
+          "startYear": "前696年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "釐王",
+      "name": "姬胡齐",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "5",
+          "ganZhi": "庚子",
+          "changeMonth": "",
+          "startYear": "前681年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "惠王",
+      "name": "姬阆",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "25",
+          "ganZhi": "乙巳",
+          "changeMonth": "",
+          "startYear": "前676年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "襄王",
+      "name": "姬郑",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "33",
+          "ganZhi": "庚午",
+          "changeMonth": "",
+          "startYear": "前651年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "顷王",
+      "name": "姬壬臣",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "6",
+          "ganZhi": "癸卯",
+          "changeMonth": "",
+          "startYear": "前618年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "匡王",
+      "name": "姬班",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "6",
+          "ganZhi": "己酉",
+          "changeMonth": "",
+          "startYear": "前612年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "定王",
+      "name": "姬瑜",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "21",
+          "ganZhi": "乙卯",
+          "changeMonth": "",
+          "startYear": "前606年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "简王",
+      "name": "姬夷",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "14",
+          "ganZhi": "丙子",
+          "changeMonth": "",
+          "startYear": "前585年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "灵王",
+      "name": "姬泄心",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "27",
+          "ganZhi": "庚寅",
+          "changeMonth": "",
+          "startYear": "前571年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "景王",
+      "name": "姬贵",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "25",
+          "ganZhi": "丁巳",
+          "changeMonth": "",
+          "startYear": "前544年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "悼王",
+      "name": "姬猛",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "1",
+          "ganZhi": "辛巳",
+          "changeMonth": "",
+          "startYear": "前520年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "敬王",
+      "name": "姬匄",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "44",
+          "ganZhi": "壬午",
+          "changeMonth": "",
+          "startYear": "前519年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "元王",
+      "name": "姬仁",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "7",
+          "ganZhi": "丙寅",
+          "changeMonth": "",
+          "startYear": "前475年"
+        }
+      ],
+      "events": [
+        {
+          "description": "战国时期形势",
+          "mapUrl": "hstrymap/b475b221.jpg"
+        }
+      ]
+    },
+    {
+      "title": "贞定王",
+      "name": "姬介",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "28",
+          "ganZhi": "癸酉",
+          "changeMonth": "",
+          "startYear": "前468年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "哀王",
+      "name": "姬去疾",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "1",
+          "ganZhi": "庚子",
+          "changeMonth": "",
+          "startYear": "前441年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "思王",
+      "name": "姬叔",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "1",
+          "ganZhi": "庚子",
+          "changeMonth": "",
+          "startYear": "前441年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "考王",
+      "name": "姬嵬",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "15",
+          "ganZhi": "辛丑",
+          "changeMonth": "",
+          "startYear": "前440年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "威烈王",
+      "name": "姬午",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "24",
+          "ganZhi": "丙辰",
+          "changeMonth": "",
+          "startYear": "前425年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "安王",
+      "name": "姬骄",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "26",
+          "ganZhi": "庚辰",
+          "changeMonth": "",
+          "startYear": "前401年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "烈王",
+      "name": "姬喜",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "7",
+          "ganZhi": "丙午",
+          "changeMonth": "",
+          "startYear": "前375年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "显王",
+      "name": "姬扁",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "48",
+          "ganZhi": "癸丑",
+          "changeMonth": "",
+          "startYear": "前368年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "慎靓王",
+      "name": "姬定",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "6",
+          "ganZhi": "辛丑",
+          "changeMonth": "",
+          "startYear": "前320年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "赧王",
+      "name": "姬延",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "59",
+          "ganZhi": "丁未",
+          "changeMonth": "",
+          "startYear": "前314年"
+        }
+      ],
+      "events": [
+        {
+          "description": "荀子32篇",
+          "mapUrl": "zi1liao4/xunkuang.htm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,330 @@
+{
+  "id": "minguo",
+  "name": "中華民國",
+  "period": "1912年-2028年",
+  "summary": "辛亥革命后建立的共和政府，结束了中国两千多年的封建帝制。经历北洋政府、国民政府等时期，现迁至台湾地区继续存在。",
+  "rulers": [
+    {
+      "title": "臨時大總統",
+      "name": "孫文",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "1",
+          "ganZhi": "辛亥",
+          "changeMonth": "十一月",
+          "startYear": "1912年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "臨時大總統",
+      "name": "袁世凱",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "1",
+          "ganZhi": "壬子",
+          "changeMonth": "正月",
+          "startYear": "1912年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "大總統",
+      "name": "袁世凱",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "3",
+          "ganZhi": "癸丑",
+          "changeMonth": "九月",
+          "startYear": "1913年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "大總統",
+      "name": "黎元洪",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "1",
+          "ganZhi": "丙辰",
+          "changeMonth": "五月",
+          "startYear": "1916年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "大總統",
+      "name": "馮国璋",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "1",
+          "ganZhi": "丁巳",
+          "changeMonth": "五月",
+          "startYear": "1917年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "大總統",
+      "name": "徐世昌",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "4",
+          "ganZhi": "戊午",
+          "changeMonth": "九月",
+          "startYear": "1918年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "非常大總統",
+      "name": "孫文",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "4",
+          "ganZhi": "壬戌",
+          "changeMonth": "五月",
+          "startYear": "1921年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "主席",
+      "name": "汪兆銘",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "1",
+          "ganZhi": "乙丑",
+          "changeMonth": "五月",
+          "startYear": "1925年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "陸海軍大元帥",
+      "name": "張作霖",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "1",
+          "ganZhi": "丁卯",
+          "changeMonth": "五月",
+          "startYear": "1927年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "主席",
+      "name": "蔣中正",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "3",
+          "ganZhi": "戊辰",
+          "changeMonth": "八月",
+          "startYear": "1928年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "主席",
+      "name": "林森",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "12",
+          "ganZhi": "辛未",
+          "changeMonth": "十一月",
+          "startYear": "1931年"
+        }
+      ],
+      "events": [
+        {
+          "description": "毛澤東1942《在延安文藝座談會上的講話》",
+          "mapUrl": "zi1liao4/Mao19425.htm"
+        }
+      ]
+    },
+    {
+      "title": "主席",
+      "name": "蔣中正",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "5",
+          "ganZhi": "癸未",
+          "changeMonth": "七月",
+          "startYear": "1943年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "總統",
+      "name": "蔣中正",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "1",
+          "ganZhi": "戊子",
+          "changeMonth": "四月",
+          "startYear": "1948年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "代總統",
+      "name": "李宗仁",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "1",
+          "ganZhi": "戊子",
+          "changeMonth": "十二月",
+          "startYear": "1949年"
+        }
+      ],
+      "events": [
+        {
+          "description": "中華民國三十八年史事日誌",
+          "mapUrl": "zi1liao4/中華民國三十八年.txt"
+        },
+        {
+          "description": "渡江作戰示意圖",
+          "mapUrl": "hstrymap/1949djzzsyt.gif"
+        }
+      ]
+    },
+    {
+      "title": "總統",
+      "name": "蔣中正",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "25",
+          "ganZhi": "庚寅",
+          "changeMonth": "正月",
+          "startYear": "1950年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "總統",
+      "name": "嚴家淦",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "3",
+          "ganZhi": "乙卯",
+          "changeMonth": "二月",
+          "startYear": "1975年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "總統",
+      "name": "蔣經國",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "10",
+          "ganZhi": "戊午",
+          "changeMonth": "四月",
+          "startYear": "1978年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "總統",
+      "name": "李登輝",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "12",
+          "ganZhi": "丁卯",
+          "changeMonth": "十一月",
+          "startYear": "1988年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "總統",
+      "name": "陳水扁",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "8",
+          "ganZhi": "庚辰",
+          "changeMonth": "四月",
+          "startYear": "2000年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "總統",
+      "name": "馬英九",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "8",
+          "ganZhi": "戊子",
+          "changeMonth": "四月",
+          "startYear": "2008年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "總統",
+      "name": "蔡英文",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "8",
+          "ganZhi": "丙申",
+          "changeMonth": "四月",
+          "startYear": "2016年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "總統",
+      "name": "賴清德",
+      "yearNames": [
+        {
+          "name": "民國",
+          "duration": "4",
+          "ganZhi": "甲辰",
+          "changeMonth": "四月",
+          "startYear": "2024年"
+        }
+      ],
+      "events": []
+    }
+  ]
+}

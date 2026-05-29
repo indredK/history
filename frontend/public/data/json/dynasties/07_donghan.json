@@ -1,0 +1,360 @@
+{
+  "id": "donghan",
+  "name": "东汉",
+  "period": "25年-220年",
+  "summary": "刘秀建立的汉朝后期，定都洛阳。光武中兴恢复汉朝统治，班超出使西域，蔡伦改进造纸术，最终因黄巾起义和外戚专权而衰落。",
+  "rulers": [
+    {
+      "title": "光武帝",
+      "name": "刘秀",
+      "yearNames": [
+        {
+          "name": "建武",
+          "duration": "32",
+          "ganZhi": "乙酉",
+          "changeMonth": "六月",
+          "startYear": "25年"
+        },
+        {
+          "name": "建武中元",
+          "duration": "2",
+          "ganZhi": "丙辰",
+          "changeMonth": "四月",
+          "startYear": "56年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "明帝",
+      "name": "刘庄",
+      "yearName": "永平",
+      "duration": "18",
+      "ganZhi": "戊午",
+      "changeMonth": "正月",
+      "startYear": "58年",
+      "events": [
+        {
+          "description": "班超出使西域",
+          "mapUrl": "hstrymap/00730097.jpg"
+        }
+      ]
+    },
+    {
+      "title": "章帝",
+      "name": "刘炟",
+      "yearNames": [
+        {
+          "name": "建初",
+          "duration": "9",
+          "ganZhi": "丙子",
+          "changeMonth": "正月",
+          "startYear": "76年"
+        },
+        {
+          "name": "元和",
+          "duration": "4",
+          "ganZhi": "甲申",
+          "changeMonth": "八月",
+          "startYear": "84年"
+        },
+        {
+          "name": "章和",
+          "duration": "2",
+          "ganZhi": "丁亥",
+          "changeMonth": "七月",
+          "startYear": "87年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "和帝",
+      "name": "刘肇",
+      "yearNames": [
+        {
+          "name": "永元",
+          "duration": "17",
+          "ganZhi": "己丑",
+          "changeMonth": "正月",
+          "startYear": "89年"
+        },
+        {
+          "name": "元兴",
+          "duration": "1",
+          "ganZhi": "乙巳",
+          "changeMonth": "四月",
+          "startYear": "105年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "殇帝",
+      "name": "刘隆",
+      "yearName": "延平",
+      "duration": "1",
+      "ganZhi": "丙午",
+      "changeMonth": "正月",
+      "startYear": "106年",
+      "events": []
+    },
+    {
+      "title": "安帝",
+      "name": "刘祜",
+      "yearNames": [
+        {
+          "name": "永初",
+          "duration": "7",
+          "ganZhi": "丁未",
+          "changeMonth": "正月",
+          "startYear": "107年"
+        },
+        {
+          "name": "元初",
+          "duration": "7",
+          "ganZhi": "甲寅",
+          "changeMonth": "正月",
+          "startYear": "114年"
+        },
+        {
+          "name": "永宁",
+          "duration": "2",
+          "ganZhi": "庚申",
+          "changeMonth": "四月",
+          "startYear": "120年"
+        },
+        {
+          "name": "建光",
+          "duration": "2",
+          "ganZhi": "辛酉",
+          "changeMonth": "七月",
+          "startYear": "121年"
+        },
+        {
+          "name": "延光",
+          "duration": "4",
+          "ganZhi": "壬戌",
+          "changeMonth": "三月",
+          "startYear": "122年"
+        }
+      ],
+      "events": [
+        {
+          "description": "东汉羌汉人民反抗斗争形势",
+          "mapUrl": "hstrymap/01110111.jpg"
+        }
+      ]
+    },
+    {
+      "title": "顺帝",
+      "name": "刘保",
+      "yearNames": [
+        {
+          "name": "永建",
+          "duration": "7",
+          "ganZhi": "丙寅",
+          "changeMonth": "正月",
+          "startYear": "126年"
+        },
+        {
+          "name": "阳嘉",
+          "duration": "4",
+          "ganZhi": "壬申",
+          "changeMonth": "三月",
+          "startYear": "132年"
+        },
+        {
+          "name": "永和",
+          "duration": "6",
+          "ganZhi": "丙子",
+          "changeMonth": "正月",
+          "startYear": "136年"
+        },
+        {
+          "name": "汉安",
+          "duration": "3",
+          "ganZhi": "壬午",
+          "changeMonth": "正月",
+          "startYear": "142年"
+        },
+        {
+          "name": "建康",
+          "duration": "1",
+          "ganZhi": "甲申",
+          "changeMonth": "四月",
+          "startYear": "144年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "冲帝",
+      "name": "刘炳",
+      "yearName": "永熹/嘉",
+      "duration": "1",
+      "ganZhi": "乙酉",
+      "changeMonth": "正月",
+      "startYear": "145年",
+      "events": []
+    },
+    {
+      "title": "质帝",
+      "name": "刘缵",
+      "yearName": "本初",
+      "duration": "1",
+      "ganZhi": "丙戌",
+      "changeMonth": "正月",
+      "startYear": "146年",
+      "events": []
+    },
+    {
+      "title": "桓帝",
+      "name": "刘志",
+      "yearNames": [
+        {
+          "name": "建和",
+          "duration": "3",
+          "ganZhi": "丁亥",
+          "changeMonth": "正月",
+          "startYear": "147年"
+        },
+        {
+          "name": "和平",
+          "duration": "1",
+          "ganZhi": "庚寅",
+          "changeMonth": "正月",
+          "startYear": "150年"
+        },
+        {
+          "name": "元嘉",
+          "duration": "3",
+          "ganZhi": "辛卯",
+          "changeMonth": "正月",
+          "startYear": "151年"
+        },
+        {
+          "name": "永兴",
+          "duration": "2",
+          "ganZhi": "癸巳",
+          "changeMonth": "五月",
+          "startYear": "153年"
+        },
+        {
+          "name": "永寿",
+          "duration": "4",
+          "ganZhi": "乙未",
+          "changeMonth": "正月",
+          "startYear": "155年"
+        },
+        {
+          "name": "延熹",
+          "duration": "10",
+          "ganZhi": "戊戌",
+          "changeMonth": "六月",
+          "startYear": "158年"
+        },
+        {
+          "name": "永康",
+          "duration": "1",
+          "ganZhi": "丁未",
+          "changeMonth": "六月",
+          "startYear": "167年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "灵帝",
+      "name": "刘宏",
+      "yearNames": [
+        {
+          "name": "建宁",
+          "duration": "5",
+          "ganZhi": "戊申",
+          "changeMonth": "正月",
+          "startYear": "168年"
+        },
+        {
+          "name": "熹平",
+          "duration": "7",
+          "ganZhi": "壬子",
+          "changeMonth": "五月",
+          "startYear": "172年"
+        },
+        {
+          "name": "光和",
+          "duration": "7",
+          "ganZhi": "戊午",
+          "changeMonth": "三月",
+          "startYear": "178年"
+        },
+        {
+          "name": "中平",
+          "duration": "6",
+          "ganZhi": "甲子",
+          "changeMonth": "十二月",
+          "startYear": "184年"
+        }
+      ],
+      "events": [
+        {
+          "description": "黄巾起义",
+          "mapUrl": "hstrymap/01840184.jpg"
+        }
+      ]
+    },
+    {
+      "title": "献帝",
+      "name": "刘协",
+      "yearNames": [
+        {
+          "name": "初平",
+          "duration": "4",
+          "ganZhi": "庚午",
+          "changeMonth": "正月",
+          "startYear": "190年"
+        },
+        {
+          "name": "兴平",
+          "duration": "2",
+          "ganZhi": "甲戌",
+          "changeMonth": "正月",
+          "startYear": "194年"
+        },
+        {
+          "name": "建安",
+          "duration": "25",
+          "ganZhi": "丙子",
+          "changeMonth": "正月",
+          "startYear": "196年"
+        },
+        {
+          "name": "延康",
+          "duration": "1",
+          "ganZhi": "庚子",
+          "changeMonth": "三月",
+          "startYear": "220年"
+        }
+      ],
+      "events": [
+        {
+          "description": "东汉末年军阀割据形势",
+          "mapUrl": "hstrymap/01990199.jpg"
+        },
+        {
+          "description": "官渡之战",
+          "mapUrl": "hstrymap/02000201.jpg"
+        },
+        {
+          "description": "隆中對",
+          "mapUrl": "hstrymap/longzhod.gif"
+        },
+        {
+          "description": "赤壁之战",
+          "mapUrl": "hstrymap/02080208.jpg"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,337 @@
+{
+  "id": "beisong",
+  "name": "北宋",
+  "period": "960年-1127年",
+  "summary": "赵匡胤建立的文治王朝，经济繁荣，科技发达，文化昌盛。与辽、西夏并立，最终在靖康之变中被金朝所灭。",
+  "rulers": [
+    {
+      "title": "太祖",
+      "name": "赵匡胤",
+      "yearNames": [
+        {
+          "name": "建隆",
+          "duration": "4",
+          "ganZhi": "庚申",
+          "changeMonth": "正月",
+          "startYear": "960年"
+        },
+        {
+          "name": "乾德",
+          "duration": "6",
+          "ganZhi": "癸亥",
+          "changeMonth": "十一月",
+          "startYear": "963年"
+        },
+        {
+          "name": "开宝",
+          "duration": "9",
+          "ganZhi": "戊辰",
+          "changeMonth": "十一月",
+          "startYear": "968年"
+        }
+      ],
+      "events": [
+        {
+          "description": "北宋东京城",
+          "mapUrl": "hstrymap/09601127.jpg"
+        }
+      ]
+    },
+    {
+      "title": "太宗",
+      "name": "赵炅(本名匡义, 又名光义)",
+      "yearNames": [
+        {
+          "name": "太平兴国",
+          "duration": "9",
+          "ganZhi": "丙子",
+          "changeMonth": "十二月",
+          "startYear": "976年"
+        },
+        {
+          "name": "雍熙",
+          "duration": "4",
+          "ganZhi": "甲申",
+          "changeMonth": "十一月",
+          "startYear": "984年"
+        },
+        {
+          "name": "端拱",
+          "duration": "2",
+          "ganZhi": "戊子",
+          "changeMonth": "正月",
+          "startYear": "988年"
+        },
+        {
+          "name": "淳化",
+          "duration": "5",
+          "ganZhi": "庚寅",
+          "changeMonth": "正月",
+          "startYear": "990年"
+        },
+        {
+          "name": "至道",
+          "duration": "3",
+          "ganZhi": "乙未",
+          "changeMonth": "正月",
+          "startYear": "995年"
+        }
+      ],
+      "events": [
+        {
+          "description": "宋辽边境形势 高粱河之战(979年)",
+          "mapUrl": "hstrymap/09601125.jpg"
+        },
+        {
+          "description": "王小波,李顺起义",
+          "mapUrl": "hstrymap/09930995.jpg"
+        }
+      ]
+    },
+    {
+      "title": "真宗",
+      "name": "赵恒",
+      "yearNames": [
+        {
+          "name": "咸平",
+          "duration": "6",
+          "ganZhi": "戊戌",
+          "changeMonth": "正月",
+          "startYear": "998年"
+        },
+        {
+          "name": "景德",
+          "duration": "4",
+          "ganZhi": "甲辰",
+          "changeMonth": "正月",
+          "startYear": "1004年"
+        },
+        {
+          "name": "大中祥符",
+          "duration": "9",
+          "ganZhi": "戊申",
+          "changeMonth": "正月",
+          "startYear": "1008年"
+        },
+        {
+          "name": "天禧",
+          "duration": "5",
+          "ganZhi": "丁巳",
+          "changeMonth": "正月",
+          "startYear": "1017年"
+        },
+        {
+          "name": "乾兴",
+          "duration": "1",
+          "ganZhi": "壬戌",
+          "changeMonth": "正月",
+          "startYear": "1022年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "仁宗",
+      "name": "赵祯",
+      "yearNames": [
+        {
+          "name": "天圣",
+          "duration": "10",
+          "ganZhi": "癸亥",
+          "changeMonth": "正月",
+          "startYear": "1023年"
+        },
+        {
+          "name": "明道",
+          "duration": "2",
+          "ganZhi": "壬申",
+          "changeMonth": "十一月",
+          "startYear": "1032年"
+        },
+        {
+          "name": "景祐",
+          "duration": "5",
+          "ganZhi": "甲戌",
+          "changeMonth": "正月",
+          "startYear": "1034年"
+        },
+        {
+          "name": "宝元",
+          "duration": "3",
+          "ganZhi": "戊寅",
+          "changeMonth": "十一月",
+          "startYear": "1038年"
+        },
+        {
+          "name": "康定",
+          "duration": "2",
+          "ganZhi": "庚辰",
+          "changeMonth": "二月",
+          "startYear": "1040年"
+        },
+        {
+          "name": "庆历",
+          "duration": "8",
+          "ganZhi": "辛巳",
+          "changeMonth": "十一月",
+          "startYear": "1041年"
+        },
+        {
+          "name": "皇祐",
+          "duration": "6",
+          "ganZhi": "己丑",
+          "changeMonth": "三月",
+          "startYear": "1049年"
+        },
+        {
+          "name": "至和",
+          "duration": "3",
+          "ganZhi": "甲午",
+          "changeMonth": "正月",
+          "startYear": "1054年"
+        },
+        {
+          "name": "嘉祐",
+          "duration": "8",
+          "ganZhi": "丙申",
+          "changeMonth": "九月",
+          "startYear": "1056年"
+        }
+      ],
+      "events": [
+        {
+          "description": "北宋,辽,西夏形势",
+          "mapUrl": "hstrymap/10381125.jpg"
+        }
+      ]
+    },
+    {
+      "title": "英宗",
+      "name": "赵曙",
+      "yearName": "治平",
+      "duration": "4",
+      "ganZhi": "甲辰",
+      "changeMonth": "正月",
+      "startYear": "1064年",
+      "events": []
+    },
+    {
+      "title": "神宗",
+      "name": "赵顼",
+      "yearNames": [
+        {
+          "name": "熙宁",
+          "duration": "10",
+          "ganZhi": "戊申",
+          "changeMonth": "正月",
+          "startYear": "1068年"
+        },
+        {
+          "name": "元丰",
+          "duration": "8",
+          "ganZhi": "戊午",
+          "changeMonth": "正月",
+          "startYear": "1078年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "哲宗",
+      "name": "赵煦",
+      "yearNames": [
+        {
+          "name": "元祐",
+          "duration": "9",
+          "ganZhi": "丙寅",
+          "changeMonth": "正月",
+          "startYear": "1086年"
+        },
+        {
+          "name": "绍圣",
+          "duration": "5",
+          "ganZhi": "甲戌",
+          "changeMonth": "四月",
+          "startYear": "1094年"
+        },
+        {
+          "name": "元符",
+          "duration": "3",
+          "ganZhi": "戊寅",
+          "changeMonth": "六月",
+          "startYear": "1098年"
+        }
+      ],
+      "events": [
+        {
+          "description": "蘇東坡詞選48首",
+          "mapUrl": "zi1liao4/sudongpo.htm"
+        }
+      ]
+    },
+    {
+      "title": "徽宗",
+      "name": "赵佶",
+      "yearNames": [
+        {
+          "name": "建中靖国",
+          "duration": "1",
+          "ganZhi": "辛巳",
+          "changeMonth": "正月",
+          "startYear": "1101年"
+        },
+        {
+          "name": "崇宁",
+          "duration": "5",
+          "ganZhi": "壬午",
+          "changeMonth": "正月",
+          "startYear": "1102年"
+        },
+        {
+          "name": "大观",
+          "duration": "4",
+          "ganZhi": "丁亥",
+          "changeMonth": "正月",
+          "startYear": "1107年"
+        },
+        {
+          "name": "政和",
+          "duration": "8",
+          "ganZhi": "辛卯",
+          "changeMonth": "正月",
+          "startYear": "1111年"
+        },
+        {
+          "name": "重和",
+          "duration": "2",
+          "ganZhi": "戊戌",
+          "changeMonth": "十一月",
+          "startYear": "1118年"
+        },
+        {
+          "name": "宣和",
+          "duration": "7",
+          "ganZhi": "己亥",
+          "changeMonth": "二月",
+          "startYear": "1119年"
+        }
+      ],
+      "events": [
+        {
+          "description": "宋江起义;方腊起义",
+          "mapUrl": "hstrymap/11191122.jpg"
+        }
+      ]
+    },
+    {
+      "title": "钦宗",
+      "name": "赵桓",
+      "yearName": "靖康",
+      "duration": "2",
+      "ganZhi": "丙午",
+      "changeMonth": "正月",
+      "startYear": "1126年",
+      "events": []
+    }
+  ]
+}

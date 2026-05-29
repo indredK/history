@@ -1,0 +1,268 @@
+{
+  "id": "wudai",
+  "name": "五代",
+  "period": "907年-960年",
+  "summary": "唐朝灭亡后，中原地区相继出现的五个朝代：后梁、后唐、后晋、后汉、后周。政权更迭频繁，战乱不断，为宋朝统一奠定基础。",
+  "dynasties": [
+    {
+      "id": "houliang",
+      "name": "后梁",
+      "period": "907年-923年",
+      "rulers": [
+        {
+          "title": "太祖",
+          "name": "朱晃(又名温、全忠)",
+          "yearNames": [
+            {
+              "name": "开平",
+              "duration": "5",
+              "ganZhi": "丁卯",
+              "changeMonth": "四月",
+              "startYear": "907年"
+            },
+            {
+              "name": "乾化",
+              "duration": "5",
+              "ganZhi": "辛未",
+              "changeMonth": "五月",
+              "startYear": "911年"
+            }
+          ],
+          "events": [
+            {
+              "description": "五代十国;幽云十六州",
+              "mapUrl": "hstrymap/08910979.jpg"
+            }
+          ]
+        },
+        {
+          "title": "末帝",
+          "name": "朱瑱",
+          "yearNames": [
+            {
+              "name": "乾化",
+              "duration": "5",
+              "ganZhi": "癸酉",
+              "changeMonth": "二月",
+              "startYear": "913年"
+            },
+            {
+              "name": "贞明",
+              "duration": "7",
+              "ganZhi": "乙亥",
+              "changeMonth": "十一月",
+              "startYear": "915年"
+            },
+            {
+              "name": "龙德",
+              "duration": "3",
+              "ganZhi": "辛巳",
+              "changeMonth": "五月",
+              "startYear": "921年"
+            }
+          ],
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "houtang",
+      "name": "后唐",
+      "period": "921年-936年",
+      "rulers": [
+        {
+          "title": "庄宗",
+          "name": "李存勖",
+          "yearName": "同光",
+          "duration": "4",
+          "ganZhi": "癸未",
+          "changeMonth": "四月",
+          "startYear": "923年",
+          "events": []
+        },
+        {
+          "title": "明宗",
+          "name": "李亶",
+          "yearNames": [
+            {
+              "name": "天成",
+              "duration": "5",
+              "ganZhi": "丙戌",
+              "changeMonth": "四月",
+              "startYear": "926年"
+            },
+            {
+              "name": "长兴",
+              "duration": "4",
+              "ganZhi": "庚寅",
+              "changeMonth": "二月",
+              "startYear": "930年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "闵帝",
+          "name": "李从厚",
+          "yearName": "应顺",
+          "duration": "1",
+          "ganZhi": "甲午",
+          "changeMonth": "正月",
+          "startYear": "934年",
+          "events": []
+        },
+        {
+          "title": "末帝",
+          "name": "李从珂",
+          "yearName": "清泰",
+          "duration": "3",
+          "ganZhi": "甲午",
+          "changeMonth": "四月",
+          "startYear": "934年",
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "houjin",
+      "name": "后晋",
+      "period": "936年-947年",
+      "rulers": [
+        {
+          "title": "高祖",
+          "name": "石敬塘",
+          "yearName": "天福",
+          "duration": "9",
+          "ganZhi": "丙申",
+          "changeMonth": "十一月",
+          "startYear": "936年",
+          "events": []
+        },
+        {
+          "title": "出帝",
+          "name": "石重贵",
+          "yearNames": [
+            {
+              "name": "天福",
+              "duration": "9",
+              "ganZhi": "壬寅",
+              "changeMonth": "六月",
+              "startYear": "942年",
+              "note": "出帝即位未改元"
+            },
+            {
+              "name": "开运",
+              "duration": "4",
+              "ganZhi": "甲辰",
+              "changeMonth": "七月",
+              "startYear": "944年"
+            }
+          ],
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "houhan",
+      "name": "后汉",
+      "period": "947年-950年",
+      "rulers": [
+        {
+          "title": "高祖",
+          "name": "刘暠(本名知远)",
+          "yearNames": [
+            {
+              "name": "天福",
+              "duration": "2",
+              "ganZhi": "丁未",
+              "changeMonth": "二月",
+              "startYear": "947年",
+              "note": "后汉高祖即位, 仍用后晋高祖年号, 称天福十二年."
+            },
+            {
+              "name": "乾祐",
+              "duration": "3",
+              "ganZhi": "戊申",
+              "changeMonth": "正月",
+              "startYear": "948年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "隐帝",
+          "name": "刘承祐",
+          "yearNames": [
+            {
+              "name": "乾祐",
+              "duration": "3",
+              "ganZhi": "戊申",
+              "changeMonth": "二月",
+              "startYear": "948年",
+              "note": "隐帝即位未改元"
+            }
+          ],
+          "events": []
+        }
+      ]
+    },
+    {
+      "id": "houzhou",
+      "name": "后周",
+      "period": "951年-960年",
+      "rulers": [
+        {
+          "title": "太祖",
+          "name": "郭威",
+          "yearNames": [
+            {
+              "name": "广顺",
+              "duration": "3",
+              "ganZhi": "辛亥",
+              "changeMonth": "正月",
+              "startYear": "951年"
+            },
+            {
+              "name": "显德",
+              "duration": "7",
+              "ganZhi": "甲寅",
+              "changeMonth": "一月",
+              "startYear": "954年"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "世宗",
+          "name": "柴荣",
+          "yearNames": [
+            {
+              "name": "显德",
+              "duration": "7",
+              "ganZhi": "甲寅",
+              "changeMonth": "一月",
+              "startYear": "954年",
+              "note": "世宗即位未改元"
+            }
+          ],
+          "events": []
+        },
+        {
+          "title": "恭帝",
+          "name": "柴宗训",
+          "yearNames": [
+            {
+              "name": "显德",
+              "duration": "7",
+              "ganZhi": "己未",
+              "changeMonth": "六月",
+              "startYear": "959年",
+              "note": "恭帝即位未改元"
+            }
+          ],
+          "events": []
+        }
+      ]
+    }
+  ]
+}

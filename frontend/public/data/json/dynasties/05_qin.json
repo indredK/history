@@ -1,0 +1,97 @@
+{
+  "id": "qin",
+  "name": "秦",
+  "period": "前221年-前206年",
+  "summary": "嬴政建立的中国第一个统一的中央集权制王朝。统一文字、货币、度量衡，建立郡县制，奠定了中国政治制度的基础。",
+  "rulers": [
+    {
+      "title": "昭襄王",
+      "name": "嬴则/稷",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "56",
+          "ganZhi": "乙卯",
+          "changeMonth": "",
+          "startYear": "前306年"
+        }
+      ],
+      "events": [
+        {
+          "description": "前256年灭周"
+        }
+      ]
+    },
+    {
+      "title": "孝文王",
+      "name": "嬴柱",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "1",
+          "ganZhi": "辛亥",
+          "changeMonth": "",
+          "startYear": "前250年"
+        }
+      ],
+      "events": []
+    },
+    {
+      "title": "庄襄王",
+      "name": "嬴子楚",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "3",
+          "ganZhi": "壬子",
+          "changeMonth": "",
+          "startYear": "前249年"
+        }
+      ],
+      "events": [
+        {
+          "description": "秦汉关中水利",
+          "mapUrl": "hstrymap/b2210220.jpg"
+        }
+      ]
+    },
+    {
+      "title": "始皇帝",
+      "name": "嬴政",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "37",
+          "ganZhi": "乙卯",
+          "changeMonth": "",
+          "startYear": "前246年"
+        }
+      ],
+      "events": [
+        {
+          "description": "秦灭六国;秦统一 前221年称帝",
+          "mapUrl": "hstrymap/b230b209.jpg"
+        }
+      ]
+    },
+    {
+      "title": "二世皇帝",
+      "name": "嬴胡亥",
+      "yearNames": [
+        {
+          "name": "",
+          "duration": "3",
+          "ganZhi": "壬辰",
+          "changeMonth": "",
+          "startYear": "前209年"
+        }
+      ],
+      "events": [
+        {
+          "description": "秦末陈胜吴广起义,农民战争",
+          "mapUrl": "hstrymap/b209b207.jpg"
+        }
+      ]
+    }
+  ]
+}
