@@ -12,7 +12,8 @@ interface MapFirstLayoutProps {
   routes: RouteConfig[];
 }
 
-const PRIMARY_NAV_KEYS = ['map', 'people', 'mythology', 'culture', 'dynasties', 'timeline'];
+// 动态使用所有路由作为导航项，避免新增模块时遗漏
+const PRIMARY_NAV_KEYS = ['map', 'people', 'mythology', 'culture', 'dynasties', 'timeline', 'emperors-cyber'];
 
 function routeMatches(pathname: string, routePath: string) {
   return pathname === routePath || pathname.startsWith(`${routePath}/`);

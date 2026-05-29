@@ -1,32 +1,82 @@
 #!/bin/bash
 
-# Start both frontend and backend in development mode
+set -u
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+BACKEND_PID=""
+FRONTEND_PID=""
+CLEANUP_DONE=0
+
 echo "🚀 Starting development servers..."
 
-# Function to cleanup processes on exit
 cleanup() {
+    if [ "$CLEANUP_DONE" -eq 1 ]; then
+        return
+    fi
+
+    CLEANUP_DONE=1
     echo "🛑 Stopping development servers..."
-    kill $BACKEND_PID $FRONTEND_PID 2>/dev/null
-    exit
+
+    if [ -n "${BACKEND_PID:-}" ] && kill -0 "$BACKEND_PID" 2>/dev/null; then
+        kill "$BACKEND_PID" 2>/dev/null
+    fi
+
+    if [ -n "${FRONTEND_PID:-}" ] && kill -0 "$FRONTEND_PID" 2>/dev/null; then
+        kill "$FRONTEND_PID" 2>/dev/null
+    fi
 }
 
-# Set trap to cleanup on script exit
-trap cleanup SIGINT SIGTERM EXIT
+fail() {
+    echo "❌ $1"
+    exit 1
+}
 
-# Start backend with Node.js
+wait_for_startup() {
+    local pid="$1"
+    local name="$2"
+
+    sleep 2
+
+    if ! kill -0 "$pid" 2>/dev/null; then
+        wait "$pid"
+        local exit_code=$?
+        fail "$name failed to start (exit code $exit_code)."
+    fi
+}
+
+monitor_processes() {
+    while true; do
+        if ! kill -0 "$BACKEND_PID" 2>/dev/null; then
+            wait "$BACKEND_PID"
+            local exit_code=$?
+            fail "Backend exited unexpectedly (exit code $exit_code)."
+        fi
+
+        if ! kill -0 "$FRONTEND_PID" 2>/dev/null; then
+            wait "$FRONTEND_PID"
+            local exit_code=$?
+            fail "Frontend exited unexpectedly (exit code $exit_code)."
+        fi
+
+        sleep 1
+    done
+}
+
+trap cleanup EXIT SIGINT SIGTERM
+
+echo "🔎 Verifying workspace tooling..."
+(cd "$ROOT_DIR" && bun run verify:tooling) || fail "Dependency check failed."
+
 echo "📦 Starting backend server..."
-(cd backend && ./node_modules/.bin/nest start --watch) &
+(cd "$ROOT_DIR" && bun run dev:backend) &
 BACKEND_PID=$!
+wait_for_startup "$BACKEND_PID" "Backend"
 
-# Wait a moment for backend to start
-sleep 3
-
-# Start frontend with Bun
 echo "🎨 Starting frontend server..."
-(cd frontend && bun run dev) &
+(cd "$ROOT_DIR" && bun run dev:frontend) &
 FRONTEND_PID=$!
+wait_for_startup "$FRONTEND_PID" "Frontend"
 
-# Wait for both processes
 echo "✅ Development servers started!"
 echo "🔗 Frontend: http://localhost:5173"
 echo "🔗 Backend: http://localhost:3001"
@@ -34,4 +84,4 @@ echo "📚 API Docs: http://localhost:3001/api/docs"
 echo ""
 echo "Press Ctrl+C to stop all servers"
 
-wait
+monitor_processes

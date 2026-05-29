@@ -10,7 +10,8 @@ import {
   People,
   Palette,
   AutoAwesome,
-  AccountBalance
+  AccountBalance,
+  MilitaryTech
 } from '@mui/icons-material';
 import { navigationItemsConfig } from './navigation';
 
@@ -30,7 +31,8 @@ const iconMap: Record<string, React.ReactNode> = {
   map: <MapOutlined />,
   people: <People />,
   culture: <Palette />,
-  mythology: <AutoAwesome />
+  mythology: <AutoAwesome />,
+  'emperors-cyber': <MilitaryTech />
 };
 
 // 创建包含图标的导航项配置

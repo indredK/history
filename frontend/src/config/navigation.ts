@@ -50,6 +50,12 @@ export const navigationItemsConfig: NavigationItemConfig[] = [
     label: '时间轴',
     path: '/timeline',
     description: '按时间顺序浏览历史事件'
+  },
+  {
+    key: 'emperors-cyber',
+    label: '帝王',
+    path: '/emperors-cyber',
+    description: '赛博风格历代帝王卡片'
   }
 ];
 

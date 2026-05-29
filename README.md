@@ -39,8 +39,10 @@
 ```bash
 git clone <repo-url> chinese-historical-panorama
 cd chinese-historical-panorama
-bun install            # 根目录执行,自动安装 frontend / backend workspace
+bun install            # 只在根目录执行一次,自动安装 frontend / backend workspace
 ```
+
+> 不要再进入 `frontend/` 或 `backend/` 单独执行 `bun install`。这是 Bun workspace 项目，依赖应始终从仓库根目录统一安装。
 
 #### 2. 准备数据库
 
@@ -74,6 +76,25 @@ cd backend && bun run start:dev # http://localhost:3001/api/v1
 #### 4. 打开浏览器
 
 访问 [http://localhost:5173](http://localhost:5173) 查看本地实例。
+
+### 依赖排错
+
+如果你看到 `nest: No such file or directory`、`vite: Script not found` 或类似的工具链错误，通常是 workspace 安装状态损坏了。推荐按下面顺序恢复：
+
+```bash
+rm -rf node_modules frontend/node_modules backend/node_modules
+bun install
+bun run verify:tooling
+bun run dev
+```
+
+也可以直接用仓库脚本：
+
+```bash
+bun run deps:clean    # 只清依赖
+bun run deps:install  # 一键重装并校验依赖
+bun run deps:reset    # 清依赖 + 重装 + 校验
+```
 
 ### 常用脚本
 

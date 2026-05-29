@@ -16,6 +16,7 @@ const CulturePage = lazy(() => import('../pages/CulturePage'));
 const MythologyPage = lazy(() => import('../pages/MythologyPage'));
 const DynastiesPage = lazy(() => import('../pages/DynastiesPage'));
 const DynastyBoundariesPage = lazy(() => import('../pages/DynastyBoundariesPage'));
+const EmperorsCyberPage = lazy(() => import('../pages/EmperorsCyberPage'));
 
 export const routes: RouteConfig[] = [
   {
@@ -60,5 +61,11 @@ export const routes: RouteConfig[] = [
     path: '/dynasty-boundaries',
     label: '疆域',
     component: DynastyBoundariesPage,
+  },
+  {
+    key: 'emperors-cyber',
+    path: '/emperors-cyber',
+    label: '帝王',
+    component: EmperorsCyberPage,
   },
 ];

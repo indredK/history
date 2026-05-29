@@ -10,7 +10,7 @@
     "dev": "bun run dev:full",
     "dev:full": "./scripts/dev.sh",
     "dev:frontend": "cd frontend && bun run dev",
-    "dev:backend": "cd backend && ./node_modules/.bin/nest start --watch",
+    "dev:backend": "cd backend && bun run start:dev",
     "build": "bun run build:backend && bun run build:frontend",
     "build:frontend": "cd frontend && bun run build",
     "build:backend": "cd backend && bun run build",
@@ -27,8 +27,12 @@
     "type-check": "bun run type-check:frontend && bun run type-check:backend",
     "type-check:frontend": "cd frontend && bun run type-check",
     "type-check:backend": "cd backend && bun run type-check",
-    "install:all": "bun install && cd frontend && bun install && cd ../backend && bun install",
-    "clean": "rm -rf frontend/dist frontend/node_modules backend/node_modules backend/dist node_modules",
+    "verify:tooling": "node scripts/verify-tooling.cjs",
+    "deps:clean": "rm -rf node_modules frontend/node_modules backend/node_modules",
+    "deps:install": "bun install && bun run verify:tooling",
+    "deps:reset": "bun run deps:clean && bun run deps:install",
+    "install:all": "bun install",
+    "clean": "rm -rf frontend/dist frontend/node_modules backend/node_modules backend/dist backend/*.tsbuildinfo node_modules",
     "clean:install": "bun run clean && bun run install:all",
     "db:seed": "cd backend && bunx prisma db seed",
     "db:migrate": "cd backend && bunx prisma migrate deploy",
@@ -41,6 +45,7 @@
     "bun": ">=1.3.0"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "vite": "^8.0.14"
   }
 }

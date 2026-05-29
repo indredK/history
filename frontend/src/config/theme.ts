@@ -102,6 +102,17 @@ export const navigationThemes: Record<string, NavigationTheme> = {
       borderColor: 'rgba(107, 135, 151, 0.2)',
       activeGlow: '0 0 15px rgba(107, 135, 151, 0.24)'
     }
+  },
+  'emperors-cyber': {
+    key: 'emperors-cyber',
+    gradient: 'linear-gradient(135deg, #00f0ff 0%, #af52de 100%)',
+    hoverBackground: 'rgba(0, 240, 255, 0.1)',
+    glass: {
+      blur: '20px',
+      bgOpacity: 0.7,
+      borderColor: 'rgba(0, 240, 255, 0.22)',
+      activeGlow: '0 0 15px rgba(0, 240, 255, 0.24)'
+    }
   }
 };
 
