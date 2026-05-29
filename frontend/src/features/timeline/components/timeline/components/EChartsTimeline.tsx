@@ -23,7 +23,6 @@ import {
   buildDefaultWindowRange,
   buildBoundsRange,
   clampRangeToBounds,
-  eventEnd,
   eventOverlapsRange,
   focusRangeToDynasty,
   getDynastyRange,
@@ -52,6 +51,7 @@ interface EChartsTimelineProps {
   // ── Controlled state (parent takes over when provided) ──
   timeRange?: TimeRange | null;
   isCondensed?: boolean;
+  selectedDynastyId?: string | null;
 
   // ── Initial state (only for uncontrolled mode) ──
   initialTimeRange?: TimeRange;
@@ -64,6 +64,8 @@ interface EChartsTimelineProps {
   showResetButton?: boolean;
   /** 显示收起/展开切换按钮，默认 true */
   showCondenseToggle?: boolean;
+  /** 缩起后的显示模式，默认 default；地图模块可用 dynasties-only */
+  condensedDisplayMode?: 'default' | 'dynasties-only';
   /** 显示朝代色带，默认 true */
   showDynastyBands?: boolean;
   /** 朝代色带上显示事件计数，默认 true */
@@ -98,6 +100,7 @@ interface EChartsTimelineProps {
   onCondensedChange?: (condensed: boolean) => void;
   onReset?: () => void;
   onEventClick?: (event: Event) => void;
+  onDynastyClick?: (dynasty: Dynasty) => void;
   clusterData?: {
     yearClusters: Array<{
       id: string;
@@ -206,6 +209,7 @@ const EVENT_AREA_BOTTOM = 0.66;
 const GRID_LEFT = 64;
 const GRID_RIGHT = 24;
 const COLLAPSED_CHART_HEIGHT = 82;
+const COLLAPSED_DYNASTY_ONLY_HEIGHT = 54;
 const EVENT_LABEL_SPAN_THRESHOLD = 300;
 
 const EVENT_CATEGORY_ORDER = EVENT_TYPE_LABELS;
@@ -316,10 +320,6 @@ function buildTimelineThemeColors(isLight: boolean): TimelineThemeColors {
   const borderMedium = readCssVar(
     '--color-border-medium',
     isLight ? 'rgba(118, 90, 51, 0.16)' : 'rgba(226, 198, 140, 0.2)',
-  );
-  const hoverBg = readCssVar(
-    '--theme-hover-bg',
-    isLight ? 'rgba(155, 97, 33, 0.08)' : 'rgba(199, 143, 69, 0.12)',
   );
   const activeBg = readCssVar(
     '--theme-active-bg',
@@ -572,6 +572,9 @@ function createDynastyBandRenderItem(
   colors: TimelineThemeColors,
   laneCount: number,
   eventCountByDynastyId: Map<string, number>,
+  selectedDynastyId?: string | null,
+  bandTop = BAND_TOP,
+  bandHeight = BAND_HEIGHT,
 ) {
   return (
     params: {
@@ -593,8 +596,8 @@ function createDynastyBandRenderItem(
       return null;
     }
 
-    const perLaneBandHeight = BAND_HEIGHT / laneCount;
-    const bandY = BAND_TOP + laneIndex * perLaneBandHeight;
+    const perLaneBandHeight = bandHeight / laneCount;
+    const bandY = bandTop + laneIndex * perLaneBandHeight;
     const startPoint = api.coord([api.value(0), bandY]);
     const endPoint = api.coord([api.value(1), bandY + perLaneBandHeight]);
     const [startX, startY] = startPoint;
@@ -627,20 +630,23 @@ function createDynastyBandRenderItem(
 
     const showLabel = shape.width >= Math.max(dynasty.name.length * 12 + 12, 36);
     const eventCount = eventCountByDynastyId.get(dynasty.id) ?? 0;
+    const isSelected = selectedDynastyId === dynasty.id;
 
     return {
       type: 'group',
+      name: 'dynasty-band-group',
       info: { dynasty },
       children: [
         {
           type: 'rect',
+          name: 'dynasty-band-rect',
           shape,
           style: {
-            fill,
-            stroke,
-            lineWidth,
-            shadowBlur,
-            shadowColor,
+            fill: isSelected ? colors.dynastySelectedFill : fill,
+            stroke: isSelected ? colors.dynastySelectedStroke : stroke,
+            lineWidth: isSelected ? 2.5 : lineWidth,
+            shadowBlur: isSelected ? 18 : shadowBlur,
+            shadowColor: isSelected ? colors.dynastySelectedShadow : shadowColor,
           },
           emphasis: {
             style: {
@@ -657,6 +663,7 @@ function createDynastyBandRenderItem(
           ? [
               {
                 type: 'text',
+                name: 'dynasty-band-label',
                 style: {
                   x: shape.x + shape.width / 2,
                   y: shape.y + shape.height / 2,
@@ -813,9 +820,11 @@ function buildOption(args: {
   showCategoryLabels: boolean;
   showCategorySeparators: boolean;
   showSliderZoom: boolean;
+  condensedDisplayMode: 'default' | 'dynasties-only';
   showEventLabels: boolean | null;
   eventLabelThreshold: number;
   showEventPoints: boolean;
+  selectedDynastyId: string | null | undefined;
   selectedEventId?: string | null;
   clusterData?: EChartsTimelineProps['clusterData'];
   enableAnimation: boolean;
@@ -835,9 +844,11 @@ function buildOption(args: {
     showCategoryLabels: _showCategoryLabels,
     showCategorySeparators: _showCategorySeparators,
     showSliderZoom: _showSliderZoom,
+    condensedDisplayMode: _condensedDisplayMode,
     showEventLabels: _showEventLabels,
     eventLabelThreshold: _eventLabelThreshold,
     showEventPoints: _showEventPoints,
+    selectedDynastyId,
     selectedEventId,
     clusterData,
     enableAnimation: _enableAnimation,
@@ -846,8 +857,10 @@ function buildOption(args: {
     enableZoom: _enableZoom,
   } = args;
 
+  const isDynastyOnlyCondensed = isCondensed && _condensedDisplayMode === 'dynasties-only';
   const { laneIndexes, laneCount } = assignDynastyLanes(dynasties);
-  const dynastyBandData = isCondensed || !_showDynastyBands ? [] : buildDynastyBandData(dynasties, laneIndexes);
+  const shouldRenderDynastyBands = _showDynastyBands && (!isCondensed || isDynastyOnlyCondensed);
+  const dynastyBandData = shouldRenderDynastyBands ? buildDynastyBandData(dynasties, laneIndexes) : [];
   const eventCountByDynastyId = isCondensed || !_showDynastyCountBadge
     ? new Map<string, number>()
     : (() => {
@@ -861,6 +874,13 @@ function buildOption(args: {
       })();
   const visibleSpan = Math.abs(timeRange[1] - timeRange[0]);
   const showEvents = !isCondensed && _showEventPoints;
+  const isDynastyFocusedLayout = !showEvents;
+  const dynastyBandTop = isDynastyOnlyCondensed
+    ? 0.22
+    : (isDynastyFocusedLayout ? 0.42 : BAND_TOP);
+  const dynastyBandHeight = isDynastyOnlyCondensed
+    ? 0.52
+    : (isDynastyFocusedLayout ? 0.34 : BAND_HEIGHT);
   const showEventLabels = showEvents
     && (_showEventLabels ?? visibleSpan <= _eventLabelThreshold);
   const { renderData: eventRenderData, categoryLabels } = showEvents
@@ -884,11 +904,11 @@ function buildOption(args: {
     animation: _enableAnimation,
     animationDuration: _animationDuration,
     animationEasing: 'cubicOut' as const,
-    grid: {
+      grid: {
       left: GRID_LEFT,
       right: GRID_RIGHT,
       top: isCondensed ? 8 : 16,
-      bottom: isCondensed ? 40 : 58,
+      bottom: isDynastyOnlyCondensed ? 10 : (isCondensed ? 40 : 58),
       containLabel: false,
     },
     xAxis: {
@@ -896,26 +916,27 @@ function buildOption(args: {
       min: boundsRange[0],
       max: boundsRange[1],
       axisLabel: {
+        show: !isDynastyOnlyCondensed,
         color: colors.axisText,
         fontSize: 11,
         fontWeight: 500,
         margin: 10,
         formatter: (value: number) => formatTimelineYear(value, { short: true }),
       },
-      axisLine: { show: true, lineStyle: { color: colors.axisLine } },
+      axisLine: { show: !isDynastyOnlyCondensed, lineStyle: { color: colors.axisLine } },
       axisTick: {
-        show: true,
+        show: !isDynastyOnlyCondensed,
         length: 6,
         lineStyle: { color: colors.axisLine },
       },
       minorTick: {
-        show: true,
+        show: !isDynastyOnlyCondensed,
         splitNumber: 4,
         length: 3,
         lineStyle: { color: colors.axisLine, opacity: 0.35 },
       },
       splitLine: {
-        show: true,
+        show: !isDynastyOnlyCondensed,
         lineStyle: {
           color: colors.axisLine,
           opacity: 0.12,
@@ -923,7 +944,7 @@ function buildOption(args: {
         },
       },
       minorSplitLine: {
-        show: true,
+        show: !isDynastyOnlyCondensed,
         lineStyle: {
           color: colors.axisLine,
           opacity: 0.05,
@@ -983,7 +1004,7 @@ function buildOption(args: {
         startValue: timeRange[0],
         endValue: timeRange[1],
       },
-      ...(_showSliderZoom
+      ...(_showSliderZoom && !isDynastyOnlyCondensed
         ? [{
             id: 'timeline-slider-range',
         type: 'slider',
@@ -1117,12 +1138,15 @@ function buildOption(args: {
         yAxisIndex: 0,
         data: dynastyBandData,
         z: 3,
-        silent: isCondensed,
+        silent: isCondensed && !isDynastyOnlyCondensed,
         renderItem: createDynastyBandRenderItem(
           dynastyBandData,
           colors,
           laneCount,
           eventCountByDynastyId,
+          selectedDynastyId,
+          dynastyBandTop,
+          dynastyBandHeight,
         ),
       },
       {
@@ -1203,6 +1227,7 @@ export function EChartsTimeline({
   // controlled state
   timeRange: timeRangeProp,
   isCondensed: isCondensedProp,
+  selectedDynastyId,
   // initial state (uncontrolled)
   initialTimeRange,
   initialIsCondensed = false,
@@ -1210,6 +1235,7 @@ export function EChartsTimeline({
   showHeader = true,
   showResetButton = true,
   showCondenseToggle = true,
+  condensedDisplayMode = 'default',
   showDynastyBands = true,
   showDynastyCountBadge = true,
   showCategoryLabels = true,
@@ -1229,6 +1255,7 @@ export function EChartsTimeline({
   onCondensedChange,
   onReset: onResetProp,
   onEventClick,
+  onDynastyClick,
   clusterData,
 }: EChartsTimelineProps) {
   const chartContainerRef = useRef<HTMLDivElement>(null);
@@ -1245,6 +1272,7 @@ export function EChartsTimeline({
   // ── Resolved values (controlled > uncontrolled) ──
   const isCondensed = isCondensedProp !== undefined ? isCondensedProp : _isCondensed;
   const timeRange = timeRangeProp !== undefined ? timeRangeProp : _timeRange;
+  const isDynastyOnlyCondensed = isCondensed && condensedDisplayMode === 'dynasties-only';
 
   const themeMode = useThemeStore((state) => state.theme);
 
@@ -1288,6 +1316,10 @@ export function EChartsTimeline({
 
   const dynasties = useMemo(() => sortDynasties(dynastiesData), [dynastiesData]);
   const events = useMemo(() => sortEvents(eventsData), [eventsData]);
+  const dynastyBandLookup = useMemo(() => {
+    const { laneIndexes } = assignDynastyLanes(dynasties);
+    return buildDynastyBandData(dynasties, laneIndexes);
+  }, [dynasties]);
   const boundsRange = useMemo(() => buildBoundsRange(events, dynasties), [dynasties, events]);
   const defaultWindowRange = useMemo<TimeRange>(() => {
     const firstDynasty = dynasties[0];
@@ -1305,7 +1337,7 @@ export function EChartsTimeline({
     return h;
   }, [showEventPoints, eventsData.length, showSliderZoom]);
   const chartHeight = isCondensed
-    ? COLLAPSED_CHART_HEIGHT
+    ? (isDynastyOnlyCondensed ? COLLAPSED_DYNASTY_ONLY_HEIGHT : COLLAPSED_CHART_HEIGHT)
     : (hasExplicitHeight ? minHeight! : autoHeight);
   const colors = useMemo(() => buildTimelineThemeColors(themeMode === 'light'), [themeMode]);
 
@@ -1360,7 +1392,7 @@ export function EChartsTimeline({
 
   useEffect(() => {
     const chart = chartRef.current;
-    if (!chart || !timeRange) {
+    if (!chart) {
       return;
     }
 
@@ -1371,7 +1403,7 @@ export function EChartsTimeline({
 
     const option = buildOption({
       boundsRange,
-      timeRange,
+      timeRange: effectiveRange,
       isCondensed,
       dynasties,
       events,
@@ -1381,9 +1413,11 @@ export function EChartsTimeline({
       showCategoryLabels,
       showCategorySeparators,
       showSliderZoom,
+      condensedDisplayMode,
       showEventLabels: showEventLabelsProp,
       eventLabelThreshold,
       showEventPoints,
+      selectedDynastyId,
       selectedEventId,
       enableAnimation,
       animationDuration,
@@ -1416,6 +1450,8 @@ export function EChartsTimeline({
     showEventLabelsProp,
     showEventPoints,
     showSliderZoom,
+    condensedDisplayMode,
+    selectedDynastyId,
     selectedEventId,
     timeRange,
   ]);
@@ -1456,14 +1492,52 @@ export function EChartsTimeline({
   }, [handleDataZoom]);
 
   const handleChartClick = useCallback((params: unknown) => {
-    const event = (params as { data?: { event?: Event } })?.data?.event;
+    const clickParams = params as {
+      info?: { dynasty?: Dynasty };
+      data?: { dynasty?: Dynasty; event?: Event };
+      dataIndex?: number;
+      seriesId?: string;
+    };
+    const dynasty =
+      clickParams.info?.dynasty
+      ?? clickParams.data?.dynasty
+      ?? (
+        clickParams.seriesId === 'dynasty-bands' &&
+        clickParams.dataIndex !== undefined
+          ? dynastyBandLookup[clickParams.dataIndex]?.dynasty
+          : undefined
+      );
+    if (dynasty) {
+      onDynastyClick?.(dynasty);
+      return;
+    }
+
+    const event = clickParams.data?.event;
     if (!event) {
       return;
     }
 
     setSelectedEvent(event);
     onEventClick?.(event);
-  }, [onEventClick]);
+  }, [dynastyBandLookup, onDynastyClick, onEventClick]);
+
+  const handleDynastyBandClick = useCallback((params: unknown) => {
+    const clickParams = params as {
+      info?: { dynasty?: Dynasty };
+      dataIndex?: number;
+    };
+    const dynasty =
+      clickParams.info?.dynasty
+      ?? (
+        clickParams.dataIndex !== undefined
+          ? dynastyBandLookup[clickParams.dataIndex]?.dynasty
+          : undefined
+      );
+
+    if (dynasty) {
+      onDynastyClick?.(dynasty);
+    }
+  }, [dynastyBandLookup, onDynastyClick]);
 
   useEffect(() => {
     const chart = chartRef.current;
@@ -1472,11 +1546,13 @@ export function EChartsTimeline({
     }
 
     chart.on('click', handleChartClick);
+    chart.on('click', { seriesId: 'dynasty-bands' }, handleDynastyBandClick);
 
     return () => {
       chart.off('click', handleChartClick);
+      chart.off('click', handleDynastyBandClick);
     };
-  }, [handleChartClick]);
+  }, [handleChartClick, handleDynastyBandClick]);
 
   const handleReset = useCallback(() => {
     setTimeRange(defaultWindowRange);
@@ -1503,6 +1579,9 @@ export function EChartsTimeline({
       sx={{
         display: 'flex',
         flexDirection: 'column',
+        position: 'relative',
+        zIndex: 1,
+        pointerEvents: 'auto',
         width: '100%',
         flex: isCondensed || hasExplicitHeight ? '0 0 auto' : 1,
         minHeight: isCondensed ? 'auto' : (hasExplicitHeight ? `${chartHeight + 56}px` : 0),
@@ -1513,12 +1592,12 @@ export function EChartsTimeline({
         boxShadow: 'var(--app-panel-shadow-sm, var(--shadow-sm))',
       }}
     >
-      {showHeader && (
+      {(showHeader || showCondenseToggle) && (
       <Box
         sx={{
           display: 'flex',
           alignItems: 'flex-start',
-          justifyContent: 'space-between',
+          justifyContent: isDynastyOnlyCondensed ? 'flex-end' : 'space-between',
           gap: 1,
           flexWrap: 'wrap',
           px: 2,
@@ -1528,69 +1607,72 @@ export function EChartsTimeline({
           color: colors.headerText,
         }}
       >
-        <Box
-          sx={{
-            minWidth: 0,
-            flex: '1 1 320px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'stretch',
-            gap: 0.6,
-          }}
-        >
+        {!isDynastyOnlyCondensed && showHeader && (
           <Box
             sx={{
               minWidth: 0,
+              flex: '1 1 320px',
               display: 'flex',
-              alignItems: 'center',
-              gap: 0.75,
+              flexDirection: 'column',
+              alignItems: 'stretch',
+              gap: 0.6,
             }}
           >
-            <Box component="span" sx={{ color: colors.headerMuted, whiteSpace: 'nowrap', flexShrink: 0 }}>
-              时间范围
-            </Box>
             <Box
-              component="span"
               sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
                 minWidth: 0,
-                px: 0.75,
-                py: 0.3,
-                borderRadius: '999px',
-                backgroundColor: colors.countPillBg,
-                color: colors.countPillText,
-                fontWeight: 600,
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-              }}
-              title={formatRangeLabel(effectiveRange)}
-            >
-              {formatRangeLabel(effectiveRange)}
-            </Box>
-            <Box
-              component="span"
-              sx={{
-                display: 'inline-flex',
+                display: 'flex',
                 alignItems: 'center',
-                minWidth: 0,
-                px: 0.75,
-                py: 0.3,
-                borderRadius: '999px',
-                backgroundColor: colors.countPillBg,
-                color: colors.countPillText,
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
+                gap: 0.75,
               }}
             >
-              窗口内 {visibleEventCount} / 共 {events.length} 个事件
+              <Box component="span" sx={{ color: colors.headerMuted, whiteSpace: 'nowrap', flexShrink: 0 }}>
+                时间范围
+              </Box>
+              <Box
+                component="span"
+                sx={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  minWidth: 0,
+                  px: 0.75,
+                  py: 0.3,
+                  borderRadius: '999px',
+                  backgroundColor: colors.countPillBg,
+                  color: colors.countPillText,
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}
+                title={formatRangeLabel(effectiveRange)}
+              >
+                {formatRangeLabel(effectiveRange)}
+              </Box>
+              {events.length > 0 && (
+                <Box
+                  component="span"
+                  sx={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    minWidth: 0,
+                    px: 0.75,
+                    py: 0.3,
+                    borderRadius: '999px',
+                    backgroundColor: colors.countPillBg,
+                    color: colors.countPillText,
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                >
+                  窗口内 {visibleEventCount} / 共 {events.length} 个事件
+                </Box>
+              )}
             </Box>
           </Box>
-        </Box>
+        )}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, flexShrink: 0 }}>
-          {showResetButton && (
+          {showHeader && !isDynastyOnlyCondensed && showResetButton && (
           <button
             type="button"
             onClick={handleReset}
@@ -1652,12 +1734,14 @@ export function EChartsTimeline({
         anchor="right"
         open={selectedEvent !== null}
         onClose={() => setSelectedEvent(null)}
-        PaperProps={{
-          sx: {
-            width: { xs: '100%', sm: 420 },
-            p: 2,
-            background: 'var(--app-panel-bg-soft, var(--color-bg-card))',
-            borderLeft: 'var(--app-panel-border, 1px solid rgba(148, 163, 184, 0.18))',
+        slotProps={{
+          paper: {
+            sx: {
+              width: { xs: '100%', sm: 420 },
+              p: 2,
+              background: 'var(--app-panel-bg-soft, var(--color-bg-card))',
+              borderLeft: 'var(--app-panel-border, 1px solid rgba(148, 163, 184, 0.18))',
+            },
           },
         }}
       >

@@ -1,6 +1,8 @@
 import {
   Stack,
-  Button
+  Button,
+  IconButton,
+  Tooltip,
 } from '@mui/material';
 import {
   Layers,
@@ -11,7 +13,11 @@ import { LayerControlPopover } from './LayerControlPopover';
 import { TimeControlPopover } from './TimeControlPopover';
 import { buttonConfig } from '@/config';
 
-export function MapFunctions() {
+interface MapFunctionsProps {
+  collapsed?: boolean;
+}
+
+export function MapFunctions({ collapsed = false }: MapFunctionsProps) {
   // 图层控制 Popover 状态
   const [layerControlAnchorEl, setLayerControlAnchorEl] = useState<HTMLButtonElement | null>(null);
 
@@ -35,6 +41,70 @@ export function MapFunctions() {
   const handleTimeControlClose = () => {
     setTimeControlAnchorEl(null);
   };
+
+  // 折叠模式：仅显示图标按钮
+  if (collapsed) {
+    return (
+      <>
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{ justifyContent: 'center', px: 1, py: 0.5 }}
+        >
+          <Tooltip title="图层控制" placement="top">
+            <IconButton
+              onClick={handleLayerControlClick}
+              size="small"
+              sx={{
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+                background: 'rgba(199, 143, 69, 0.08)',
+                border: '1px solid var(--theme-glass-border)',
+                color: 'var(--color-text-primary)',
+                width: 36,
+                height: 36,
+                '&:hover': {
+                  background: 'rgba(199, 143, 69, 0.15)',
+                  transform: 'translateY(-1px)',
+                },
+              }}
+            >
+              <Layers fontSize="small" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="时间控制" placement="top">
+            <IconButton
+              onClick={handleTimeControlClick}
+              size="small"
+              sx={{
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+                background: 'rgba(199, 143, 69, 0.08)',
+                border: '1px solid var(--theme-glass-border)',
+                color: 'var(--color-text-primary)',
+                width: 36,
+                height: 36,
+                '&:hover': {
+                  background: 'rgba(199, 143, 69, 0.15)',
+                  transform: 'translateY(-1px)',
+                },
+              }}
+            >
+              <Schedule fontSize="small" />
+            </IconButton>
+          </Tooltip>
+        </Stack>
+        <LayerControlPopover
+          anchorEl={layerControlAnchorEl}
+          onClose={handleLayerControlClose}
+        />
+        <TimeControlPopover
+          anchorEl={timeControlAnchorEl}
+          onClose={handleTimeControlClose}
+        />
+      </>
+    );
+  }
 
   return (
     <Stack spacing={1}>

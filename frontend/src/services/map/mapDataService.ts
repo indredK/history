@@ -4,6 +4,11 @@
  */
 
 import { loadJsonData } from '@/utils/services/dataLoaders';
+import {
+  CHINA_GEOJSON_PATH,
+  MAP_BOUNDARIES_DATA_PATH,
+  MAP_PLACES_PATH,
+} from '@/config/mapDataPaths';
 import type {
   Place,
   BoundaryGeoJSON,
@@ -76,7 +81,7 @@ export class MapDataService {
   async loadPlaces(): Promise<Place[]> {
     return this.cache.get('places', async () => {
       console.log('🗺️ 加载地点数据...');
-      const data = await loadJsonData<Place[]>('/data/json/places.json');
+      const data = await loadJsonData<Place[]>(MAP_PLACES_PATH);
       console.log(`✅ 地点数据加载完成，共 ${data.length} 个地点`);
       return data;
     });
@@ -84,7 +89,7 @@ export class MapDataService {
 
   async loadChinaGeoJson(): Promise<GeoJsonData> {
     return this.cache.get('china-geojson', () =>
-      loadJsonData<GeoJsonData>('/data/json/100000.geoJson'),
+      loadJsonData<GeoJsonData>(CHINA_GEOJSON_PATH),
     );
   }
 
@@ -165,7 +170,7 @@ export class MapDataService {
           return null;
         }
 
-        const data = await loadJsonData<BoundaryGeoJSON>(`/data/raw/${mapping.file}`);
+        const data = await loadJsonData<BoundaryGeoJSON>(`${MAP_BOUNDARIES_DATA_PATH}/${mapping.file}`);
         console.log(`✅ ${period} 时期边界数据加载完成`);
         return data;
       } catch (error) {
@@ -180,7 +185,8 @@ export class MapDataService {
    */
   async getBoundaryDataByYear(year: number): Promise<BoundaryGeoJSON | null> {
     const mappings = await this.loadBoundaryMappings();
-    const mapping = mappings.find(m => year >= m.validFrom && year <= m.validTo);
+    const matchedMappings = mappings.filter((mapping) => year >= mapping.validFrom && year <= mapping.validTo);
+    const mapping = matchedMappings.sort((left, right) => right.validFrom - left.validFrom)[0] ?? null;
     
     if (!mapping) {
       console.warn(`⚠️ 未找到年份 ${year} 对应的边界数据`);

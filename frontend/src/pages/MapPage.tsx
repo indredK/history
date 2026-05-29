@@ -1,9 +1,11 @@
 import { useCallback, useMemo } from 'react';
+import { useRequest } from 'ahooks';
 import { EChartsMapView } from '@/features/map/EChartsMapView';
 import type { EChartsMapViewProps } from '@/features/map/EChartsMapView';
 import { MapErrorBoundary } from '@/features/map/components/MapErrorBoundary';
+import { StateView } from '@/components/ui';
+import { getDynasties, getEvents, getPlaces } from '@/services/dataClient';
 import { useMapStore } from '@/store';
-
 function MapPage() {
   const {
     historicalFocusMode,
@@ -56,9 +58,55 @@ function MapPage() {
   const initialPlaybackState = useMemo(() => playbackState, []);
   const initialPlaybackSpeed = useMemo(() => playbackSpeed, []);
 
+  const {
+    data,
+    loading,
+    error,
+    refresh,
+  } = useRequest(async () => {
+    const [eventsResult, dynastiesResult, placesResult] = await Promise.all([
+      getEvents(),
+      getDynasties(),
+      getPlaces(),
+    ]);
+
+    return {
+      events: eventsResult.data,
+      dynasties: dynastiesResult.data,
+      places: placesResult.data,
+    };
+  });
+
+  if (loading) {
+    return (
+      <StateView
+        mode="loading"
+        title="正在加载地图数据..."
+        description="正在接入完整时间轴与地图资源。"
+        minHeight="100%"
+      />
+    );
+  }
+
+  if (error || !data) {
+    return (
+      <StateView
+        mode="error"
+        title="地图数据加载失败"
+        description={error instanceof Error ? error.message : '请稍后重试'}
+        actionLabel="重试"
+        onAction={refresh}
+        minHeight="100%"
+      />
+    );
+  }
+
   return (
     <MapErrorBoundary>
       <EChartsMapView
+        events={data.events}
+        dynasties={data.dynasties}
+        places={data.places}
         // Controlled state (synced to store)
         historicalFocusMode={historicalFocusMode}
         selectedDynastyId={selectedDynastyId}

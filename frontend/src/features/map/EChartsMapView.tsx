@@ -9,6 +9,7 @@ import type { Dynasty } from '@/services/culture/types';
 import type { Place } from '@/services/map/types';
 import { EChartsTimeline } from '@/features/timeline/components';
 import { StateView } from '@/components/ui';
+import { mapDataService } from '@/services/map/mapDataService';
 import { mapTimelineDemoService } from './demo/service';
 import { resolveEventLocations } from './utils/resolveEventLocations';
 import { useHistoricalPlayback } from './hooks/useHistoricalPlayback';
@@ -103,7 +104,7 @@ export function EChartsMapView({
 
   // ── Timeline props ──
   timelineProps,
-  showTimelineEvents = false,
+  showTimelineEvents: _showTimelineEvents = false,
 
   // ── Callbacks ──
   onProvinceClick,
@@ -112,6 +113,7 @@ export function EChartsMapView({
   onPlayheadYearChange,
   onPlaybackStateChange,
 }: EChartsMapViewProps) {
+  const currentYear = new Date().getFullYear();
   usePerformanceTrace('map-page-mounted', []);
 
   // ── Province selection (always internal) ──
@@ -257,7 +259,7 @@ export function EChartsMapView({
   // ── Default dynasty selection on first load ──
   useEffect(() => {
     if (loading || dynasties.length === 0) return;
-    if (hasExternalData && selectedDynastyIdProp !== undefined) return;
+    if (hasExternalData && selectedDynastyIdProp != null) return;
     if (selectedDynastyId || selectedEventId || focusYear !== null) return;
     const defaultDynasty = dynasties[0];
     if (defaultDynasty) {
@@ -272,19 +274,32 @@ export function EChartsMapView({
       if (boundaryYear === null) {
         return { boundary: null, mapping: null };
       }
+      if (hasExternalData) {
+        const boundary = await mapDataService.getBoundaryDataByYear(boundaryYear);
+        return { boundary, mapping: null };
+      }
       return mapTimelineDemoService.getBoundarySnapshotByYear(boundaryYear);
     },
     {
-      refreshDeps: [boundaryYear],
+      refreshDeps: [boundaryYear, hasExternalData],
     },
   );
-  const activeBoundaryName = boundarySnapshot?.mapping?.name ?? null;
+  const activeBoundaryName = boundarySnapshot?.mapping?.name ?? boundarySnapshot?.boundary?.name ?? null;
 
   // ── Derived data ──
   const selectedDynasty = useMemo(
     () => dynasties.find((item) => item.id === selectedDynastyId) ?? null,
     [dynasties, selectedDynastyId],
   );
+  const embeddedTimelineInitialRange = useMemo<[number, number] | undefined>(() => {
+    if (dynasties.length === 0) {
+      return undefined;
+    }
+
+    const start = dynasties[0]?.startYear ?? 0;
+    const end = dynasties[dynasties.length - 1]?.endYear ?? currentYear;
+    return [start, end];
+  }, [currentYear, dynasties]);
   const selectedEvent = useMemo(
     () => events.find((item) => item.id === selectedEventId) ?? null,
     [events, selectedEventId],
@@ -443,14 +458,26 @@ export function EChartsMapView({
           bottom: 16,
           left: 16,
           right: 16,
-          zIndex: 100,
+          zIndex: 140,
+          pointerEvents: 'auto',
         }}>
           <EChartsTimeline
-            dynastiesData={dynasties}
-            eventsData={events}
-            minHeight={minTimelineHeight}
-            showEventPoints={showTimelineEvents}
             {...(timelineProps ?? {})}
+            dynastiesData={dynasties}
+            eventsData={[]}
+            minHeight={minTimelineHeight}
+            selectedDynastyId={selectedDynastyId}
+            condensedDisplayMode="dynasties-only"
+            showEventPoints={false}
+            showEventLabels={false}
+            showCategoryLabels={false}
+            showCategorySeparators={false}
+            showDynastyCountBadge={false}
+            showSliderZoom={false}
+            enablePan={false}
+            enableZoom={false}
+            onDynastyClick={(dynasty) => selectDynasty(dynasty.id, dynasty.startYear)}
+            {...(embeddedTimelineInitialRange ? { initialTimeRange: embeddedTimelineInitialRange } : {})}
           />
         </div>
       )}

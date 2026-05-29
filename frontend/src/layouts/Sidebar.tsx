@@ -5,10 +5,12 @@ import {
   Divider,
   IconButton,
   Tooltip,
-  Stack
+  Stack,
+  Popover,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { navigationItems, getNavigationItemTheme, navigationStyles } from '@/config';
 import { NavigationSection } from '@/layouts/Sidebar/NavigationSection';
@@ -31,6 +33,9 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
   const { screenWidth } = useResponsive();
   const { theme } = useThemeStore();
   const { style } = useStyleStore();
+  const navButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const [compactPanelAnchorEl, setCompactPanelAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [compactPanelTabKey, setCompactPanelTabKey] = useState<string | null>(null);
   
   // 获取毛玻璃配置
   const glassConfig = getGlassConfig(screenWidth);
@@ -45,6 +50,54 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
   const handleNavigation = (path: string) => {
     navigate(path);
   };
+
+  const handleCompactPanelClose = () => {
+    setCompactPanelAnchorEl(null);
+  };
+
+  const handleCollapsedNavigation = (
+    item: (typeof navigationItems)[number],
+    anchorEl: HTMLButtonElement | null,
+  ) => {
+    const isCurrentTab = activeTab === item.key;
+    const isPanelOpenForTab = compactPanelAnchorEl !== null && compactPanelTabKey === item.key;
+
+    if (!isCurrentTab) {
+      handleNavigation(item.path);
+    }
+
+    setCompactPanelTabKey(item.key);
+
+    if (isCurrentTab && isPanelOpenForTab) {
+      handleCompactPanelClose();
+      return;
+    }
+
+    if (anchorEl) {
+      setCompactPanelAnchorEl(anchorEl);
+    }
+  };
+
+  useEffect(() => {
+    if (!collapsed) {
+      setCompactPanelAnchorEl(null);
+      setCompactPanelTabKey(null);
+      return;
+    }
+
+    if (compactPanelTabKey === activeTab) {
+      return;
+    }
+
+    const activeButton = navButtonRefs.current[activeTab];
+    if (activeButton) {
+      setCompactPanelTabKey(activeTab);
+      setCompactPanelAnchorEl(activeButton);
+    }
+  }, [activeTab, collapsed, compactPanelTabKey]);
+
+  const compactPanelActiveTab = compactPanelTabKey ?? activeTab;
+  const compactPanelLabel = navigationItems.find((item) => item.key === compactPanelActiveTab)?.label ?? '';
 
   // 毛玻璃侧边栏样式 - 仅在毛玻璃模式下使用
   // 经典模式下使用 CSS 类样式
@@ -93,7 +146,11 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
             }}>
               <Tooltip title="展开菜单" placement="right">
                 <IconButton 
-                  onClick={onToggle}
+                  onClick={() => {
+                    handleCompactPanelClose();
+                    setCompactPanelTabKey(null);
+                    onToggle();
+                  }}
                   sx={{ 
                     color: 'var(--color-text-primary)',
                     ...(isClassicStyle ? {
@@ -198,7 +255,12 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
                 return (
                   <Tooltip key={item.key} title={item.label} placement="right">
                     <IconButton
-                      onClick={() => handleNavigation(item.path)}
+                      ref={(node) => {
+                        navButtonRefs.current[item.key] = node;
+                      }}
+                      onClick={(event) => {
+                        handleCollapsedNavigation(item, event.currentTarget);
+                      }}
                       sx={{
                         ...navigationStyles.iconButton,
                         ...(isClassicStyle ? {
@@ -260,7 +322,7 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
             overflow: 'auto',
             width: '100%'
           }}>
-            <FunctionPanel activeTab={activeTab} />
+            <FunctionPanel activeTab={activeTab} collapsed={false} />
           </Box>
         )}
         
@@ -274,6 +336,52 @@ export function Sidebar({ activeTab, collapsed, onToggle }: SidebarProps) {
           <SettingsPanel collapsed={collapsed} />
         </Box>
       </Box>
+      {collapsed && compactPanelActiveTab ? (
+        <Popover
+          open={Boolean(compactPanelAnchorEl)}
+          anchorEl={compactPanelAnchorEl}
+          onClose={handleCompactPanelClose}
+          anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
+          transformOrigin={{ vertical: 'center', horizontal: 'left' }}
+          disableRestoreFocus
+          slotProps={{
+            paper: {
+              sx: {
+                ml: 1.25,
+                width: 304,
+                maxWidth: 'min(304px, calc(100vw - 92px))',
+                maxHeight: 'calc(100vh - 48px)',
+                overflow: 'hidden',
+                background: 'var(--panel-bg)',
+                border: 'var(--panel-border)',
+                borderRadius: '14px',
+                boxShadow: 'var(--shadow-lg)',
+              },
+            },
+          }}
+        >
+          <Box
+            sx={{
+              px: 1.5,
+              py: 1.1,
+              borderBottom: '1px solid var(--color-border-medium)',
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: '0.82rem',
+                fontWeight: 700,
+                color: 'var(--color-text-primary)',
+              }}
+            >
+              {compactPanelLabel}
+            </Typography>
+          </Box>
+          <Box sx={{ maxHeight: 'calc(100vh - 112px)', overflowY: 'auto' }}>
+            <FunctionPanel activeTab={compactPanelActiveTab} collapsed />
+          </Box>
+        </Popover>
+      ) : null}
     </Drawer>
   );
 }

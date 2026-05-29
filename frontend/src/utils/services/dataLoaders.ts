@@ -3,6 +3,8 @@
  * 处理所有静态资源的路径问题，确保在GitHub Pages等部署环境中正确加载
  */
 
+import { CHINA_GEOJSON_PATH, MAP_PLACES_PATH } from '@/config/mapDataPaths';
+
 /**
  * 获取正确的资源路径
  * 处理部署环境中的base路径问题
@@ -78,14 +80,14 @@ export async function loadPersonsData() {
  * 加载地点数据
  */
 export async function loadPlacesData() {
-  return loadJsonArray('/data/json/places.json');
+  return loadJsonArray(MAP_PLACES_PATH);
 }
 
 /**
  * 加载地图GeoJSON数据
  */
 export async function loadMapGeoJson() {
-  return loadJsonData('/data/json/100000.geoJson');
+  return loadJsonData(CHINA_GEOJSON_PATH);
 }
 
 /**

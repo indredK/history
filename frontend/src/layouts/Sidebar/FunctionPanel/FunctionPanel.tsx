@@ -4,9 +4,10 @@ import "./FunctionPanel.css";
 
 interface FunctionPanelProps {
   activeTab: string;
+  collapsed?: boolean;
 }
 
-export function FunctionPanel({ activeTab }: FunctionPanelProps) {
+export function FunctionPanel({ activeTab, collapsed = false }: FunctionPanelProps) {
   const renderFunctionPanel = () => {
     switch (activeTab) {
       case "timeline":
@@ -14,7 +15,7 @@ export function FunctionPanel({ activeTab }: FunctionPanelProps) {
       case "dynasties":
         return <DynastiesFunctions />;
       case "map":
-        return <MapFunctions />;
+        return <MapFunctions collapsed={collapsed} />;
       case "people":
         return <PeopleFunctions />;
       case "culture":

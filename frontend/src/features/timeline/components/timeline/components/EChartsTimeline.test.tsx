@@ -5,6 +5,30 @@ import type { Event } from '@/services/timeline/types';
 import { useThemeStore } from '@/store';
 import { EChartsTimeline } from './EChartsTimeline';
 
+vi.hoisted(() => {
+  const localStorageStub = {
+    getItem: vi.fn(() => null),
+    setItem: vi.fn(),
+    removeItem: vi.fn(),
+    clear: vi.fn(),
+  };
+  const windowStub = {
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    matchMedia: vi.fn(() => ({ matches: false })),
+    getComputedStyle: vi.fn(() => ({ getPropertyValue: () => '' })),
+  };
+
+  Object.defineProperty(globalThis, 'localStorage', {
+    value: localStorageStub,
+    configurable: true,
+  });
+  Object.defineProperty(globalThis, 'window', {
+    value: windowStub,
+    configurable: true,
+  });
+});
+
 type EChartsInitResult = {
   setOption: ReturnType<typeof vi.fn>;
   getOption: ReturnType<typeof vi.fn>;
@@ -363,5 +387,61 @@ describe('EChartsTimeline', () => {
 
     const chart = chartInstances[chartInstances.length - 1];
     expect(chart?.on).toHaveBeenCalledWith('click', expect.any(Function));
+  });
+
+  it('routes dynasty-band clicks through the official echarts click handler', () => {
+    const onDynastyClick = vi.fn();
+
+    render(
+      <EChartsTimeline
+        eventsData={[]}
+        dynastiesData={[makeDynasty({ id: 'tang', startYear: 618, endYear: 907 })]}
+        timeRange={[618, 907]}
+        onDynastyClick={onDynastyClick}
+      />,
+    );
+
+    const chart = chartInstances[chartInstances.length - 1];
+    const clickHandler = chart?.on.mock.calls.find((call) => call[0] === 'click')?.[1] as
+      | ((params: { data?: { dynasty?: Dynasty } }) => void)
+      | undefined;
+
+    expect(clickHandler).toBeDefined();
+
+    act(() => {
+      clickHandler?.({ data: { dynasty: makeDynasty({ id: 'tang', startYear: 618, endYear: 907 }) } });
+    });
+
+    expect(onDynastyClick).toHaveBeenCalledWith(
+      expect.objectContaining({ id: 'tang', startYear: 618, endYear: 907 }),
+    );
+  });
+
+  it('falls back to official seriesId and dataIndex for dynasty-band clicks', () => {
+    const onDynastyClick = vi.fn();
+
+    render(
+      <EChartsTimeline
+        eventsData={[]}
+        dynastiesData={[makeDynasty({ id: 'ming', name: '明朝', startYear: 1368, endYear: 1644 })]}
+        timeRange={[1368, 1644]}
+        onDynastyClick={onDynastyClick}
+      />,
+    );
+
+    const chart = chartInstances[chartInstances.length - 1];
+    const clickHandler = chart?.on.mock.calls.find((call) => call[0] === 'click')?.[1] as
+      | ((params: { dataIndex?: number; seriesId?: string }) => void)
+      | undefined;
+
+    expect(clickHandler).toBeDefined();
+
+    act(() => {
+      clickHandler?.({ seriesId: 'dynasty-bands', dataIndex: 0 });
+    });
+
+    expect(onDynastyClick).toHaveBeenCalledWith(
+      expect.objectContaining({ id: 'ming', startYear: 1368, endYear: 1644 }),
+    );
   });
 });

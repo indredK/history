@@ -6,13 +6,16 @@
  * Requirements: 6.3, 6.4, 6.5
  */
 
-import { Box, Paper } from '@mui/material';
+import { Box, Paper, Drawer, IconButton, Typography } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { navigationItems } from '@/config';
+import { FunctionPanel } from '@/layouts/Sidebar/FunctionPanel';
+import { Settings as SettingsIcon, Close } from '@mui/icons-material';
 import { useResponsive, useOrientation } from '@/hooks/useResponsive';
 import { getSidebarStyles } from '@/config/responsive';
 import { getGlassConfig } from '@/config/glassConfig';
 import { useThemeStore, useStyleStore } from '@/store';
+import { useState } from 'react';
 
 interface PortraitSidebarProps {
   activeTab: string;
@@ -26,6 +29,7 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
   const orientation = useOrientation();
   const { theme } = useThemeStore();
   const { style } = useStyleStore();
+  const [functionDrawerOpen, setFunctionDrawerOpen] = useState(false);
   
   // 只在移动端竖屏模式下显示
   const isPortrait = orientation.type.includes('portrait') || window.innerHeight > window.innerWidth;
@@ -85,7 +89,8 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
   };
 
   return (
-    <Paper
+    <>
+      <Paper
       sx={{
         width: '90%',
         maxWidth: '400px',
@@ -236,7 +241,73 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
             </Box>
           );
         })}
+        {/* 功能面板开关按钮 */}
+        <Box
+          onClick={() => setFunctionDrawerOpen(true)}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: sidebarStyles.itemSize,
+            height: sidebarStyles.itemSize,
+            padding: '4px 1px',
+            borderRadius: glassConfig.border.radius.md,
+            cursor: 'pointer',
+            color: textColor,
+            flexShrink: 0,
+            transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
+            '&:hover': {
+              background: `rgba(${isDark ? '245, 236, 216' : '255, 251, 243'}, 0.1)`,
+            },
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label="展开功能面板"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              setFunctionDrawerOpen(true);
+            }
+          }}
+        >
+          <Box sx={{ fontSize: sidebarStyles.iconSize, marginBottom: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <SettingsIcon fontSize="inherit" />
+          </Box>
+          <Box sx={{ fontSize: sidebarStyles.fontSize, fontWeight: 500, textAlign: 'center', lineHeight: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100%' }}>
+            功能
+          </Box>
+        </Box>
       </Box>
     </Paper>
+    {/* 功能面板抽屉 */}
+    <Drawer
+      anchor="bottom"
+      open={functionDrawerOpen}
+      onClose={() => setFunctionDrawerOpen(false)}
+      slotProps={{
+        paper: {
+          sx: {
+            maxHeight: '70vh',
+            borderTopLeftRadius: '16px',
+            borderTopRightRadius: '16px',
+            background: 'var(--panel-bg)',
+          },
+        },
+      }}
+    >
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', px: 2, py: 1.5, borderBottom: '1px solid var(--color-border-medium)' }}>
+        <Typography sx={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>
+          {navigationItems.find(item => item.key === _activeTab)?.label || '功能面板'}
+        </Typography>
+        <IconButton size="small" onClick={() => setFunctionDrawerOpen(false)}>
+          <Close fontSize="small" />
+        </IconButton>
+      </Box>
+      <Box sx={{ px: 2, py: 1, overflowY: 'auto' }}>
+        <FunctionPanel activeTab={_activeTab} collapsed />
+      </Box>
+    </Drawer>
+    </>
   );
 }

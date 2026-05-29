@@ -7,10 +7,8 @@ import { getDynasties, getEvents } from '@/services/dataClient';
 import { useTimelineStore } from '@/store';
 import { usePerformanceTrace } from '@/utils/performance';
 import {
-  buildTimelineDynastyClusters,
   deriveTimelineEvents,
   filterTimelineEvents,
-  shouldUseClusterMode,
   shouldUseMajorOnlyMode,
 } from './utils/timelineFilters';
 import { useEffect, useMemo, useState } from 'react';
@@ -25,6 +23,7 @@ export function TimelineList() {
     jumpRange,
     densityMode,
     currentTimeRange,
+    setJumpRange,
     setCurrentTimeRange,
     resetViewState,
   } = useTimelineStore();
@@ -97,6 +96,14 @@ export function TimelineList() {
     );
   }, [currentYear, data?.dynasties, selectedDynastyIds]);
 
+  const handleTimeRangeChange = (range: [number, number]) => {
+    setCurrentTimeRange(range);
+    setJumpRange({
+      startYear: Math.round(range[0]),
+      endYear: Math.round(range[1]),
+    });
+  };
+
   const timelineContent = (() => {
     if (loading) {
       return (
@@ -127,7 +134,8 @@ export function TimelineList() {
         eventsData={densityFilteredEvents}
         dynastiesData={filteredDynasties}
         timeRange={currentTimeRange}
-        onTimeRangeChange={setCurrentTimeRange}
+        showCondenseToggle={false}
+        onTimeRangeChange={handleTimeRangeChange}
         onReset={() => {
           resetViewState();
           setStableTimeRange(null);

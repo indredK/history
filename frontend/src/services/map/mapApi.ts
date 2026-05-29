@@ -1,6 +1,7 @@
 import type { MapService } from './mapService';
 import { createUnifiedService } from '../base/serviceFactory';
 import { mapDataService } from './mapDataService';
+import { MAP_PLACES_PATH } from '@/config/mapDataPaths';
 import type { Place } from './types';
 
 // 数据转换器
@@ -25,7 +26,7 @@ function transformJsonToPlace(jsonPlace: any, index: number): Place {
 // 创建统一服务
 const unifiedService = createUnifiedService<Place>(
   '/places',
-  '/data/json/places.json',
+  MAP_PLACES_PATH,
   transformJsonToPlace
 );
 

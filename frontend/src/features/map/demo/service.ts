@@ -1,10 +1,11 @@
 import { loadJsonData } from '@/utils/services/dataLoaders';
+import { MAP_MOCK_DATA_PATH } from '@/config/mapDataPaths';
 import type { Dynasty } from '@/services/culture/types';
 import type { Event } from '@/services/timeline/types';
 import type { BoundaryGeoJSON, Place } from '@/services/map/types';
 import type { DemoBoundaryMapping, DemoTimelineBundle, HistoricalMapSnapshot } from './types';
 
-const DEMO_BASE_PATH = '/data/mock/map-timeline-demo';
+const DEMO_BASE_PATH = MAP_MOCK_DATA_PATH;
 
 const cache = new Map<string, Promise<unknown>>();
 

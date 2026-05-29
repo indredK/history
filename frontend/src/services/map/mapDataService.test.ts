@@ -9,9 +9,9 @@
  *      - clear(key) 只清单 key,clear() 全清
  *      - getStats 返回 {cacheSize, loadingCount, cachedKeys}
  *   2) MapDataService 公共方法:
- *      - loadPlaces 走 loadJsonData('/data/json/places.json')
+ *      - loadPlaces 走 loadJsonData('/data/map/places/places.json')
  *      - loadBoundaryMappings 返回 10 个朝代硬编码映射
- *      - loadBoundaryData(period) 找到 mapping 后走 /data/raw/<file>;period 不存在 → null
+ *      - loadBoundaryData(period) 找到 mapping 后走 /data/map/boundaries/<file>;period 不存在 → null
  *      - getBoundaryDataByYear 用 [validFrom, validTo] 闭区间命中后透传 loadBoundaryData
  *        - 年份未命中 → null
  *      - clearCache 清缓存 + getCacheStats 透传
@@ -44,12 +44,12 @@ describe("MapDataService", () => {
   });
 
   describe("loadPlaces", () => {
-    it("走 /data/json/places.json,二次调用走缓存", async () => {
+    it("走 /data/map/places/places.json,二次调用走缓存", async () => {
       mockedLoad.mockResolvedValueOnce([{ id: "p1" }, { id: "p2" }]);
       const r1 = await svc.loadPlaces();
       expect(r1).toEqual([{ id: "p1" }, { id: "p2" }]);
       expect(mockedLoad).toHaveBeenCalledTimes(1);
-      expect(mockedLoad).toHaveBeenCalledWith("/data/json/places.json");
+      expect(mockedLoad).toHaveBeenCalledWith("/data/map/places/places.json");
 
       // 二次 get → 走缓存,loader 不再执行
       const r2 = await svc.loadPlaces();
@@ -114,12 +114,12 @@ describe("MapDataService", () => {
   });
 
   describe("loadBoundaryData(period)", () => {
-    it("命中 mapping → 走 /data/raw/<file>", async () => {
+    it("命中 mapping → 走 /data/map/boundaries/<file>", async () => {
       mockedLoad.mockResolvedValueOnce({ name: "tang-bd" });
       const r = await svc.loadBoundaryData("tang");
       expect(r).toEqual({ name: "tang-bd" });
       expect(mockedLoad).toHaveBeenCalledWith(
-        "/data/raw/boundaries_tang.geojson",
+        "/data/map/boundaries/boundaries_tang.geojson",
       );
     });
 
@@ -150,7 +150,7 @@ describe("MapDataService", () => {
       const r = await svc.getBoundaryDataByYear(700); // tang [618, 907]
       expect(r).toEqual({ name: "tang-bd" });
       expect(mockedLoad).toHaveBeenCalledWith(
-        "/data/raw/boundaries_tang.geojson",
+        "/data/map/boundaries/boundaries_tang.geojson",
       );
     });
 

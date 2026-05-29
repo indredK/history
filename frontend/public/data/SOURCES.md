@@ -128,8 +128,8 @@ https://doi.org/10.7910/DVN/XBK9PJ
      - `source`: 数据来源
 
 **示例目录结构**:
-```
-data/raw/
+``` 
+data/map/boundaries/
   ├── boundaries_tang.geojson      # 唐代疆域及省级行政区 (618-907)
   ├── boundaries_song.geojson      # 宋代疆域及省级行政区 (960-1279)
   ├── boundaries_ming.geojson      # 明代疆域及省级行政区 (1368-1644)
