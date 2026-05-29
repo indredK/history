@@ -13,7 +13,7 @@
     "lint": "bunx eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 100",
     "lint:fix": "bunx eslint src --ext ts,tsx --fix",
     "type-check": "bunx tsc --noEmit",
-    "test": "bunx vitest --run",
+    "test": "bunx vitest --run --passWithNoTests",
     "test:watch": "bunx vitest",
     "test:coverage": "bunx vitest run --coverage",
     "vitest": "vitest"
