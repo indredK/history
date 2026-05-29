@@ -117,7 +117,7 @@ function MythologyPage() {
       </Box>
 
       {/* 卡片滚动区域 */}
-      <Box sx={{ flex: 1, overflow: 'auto', pr: 1 }}>
+      <Box sx={{ flex: 1, overflow: 'auto' }}>
         {loading ? (
           <LoadingSkeleton />
         ) : error ? (

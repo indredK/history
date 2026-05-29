@@ -11,9 +11,6 @@
   flex-direction: column;
   animation: pageEnter 0.5s ease-out;
   overflow: hidden;
-  max-width: 1280px;
-  width: 100%;
-  margin: 0 auto;
 }
 
 /* 页面进入动画 */
@@ -110,17 +107,13 @@
 
 /* 平板适配 */
 @media (max-width: 1024px) {
-  .mythology-page {
-    max-width: none;
+  .mythology-tabs {
+    margin-bottom: 1rem;
   }
 }
 
 /* 手机适配 */
 @media (max-width: 768px) {
-  .mythology-page {
-    max-width: none;
-  }
-  
   .mythology-page::before {
     display: none;
   }
@@ -132,8 +125,8 @@
 
 /* 小屏手机适配 */
 @media (max-width: 375px) {
-  .mythology-page {
-    max-width: none;
+  .mythology-tabs {
+    margin-bottom: 0.5rem;
   }
 }
 

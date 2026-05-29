@@ -1,7 +1,4 @@
 .culture-page {
-  max-width: 1280px;
-  margin: 0 auto;
-  width: 100%;
   height: 100%;
   overflow: hidden; /* 确保页面不滚动 */
   display: flex;
@@ -36,17 +33,10 @@
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-  .culture-page {
-    max-width: none;
-  }
-  
   .culture-content {
     flex: 1; /* 占用剩余空间 */
   }
 }
 
 @media (max-width: 480px) {
-  .culture-page {
-    max-width: none;
-  }
 }
