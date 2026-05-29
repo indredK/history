@@ -130,7 +130,7 @@
   display: flex;
   flex-direction: column;
   overflow: auto;
-  padding: 18px 20px 22px;
+  padding: var(--space-4);
   background:
     linear-gradient(180deg, rgba(255, 248, 236, 0.74), rgba(255, 248, 236, 0.42)),
     radial-gradient(circle at top right, rgba(179, 138, 74, 0.12), transparent 28%);
@@ -159,7 +159,7 @@
   }
 
   .map-first-layout__route-content--page {
-    padding: 16px;
+    padding: var(--space-3);
   }
 }
 
@@ -170,7 +170,7 @@
   }
 
   .map-first-layout__route-content--page {
-    padding: 12px;
+    padding: var(--space-3);
   }
 
   .map-first-layout__brand-title {

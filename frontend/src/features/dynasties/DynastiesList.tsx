@@ -225,12 +225,7 @@ export function DynastiesList() {
           value={`${data.dynasties.length} 个朝代`}
         />
       }
-      sx={{
-        p: isMobile ? 0.5 : 1.5,
-        ...(isMobile && {
-          p: 0.25,
-        }),
-      }}
+      sx={{}}
       contentSx={{ minHeight: 0 }}
     >
       <MobileTableContainer

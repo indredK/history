@@ -31,8 +31,9 @@ function SchoolsListSkeleton({ count = 10 }: { count?: number }) {
           xs: '1fr',
           sm: 'repeat(2, 1fr)',
           md: 'repeat(3, 1fr)',
+          lg: 'repeat(4, 1fr)',
         },
-        gap: { xs: 2, sm: 2, md: 3 },
+        gap: { xs: 2, sm: 2, md: 2.5 },
       }}
     >
       {Array.from({ length: count }).map((_, index) => (
@@ -156,8 +157,9 @@ export function SchoolsList({
           xs: '1fr',              // 手机: 1列
           sm: 'repeat(2, 1fr)',   // 平板: 2列
           md: 'repeat(3, 1fr)',   // 桌面: 3列
+          lg: 'repeat(4, 1fr)',   // 大屏: 4列
         },
-        gap: { xs: 2, sm: 2, md: 3 },
+        gap: { xs: 2, sm: 2, md: 2.5 },
         pt: 1, // 顶部间距
         px: 0.5, // 左右间距
         pb: 2, // 底部间距

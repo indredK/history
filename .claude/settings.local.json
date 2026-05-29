@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm /Users/apple/Documents/github/history/frontend/src/features/culture/components/SchoolDetail.tsx)",
+      "Bash(bun run *)",
+      "Bash(DATABASE_URL=file:./prisma/dev.db bun -e ' *)",
+      "Bash(DATABASE_URL=\"file:./prisma/dev.db\" bunx --cwd backend prisma generate)",
+      "Bash(DATABASE_URL=\"file:./prisma/dev.db\" bunx prisma generate)",
+      "Bash(DATABASE_URL=\"file:./prisma/dev.db\" bun run scripts/test-prisma.ts)",
+      "Bash(DATABASE_URL=\"file:./prisma/dev.db\" bun run --cwd backend prisma/seed.ts)",
+      "Bash(DATABASE_URL=\"file:./prisma/dev.db\" bun run prisma/seed.ts)",
+      "Bash(DATABASE_URL=\"file:./prisma/dev.db\" bunx prisma migrate deploy)",
+      "Bash(DATABASE_URL=\"file:./prisma/dev.db\" bunx prisma db seed)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(./node_modules/.bin/eslint src *)",
+      "Bash(echo \"ESLINT_EXIT=$?\")",
+      "Bash(bunx tsc *)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(python3 -c 'p='\\\\''__TRACKED_VAR__'\\\\''; s=open\\(p\\).read\\(\\); s=s.replace\\('\\\\''getById\\\\\\\\!'\\\\'','\\\\''getById!'\\\\''\\); open\\(p,'\\\\''w'\\\\''\\).write\\(s\\)')",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:r3f.docs.pmnd.rs)",
+      "WebFetch(domain:blog.logrocket.com)",
+      "WebFetch(domain:bundlephobia.com)",
+      "WebFetch(domain:tempis.dev)",
+      "WebFetch(domain:www.npmjs.com)",
+      "Bash(echo \"TSC=$?\")",
+      "Bash(bunx eslint *)",
+      "Bash(echo \"LINT=$?\")",
+      "mcp__Claude_Preview__preview_start",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:cdn.jsdelivr.net)",
+      "WebFetch(domain:sites.fas.harvard.edu)",
+      "WebFetch(domain:chgis.fairbank.fas.harvard.edu)"
+    ]
+  }
+}

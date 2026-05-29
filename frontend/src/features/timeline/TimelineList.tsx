@@ -157,7 +157,7 @@ export function TimelineList() {
         flexDirection: 'column',
         flex: 1,
         gap: 2,
-        p: { xs: 2, md: 3 },
+        p: { xs: 1.5, md: 2 },
         background: 'var(--panel-bg)',
         border: 'var(--panel-border)',
         boxShadow: 'var(--shadow-lg)',
