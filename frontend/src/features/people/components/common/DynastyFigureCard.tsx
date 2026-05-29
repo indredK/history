@@ -43,7 +43,7 @@ export function DynastyFigureCard<T extends DynastyFigureData>({
 }: DynastyFigureCardProps<T>) {
   const roleColor = roleColors[figure.role] || DEFAULT_TAG_COLOR;
   const lifespan = formatLifespan(figure);
-  const roleLabel = roleLabels[figure.role];
+  const roleLabel = roleLabels[figure.role] ?? '其他';
 
   const secondaryTags = figure.faction
     ? [{ label: figure.faction, color: DEFAULT_TAG_COLOR, variant: 'outlined' as const }]

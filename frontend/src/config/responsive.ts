@@ -236,7 +236,8 @@ export function getCardHeight(type: keyof ResponsiveConfig['components']['cardHe
 // 通用获取函数（保留向后兼容）
 export function getResponsiveStyles(component: keyof ResponsiveConfig['components'], width: number) {
   const key = getResponsiveKey(width);
-  return responsiveConfig.components[component][key];
+  const componentStyles = responsiveConfig.components[component];
+  return componentStyles[key as keyof typeof componentStyles];
 }
 
 // 获取响应式字体

@@ -12,12 +12,12 @@ import { createFigureStore, type FigureServiceLike } from './createFigureStore';
  */
 const sanguoServiceAdapter: FigureServiceLike<SanguoFigure, SanguoFigureRole, SanguoFigureSortBy> = {
   filterAndSort(figures, options) {
-    return sanguoFigureService.filterAndSort(figures, {
-      role: options.role,
-      kingdom: options.period as SanguoKingdom | '全部',
-      query: options.query,
-      sortBy: options.sortBy,
-    });
+    const input: { role?: SanguoFigureRole | '全部'; kingdom?: SanguoKingdom | '全部'; query?: string; sortBy?: SanguoFigureSortBy } = {};
+    if (options.role) input.role = options.role;
+    if (options.period) input.kingdom = options.period as SanguoKingdom | '全部';
+    if (options.query) input.query = options.query;
+    if (options.sortBy) input.sortBy = options.sortBy;
+    return sanguoFigureService.filterAndSort(figures, input);
   },
 };
 

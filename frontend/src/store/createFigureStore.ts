@@ -12,10 +12,11 @@
 
 import { create, type UseBoundStore, type StoreApi } from 'zustand';
 
-export interface FigureFilters<TRole extends string, TSortBy extends string, TFilterField extends string = 'period'> {
+export interface FigureFilters<TRole extends string, TSortBy extends string> {
   role: TRole | '全部';
   /** 筛选字段，默认 'period'，三国使用 'kingdom' */
-  [K in TFilterField]: string;
+  period: string;
+  kingdom: string;
   searchQuery: string;
   sortBy: TSortBy;
 }
@@ -24,13 +25,12 @@ export interface FigureStoreState<
   TFigure,
   TRole extends string,
   TSortBy extends string,
-  TFilterField extends string = 'period',
 > {
   figures: TFigure[];
   selectedFigure: TFigure | null;
   loading: boolean;
   error: Error | null;
-  filters: FigureFilters<TRole, TSortBy, TFilterField>;
+  filters: FigureFilters<TRole, TSortBy>;
   setFigures: (figures: TFigure[]) => void;
   setSelectedFigure: (figure: TFigure | null) => void;
   setLoading: (loading: boolean) => void;
@@ -91,10 +91,11 @@ export function createFigureStore<
     error: null,
     filters: {
       role: '全部',
-      [filterField]: '全部',
+      period: filterField === 'period' ? '全部' : '',
+      kingdom: filterField === 'kingdom' ? '全部' : '',
       searchQuery: '',
       sortBy: options.defaultSortBy,
-    } as FigureStoreState<TFigure, TRole, TSortBy>['filters'],
+    },
 
     setFigures: (figures) => set({ figures }),
     setSelectedFigure: (figure) => set({ selectedFigure: figure }),
@@ -111,12 +112,13 @@ export function createFigureStore<
 
     getFilteredFigures: () => {
       const { figures, filters } = get();
-      return options.service.filterAndSort(figures, {
-        role: filters.role,
-        period: filters[filterField as keyof typeof filters] as string,
-        query: filters.searchQuery,
-        sortBy: filters.sortBy,
-      });
+      const opts: FigureFilterAndSortInput<TRole, TSortBy> = {};
+      if (filters.role) opts.role = filters.role;
+      const filterVal = filters[filterField as keyof typeof filters] as string;
+      if (filterVal) opts.period = filterVal;
+      if (filters.searchQuery) opts.query = filters.searchQuery;
+      if (filters.sortBy) opts.sortBy = filters.sortBy;
+      return options.service.filterAndSort(figures, opts);
     },
 
     getRoleOptions: () => options.roleOptions,

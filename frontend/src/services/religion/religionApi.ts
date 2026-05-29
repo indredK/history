@@ -29,7 +29,7 @@ export const religionApi: ReligionService = {
   getReligionNode: async (id: string) => {
     const result = await unifiedService.getAll();
     const graphData = Array.isArray(result.data) ? result.data[0] : result.data;
-    const node = graphData?.nodes.find(n => n.id === id) || null;
+    const node = graphData?.nodes.find((n: { id: string }) => n.id === id) || null;
     return { data: node };
   },
 };

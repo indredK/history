@@ -4,6 +4,7 @@ import { Box } from '@mui/material';
 import { useRequest } from 'ahooks';
 import { StateView } from '@/components/ui';
 import { getDynasties, getEvents } from '@/services/dataClient';
+import type { Dynasty } from '@/services/culture/types';
 import { useTimelineStore } from '@/store';
 import { usePerformanceTrace } from '@/utils/performance';
 import {
@@ -79,17 +80,17 @@ export function TimelineList() {
     const allDynasties = data?.dynasties ?? [];
     const scopedDynasties = selectedDynastyIds.length === 0
       ? allDynasties
-      : allDynasties.filter((dynasty) => selectedDynastyIds.includes(dynasty.id));
+      : allDynasties.filter((dynasty: Dynasty) => selectedDynastyIds.includes(dynasty.id));
 
     if (scopedDynasties.length === 0) {
       return scopedDynasties;
     }
 
-    const lastDynasty = scopedDynasties.reduce((latest, dynasty) =>
+    const lastDynasty = scopedDynasties.reduce((latest: Dynasty, dynasty: Dynasty) =>
       dynasty.startYear > latest.startYear ? dynasty : latest,
     scopedDynasties[0]!);
 
-    return scopedDynasties.map((dynasty) =>
+    return scopedDynasties.map((dynasty: Dynasty) =>
       dynasty.id === lastDynasty.id
         ? { ...dynasty, endYear: Math.max(dynasty.endYear ?? dynasty.startYear, currentYear) }
         : dynasty,

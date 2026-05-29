@@ -15,6 +15,9 @@ import type { EChartsMapViewProps } from '@/features/map/EChartsMapView';
 import { MapErrorBoundary } from '@/features/map/components/MapErrorBoundary';
 import { EChartsTimeline } from '@/features/timeline/components';
 import { getDynasties, getEvents, getPlaces } from '@/services/dataClient';
+import type { Dynasty } from '@/services/culture/types';
+import type { Event } from '@/services/timeline/types';
+import type { Place } from '@/services/map/types';
 import { useMapStore } from '@/store';
 import './MapWorkbench.css';
 
@@ -117,9 +120,9 @@ export function MapWorkbench() {
       withTimeout(getPlaces(), 4000, '地点数据'),
     ]);
 
-    const events = eventsResult.status === 'fulfilled' ? eventsResult.value.data : [];
-    const dynasties = dynastiesResult.status === 'fulfilled' ? dynastiesResult.value.data : [];
-    const places = placesResult.status === 'fulfilled' ? placesResult.value.data : [];
+    const events = eventsResult.status === 'fulfilled' ? (eventsResult.value as { data: Event[] }).data : [];
+    const dynasties = dynastiesResult.status === 'fulfilled' ? (dynastiesResult.value as { data: Dynasty[] }).data : [];
+    const places = placesResult.status === 'fulfilled' ? (placesResult.value as { data: Place[] }).data : [];
 
     const failures = [
       eventsResult.status === 'rejected' ? eventsResult.reason : null,
@@ -157,9 +160,9 @@ export function MapWorkbench() {
     }
 
     return {
-      earliestYear: String(Math.min(...dynasties.map((dynasty) => dynasty.startYear))),
+      earliestYear: String(Math.min(...dynasties.map((dynasty: Dynasty) => dynasty.startYear))),
       latestYear: String(
-        Math.max(...dynasties.map((dynasty) => dynasty.endYear ?? dynasty.startYear)),
+        Math.max(...dynasties.map((dynasty: Dynasty) => dynasty.endYear ?? dynasty.startYear)),
       ),
     };
   }, [data?.dynasties]);
@@ -169,7 +172,7 @@ export function MapWorkbench() {
     const startBoundary = startYear.trim() === '' ? null : Number(startYear);
     const endBoundary = endYear.trim() === '' ? null : Number(endYear);
 
-    return (data?.events ?? []).filter((event) => {
+    return (data?.events ?? []).filter((event: Event) => {
       const eventType = event.eventType?.trim() || '未分类';
       const eventEnd = event.endYear ?? event.startYear;
       const haystack = [event.title, event.description, ...(event.rawLocations ?? [])]
@@ -198,7 +201,7 @@ export function MapWorkbench() {
   }, [data?.events, endYear, keyword, selectedEventTypes, startYear]);
 
   const selectedDynasty = useMemo(
-    () => data?.dynasties.find((dynasty) => dynasty.id === selectedDynastyId) ?? null,
+    () => data?.dynasties.find((dynasty: Dynasty) => dynasty.id === selectedDynastyId) ?? null,
     [data?.dynasties, selectedDynastyId],
   );
 
