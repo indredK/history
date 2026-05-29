@@ -15,6 +15,7 @@ const PeoplePage = lazy(() => import('../pages/PeoplePage'));
 const CulturePage = lazy(() => import('../pages/CulturePage'));
 const MythologyPage = lazy(() => import('../pages/MythologyPage'));
 const DynastiesPage = lazy(() => import('../pages/DynastiesPage'));
+const DynastyBoundariesPage = lazy(() => import('../pages/DynastyBoundariesPage'));
 
 export const routes: RouteConfig[] = [
   {
@@ -35,6 +36,12 @@ export const routes: RouteConfig[] = [
     path: '/map',
     label: '地图',
     component: MapPage
+  },
+  {
+    key: 'dynasty-boundaries',
+    path: '/dynasty-boundaries',
+    label: '朝代疆域',
+    component: DynastyBoundariesPage
   },
   {
     key: 'people',
