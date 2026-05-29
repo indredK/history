@@ -163,3 +163,6 @@ export default {
   dynastyConfig,
   dynastyUtils
 };
+
+// 别名导出，供 theme.ts 等模块统一引用
+export { dynastyConfig as dynastyColors, dynastyUtils as dynastyColorUtils };

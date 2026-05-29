@@ -1,68 +1,45 @@
 /**
  * 三国人物状态管理Store
+ * 基于 createFigureStore 工厂创建，使用 filterField: 'kingdom'
  */
 
-import { create } from 'zustand';
 import type { SanguoFigure, SanguoFigureRole, SanguoKingdom } from '@/services/person/sanguo/types';
 import { sanguoFigureService, type SanguoFigureSortBy } from '@/services/person/sanguo';
+import { createFigureStore, type FigureServiceLike } from './createFigureStore';
 
-interface SanguoFigureFilters {
-  role: SanguoFigureRole | '全部';
-  kingdom: SanguoKingdom | '全部';
-  searchQuery: string;
-  sortBy: SanguoFigureSortBy;
-}
-
-interface SanguoFigureState {
-  figures: SanguoFigure[];
-  selectedFigure: SanguoFigure | null;
-  loading: boolean;
-  error: Error | null;
-  filters: SanguoFigureFilters;
-  setFigures: (figures: SanguoFigure[]) => void;
-  setSelectedFigure: (figure: SanguoFigure | null) => void;
-  setLoading: (loading: boolean) => void;
-  setError: (error: Error | null) => void;
-  setRoleFilter: (role: SanguoFigureRole | '全部') => void;
-  setKingdomFilter: (kingdom: SanguoKingdom | '全部') => void;
-  setSearchQuery: (query: string) => void;
-  setSortBy: (sortBy: SanguoFigureSortBy) => void;
-  getFilteredFigures: () => SanguoFigure[];
-  getRoleOptions: () => string[];
-  getKingdomOptions: () => string[];
-}
-
-export const useSanguoFigureStore = create<SanguoFigureState>((set, get) => ({
-  figures: [],
-  selectedFigure: null,
-  loading: false,
-  error: null,
-  filters: {
-    role: '全部',
-    kingdom: '全部',
-    searchQuery: '',
-    sortBy: 'kingdom',
-  },
-
-  setFigures: (figures) => set({ figures }),
-  setSelectedFigure: (figure) => set({ selectedFigure: figure }),
-  setLoading: (loading) => set({ loading }),
-  setError: (error) => set({ error }),
-  setRoleFilter: (role) => set((state) => ({ filters: { ...state.filters, role } })),
-  setKingdomFilter: (kingdom) => set((state) => ({ filters: { ...state.filters, kingdom } })),
-  setSearchQuery: (query) => set((state) => ({ filters: { ...state.filters, searchQuery: query } })),
-  setSortBy: (sortBy) => set((state) => ({ filters: { ...state.filters, sortBy } })),
-
-  getFilteredFigures: () => {
-    const { figures, filters } = get();
+/**
+ * 适配器：将工厂的 period 参数映射为 sanguo 的 kingdom 参数
+ */
+const sanguoServiceAdapter: FigureServiceLike<SanguoFigure, SanguoFigureRole, SanguoFigureSortBy> = {
+  filterAndSort(figures, options) {
     return sanguoFigureService.filterAndSort(figures, {
-      role: filters.role,
-      kingdom: filters.kingdom,
-      query: filters.searchQuery,
-      sortBy: filters.sortBy,
+      role: options.role,
+      kingdom: options.period as SanguoKingdom | '全部',
+      query: options.query,
+      sortBy: options.sortBy,
     });
   },
+};
 
-  getRoleOptions: () => ['全部', 'ruler', 'strategist', 'general', 'official', 'other'],
-  getKingdomOptions: () => ['全部', '魏', '蜀', '吴', '其他'],
-}));
+// 使用工厂创建底层 store
+const _useBase = createFigureStore<SanguoFigure, SanguoFigureRole, SanguoFigureSortBy>({
+  service: sanguoServiceAdapter,
+  roleOptions: ['全部', 'ruler', 'strategist', 'general', 'official', 'other'],
+  periodOptions: ['全部', '魏', '蜀', '吴', '其他'],
+  defaultSortBy: 'kingdom',
+  filterField: 'kingdom',
+});
+
+/**
+ * 三国人物 store hook
+ * 包装工厂 store，将 setPeriodFilter / getPeriodOptions 别名为 setKingdomFilter / getKingdomOptions，
+ * 保持对外接口不变。
+ */
+export const useSanguoFigureStore = () => {
+  const store = _useBase();
+  return {
+    ...store,
+    setKingdomFilter: store.setPeriodFilter,
+    getKingdomOptions: store.getPeriodOptions,
+  };
+};

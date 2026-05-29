@@ -13,3 +13,6 @@ export { useTangFigureStore } from './tangFigureStore';
 export { useSongFigureStore } from './songFigureStore';
 export { useYuanFigureStore } from './yuanFigureStore';
 export { useSanguoFigureStore } from './sanguoFigureStore';
+export { useMythologyStore, useMythology, useFilteredMythologies, useSelectedMythology, useActiveCategory } from './mythologyStore';
+export { useReligionStore } from './religionStore';
+export type { ViewMode } from './religionStore';
