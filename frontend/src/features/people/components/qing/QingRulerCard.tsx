@@ -7,7 +7,8 @@
  * Requirements: 4.2
  */
 
-import { PersonCard, type TagColor } from '@/components/common';
+import { PersonCard, DEFAULT_TAG_COLOR } from '@/components/common';
+import type { TagColor } from '@/components/common';
 import type { QingRuler } from '@/services/person/qing/types';
 import { qingRulerService } from '@/services/person/qing';
 
@@ -26,8 +27,6 @@ const periodColors: Record<string, TagColor> = {
   '晚清（1862-1912）': { bg: 'rgba(121, 85, 72, 0.15)', text: '#795548' },
 };
 
-const defaultColor: TagColor = { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e' };
-
 /**
  * 根据在位时间确定时期
  */
@@ -44,7 +43,7 @@ function getPeriod(reignStart: number): string {
  */
 export function QingRulerCard({ ruler, onClick }: QingRulerCardProps) {
   const period = getPeriod(ruler.reignStart);
-  const periodColor = periodColors[period] || defaultColor;
+  const periodColor = periodColors[period] || DEFAULT_TAG_COLOR;
   const reignPeriod = qingRulerService.formatReignPeriod(ruler);
   const title = qingRulerService.getTitle(ruler);
   const reignYears = qingRulerService.calculateReignYears(ruler);
@@ -61,7 +60,7 @@ export function QingRulerCard({ ruler, onClick }: QingRulerCardProps) {
       subtitle={title}
       portraitUrl={ruler.portraitUrl}
       primaryTag={{ label: period, color: periodColor }}
-      secondaryTags={[{ label: ruler.eraName, color: defaultColor, variant: 'outlined' as const }]}
+      secondaryTags={[{ label: ruler.eraName, color: DEFAULT_TAG_COLOR, variant: 'outlined' as const }]}
       infoLines={infoLines}
       biography={ruler.biography}
       onClick={onClick}

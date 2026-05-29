@@ -75,7 +75,6 @@ export class SimpleFallbackManager {
   ): Promise<T> {
     // 检查是否在降级状态
     if (this.shouldUseFallback()) {
-      console.log(`🎭 ${operationName}: 使用降级策略（Mock数据）`);
       return fallbackOperation();
     }
 
@@ -112,7 +111,6 @@ export class SimpleFallbackManager {
     }
 
     if (this.config.enableAutoFallback && this.shouldUseFallback()) {
-      console.log(`🎭 ${operationName}: 使用降级策略（Mock数据）`);
       return fallbackOperation();
     }
 
@@ -155,13 +153,9 @@ export class SimpleFallbackManager {
     this.state.isActive = false;
     this.state.activatedAt = 0;
     this.state.failureCount = 0;
-    console.log('✅ 自动降级策略已停用，恢复API请求');
   }
 
   private onSuccess(): void {
-    if (this.state.failureCount > 0) {
-      console.log('✅ API请求恢复正常');
-    }
     this.state.failureCount = 0;
     delete this.state.lastError;
   }
@@ -169,7 +163,6 @@ export class SimpleFallbackManager {
   private onFailure(error: ApiError): void {
     this.state.failureCount++;
     this.state.lastError = error;
-    console.log(`⚠️ API失败计数: ${this.state.failureCount}/${this.config.fallbackThreshold}`);
   }
 
   getState(): FallbackState & { config: FallbackConfig } {

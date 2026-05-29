@@ -17,9 +17,5 @@ export const getAllRoutes = () => routes;
 
 // 验证路由配置
 export const validateRoutes = () => {
-  console.log('🚀 路由配置验证:');
-  routes.forEach(route => {
-    console.log(`✅ ${route.label} (${route.key}): ${route.path}`);
-  });
   return routes.length;
 };

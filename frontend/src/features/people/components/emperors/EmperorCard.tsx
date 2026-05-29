@@ -7,7 +7,8 @@
  * Requirements: 2.2
  */
 
-import { PersonCard, type TagColor } from '@/components/common';
+import { PersonCard, DEFAULT_TAG_COLOR } from '@/components/common';
+import type { TagColor } from '@/components/common';
 import type { Emperor } from '@/services/person/emperors/types';
 import { emperorService } from '@/services/person/emperors';
 
@@ -45,20 +46,18 @@ const dynastyColors: Record<string, TagColor> = {
   '清': { bg: 'rgba(255, 235, 59, 0.15)', text: '#F9A825' },
 };
 
-const defaultColor: TagColor = { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e' };
-
 /**
  * 帝王卡片组件
  * Requirements 2.2: 显示基本信息
  */
 export function EmperorCard({ emperor, onClick }: EmperorCardProps) {
-  const dynastyColor = dynastyColors[emperor.dynasty] || defaultColor;
+  const dynastyColor = dynastyColors[emperor.dynasty] || DEFAULT_TAG_COLOR;
   const reignPeriod = emperorService.formatReignPeriod(emperor);
   const eraNames = emperorService.formatEraNames(emperor);
 
   // 构建次标签
   const secondaryTags = emperor.eraNames.length > 0 && emperor.eraNames[0]
-    ? [{ label: emperor.eraNames[0].name, color: defaultColor, variant: 'outlined' as const }]
+    ? [{ label: emperor.eraNames[0].name, color: DEFAULT_TAG_COLOR, variant: 'outlined' as const }]
     : [];
 
   // 构建信息行

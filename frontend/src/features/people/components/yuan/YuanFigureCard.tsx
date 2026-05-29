@@ -2,7 +2,8 @@
  * 元朝人物卡片组件
  */
 
-import { PersonCard, type TagColor } from '@/components/common';
+import { PersonCard, DEFAULT_TAG_COLOR } from '@/components/common';
+import type { TagColor } from '@/components/common';
 import type { YuanFigure } from '@/services/person/yuan/types';
 import { ROLE_LABELS } from '@/services/person/yuan/types';
 import { yuanFigureService } from '@/services/person/yuan';
@@ -21,15 +22,13 @@ const roleColors: Record<string, TagColor> = {
   other: { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e' },
 };
 
-const defaultColor: TagColor = { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e' };
-
 export function YuanFigureCard({ figure, onClick }: YuanFigureCardProps) {
   const roleColor = roleColors[figure.role] || roleColors['other']!;
   const lifespan = yuanFigureService.formatLifespan(figure);
   const roleLabel = ROLE_LABELS[figure.role];
 
   const secondaryTags = figure.faction
-    ? [{ label: figure.faction, color: defaultColor, variant: 'outlined' as const }]
+    ? [{ label: figure.faction, color: DEFAULT_TAG_COLOR, variant: 'outlined' as const }]
     : [];
 
   const infoLines = [

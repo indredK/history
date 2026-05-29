@@ -80,9 +80,7 @@ export class MapDataService {
    */
   async loadPlaces(): Promise<Place[]> {
     return this.cache.get('places', async () => {
-      console.log('🗺️ 加载地点数据...');
       const data = await loadJsonData<Place[]>(MAP_PLACES_PATH);
-      console.log(`✅ 地点数据加载完成，共 ${data.length} 个地点`);
       return data;
     });
   }
@@ -133,8 +131,6 @@ export class MapDataService {
    */
   async loadBoundaryMappings(): Promise<BoundaryMapping[]> {
     return this.cache.get('boundary-mappings', async () => {
-      console.log('🗺️ 加载边界映射数据...');
-      // 这里可以加载边界数据的索引文件
       const mappings: BoundaryMapping[] = [
         { file: 'boundaries_qin.geojson', validFrom: -221, validTo: -206, name: '秦朝', period: 'qin' },
         { file: 'boundaries_han.geojson', validFrom: -206, validTo: 220, name: '汉朝', period: 'han' },
@@ -147,7 +143,6 @@ export class MapDataService {
         { file: 'boundaries_ming.geojson', validFrom: 1368, validTo: 1644, name: '明朝', period: 'ming' },
         { file: 'boundaries_qing.geojson', validFrom: 1644, validTo: 1912, name: '清朝', period: 'qing' },
       ];
-      console.log(`✅ 边界映射数据加载完成，共 ${mappings.length} 个时期`);
       return mappings;
     });
   }
@@ -159,8 +154,6 @@ export class MapDataService {
     const cacheKey = `boundary-${period}`;
     
     return this.cache.get(cacheKey, async () => {
-      console.log(`🗺️ 加载 ${period} 时期边界数据...`);
-      
       try {
         const mappings = await this.loadBoundaryMappings();
         const mapping = mappings.find(m => m.period === period);
@@ -171,7 +164,6 @@ export class MapDataService {
         }
 
         const data = await loadJsonData<BoundaryGeoJSON>(`${MAP_BOUNDARIES_DATA_PATH}/${mapping.file}`);
-        console.log(`✅ ${period} 时期边界数据加载完成`);
         return data;
       } catch (error) {
         console.error(`❌ 加载 ${period} 时期边界数据失败:`, error);
@@ -200,8 +192,6 @@ export class MapDataService {
    * 预加载常用的地图数据
    */
   async preloadCommonData(): Promise<void> {
-    console.log('🚀 开始预加载常用地图数据...');
-    
     const preloadTasks = [
       this.loadPlaces(),
       this.loadBoundaryMappings(),
@@ -214,7 +204,6 @@ export class MapDataService {
 
     try {
       await Promise.all(preloadTasks);
-      console.log('✅ 常用地图数据预加载完成');
     } catch (error) {
       console.error('❌ 地图数据预加载失败:', error);
     }
@@ -225,7 +214,6 @@ export class MapDataService {
    */
   clearCache(key?: string): void {
     this.cache.clear(key);
-    console.log(key ? `🧹 已清理缓存: ${key}` : '🧹 已清理所有地图数据缓存');
   }
 
   /**

@@ -82,21 +82,17 @@ export const DataSourceIndicator: React.FC<DataSourceIndicatorProps> = ({ collap
         });
       } else {
         // API模式下的测试
-        console.log('🧪 开始API连接测试...');
-        
+
         // 1. 测试前端代理
         const proxyTest = await testFrontendProxy();
-        console.log('代理测试结果:', proxyTest);
-        
+
         // 2. 测试直接API连接
         const connectionTest = await testApiConnection();
-        console.log('API连接测试结果:', connectionTest);
-        
+
         // 3. 测试所有端点
         let endpointTests = null;
         if (proxyTest.success || connectionTest.success) {
           endpointTests = await testAllApiEndpoints();
-          console.log('端点测试结果:', endpointTests);
         }
         
         setTestResults({

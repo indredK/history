@@ -52,7 +52,6 @@ export class PerformanceMonitor {
   reportWebVitals(): void {
     if ('web-vital' in window) {
       // 这里可以集成 web-vitals 库
-      console.log('Web Vitals reporting enabled');
     }
   }
 }

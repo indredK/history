@@ -240,9 +240,8 @@ export function DynastyBoundaryMap({
 
     // 点击事件
     chartInstance.current.off('click');
-    chartInstance.current.on('click', (params: unknown) => {
-      const p = params as { name?: string };
-      console.log('Clicked:', p.name);
+    chartInstance.current.on('click', (_params: unknown) => {
+      // 点击事件处理（预留）
     });
   }, [boundaryData, selectedDynastyId]);
 

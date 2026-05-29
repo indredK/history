@@ -59,6 +59,5 @@ export function getDataSourceInfo() {
 
 // 开发环境下打印数据源信息
 if (import.meta.env.DEV) {
-  const info = getDataSourceInfo();
-  console.log(`📊 数据源模式: ${info.description}`, info);
+  getDataSourceInfo();
 }

@@ -1,9 +1,6 @@
 export { useDynastyStore } from './dynastyStore';
 export { useTimelineStore } from './timelineStore';
 export { useMapStore } from './mapStore';
-
-export { usePersonStore } from './personStore';
-export { useNavigationStore } from './navigationStore';
 export { useThemeStore, initializeTheme } from './themeStore';
 export { useStyleStore, initializeStyle } from './styleStore';
 export { useDynastiesStore, useDynastiesExpanded } from './dynastyExpandedStore';

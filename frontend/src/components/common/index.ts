@@ -3,7 +3,6 @@
  * Common Components Exports
  */
 
-export { TabsContainer, type TabConfig } from './TabsContainer';
 export { FixedTabsPage } from './FixedTabsPage';
 export type { TabConfig as FixedTabConfig } from './FixedTabsPage';
 export { PageIntro } from './PageIntro';
