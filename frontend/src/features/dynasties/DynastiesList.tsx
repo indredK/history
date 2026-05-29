@@ -217,12 +217,6 @@ export function DynastiesList() {
 
   return (
     <PagePanel
-      headerAside={
-        <PageHeaderBadge
-          label="Dynasties"
-          value={`${data.dynasties.length} 个朝代`}
-        />
-      }
       sx={{}}
       contentSx={{ minHeight: 0 }}
     >
