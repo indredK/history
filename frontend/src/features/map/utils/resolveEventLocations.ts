@@ -1,6 +1,10 @@
 import type { Place } from '@/services/map/types';
 import type { Event } from '@/services/timeline/types';
-import type { ResolvedEventLocations } from '@/features/map/demo/types';
+
+export interface ResolvedEventLocations {
+  matchedPlaces: Place[];
+  unmatchedNames: string[];
+}
 
 function normalize(input: string): string {
   return input.trim().replace(/\s+/g, '').toLowerCase();

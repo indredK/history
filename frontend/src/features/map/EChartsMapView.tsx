@@ -8,9 +8,7 @@ import type { Event } from '@/services/timeline/types';
 import type { Dynasty } from '@/services/culture/types';
 import type { Place } from '@/services/map/types';
 import { EChartsTimeline } from '@/features/timeline/components';
-import { StateView } from '@/components/ui';
 import { mapDataService } from '@/services/map/mapDataService';
-import { mapTimelineDemoService } from './demo/service';
 import { resolveEventLocations } from './utils/resolveEventLocations';
 import { useHistoricalPlayback } from './hooks/useHistoricalPlayback';
 import type { HistoricalPlaybackOptions } from './hooks/useHistoricalPlayback';
@@ -189,52 +187,24 @@ export function EChartsMapView({
     setPlaybackState('paused');
   }, [setPlaybackState]);
 
-  // ── Data loading ──
-  const hasExternalData = eventsProp !== undefined && dynastiesProp !== undefined;
-
-  const {
-    data: demoBundle,
-    loading,
-    error,
-    refresh,
-  } = useRequest(
-    () => mapTimelineDemoService.loadBundle(),
-    { ready: !hasExternalData },
-  );
-
+  // ── Data (from props) ──
   const dynasties = useMemo(
-    () => {
-      if (dynastiesProp !== undefined) {
-        return [...dynastiesProp].sort((a, b) => a.startYear - b.startYear);
-      }
-      return [...(demoBundle?.dynasties ?? [])].sort(
-        (left, right) => left.startYear - right.startYear,
-      );
-    },
-    [dynastiesProp, demoBundle?.dynasties],
+    () => [...(dynastiesProp ?? [])].sort((a, b) => a.startYear - b.startYear),
+    [dynastiesProp],
   );
 
   const events = useMemo(
-    () => {
-      if (eventsProp !== undefined) {
-        return [...eventsProp].sort((left, right) => {
-          const leftEnd = left.endYear ?? left.startYear;
-          const rightEnd = right.endYear ?? right.startYear;
-          return left.startYear - right.startYear || leftEnd - rightEnd;
-        });
-      }
-      return [...(demoBundle?.events ?? [])].sort((left, right) => {
-        const leftEnd = left.endYear ?? left.startYear;
-        const rightEnd = right.endYear ?? right.startYear;
-        return left.startYear - right.startYear || leftEnd - rightEnd;
-      });
-    },
-    [eventsProp, demoBundle?.events],
+    () => [...(eventsProp ?? [])].sort((left, right) => {
+      const leftEnd = left.endYear ?? left.startYear;
+      const rightEnd = right.endYear ?? right.startYear;
+      return left.startYear - right.startYear || leftEnd - rightEnd;
+    }),
+    [eventsProp],
   );
 
   const places = useMemo(
-    () => placesProp ?? demoBundle?.places ?? [],
-    [placesProp, demoBundle?.places],
+    () => placesProp ?? [],
+    [placesProp],
   );
 
   // ── Playback hook ──
@@ -258,33 +228,29 @@ export function EChartsMapView({
 
   // ── Default dynasty selection on first load ──
   useEffect(() => {
-    if (loading || dynasties.length === 0) return;
-    if (hasExternalData && selectedDynastyIdProp != null) return;
+    if (dynasties.length === 0) return;
+    if (selectedDynastyIdProp != null) return;
     if (selectedDynastyId || selectedEventId || focusYear !== null) return;
     const defaultDynasty = dynasties[0];
     if (defaultDynasty) {
       selectDynasty(defaultDynasty.id, defaultDynasty.startYear);
     }
-  }, [dynasties, focusYear, loading, selectDynasty, selectedDynastyId, selectedEventId, hasExternalData, selectedDynastyIdProp]);
+  }, [dynasties, focusYear, selectDynasty, selectedDynastyId, selectedEventId, selectedDynastyIdProp]);
 
   // ── Boundary snapshot ──
   const boundaryYear = playheadYear ?? focusYear;
   const { data: boundarySnapshot, loading: boundaryLoading } = useRequest(
     async () => {
       if (boundaryYear === null) {
-        return { boundary: null, mapping: null };
+        return null;
       }
-      if (hasExternalData) {
-        const boundary = await mapDataService.getBoundaryDataByYear(boundaryYear);
-        return { boundary, mapping: null };
-      }
-      return mapTimelineDemoService.getBoundarySnapshotByYear(boundaryYear);
+      return mapDataService.getBoundaryDataByYear(boundaryYear);
     },
     {
-      refreshDeps: [boundaryYear, hasExternalData],
+      refreshDeps: [boundaryYear],
     },
   );
-  const activeBoundaryName = boundarySnapshot?.mapping?.name ?? boundarySnapshot?.boundary?.name ?? null;
+  const activeBoundaryName = boundarySnapshot?.name ?? null;
 
   // ── Derived data ──
   const selectedDynasty = useMemo(
@@ -349,24 +315,6 @@ export function EChartsMapView({
     onProvinceClick?.(name, data);
   }, [onProvinceClick]);
 
-  // ── Loading / error states ──
-  if (!hasExternalData && loading) {
-    return <StateView mode="loading" title="正在加载地图联动演示数据..." minHeight="100%" />;
-  }
-
-  if (!hasExternalData && (error || !demoBundle)) {
-    return (
-      <StateView
-        mode="error"
-        title="地图联动演示数据加载失败"
-        description={error instanceof Error ? error.message : '请稍后重试'}
-        actionLabel="重试"
-        onAction={refresh}
-        minHeight="100%"
-      />
-    );
-  }
-
   // ── Render ──
   return (
     <div
@@ -391,7 +339,7 @@ export function EChartsMapView({
         width="100%"
         height="100%"
         onProvinceClick={handleProvinceClick}
-        historicalBoundary={boundarySnapshot?.boundary ?? null}
+        historicalBoundary={boundarySnapshot ?? null}
         historicalBoundaryName={activeBoundaryName}
         eventPlaces={visibleEventMarkers}
         loadingHistoricalBoundary={boundaryLoading}
