@@ -128,8 +128,6 @@ function PeoplePage() {
       tabs={tabs}
       defaultTab="emperors"
       className="people-page"
-      title="人物谱系"
-      description="从帝王、士人到群雄，按历史阶段检索人物群像与生平脉络。"
       tabsProps={{
         variant: 'scrollable',
         scrollButtons: 'auto',

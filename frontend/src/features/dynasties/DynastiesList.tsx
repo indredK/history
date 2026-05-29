@@ -217,8 +217,6 @@ export function DynastiesList() {
 
   return (
     <PagePanel
-      title={data.title}
-      description={data.subtitle}
       headerAside={
         <PageHeaderBadge
           label="Dynasties"

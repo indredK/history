@@ -177,8 +177,6 @@ function MythologyPage() {
         tabs={tabs}
         defaultTab="mythology"
         className={`mythology-page ${activeTab === 'religion' ? 'religion-view' : ''}`}
-        title="神话与信仰"
-        description="浏览创世、英雄与宗教谱系，在故事视图与关系图之间切换。"
         onTabChange={setActiveTab}
       />
 
