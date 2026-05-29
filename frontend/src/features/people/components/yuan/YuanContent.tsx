@@ -2,6 +2,8 @@
  * 元朝人物内容容器组件
  */
 
+import { useMemo } from 'react';
+
 import { useYuanFigureStore } from '@/store/yuanFigureStore';
 import { getYuanFigures } from '@/services/person/yuan';
 import type { YuanFigure, YuanFigureRole } from '@/services/person/yuan/types';
@@ -15,6 +17,25 @@ import { YuanFigureDetailModal } from './YuanFigureDetailModal';
 export function YuanContent() {
   const store = useYuanFigureStore();
 
+  const adaptedStore = useMemo(() => ({
+    items: store.figures,
+    selectedItem: store.selectedFigure,
+    loading: store.loading,
+    error: store.error,
+    filters: store.filters,
+    setItems: store.setFigures,
+    setSelectedItem: store.setSelectedFigure,
+    setLoading: store.setLoading,
+    setError: store.setError,
+    setSearchQuery: store.setSearchQuery,
+    setSortBy: store.setSortBy,
+    getFilteredItems: store.getFilteredFigures,
+    getRoleOptions: store.getRoleOptions,
+    getPeriodOptions: store.getPeriodOptions,
+    setRoleFilter: store.setRoleFilter,
+    setPeriodFilter: store.setPeriodFilter,
+  }), [store]);
+
   const {
     error, reload, requestLoading,
     searchQuery, onSearchChange, searchPlaceholder,
@@ -23,7 +44,7 @@ export function YuanContent() {
     filteredItems, selectedItem, handleItemClick, handleCloseModal,
   } = useFigureCollection<YuanFigure>({
     cacheKey: 'yuanFigures',
-    store,
+    store: adaptedStore,
     loadData: getYuanFigures,
     errorMessage: '获取元朝人物数据失败:',
     searchPlaceholder: '搜索元朝人物姓名、字号...',

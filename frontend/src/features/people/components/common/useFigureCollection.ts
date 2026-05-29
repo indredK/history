@@ -13,7 +13,7 @@ export interface FilterOption {
 }
 
 export interface FilterConfig {
-  field: string;
+  name: string;
   label: string;
   value: string;
   options: FilterOption[];
@@ -27,22 +27,8 @@ export interface SortOption {
 
 export interface FigureCollectionOptions<T> {
   cacheKey: string;
-  store: {
-    items: T[];
-    selectedItem: T | null;
-    loading: boolean;
-    error: Error | null;
-    filters: Record<string, string>;
-    setItems: (items: T[]) => void;
-    setSelectedItem: (item: T | null) => void;
-    setLoading: (loading: boolean) => void;
-    setError: (error: Error | null) => void;
-    setSearchQuery: (query: string) => void;
-    setSortBy: (sortBy: string) => void;
-    getFilteredItems: () => T[];
-    // 动态 filter setter 和 options getter
-    [key: string]: any;
-  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  store: any;
   loadData: () => Promise<{ data: T[] }>;
   errorMessage: string;
   searchPlaceholder: string;
@@ -90,7 +76,7 @@ export function useFigureCollection<T>(options: FigureCollectionOptions<T>) {
   const filters = useMemo(
     () =>
       filterConfigs.map((config) => ({
-        field: config.field,
+        name: config.field,
         label: config.label,
         value: store.filters[config.field] || '全部',
         options: config.getOptions(),
@@ -114,11 +100,11 @@ export function useFigureCollection<T>(options: FigureCollectionOptions<T>) {
     error: store.error,
     reload,
     requestLoading,
-    searchQuery: store.filters.searchQuery || '',
+    searchQuery: store.filters['searchQuery'] || '',
     onSearchChange: store.setSearchQuery,
     searchPlaceholder,
     filters,
-    sortBy: store.filters.sortBy || '',
+    sortBy: store.filters['sortBy'] || '',
     sortOptions,
     onSortChange: store.setSortBy,
     resultCount: filteredItems.length,

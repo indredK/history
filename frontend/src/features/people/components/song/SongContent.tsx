@@ -2,6 +2,8 @@
  * 宋朝人物内容容器组件
  */
 
+import { useMemo } from 'react';
+
 import { useSongFigureStore } from '@/store/songFigureStore';
 import { getSongFigures } from '@/services/person/song';
 import type { SongFigure, SongFigureRole } from '@/services/person/song/types';
@@ -15,6 +17,25 @@ import { SongFigureDetailModal } from './SongFigureDetailModal';
 export function SongContent() {
   const store = useSongFigureStore();
 
+  const adaptedStore = useMemo(() => ({
+    items: store.figures,
+    selectedItem: store.selectedFigure,
+    loading: store.loading,
+    error: store.error,
+    filters: store.filters,
+    setItems: store.setFigures,
+    setSelectedItem: store.setSelectedFigure,
+    setLoading: store.setLoading,
+    setError: store.setError,
+    setSearchQuery: store.setSearchQuery,
+    setSortBy: store.setSortBy,
+    getFilteredItems: store.getFilteredFigures,
+    getRoleOptions: store.getRoleOptions,
+    getPeriodOptions: store.getPeriodOptions,
+    setRoleFilter: store.setRoleFilter,
+    setPeriodFilter: store.setPeriodFilter,
+  }), [store]);
+
   const {
     error, reload, requestLoading,
     searchQuery, onSearchChange, searchPlaceholder,
@@ -23,7 +44,7 @@ export function SongContent() {
     filteredItems, selectedItem, handleItemClick, handleCloseModal,
   } = useFigureCollection<SongFigure>({
     cacheKey: 'songFigures',
-    store,
+    store: adaptedStore,
     loadData: getSongFigures,
     errorMessage: '获取宋朝人物数据失败:',
     searchPlaceholder: '搜索宋朝人物姓名、字号...',

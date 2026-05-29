@@ -2,6 +2,8 @@
  * 三国人物内容容器组件
  */
 
+import { useMemo } from 'react';
+
 import { useSanguoFigureStore } from '@/store/sanguoFigureStore';
 import { getSanguoFigures } from '@/services/person/sanguo';
 import type { SanguoFigure, SanguoFigureRole, SanguoKingdom } from '@/services/person/sanguo/types';
@@ -15,6 +17,25 @@ import { SanguoFigureDetailModal } from './SanguoFigureDetailModal';
 export function SanguoContent() {
   const store = useSanguoFigureStore();
 
+  const adaptedStore = useMemo(() => ({
+    items: store.figures,
+    selectedItem: store.selectedFigure,
+    loading: store.loading,
+    error: store.error,
+    filters: store.filters,
+    setItems: store.setFigures,
+    setSelectedItem: store.setSelectedFigure,
+    setLoading: store.setLoading,
+    setError: store.setError,
+    setSearchQuery: store.setSearchQuery,
+    setSortBy: store.setSortBy,
+    getFilteredItems: store.getFilteredFigures,
+    getRoleOptions: store.getRoleOptions,
+    getKingdomOptions: store.getKingdomOptions,
+    setRoleFilter: store.setRoleFilter,
+    setKingdomFilter: store.setKingdomFilter,
+  }), [store]);
+
   const {
     error, reload, requestLoading,
     searchQuery, onSearchChange, searchPlaceholder,
@@ -23,7 +44,7 @@ export function SanguoContent() {
     filteredItems, selectedItem, handleItemClick, handleCloseModal,
   } = useFigureCollection<SanguoFigure>({
     cacheKey: 'sanguoFigures',
-    store,
+    store: adaptedStore,
     loadData: getSanguoFigures,
     errorMessage: '获取三国人物数据失败:',
     searchPlaceholder: '搜索三国人物姓名、字号...',

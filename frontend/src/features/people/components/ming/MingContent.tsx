@@ -2,6 +2,8 @@
  * 明朝人物内容容器组件
  */
 
+import { useMemo } from 'react';
+
 import { useMingFigureStore } from '@/store';
 import { getMingFigures } from '@/services/person/ming';
 import type { MingFigure, MingFigureRole } from '@/services/person/ming/types';
@@ -15,6 +17,25 @@ import { MingFigureDetailModal } from './MingFigureDetailModal';
 export function MingContent() {
   const store = useMingFigureStore();
 
+  const adaptedStore = useMemo(() => ({
+    items: store.figures,
+    selectedItem: store.selectedFigure,
+    loading: store.loading,
+    error: store.error,
+    filters: store.filters,
+    setItems: store.setFigures,
+    setSelectedItem: store.setSelectedFigure,
+    setLoading: store.setLoading,
+    setError: store.setError,
+    setSearchQuery: store.setSearchQuery,
+    setSortBy: store.setSortBy,
+    getFilteredItems: store.getFilteredFigures,
+    getRoleOptions: store.getRoleOptions,
+    getPeriodOptions: store.getPeriodOptions,
+    setRoleFilter: store.setRoleFilter,
+    setPeriodFilter: store.setPeriodFilter,
+  }), [store]);
+
   const {
     error, reload, requestLoading,
     searchQuery, onSearchChange, searchPlaceholder,
@@ -23,7 +44,7 @@ export function MingContent() {
     filteredItems, selectedItem, handleItemClick, handleCloseModal,
   } = useFigureCollection<MingFigure>({
     cacheKey: 'mingFigures',
-    store,
+    store: adaptedStore,
     loadData: getMingFigures,
     errorMessage: '获取明朝人物数据失败:',
     searchPlaceholder: '搜索明朝人物姓名、字号...',

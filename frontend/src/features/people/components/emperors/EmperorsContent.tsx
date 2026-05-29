@@ -2,6 +2,8 @@
  * 帝王内容容器组件
  */
 
+import { useMemo } from 'react';
+
 import { useEmperorStore } from '@/store';
 import { getEmperors } from '@/services/person/emperors';
 import type { Emperor } from '@/services/person/emperors/types';
@@ -14,6 +16,23 @@ import { EmperorDetailModal } from './EmperorDetailModal';
 export function EmperorsContent() {
   const store = useEmperorStore();
 
+  const adaptedStore = useMemo(() => ({
+    items: store.emperors,
+    selectedItem: store.selectedEmperor,
+    loading: store.loading,
+    error: store.error,
+    filters: store.filters,
+    setItems: store.setEmperors,
+    setSelectedItem: store.setSelectedEmperor,
+    setLoading: store.setLoading,
+    setError: store.setError,
+    setSearchQuery: store.setSearchQuery,
+    setSortBy: store.setSortBy,
+    getFilteredItems: store.getFilteredEmperors,
+    getDynastyOptions: store.getDynastyOptions,
+    setDynastyFilter: store.setDynastyFilter,
+  }), [store]);
+
   const {
     error, reload, requestLoading,
     searchQuery, onSearchChange, searchPlaceholder,
@@ -22,7 +41,7 @@ export function EmperorsContent() {
     filteredItems, selectedItem, handleItemClick, handleCloseModal,
   } = useFigureCollection<Emperor>({
     cacheKey: 'emperors',
-    store,
+    store: adaptedStore,
     loadData: getEmperors,
     errorMessage: '获取帝王数据失败:',
     searchPlaceholder: '搜索帝王姓名、年号...',

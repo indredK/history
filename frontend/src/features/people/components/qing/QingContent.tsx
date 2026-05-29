@@ -2,6 +2,8 @@
  * 清朝统治者内容容器组件
  */
 
+import { useMemo } from 'react';
+
 import { useQingRulerStore } from '@/store';
 import { getQingRulers } from '@/services/person/qing';
 import type { QingRuler } from '@/services/person/qing/types';
@@ -14,6 +16,23 @@ import { QingRulerDetailModal } from './QingRulerDetailModal';
 export function QingContent() {
   const store = useQingRulerStore();
 
+  const adaptedStore = useMemo(() => ({
+    items: store.rulers,
+    selectedItem: store.selectedRuler,
+    loading: store.loading,
+    error: store.error,
+    filters: store.filters,
+    setItems: store.setRulers,
+    setSelectedItem: store.setSelectedRuler,
+    setLoading: store.setLoading,
+    setError: store.setError,
+    setSearchQuery: store.setSearchQuery,
+    setSortBy: store.setSortBy,
+    getFilteredItems: store.getFilteredRulers,
+    getPeriodOptions: store.getPeriodOptions,
+    setPeriodFilter: store.setPeriodFilter,
+  }), [store]);
+
   const {
     error, reload, requestLoading,
     searchQuery, onSearchChange, searchPlaceholder,
@@ -22,7 +41,7 @@ export function QingContent() {
     filteredItems, selectedItem, handleItemClick, handleCloseModal,
   } = useFigureCollection<QingRuler>({
     cacheKey: 'qingRulers',
-    store,
+    store: adaptedStore,
     loadData: getQingRulers,
     errorMessage: '获取清朝统治者数据失败:',
     searchPlaceholder: '搜索清朝统治者姓名、庙号、年号...',
