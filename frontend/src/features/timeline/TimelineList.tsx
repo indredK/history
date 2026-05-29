@@ -1,6 +1,6 @@
 import './TimelineList.css';
-import { Dynasty3DWheel, EChartsTimeline } from './components';
-import { Box, Paper } from '@mui/material';
+import { EChartsTimeline } from './components';
+import { Box } from '@mui/material';
 import { useRequest } from 'ahooks';
 import { StateView } from '@/components/ui';
 import { getDynasties, getEvents } from '@/services/dataClient';
@@ -163,21 +163,6 @@ export function TimelineList() {
         boxShadow: 'var(--shadow-lg)',
       }}
     >
-      <Paper
-        className="glass-card dynasty-wheel-container"
-        sx={{
-          padding: { xs: 1.5, md: 2 },
-          overflow: 'hidden',
-          maxHeight: '30vh',
-          background: 'var(--panel-bg-soft)',
-          border: 'var(--panel-border)',
-          borderRadius: '14px',
-          boxShadow: 'var(--shadow-sm)',
-        }}
-      >
-        <Dynasty3DWheel />
-      </Paper>
-
       {timelineContent}
     </Box>
   );

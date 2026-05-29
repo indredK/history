@@ -28,50 +28,6 @@
   }
 }
 
-/* 页面标题样式 */
-.mythology-page-header {
-  margin-bottom: 1.5rem;
-  animation: fadeInDown 0.6s ease-out;
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 响应式标题 */
-.mythology-page h1 {
-  font-size: 1.8rem;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary, #ff6b6b) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* 页面介绍文字 */
-.mythology-page-intro {
-  position: relative;
-  padding-left: 1rem;
-  border-left: 3px solid var(--color-primary);
-  animation: fadeIn 0.8s ease-out 0.2s both;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 /* 内容区域 */
 .mythology-content {
   flex: 1;
@@ -157,31 +113,12 @@
   .mythology-page {
     max-width: none;
   }
-  
-  .mythology-page h1 {
-    font-size: 1.5rem;
-  }
-  
-  .mythology-page-intro {
-    padding-left: 0.75rem;
-  }
 }
 
 /* 手机适配 */
 @media (max-width: 768px) {
   .mythology-page {
     max-width: none;
-  }
-  
-  .mythology-page h1 {
-    font-size: 1.3rem;
-    text-align: center;
-  }
-  
-  .mythology-page-intro {
-    border-left: none;
-    padding-left: 0;
-    text-align: center;
   }
   
   .mythology-page::before {
@@ -198,17 +135,11 @@
   .mythology-page {
     max-width: none;
   }
-  
-  .mythology-page h1 {
-    font-size: 1.2rem;
-  }
 }
 
 /* 减少动画偏好 */
 @media (prefers-reduced-motion: reduce) {
   .mythology-page,
-  .mythology-page-header,
-  .mythology-page-intro,
   .mythology-content,
   .mythology-view-enter {
     animation: none;

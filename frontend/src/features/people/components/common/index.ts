@@ -6,3 +6,4 @@ export { GridSkeleton } from './GridSkeleton';
 export { PeopleCollectionContent } from './PeopleCollectionContent';
 export { PeopleFilter } from './PeopleFilter';
 export { PeopleTabs, type PeopleTabValue } from './PeopleTabs';
+export { FigureGrid, FIGURE_GRID_SX } from './FigureGrid';
