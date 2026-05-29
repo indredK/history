@@ -205,7 +205,7 @@ export const TimelineChart = forwardRef<TimelineChartRef, TimelineChartProps>(
           overflow: 'hidden',
           border: '1px solid rgba(148, 163, 184, 0.18)',
           borderRadius: '12px',
-          backgroundColor: 'rgba(248, 250, 252, 0.12)',
+          backgroundColor: 'rgba(var(--color-glass-surface-rgb), 0.12)',
           backdropFilter: 'blur(2px)',
         }}
       >

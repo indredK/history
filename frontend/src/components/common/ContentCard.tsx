@@ -76,7 +76,7 @@ export interface ContentCardProps {
 
 const defaultColor: ContentTagColor = {
   bg: 'rgba(158, 158, 158, 0.15)',
-  text: '#9e9e9e',
+  text: 'var(--color-gray-500)',
 };
 
 /**

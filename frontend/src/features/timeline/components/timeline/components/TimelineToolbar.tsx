@@ -70,7 +70,7 @@ export function TimelineToolbar({
     py: 0.75,
     borderRadius: '999px',
     border: '1px solid rgba(148, 163, 184, 0.2)',
-    backgroundColor: 'rgba(255, 255, 255, 0.42)',
+    backgroundColor: 'rgba(var(--color-glass-surface-rgb), 0.42)',
   } as const;
 
   return (

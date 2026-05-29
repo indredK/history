@@ -111,25 +111,25 @@ export const getNavigationTheme = (key: string): NavigationTheme => {
   return theme || navigationThemes['timeline']!;
 };
 
-// 颜色配置 - 更新为毛玻璃友好的半透明色
+// 颜色配置 - 对齐 CSS 变量值
 export const colors = {
-  // 主色调
-  primary: '#FF3D00',
-  primaryLight: '#FF6F3D',
-  primaryDark: '#E63900',
-  
-  // 次要色
-  secondary: '#03A9F4',
-  secondaryLight: '#4FC3F7',
-  secondaryDark: '#0288D1',
-  
-  // 功能色
-  success: '#4CAF50',
-  warning: '#FF9800',
-  error: '#F44336',
-  info: '#2196F3',
-  
-  // 中性色
+  // 主色调 - 对齐 CSS --color-primary
+  primary: '#c78f45',
+  primaryLight: '#e1b879',
+  primaryDark: '#94652f',
+
+  // 次要色 - 对齐 CSS --color-secondary
+  secondary: '#6b8797',
+  secondaryLight: '#97b4c6',
+  secondaryDark: '#465c6a',
+
+  // 功能色 - 对齐 CSS --color-success/warning/error/info
+  success: '#7ea47d',
+  warning: '#c89049',
+  error: '#b76558',
+  info: '#7595a9',
+
+  // 中性色 - 保持不变
   gray: {
     50: '#FAFAFA',
     100: '#F5F5F5',
@@ -142,34 +142,34 @@ export const colors = {
     800: '#424242',
     900: '#212121'
   },
-  
-  // 文本色
+
+  // 文本色 - 对齐 CSS --color-text-*
   text: {
-    primary: '#999',
-    secondary: '#666',
-    disabled: '#BDBDBD'
+    primary: '#f5ecd8',     // 暗色默认，createAppTheme 会根据 mode 覆盖
+    secondary: '#d2c3a3',
+    disabled: '#95856e'
   },
-  
-  // 背景色 - 毛玻璃友好的半透明色
+
+  // 背景色 - 对齐 CSS --color-bg-*
   background: {
-    default: '#FAFAFA',
-    paper: '#FFFFFF',
-    hover: '#F8F9FA',
-    evenRow: '#FAFAFA',
-    dynastyCell: '#E8F5E8',
+    default: '#120f0d',     // 暗色默认，createAppTheme 会根据 mode 覆盖
+    paper: '#211b16',
+    hover: '#26211d',
+    evenRow: 'rgba(var(--color-glass-surface-soft-rgb), 0.3)',
+    dynastyCell: 'rgba(var(--color-success-rgb, 126, 164, 125), 0.15)',
     // 毛玻璃背景色
-    glass: 'rgba(255, 251, 243, 0.74)',
+    glass: 'rgba(var(--color-glass-surface-rgb), 0.72)',
     glassDark: 'rgba(28, 24, 20, 0.72)',
     glassLight: 'rgba(244, 236, 223, 0.62)',
-    glassHover: 'rgba(255, 251, 243, 0.9)',
-    glassActive: 'rgba(255, 251, 243, 0.96)'
+    glassHover: 'rgba(var(--color-glass-surface-rgb), 0.9)',
+    glassActive: 'rgba(var(--color-glass-surface-rgb), 0.96)'
   },
-  
-  // 边框色 - 毛玻璃友好的半透明色
+
+  // 边框色 - 对齐 CSS --color-border-*
   border: {
-    light: '#E0E0E0',
-    medium: '#E3F2FD',
-    dark: '#BDBDBD',
+    light: 'rgba(226, 198, 140, 0.12)',
+    medium: 'rgba(226, 198, 140, 0.2)',
+    dark: 'rgba(226, 198, 140, 0.34)',
     // 毛玻璃边框色
     glass: 'rgba(226, 198, 140, 0.16)',
     glassDark: 'rgba(226, 198, 140, 0.1)',

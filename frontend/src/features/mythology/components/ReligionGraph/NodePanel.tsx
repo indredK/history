@@ -111,7 +111,7 @@ export function NodePanel({ node, onClose, relatedNodes, relatedEdges }: NodePan
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#fff',
+                  color: 'var(--color-text-inverse)',
                 }}
               >
                 {getNodeTypeIcon(node.type)}

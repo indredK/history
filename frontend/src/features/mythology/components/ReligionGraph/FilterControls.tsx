@@ -74,7 +74,7 @@ export function FilterControls() {
               ? SECT_COLORS[sect] 
               : 'rgba(var(--glass-surface-rgb), 0.1)',
             color: selectedSects.includes(sect) 
-              ? '#fff' 
+              ? 'var(--color-text-inverse)' 
               : 'var(--color-text-secondary)',
             borderColor: SECT_COLORS[sect],
             border: `1px solid ${selectedSects.includes(sect) ? 'transparent' : SECT_COLORS[sect]}`,

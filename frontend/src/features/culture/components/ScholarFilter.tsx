@@ -143,7 +143,7 @@ export function ScholarFilter({
           size="small"
           sx={{
             backgroundColor: 'rgba(76, 175, 80, 0.1)',
-            color: '#4caf50',
+            color: 'var(--color-success)',
             fontWeight: 500,
           }}
         />

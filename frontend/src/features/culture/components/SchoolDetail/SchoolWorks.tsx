@@ -28,7 +28,7 @@ export function SchoolWorks({ school }: SchoolWorksProps) {
           gap: 1,
         }}
       >
-        <MenuBookIcon sx={{ fontSize: '1.2rem', color: '#4caf50' }} />
+        <MenuBookIcon sx={{ fontSize: '1.2rem', color: 'var(--color-success)' }} />
         经典著作
       </Typography>
 

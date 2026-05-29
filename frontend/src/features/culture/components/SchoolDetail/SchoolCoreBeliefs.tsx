@@ -27,7 +27,7 @@ export function SchoolCoreBeliefs({ school }: SchoolCoreBeliefsProps) {
           gap: 1,
         }}
       >
-        <LightbulbIcon sx={{ fontSize: '1.2rem', color: '#ffc107' }} />
+        <LightbulbIcon sx={{ fontSize: '1.2rem', color: 'var(--color-warning)' }} />
         核心思想
       </Typography>
       <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>

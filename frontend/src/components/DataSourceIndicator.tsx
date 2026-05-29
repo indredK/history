@@ -42,7 +42,7 @@ export const DataSourceIndicator: React.FC<DataSourceIndicatorProps> = ({ collap
     minWidth: buttonSize,
     transition: `all ${glassConfig.animation.duration.normal} ${glassConfig.animation.easing}`,
     '&:hover': {
-      background: 'rgba(199, 143, 69, 0.1)',
+      background: 'var(--color-hover-bg)',
       boxShadow: glassConfig.shadow.glow,
       transform: 'translateY(-2px)',
     },

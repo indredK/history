@@ -90,12 +90,12 @@ export function EmperorDetailModal({ emperor, open, onClose }: EmperorDetailModa
             <Divider sx={{ my: 2 }} />
             <Box sx={{ mb: 3 }}>
               <Typography variant="subtitle1" sx={{ color: 'var(--color-text-primary)', fontWeight: 600, mb: 1.5, display: 'flex', alignItems: 'center', gap: 1 }}>
-                <EmojiEventsIcon sx={{ fontSize: '1.2rem', color: '#ffc107' }} />主要功绩
+                <EmojiEventsIcon sx={{ fontSize: '1.2rem', color: 'var(--color-warning)' }} />主要功绩
               </Typography>
               <List dense disablePadding>
                 {emperor.achievements.map((achievement, index) => (
                   <ListItem key={index} sx={{ py: 0.5, px: 0 }}>
-                    <ListItemText primary={<Typography variant="body2" sx={{ color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'flex-start', gap: 1 }}><span style={{ color: '#4caf50' }}>•</span>{achievement}</Typography>} />
+                    <ListItemText primary={<Typography variant="body2" sx={{ color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'flex-start', gap: 1 }}><span style={{ color: 'var(--color-success)' }}>•</span>{achievement}</Typography>} />
                   </ListItem>
                 ))}
               </List>
@@ -108,12 +108,12 @@ export function EmperorDetailModal({ emperor, open, onClose }: EmperorDetailModa
             <Divider sx={{ my: 2 }} />
             <Box sx={{ mb: 3 }}>
               <Typography variant="subtitle1" sx={{ color: 'var(--color-text-primary)', fontWeight: 600, mb: 1.5, display: 'flex', alignItems: 'center', gap: 1 }}>
-                <WarningIcon sx={{ fontSize: '1.2rem', color: '#ff9800' }} />重大失误与争议
+                <WarningIcon sx={{ fontSize: '1.2rem', color: 'var(--color-warning)' }} />重大失误与争议
               </Typography>
               <List dense disablePadding>
                 {emperor.failures.map((failure, index) => (
                   <ListItem key={index} sx={{ py: 0.5, px: 0 }}>
-                    <ListItemText primary={<Typography variant="body2" sx={{ color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'flex-start', gap: 1 }}><span style={{ color: '#ff9800' }}>•</span>{failure}</Typography>} />
+                    <ListItemText primary={<Typography variant="body2" sx={{ color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'flex-start', gap: 1 }}><span style={{ color: 'var(--color-warning)' }}>•</span>{failure}</Typography>} />
                   </ListItem>
                 ))}
               </List>
@@ -126,7 +126,7 @@ export function EmperorDetailModal({ emperor, open, onClose }: EmperorDetailModa
             <Divider sx={{ my: 2 }} />
             <Box>
               <Typography variant="subtitle1" sx={{ color: 'var(--color-text-primary)', fontWeight: 600, mb: 1.5, display: 'flex', alignItems: 'center', gap: 1 }}>
-                <MenuBookIcon sx={{ fontSize: '1.2rem', color: '#2196f3' }} />历史评价
+                <MenuBookIcon sx={{ fontSize: '1.2rem', color: 'var(--color-info)' }} />历史评价
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 {emperor.evaluations.map((evaluation, index) => (

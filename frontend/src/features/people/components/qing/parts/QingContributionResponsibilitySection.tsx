@@ -30,7 +30,7 @@ export function QingContributionResponsibilitySection({
             gap: 1,
           }}
         >
-          <TrendingUpIcon sx={{ fontSize: '1.2rem', color: '#4caf50' }} />
+          <TrendingUpIcon sx={{ fontSize: '1.2rem', color: 'var(--color-success)' }} />
           对清朝兴衰的贡献
         </Typography>
         <Box
@@ -62,7 +62,7 @@ export function QingContributionResponsibilitySection({
             gap: 1,
           }}
         >
-          <TrendingDownIcon sx={{ fontSize: '1.2rem', color: '#f44336' }} />
+          <TrendingDownIcon sx={{ fontSize: '1.2rem', color: 'var(--color-error)' }} />
           对清朝兴衰的责任
         </Typography>
         <Box

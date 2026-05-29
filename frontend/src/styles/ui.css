@@ -342,7 +342,7 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   background-color: rgba(var(--glass-tint-rgb, 199, 143, 69), 0.18);
-  color: #FF6F3D;
+  color: var(--color-primary-light);
   border-color: rgba(var(--glass-tint-rgb, 199, 143, 69), 0.28);
 }
 
@@ -350,7 +350,7 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   background-color: rgba(107, 135, 151, 0.18);
-  color: #4FC3F7;
+  color: var(--color-secondary-light);
   border-color: rgba(107, 135, 151, 0.28);
 }
 
@@ -358,7 +358,7 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   background-color: rgba(255, 234, 0, 0.2);
-  color: #FFF176;
+  color: var(--color-accent);
   border-color: rgba(255, 234, 0, 0.3);
 }
 
@@ -366,7 +366,7 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   background-color: rgba(76, 175, 80, 0.2);
-  color: #81C784;
+  color: var(--color-success);
   border-color: rgba(76, 175, 80, 0.3);
 }
 
@@ -374,7 +374,7 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   background-color: rgba(255, 152, 0, 0.2);
-  color: #FFB74D;
+  color: var(--color-warning);
   border-color: rgba(255, 152, 0, 0.3);
 }
 
@@ -382,7 +382,7 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   background-color: rgba(244, 67, 54, 0.2);
-  color: #EF5350;
+  color: var(--color-error);
   border-color: rgba(244, 67, 54, 0.3);
 }
 

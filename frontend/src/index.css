@@ -185,6 +185,27 @@
   --z-popover: 1060;
   --z-tooltip: 1070;
   --z-toast: 1080;
+  
+  /* 毛玻璃 RGB 基础值（用于 rgba() 组合） */
+  --color-glass-surface-rgb: 28, 24, 20;
+  --color-glass-surface-soft-rgb: 43, 37, 31;
+  --color-glass-on-surface-rgb: 245, 236, 216;
+  --color-glass-tint-rgb: 199, 143, 69;
+  
+  /* 毛玻璃复合值 */
+  --color-glass-bg: rgba(var(--color-glass-surface-rgb), 0.72);
+  --color-glass-bg-light: rgba(var(--color-glass-surface-soft-rgb), 0.56);
+  --color-glass-bg-heavy: rgba(var(--color-glass-surface-rgb), 0.88);
+  --color-glass-border: rgba(226, 198, 140, 0.16);
+  --color-glass-border-light: rgba(226, 198, 140, 0.1);
+  --color-glass-border-heavy: rgba(226, 198, 140, 0.24);
+  
+  /* UI 语义色 */
+  --color-hover-bg: rgba(199, 143, 69, 0.12);
+  --color-active-bg: rgba(199, 143, 69, 0.18);
+  --color-divider: rgba(226, 198, 140, 0.1);
+  --color-icon-primary: rgba(var(--color-glass-on-surface-rgb), 0.9);
+  --color-icon-secondary: rgba(var(--color-glass-on-surface-rgb), 0.62);
 }
 
 /* ============================================
@@ -226,6 +247,27 @@
   --panel-border: 1px solid rgba(118, 90, 51, 0.14);
   --panel-highlight: linear-gradient(90deg, rgba(184, 131, 63, 0.22), rgba(107, 135, 151, 0.08));
   --panel-grid: rgba(118, 90, 51, 0.06);
+  
+  /* 毛玻璃 RGB 基础值 */
+  --color-glass-surface-rgb: 255, 251, 243;
+  --color-glass-surface-soft-rgb: 244, 236, 223;
+  --color-glass-on-surface-rgb: 44, 36, 28;
+  --color-glass-tint-rgb: 155, 97, 33;
+  
+  /* 毛玻璃复合值 */
+  --color-glass-bg: rgba(var(--color-glass-surface-rgb), 0.74);
+  --color-glass-bg-light: rgba(var(--color-glass-surface-soft-rgb), 0.62);
+  --color-glass-bg-heavy: rgba(var(--color-glass-surface-rgb), 0.9);
+  --color-glass-border: rgba(118, 90, 51, 0.14);
+  --color-glass-border-light: rgba(118, 90, 51, 0.1);
+  --color-glass-border-heavy: rgba(118, 90, 51, 0.2);
+  
+  /* UI 语义色 */
+  --color-hover-bg: rgba(155, 97, 33, 0.08);
+  --color-active-bg: rgba(155, 97, 33, 0.14);
+  --color-divider: rgba(118, 90, 51, 0.1);
+  --color-icon-primary: rgba(0, 0, 0, 0.8);
+  --color-icon-secondary: rgba(0, 0, 0, 0.54);
 }
 
 /* 全局重置与基础样式 */
@@ -574,19 +616,19 @@ input:hover, textarea:hover, select:hover {
 
 @keyframes backgroundShift {
   0% {
-    background: linear-gradient(135deg, #121212 0%, #1E1E1E 100%);
+    background: var(--color-bg-primary);
   }
   25% {
-    background: linear-gradient(135deg, #1E1E1E 0%, #2D2D2D 100%);
+    background: var(--color-bg-secondary);
   }
   50% {
-    background: linear-gradient(135deg, #2D2D2D 0%, #1E1E1E 100%);
+    background: var(--color-bg-tertiary);
   }
   75% {
     background: linear-gradient(135deg, #1E1E1E 0%, #121212 100%);
   }
   100% {
-    background: linear-gradient(135deg, #121212 0%, #1E1E1E 100%);
+    background: var(--color-bg-primary);
   }
 }
 

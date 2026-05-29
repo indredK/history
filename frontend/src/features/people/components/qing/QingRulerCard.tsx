@@ -21,10 +21,10 @@ interface QingRulerCardProps {
  * 清朝时期颜色映射
  */
 const periodColors: Record<string, TagColor> = {
-  '清初（1616-1722）': { bg: 'rgba(255, 235, 59, 0.15)', text: '#F9A825' },
-  '盛清（1723-1795）': { bg: 'rgba(255, 193, 7, 0.15)', text: '#FFA000' },
-  '清中期（1796-1861）': { bg: 'rgba(255, 152, 0, 0.15)', text: '#FF9800' },
-  '晚清（1862-1912）': { bg: 'rgba(121, 85, 72, 0.15)', text: '#795548' },
+  '清初（1616-1722）': { bg: 'rgba(255, 235, 59, 0.15)', text: 'var(--color-warning)' },
+  '盛清（1723-1795）': { bg: 'rgba(255, 193, 7, 0.15)', text: 'var(--color-warning)' },
+  '清中期（1796-1861）': { bg: 'rgba(255, 152, 0, 0.15)', text: 'var(--color-warning)' },
+  '晚清（1862-1912）': { bg: 'rgba(121, 85, 72, 0.15)', text: 'var(--color-primary-dark)' },
 };
 
 /**

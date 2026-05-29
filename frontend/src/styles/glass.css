@@ -12,10 +12,10 @@
    桌面端CSS变量 (Desktop CSS Variables)
    ============================================ */
 :root {
-  --glass-surface-rgb: var(--theme-glass-surface-rgb, 255, 255, 255);
-  --glass-surface-soft-rgb: var(--theme-glass-surface-soft-rgb, 43, 37, 31);
-  --glass-on-surface-rgb: var(--theme-glass-on-surface-rgb, 245, 236, 216);
-  --glass-tint-rgb: var(--theme-glass-tint-rgb, 199, 143, 69);
+  --glass-surface-rgb: var(--color-glass-surface-rgb, 28, 24, 20);
+  --glass-surface-soft-rgb: var(--color-glass-surface-soft-rgb, 43, 37, 31);
+  --glass-on-surface-rgb: var(--color-glass-on-surface-rgb, 245, 236, 216);
+  --glass-tint-rgb: var(--color-glass-tint-rgb, 199, 143, 69);
   /* ------------------------------------------
      模糊级别 (Blur Levels)
      Requirements: 4.2
@@ -45,8 +45,8 @@
      边框样式 (Border Styles)
      Requirements: 4.4
      ------------------------------------------ */
-  --glass-border-color: var(--theme-glass-border, rgba(226, 198, 140, 0.16));
-  --glass-border-color-dark: var(--theme-glass-border-light, rgba(118, 90, 51, 0.1));
+  --glass-border-color: var(--color-glass-border, rgba(226, 198, 140, 0.16));
+  --glass-border-color-dark: var(--color-glass-border-light, rgba(118, 90, 51, 0.1));
   --glass-border-width: 1px;
   --glass-border: var(--glass-border-width) solid var(--glass-border-color);
 

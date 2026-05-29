@@ -314,7 +314,7 @@ export function EChartsMap({
                   fontSize: 10,
                 },
                 itemStyle: {
-                  color: '#f97316',
+                  color: 'var(--color-warning)',
                   shadowColor: 'rgba(249, 115, 22, 0.45)',
                   shadowBlur: 8,
                 },
@@ -409,7 +409,7 @@ export function EChartsMap({
             py: 0.75,
             borderRadius: '999px',
             background: 'rgba(15, 23, 42, 0.72)',
-            color: '#f8fafc',
+            color: 'var(--color-text-inverse)',
             fontSize: 12,
           }}
         >

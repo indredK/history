@@ -131,7 +131,7 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
                 ? activeGradient
                 : isDark ? 'var(--classic-nav-item-hover)' : 'var(--classic-nav-item-hover)',
               transform: 'translateY(-2px)',
-              color: isActive ? 'white' : textColor,
+              color: isActive ? 'var(--color-text-inverse)' : textColor,
             },
             '&:active': {
               transform: 'translateY(-1px) scale(0.95)',
@@ -150,7 +150,7 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
                 : `rgba(${isDark ? '245, 236, 216' : '255, 251, 243'}, ${navConfig.itemHoverOpacity - navConfig.bgOpacity})`,
               backdropFilter: isActive ? 'none' : `blur(${glassConfig.blur.light})`,
               transform: 'translateY(-2px)',
-              color: 'white',
+              color: 'var(--color-text-inverse)',
             },
             '&:active': {
               transform: 'translateY(-1px) scale(0.95)',
@@ -168,7 +168,7 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
                 ? activeGradient
                 : hoverGradient,
               transform: 'translateY(-2px)',
-              color: 'white',
+              color: 'var(--color-text-inverse)',
             },
             '&:active': {
               transform: 'translateY(-1px) scale(0.95)',
@@ -192,7 +192,7 @@ export function PortraitSidebar({ activeTab: _activeTab, glassEffect = true }: P
                 borderRadius: glassConfig.border.radius.md,
                 cursor: 'pointer',
                 textDecoration: 'none',
-                color: isActive ? 'white' : textColor,
+                color: isActive ? 'var(--color-text-inverse)' : textColor,
                 transform: isActive ? 'translateY(-2px)' : 'none',
                 ...glassItemStyles,
                 '&:focus': {

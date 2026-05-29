@@ -31,7 +31,7 @@ export function SchoolHeader({ school, onClose }: SchoolHeaderProps) {
             width: 64,
             height: 64,
             backgroundColor: school.color || 'var(--color-primary)',
-            color: '#fff',
+            color: 'var(--color-text-inverse)',
             fontWeight: 'bold',
             fontSize: '1.5rem',
           }}

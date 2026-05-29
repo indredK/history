@@ -33,7 +33,7 @@ export function QingEvaluationsSection({
             gap: 1,
           }}
         >
-          <MenuBookIcon sx={{ fontSize: '1.2rem', color: '#9c27b0' }} />
+          <MenuBookIcon sx={{ fontSize: '1.2rem', color: 'var(--color-purple)' }} />
           历史评价
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>

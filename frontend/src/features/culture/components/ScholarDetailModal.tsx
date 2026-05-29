@@ -248,7 +248,7 @@ export function ScholarDetailModal({
                 gap: 1,
               }}
             >
-              <EmojiEventsIcon sx={{ fontSize: '1.2rem', color: '#ffc107' }} />
+              <EmojiEventsIcon sx={{ fontSize: '1.2rem', color: 'var(--color-warning)' }} />
               主要成就
             </Typography>
             <List dense disablePadding>
@@ -292,7 +292,7 @@ export function ScholarDetailModal({
                 gap: 1,
               }}
             >
-              <MenuBookIcon sx={{ fontSize: '1.2rem', color: '#4caf50' }} />
+              <MenuBookIcon sx={{ fontSize: '1.2rem', color: 'var(--color-success)' }} />
               代表作品
             </Typography>
             
@@ -326,7 +326,7 @@ export function ScholarDetailModal({
                         fontSize: '0.65rem',
                         height: '20px',
                         backgroundColor: 'rgba(76, 175, 80, 0.1)',
-                        color: '#4caf50',
+                        color: 'var(--color-success)',
                       }}
                     />
                   </Box>

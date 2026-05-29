@@ -118,7 +118,7 @@
 }
 
 .map-workbench__checkbox-row input {
-  accent-color: #aa732f;
+  accent-color: var(--color-primary-dark);
 }
 
 .map-workbench__panel-footer {
@@ -204,9 +204,9 @@
 .map-workbench__icon-button.is-active,
 .map-workbench__transport-button--primary,
 .map-workbench__speed-tab.is-active {
-  background: #b9833c;
-  border-color: #b9833c;
-  color: #fff7eb;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-primary);
 }
 
 .map-workbench__timeline-dock {

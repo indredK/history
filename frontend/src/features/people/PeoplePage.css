@@ -56,8 +56,8 @@
 }
 
 .emperor-card .MuiAvatar-root {
-  background: linear-gradient(135deg, #FFC107 0%, #FFEB3B 100%);
-  color: #333;
+  background: linear-gradient(135deg, var(--color-warning) 0%, var(--color-accent) 100%);
+  color: var(--color-text-inverse);
 }
 
 /* 明朝人物卡片特殊样式 */
@@ -67,8 +67,8 @@
 }
 
 .ming-figure-card .MuiAvatar-root {
-  background: linear-gradient(135deg, #2196F3 0%, #64B5F6 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--color-info) 0%, var(--color-secondary-light) 100%);
+  color: var(--color-text-inverse);
 }
 
 /* 清朝统治者卡片特殊样式 */
@@ -78,8 +78,8 @@
 }
 
 .qing-ruler-card .MuiAvatar-root {
-  background: linear-gradient(135deg, #9C27B0 0%, #BA68C8 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-secondary) 100%);
+  color: var(--color-text-inverse);
 }
 
 /* 详情弹窗样式 */

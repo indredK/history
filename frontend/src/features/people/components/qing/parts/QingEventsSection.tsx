@@ -30,7 +30,7 @@ export function QingEventsSection({ events, periodColor }: QingEventsSectionProp
             gap: 1,
           }}
         >
-          <HistoryIcon sx={{ fontSize: '1.2rem', color: '#ff9800' }} />
+          <HistoryIcon sx={{ fontSize: '1.2rem', color: 'var(--color-warning)' }} />
           重大历史事件
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -58,7 +58,7 @@ export function QingEventsSection({ events, periodColor }: QingEventsSectionProp
                     fontSize: '0.7rem',
                     height: '20px',
                     backgroundColor: 'rgba(255, 152, 0, 0.1)',
-                    color: '#ff9800',
+                    color: 'var(--color-warning)',
                   }}
                 />
                 <Chip

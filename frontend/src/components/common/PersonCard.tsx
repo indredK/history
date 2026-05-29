@@ -69,7 +69,7 @@ export interface PersonCardProps {
 
 const defaultColor: TagColor = {
   bg: 'rgba(158, 158, 158, 0.15)',
-  text: '#9e9e9e',
+  text: 'var(--color-gray-500)',
 };
 
 // Re-export for external use

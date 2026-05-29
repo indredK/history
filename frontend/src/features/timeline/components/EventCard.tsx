@@ -74,7 +74,7 @@ export function EventCard({ event, index }: Props) {
               style={{
                 backdropFilter: 'blur(6px)',
                 WebkitBackdropFilter: 'blur(6px)',
-                backgroundColor: 'rgba(199, 143, 69, 0.12)',
+                backgroundColor: 'var(--color-hover-bg)',
                 color: 'var(--color-text-primary)',
                 border: '1px solid rgba(199, 143, 69, 0.28)',
                 borderRadius: 'var(--glass-radius-lg, 16px)'

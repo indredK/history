@@ -25,7 +25,7 @@ export function SchoolInfluence({ influence }: SchoolInfluenceProps) {
           gap: 1,
         }}
       >
-        <HistoryEduIcon sx={{ fontSize: '1.2rem', color: '#9c27b0' }} />
+        <HistoryEduIcon sx={{ fontSize: '1.2rem', color: 'var(--color-purple)' }} />
         历史影响
       </Typography>
       <Typography

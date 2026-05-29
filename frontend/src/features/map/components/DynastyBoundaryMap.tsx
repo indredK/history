@@ -14,16 +14,16 @@ interface DynastyConfig {
 }
 
 const DYNASTIES: DynastyConfig[] = [
-  { id: 'qin', name: '秦朝', file: 'boundaries_qin.geojson', period: '前221年-前206年', color: '#d32f2f' },
-  { id: 'han', name: '汉朝', file: 'boundaries_han.geojson', period: '前206年-220年', color: '#c62828' },
-  { id: 'three_kingdoms', name: '三国', file: 'boundaries_three_kingdoms.geojson', period: '220年-280年', color: '#e65100' },
-  { id: 'jin', name: '晋朝', file: 'boundaries_jin.geojson', period: '266年-420年', color: '#f57c00' },
-  { id: 'sui', name: '隋朝', file: 'boundaries_sui.geojson', period: '581年-618年', color: '#fbc02d' },
-  { id: 'tang', name: '唐朝', file: 'boundaries_tang.geojson', period: '618年-907年', color: '#ffa000' },
-  { id: 'song', name: '宋朝', file: 'boundaries_song.geojson', period: '960年-1279年', color: '#689f38' },
-  { id: 'yuan', name: '元朝', file: 'boundaries_yuan.geojson', period: '1271年-1368年', color: '#388e3c' },
-  { id: 'ming', name: '明朝', file: 'boundaries_ming.geojson', period: '1368年-1644年', color: '#1976d2' },
-  { id: 'qing', name: '清朝', file: 'boundaries_qing.geojson', period: '1644年-1912年', color: '#7b1fa2' },
+  { id: 'qin', name: '秦朝', file: 'boundaries_qin.geojson', period: '前221年-前206年', color: 'var(--color-error)' },
+  { id: 'han', name: '汉朝', file: 'boundaries_han.geojson', period: '前206年-220年', color: 'var(--color-error)' },
+  { id: 'three_kingdoms', name: '三国', file: 'boundaries_three_kingdoms.geojson', period: '220年-280年', color: 'var(--color-warning)' },
+  { id: 'jin', name: '晋朝', file: 'boundaries_jin.geojson', period: '266年-420年', color: 'var(--color-warning)' },
+  { id: 'sui', name: '隋朝', file: 'boundaries_sui.geojson', period: '581年-618年', color: 'var(--color-warning)' },
+  { id: 'tang', name: '唐朝', file: 'boundaries_tang.geojson', period: '618年-907年', color: 'var(--color-warning)' },
+  { id: 'song', name: '宋朝', file: 'boundaries_song.geojson', period: '960年-1279年', color: 'var(--color-success)' },
+  { id: 'yuan', name: '元朝', file: 'boundaries_yuan.geojson', period: '1271年-1368年', color: 'var(--color-success)' },
+  { id: 'ming', name: '明朝', file: 'boundaries_ming.geojson', period: '1368年-1644年', color: 'var(--color-info)' },
+  { id: 'qing', name: '清朝', file: 'boundaries_qing.geojson', period: '1644年-1912年', color: 'var(--color-purple)' },
 ];
 
 interface DynastyBoundaryMapProps {
@@ -279,7 +279,7 @@ export function DynastyBoundaryMap({
               fontWeight: selectedDynastyId === dynasty.id ? 'bold' : 'normal',
               backgroundColor:
                 selectedDynastyId === dynasty.id ? dynasty.color : 'rgba(255,255,255,0.9)',
-              color: selectedDynastyId === dynasty.id ? '#fff' : '#333',
+              color: selectedDynastyId === dynasty.id ? 'var(--color-text-inverse)' : 'var(--color-gray-800)',
               boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
               transition: 'all 0.2s ease',
               backdropFilter: 'blur(8px)',

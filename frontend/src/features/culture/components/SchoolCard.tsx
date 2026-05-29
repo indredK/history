@@ -21,8 +21,8 @@ interface SchoolCardProps {
  */
 export function SchoolCard({ school, onClick }: SchoolCardProps) {
   const schoolColor: ContentTagColor = {
-    bg: `${school.color || '#9e9e9e'}15`,
-    text: school.color || '#9e9e9e',
+    bg: `${school.color || 'var(--color-gray-500)'}15`,
+    text: school.color || 'var(--color-gray-500)',
   };
 
   // 获取核心思想，优先使用coreBeliefs，兼容coreIdeas

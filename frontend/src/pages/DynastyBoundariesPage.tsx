@@ -77,7 +77,7 @@ function DynastyBoundariesPage() {
               width: 16,
               height: 16,
               borderRadius: '50%',
-              backgroundColor: selectedDynasty?.color || '#999',
+              backgroundColor: selectedDynasty?.color || 'var(--color-gray-500)',
             }}
           />
           <Box>

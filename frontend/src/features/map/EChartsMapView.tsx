@@ -361,7 +361,7 @@ export function EChartsMapView({
         height: '100%',
         position: 'relative',
         border: stageMode ? 'none' : 'var(--app-panel-border)',
-        borderLeft: stageMode ? 'none' : '4px solid rgba(25, 118, 210, 0.8)',
+        borderLeft: stageMode ? 'none' : '4px solid var(--color-info)',
         borderRadius: stageMode ? 0 : 'var(--panel-radius)',
         overflow: 'hidden',
         boxSizing: 'border-box',
@@ -610,7 +610,7 @@ export function EChartsMapView({
                   style={{
                     padding: '4px 10px',
                     borderRadius: 999,
-                    background: 'rgba(59, 130, 246, 0.12)',
+                    background: 'var(--color-hover-bg)',
                     color: 'var(--color-text-primary)',
                     fontSize: 12,
                     fontWeight: 600,
@@ -624,7 +624,7 @@ export function EChartsMapView({
                   style={{
                     padding: '4px 10px',
                     borderRadius: 999,
-                    background: 'rgba(148, 163, 184, 0.14)',
+                    background: 'var(--color-hover-bg)',
                     color: 'var(--color-text-secondary)',
                     fontSize: 12,
                     fontWeight: 600,
@@ -638,7 +638,7 @@ export function EChartsMapView({
                   style={{
                     padding: '4px 10px',
                     borderRadius: 999,
-                    background: 'rgba(16, 185, 129, 0.12)',
+                    background: 'var(--color-hover-bg)',
                     color: 'var(--color-text-secondary)',
                     fontSize: 12,
                     fontWeight: 600,

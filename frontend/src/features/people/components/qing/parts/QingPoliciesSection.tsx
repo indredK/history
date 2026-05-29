@@ -28,7 +28,7 @@ export function QingPoliciesSection({ policies }: QingPoliciesSectionProps) {
             gap: 1,
           }}
         >
-          <PolicyIcon sx={{ fontSize: '1.2rem', color: '#2196f3' }} />
+          <PolicyIcon sx={{ fontSize: '1.2rem', color: 'var(--color-info)' }} />
           政治举措
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -57,7 +57,7 @@ export function QingPoliciesSection({ policies }: QingPoliciesSectionProps) {
                       fontSize: '0.7rem',
                       height: '20px',
                       backgroundColor: 'rgba(33, 150, 243, 0.1)',
-                      color: '#2196f3',
+                      color: 'var(--color-info)',
                     }}
                   />
                 )}

@@ -36,7 +36,7 @@ export function SchoolFigures({ school }: SchoolFiguresProps) {
           gap: 1,
         }}
       >
-        <PersonIcon sx={{ fontSize: '1.2rem', color: '#2196f3' }} />
+        <PersonIcon sx={{ fontSize: '1.2rem', color: 'var(--color-info)' }} />
         代表人物
       </Typography>
       <List dense disablePadding>
@@ -56,7 +56,7 @@ export function SchoolFigures({ school }: SchoolFiguresProps) {
               <Avatar
                 sx={{
                   backgroundColor: school.color || 'var(--color-primary)',
-                  color: '#fff',
+                  color: 'var(--color-text-inverse)',
                   width: 36,
                   height: 36,
                   fontSize: '0.9rem',

@@ -186,3 +186,39 @@
     height: 34px;
   }
 }
+
+/* ============================================
+   亮色模式适配
+   ============================================ */
+[data-theme="light"] .map-first-layout__topbar {
+  background: linear-gradient(180deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+  border-bottom-color: var(--color-border-medium);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="light"] .map-first-layout__nav-pill,
+[data-theme="light"] .map-first-layout__tool-button {
+  border-color: var(--color-border-medium);
+  background: rgba(var(--color-glass-surface-rgb), 0.5);
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] .map-first-layout__nav-pill:hover,
+[data-theme="light"] .map-first-layout__tool-button:hover,
+[data-theme="light"] .map-first-layout__nav-pill.is-active {
+  background: rgba(var(--color-glass-surface-rgb), 0.75);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="light"] .map-first-layout__nav-pill.is-active {
+  color: var(--color-primary-dark);
+  background: rgba(var(--color-glass-surface-rgb), 0.92);
+  border-color: var(--color-border-dark);
+}
+
+[data-theme="light"] .map-first-layout__route-content--page {
+  background:
+    linear-gradient(180deg, rgba(var(--color-glass-surface-rgb), 0.5), rgba(var(--color-glass-surface-soft-rgb), 0.3)),
+    radial-gradient(circle at top right, rgba(var(--color-glass-tint-rgb), 0.06), transparent 28%);
+}

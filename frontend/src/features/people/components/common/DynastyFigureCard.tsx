@@ -8,7 +8,7 @@
 import { PersonCard, type TagColor } from '@/components/common';
 
 /** 公共默认标签颜色 */
-export const DEFAULT_TAG_COLOR: TagColor = { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e' };
+export const DEFAULT_TAG_COLOR: TagColor = { bg: 'rgba(158, 158, 158, 0.15)', text: 'var(--color-gray-500)' };
 
 /** 通用人物数据接口 —— 各朝代人物类型需满足此约束 */
 export interface DynastyFigureData {
