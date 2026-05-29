@@ -4,7 +4,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import { PageHeaderBadge, PagePanel } from '@/components/common';
+import { PagePanel } from '@/components/common';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import { MobileTableContainer } from '@/components/ui/MobileTableContainer';
 import {

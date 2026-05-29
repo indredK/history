@@ -95,7 +95,8 @@ export function useResponsive(breakpoints: Breakpoints = defaultBreakpoints): Re
  * @param query 媒体查询字符串
  * @returns 是否匹配
  */
-function useMediaQuery(query: string): boolean {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.matchMedia(query).matches;
@@ -199,7 +200,8 @@ export function useOrientation() {
  * 使用视口尺寸
  * @returns 视口宽度和高度
  */
-function useViewport() {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function useViewport() {
   const [viewport, setViewport] = useState({
     width: window.innerWidth,
     height: window.innerHeight,

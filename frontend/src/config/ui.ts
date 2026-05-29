@@ -225,6 +225,21 @@ export const uiUtils = {
     }
   }),
 
+  // 根据主题生成Slider样式
+  getThemedSliderStyles: (theme: keyof typeof uiThemeColors): SxProps<Theme> => ({
+    color: uiThemeColors[theme].primary,
+    '& .MuiSlider-thumb': {
+      backgroundColor: uiThemeColors[theme].primary,
+      '&:hover': {
+        boxShadow: `0 0 0 8px ${uiThemeColors[theme].hover}`,
+      }
+    },
+    '& .MuiSlider-track': {
+      backgroundColor: uiThemeColors[theme].primary,
+    },
+    ...formConfig.slider
+  }),
+
   // 根据主题生成Chip样式
   getThemedChipStyles: (theme: keyof typeof uiThemeColors): SxProps<Theme> => ({
     ...formConfig.chip,

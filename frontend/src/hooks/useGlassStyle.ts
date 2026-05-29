@@ -61,7 +61,9 @@ export interface PerformanceOptions {
  * return <div style={style} className={className}>Content</div>;
  * ```
  */
-function useGlassStyle(
+// useGlassStyle 已弃用，保留函数定义以备未来使用
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function useGlassStyle(
   options: GlassStyleOptions = {},
   performanceOptions: PerformanceOptions = {}
 ): GlassStyleResult {

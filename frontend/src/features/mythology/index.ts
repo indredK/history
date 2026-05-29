@@ -5,11 +5,3 @@
 
 // 页面组件
 export { default as MythologyPage } from './MythologyPage';
-
-// 子组件
-export {
-  MythologyCard,
-  CategoryFilter,
-  MythologyGrid,
-  MythologyDetailModal,
-} from './components';
