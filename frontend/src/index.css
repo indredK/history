@@ -309,8 +309,10 @@ body {
   overscroll-behavior: none;
 }
 
-/* 链接样式 */
-a {
+/* 链接样式
+ * 用 :where() 包裹，特异性归零，组件内任意 class 均可轻松覆盖，不会反向压制组件样式。
+ * 注意：伪元素 ::before 不能写进 :where() 内，必须留在外面。 */
+:where(a) {
   color: var(--color-primary);
   text-decoration: none;
   font-weight: var(--font-weight-medium);
@@ -319,7 +321,7 @@ a {
   overflow: hidden;
 }
 
-a::before {
+:where(a)::before {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -332,18 +334,19 @@ a::before {
   transition: transform var(--transition-normal);
 }
 
-a:hover {
+:where(a:hover) {
   color: var(--color-primary-light);
   text-shadow: 0 0 10px rgba(var(--glass-tint-rgb), 0.35);
 }
 
-a:hover::before {
+:where(a:hover)::before {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-/* 按钮基础样式 */
-button {
+/* 按钮基础样式
+ * 同样用 :where() 归零特异性，避免全局 button 规则漏进组件（如轮盘刻度）后反向压制。 */
+:where(button) {
   font-family: inherit;
   font-size: inherit;
   font-weight: var(--font-weight-medium);
@@ -359,7 +362,7 @@ button {
   z-index: 1;
 }
 
-button::before {
+:where(button)::before {
   content: '';
   position: absolute;
   top: 0;
@@ -372,27 +375,26 @@ button::before {
   z-index: -1;
 }
 
-button:hover {
-  /* transform: translateY(-2px); */
+:where(button:hover) {
   box-shadow: var(--shadow-md), var(--shadow-glow);
 }
 
-button:hover::before {
+:where(button:hover)::before {
   opacity: 1;
 }
 
-button:active {
+:where(button:active) {
   transform: translateY(0);
 }
 
-button:focus-visible {
+:where(button:focus-visible) {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
   box-shadow: var(--shadow-glow);
 }
 
 /* 输入框基础样式 */
-input, textarea, select {
+:where(input, textarea, select) {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
@@ -406,14 +408,14 @@ input, textarea, select {
   overflow: hidden;
 }
 
-input:focus, textarea:focus, select:focus {
+:where(input:focus, textarea:focus, select:focus) {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(199, 143, 69, 0.18), var(--shadow-glow);
   background-color: var(--color-bg-card);
   transform: translateY(-1px);
 }
 
-input:hover, textarea:hover, select:hover {
+:where(input:hover, textarea:hover, select:hover) {
   border-color: var(--color-primary-light);
   box-shadow: 0 0 0 2px rgba(199, 143, 69, 0.1);
 }

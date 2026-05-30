@@ -5,6 +5,10 @@ import {
   RADIUS_VARIATION,
 } from './geometry';
 import type { RadialMenuItem } from './types';
+import { createCx } from '@utils/cssModules';
+import styles from './RadialMenu.module.css';
+
+const cx = createCx(styles);
 
 interface RadialOrbitProps {
   visibleItems: Array<{ item: RadialMenuItem; globalIndex: number }>;
@@ -29,7 +33,7 @@ export function RadialOrbit({
   onSelect,
 }: RadialOrbitProps) {
   return (
-    <div className="radial-menu__orbit" role="listbox" aria-label={ariaLabel}>
+    <div className={cx('radial-menu__orbit')} role="listbox" aria-label={ariaLabel}>
       {visibleItems.map(({ item, globalIndex }) => {
         const isActive = item.id === activeItemId;
         const normalized = visibleCount === 1
@@ -45,7 +49,7 @@ export function RadialOrbit({
           <button
             key={`${item.id}-${globalIndex}`}
             type="button"
-            className={`radial-menu__node${isActive ? ' radial-menu__node--active' : ''}`}
+            className={cx('radial-menu__node', isActive && 'radial-menu__node--active')}
             style={{
               '--item-accent': item.accentColor || resolvedAccent,
               '--item-accent-soft': `${item.accentColor || resolvedAccent}3d`,
@@ -57,13 +61,13 @@ export function RadialOrbit({
             aria-label={`选择${item.label}`}
             aria-current={isActive ? 'true' : undefined}
           >
-            <span className="radial-menu__node-disc" aria-hidden="true">
+            <span className={cx('radial-menu__node-disc')} aria-hidden="true">
               {item.meta || String(globalIndex + 1).padStart(2, '0')}
             </span>
-            <span className="radial-menu__node-copy">
-              <span className="radial-menu__node-title">{item.label}</span>
+            <span className={cx('radial-menu__node-copy')}>
+              <span className={cx('radial-menu__node-title')}>{item.label}</span>
               {item.subtitle ? (
-                <span className="radial-menu__node-subtitle">{item.subtitle}</span>
+                <span className={cx('radial-menu__node-subtitle')}>{item.subtitle}</span>
               ) : null}
             </span>
           </button>

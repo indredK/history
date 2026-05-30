@@ -6,6 +6,10 @@ import {
   getTimelinePosition,
 } from './geometry';
 import type { RadialTimelineItem } from './types';
+import { createCx } from '@utils/cssModules';
+import styles from './RadialMenu.module.css';
+
+const cx = createCx(styles);
 
 interface RadialTimelineProps {
   timelineItems: RadialTimelineItem[];
@@ -37,24 +41,24 @@ export function RadialTimeline({
 }: RadialTimelineProps) {
   return (
     <div
-      className="radial-menu__timeline"
+      className={cx('radial-menu__timeline')}
       role="listbox"
       aria-label={`${ariaLabel}时间刻度`}
       onClick={onSurfaceClick}
     >
       <svg
-        className="radial-menu__timeline-svg"
+        className={cx('radial-menu__timeline-svg')}
         viewBox={`0 0 ${TIMELINE_BOX} ${TIMELINE_BOX}`}
         aria-hidden="true"
       >
         <g transform={side === 'right' ? `translate(${TIMELINE_BOX} 0) scale(-1 1)` : undefined}>
-          <path className="radial-menu__timeline-arc" d={timelineFullArcPath} />
+          <path className={cx('radial-menu__timeline-arc')} d={timelineFullArcPath} />
           {timelineActiveArcPath ? (
-            <path className="radial-menu__timeline-arc radial-menu__timeline-arc--active" d={timelineActiveArcPath} />
+            <path className={cx('radial-menu__timeline-arc', 'radial-menu__timeline-arc--active')} d={timelineActiveArcPath} />
           ) : null}
         </g>
       </svg>
-      <div className="radial-menu__timeline-pointer" aria-hidden="true" />
+      <div className={cx('radial-menu__timeline-pointer')} aria-hidden="true" />
       {timelineItems.map((item, index) => {
         const position = getTimelinePosition(index, timelineItems.length, side, timelineRadius, timelineArcSpan);
         const isActive = item.id === activeTimelineItemId;
@@ -64,7 +68,7 @@ export function RadialTimeline({
           <button
             key={`${item.id}-timeline`}
             type="button"
-            className={`radial-menu__time-tick${isActive ? ' radial-menu__time-tick--active' : ''}`}
+            className={cx('radial-menu__time-tick', isActive && 'radial-menu__time-tick--active')}
             style={{
               '--item-accent': item.accentColor || resolvedAccent,
               '--item-accent-soft': `${item.accentColor || resolvedAccent}3d`,
@@ -78,8 +82,8 @@ export function RadialTimeline({
               onSelectTimeline(index, item.id);
             }}
           >
-            <span className="radial-menu__time-tick-mark" aria-hidden="true" />
-            <span className="radial-menu__time-tick-label">{yearLabel}</span>
+            <span className={cx('radial-menu__time-tick-mark')} aria-hidden="true" />
+            <span className={cx('radial-menu__time-tick-label')}>{yearLabel}</span>
           </button>
         );
       })}

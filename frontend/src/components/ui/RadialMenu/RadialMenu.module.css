@@ -262,6 +262,24 @@
   box-shadow: 0 0 22px var(--item-accent-glow);
 }
 
+/* hover 时只点亮刻度数字与刻度线，不要出现按钮背景块。
+ * index.css 的全局 button::before（主色渐变）和 button:hover box-shadow
+ * 会在悬停时浮出成背景，这里在刻度上将其屏蔽。 */
+.radial-menu__time-tick::before {
+  display: none;
+}
+
+.radial-menu__time-tick:hover,
+.radial-menu__time-tick:focus-visible {
+  box-shadow: none;
+}
+
+.radial-menu__time-tick:hover .radial-menu__time-tick-label,
+.radial-menu__time-tick:focus-visible .radial-menu__time-tick-label {
+  color: var(--imperial-text, #f3ead7);
+  text-shadow: 0 0 14px var(--item-accent-glow);
+}
+
 .radial-menu__node:hover,
 .radial-menu__node:focus-visible {
   filter: brightness(1.08);

@@ -8,7 +8,10 @@ import { RadialOrbit } from './RadialOrbit';
 import { RadialTimeline } from './RadialTimeline';
 import { useRadialMenu } from './useRadialMenu';
 import type { RadialMenuProps } from './types';
-import './RadialMenu.css';
+import { createCx } from '@utils/cssModules';
+import styles from './RadialMenu.module.css';
+
+const cx = createCx(styles);
 
 /**
  * 径向/时间轴双模式轮盘菜单。
@@ -55,7 +58,7 @@ export function RadialMenu({
   return (
     <aside
       ref={menuRef}
-      className={`radial-menu radial-menu--${side}${isExpanded ? ' radial-menu--expanded' : ''}`}
+      className={cx('radial-menu', `radial-menu--${side}`, isExpanded && 'radial-menu--expanded')}
       style={{
         '--menu-accent': resolvedAccent,
         '--menu-accent-glow': `${resolvedAccent}2e`,
@@ -69,24 +72,24 @@ export function RadialMenu({
     >
       {items.length === 0 ? (
         emptyMode === 'disc' ? (
-          <div className="radial-menu__hub">
-            <div className="radial-menu__core">
-              <div className="radial-menu__core-disc radial-menu__core-disc--empty" aria-hidden="true" />
+          <div className={cx('radial-menu__hub')}>
+            <div className={cx('radial-menu__core')}>
+              <div className={cx('radial-menu__core-disc', 'radial-menu__core-disc--empty')} aria-hidden="true" />
             </div>
           </div>
         ) : (
-          <div className="radial-menu__empty">{emptyText}</div>
+          <div className={cx('radial-menu__empty')}>{emptyText}</div>
         )
       ) : (
         <div
-          className="radial-menu__anchor"
+          className={cx('radial-menu__anchor')}
           onPointerLeave={() => setIsExpanded(false)}
           onFocusCapture={() => setIsExpanded(true)}
           onBlurCapture={handleAnchorBlur}
         >
           {isExpanded ? (
             <>
-              <div className="radial-menu__interaction-pad" aria-hidden="true" />
+              <div className={cx('radial-menu__interaction-pad')} aria-hidden="true" />
               {mode === 'timeline' && timelineItems?.length ? (
                 <RadialTimeline
                   timelineItems={timelineItems}
@@ -116,10 +119,10 @@ export function RadialMenu({
             </>
           ) : null}
 
-          <div className="radial-menu__hub">
-            <div className="radial-menu__core">
+          <div className={cx('radial-menu__hub')}>
+            <div className={cx('radial-menu__core')}>
               <div
-                className="radial-menu__core-disc"
+                className={cx('radial-menu__core-disc')}
                 onPointerEnter={() => setIsExpanded(true)}
                 onClick={handleCoreClick}
                 onKeyDown={handleCoreKeyDown}
@@ -127,7 +130,7 @@ export function RadialMenu({
                 role={timelineItems?.length ? 'button' : undefined}
                 aria-label={timelineItems?.length ? `切换${ariaLabel}显示模式` : undefined}
               >
-                <span className="radial-menu__core-title">
+                <span className={cx('radial-menu__core-title')}>
                   {mode === 'timeline'
                     ? (timelineCoreLabel || '未选中')
                     : (activeItem?.label || '未选中')}
