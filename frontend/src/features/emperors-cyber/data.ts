@@ -10,13 +10,95 @@ const CYBER_COLORS = [
   '#ffd426', '#a2845e', '#ff375f', '#5e5ce6',
 ];
 
+function normalizeTimeLabel(value: string | undefined) {
+  return value?.trim() || '';
+}
+
+function parseHistoricalYear(input: string | undefined): number | null {
+  const value = normalizeTimeLabel(input);
+
+  if (!value) {
+    return null;
+  }
+
+  const cleaned = value
+    .replace(/约/g, '')
+    .replace(/公元前/g, '前')
+    .replace(/公元/g, '')
+    .replace(/年/g, '')
+    .replace(/\s+/g, '');
+
+  const centuryMatch = cleaned.match(/前?(\d+)世纪([初中末])?/);
+
+  if (centuryMatch) {
+    const century = Number(centuryMatch[1]);
+    const marker = centuryMatch[2];
+    const isBeforeCommonEra = cleaned.startsWith('前');
+    const base = isBeforeCommonEra ? century * 100 : (century - 1) * 100;
+    const offset = marker === '初' ? 0 : marker === '中' ? 50 : marker === '末' ? 90 : 0;
+
+    return isBeforeCommonEra ? -(base - offset) : base + offset;
+  }
+
+  const yearMatch = cleaned.match(/前?(\d{1,4})/);
+
+  if (yearMatch) {
+    const year = Number(yearMatch[1]);
+    return cleaned.startsWith('前') ? -year : year;
+  }
+
+  return null;
+}
+
+function parsePeriodRange(period: string | undefined) {
+  const value = normalizeTimeLabel(period);
+
+  if (!value) {
+    return {
+      startLabel: '',
+      endLabel: '',
+      startValue: null,
+      endValue: null,
+    };
+  }
+
+  const [rawStart = '', rawEnd = ''] = value.split('-');
+  const startLabel = rawStart.trim();
+  const endLabel = rawEnd.trim();
+  const startValue = parseHistoricalYear(startLabel);
+  const endValue = parseHistoricalYear(endLabel);
+
+  return {
+    startLabel,
+    endLabel,
+    startValue,
+    endValue,
+  };
+}
+
+function getRulerStartYearLabel(ruler: Ruler) {
+  if (ruler.yearNames?.[0]?.startYear) {
+    return normalizeTimeLabel(ruler.yearNames[0].startYear);
+  }
+
+  return normalizeTimeLabel(ruler.startYear);
+}
+
+function getRulerStartYearValue(ruler: Ruler) {
+  return parseHistoricalYear(getRulerStartYearLabel(ruler));
+}
+
 function extractRulers(dynasty: DynastyData): CyberEmperor[] {
   const results: CyberEmperor[] = [];
+  const dynastyPeriod = parsePeriodRange(dynasty.period);
 
   const addRulers = (rulers: Ruler[] | undefined) => {
     if (!rulers) return;
 
     rulers.forEach((ruler, idx) => {
+      const startYearLabel = getRulerStartYearLabel(ruler) || dynastyPeriod.startLabel;
+      const startYearValue = getRulerStartYearValue(ruler) ?? dynastyPeriod.startValue;
+
       results.push({
         id: `${dynasty.id}-${idx}`,
         name: ruler.name,
@@ -27,6 +109,11 @@ function extractRulers(dynasty: DynastyData): CyberEmperor[] {
         yearNames: ruler.yearNames?.map((yearName) => yearName.name).filter(Boolean) || [],
         events: ruler.events?.map((event) => event.description).filter(Boolean) || [],
         summary: dynasty.summary || '',
+        startYearLabel,
+        endYearLabel: dynastyPeriod.endLabel,
+        startYearValue,
+        endYearValue: dynastyPeriod.endValue,
+        sortYearValue: startYearValue ?? dynastyPeriod.startValue ?? idx,
       });
     });
   };
@@ -34,7 +121,7 @@ function extractRulers(dynasty: DynastyData): CyberEmperor[] {
   addRulers(dynasty.rulers);
   dynasty.subDynasties?.forEach((subDynasty) => addRulers(subDynasty.rulers));
 
-  return results;
+  return results.sort((left, right) => left.sortYearValue - right.sortYearValue);
 }
 
 export function getEmperorDisplayName(emperor: Pick<CyberEmperor, 'name' | 'title'>) {
@@ -52,10 +139,20 @@ export async function loadEmperorsCyberData(): Promise<{
   }
 
   const dynasties = config.dynasties.map((dynasty, index) => ({
-    id: dynasty.id,
-    name: dynasty.name,
-    era: dynasty.period,
-    color: CYBER_COLORS[index % CYBER_COLORS.length] ?? '#00f0ff',
+    ...(() => {
+      const period = parsePeriodRange(dynasty.period);
+
+      return {
+        id: dynasty.id,
+        name: dynasty.name,
+        era: dynasty.period,
+        color: CYBER_COLORS[index % CYBER_COLORS.length] ?? '#00f0ff',
+        startYearLabel: period.startLabel,
+        endYearLabel: period.endLabel,
+        startYearValue: period.startValue,
+        endYearValue: period.endValue,
+      };
+    })(),
   }));
 
   const emperors: CyberEmperor[] = [];

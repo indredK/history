@@ -340,6 +340,7 @@
     grid-template-rows: auto auto 1fr;
     gap: 18px;
   }
+
   .cyber-focus-panel {
     min-height: 420px;
   }

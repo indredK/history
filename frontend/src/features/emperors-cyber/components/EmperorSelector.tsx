@@ -1,6 +1,10 @@
 import type { CyberEmperor } from '../types';
 import { getEmperorDisplayName } from '../data';
-import { SideRadialMenu, type SideRadialMenuItem } from './SideRadialMenu';
+import {
+  RadialMenu,
+  type RadialMenuItem,
+  type RadialTimelineItem,
+} from '@/components/ui';
 
 interface EmperorSelectorProps {
   emperors: CyberEmperor[];
@@ -15,17 +19,26 @@ export function EmperorSelector({
   onSelect,
   accentColor,
 }: EmperorSelectorProps) {
-  const items: SideRadialMenuItem[] = emperors.map((emperor, index) => ({
+  const items: RadialMenuItem[] = emperors.map((emperor, index) => ({
     id: emperor.id,
     label: getEmperorDisplayName(emperor),
     subtitle: emperor.title || emperor.period,
     meta: String(index + 1).padStart(2, '0'),
     accentColor,
   }));
+  const timelineItems: RadialTimelineItem[] = emperors.map((emperor) => ({
+    id: emperor.id,
+    label: getEmperorDisplayName(emperor),
+    yearLabel: emperor.startYearLabel || emperor.period,
+    yearValue: emperor.startYearValue,
+    rangeLabel: emperor.period,
+    accentColor,
+  }));
 
   return (
-    <SideRadialMenu
+    <RadialMenu
       items={items}
+      timelineItems={timelineItems}
       activeId={activeEmperorId}
       onSelect={onSelect}
       side="right"

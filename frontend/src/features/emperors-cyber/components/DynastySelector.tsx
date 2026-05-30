@@ -1,5 +1,9 @@
 import type { DynastyItem } from '../types';
-import { SideRadialMenu, type SideRadialMenuItem } from './SideRadialMenu';
+import {
+  RadialMenu,
+  type RadialMenuItem,
+  type RadialTimelineItem,
+} from '@/components/ui';
 
 interface DynastySelectorProps {
   dynasties: DynastyItem[];
@@ -14,7 +18,7 @@ export function DynastySelector({
   onSelect,
   emperorCounts,
 }: DynastySelectorProps) {
-  const items: SideRadialMenuItem[] = dynasties.map((dynasty) => {
+  const items: RadialMenuItem[] = dynasties.map((dynasty) => {
     const count = emperorCounts[dynasty.id] || 0;
 
     return {
@@ -25,10 +29,19 @@ export function DynastySelector({
       accentColor: dynasty.color,
     };
   });
+  const timelineItems: RadialTimelineItem[] = dynasties.map((dynasty) => ({
+    id: dynasty.id,
+    label: dynasty.name,
+    yearLabel: dynasty.startYearLabel || dynasty.era,
+    yearValue: dynasty.startYearValue,
+    rangeLabel: dynasty.era,
+    accentColor: dynasty.color,
+  }));
 
   return (
-    <SideRadialMenu
+    <RadialMenu
       items={items}
+      timelineItems={timelineItems}
       activeId={activeDynasty}
       onSelect={onSelect}
       side="left"

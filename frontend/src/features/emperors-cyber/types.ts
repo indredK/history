@@ -19,6 +19,9 @@ export interface YearName {
 export interface Ruler {
   title: string;
   name: string;
+  yearName?: string;
+  duration?: string;
+  startYear?: string;
   yearNames?: YearName[];
   events?: RulerEvent[];
 }
@@ -42,6 +45,10 @@ export interface DynastyItem {
   name: string;
   era: string;
   color: string;
+  startYearLabel: string;
+  endYearLabel: string;
+  startYearValue: number | null;
+  endYearValue: number | null;
 }
 
 export interface CyberEmperor {
@@ -54,4 +61,9 @@ export interface CyberEmperor {
   yearNames: string[];
   events: string[];
   summary: string;
+  startYearLabel: string;
+  endYearLabel: string;
+  startYearValue: number | null;
+  endYearValue: number | null;
+  sortYearValue: number;
 }
