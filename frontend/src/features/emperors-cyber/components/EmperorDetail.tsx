@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 
+import { getEmperorDisplayName } from '../data';
 import type { CyberEmperor } from '../types';
 
 interface EmperorDetailProps {
@@ -38,12 +39,12 @@ export function EmperorDetail({
 
       <div className="cyber-focus-hero">
         <div className="cyber-focus-seal" aria-hidden="true">
-          <span>{emperor.name.charAt(0)}</span>
+          <span>{getEmperorDisplayName(emperor).charAt(0)}</span>
         </div>
 
         <div className="cyber-focus-titles">
           <div className="cyber-focus-dynasty">{emperor.dynasty}</div>
-          <h3 className="cyber-focus-name">{emperor.name}</h3>
+          <h3 className="cyber-focus-name">{getEmperorDisplayName(emperor)}</h3>
           {emperor.title && <p className="cyber-focus-ruler-title">{emperor.title}</p>}
           <div className="cyber-focus-meta">
             <span>{emperor.period}</span>

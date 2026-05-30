@@ -37,6 +37,10 @@ function extractRulers(dynasty: DynastyData): CyberEmperor[] {
   return results;
 }
 
+export function getEmperorDisplayName(emperor: Pick<CyberEmperor, 'name' | 'title'>) {
+  return emperor.name || emperor.title || '未选中';
+}
+
 export async function loadEmperorsCyberData(): Promise<{
   dynasties: DynastyItem[];
   emperors: CyberEmperor[];

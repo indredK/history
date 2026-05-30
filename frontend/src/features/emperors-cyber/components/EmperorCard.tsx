@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 
+import { getEmperorDisplayName } from '../data';
 import type { CyberEmperor } from '../types';
 
 interface EmperorCardProps {
@@ -35,12 +36,12 @@ export function EmperorCard({
 
         <div className="cyber-card-avatar" style={{ boxShadow: `0 0 30px ${color}40, inset 0 0 20px ${color}20` }}>
           <div className="cyber-card-avatar-placeholder" style={{ borderColor: color }}>
-            <span style={{ color }}>{emperor.name.charAt(0)}</span>
+            <span style={{ color }}>{getEmperorDisplayName(emperor).charAt(0)}</span>
           </div>
         </div>
 
         <h3 className="cyber-card-name" style={{ textShadow: `0 0 20px ${color}80` }}>
-          {emperor.name}
+          {getEmperorDisplayName(emperor)}
         </h3>
         {emperor.title && (
           <div className="cyber-card-temple" style={{ color }}>

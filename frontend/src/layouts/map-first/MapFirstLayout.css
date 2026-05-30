@@ -3,6 +3,7 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+  overscroll-behavior: none;
   background:
     linear-gradient(180deg, rgba(255, 247, 230, 0.3), rgba(255, 247, 230, 0)),
     var(--color-bg-gradient);
@@ -110,11 +111,13 @@
   flex: 1;
   min-height: 0;
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 .map-first-layout__route-content {
   height: 100%;
   min-height: 0;
+  overscroll-behavior: none;
 }
 
 .map-first-layout__route-content > * {
@@ -124,12 +127,14 @@
 
 .map-first-layout__route-content--map {
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 .map-first-layout__route-content--page {
   display: flex;
   flex-direction: column;
   overflow: auto;
+  overscroll-behavior: none;
   padding: var(--space-4);
   background: var(--app-page-surface);
   scrollbar-gutter: stable;

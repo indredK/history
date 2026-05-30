@@ -282,11 +282,15 @@
   height: 100vh;
   min-height: 100vh;
   position: relative;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 html {
   scroll-behavior: smooth;
   height: 100%; /* 确保html占满视口 */
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 body {
@@ -301,6 +305,8 @@ body {
   margin: 0; /* 移除默认边距 */
   padding: 0; /* 移除默认内边距 */
   background-attachment: fixed;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 /* 链接样式 */
