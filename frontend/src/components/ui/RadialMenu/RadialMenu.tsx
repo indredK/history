@@ -9,7 +9,7 @@ import { RadialTimeline } from './RadialTimeline';
 import { useRadialMenu } from './useRadialMenu';
 import type { RadialMenuProps } from './types';
 import { createCx } from '@utils/cssModules';
-import styles from './RadialMenu.module.css';
+import styles from './RadialMenu.module.scss';
 
 const cx = createCx(styles);
 

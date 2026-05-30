@@ -7,7 +7,7 @@ import {
 } from './geometry';
 import type { RadialTimelineItem } from './types';
 import { createCx } from '@utils/cssModules';
-import styles from './RadialMenu.module.css';
+import styles from './RadialMenu.module.scss';
 
 const cx = createCx(styles);
 

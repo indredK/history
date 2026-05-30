@@ -1,0 +1,489 @@
+/* RadialMenu 组件样式（SCSS + CSS Modules）
+ * 从 emperors-cyber 抽离为通用 UI 组件。
+ * 主题变量（--imperial-*）均带 fallback，脱离原页面也可正常显示。
+ * 容器尺寸由 JS 注入的 --timeline-box / --anchor-box / --menu-min-height 驱动。
+ * 采用 BEM + & 嵌套：&__x 生成元素类、&--x &__y 生成上下文组合选择器，
+ * 编译产物类名与原 .module.css 完全一致，CSS Modules 哈希行为不变。
+ */
+
+.radial-menu {
+  position: relative;
+  min-height: var(--menu-min-height, 560px);
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: 1080px) {
+    min-height: 220px;
+  }
+
+  /* ===== Anchor 容器 ===== */
+  &__anchor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 104px;
+    height: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+
+    @media (max-width: 1080px) {
+      position: relative;
+      top: auto;
+      left: auto;
+      right: auto;
+      width: 100%;
+      transform: none;
+    }
+  }
+
+  &--expanded &__anchor {
+    width: var(--anchor-box, 580px);
+    height: var(--anchor-box, 580px);
+  }
+
+  /* left/right 下 anchor 定位一致（保留以备未来差异化） */
+  &--left &__anchor,
+  &--right &__anchor {
+    transform: translate(-50%, -50%);
+
+    @media (max-width: 1080px) {
+      left: auto;
+      right: auto;
+    }
+  }
+
+  /* ===== 轨道（径向模式）===== */
+  &__orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    width: 380px;
+    height: 380px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 22px;
+      border: 1px solid rgba(216, 179, 106, 0.08);
+      border-radius: 999px;
+      opacity: 0;
+      transition: opacity 180ms ease;
+    }
+
+    @media (max-width: 1280px) {
+      width: 330px;
+      height: 330px;
+    }
+
+    @media (max-width: 1080px) {
+      width: 100%;
+      height: 220px;
+    }
+  }
+
+  &--left &__orbit::before {
+    clip-path: inset(0 0 0 50%);
+  }
+
+  &--right &__orbit::before {
+    clip-path: inset(0 50% 0 0);
+  }
+
+  &--expanded &__orbit::before {
+    opacity: 1;
+  }
+
+  /* ===== 交互热区 ===== */
+  &__interaction-pad {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 0;
+    width: var(--timeline-box, 520px);
+    height: var(--timeline-box, 520px);
+    transform: translate(-50%, -50%);
+  }
+
+  &--left &__interaction-pad {
+    clip-path: inset(0 0 0 50%);
+  }
+
+  &--right &__interaction-pad {
+    clip-path: inset(0 50% 0 0);
+  }
+
+  /* ===== 时间轴（timeline 模式）===== */
+  &__timeline {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    width: var(--timeline-box, 520px);
+    height: var(--timeline-box, 520px);
+    transform: translate(-50%, -50%);
+  }
+
+  &__timeline-svg {
+    position: absolute;
+    inset: 0;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  &__timeline-arc {
+    fill: none;
+    stroke: rgba(216, 179, 106, 0.28);
+    stroke-width: 2;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 14px rgba(216, 179, 106, 0.2));
+
+    &--active {
+      stroke: var(--menu-accent);
+      stroke-width: 3;
+      filter: drop-shadow(0 0 14px var(--menu-accent-glow));
+    }
+  }
+
+  &__timeline-pointer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    width: var(--timeline-pointer-length, 122px);
+    height: 2px;
+    transform: translateY(-50%) rotate(var(--timeline-pointer-angle));
+    transform-origin: left center;
+    pointer-events: none;
+    transition: transform 180ms cubic-bezier(0.2, 0.72, 0.22, 1);
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &::before {
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(216, 179, 106, 0.16), var(--menu-accent));
+      box-shadow: 0 0 16px var(--menu-accent-glow);
+    }
+
+    &::after {
+      right: -7px;
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      border: 1px solid var(--menu-accent);
+      background: rgba(18, 13, 11, 0.96);
+      box-shadow: 0 0 22px var(--menu-accent-glow);
+    }
+  }
+
+  /* ===== 轨道节点 ===== */
+  &__node {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--imperial-text, #f3ead7);
+    transform: translate(-50%, -50%) translate(0, 0) scale(0.78);
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+    will-change: transform, opacity;
+    transition:
+      transform 90ms linear,
+      opacity 140ms ease,
+      filter 180ms ease;
+
+    &:hover,
+    &:focus-visible {
+      filter: brightness(1.08);
+    }
+
+    &--active {
+      filter: brightness(1.08);
+    }
+  }
+
+  &--expanded &__node {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) translate(var(--orbit-x), var(--orbit-y)) scale(1);
+  }
+
+  /* 顺序敏感：row-reverse 必须在合并的 row 规则之前，二者同特异性，靠书写顺序定胜负（最终生效 row）。 */
+  &--right &__node {
+    flex-direction: row-reverse;
+  }
+
+  &--left &__node,
+  &--right &__node {
+    flex-direction: row;
+  }
+
+  &__node-disc {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 48px;
+    border-radius: 999px;
+    border: 1px solid var(--item-accent-soft);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.12), transparent 68%),
+      rgba(16, 12, 10, 0.94);
+    color: var(--item-accent);
+    font-size: 0.78rem;
+    font-weight: 700;
+    box-shadow: 0 0 26px var(--item-accent-glow);
+  }
+
+  &__node--active &__node-disc {
+    border-color: var(--item-accent);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.18), transparent 68%),
+      rgba(22, 16, 14, 0.98);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 0 36px var(--item-accent-glow);
+  }
+
+  &__node-copy {
+    min-width: 112px;
+    max-width: 152px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 12px;
+    border: 1px solid rgba(216, 179, 106, 0.14);
+    background: rgba(20, 15, 13, 0.88);
+    text-align: left;
+
+    @media (max-width: 1280px) {
+      min-width: 98px;
+      max-width: 132px;
+    }
+
+    @media (max-width: 1080px) {
+      min-width: 90px;
+      max-width: 112px;
+    }
+  }
+
+  &__node--active &__node-copy {
+    border-color: rgba(216, 179, 106, 0.3);
+    background: rgba(28, 21, 18, 0.94);
+  }
+
+  &__node-title {
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: var(--imperial-text, #f3ead7);
+  }
+
+  &__node-subtitle {
+    font-size: 0.76rem;
+    line-height: 1.45;
+    color: var(--imperial-text-dim, rgba(243, 234, 215, 0.64));
+  }
+
+  /* ===== 时间刻度 ===== */
+  &__time-tick {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    width: 72px;
+    min-height: 32px;
+    display: grid;
+    place-items: center;
+    padding: 4px 0;
+    border: 0;
+    background: transparent;
+    color: var(--imperial-text, #f3ead7);
+    cursor: pointer;
+    transform: translate(-50%, -50%) translate(var(--tick-x), var(--tick-y));
+
+    /* 屏蔽全局 button::before（主色渐变）与 button:hover box-shadow，
+     * 避免悬停时刻度出现背景块；hover 只点亮刻度数字与刻度线。 */
+    &::before {
+      display: none;
+    }
+
+    &:hover,
+    &:focus-visible {
+      box-shadow: none;
+    }
+
+    &:hover &-mark,
+    &:focus-visible &-mark {
+      background: var(--item-accent);
+      box-shadow: 0 0 22px var(--item-accent-glow);
+    }
+
+    &:hover &-label,
+    &:focus-visible &-label {
+      color: var(--imperial-text, #f3ead7);
+      text-shadow: 0 0 14px var(--item-accent-glow);
+    }
+  }
+
+  &__time-tick-mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 2px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--item-accent-soft);
+    box-shadow: 0 0 16px var(--item-accent-glow);
+    transform: translate(-50%, -50%) rotate(var(--tick-angle));
+    transition: width 160ms ease, height 160ms ease, background 160ms ease, box-shadow 160ms ease;
+  }
+
+  &__time-tick-label {
+    position: absolute;
+    top: 50%;
+    min-width: 42px;
+    padding: 2px 4px;
+    color: rgba(243, 234, 215, 0.54);
+    font-size: 0.52rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: color 160ms ease, font-size 160ms ease, text-shadow 160ms ease;
+  }
+
+  &--left &__time-tick-label {
+    right: 24px;
+    text-align: right;
+  }
+
+  &--right &__time-tick-label {
+    left: 24px;
+    text-align: left;
+  }
+
+  &__time-tick--active &__time-tick-mark {
+    width: 24px;
+    height: 3px;
+    background: var(--item-accent);
+    box-shadow: 0 0 22px var(--item-accent-glow);
+  }
+
+  &__time-tick--active &__time-tick-label {
+    color: var(--imperial-text, #f3ead7);
+    font-size: 0.68rem;
+    text-shadow: 0 0 14px var(--item-accent-glow);
+  }
+
+  /* ===== 中心 hub / 核心圆盘 ===== */
+  &__hub {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+  }
+
+  &__core {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__core-disc {
+    position: relative;
+    z-index: 1;
+    width: 104px;
+    height: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(216, 179, 106, 0.24);
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 66%),
+      rgba(18, 13, 11, 0.96);
+    box-shadow:
+      inset 0 0 0 10px rgba(255, 255, 255, 0.025),
+      0 0 36px var(--menu-accent-glow);
+    user-select: none;
+    -webkit-user-select: none;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 999px;
+      background:
+        conic-gradient(
+          from -90deg,
+          var(--menu-accent) 0turn,
+          var(--menu-accent) calc(var(--menu-progress) * 1turn),
+          rgba(216, 179, 106, 0.12) calc(var(--menu-progress) * 1turn),
+          rgba(216, 179, 106, 0.12) 1turn
+        );
+      -webkit-mask:
+        radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+      mask:
+        radial-gradient(farthest-side, transparent calc(100% - 5px), #000 calc(100% - 4px));
+      box-shadow: 0 0 18px var(--menu-accent-glow);
+      opacity: 0.96;
+      transition:
+        background 180ms linear,
+        box-shadow 180ms ease,
+        opacity 180ms ease;
+      pointer-events: none;
+    }
+
+    &--empty {
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.08), transparent 66%),
+        rgba(18, 13, 11, 0.92);
+    }
+  }
+
+  &__core-title {
+    width: 100%;
+    font-family: var(--imperial-display, 'Baskerville', 'Times New Roman', 'Songti SC', serif);
+    font-size: 1.34rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+    word-break: break-all;
+    color: var(--menu-accent);
+    text-shadow: 0 0 22px var(--menu-accent-glow);
+  }
+
+  /* ===== 空状态 ===== */
+  &__empty {
+    width: 100%;
+    min-height: 220px;
+    display: grid;
+    place-items: center;
+    padding: 18px;
+    border: 1px solid rgba(216, 179, 106, 0.12);
+    background: rgba(20, 15, 13, 0.72);
+    color: var(--imperial-text-dim, rgba(243, 234, 215, 0.64));
+  }
+}
