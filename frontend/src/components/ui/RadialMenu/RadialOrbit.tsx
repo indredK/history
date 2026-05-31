@@ -58,7 +58,7 @@ export function RadialOrbit({
             </span>
             <span className={cx('radial-menu__node-copy')}>
               <span className={cx('radial-menu__node-title')}>{item.label}</span>
-              {item.subtitle ? (
+              {/* {item.subtitle ? (
                 <span className={cx('radial-menu__node-subtitle')}>{item.subtitle}</span>
               ) : null}
               {isActive && item.tags?.length ? (
@@ -67,7 +67,7 @@ export function RadialOrbit({
                     <span key={tag} className={cx('radial-menu__node-tag')}>{tag}</span>
                   ))}
                 </span>
-              ) : null}
+              ) : null} */}
             </span>
           </button>
         );
