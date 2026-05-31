@@ -46,6 +46,8 @@
     "swiper": "^12.2.0",
     "three": "^0.184.0",
     "zod": "^4.4.3",
+    "@tanstack/react-virtual": "^3.13.26",
+    "@tanstack/virtual-core": "^3.16.00",
     "zustand": "^5.0.13"
   },
   "devDependencies": {
