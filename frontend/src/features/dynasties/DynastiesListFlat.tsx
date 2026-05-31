@@ -27,7 +27,7 @@ export function DynastiesListFlat() {
   const [data, setData] = useState<TableRowData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { isMobile, isSmallMobile } = useResponsive();
+  const { isMobile } = useResponsive();
 
   useEffect(() => {
     const loadData = async () => {
