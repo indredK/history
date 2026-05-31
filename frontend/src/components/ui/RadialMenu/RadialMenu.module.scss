@@ -201,6 +201,8 @@
     padding: 0;
     background: transparent;
     color: var(--imperial-text, #f3ead7);
+    border-radius: 999px;
+    overflow: visible;
     /* 位置(orbit-x/y)与显隐(orbit-opacity/scale)全部由 JS 按「到连续中心的
      * 距离」每帧注入。位置不加 transition——RAF 已做缓动，再叠加 CSS 过渡会
      * 二次拖尾，正是旧实现快速滚动时「排队/追赶」的根因。仅 opacity/scale 留
@@ -212,11 +214,20 @@
     will-change: transform, opacity;
     transition:
       opacity 120ms linear,
-      filter 180ms ease;
+      filter 180ms ease,
+      transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
+    /* 覆盖全局button样式：移除::before渐变背景和hover box-shadow */
+    &::before {
+      display: none !important;
+    }
+
+    /* 优化5: 交互反馈流畅性 - hover时轻微上浮 */
     &:hover,
     &:focus-visible {
       filter: brightness(1.08);
+      // transform: translate(-50%, -50%) translate(var(--orbit-x, 0), calc(var(--orbit-y, 0) - 3px)) scale(var(--orbit-scale, 0.78));
+      // box-shadow: none;
     }
 
     &--active {
@@ -264,6 +275,21 @@
     font-size: 0.78rem;
     font-weight: 700;
     box-shadow: 0 0 26px var(--item-accent-glow);
+    /* 确保圆盘在卡片上方，不被遮挡 */
+    position: relative;
+    z-index: 2;
+    /* 优化5: 圆盘动画延迟，实现stagger效果 */
+    transition:
+      border-color 180ms ease,
+      background 180ms ease,
+      box-shadow 180ms ease,
+      transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  &__node:hover &__node-disc,
+  &__node:focus-visible &__node-disc {
+    // transform: scale(1.05);
+    // box-shadow: 0 0 32px var(--item-accent-glow);
   }
 
   &__node--active &__node-disc {
@@ -286,8 +312,17 @@
     gap: 4px;
     padding: 10px 14px;
     border: 1px solid rgba(216, 179, 106, 0.14);
-    background: rgba(20, 15, 13, 0.88);
+    border-radius: 999px;
+    background: transparent;
     text-align: left;
+    /* 确保卡片在圆盘下方 */
+    position: relative;
+    z-index: 1;
+    /* 优化5: 卡片延迟动画，晚于圆盘 */
+    transition:
+      border-color 200ms ease 50ms,
+      box-shadow 200ms ease 50ms,
+      transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1) 50ms;
 
     @media (max-width: 1280px) {
       max-width: 200px;
@@ -298,19 +333,40 @@
     }
   }
 
+  &__node:hover &__node-copy,
+  &__node:focus-visible &__node-copy {
+    /* 优化5&6: hover时增强边框发光和阴影 */
+    border-color: rgba(216, 179, 106, 0.4);
+    box-shadow: 0 4px 20px rgba(216, 179, 106, 0.15);
+    // transform: translateX(2px);
+  }
+
   &__node--active &__node-copy {
     border-color: rgba(216, 179, 106, 0.3);
-    background: rgba(28, 21, 18, 0.94);
   }
 
   &__node-title {
     font-size: 0.96rem;
-    font-weight: 600;
+    /* 优化4: 增强标题字重对比 */
+    font-weight: 700;
     color: var(--imperial-text, #f3ead7);
     /* 弹出项不换行，超长省略，避免卡片变高、参差撑出弧线 */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    /* 优化4: 添加细微文字阴影增强层次 */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    /* 优化6: 色彩过渡 */
+    transition: color 180ms ease, text-shadow 180ms ease;
+  }
+
+  &__node:hover &__node-title,
+  &__node:focus-visible &__node-title {
+    /* 优化6: hover时文字微微发光，与主题色协调 */
+    color: rgba(243, 234, 215, 1);
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.3),
+      0 0 8px rgba(216, 179, 106, 0.2);
   }
 
   &__node-subtitle {
