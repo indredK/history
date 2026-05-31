@@ -1,6 +1,38 @@
 import { loadJsonData } from '@/utils/services/dataLoaders';
 
-import type { CyberEmperor, DynastyConfig, DynastyData, DynastyItem, Ruler } from './types';
+import type { CyberEmperor, DynastyItem } from './types';
+
+interface FlatYearRow {
+  id: string;
+  year: number;
+  polity: string;
+  ruler: string;
+  rulerAlias: string;
+  eraName: string;
+  eraFullName: string;
+  sexagenary: string;
+}
+
+interface FlatApiResponse {
+  yearRows?: FlatYearRow[];
+}
+
+interface DynastyAccumulator {
+  name: string;
+  startYear: number;
+  endYear: number;
+  emperors: Map<string, EmperorAccumulator>;
+}
+
+interface EmperorAccumulator {
+  alias: string;
+  ruler: string;
+  startYear: number;
+  endYear: number;
+  yearNames: string[];
+}
+
+const RESPONSE_FILE_COUNT = 9;
 
 const CYBER_COLORS = [
   '#00f0ff', '#ff2d55', '#ff9500', '#ffcc00', '#34c759',
@@ -10,118 +42,127 @@ const CYBER_COLORS = [
   '#ffd426', '#a2845e', '#ff375f', '#5e5ce6',
 ];
 
-function normalizeTimeLabel(value: string | undefined) {
-  return value?.trim() || '';
+function formatHistoricalYear(year: number | null | undefined) {
+  if (typeof year !== 'number' || !Number.isFinite(year)) {
+    return '';
+  }
+
+  if (year < 0) {
+    return `前${Math.abs(Math.trunc(year))}`;
+  }
+
+  return String(Math.trunc(year));
 }
 
-function parseHistoricalYear(input: string | undefined): number | null {
-  const value = normalizeTimeLabel(input);
+function formatPeriod(startYear: number, endYear: number) {
+  const startLabel = formatHistoricalYear(startYear);
+  const endLabel = formatHistoricalYear(endYear);
 
-  if (!value) {
-    return null;
-  }
-
-  const cleaned = value
-    .replace(/约/g, '')
-    .replace(/公元前/g, '前')
-    .replace(/公元/g, '')
-    .replace(/年/g, '')
-    .replace(/\s+/g, '');
-
-  const centuryMatch = cleaned.match(/前?(\d+)世纪([初中末])?/);
-
-  if (centuryMatch) {
-    const century = Number(centuryMatch[1]);
-    const marker = centuryMatch[2];
-    const isBeforeCommonEra = cleaned.startsWith('前');
-    const base = isBeforeCommonEra ? century * 100 : (century - 1) * 100;
-    const offset = marker === '初' ? 0 : marker === '中' ? 50 : marker === '末' ? 90 : 0;
-
-    return isBeforeCommonEra ? -(base - offset) : base + offset;
-  }
-
-  const yearMatch = cleaned.match(/前?(\d{1,4})/);
-
-  if (yearMatch) {
-    const year = Number(yearMatch[1]);
-    return cleaned.startsWith('前') ? -year : year;
-  }
-
-  return null;
+  return startYear === endYear ? startLabel : `${startLabel}-${endLabel}`;
 }
 
-function parsePeriodRange(period: string | undefined) {
-  const value = normalizeTimeLabel(period);
+function compareRows(left: FlatYearRow, right: FlatYearRow) {
+  if (left.year !== right.year) {
+    return left.year - right.year;
+  }
 
-  if (!value) {
-    return {
-      startLabel: '',
-      endLabel: '',
-      startValue: null,
-      endValue: null,
+  return Number(left.id) - Number(right.id);
+}
+
+async function loadFlatYearRows() {
+  const responses = await Promise.all(
+    Array.from({ length: RESPONSE_FILE_COUNT }, (_, index) => (
+      loadJsonData<FlatApiResponse>(`/data/json/response${index + 1}.json`)
+    )),
+  );
+
+  return responses
+    .flatMap((response) => response.yearRows ?? [])
+    .filter((row) => row.polity && (row.rulerAlias || row.ruler))
+    .sort(compareRows);
+}
+
+function buildCyberDataset(rows: FlatYearRow[]) {
+  const dynasties = new Map<string, DynastyAccumulator>();
+
+  rows.forEach((row) => {
+    const polity = row.polity.trim();
+    const dynasty = dynasties.get(polity) ?? {
+      name: polity,
+      startYear: row.year,
+      endYear: row.year,
+      emperors: new Map<string, EmperorAccumulator>(),
     };
-  }
 
-  const [rawStart = '', rawEnd = ''] = value.split('-');
-  const startLabel = rawStart.trim();
-  const endLabel = rawEnd.trim();
-  const startValue = parseHistoricalYear(startLabel);
-  const endValue = parseHistoricalYear(endLabel);
+    dynasty.startYear = Math.min(dynasty.startYear, row.year);
+    dynasty.endYear = Math.max(dynasty.endYear, row.year);
 
-  return {
-    startLabel,
-    endLabel,
-    startValue,
-    endValue,
-  };
-}
+    const emperorKey = `${row.rulerAlias || row.ruler}::${row.ruler}`;
+    const emperor = dynasty.emperors.get(emperorKey) ?? {
+      alias: row.rulerAlias || row.ruler,
+      ruler: row.ruler,
+      startYear: row.year,
+      endYear: row.year,
+      yearNames: [],
+    };
 
-function getRulerStartYearLabel(ruler: Ruler) {
-  if (ruler.yearNames?.[0]?.startYear) {
-    return normalizeTimeLabel(ruler.yearNames[0].startYear);
-  }
+    emperor.startYear = Math.min(emperor.startYear, row.year);
+    emperor.endYear = Math.max(emperor.endYear, row.year);
 
-  return normalizeTimeLabel(ruler.startYear);
-}
+    const eraName = row.eraName?.trim() || row.eraFullName?.trim();
+    if (eraName && !emperor.yearNames.includes(eraName)) {
+      emperor.yearNames.push(eraName);
+    }
 
-function getRulerStartYearValue(ruler: Ruler) {
-  return parseHistoricalYear(getRulerStartYearLabel(ruler));
-}
+    dynasty.emperors.set(emperorKey, emperor);
+    dynasties.set(polity, dynasty);
+  });
 
-function extractRulers(dynasty: DynastyData): CyberEmperor[] {
-  const results: CyberEmperor[] = [];
-  const dynastyPeriod = parsePeriodRange(dynasty.period);
+  const orderedDynasties = Array.from(dynasties.values())
+    .sort((left, right) => left.startYear - right.startYear);
 
-  const addRulers = (rulers: Ruler[] | undefined) => {
-    if (!rulers) return;
+  const dynastyItems: DynastyItem[] = orderedDynasties.map((dynasty, index) => ({
+    id: `dynasty-${index}`,
+    name: dynasty.name,
+    era: formatPeriod(dynasty.startYear, dynasty.endYear),
+    color: CYBER_COLORS[index % CYBER_COLORS.length] ?? '#00f0ff',
+    startYearLabel: formatHistoricalYear(dynasty.startYear),
+    endYearLabel: formatHistoricalYear(dynasty.endYear),
+    startYearValue: dynasty.startYear,
+    endYearValue: dynasty.endYear,
+  }));
 
-    rulers.forEach((ruler, idx) => {
-      const startYearLabel = getRulerStartYearLabel(ruler) || dynastyPeriod.startLabel;
-      const startYearValue = getRulerStartYearValue(ruler) ?? dynastyPeriod.startValue;
+  const emperorItems: CyberEmperor[] = dynastyItems.flatMap((dynasty) => {
+    const dynastyData = dynasties.get(dynasty.name);
 
-      results.push({
-        id: `${dynasty.id}-${idx}`,
-        name: ruler.name,
-        title: ruler.title,
+    if (!dynastyData) {
+      return [];
+    }
+
+    return Array.from(dynastyData.emperors.values())
+      .sort((left, right) => left.startYear - right.startYear)
+      .map((emperor, index) => ({
+        id: `${dynasty.id}-emperor-${index}`,
+        name: emperor.alias,
+        title: emperor.ruler,
         dynasty: dynasty.name,
         dynastyId: dynasty.id,
-        period: dynasty.period,
-        yearNames: ruler.yearNames?.map((yearName) => yearName.name).filter(Boolean) || [],
-        events: ruler.events?.map((event) => event.description).filter(Boolean) || [],
-        summary: dynasty.summary || '',
-        startYearLabel,
-        endYearLabel: dynastyPeriod.endLabel,
-        startYearValue,
-        endYearValue: dynastyPeriod.endValue,
-        sortYearValue: startYearValue ?? dynastyPeriod.startValue ?? idx,
-      });
-    });
+        period: formatPeriod(emperor.startYear, emperor.endYear),
+        yearNames: emperor.yearNames,
+        events: [],
+        summary: '',
+        startYearLabel: formatHistoricalYear(emperor.startYear),
+        endYearLabel: formatHistoricalYear(emperor.endYear),
+        startYearValue: emperor.startYear,
+        endYearValue: emperor.endYear,
+        sortYearValue: emperor.startYear,
+      }));
+  });
+
+  return {
+    dynasties: dynastyItems,
+    emperors: emperorItems,
   };
-
-  addRulers(dynasty.rulers);
-  dynasty.subDynasties?.forEach((subDynasty) => addRulers(subDynasty.rulers));
-
-  return results.sort((left, right) => left.sortYearValue - right.sortYearValue);
 }
 
 export function getEmperorDisplayName(emperor: Pick<CyberEmperor, 'name' | 'title'>) {
@@ -132,39 +173,13 @@ export async function loadEmperorsCyberData(): Promise<{
   dynasties: DynastyItem[];
   emperors: CyberEmperor[];
 }> {
-  const config = await loadJsonData<{ dynasties: DynastyConfig[] }>('/data/json/chinese-dynasties.json');
+  const rows = await loadFlatYearRows();
 
-  if (!config) {
+  if (rows.length === 0) {
     return { dynasties: [], emperors: [] };
   }
 
-  const dynasties = config.dynasties.map((dynasty, index) => ({
-    ...(() => {
-      const period = parsePeriodRange(dynasty.period);
-
-      return {
-        id: dynasty.id,
-        name: dynasty.name,
-        era: dynasty.period,
-        color: CYBER_COLORS[index % CYBER_COLORS.length] ?? '#00f0ff',
-        startYearLabel: period.startLabel,
-        endYearLabel: period.endLabel,
-        startYearValue: period.startValue,
-        endYearValue: period.endValue,
-      };
-    })(),
-  }));
-
-  const emperors: CyberEmperor[] = [];
-
-  for (const dynasty of config.dynasties) {
-    const data = await loadJsonData<DynastyData>(`/data/json/${dynasty.dataFile}`);
-    if (data) {
-      emperors.push(...extractRulers(data));
-    }
-  }
-
-  return { dynasties, emperors };
+  return buildCyberDataset(rows);
 }
 
 export function getDynastyColor(dynastyId: string, dynasties: DynastyItem[]): string {

@@ -88,6 +88,8 @@
 }
 
 .cyber-stage {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--cyber-panel-gap);

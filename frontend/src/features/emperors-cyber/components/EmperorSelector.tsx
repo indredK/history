@@ -43,11 +43,17 @@ export function EmperorSelector({
       activeId={activeEmperorId}
       onSelect={onSelect}
       side="right"
+      offset={200}
+      boundary="container"
+      inset={28}
+      safePadding={{ top: 28, right: 18, bottom: 18, left: 18 }}
+      compactBelow={1060}
+      hiddenBelow={700}
+      previewOnHover
       ariaLabel="帝王选择"
       emptyText="该朝代暂无帝王数据"
       accentColor={accentColor}
       emptyMode="disc"
-      hiddenBelowWidth={1120}
     />
   );
 }

@@ -45,9 +45,15 @@ export function DynastySelector({
       activeId={activeDynasty}
       onSelect={onSelect}
       side="left"
+      offset={200}
+      boundary="container"
+      inset={28}
+      safePadding={{ top: 18, right: 18, bottom: 28, left: 18 }}
+      compactBelow={1060}
+      hiddenBelow={700}
+      previewOnHover
       ariaLabel="朝代选择"
       emptyText="暂无朝代数据"
-      hiddenBelowWidth={1120}
     />
   );
 }

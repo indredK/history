@@ -5,11 +5,11 @@ import {
   useRef,
   useState,
   type FocusEvent as ReactFocusEvent,
-  type MouseEvent as ReactMouseEvent,
   type KeyboardEvent as ReactKeyboardEvent,
+  type MouseEvent as ReactMouseEvent,
 } from 'react';
+import type { RadialMenuLayout } from './layout';
 import {
-  MAX_VISIBLE_ITEMS,
   MOTION_EASING,
   MOTION_SNAP_THRESHOLD,
   ORBIT_BUFFER,
@@ -17,60 +17,122 @@ import {
   WHEEL_STEP_DELTA,
   clamp,
   formatTimelineYear,
-  getPointerAngle,
-  getTimelineArcConfig,
   getTimelineArcPath,
-  getTimelinePosition,
   getTimelineRatios,
-  type RadialMenuLayoutMetrics,
+  projectPointToArcRatio,
 } from './geometry';
-import type { RadialMenuProps } from './types';
+import type {
+  RadialMenuClickBehavior,
+  RadialMenuDisplayState,
+  RadialMenuItem,
+  RadialMenuMode,
+  RadialMenuProps,
+  RadialMenuViewMode,
+  RadialTimelineItem,
+} from './types';
 
 type UseRadialMenuArgs = {
-  items: RadialMenuProps['items'];
-  timelineItems: RadialMenuProps['timelineItems'] | undefined;
+  items: RadialMenuItem[];
+  timelineItems: RadialTimelineItem[] | undefined;
   activeId: RadialMenuProps['activeId'];
   onSelect: RadialMenuProps['onSelect'];
-  side: RadialMenuProps['side'];
   accentColor: RadialMenuProps['accentColor'] | undefined;
-  layoutMetrics: RadialMenuLayoutMetrics;
+  layout: RadialMenuLayout;
+  mode: RadialMenuMode;
+  defaultView: RadialMenuViewMode;
+  rememberLastView: boolean;
+  clickBehavior: RadialMenuClickBehavior;
+  collapseOnSelect: boolean;
+  previewOnHover: boolean;
 };
+
+function getPreferredView({
+  allowOrbit,
+  allowTimeline,
+  defaultView,
+  rememberLastView,
+  lastExpandedView,
+}: {
+  allowOrbit: boolean;
+  allowTimeline: boolean;
+  defaultView: RadialMenuViewMode;
+  rememberLastView: boolean;
+  lastExpandedView: RadialMenuViewMode;
+}) {
+  if (rememberLastView && ((lastExpandedView === 'orbit' && allowOrbit) || (lastExpandedView === 'timeline' && allowTimeline))) {
+    return lastExpandedView;
+  }
+
+  if (defaultView === 'timeline' && allowTimeline) {
+    return 'timeline';
+  }
+
+  if (allowOrbit) {
+    return 'orbit';
+  }
+
+  return 'timeline';
+}
 
 export function useRadialMenu({
   items,
   timelineItems,
   activeId,
   onSelect,
-  side,
   accentColor,
-  layoutMetrics,
+  layout,
+  mode,
+  defaultView,
+  rememberLastView,
+  clickBehavior,
+  collapseOnSelect,
+  previewOnHover,
 }: UseRadialMenuArgs) {
-  const activeIndex = Math.max(items.findIndex((item) => item.id === activeId), 0);
-  const activeTimelineIndex = Math.max(timelineItems?.findIndex((item) => item.id === activeId) ?? -1, 0);
-  const activeTimelineItem = timelineItems?.[activeTimelineIndex] ?? null;
-  const [animatedIndex, setAnimatedIndex] = useState(activeIndex);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [mode, setMode] = useState<'radial' | 'timeline'>('radial');
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const wheelDeltaRef = useRef(0);
   const lastWheelEventTimeRef = useRef(0);
+  const animationFrameRef = useRef<number | null>(null);
+
+  const activeIndex = Math.max(items.findIndex((item) => item.id === activeId), 0);
+  const activeTimelineIndex = Math.max(timelineItems?.findIndex((item) => item.id === activeId) ?? -1, 0);
+  const activeItem = items[activeIndex] ?? null;
+  const activeTimelineItem = timelineItems?.[activeTimelineIndex] ?? null;
+  const resolvedAccent = activeTimelineItem?.accentColor || activeItem?.accentColor || accentColor || 'var(--imperial-accent)';
+  const allowTimeline = mode !== 'orbit' && !!timelineItems?.length;
+  const allowOrbit = mode !== 'timeline' || !allowTimeline;
+  const lastExpandedViewRef = useRef<RadialMenuViewMode>(defaultView === 'timeline' && allowTimeline ? 'timeline' : 'orbit');
+  const [displayState, setDisplayState] = useState<RadialMenuDisplayState>(
+    layout.displayMode === 'hidden' ? 'hidden' : 'collapsed',
+  );
+  const [viewMode, setViewMode] = useState<RadialMenuViewMode>(
+    getPreferredView({
+      allowOrbit,
+      allowTimeline,
+      defaultView,
+      rememberLastView,
+      lastExpandedView: lastExpandedViewRef.current,
+    }),
+  );
+  const [animatedIndex, setAnimatedIndex] = useState(activeIndex);
   const pendingIndexRef = useRef(activeIndex);
   const pendingTimelineIndexRef = useRef(activeTimelineIndex);
   const animatedIndexRef = useRef(activeIndex);
-  const animationFrameRef = useRef<number | null>(null);
-  const menuRef = useRef<HTMLElement | null>(null);
-  const activeItem = items[activeIndex] ?? null;
-  const resolvedAccent = activeItem?.accentColor || accentColor || 'var(--imperial-accent)';
+
   const progressRatio = items.length > 0 ? (activeIndex + 1) / items.length : 0;
-  const visibleCount = Math.min(items.length, MAX_VISIBLE_ITEMS);
+  const timelineProgressRatio = timelineItems && timelineItems.length > 0
+    ? (activeTimelineIndex + 1) / timelineItems.length
+    : 0;
+  const totalCount = viewMode === 'timeline' && allowTimeline ? (timelineItems?.length ?? 0) : items.length;
+  const currentNumber = totalCount > 0
+    ? ((viewMode === 'timeline' && allowTimeline ? activeTimelineIndex : activeIndex) + 1)
+    : 0;
+  const visibleCount = Math.min(items.length, layout.visibleOrbitCount);
   const halfSpan = (visibleCount - 1) / 2;
-  // 连续中心：RAF 缓动后的 animatedIndex，端点处钳制使首/尾项能停在弧线中心。
   const orbitCenter = clamp(animatedIndex, halfSpan, Math.max(items.length - 1 - halfSpan, halfSpan));
-  // 以连续中心对称渲染：5 个实显 + 两侧各 ORBIT_BUFFER 个缓冲节点。
-  // 缓冲节点按到中心的连续距离淡入淡出，进出列表恒发生在 opacity≈0 处。
   const visibleItems = useMemo(() => {
     const renderStart = Math.ceil(orbitCenter - halfSpan - ORBIT_BUFFER);
     const renderEnd = Math.floor(orbitCenter + halfSpan + ORBIT_BUFFER);
-    const result: Array<{ item: RadialMenuProps['items'][number]; globalIndex: number; offset: number }> = [];
+    const result: Array<{ item: RadialMenuItem; globalIndex: number; offset: number }> = [];
 
     for (let globalIndex = renderStart; globalIndex <= renderEnd; globalIndex += 1) {
       const item = items[globalIndex];
@@ -81,72 +143,51 @@ export function useRadialMenu({
     }
 
     return result;
-  }, [items, orbitCenter, halfSpan]);
-  const timelineActiveIndex = timelineItems && timelineItems.length > 0
-    ? activeTimelineIndex
-    : activeIndex;
-  const timelineProgressRatio = timelineItems && timelineItems.length > 0
-    ? (timelineActiveIndex + 1) / timelineItems.length
-    : 0;
-  const timelineArcConfig = getTimelineArcConfig(timelineItems?.length ?? 0, layoutMetrics);
-  const timelineRadius = timelineArcConfig.radius;
-  const timelineArcSpan = timelineArcConfig.arcSpan;
-  const timelineHalfArc = timelineArcSpan / 2;
-  // 按真实年份计算各刻度归一化位置；年份缺失时回退均匀分布。
+  }, [halfSpan, items, orbitCenter]);
+
   const timelineRatios = useMemo(
     () => getTimelineRatios((timelineItems ?? []).map((item) => item.yearValue)),
     [timelineItems],
   );
-  const timelineActiveRatio = timelineRatios[timelineActiveIndex] ?? 0;
-  const timelineActivePosition = getTimelinePosition(timelineActiveRatio, timelineItems?.length ?? 0, side, timelineRadius, timelineArcSpan);
-  const timelineActiveAngle = timelineActivePosition.angle;
-  const timelinePointerAngle = getPointerAngle(timelineActiveAngle, side);
-  const timelineFullArcPath = getTimelineArcPath(-timelineHalfArc, timelineHalfArc, timelineRadius, layoutMetrics.timelineCenter);
-  const timelineActiveArcPath = timelineItems && timelineItems.length > 1
-    ? getTimelineArcPath(-timelineHalfArc, timelineActiveAngle, timelineRadius, layoutMetrics.timelineCenter)
+  const timelineActiveRatio = timelineRatios[activeTimelineIndex] ?? 0;
+  const timelineHalfArc = layout.timelineArcSpan / 2;
+  const timelineActiveAngleOffset = (clamp(timelineActiveRatio, 0, 1) * 2 - 1) * timelineHalfArc;
+  const timelineFullArcPath = allowTimeline
+    ? getTimelineArcPath(-timelineHalfArc, timelineHalfArc, layout.timelineRadius, layout)
     : '';
+  const timelineActiveArcPath = allowTimeline && (timelineItems?.length ?? 0) > 1
+    ? getTimelineArcPath(-timelineHalfArc, timelineActiveAngleOffset, layout.timelineRadius, layout)
+    : '';
+  const timelinePointerAngle = layout.bearing + timelineActiveAngleOffset;
   const timelineCoreLabel = formatTimelineYear(activeTimelineItem?.yearValue, activeTimelineItem?.yearLabel);
 
-  // 当前位置计数（1-based）：随模式取径向/时间轴的索引与总数。
-  const isTimelineMode = mode === 'timeline' && !!timelineItems?.length;
-  const totalCount = isTimelineMode ? (timelineItems?.length ?? 0) : items.length;
-  const currentNumber = totalCount > 0
-    ? (isTimelineMode ? timelineActiveIndex : activeIndex) + 1
-    : 0;
+  useEffect(() => {
+    if (layout.displayMode === 'hidden') {
+      setDisplayState('hidden');
+    } else {
+      setDisplayState((current) => (current === 'hidden' ? 'collapsed' : current));
+    }
+  }, [layout.displayMode]);
+
+  useEffect(() => {
+    if (!allowTimeline && viewMode === 'timeline') {
+      setViewMode('orbit');
+    }
+  }, [allowTimeline, viewMode]);
+
+  useEffect(() => {
+    pendingIndexRef.current = activeIndex;
+  }, [activeIndex]);
+
+  useEffect(() => {
+    pendingTimelineIndexRef.current = activeTimelineIndex;
+  }, [activeTimelineIndex]);
 
   useEffect(() => {
     if (items.length === 0) {
-      pendingIndexRef.current = 0;
-      pendingTimelineIndexRef.current = 0;
       animatedIndexRef.current = 0;
       setAnimatedIndex(0);
-      setMode('radial');
       return;
-    }
-
-    pendingIndexRef.current = activeIndex;
-  }, [activeIndex, items.length]);
-
-  useEffect(() => {
-    if (!timelineItems || timelineItems.length === 0) {
-      pendingTimelineIndexRef.current = 0;
-      return;
-    }
-
-    pendingTimelineIndexRef.current = activeTimelineIndex;
-  }, [activeTimelineIndex, timelineItems]);
-
-  useEffect(() => {
-    if (!timelineItems || timelineItems.length === 0) {
-      if (mode === 'timeline') {
-        setMode('radial');
-      }
-    }
-  }, [mode, timelineItems]);
-
-  useEffect(() => {
-    if (items.length === 0) {
-      return undefined;
     }
 
     if (animationFrameRef.current !== null) {
@@ -181,16 +222,71 @@ export function useRadialMenu({
   }, [activeIndex, items.length]);
 
   useEffect(() => {
-    if (!isExpanded) {
+    if (displayState !== 'expanded') {
       wheelDeltaRef.current = 0;
       lastWheelEventTimeRef.current = 0;
     }
-  }, [isExpanded]);
+  }, [displayState]);
 
   useEffect(() => {
     wheelDeltaRef.current = 0;
     lastWheelEventTimeRef.current = 0;
-  }, [mode]);
+  }, [viewMode]);
+
+  useEffect(() => {
+    if (displayState !== 'expanded') {
+      return undefined;
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!menuRef.current?.contains(event.target as Node)) {
+        setDisplayState('collapsed');
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setDisplayState('collapsed');
+      }
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [displayState]);
+
+  const openExpanded = useCallback((targetView?: RadialMenuViewMode) => {
+    const nextView = targetView ?? getPreferredView({
+      allowOrbit,
+      allowTimeline,
+      defaultView,
+      rememberLastView,
+      lastExpandedView: lastExpandedViewRef.current,
+    });
+
+    setViewMode(nextView);
+    setDisplayState('expanded');
+  }, [allowOrbit, allowTimeline, defaultView, rememberLastView]);
+
+  const collapse = useCallback(() => {
+    setDisplayState('collapsed');
+
+    if (!rememberLastView) {
+      setViewMode(defaultView === 'timeline' && allowTimeline ? 'timeline' : 'orbit');
+    }
+  }, [allowTimeline, defaultView, rememberLastView]);
+
+  const finalizeSelection = useCallback(() => {
+    if (collapseOnSelect) {
+      collapse();
+    } else {
+      setDisplayState('expanded');
+    }
+  }, [collapse, collapseOnSelect]);
 
   const selectIndex = useCallback((targetIndex: number) => {
     const targetItem = items[targetIndex];
@@ -198,11 +294,27 @@ export function useRadialMenu({
     if (targetItem) {
       pendingIndexRef.current = targetIndex;
       onSelect(targetItem.id);
+      finalizeSelection();
     }
-  }, [items, onSelect]);
+  }, [finalizeSelection, items, onSelect]);
+
+  const selectTimelineIndex = useCallback((index: number, id: string) => {
+    pendingTimelineIndexRef.current = index;
+    onSelect(id);
+    finalizeSelection();
+  }, [finalizeSelection, onSelect]);
+
+  const selectItemId = useCallback((itemId: string) => {
+    const targetIndex = items.findIndex((item) => item.id === itemId);
+
+    if (targetIndex >= 0) {
+      selectIndex(targetIndex);
+    }
+  }, [items, selectIndex]);
 
   const applyWheelDelta = useCallback((deltaY: number) => {
-    const sourceItems = mode === 'timeline' && timelineItems?.length ? timelineItems : items;
+    const useTimeline = viewMode === 'timeline' && allowTimeline;
+    const sourceItems = useTimeline ? (timelineItems ?? []) : items;
 
     if (sourceItems.length <= 1) {
       return false;
@@ -240,45 +352,36 @@ export function useRadialMenu({
       return false;
     }
 
-    const currentIndex = mode === 'timeline' && timelineItems?.length
-      ? pendingTimelineIndexRef.current
-      : pendingIndexRef.current;
+    const currentIndex = useTimeline ? pendingTimelineIndexRef.current : pendingIndexRef.current;
     const targetIndex = clamp(currentIndex + steps, 0, sourceItems.length - 1);
 
-    if (mode === 'timeline' && timelineItems?.length) {
-      const targetItem = timelineItems[targetIndex];
-
-      if (targetItem && targetIndex !== currentIndex) {
-        pendingTimelineIndexRef.current = targetIndex;
-        onSelect(targetItem.id);
-        return true;
-      }
-
+    if (targetIndex === currentIndex) {
       wheelDeltaRef.current = 0;
       return false;
     }
 
-    if (targetIndex !== currentIndex) {
-      selectIndex(targetIndex);
-      return true;
+    const targetItem = sourceItems[targetIndex];
+
+    if (!targetItem) {
+      wheelDeltaRef.current = 0;
+      return false;
     }
 
-    wheelDeltaRef.current = 0;
-    return false;
-  }, [items, mode, onSelect, selectIndex, timelineItems]);
-
-  const handleAnchorBlur = useCallback((event: ReactFocusEvent<HTMLElement>) => {
-    const nextFocused = event.relatedTarget;
-
-    if (!nextFocused || !event.currentTarget.contains(nextFocused)) {
-      setIsExpanded(false);
+    if (useTimeline) {
+      pendingTimelineIndexRef.current = targetIndex;
+      onSelect(targetItem.id);
+    } else {
+      pendingIndexRef.current = targetIndex;
+      onSelect(targetItem.id);
     }
-  }, []);
+
+    return true;
+  }, [allowTimeline, items, onSelect, timelineItems, viewMode]);
 
   useEffect(() => {
     const menuElement = menuRef.current;
 
-    if (!menuElement || !isExpanded) {
+    if (!menuElement || displayState !== 'expanded') {
       return undefined;
     }
 
@@ -293,67 +396,18 @@ export function useRadialMenu({
     return () => {
       menuElement.removeEventListener('wheel', handleNativeWheel);
     };
-  }, [applyWheelDelta, isExpanded]);
+  }, [applyWheelDelta, displayState]);
 
-  const handleCoreClick = useCallback(() => {
-    if (timelineItems && timelineItems.length > 0) {
-      setMode((currentMode) => (currentMode === 'radial' ? 'timeline' : 'radial'));
-      setIsExpanded(true);
-    }
-  }, [timelineItems]);
-
-  const handleCoreKeyDown = useCallback((event: ReactKeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      handleCoreClick();
-    }
-  }, [handleCoreClick]);
-
-  const handleTimelineSurfaceClick = useCallback((event: ReactMouseEvent<HTMLDivElement>) => {
-    if (!timelineItems || timelineItems.length === 0) {
-      return;
-    }
-
-    const rect = event.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const localX = event.clientX - centerX;
-    const localY = event.clientY - centerY;
-
-    // 使用弧线角度计算
-    const clickAngle = Math.atan2(localY, Math.abs(localX)) * (180 / Math.PI);
-    const halfArc = timelineArcSpan / 2;
-    const normalizedAngle = clamp((clickAngle + halfArc) / timelineArcSpan, 0, 1); // -halfArc..+halfArc → 0..1
-    // 刻度按真实年份非均匀分布，取归一化位置最接近点击处的刻度（最近邻）。
-    let targetIndex = 0;
-    let minDistance = Infinity;
-    timelineRatios.forEach((ratio, index) => {
-      const distance = Math.abs(ratio - normalizedAngle);
-      if (distance < minDistance) {
-        minDistance = distance;
-        targetIndex = index;
-      }
-    });
-    const targetItem = timelineItems[targetIndex];
-
-    if (targetItem && targetItem.id !== activeId) {
-      pendingTimelineIndexRef.current = targetIndex;
-      onSelect(targetItem.id);
-    }
-  }, [activeId, onSelect, timelineItems, timelineArcSpan, timelineRatios]);
-
-  const selectTimelineIndex = useCallback((index: number, id: string) => {
-    pendingTimelineIndexRef.current = index;
-    onSelect(id);
-  }, [onSelect]);
-
-  // 在当前模式对应的数据源里相对移动 step 步（方向键导航）。
   const stepBy = useCallback((step: number) => {
-    const useTimeline = mode === 'timeline' && !!timelineItems?.length;
-    const sourceItems = useTimeline ? timelineItems! : items;
+    const useTimeline = viewMode === 'timeline' && allowTimeline;
+    const sourceItems = useTimeline ? (timelineItems ?? []) : items;
 
     if (sourceItems.length === 0) {
       return;
+    }
+
+    if (displayState !== 'expanded') {
+      openExpanded(useTimeline ? 'timeline' : 'orbit');
     }
 
     const currentIndex = useTimeline ? pendingTimelineIndexRef.current : pendingIndexRef.current;
@@ -373,13 +427,77 @@ export function useRadialMenu({
       pendingTimelineIndexRef.current = targetIndex;
       onSelect(targetItem.id);
     } else {
-      selectIndex(targetIndex);
+      pendingIndexRef.current = targetIndex;
+      onSelect(targetItem.id);
     }
-  }, [items, mode, onSelect, selectIndex, timelineItems]);
+  }, [allowTimeline, displayState, items, onSelect, openExpanded, timelineItems, viewMode]);
 
-  // 方向键导航：↑/← 上一项，↓/→ 下一项，Home/End 首尾。
+  const handleCoreClick = useCallback(() => {
+    if (layout.displayMode === 'hidden') {
+      return;
+    }
+
+    if (clickBehavior === 'toggle-only' || !allowTimeline || !allowOrbit) {
+      if (displayState === 'expanded') {
+        collapse();
+      } else {
+        openExpanded();
+      }
+      return;
+    }
+
+    if (displayState === 'collapsed' || displayState === 'preview' || displayState === 'hidden') {
+      openExpanded();
+      return;
+    }
+
+    if (viewMode === 'orbit') {
+      setViewMode('timeline');
+      return;
+    }
+
+    collapse();
+  }, [allowOrbit, allowTimeline, clickBehavior, collapse, displayState, layout.displayMode, openExpanded, viewMode]);
+
+  const handleCorePointerEnter = useCallback(() => {
+    if (previewOnHover && displayState === 'collapsed' && allowOrbit) {
+      setViewMode('orbit');
+      setDisplayState('preview');
+    }
+  }, [allowOrbit, displayState, previewOnHover]);
+
+  const handlePointerLeave = useCallback(() => {
+    if (displayState === 'preview') {
+      setDisplayState('collapsed');
+    }
+  }, [displayState]);
+
+  const handleFocusCapture = useCallback(() => {
+    if (previewOnHover && displayState === 'collapsed' && allowOrbit) {
+      setViewMode('orbit');
+      setDisplayState('preview');
+    }
+  }, [allowOrbit, displayState, previewOnHover]);
+
+  const handleAnchorBlur = useCallback((event: ReactFocusEvent<HTMLElement>) => {
+    const nextFocused = event.relatedTarget;
+
+    if (!nextFocused || !event.currentTarget.contains(nextFocused)) {
+      if (displayState === 'preview') {
+        setDisplayState('collapsed');
+      }
+    }
+  }, [displayState]);
+
+  const handleCoreKeyDown = useCallback((event: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleCoreClick();
+    }
+  }, [handleCoreClick]);
+
   const handleNavKeyDown = useCallback((event: ReactKeyboardEvent<HTMLElement>) => {
-    const useTimeline = mode === 'timeline' && !!timelineItems?.length;
+    const useTimeline = viewMode === 'timeline' && allowTimeline;
     const total = useTimeline ? (timelineItems?.length ?? 0) : items.length;
 
     if (total === 0) {
@@ -390,59 +508,90 @@ export function useRadialMenu({
       case 'ArrowUp':
       case 'ArrowLeft':
         event.preventDefault();
-        setIsExpanded(true);
         stepBy(-1);
         break;
       case 'ArrowDown':
       case 'ArrowRight':
         event.preventDefault();
-        setIsExpanded(true);
         stepBy(1);
         break;
       case 'Home':
         event.preventDefault();
-        setIsExpanded(true);
         stepBy(-total);
         break;
       case 'End':
         event.preventDefault();
-        setIsExpanded(true);
         stepBy(total);
         break;
       default:
         break;
     }
-  }, [items.length, mode, stepBy, timelineItems]);
+  }, [allowTimeline, items.length, stepBy, timelineItems?.length, viewMode]);
+
+  const handleTimelineSurfaceClick = useCallback((event: ReactMouseEvent<HTMLDivElement>) => {
+    if (!allowTimeline || !timelineItems || timelineItems.length === 0) {
+      return;
+    }
+
+    const rect = event.currentTarget.getBoundingClientRect();
+    const localX = event.clientX - rect.left;
+    const localY = event.clientY - rect.top;
+    const normalizedAngle = projectPointToArcRatio(localX, localY, layout);
+    let targetIndex = 0;
+    let minDistance = Infinity;
+
+    timelineRatios.forEach((ratio, index) => {
+      const distance = Math.abs(ratio - normalizedAngle);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        targetIndex = index;
+      }
+    });
+
+    const targetItem = timelineItems[targetIndex];
+
+    if (targetItem && targetItem.id !== activeId) {
+      pendingTimelineIndexRef.current = targetIndex;
+      onSelect(targetItem.id);
+    }
+  }, [activeId, allowTimeline, layout, onSelect, timelineItems, timelineRatios]);
+
+  useEffect(() => {
+    if (displayState === 'expanded') {
+      lastExpandedViewRef.current = viewMode;
+    }
+  }, [displayState, viewMode]);
 
   return {
     menuRef,
-    isExpanded,
-    setIsExpanded,
-    mode,
+    displayState,
+    viewMode,
     resolvedAccent,
     progressRatio,
     timelineProgressRatio,
     currentNumber,
     totalCount,
-    // 径向视图
     activeItem,
+    activeTimelineItem,
     visibleItems,
     halfSpan,
-    // 时间轴视图
-    activeTimelineItem,
-    timelineRadius,
-    timelineArcSpan,
     timelineRatios,
     timelineFullArcPath,
     timelineActiveArcPath,
     timelinePointerAngle,
     timelineCoreLabel,
-    // 回调
+    allowTimeline,
     handleAnchorBlur,
     handleCoreClick,
     handleCoreKeyDown,
+    handleCorePointerEnter,
+    handleFocusCapture,
     handleNavKeyDown,
+    handlePointerLeave,
     handleTimelineSurfaceClick,
     selectTimelineIndex,
+    selectItemId,
+    selectIndex,
   };
 }

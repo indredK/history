@@ -3,177 +3,141 @@
  * 纯函数 + 常量，无 React 依赖。
  */
 
-export const MAX_VISIBLE_ITEMS = 7;
-export const ARC_SPAN_DEGREES = 50;
-export const BASE_RADIUS = 360;
-export const RADIUS_VARIATION = 30;
-export const ORBIT_BOX = 380;
+import type { RadialMenuLayout } from './layout';
+import { clamp, normalizeDegrees, toDegrees, toRadians } from './placement';
 
-// 径向轨道缓冲与景深：
-// 以「连续中心」(RAF 缓动后的 animatedIndex) 为锚，对称渲染 5 个实显节点
-// 两侧各 ORBIT_BUFFER 个缓冲节点。缓冲节点的透明度/缩放按到中心的「连续
-// 归一化距离」平滑衰减，进出列表恒发生在 opacity≈0 处，取代旧实现里
-// 切片 [floor, floor+4] 不对称、节点在可见区凭空出现/消失的硬切。
-//
-// 关键约束：ORBIT_FADE_END 必须 ≤ 最外层缓冲节点的归一化距离，
-// 否则最外层在卸载时仍有可见透明度 → 重现跳变。
-// BUFFER=2 时最外层归一化距离约为 1.75 (中心处于半整数时)，故 FADE_END=1.7。
+export { clamp, toRadians } from './placement';
+
+/** 轨道渲染缓冲区 - 在可见范围外额外渲染的节点数量 */
 export const ORBIT_BUFFER = 2;
-const ORBIT_FADE_START = 1.0;  // |normalized| ≤ 此值：完全显示（含弧线两端实显节点）
-const ORBIT_FADE_END = 1.7;    // |normalized| ≥ 此值：完全隐藏
-const ORBIT_MIN_SCALE = 0.74;  // 淡出边缘的最小缩放
-const ORBIT_POSITION_CLAMP = 1.12; // 角度/半径的归一化上限，防止缓冲节点绕过 90° 跳到另一侧
 
+/** 轨道淡出开始位置 - 归一化距离 */
+const ORBIT_FADE_START = 1.0;
+
+/** 轨道淡出结束位置 - 归一化距离 */
+const ORBIT_FADE_END = 1.7;
+
+/** 轨道最小缩放比例 - 远离中心的节点缩放到此比例 */
+const ORBIT_MIN_SCALE = 0.74;
+
+/** 轨道位置限制 - 节点位置的最大归一化偏移 */
+const ORBIT_POSITION_CLAMP = 1.12;
+
+/** 滚轮步进增量 - 累积此值后触发一次切换 */
 export const WHEEL_STEP_DELTA = 18;
+
+/** 滚轮重置时间（毫秒）- 超过此时间后重置累积值 */
 export const WHEEL_RESET_MS = 160;
+
+/** 动画缓动系数 - 控制动画平滑度 */
 export const MOTION_EASING = 0.22;
+
+/** 动画吸附阈值 - 小于此值时直接吸附到目标 */
 export const MOTION_SNAP_THRESHOLD = 0.002;
 
-// 时间轴动态弧度配置
-// 少刻度：小直径半圆（180°弧）
-// 多刻度：大直径1/3圆（120°弧），弧线更长，刻度更分散
-export const TIMELINE_MIN_RADIUS = 160;  // 少量刻度时的半径
-export const TIMELINE_MAX_RADIUS = 240;  // 大量刻度时的大半径（接近组件高度的一半）
-export const TIMELINE_MIN_ARC = 180;     // 少量刻度时的弧度（半圆）
-export const TIMELINE_MAX_ARC = 120;     // 大量刻度时的弧度（1/3圆）
-export const TIMELINE_ITEMS_THRESHOLD_LOW = 5;   // 少量刻度阈值
-export const TIMELINE_ITEMS_THRESHOLD_HIGH = 20; // 大量刻度阈值
-export const MENU_CORE_SIZE = 104;
-export const MENU_NODE_DISC_SIZE = 48;
-export const MENU_NODE_COPY_MAX_WIDTH = 240;
-export const MENU_TICK_WIDTH = 72;
-export const MENU_EDGE_OFFSET = 28;
-
-// 时间轴「真实年代比例」与「均匀分布」的混合系数。
-// 1 = 完全按真实年份（密集时期刻度挤在一起，可能重叠）；
-// 0 = 完全均匀（退化为旧行为）。取 0.7：主体反映年代密度，
-// 同时保留 (1-0.7)/(n-1) 的最小间距，让相邻刻度不至于完全重合。
+/** 时间轴密度混合比例 - 真实年份分布与均匀分布的混合权重 */
 export const TIMELINE_DENSITY_BLEND = 0.7;
 
-// ─── 尺寸推导链（单一数据源）───────────────────────────
-// 所有容器尺寸都由 TIMELINE_MAX_RADIUS 推导，改半径时其余自动联动。
-export const TICK_HALF_WIDTH = 36;       // 刻度按钮半宽，刻度最远触及 = 半径 + 此值
-export const CONTENT_BUFFER = 20;        // 内容盒在最大触及点外的留白
-export const HOVER_BUFFER = 50;          // hover 检测盒（anchor）额外缓冲，避免误触收起
-// SVG / 刻度容器的中心点 = 最大半径 + 刻度半宽 + 留白
-export const TIMELINE_CENTER = TIMELINE_MAX_RADIUS + TICK_HALF_WIDTH + CONTENT_BUFFER;
-export const TIMELINE_BOX = TIMELINE_CENTER * 2;                       // 内容盒边长
-export const ANCHOR_BOX = (TIMELINE_MAX_RADIUS + TICK_HALF_WIDTH + HOVER_BUFFER) * 2; // hover 检测盒边长
-export const MENU_MIN_HEIGHT = ANCHOR_BOX;                             // 容器最小高度跟随 hover 盒
-
-export interface RadialMenuLayoutMetrics {
-  orbitBaseRadius: number;
-  orbitRadiusVariation: number;
-  orbitBox: number;
-  timelineMinRadius: number;
-  timelineMaxRadius: number;
-  tickHalfWidth: number;
-  contentBuffer: number;
-  hoverBuffer: number;
-  timelineCenter: number;
-  timelineBox: number;
-  anchorBox: number;
-  menuMinHeight: number;
-  coreSize: number;
-  nodeDiscSize: number;
-  nodeCopyMaxWidth: number;
-  timeTickWidth: number;
-  edgeOffset: number;
+/**
+ * 轨道节点的视觉属性
+ * 包含位置、透明度、缩放等渲染所需的所有信息
+ */
+export interface OrbitNodeVisual {
+  /** 归一化位置 - 相对于中心的偏移量（-1 到 1） */
+  normalized: number;
+  /** 透明度 - 0 到 1 */
+  opacity: number;
+  /** 缩放比例 - 0 到 1 */
+  scale: number;
+  /** 节点中心 X 坐标 */
+  x: number;
+  /** 节点中心 Y 坐标 */
+  y: number;
+  /** 节点角度（度） */
+  angle: number;
+  /** X 方向单位向量 */
+  dx: number;
+  /** Y 方向单位向量 */
+  dy: number;
+  /** 主轴方向 - 决定标签排列方向 */
+  axis: 'horizontal' | 'vertical';
+  /** 标签放置位置 - 相对于节点的位置 */
+  labelPlacement: 'before' | 'after';
 }
 
-export function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(value, min), max);
+/**
+ * 时间轴刻度位置信息
+ */
+export interface TimelinePosition {
+  /** 刻度中心 X 坐标 */
+  x: number;
+  /** 刻度中心 Y 坐标 */
+  y: number;
+  /** 刻度角度（度） */
+  angle: number;
+  /** X 方向单位向量 */
+  dx: number;
+  /** Y 方向单位向量 */
+  dy: number;
+  /** 标签位置 - 相对于刻度的方向 */
+  labelPosition: 'left' | 'right' | 'top' | 'bottom';
 }
 
-function mix(min: number, max: number, ratio: number) {
-  return min + (max - min) * ratio;
+type Axis = 'horizontal' | 'vertical';
+
+/**
+ * 根据方向向量判断主轴方向
+ * 用于决定标签应该水平还是垂直排列
+ */
+function getAxis(dx: number, dy: number): Axis {
+  return Math.abs(dx) >= Math.abs(dy) ? 'horizontal' : 'vertical';
 }
 
-export function getResponsiveMenuMetrics(viewportWidth: number): RadialMenuLayoutMetrics {
-  const width = Number.isFinite(viewportWidth) && viewportWidth > 0 ? viewportWidth : 1920;
-  const ratio = clamp((width - 1200) / 520, 0, 1);
-  const orbitBaseRadius = Math.round(mix(280, BASE_RADIUS, ratio));
-  const orbitRadiusVariation = Math.round(mix(18, RADIUS_VARIATION, ratio));
-  const timelineMinRadius = Math.round(mix(136, TIMELINE_MIN_RADIUS, ratio));
-  const timelineMaxRadius = Math.round(mix(184, TIMELINE_MAX_RADIUS, ratio));
-  const tickHalfWidth = Math.round(mix(28, TICK_HALF_WIDTH, ratio));
-  const contentBuffer = Math.round(mix(14, CONTENT_BUFFER, ratio));
-  const hoverBuffer = Math.round(mix(34, HOVER_BUFFER, ratio));
-  const timelineCenter = timelineMaxRadius + tickHalfWidth + contentBuffer;
-  const timelineBox = timelineCenter * 2;
-  const anchorBox = (timelineMaxRadius + tickHalfWidth + hoverBuffer) * 2;
+/**
+ * 计算轨道节点的视觉属性
+ *
+ * 根据节点相对于中心的偏移量，计算其位置、透明度、缩放等属性。
+ * 远离中心的节点会逐渐淡出和缩小。
+ *
+ * @param offset - 节点相对于中心的偏移量（整数索引差）
+ * @param halfSpan - 可见范围的半径（节点数量）
+ * @param layout - 布局参数
+ * @returns 节点的视觉属性
+ */
+export function getOrbitNodeVisual(
+  offset: number,
+  halfSpan: number,
+  layout: Pick<RadialMenuLayout, 'anchorX' | 'anchorY' | 'bearing' | 'orbitArcSpan' | 'orbitRadius' | 'nodeSize'>,
+): OrbitNodeVisual {
+  const normalized = halfSpan > 0 ? offset / halfSpan : 0;
+  const absNorm = Math.abs(normalized);
+  const fade = 1 - clamp((absNorm - ORBIT_FADE_START) / (ORBIT_FADE_END - ORBIT_FADE_START), 0, 1);
+  const opacity = fade;
+  const scale = ORBIT_MIN_SCALE + (1 - ORBIT_MIN_SCALE) * fade;
+  const posNorm = clamp(normalized, -ORBIT_POSITION_CLAMP, ORBIT_POSITION_CLAMP);
+  const angleOffset = posNorm * (layout.orbitArcSpan / 2);
+  const angle = layout.bearing + angleOffset;
+  const angleRad = toRadians(angle);
+  const radius = layout.orbitRadius + Math.abs(posNorm) * Math.max(18, layout.nodeSize * 0.68);
+  const dx = Math.cos(angleRad);
+  const dy = Math.sin(angleRad);
+  const x = layout.anchorX + dx * radius;
+  const y = layout.anchorY + dy * radius;
+  const axis = getAxis(dx, dy);
 
   return {
-    orbitBaseRadius,
-    orbitRadiusVariation,
-    orbitBox: Math.round(mix(304, ORBIT_BOX, ratio)),
-    timelineMinRadius,
-    timelineMaxRadius,
-    tickHalfWidth,
-    contentBuffer,
-    hoverBuffer,
-    timelineCenter,
-    timelineBox,
-    anchorBox,
-    menuMinHeight: anchorBox,
-    coreSize: Math.round(mix(86, MENU_CORE_SIZE, ratio)),
-    nodeDiscSize: Math.round(mix(42, MENU_NODE_DISC_SIZE, ratio)),
-    nodeCopyMaxWidth: Math.round(mix(176, MENU_NODE_COPY_MAX_WIDTH, ratio)),
-    timeTickWidth: Math.round(mix(56, MENU_TICK_WIDTH, ratio)),
-    // 窄桌面保持贴边，避免 1200px 以下横向收缩时核心圆盘明显内漂。
-    edgeOffset: Math.round(mix(40, MENU_EDGE_OFFSET, ratio)),
-  };
-}
-
-export function toRadians(degrees: number) {
-  return (degrees * Math.PI) / 180;
-}
-
-export function getTimelineArcConfig(itemCount: number, layoutMetrics?: Pick<RadialMenuLayoutMetrics, 'timelineMinRadius' | 'timelineMaxRadius'>) {
-  const minRadius = layoutMetrics?.timelineMinRadius ?? TIMELINE_MIN_RADIUS;
-  const maxRadius = layoutMetrics?.timelineMaxRadius ?? TIMELINE_MAX_RADIUS;
-
-  if (itemCount <= TIMELINE_ITEMS_THRESHOLD_LOW) {
-    return { radius: minRadius, arcSpan: TIMELINE_MIN_ARC };
-  }
-  if (itemCount >= TIMELINE_ITEMS_THRESHOLD_HIGH) {
-    return { radius: maxRadius, arcSpan: TIMELINE_MAX_ARC };
-  }
-  // 线性插值
-  const ratio = (itemCount - TIMELINE_ITEMS_THRESHOLD_LOW) / (TIMELINE_ITEMS_THRESHOLD_HIGH - TIMELINE_ITEMS_THRESHOLD_LOW);
-  return {
-    radius: minRadius + ratio * (maxRadius - minRadius),
-    arcSpan: TIMELINE_MIN_ARC + ratio * (TIMELINE_MAX_ARC - TIMELINE_MIN_ARC),
-  };
-}
-
-export function getTimelinePosition(
-  ratio: number,
-  totalItems: number,
-  side: 'left' | 'right',
-  radius: number,
-  arcSpan: number,
-) {
-  const halfArc = arcSpan / 2;
-
-  if (totalItems <= 1) {
-    const direction = side === 'left' ? 1 : -1;
-    return {
-      x: radius * direction,
-      y: 0,
-      angle: 0,
-    };
-  }
-
-  // ratio ∈ [0,1] → 从 -halfArc 到 +halfArc 度分布
-  const angleDeg = (clamp(ratio, 0, 1) * 2 - 1) * halfArc;
-  const angleRad = toRadians(angleDeg);
-  const direction = side === 'left' ? 1 : -1;
-
-  return {
-    x: Math.cos(angleRad) * radius * direction,
-    y: Math.sin(angleRad) * radius,
-    angle: angleDeg,
+    normalized,
+    opacity,
+    scale,
+    x,
+    y,
+    angle,
+    dx,
+    dy,
+    axis,
+    labelPlacement: axis === 'horizontal'
+      ? (dx >= 0 ? 'after' : 'before')
+      : (dy >= 0 ? 'after' : 'before'),
   };
 }
 
@@ -183,9 +147,6 @@ export function getTimelinePosition(
  * 当所有刻度都有有效年份时，按真实年份在 [min,max] 区间内线性映射，
  * 再与均匀分布按 TIMELINE_DENSITY_BLEND 混合：密集时期刻度自然靠拢、
  * 长治时期拉开，弧线即成「时间密度图」；混合保留最小间距避免重叠。
- *
- * 任一年份缺失（null/NaN）或年份全相同时回退为纯均匀分布（旧行为）。
- * 输入假定已按年份升序排列（消费方 emperors/dynasties 均已排序）。
  */
 export function getTimelineRatios(years: Array<number | null | undefined>): number[] {
   const count = years.length;
@@ -217,65 +178,99 @@ export function getTimelineRatios(years: Array<number | null | undefined>): numb
   });
 }
 
-export function getPointerAngle(angle: number, side: 'left' | 'right') {
-  return side === 'left' ? angle : 180 - angle;
+/**
+ * 计算时间轴刻度的位置信息
+ *
+ * @param ratio - 刻度在弧线上的归一化位置（0 到 1）
+ * @param totalItems - 时间轴总项目数
+ * @param layout - 布局参数
+ * @returns 刻度的位置信息
+ */
+export function getTimelinePosition(
+  ratio: number,
+  totalItems: number,
+  layout: Pick<RadialMenuLayout, 'anchorX' | 'anchorY' | 'bearing' | 'timelineArcSpan' | 'timelineRadius'>,
+): TimelinePosition {
+  const halfArc = layout.timelineArcSpan / 2;
+  const angleOffset = totalItems <= 1 ? 0 : (clamp(ratio, 0, 1) * 2 - 1) * halfArc;
+  const angle = layout.bearing + angleOffset;
+  const angleRad = toRadians(angle);
+  const dx = Math.cos(angleRad);
+  const dy = Math.sin(angleRad);
+  const x = layout.anchorX + dx * layout.timelineRadius;
+  const y = layout.anchorY + dy * layout.timelineRadius;
+  const axis = getAxis(dx, dy);
+
+  return {
+    x,
+    y,
+    angle,
+    dx,
+    dy,
+    labelPosition: axis === 'horizontal'
+      ? (dx >= 0 ? 'right' : 'left')
+      : (dy >= 0 ? 'bottom' : 'top'),
+  };
 }
 
 /**
- * 计算径向节点相对「连续中心」的视觉状态（位置 + 透明度 + 缩放）。
+ * 生成 SVG 弧线路径
  *
- * @param offset   节点 globalIndex 与连续中心(animatedIndex 经端点钳制)的差值
- * @param halfSpan 半窗口大小 = (visibleCount-1)/2，5 个实显节点时为 2
- * @param side     菜单贴靠侧，决定 x 方向
- *
- * normalized = offset / halfSpan：实显节点落在 [-1,1]，缓冲节点向外延伸。
- * 透明度/缩放按 |normalized| 在 [FADE_START,FADE_END] 间线性衰减，使节点
- * 进出列表恒发生在 opacity≈0 处——这是平滑滚动、消除「排队/凭空出现」的关键。
- * 位置归一化经 POSITION_CLAMP 钳制，防止缓冲节点角度越过 90° 翻到弧线另一侧。
+ * @param startAngleOffset - 起始角度偏移（相对于 bearing）
+ * @param endAngleOffset - 结束角度偏移（相对于 bearing）
+ * @param radius - 弧线半径
+ * @param layout - 布局参数
+ * @returns SVG 路径字符串
  */
-export function getOrbitNodeVisual(
-  offset: number,
-  halfSpan: number,
-  side: 'left' | 'right',
-  layoutMetrics?: Pick<RadialMenuLayoutMetrics, 'orbitBaseRadius' | 'orbitRadiusVariation'>,
+export function getTimelineArcPath(
+  startAngleOffset: number,
+  endAngleOffset: number,
+  radius: number,
+  layout: Pick<RadialMenuLayout, 'anchorX' | 'anchorY' | 'bearing'>,
 ) {
-  const normalized = halfSpan > 0 ? offset / halfSpan : 0;
-  const absNorm = Math.abs(normalized);
+  const startRadians = toRadians(layout.bearing + startAngleOffset);
+  const endRadians = toRadians(layout.bearing + endAngleOffset);
+  const startX = layout.anchorX + Math.cos(startRadians) * radius;
+  const startY = layout.anchorY + Math.sin(startRadians) * radius;
+  const endX = layout.anchorX + Math.cos(endRadians) * radius;
+  const endY = layout.anchorY + Math.sin(endRadians) * radius;
+  const largeArcFlag = Math.abs(endAngleOffset - startAngleOffset) > 180 ? 1 : 0;
 
-  const fade = 1 - clamp(
-    (absNorm - ORBIT_FADE_START) / (ORBIT_FADE_END - ORBIT_FADE_START),
-    0,
-    1,
-  );
-  const opacity = fade;
-  const scale = ORBIT_MIN_SCALE + (1 - ORBIT_MIN_SCALE) * fade;
-
-  const posNorm = clamp(normalized, -ORBIT_POSITION_CLAMP, ORBIT_POSITION_CLAMP);
-  const angle = posNorm * ARC_SPAN_DEGREES;
-  const angleRad = toRadians(angle);
-  const radius = (layoutMetrics?.orbitBaseRadius ?? BASE_RADIUS)
-    + Math.abs(posNorm) * (layoutMetrics?.orbitRadiusVariation ?? RADIUS_VARIATION);
-  const x = Math.cos(angleRad) * radius * (side === 'left' ? 1 : -1);
-  const y = Math.sin(angleRad) * radius;
-
-  return { normalized, opacity, scale, x, y };
+  return `M ${startX.toFixed(1)} ${startY.toFixed(1)} A ${radius.toFixed(1)} ${radius.toFixed(1)} 0 ${largeArcFlag} 1 ${endX.toFixed(1)} ${endY.toFixed(1)}`;
 }
 
-export function getTimelineArcPath(startAngle: number, endAngle: number, radius: number, center = TIMELINE_CENTER) {
-  const startRadians = toRadians(startAngle);
-  const endRadians = toRadians(endAngle);
-  const startX = center + Math.cos(startRadians) * radius;
-  const startY = center + Math.sin(startRadians) * radius;
-  const endX = center + Math.cos(endRadians) * radius;
-  const endY = center + Math.sin(endRadians) * radius;
-  const largeArcFlag = Math.abs(endAngle - startAngle) > 180 ? 1 : 0;
+/**
+ * 将点击坐标投影到弧线上，返回归一化比例
+ *
+ * 用于时间轴点击交互，将鼠标点击位置映射到最近的刻度。
+ *
+ * @param x - 点击位置 X 坐标
+ * @param y - 点击位置 Y 坐标
+ * @param layout - 布局参数
+ * @returns 归一化比例（0 到 1）
+ */
+export function projectPointToArcRatio(
+  x: number,
+  y: number,
+  layout: Pick<RadialMenuLayout, 'anchorX' | 'anchorY' | 'bearing' | 'timelineArcSpan'>,
+) {
+  const absoluteAngle = toDegrees(Math.atan2(y - layout.anchorY, x - layout.anchorX));
+  const relativeAngle = normalizeDegrees(absoluteAngle - layout.bearing);
+  const halfArc = layout.timelineArcSpan / 2;
 
-  return `M ${startX.toFixed(1)} ${startY.toFixed(1)} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX.toFixed(1)} ${endY.toFixed(1)}`;
+  return clamp((relativeAngle + halfArc) / layout.timelineArcSpan, 0, 1);
 }
 
+/**
+ * 格式化时间轴年份显示
+ *
+ * @param value - 年份数值（负数表示公元前）
+ * @param fallback - 当值无效时的后备文本
+ * @returns 格式化后的年份字符串
+ */
 export function formatTimelineYear(value: number | null | undefined, fallback: string | undefined) {
   if (typeof value === 'number' && Number.isFinite(value)) {
-    return String(Math.trunc(value));
+    return value < 0 ? `前${Math.abs(Math.trunc(value))}` : String(Math.trunc(value));
   }
 
   return fallback || '';
