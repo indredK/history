@@ -1,7 +1,7 @@
-import { DynastiesListFlat } from '@/features/dynasties/DynastiesListFlat';
+import { DynastiesView } from '@/features/dynasties/DynastiesView';
 
 function DynastiesPage() {
-  return <DynastiesListFlat />;
+  return <DynastiesView />;
 }
 
 export default DynastiesPage;

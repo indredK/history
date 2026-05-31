@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
-import { PagePanel } from '@/components/common';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
 import { loadJsonData } from '@/utils/services/dataLoaders';
 import { DynastiesVirtualTable } from './DynastiesVirtualTable';
@@ -119,8 +118,15 @@ export function DynastiesListFlat() {
   }
 
   return (
-    <PagePanel sx={{}} contentSx={{ minHeight: 0 }}>
+    <Box
+      sx={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: 0,
+      }}
+    >
       <DynastiesVirtualTable data={data} />
-    </PagePanel>
+    </Box>
   );
 }
