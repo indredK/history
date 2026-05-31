@@ -3,10 +3,10 @@
  * 纯函数 + 常量，无 React 依赖。
  */
 
-export const MAX_VISIBLE_ITEMS = 5;
-export const ARC_SPAN_DEGREES = 76;
-export const BASE_RADIUS = 144;
-export const RADIUS_VARIATION = 18;
+export const MAX_VISIBLE_ITEMS = 7;
+export const ARC_SPAN_DEGREES = 50;
+export const BASE_RADIUS = 360;
+export const RADIUS_VARIATION = 30;
 
 // 径向轨道缓冲与景深：
 // 以「连续中心」(RAF 缓动后的 animatedIndex) 为锚，对称渲染 5 个实显节点
