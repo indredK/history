@@ -95,6 +95,18 @@ export interface GanttColors {
   subFill: (rowName: string, type: 'ruler' | 'era') => string;
   /** ruler / era 小块描边 */
   subStroke: (rowName: string) => string;
+  /** dataZoom 滑块配色（照抄 EChartsTimeline 命名） */
+  sliderBg: string;
+  sliderBorder: string;
+  sliderFiller: string;
+  sliderDataLine: string;
+  sliderDataArea: string;
+  sliderSelectedLine: string;
+  sliderSelectedArea: string;
+  sliderHandle: string;
+  sliderHandleBorder: string;
+  sliderMoveHandle: string;
+  sliderMoveHandleBorder: string;
 }
 
 export function buildGanttColors(
@@ -108,6 +120,17 @@ export function buildGanttColors(
     const i = idxByName.get(rowName) ?? 0;
     return PALETTE[i % PALETTE.length] ?? PALETTE[0]!;
   };
+
+  // dataZoom 滑块基色（与 EChartsTimeline 同款派生：次要色 + 卡片/二级面板色）
+  const secondary = readCssVar('--color-secondary', isLight ? '#6b8797' : '#8aa6b6');
+  const surface = readCssVar(
+    '--color-bg-card',
+    isLight ? 'rgba(255,251,243,0.88)' : 'rgba(33,27,22,0.82)',
+  );
+  const surfaceSecondary = readCssVar(
+    '--color-bg-secondary',
+    isLight ? '#fbf7ef' : '#1b1714',
+  );
 
   return {
     axisText: readCssVar('--color-text-secondary', isLight ? '#57483a' : '#d2c3a3'),
@@ -124,5 +147,16 @@ export function buildGanttColors(
         type === 'ruler' ? (isLight ? 0.55 : 0.62) : isLight ? 0.32 : 0.4,
       ),
     subStroke: (rowName) => colorWithAlpha(hueOf(rowName), isLight ? 0.7 : 0.75),
+    sliderBg: colorWithAlpha(surfaceSecondary, isLight ? 0.52 : 0.36),
+    sliderBorder: readCssVar('--color-border-medium', isLight ? 'rgba(118,90,51,0.16)' : 'rgba(226,198,140,0.2)'),
+    sliderFiller: colorWithAlpha(secondary, isLight ? 0.14 : 0.18),
+    sliderDataLine: colorWithAlpha(secondary, isLight ? 0.26 : 0.34),
+    sliderDataArea: colorWithAlpha(secondary, isLight ? 0.08 : 0.14),
+    sliderSelectedLine: colorWithAlpha(secondary, isLight ? 0.34 : 0.42),
+    sliderSelectedArea: colorWithAlpha(secondary, isLight ? 0.12 : 0.18),
+    sliderHandle: colorWithAlpha(secondary, isLight ? 0.78 : 0.86),
+    sliderHandleBorder: colorWithAlpha(surface, 0.96),
+    sliderMoveHandle: colorWithAlpha(secondary, isLight ? 0.3 : 0.4),
+    sliderMoveHandleBorder: colorWithAlpha(surface, 0.88),
   };
 }

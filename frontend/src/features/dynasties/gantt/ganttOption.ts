@@ -113,17 +113,33 @@ function makeBarRenderItem(
   };
 }
 
+/** 当前视窗：横向用年值（与 pxPerYear→可见年数 换算对齐），纵向用百分比（category 轴原生） */
+export interface GanttViewWindow {
+  xStartValue: number;
+  xEndValue: number;
+  yStart: number;
+  yEnd: number;
+}
+
 export function buildGanttOption(
   model: GanttModel,
   colors: GanttColors,
+  view?: GanttViewWindow,
 ): EChartsCoreOption {
+  // 兜底：未传 view 时显示整段时间 + 全部行（防御性，避免任何 undefined 解构抛错）
+  const win: GanttViewWindow = view ?? {
+    xStartValue: model.bounds[0],
+    xEndValue: model.bounds[1],
+    yStart: 0,
+    yEnd: 100,
+  };
   const option = {
     animation: false,
     grid: {
       left: 88, // 容纳最长 4~5 字政权名
-      right: 24,
+      right: 36, // 24 留白 + 右侧纵向滑块宽
       top: 32, // 顶部年份轴留白
-      bottom: 10,
+      bottom: 40, // 10 留白 + 底部横向时间滑块
       containLabel: false,
     },
     xAxis: {
@@ -163,10 +179,108 @@ export function buildGanttOption(
         return `<b>${d.title}</b><br/>${d.rowName} · ${range}`;
       },
     },
+    dataZoom: [
+      // ── 横向：时间缩放（inside）。Ctrl+滚轮缩放，拖空白横向平移 ──
+      {
+        id: 'gantt-x-inside',
+        type: 'inside',
+        xAxisIndex: 0,
+        filterMode: 'none', // 必须 none：跨窗口的政权带靠 clipRect 裁剪，不能被过滤删除
+        zoomOnMouseWheel: 'ctrl',
+        moveOnMouseMove: true,
+        moveOnMouseWheel: false,
+        startValue: win.xStartValue,
+        endValue: win.xEndValue,
+      },
+      // ── 横向：底部时间滑块 ──
+      {
+        id: 'gantt-x-slider',
+        type: 'slider',
+        xAxisIndex: 0,
+        filterMode: 'none',
+        orient: 'horizontal',
+        left: 88, // 与 grid.left 对齐 → 滑块刻度对齐绘图区
+        right: 36, // 与 grid.right 对齐
+        bottom: 8,
+        height: 22,
+        brushSelect: false,
+        showDetail: false,
+        backgroundColor: colors.sliderBg,
+        borderColor: colors.sliderBorder,
+        fillerColor: colors.sliderFiller,
+        dataBackground: {
+          lineStyle: { color: colors.sliderDataLine },
+          areaStyle: { color: colors.sliderDataArea },
+        },
+        selectedDataBackground: {
+          lineStyle: { color: colors.sliderSelectedLine },
+          areaStyle: { color: colors.sliderSelectedArea },
+        },
+        handleSize: 18,
+        handleIcon: 'path://M9.6,3.2h2.2v9.6H9.6V3.2z M14.2,3.2h2.2v9.6h-2.2V3.2z',
+        handleStyle: {
+          color: colors.sliderHandle,
+          borderColor: colors.sliderHandleBorder,
+          borderWidth: 1,
+        },
+        moveHandleSize: 8,
+        moveHandleStyle: {
+          color: colors.sliderMoveHandle,
+          borderColor: colors.sliderMoveHandleBorder,
+        },
+        textStyle: { color: colors.axisText, fontSize: 10 },
+        labelFormatter: (v: number) => formatTimelineYear(v, { short: true }),
+        startValue: win.xStartValue,
+        endValue: win.xEndValue,
+      },
+      // ── 纵向：行平移（inside）。普通滚轮翻行，不抢横向缩放 ──
+      {
+        id: 'gantt-y-inside',
+        type: 'inside',
+        yAxisIndex: 0,
+        filterMode: 'none',
+        zoomOnMouseWheel: false,
+        moveOnMouseWheel: true,
+        moveOnMouseMove: false,
+        start: win.yStart,
+        end: win.yEnd,
+      },
+      // ── 纵向：右侧滚动条 ──
+      {
+        id: 'gantt-y-slider',
+        type: 'slider',
+        yAxisIndex: 0,
+        filterMode: 'none',
+        orient: 'vertical',
+        right: 6,
+        width: 12,
+        top: 32, // 与 grid.top 对齐
+        bottom: 40, // 与 grid.bottom 对齐
+        showDetail: false,
+        showDataShadow: false,
+        brushSelect: false,
+        backgroundColor: colors.sliderBg,
+        borderColor: colors.sliderBorder,
+        fillerColor: colors.sliderFiller,
+        handleStyle: {
+          color: colors.sliderHandle,
+          borderColor: colors.sliderHandleBorder,
+          borderWidth: 1,
+        },
+        moveHandleStyle: {
+          color: colors.sliderMoveHandle,
+          borderColor: colors.sliderMoveHandleBorder,
+        },
+        start: win.yStart,
+        end: win.yEnd,
+      },
+    ],
     series: [
       {
         id: 'polity-bands',
         type: 'custom',
+        xAxisIndex: 0,
+        yAxisIndex: 0,
         data: model.polityData,
         z: 2,
         renderItem: makeBarRenderItem(
@@ -180,6 +294,8 @@ export function buildGanttOption(
       {
         id: 'sub-rulers',
         type: 'custom',
+        xAxisIndex: 0,
+        yAxisIndex: 0,
         data: model.rulerData,
         z: 3,
         renderItem: makeBarRenderItem(
@@ -193,6 +309,8 @@ export function buildGanttOption(
       {
         id: 'sub-eras',
         type: 'custom',
+        xAxisIndex: 0,
+        yAxisIndex: 0,
         data: model.eraData,
         z: 3,
         renderItem: makeBarRenderItem(
