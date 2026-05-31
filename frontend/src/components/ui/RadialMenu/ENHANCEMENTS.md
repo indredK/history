@@ -43,6 +43,18 @@
 - `RadialOrbit.tsx` — 用 `getOrbitNodeVisual` 注入 `--orbit-opacity/scale/pointer`，移除离散 `stagger-order`。
 - `RadialMenu.module.scss` — 节点位置去过渡（杜绝二次拖尾），opacity/scale 由 JS 变量驱动；缓冲节点 `pointer-events:none` 防误点。
 
+## 样式优化
+
+| # | 项 | 状态 | 说明 |
+|---|----|------|------|
+| P1 | 弹出项不换行、宽度自适应 | ✅ 本轮 | `node-copy` 原先固定 `min/max-width` 强制长标题换行、卡片参差变高。改为 `width:max-content` 随内容自适应（`max-width` 仅作超长保护上限），`node-title` 设 `white-space:nowrap` + 省略号兜底。长短不一无妨，不再换行。 |
+| P2 | 核心标题按字数自适应字号 | ✅ 本轮 | `core-title` 原用 `word-break:break-all` 强制换行，长名（如「中华人民共和国」）折行撑高、溢出圆盘。改为不换行 + 字号按字数自适应：圆盘内容区实测 74px，取 `70/字数`（留安全边距）并 clamp 到 `[9.6px, 21.44px]`。短名维持大字号，长名自动缩到一行容纳。<br>注：字号在组件内 JS 计算后以 inline `font-size` 注入——SCSS 会把 `calc()` 内的 `/` 当除法优化掉导致 clamp 失效，故不用 CSS 计算。 |
+
+涉及文件（P1/P2）：
+
+- `RadialMenu.tsx` — 计算 `coreTitleSize = clamp(70/字数, 9.6, 21.44)`，以 inline `font-size` 注入核心标题。
+- `RadialMenu.module.scss` — `node-copy` 宽度自适应 + `node-title` nowrap/省略号；`core-title` 移除 `word-break`、改 nowrap + 省略号，字号交由组件注入。
+
 ## 本轮落地（高价值精选集）
 
 数据项 **F1 + F2** 放大历史数据本身的信息量；功能项 **F3 + F4** 补足交互与无障碍；

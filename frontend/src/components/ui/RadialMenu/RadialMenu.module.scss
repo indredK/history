@@ -277,24 +277,24 @@
   }
 
   &__node-copy {
-    min-width: 112px;
-    max-width: 152px;
+    /* 宽度随内容自适应：不再固定 min/max-width 强制换行，长短不一无妨。
+     * max-width 仅作超长保护上限，配合标题省略号防止极端长名溢出视口。 */
+    width: max-content;
+    max-width: 240px;
     display: flex;
     flex-direction: column;
     gap: 4px;
-    padding: 10px 12px;
+    padding: 10px 14px;
     border: 1px solid rgba(216, 179, 106, 0.14);
     background: rgba(20, 15, 13, 0.88);
     text-align: left;
 
     @media (max-width: 1280px) {
-      min-width: 98px;
-      max-width: 132px;
+      max-width: 200px;
     }
 
     @media (max-width: 1080px) {
-      min-width: 90px;
-      max-width: 112px;
+      max-width: 168px;
     }
   }
 
@@ -307,6 +307,10 @@
     font-size: 0.96rem;
     font-weight: 600;
     color: var(--imperial-text, #f3ead7);
+    /* 弹出项不换行，超长省略，避免卡片变高、参差撑出弧线 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__node-subtitle {
@@ -520,15 +524,18 @@
   &__core-title {
     width: 100%;
     font-family: var(--imperial-display, 'Baskerville', 'Times New Roman', 'Songti SC', serif);
-    font-size: 1.34rem;
+    /* 字号由组件按字数注入(inline font-size)，圆盘内一行显示，不换行不溢出。
+     * 不在此处用 calc/clamp：SCSS 会把 calc 内的 `/` 优化成裸除法导致失效。 */
     font-weight: 700;
     line-height: 1.15;
     text-align: center;
-    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: var(--menu-accent);
     text-shadow: 0 0 22px var(--menu-accent-glow);
     /* V4 主色过渡：切换朝代时核心标题主色平滑流动 */
-    transition: color 320ms ease, text-shadow 320ms ease;
+    transition: color 320ms ease, text-shadow 320ms ease, font-size 200ms ease;
   }
 
   /* F4 位置计数 n / total */

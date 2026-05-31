@@ -58,6 +58,14 @@ export function RadialMenu({
     selectTimelineIndex,
   } = useRadialMenu({ items, timelineItems, activeId, onSelect, side, accentColor });
 
+  // 核心圆盘标题：长短名都在圆内一行显示。
+  // 字号按字数自适应——圆盘内容区实测约 74px、CJK 字宽≈1em，取 70px 留安全边距；
+  // 上限 21.44px(1.34rem) 维持短名观感，下限 9.6px(0.6rem) 保可读。
+  // 在 JS 计算而非 SCSS calc：SCSS 会把 calc 内的 `/` 当除法优化掉，
+  // 导致 clamp 失效，故由此处注入确定值。
+  const coreTitle = (mode === 'timeline' ? timelineCoreLabel : activeItem?.label) || '未选中';
+  const coreTitleSize = Math.max(9.6, Math.min(21.44, 70 / Math.max(coreTitle.length, 1)));
+
   return (
     <aside
       ref={menuRef}
@@ -139,10 +147,11 @@ export function RadialMenu({
                 role={timelineItems?.length ? 'button' : undefined}
                 aria-label={timelineItems?.length ? `切换${ariaLabel}显示模式` : undefined}
               >
-                <span className={cx('radial-menu__core-title')}>
-                  {mode === 'timeline'
-                    ? (timelineCoreLabel || '未选中')
-                    : (activeItem?.label || '未选中')}
+                <span
+                  className={cx('radial-menu__core-title')}
+                  style={{ fontSize: `${coreTitleSize}px` } as CSSProperties}
+                >
+                  {coreTitle}
                 </span>
                 {totalCount > 0 ? (
                   <span className={cx('radial-menu__core-count')} aria-hidden="true">
