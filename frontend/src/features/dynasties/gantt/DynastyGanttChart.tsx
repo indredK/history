@@ -18,7 +18,12 @@ import AddIcon from '@mui/icons-material/Add';
 import FitScreenIcon from '@mui/icons-material/FitScreen';
 import * as echarts from 'echarts/core';
 import { CustomChart } from 'echarts/charts';
-import { DataZoomComponent, GridComponent, TooltipComponent } from 'echarts/components';
+import {
+  AxisPointerComponent,
+  DataZoomComponent,
+  GridComponent,
+  TooltipComponent,
+} from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import type { ECharts } from 'echarts/core';
 import { LoadingSkeleton } from '@/components/ui/LoadingSkeleton';
@@ -35,6 +40,7 @@ echarts.use([
   GridComponent,
   TooltipComponent,
   DataZoomComponent,
+  AxisPointerComponent,
   CanvasRenderer,
 ]);
 
@@ -276,6 +282,73 @@ export function DynastyGanttChart() {
     });
   }, []);
 
+  // ── 相交高亮：竖线扫过时，高亮该年份命中的所有色块（整列）──
+  /** 上次高亮的命中签名，去重避免每像素重复 dispatch */
+  const lastHitSigRef = useRef<string>('');
+  /** rAF 节流句柄 */
+  const hoverRafRef = useRef<number | null>(null);
+
+  /** 三个 series 的 id 与对应数据，命中判断用 */
+  const SERIES_DEFS: { id: string; key: 'polityData' | 'rulerData' | 'eraData' }[] = useMemo(
+    () => [
+      { id: 'polity-bands', key: 'polityData' },
+      { id: 'sub-rulers', key: 'rulerData' },
+      { id: 'sub-eras', key: 'eraData' },
+    ],
+    [],
+  );
+
+  /** 根据鼠标像素 X 求年份 → 找出所有「区间含该年」的色块 → highlight（整列） */
+  const handleHoverMove = useCallback(
+    (offsetX: number, offsetY: number) => {
+      const chart = chartRef.current;
+      const m = modelRef.current;
+      if (!chart || !m) return;
+
+      // 仅在绘图区内响应（避开左侧标签列 / 顶部轴 / 底部滑块区）
+      if (
+        offsetX < LABEL_WIDTH ||
+        offsetX > chart.getWidth() - GRID_RIGHT ||
+        offsetY < GRID_TOP ||
+        offsetY > chart.getHeight() - GRID_BOTTOM
+      ) {
+        if (lastHitSigRef.current !== '') {
+          chart.dispatchAction({ type: 'downplay' });
+          lastHitSigRef.current = '';
+        }
+        return;
+      }
+
+      // 像素 → 年份（顶部缩放轴 x[0]）
+      const year = chart.convertFromPixel({ xAxisIndex: 0 }, offsetX) as number;
+      if (typeof year !== 'number' || Number.isNaN(year)) return;
+
+      // 命中：区间 [start,end] 含 year
+      const batch: { seriesId: string; dataIndex: number[] }[] = [];
+      const sigParts: string[] = [];
+      for (const def of SERIES_DEFS) {
+        const arr = m[def.key];
+        const hits: number[] = [];
+        for (let i = 0; i < arr.length; i++) {
+          const [s, e] = arr[i]!.value;
+          if (year >= s && year <= e) hits.push(i);
+        }
+        if (hits.length) {
+          batch.push({ seriesId: def.id, dataIndex: hits });
+          sigParts.push(`${def.id}:${hits.join(',')}`);
+        }
+      }
+
+      const sig = sigParts.join('|');
+      if (sig === lastHitSigRef.current) return; // 命中集合没变，跳过
+      lastHitSigRef.current = sig;
+
+      chart.dispatchAction({ type: 'downplay' }); // 先清旧高亮
+      if (batch.length) chart.dispatchAction({ type: 'highlight', batch });
+    },
+    [SERIES_DEFS],
+  );
+
   const isReady = Boolean(model && colors);
 
   // ECharts 实例：init + ResizeObserver + 绑 dataZoom 事件 + 卸载 dispose
@@ -293,13 +366,39 @@ export function DynastyGanttChart() {
     observer.observe(hostRef.current);
     chart.on('dataZoom', handleDataZoom);
 
+    // 相交高亮：zrender 原生 mousemove（rAF 节流）+ 移出清除
+    const zr = chart.getZr();
+    const onZrMove = (e: { offsetX: number; offsetY: number }) => {
+      const { offsetX, offsetY } = e;
+      if (hoverRafRef.current !== null) return;
+      hoverRafRef.current = requestAnimationFrame(() => {
+        hoverRafRef.current = null;
+        handleHoverMove(offsetX, offsetY);
+      });
+    };
+    const onZrOut = () => {
+      const c = chartRef.current;
+      if (c && lastHitSigRef.current !== '') {
+        c.dispatchAction({ type: 'downplay' });
+        lastHitSigRef.current = '';
+      }
+    };
+    zr.on('mousemove', onZrMove);
+    zr.on('globalout', onZrOut);
+
     return () => {
       observer.disconnect();
       chart.off('dataZoom', handleDataZoom);
+      zr.off('mousemove', onZrMove);
+      zr.off('globalout', onZrOut);
+      if (hoverRafRef.current !== null) {
+        cancelAnimationFrame(hoverRafRef.current);
+        hoverRafRef.current = null;
+      }
       chart.dispose();
       chartRef.current = null;
     };
-  }, [isReady, handleResize, handleDataZoom, refreshPxBounds]);
+  }, [isReady, handleResize, handleDataZoom, refreshPxBounds, handleHoverMove]);
 
   // 数据 / 主题变化时重设 option：首帧据视口算初始窗口，之后用 viewRef 回填（不丢窗口）
   useEffect(() => {

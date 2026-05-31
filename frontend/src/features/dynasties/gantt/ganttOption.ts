@@ -38,6 +38,7 @@ function makeBarRenderItem(
   getFill: (d: GanttDatum) => string,
   getStroke: (d: GanttDatum) => string,
   labelColor: string,
+  emphasisStroke: string,
 ) {
   return (params: RenderItemParams, api: RenderItemApi) => {
     const d = data[params.dataIndex];
@@ -86,6 +87,15 @@ function makeBarRenderItem(
           fill: getFill(d),
           stroke: getStroke(d),
           lineWidth: lane === 'full' ? 0 : 0.5,
+        },
+        // 相交高亮态：竖线扫过时 dispatchAction('highlight') 触发，描边 + 提亮
+        emphasis: {
+          style: {
+            stroke: emphasisStroke,
+            lineWidth: 1.5,
+            shadowBlur: 6,
+            shadowColor: emphasisStroke,
+          },
         },
       },
     ];
@@ -142,6 +152,24 @@ export function buildGanttOption(
       bottom: 58, // 底部横向滑块(22) + 全程刻度轴 + 留白
       containLabel: false,
     },
+    // 跟随鼠标的竖线时间指针：只在顶部年份轴(x[0])画竖线，移动即显示当前年份
+    axisPointer: {
+      show: true,
+      type: 'line',
+      snap: false, // 自由跟随鼠标，不吸附到数据点
+      triggerOn: 'mousemove',
+      triggerTooltip: false, // 不劫持 item tooltip（色块 hover 仍弹各自气泡）
+      lineStyle: { color: colors.pointerLine, width: 1, type: 'solid' },
+      label: {
+        show: true,
+        color: colors.tooltipText,
+        backgroundColor: colors.pointerLabelBg,
+        borderColor: colors.tooltipBorder,
+        borderWidth: 1,
+        fontSize: 11,
+        padding: [3, 6],
+      },
+    },
     xAxis: [
       // [0] 顶部年份轴：随 dataZoom 缩放，显示当前窗口刻度
       {
@@ -159,6 +187,14 @@ export function buildGanttOption(
           show: true,
           lineStyle: { color: colors.splitLine, type: 'dashed' },
         },
+        // 竖线指针挂这条轴，label 显示鼠标处年份
+        axisPointer: {
+          show: true,
+          label: {
+            formatter: (p: { value: number }) =>
+              formatTimelineYear(p.value, { short: true }),
+          },
+        },
       },
       // [1] 底部全程刻度轴：固定整段 bounds、不受 dataZoom 影响，作为滑块的年份参照尺
       {
@@ -174,6 +210,7 @@ export function buildGanttOption(
         axisLine: { lineStyle: { color: colors.axisLine } },
         axisTick: { show: true, lineStyle: { color: colors.axisLine } },
         splitLine: { show: false },
+        axisPointer: { show: false }, // 底部参照尺不画指针，避免双线
       },
     ],
     yAxis: {
@@ -184,6 +221,7 @@ export function buildGanttOption(
       axisTick: { show: false },
       axisLine: { lineStyle: { color: colors.axisLine } },
       splitLine: { show: true, lineStyle: { color: colors.splitLine } },
+      axisPointer: { show: false }, // 不要水平指针，只保留竖线
     },
     tooltip: {
       trigger: 'item',
@@ -310,6 +348,7 @@ export function buildGanttOption(
           (d) => colors.bandFill(d.rowName),
           () => 'transparent',
           colors.label,
+          colors.emphasisStroke,
         ),
       },
       {
@@ -325,6 +364,7 @@ export function buildGanttOption(
           (d) => colors.subFill(d.rowName, 'ruler'),
           (d) => colors.subStroke(d.rowName),
           colors.label,
+          colors.emphasisStroke,
         ),
       },
       {
@@ -340,6 +380,7 @@ export function buildGanttOption(
           (d) => colors.subFill(d.rowName, 'era'),
           (d) => colors.subStroke(d.rowName),
           colors.label,
+          colors.emphasisStroke,
         ),
       },
     ],

@@ -107,6 +107,11 @@ export interface GanttColors {
   sliderHandleBorder: string;
   sliderMoveHandle: string;
   sliderMoveHandleBorder: string;
+  /** 竖线时间指针 */
+  pointerLine: string;
+  pointerLabelBg: string;
+  /** 相交色块高亮描边 */
+  emphasisStroke: string;
 }
 
 export function buildGanttColors(
@@ -131,6 +136,8 @@ export function buildGanttColors(
     '--color-bg-secondary',
     isLight ? '#fbf7ef' : '#1b1714',
   );
+  // 指针 / 高亮基色：主题主色
+  const primary = readCssVar('--color-primary', isLight ? '#9b6121' : '#c08a5a');
 
   return {
     axisText: readCssVar('--color-text-secondary', isLight ? '#57483a' : '#d2c3a3'),
@@ -158,5 +165,8 @@ export function buildGanttColors(
     sliderHandleBorder: colorWithAlpha(surface, 0.96),
     sliderMoveHandle: colorWithAlpha(secondary, isLight ? 0.3 : 0.4),
     sliderMoveHandleBorder: colorWithAlpha(surface, 0.88),
+    pointerLine: colorWithAlpha(primary, isLight ? 0.7 : 0.8),
+    pointerLabelBg: colorWithAlpha(primary, isLight ? 0.9 : 0.85),
+    emphasisStroke: colorWithAlpha(primary, isLight ? 0.95 : 1),
   };
 }
