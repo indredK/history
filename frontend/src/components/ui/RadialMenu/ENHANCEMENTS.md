@@ -23,12 +23,25 @@
 
 | # | 项 | 状态 | 说明 |
 |---|----|------|------|
-| V1 | 节点错位展开（stagger） | ✅ 本轮 | 展开时各节点按距中心的角度顺序递增延迟淡入，做出从核心向外扇形绽开效果。 |
+| V1 | 节点错位展开（stagger） | ⚠️ 已退役 | 初版用 `transform` 过渡 + `stagger-order*45ms` 级联延迟。该延迟正是快速滚动时「节点逐个排队进出」的主因，已由 S1 平滑滚动方案取代（位置去过渡 + 连续淡入）。 |
 | V2 | 焦点景深 | ✅ 本轮 | 非选中节点叠加轻微 `blur()`，强化选中项的视觉层次。 |
 | V3 | 进度环刻度化 | ✅ 本轮 | 连续 conic-gradient 叠加按 item 数分段的刻度环（表盘感），顺带暗示总数。 |
 | V4 | 朝代主色过渡 | ✅ 本轮 | `--menu-accent` 切换由瞬变改为平滑 transition，整个轮盘主色流动切换。 |
 | V5 | 核心—选中节点连接线 | ⬜ 未做 | 在 hub 与当前 active 节点间画发光连线，强化「当前选中」锚点。 |
 | V6 | 指针拖尾 | ⬜ 未做 | 时间轴指针切换时加扫描余晖 / 拖尾。 |
+
+## 滚动手感
+
+| # | 项 | 状态 | 说明 |
+|---|----|------|------|
+| S1 | 径向平滑滚动 | ✅ 本轮 | 修复快速滚动时节点「逐个排队进出」的生硬感。两处根因：①窗口切片 `[floor, floor+4]` 相对连续中心不对称，节点在可见区（满透明度）凭空挂载/卸载；②`transform` 位置过渡叠加 RAF 缓动造成二次拖尾，并被 stagger 级联延迟放大。方案：以连续中心 `orbitCenter` 对称渲染 `5 实显 + 两侧各 ORBIT_BUFFER` 个缓冲节点，透明度/缩放按到中心的连续归一化距离衰减（进出恒发生在 opacity≈0 处）；位置由 JS 每帧注入且 CSS 不加过渡，缩放/透明度保留极短过渡。 |
+
+涉及文件（S1）：
+
+- `geometry.ts` — 新增 `ORBIT_BUFFER` 等常量与纯函数 `getOrbitNodeVisual(offset, halfSpan, side)`，统一计算节点位置 + 连续景深。
+- `useRadialMenu.ts` — 窗口切片由离散 `[floor, floor+4]` 改为以连续中心 `orbitCenter` 对称渲染并附带每节点的连续 `offset`；暴露 `halfSpan` 取代 `visibleWindowStart`/`visibleCount`。
+- `RadialOrbit.tsx` — 用 `getOrbitNodeVisual` 注入 `--orbit-opacity/scale/pointer`，移除离散 `stagger-order`。
+- `RadialMenu.module.scss` — 节点位置去过渡（杜绝二次拖尾），opacity/scale 由 JS 变量驱动；缓冲节点 `pointer-events:none` 防误点。
 
 ## 本轮落地（高价值精选集）
 

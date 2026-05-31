@@ -12,6 +12,7 @@ import {
   MAX_VISIBLE_ITEMS,
   MOTION_EASING,
   MOTION_SNAP_THRESHOLD,
+  ORBIT_BUFFER,
   TIMELINE_CENTER,
   WHEEL_RESET_MS,
   WHEEL_STEP_DELTA,
@@ -59,18 +60,26 @@ export function useRadialMenu({
   const resolvedAccent = activeItem?.accentColor || accentColor || 'var(--imperial-accent)';
   const progressRatio = items.length > 0 ? (activeIndex + 1) / items.length : 0;
   const visibleCount = Math.min(items.length, MAX_VISIBLE_ITEMS);
-  const visibleWindowStart = clamp(
-    animatedIndex - (visibleCount - 1) / 2,
-    0,
-    Math.max(items.length - visibleCount, 0),
-  );
+  const halfSpan = (visibleCount - 1) / 2;
+  // 连续中心：RAF 缓动后的 animatedIndex，端点处钳制使首/尾项能停在弧线中心。
+  const orbitCenter = clamp(animatedIndex, halfSpan, Math.max(items.length - 1 - halfSpan, halfSpan));
+  // 以连续中心对称渲染：5 个实显 + 两侧各 ORBIT_BUFFER 个缓冲节点。
+  // 缓冲节点按到中心的连续距离淡入淡出，进出列表恒发生在 opacity≈0 处。
   const visibleItems = useMemo(() => {
-    const sliceStart = Math.floor(visibleWindowStart);
-    return items.slice(sliceStart, sliceStart + visibleCount).map((item, index) => ({
-      item,
-      globalIndex: sliceStart + index,
-    }));
-  }, [items, visibleCount, visibleWindowStart]);
+    const renderStart = Math.ceil(orbitCenter - halfSpan - ORBIT_BUFFER);
+    const renderEnd = Math.floor(orbitCenter + halfSpan + ORBIT_BUFFER);
+    const result: Array<{ item: RadialMenuProps['items'][number]; globalIndex: number; offset: number }> = [];
+
+    for (let globalIndex = renderStart; globalIndex <= renderEnd; globalIndex += 1) {
+      const item = items[globalIndex];
+
+      if (item) {
+        result.push({ item, globalIndex, offset: globalIndex - orbitCenter });
+      }
+    }
+
+    return result;
+  }, [items, orbitCenter, halfSpan]);
   const timelineActiveIndex = timelineItems && timelineItems.length > 0
     ? activeTimelineIndex
     : activeIndex;
@@ -416,8 +425,7 @@ export function useRadialMenu({
     // 径向视图
     activeItem,
     visibleItems,
-    visibleWindowStart,
-    visibleCount,
+    halfSpan,
     // 时间轴视图
     activeTimelineItem,
     timelineRadius,

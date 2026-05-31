@@ -1,9 +1,5 @@
 import { type CSSProperties } from 'react';
-import {
-  ARC_SPAN_DEGREES,
-  BASE_RADIUS,
-  RADIUS_VARIATION,
-} from './geometry';
+import { getOrbitNodeVisual } from './geometry';
 import type { RadialMenuItem } from './types';
 import { createCx } from '@utils/cssModules';
 import styles from './RadialMenu.module.scss';
@@ -11,9 +7,8 @@ import styles from './RadialMenu.module.scss';
 const cx = createCx(styles);
 
 interface RadialOrbitProps {
-  visibleItems: Array<{ item: RadialMenuItem; globalIndex: number }>;
-  visibleWindowStart: number;
-  visibleCount: number;
+  visibleItems: Array<{ item: RadialMenuItem; globalIndex: number; offset: number }>;
+  halfSpan: number;
   side: 'left' | 'right';
   resolvedAccent: string;
   activeItemId: string | undefined;
@@ -24,8 +19,7 @@ interface RadialOrbitProps {
 /** 径向模式视图：节点沿弧线排布 */
 export function RadialOrbit({
   visibleItems,
-  visibleWindowStart,
-  visibleCount,
+  halfSpan,
   side,
   resolvedAccent,
   activeItemId,
@@ -34,18 +28,10 @@ export function RadialOrbit({
 }: RadialOrbitProps) {
   return (
     <div className={cx('radial-menu__orbit')} role="listbox" aria-label={ariaLabel}>
-      {visibleItems.map(({ item, globalIndex }) => {
+      {visibleItems.map(({ item, globalIndex, offset }) => {
         const isActive = item.id === activeItemId;
-        const normalized = visibleCount === 1
-          ? 0
-          : ((globalIndex - visibleWindowStart) / (visibleCount - 1)) * 2 - 1;
-        const angle = normalized * ARC_SPAN_DEGREES;
-        const angleInRadians = (angle * Math.PI) / 180;
-        const radius = BASE_RADIUS + Math.abs(normalized) * RADIUS_VARIATION;
-        const orbitX = Math.cos(angleInRadians) * radius * (side === 'left' ? 1 : -1);
-        const orbitY = Math.sin(angleInRadians) * radius;
-        // 从弧线中心向两端递增的展开序号，驱动 stagger 级联淡入。
-        const staggerOrder = Math.round(Math.abs(normalized) * (visibleCount - 1));
+        // 位置/透明度/缩放全部由「到连续中心的距离」driven，滚动时每帧平滑跟随。
+        const visual = getOrbitNodeVisual(offset, halfSpan, side);
 
         return (
           <button
@@ -56,9 +42,12 @@ export function RadialOrbit({
               '--item-accent': item.accentColor || resolvedAccent,
               '--item-accent-soft': `${item.accentColor || resolvedAccent}3d`,
               '--item-accent-glow': `${item.accentColor || resolvedAccent}52`,
-              '--orbit-x': `${orbitX.toFixed(1)}px`,
-              '--orbit-y': `${orbitY.toFixed(1)}px`,
-              '--stagger-order': staggerOrder,
+              '--orbit-x': `${visual.x.toFixed(1)}px`,
+              '--orbit-y': `${visual.y.toFixed(1)}px`,
+              '--orbit-opacity': visual.opacity.toFixed(3),
+              '--orbit-scale': visual.scale.toFixed(3),
+              // 淡出中的缓冲节点不接收指针，避免误点弧线外的半透明节点
+              '--orbit-pointer': visual.opacity < 0.6 ? 'none' : 'auto',
             } as CSSProperties}
             onClick={() => onSelect(item.id)}
             aria-label={`选择${item.label}`}

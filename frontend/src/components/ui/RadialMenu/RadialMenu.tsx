@@ -41,8 +41,7 @@ export function RadialMenu({
     totalCount,
     activeItem,
     visibleItems,
-    visibleWindowStart,
-    visibleCount,
+    halfSpan,
     activeTimelineItem,
     timelineRadius,
     timelineArcSpan,
@@ -113,8 +112,7 @@ export function RadialMenu({
               ) : (
                 <RadialOrbit
                   visibleItems={visibleItems}
-                  visibleWindowStart={visibleWindowStart}
-                  visibleCount={visibleCount}
+                  halfSpan={halfSpan}
                   side={side}
                   resolvedAccent={resolvedAccent}
                   activeItemId={activeItem?.id}

@@ -7,6 +7,22 @@ export const MAX_VISIBLE_ITEMS = 5;
 export const ARC_SPAN_DEGREES = 76;
 export const BASE_RADIUS = 144;
 export const RADIUS_VARIATION = 18;
+
+// 径向轨道缓冲与景深：
+// 以「连续中心」(RAF 缓动后的 animatedIndex) 为锚，对称渲染 5 个实显节点
+// 两侧各 ORBIT_BUFFER 个缓冲节点。缓冲节点的透明度/缩放按到中心的「连续
+// 归一化距离」平滑衰减，进出列表恒发生在 opacity≈0 处，取代旧实现里
+// 切片 [floor, floor+4] 不对称、节点在可见区凭空出现/消失的硬切。
+//
+// 关键约束：ORBIT_FADE_END 必须 ≤ 最外层缓冲节点的归一化距离，
+// 否则最外层在卸载时仍有可见透明度 → 重现跳变。
+// BUFFER=2 时最外层归一化距离约为 1.75 (中心处于半整数时)，故 FADE_END=1.7。
+export const ORBIT_BUFFER = 2;
+const ORBIT_FADE_START = 1.0;  // |normalized| ≤ 此值：完全显示（含弧线两端实显节点）
+const ORBIT_FADE_END = 1.7;    // |normalized| ≥ 此值：完全隐藏
+const ORBIT_MIN_SCALE = 0.74;  // 淡出边缘的最小缩放
+const ORBIT_POSITION_CLAMP = 1.12; // 角度/半径的归一化上限，防止缓冲节点绕过 90° 跳到另一侧
+
 export const WHEEL_STEP_DELTA = 18;
 export const WHEEL_RESET_MS = 160;
 export const MOTION_EASING = 0.22;
@@ -134,6 +150,40 @@ export function getTimelineRatios(years: Array<number | null | undefined>): numb
 
 export function getPointerAngle(angle: number, side: 'left' | 'right') {
   return side === 'left' ? angle : 180 - angle;
+}
+
+/**
+ * 计算径向节点相对「连续中心」的视觉状态（位置 + 透明度 + 缩放）。
+ *
+ * @param offset   节点 globalIndex 与连续中心(animatedIndex 经端点钳制)的差值
+ * @param halfSpan 半窗口大小 = (visibleCount-1)/2，5 个实显节点时为 2
+ * @param side     菜单贴靠侧，决定 x 方向
+ *
+ * normalized = offset / halfSpan：实显节点落在 [-1,1]，缓冲节点向外延伸。
+ * 透明度/缩放按 |normalized| 在 [FADE_START,FADE_END] 间线性衰减，使节点
+ * 进出列表恒发生在 opacity≈0 处——这是平滑滚动、消除「排队/凭空出现」的关键。
+ * 位置归一化经 POSITION_CLAMP 钳制，防止缓冲节点角度越过 90° 翻到弧线另一侧。
+ */
+export function getOrbitNodeVisual(offset: number, halfSpan: number, side: 'left' | 'right') {
+  const normalized = halfSpan > 0 ? offset / halfSpan : 0;
+  const absNorm = Math.abs(normalized);
+
+  const fade = 1 - clamp(
+    (absNorm - ORBIT_FADE_START) / (ORBIT_FADE_END - ORBIT_FADE_START),
+    0,
+    1,
+  );
+  const opacity = fade;
+  const scale = ORBIT_MIN_SCALE + (1 - ORBIT_MIN_SCALE) * fade;
+
+  const posNorm = clamp(normalized, -ORBIT_POSITION_CLAMP, ORBIT_POSITION_CLAMP);
+  const angle = posNorm * ARC_SPAN_DEGREES;
+  const angleRad = toRadians(angle);
+  const radius = BASE_RADIUS + Math.abs(posNorm) * RADIUS_VARIATION;
+  const x = Math.cos(angleRad) * radius * (side === 'left' ? 1 : -1);
+  const y = Math.sin(angleRad) * radius;
+
+  return { normalized, opacity, scale, x, y };
 }
 
 export function getTimelineArcPath(startAngle: number, endAngle: number, radius: number) {

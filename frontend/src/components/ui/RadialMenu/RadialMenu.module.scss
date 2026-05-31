@@ -201,14 +201,17 @@
     padding: 0;
     background: transparent;
     color: var(--imperial-text, #f3ead7);
-    transform: translate(-50%, -50%) translate(0, 0) scale(0.78);
+    /* 位置(orbit-x/y)与显隐(orbit-opacity/scale)全部由 JS 按「到连续中心的
+     * 距离」每帧注入。位置不加 transition——RAF 已做缓动，再叠加 CSS 过渡会
+     * 二次拖尾，正是旧实现快速滚动时「排队/追赶」的根因。仅 opacity/scale 留
+     * 极短过渡平滑量化误差，filter 留长过渡供景深用。 */
+    transform: translate(-50%, -50%) translate(var(--orbit-x, 0), var(--orbit-y, 0)) scale(var(--orbit-scale, 0.78));
     opacity: 0;
     pointer-events: none;
     cursor: pointer;
     will-change: transform, opacity;
     transition:
-      transform 90ms linear,
-      opacity 140ms ease,
+      opacity 120ms linear,
       filter 180ms ease;
 
     &:hover,
@@ -222,14 +225,8 @@
   }
 
   &--expanded &__node {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translate(-50%, -50%) translate(var(--orbit-x), var(--orbit-y)) scale(1);
-    /* V1 节点错位展开：按距中心序号递增延迟，从核心向外扇形绽开 */
-    transition:
-      transform 260ms cubic-bezier(0.22, 0.72, 0.2, 1) calc(var(--stagger-order, 0) * 45ms),
-      opacity 200ms ease calc(var(--stagger-order, 0) * 45ms),
-      filter 180ms ease;
+    opacity: var(--orbit-opacity, 1);
+    pointer-events: var(--orbit-pointer, auto);
   }
 
   /* V2 焦点景深：展开时非选中节点轻微虚化，突出当前项 */
