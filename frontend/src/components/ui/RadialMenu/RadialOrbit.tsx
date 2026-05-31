@@ -1,5 +1,6 @@
 import { type CSSProperties } from 'react';
 import { getOrbitNodeVisual } from './geometry';
+import type { RadialMenuLayoutMetrics } from './geometry';
 import type { RadialMenuItem } from './types';
 import { createCx } from '@utils/cssModules';
 import styles from './RadialMenu.module.scss';
@@ -14,6 +15,7 @@ interface RadialOrbitProps {
   activeItemId: string | undefined;
   ariaLabel: string;
   onSelect: (itemId: string) => void;
+  layoutMetrics: RadialMenuLayoutMetrics;
 }
 
 /** 径向模式视图：节点沿弧线排布 */
@@ -25,13 +27,14 @@ export function RadialOrbit({
   activeItemId,
   ariaLabel,
   onSelect,
+  layoutMetrics,
 }: RadialOrbitProps) {
   return (
     <div className={cx('radial-menu__orbit')} role="listbox" aria-label={ariaLabel}>
       {visibleItems.map(({ item, globalIndex, offset }) => {
         const isActive = item.id === activeItemId;
         // 位置/透明度/缩放全部由「到连续中心的距离」driven，滚动时每帧平滑跟随。
-        const visual = getOrbitNodeVisual(offset, halfSpan, side);
+        const visual = getOrbitNodeVisual(offset, halfSpan, side, layoutMetrics);
 
         return (
           <button

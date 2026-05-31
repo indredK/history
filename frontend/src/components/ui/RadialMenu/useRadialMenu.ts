@@ -13,7 +13,6 @@ import {
   MOTION_EASING,
   MOTION_SNAP_THRESHOLD,
   ORBIT_BUFFER,
-  TIMELINE_CENTER,
   WHEEL_RESET_MS,
   WHEEL_STEP_DELTA,
   clamp,
@@ -23,6 +22,7 @@ import {
   getTimelineArcPath,
   getTimelinePosition,
   getTimelineRatios,
+  type RadialMenuLayoutMetrics,
 } from './geometry';
 import type { RadialMenuProps } from './types';
 
@@ -33,6 +33,7 @@ type UseRadialMenuArgs = {
   onSelect: RadialMenuProps['onSelect'];
   side: RadialMenuProps['side'];
   accentColor: RadialMenuProps['accentColor'] | undefined;
+  layoutMetrics: RadialMenuLayoutMetrics;
 };
 
 export function useRadialMenu({
@@ -42,6 +43,7 @@ export function useRadialMenu({
   onSelect,
   side,
   accentColor,
+  layoutMetrics,
 }: UseRadialMenuArgs) {
   const activeIndex = Math.max(items.findIndex((item) => item.id === activeId), 0);
   const activeTimelineIndex = Math.max(timelineItems?.findIndex((item) => item.id === activeId) ?? -1, 0);
@@ -86,7 +88,7 @@ export function useRadialMenu({
   const timelineProgressRatio = timelineItems && timelineItems.length > 0
     ? (timelineActiveIndex + 1) / timelineItems.length
     : 0;
-  const timelineArcConfig = getTimelineArcConfig(timelineItems?.length ?? 0);
+  const timelineArcConfig = getTimelineArcConfig(timelineItems?.length ?? 0, layoutMetrics);
   const timelineRadius = timelineArcConfig.radius;
   const timelineArcSpan = timelineArcConfig.arcSpan;
   const timelineHalfArc = timelineArcSpan / 2;
@@ -99,9 +101,9 @@ export function useRadialMenu({
   const timelineActivePosition = getTimelinePosition(timelineActiveRatio, timelineItems?.length ?? 0, side, timelineRadius, timelineArcSpan);
   const timelineActiveAngle = timelineActivePosition.angle;
   const timelinePointerAngle = getPointerAngle(timelineActiveAngle, side);
-  const timelineFullArcPath = getTimelineArcPath(-timelineHalfArc, timelineHalfArc, timelineRadius);
+  const timelineFullArcPath = getTimelineArcPath(-timelineHalfArc, timelineHalfArc, timelineRadius, layoutMetrics.timelineCenter);
   const timelineActiveArcPath = timelineItems && timelineItems.length > 1
-    ? getTimelineArcPath(-timelineHalfArc, timelineActiveAngle, timelineRadius)
+    ? getTimelineArcPath(-timelineHalfArc, timelineActiveAngle, timelineRadius, layoutMetrics.timelineCenter)
     : '';
   const timelineCoreLabel = formatTimelineYear(activeTimelineItem?.yearValue, activeTimelineItem?.yearLabel);
 
@@ -313,8 +315,8 @@ export function useRadialMenu({
     }
 
     const rect = event.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + TIMELINE_CENTER;
-    const centerY = rect.top + TIMELINE_CENTER;
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
     const localX = event.clientX - centerX;
     const localY = event.clientY - centerY;
 

@@ -31,4 +31,5 @@ export interface RadialMenuProps {
   emptyText: string;
   accentColor?: string;
   emptyMode?: 'text' | 'disc';
+  hiddenBelowWidth?: number;
 }

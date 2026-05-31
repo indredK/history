@@ -11,6 +11,13 @@
   --imperial-accent-tertiary: #436a5d;
   --imperial-display: 'Baskerville', 'Times New Roman', 'Songti SC', 'STSong', serif;
   --imperial-body: 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', sans-serif;
+  --cyber-shell-inline-padding: clamp(180px, calc(24vw - 64px), 400px);
+  --cyber-stage-inline-padding: clamp(96px, calc(14vw - 24px), 240px);
+  --cyber-panel-inline-padding: clamp(20px, 2vw, 28px);
+  --cyber-panel-block-padding: clamp(20px, 1.8vw, 24px);
+  --cyber-panel-gap: clamp(18px, 2vw, 28px);
+  --cyber-hero-gap: clamp(16px, 1.6vw, 22px);
+  --cyber-hero-seal-size: clamp(104px, 8vw, 124px);
 
   position: relative;
   display: flex;
@@ -18,7 +25,8 @@
   width: calc(100% + 32px);
   height: calc(100% + 32px);
   margin: -16px;
-  overflow: hidden;
+  /* 改为 overflow: visible 以避免裁切固定定位的轮盘菜单 */
+  overflow: visible;
   background:
     radial-gradient(circle at top center, rgba(216, 179, 106, 0.18), transparent 36%),
     radial-gradient(circle at 15% 18%, rgba(67, 106, 93, 0.16), transparent 28%),
@@ -54,6 +62,11 @@
   overscroll-behavior: none;
 }
 
+.map-first-layout__route-content--emperors-cyber:has(.cyber-emperors-page) {
+  overflow: visible;
+  overscroll-behavior: none;
+}
+
 .cyber-shell {
   position: relative;
   z-index: 1;
@@ -61,7 +74,11 @@
   flex-direction: column;
   flex: 1;
   min-height: 0;
-  padding: 28px;
+  padding: clamp(28px, 3vw, 50px) var(--cyber-shell-inline-padding);
+
+  @media (max-width: 1120px) {
+    padding: 22px 20px 20px;
+  }
 }
 
 .cyber-stage,
@@ -72,11 +89,17 @@
 
 .cyber-stage {
   display: grid;
-  grid-template-columns: minmax(180px, 220px) minmax(0, 1fr) minmax(180px, 220px);
-  gap: 28px;
+  grid-template-columns: 1fr;
+  gap: var(--cyber-panel-gap);
   align-items: stretch;
-  overflow: auto;
   overflow: visible;
+  padding: 0 var(--cyber-stage-inline-padding);
+
+  @media (max-width: 1120px) {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
 }
 
 .cyber-loading-shell,
@@ -94,11 +117,18 @@
   position: relative;
   min-height: 0;
   overflow: auto;
-  padding: 24px 28px 28px;
+  padding: var(--cyber-panel-block-padding) var(--cyber-panel-inline-padding) clamp(22px, 2vw, 28px);
 
   &--empty {
     display: grid;
     place-items: center;
+  }
+
+  @media (max-width: 1120px) {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 100%;
   }
 }
 
@@ -117,6 +147,22 @@
   z-index: 1;
 }
 
+@media (max-width: 1120px) {
+  .cyber-focus-grid {
+    flex: 1;
+    min-height: 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    align-content: stretch;
+  }
+
+  .cyber-focus-section--wide {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+}
+
 .cyber-focus-kicker {
   font-size: 11px;
   letter-spacing: 0.28em;
@@ -126,15 +172,15 @@
 
 .cyber-focus-order {
   align-self: center;
-  padding: 8px 12px;
+  padding: clamp(7px, 0.8vw, 8px) clamp(10px, 1vw, 12px);
   border: 1px solid rgba(216, 179, 106, 0.18);
   color: var(--detail-color);
-  font-size: 0.92rem;
+  font-size: clamp(0.84rem, 0.9vw, 0.92rem);
 
   &--floating {
     position: absolute;
-    top: 24px;
-    right: 28px;
+    top: var(--cyber-panel-block-padding);
+    right: var(--cyber-panel-inline-padding);
     z-index: 2;
     background: rgba(18, 14, 12, 0.72);
   }
@@ -142,14 +188,14 @@
 
 .cyber-focus-hero {
   display: grid;
-  grid-template-columns: 124px minmax(0, 1fr);
-  gap: 22px;
+  grid-template-columns: var(--cyber-hero-seal-size) minmax(0, 1fr);
+  gap: var(--cyber-hero-gap);
   align-items: center;
 }
 
 .cyber-focus-seal {
-  width: 124px;
-  height: 124px;
+  width: var(--cyber-hero-seal-size);
+  height: var(--cyber-hero-seal-size);
   display: grid;
   place-items: center;
   border: 1px solid rgba(216, 179, 106, 0.28);
@@ -162,7 +208,7 @@
 
   span {
     font-family: var(--imperial-display);
-    font-size: 3.4rem;
+    font-size: clamp(2.8rem, 3.1vw, 3.4rem);
     color: var(--detail-color);
   }
 }
@@ -220,11 +266,11 @@
 .cyber-focus-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
-  gap: 18px;
+  gap: clamp(14px, 1.6vw, 18px);
 }
 
 .cyber-focus-section {
-  padding: 20px 18px 18px;
+  padding: clamp(16px, 1.5vw, 20px) clamp(14px, 1.5vw, 18px) clamp(14px, 1.4vw, 18px);
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(216, 179, 106, 0.1);
 
@@ -314,31 +360,26 @@
 }
 
 @media (max-width: 1280px) {
-  .cyber-stage {
-    grid-template-columns: minmax(160px, 196px) minmax(0, 1fr) minmax(160px, 196px);
-    gap: 20px;
-  }
-
-  .cyber-focus-hero {
-    grid-template-columns: 104px minmax(0, 1fr);
-  }
-
-  .cyber-focus-seal {
-    width: 104px;
-    height: 104px;
+  .cyber-emperors-page {
+    --cyber-stage-inline-padding: clamp(80px, 8vw, 120px);
+    --cyber-shell-inline-padding: clamp(140px, 14vw, 188px);
   }
 }
 
-@media (max-width: 1080px) {
-  .cyber-shell {
-    padding: 22px 20px 20px;
+@media (max-width: 1120px) {
+  .cyber-emperors-page {
+    --cyber-stage-inline-padding: clamp(44px, 6vw, 76px);
+    --cyber-shell-inline-padding: clamp(96px, 11vw, 132px);
   }
+}
 
-  .cyber-stage {
+@media (max-width: 1360px) {
+  .cyber-focus-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr;
-    gap: 18px;
   }
+}
+
+@media (max-width: 1120px) {
   .cyber-focus-panel {
     min-height: 420px;
   }

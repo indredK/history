@@ -47,6 +47,7 @@ export function DynastySelector({
       side="left"
       ariaLabel="朝代选择"
       emptyText="暂无朝代数据"
+      hiddenBelowWidth={1120}
     />
   );
 }

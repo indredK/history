@@ -7,6 +7,7 @@ export const MAX_VISIBLE_ITEMS = 7;
 export const ARC_SPAN_DEGREES = 50;
 export const BASE_RADIUS = 360;
 export const RADIUS_VARIATION = 30;
+export const ORBIT_BOX = 380;
 
 // 径向轨道缓冲与景深：
 // 以「连续中心」(RAF 缓动后的 animatedIndex) 为锚，对称渲染 5 个实显节点
@@ -37,6 +38,11 @@ export const TIMELINE_MIN_ARC = 180;     // 少量刻度时的弧度（半圆）
 export const TIMELINE_MAX_ARC = 120;     // 大量刻度时的弧度（1/3圆）
 export const TIMELINE_ITEMS_THRESHOLD_LOW = 5;   // 少量刻度阈值
 export const TIMELINE_ITEMS_THRESHOLD_HIGH = 20; // 大量刻度阈值
+export const MENU_CORE_SIZE = 104;
+export const MENU_NODE_DISC_SIZE = 48;
+export const MENU_NODE_COPY_MAX_WIDTH = 240;
+export const MENU_TICK_WIDTH = 72;
+export const MENU_EDGE_OFFSET = 28;
 
 // 时间轴「真实年代比例」与「均匀分布」的混合系数。
 // 1 = 完全按真实年份（密集时期刻度挤在一起，可能重叠）；
@@ -55,25 +61,88 @@ export const TIMELINE_BOX = TIMELINE_CENTER * 2;                       // 内容
 export const ANCHOR_BOX = (TIMELINE_MAX_RADIUS + TICK_HALF_WIDTH + HOVER_BUFFER) * 2; // hover 检测盒边长
 export const MENU_MIN_HEIGHT = ANCHOR_BOX;                             // 容器最小高度跟随 hover 盒
 
+export interface RadialMenuLayoutMetrics {
+  orbitBaseRadius: number;
+  orbitRadiusVariation: number;
+  orbitBox: number;
+  timelineMinRadius: number;
+  timelineMaxRadius: number;
+  tickHalfWidth: number;
+  contentBuffer: number;
+  hoverBuffer: number;
+  timelineCenter: number;
+  timelineBox: number;
+  anchorBox: number;
+  menuMinHeight: number;
+  coreSize: number;
+  nodeDiscSize: number;
+  nodeCopyMaxWidth: number;
+  timeTickWidth: number;
+  edgeOffset: number;
+}
+
 export function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
+}
+
+function mix(min: number, max: number, ratio: number) {
+  return min + (max - min) * ratio;
+}
+
+export function getResponsiveMenuMetrics(viewportWidth: number): RadialMenuLayoutMetrics {
+  const width = Number.isFinite(viewportWidth) && viewportWidth > 0 ? viewportWidth : 1920;
+  const ratio = clamp((width - 1200) / 520, 0, 1);
+  const orbitBaseRadius = Math.round(mix(280, BASE_RADIUS, ratio));
+  const orbitRadiusVariation = Math.round(mix(18, RADIUS_VARIATION, ratio));
+  const timelineMinRadius = Math.round(mix(136, TIMELINE_MIN_RADIUS, ratio));
+  const timelineMaxRadius = Math.round(mix(184, TIMELINE_MAX_RADIUS, ratio));
+  const tickHalfWidth = Math.round(mix(28, TICK_HALF_WIDTH, ratio));
+  const contentBuffer = Math.round(mix(14, CONTENT_BUFFER, ratio));
+  const hoverBuffer = Math.round(mix(34, HOVER_BUFFER, ratio));
+  const timelineCenter = timelineMaxRadius + tickHalfWidth + contentBuffer;
+  const timelineBox = timelineCenter * 2;
+  const anchorBox = (timelineMaxRadius + tickHalfWidth + hoverBuffer) * 2;
+
+  return {
+    orbitBaseRadius,
+    orbitRadiusVariation,
+    orbitBox: Math.round(mix(304, ORBIT_BOX, ratio)),
+    timelineMinRadius,
+    timelineMaxRadius,
+    tickHalfWidth,
+    contentBuffer,
+    hoverBuffer,
+    timelineCenter,
+    timelineBox,
+    anchorBox,
+    menuMinHeight: anchorBox,
+    coreSize: Math.round(mix(86, MENU_CORE_SIZE, ratio)),
+    nodeDiscSize: Math.round(mix(42, MENU_NODE_DISC_SIZE, ratio)),
+    nodeCopyMaxWidth: Math.round(mix(176, MENU_NODE_COPY_MAX_WIDTH, ratio)),
+    timeTickWidth: Math.round(mix(56, MENU_TICK_WIDTH, ratio)),
+    // 窄桌面保持贴边，避免 1200px 以下横向收缩时核心圆盘明显内漂。
+    edgeOffset: Math.round(mix(40, MENU_EDGE_OFFSET, ratio)),
+  };
 }
 
 export function toRadians(degrees: number) {
   return (degrees * Math.PI) / 180;
 }
 
-export function getTimelineArcConfig(itemCount: number) {
+export function getTimelineArcConfig(itemCount: number, layoutMetrics?: Pick<RadialMenuLayoutMetrics, 'timelineMinRadius' | 'timelineMaxRadius'>) {
+  const minRadius = layoutMetrics?.timelineMinRadius ?? TIMELINE_MIN_RADIUS;
+  const maxRadius = layoutMetrics?.timelineMaxRadius ?? TIMELINE_MAX_RADIUS;
+
   if (itemCount <= TIMELINE_ITEMS_THRESHOLD_LOW) {
-    return { radius: TIMELINE_MIN_RADIUS, arcSpan: TIMELINE_MIN_ARC };
+    return { radius: minRadius, arcSpan: TIMELINE_MIN_ARC };
   }
   if (itemCount >= TIMELINE_ITEMS_THRESHOLD_HIGH) {
-    return { radius: TIMELINE_MAX_RADIUS, arcSpan: TIMELINE_MAX_ARC };
+    return { radius: maxRadius, arcSpan: TIMELINE_MAX_ARC };
   }
   // 线性插值
   const ratio = (itemCount - TIMELINE_ITEMS_THRESHOLD_LOW) / (TIMELINE_ITEMS_THRESHOLD_HIGH - TIMELINE_ITEMS_THRESHOLD_LOW);
   return {
-    radius: TIMELINE_MIN_RADIUS + ratio * (TIMELINE_MAX_RADIUS - TIMELINE_MIN_RADIUS),
+    radius: minRadius + ratio * (maxRadius - minRadius),
     arcSpan: TIMELINE_MIN_ARC + ratio * (TIMELINE_MAX_ARC - TIMELINE_MIN_ARC),
   };
 }
@@ -164,7 +233,12 @@ export function getPointerAngle(angle: number, side: 'left' | 'right') {
  * 进出列表恒发生在 opacity≈0 处——这是平滑滚动、消除「排队/凭空出现」的关键。
  * 位置归一化经 POSITION_CLAMP 钳制，防止缓冲节点角度越过 90° 翻到弧线另一侧。
  */
-export function getOrbitNodeVisual(offset: number, halfSpan: number, side: 'left' | 'right') {
+export function getOrbitNodeVisual(
+  offset: number,
+  halfSpan: number,
+  side: 'left' | 'right',
+  layoutMetrics?: Pick<RadialMenuLayoutMetrics, 'orbitBaseRadius' | 'orbitRadiusVariation'>,
+) {
   const normalized = halfSpan > 0 ? offset / halfSpan : 0;
   const absNorm = Math.abs(normalized);
 
@@ -179,20 +253,21 @@ export function getOrbitNodeVisual(offset: number, halfSpan: number, side: 'left
   const posNorm = clamp(normalized, -ORBIT_POSITION_CLAMP, ORBIT_POSITION_CLAMP);
   const angle = posNorm * ARC_SPAN_DEGREES;
   const angleRad = toRadians(angle);
-  const radius = BASE_RADIUS + Math.abs(posNorm) * RADIUS_VARIATION;
+  const radius = (layoutMetrics?.orbitBaseRadius ?? BASE_RADIUS)
+    + Math.abs(posNorm) * (layoutMetrics?.orbitRadiusVariation ?? RADIUS_VARIATION);
   const x = Math.cos(angleRad) * radius * (side === 'left' ? 1 : -1);
   const y = Math.sin(angleRad) * radius;
 
   return { normalized, opacity, scale, x, y };
 }
 
-export function getTimelineArcPath(startAngle: number, endAngle: number, radius: number) {
+export function getTimelineArcPath(startAngle: number, endAngle: number, radius: number, center = TIMELINE_CENTER) {
   const startRadians = toRadians(startAngle);
   const endRadians = toRadians(endAngle);
-  const startX = TIMELINE_CENTER + Math.cos(startRadians) * radius;
-  const startY = TIMELINE_CENTER + Math.sin(startRadians) * radius;
-  const endX = TIMELINE_CENTER + Math.cos(endRadians) * radius;
-  const endY = TIMELINE_CENTER + Math.sin(endRadians) * radius;
+  const startX = center + Math.cos(startRadians) * radius;
+  const startY = center + Math.sin(startRadians) * radius;
+  const endX = center + Math.cos(endRadians) * radius;
+  const endY = center + Math.sin(endRadians) * radius;
   const largeArcFlag = Math.abs(endAngle - startAngle) > 180 ? 1 : 0;
 
   return `M ${startX.toFixed(1)} ${startY.toFixed(1)} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX.toFixed(1)} ${endY.toFixed(1)}`;

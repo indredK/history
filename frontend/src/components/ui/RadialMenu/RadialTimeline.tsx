@@ -1,10 +1,10 @@
 import { type CSSProperties, type MouseEvent as ReactMouseEvent } from 'react';
 import {
-  TIMELINE_BOX,
   formatTimelineYear,
   getPointerAngle,
   getTimelinePosition,
 } from './geometry';
+import type { RadialMenuLayoutMetrics } from './geometry';
 import type { RadialTimelineItem } from './types';
 import { createCx } from '@utils/cssModules';
 import styles from './RadialMenu.module.scss';
@@ -24,6 +24,7 @@ interface RadialTimelineProps {
   timelineActiveArcPath: string;
   onSurfaceClick: (event: ReactMouseEvent<HTMLDivElement>) => void;
   onSelectTimeline: (index: number, id: string) => void;
+  layoutMetrics: RadialMenuLayoutMetrics;
 }
 
 /** 时间轴模式视图：SVG 弧线 + 指针 + 刻度按钮 */
@@ -40,6 +41,7 @@ export function RadialTimeline({
   timelineActiveArcPath,
   onSurfaceClick,
   onSelectTimeline,
+  layoutMetrics,
 }: RadialTimelineProps) {
   return (
     <div
@@ -50,10 +52,10 @@ export function RadialTimeline({
     >
       <svg
         className={cx('radial-menu__timeline-svg')}
-        viewBox={`0 0 ${TIMELINE_BOX} ${TIMELINE_BOX}`}
+        viewBox={`0 0 ${layoutMetrics.timelineBox} ${layoutMetrics.timelineBox}`}
         aria-hidden="true"
       >
-        <g transform={side === 'right' ? `translate(${TIMELINE_BOX} 0) scale(-1 1)` : undefined}>
+        <g transform={side === 'right' ? `translate(${layoutMetrics.timelineBox} 0) scale(-1 1)` : undefined}>
           <path className={cx('radial-menu__timeline-arc')} d={timelineFullArcPath} />
           {timelineActiveArcPath ? (
             <path className={cx('radial-menu__timeline-arc', 'radial-menu__timeline-arc--active')} d={timelineActiveArcPath} />

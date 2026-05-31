@@ -7,14 +7,32 @@
  */
 
 .radial-menu {
-  position: relative;
+  --menu-surface-center-x: 50%;
+
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
   min-height: var(--menu-min-height, 560px);
+  width: max(100px, var(--core-size, 104px));
   overflow: visible;
   display: flex;
   justify-content: center;
+  pointer-events: none;
+  z-index: 100;
 
-  @media (max-width: 1080px) {
+  /* 让子元素可以接收交互 */
+  & > * {
+    pointer-events: auto;
+  }
+
+  @media (max-width: 920px) {
+    --menu-surface-center-x: 50%;
     min-height: 220px;
+    position: relative;
+    top: auto;
+    transform: none;
+    width: 100%;
+    align-items: center;
   }
 
   /* ===== Anchor 容器 ===== */
@@ -22,14 +40,14 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 104px;
-    height: 104px;
+    width: var(--core-size, 104px);
+    height: var(--core-size, 104px);
     display: flex;
     align-items: center;
     justify-content: center;
     transform: translate(-50%, -50%);
 
-    @media (max-width: 1080px) {
+    @media (max-width: 920px) {
       position: relative;
       top: auto;
       left: auto;
@@ -42,16 +60,40 @@
   &--expanded &__anchor {
     width: var(--anchor-box, 580px);
     height: var(--anchor-box, 580px);
+
+    @media (max-width: 920px) {
+      width: 100%;
+      height: 220px;
+    }
   }
 
   /* left/right 下 anchor 定位一致（保留以备未来差异化） */
+  &--left {
+    --menu-surface-center-x: 30%;
+    left: var(--menu-edge-offset, 28px);
+
+    @media (max-width: 920px) {
+      left: auto;
+    }
+  }
+
+  &--right {
+    --menu-surface-center-x: 70%;
+    right: var(--menu-edge-offset, 28px);
+
+    @media (max-width: 920px) {
+      right: auto;
+    }
+  }
+
   &--left &__anchor,
   &--right &__anchor {
     transform: translate(-50%, -50%);
 
-    @media (max-width: 1080px) {
+    @media (max-width: 920px) {
       left: auto;
       right: auto;
+      transform: none;
     }
   }
 
@@ -59,51 +101,24 @@
   &__orbit {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: var(--menu-surface-center-x, 50%);
     z-index: 1;
-    width: 380px;
-    height: 380px;
+    width: var(--orbit-box, 380px);
+    height: var(--orbit-box, 380px);
     transform: translate(-50%, -50%);
     pointer-events: none;
 
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 22px;
-      border: 1px solid rgba(216, 179, 106, 0.08);
-      border-radius: 999px;
-      opacity: 0;
-      transition: opacity 180ms ease;
-    }
-
-    @media (max-width: 1280px) {
-      width: 330px;
-      height: 330px;
-    }
-
-    @media (max-width: 1080px) {
+    @media (max-width: 920px) {
       width: 100%;
       height: 220px;
     }
-  }
-
-  &--left &__orbit::before {
-    clip-path: inset(0 0 0 50%);
-  }
-
-  &--right &__orbit::before {
-    clip-path: inset(0 50% 0 0);
-  }
-
-  &--expanded &__orbit::before {
-    opacity: 1;
   }
 
   /* ===== 交互热区 ===== */
   &__interaction-pad {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: var(--menu-surface-center-x, 50%);
     z-index: 0;
     width: var(--timeline-box, 520px);
     height: var(--timeline-box, 520px);
@@ -122,7 +137,7 @@
   &__timeline {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: var(--menu-surface-center-x, 50%);
     z-index: 1;
     width: var(--timeline-box, 520px);
     height: var(--timeline-box, 520px);
@@ -153,7 +168,7 @@
   &__timeline-pointer {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: var(--menu-surface-center-x, 50%);
     z-index: 2;
     width: var(--timeline-pointer-length, 122px);
     height: 2px;
@@ -196,7 +211,7 @@
     left: 50%;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: clamp(8px, 1vw, 12px);
     border: 0;
     padding: 0;
     background: transparent;
@@ -261,11 +276,11 @@
   }
 
   &__node-disc {
-    width: 48px;
-    height: 48px;
+    width: var(--node-disc-size, 48px);
+    height: var(--node-disc-size, 48px);
     display: grid;
     place-items: center;
-    flex: 0 0 48px;
+    flex: 0 0 var(--node-disc-size, 48px);
     border-radius: 999px;
     border: 1px solid var(--item-accent-soft);
     background:
@@ -306,11 +321,11 @@
     /* 宽度随内容自适应：不再固定 min/max-width 强制换行，长短不一无妨。
      * max-width 仅作超长保护上限，配合标题省略号防止极端长名溢出视口。 */
     width: max-content;
-    max-width: 240px;
+    max-width: var(--node-copy-max-width, 240px);
     display: flex;
     flex-direction: column;
     gap: 4px;
-    padding: 10px 14px;
+    padding: clamp(8px, 0.9vw, 10px) clamp(12px, 1.1vw, 14px);
     border: 1px solid rgba(216, 179, 106, 0.14);
     border-radius: 999px;
     background: transparent;
@@ -323,10 +338,6 @@
       border-color 200ms ease 50ms,
       box-shadow 200ms ease 50ms,
       transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1) 50ms;
-
-    @media (max-width: 1280px) {
-      max-width: 200px;
-    }
 
     @media (max-width: 1080px) {
       max-width: 168px;
@@ -402,7 +413,7 @@
     top: 50%;
     left: 50%;
     z-index: 3;
-    width: 72px;
+    width: var(--time-tick-width, 72px);
     min-height: 32px;
     display: grid;
     place-items: center;
@@ -495,23 +506,33 @@
     z-index: 2;
     display: flex;
     align-items: center;
+
+    @media (max-width: 920px) {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   &__core {
     position: relative;
     display: flex;
     align-items: center;
+
+    @media (max-width: 920px) {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   &__core-disc {
     position: relative;
     z-index: 1;
-    width: 104px;
-    height: 104px;
+    width: var(--core-size, 104px);
+    height: var(--core-size, 104px);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 14px;
+    padding: clamp(12px, 1vw, 14px);
     border-radius: 999px;
     border: 1px solid rgba(216, 179, 106, 0.24);
     background:
@@ -598,7 +619,7 @@
   &__core-count {
     position: absolute;
     left: 50%;
-    bottom: 16px;
+    bottom: var(--core-count-bottom, 16px);
     transform: translateX(-50%);
     font-size: 0.62rem;
     font-weight: 700;

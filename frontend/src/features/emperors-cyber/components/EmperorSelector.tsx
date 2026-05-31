@@ -47,6 +47,7 @@ export function EmperorSelector({
       emptyText="该朝代暂无帝王数据"
       accentColor={accentColor}
       emptyMode="disc"
+      hiddenBelowWidth={1120}
     />
   );
 }

@@ -38,6 +38,7 @@ export function MapFirstLayout({ routes }: MapFirstLayoutProps) {
     [location.pathname, routes],
   );
   const isMapRoute = activeRoute?.key === 'map';
+  const isEmperorsCyberRoute = activeRoute?.key === 'emperors-cyber';
 
   return (
     <div className="map-first-layout">
@@ -87,7 +88,9 @@ export function MapFirstLayout({ routes }: MapFirstLayoutProps) {
       <main className="map-first-layout__stage">
         <div
           className={`map-first-layout__route-content${
-            isMapRoute ? ' map-first-layout__route-content--map' : ' map-first-layout__route-content--page'
+            isMapRoute
+              ? ' map-first-layout__route-content--map'
+              : isEmperorsCyberRoute ? ' map-first-layout__route-content--emperors-cyber' : ' map-first-layout__route-content--page'
           }`}
         >
           <Outlet />

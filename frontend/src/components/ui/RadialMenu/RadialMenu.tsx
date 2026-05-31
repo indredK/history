@@ -1,8 +1,6 @@
-import { type CSSProperties } from 'react';
+import { type CSSProperties, useEffect, useMemo, useState } from 'react';
 import {
-  ANCHOR_BOX,
-  MENU_MIN_HEIGHT,
-  TIMELINE_BOX,
+  getResponsiveMenuMetrics,
 } from './geometry';
 import { RadialOrbit } from './RadialOrbit';
 import { RadialTimeline } from './RadialTimeline';
@@ -28,7 +26,26 @@ export function RadialMenu({
   emptyText,
   accentColor,
   emptyMode = 'text',
+  hiddenBelowWidth,
 }: RadialMenuProps) {
+  const [viewportWidth, setViewportWidth] = useState(() =>
+    typeof window === 'undefined' ? 1920 : window.innerWidth,
+  );
+  const layoutMetrics = useMemo(() => getResponsiveMenuMetrics(viewportWidth), [viewportWidth]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const {
     menuRef,
     isExpanded,
@@ -56,15 +73,19 @@ export function RadialMenu({
     handleNavKeyDown,
     handleTimelineSurfaceClick,
     selectTimelineIndex,
-  } = useRadialMenu({ items, timelineItems, activeId, onSelect, side, accentColor });
+  } = useRadialMenu({ items, timelineItems, activeId, onSelect, side, accentColor, layoutMetrics });
 
   // 核心圆盘标题：长短名都在圆内一行显示。
-  // 字号按字数自适应——圆盘内容区实测约 74px、CJK 字宽≈1em，取 70px 留安全边距；
-  // 上限 21.44px(1.34rem) 维持短名观感，下限 9.6px(0.6rem) 保可读。
+  // 字号按字数和当前圆盘尺寸自适应；宽屏保持原观感，窄一些时同步收紧。
   // 在 JS 计算而非 SCSS calc：SCSS 会把 calc 内的 `/` 当除法优化掉，
   // 导致 clamp 失效，故由此处注入确定值。
   const coreTitle = (mode === 'timeline' ? timelineCoreLabel : activeItem?.label) || '未选中';
-  const coreTitleSize = Math.max(9.6, Math.min(21.44, 70 / Math.max(coreTitle.length, 1)));
+  const coreTitleWidth = Math.max(layoutMetrics.coreSize - 32, 58);
+  const coreTitleSize = Math.max(9.6, Math.min(layoutMetrics.coreSize * 0.206, coreTitleWidth / Math.max(coreTitle.length, 1)));
+
+  if (hiddenBelowWidth !== undefined && viewportWidth <= hiddenBelowWidth) {
+    return null;
+  }
 
   return (
     <aside
@@ -77,9 +98,16 @@ export function RadialMenu({
         '--menu-count': totalCount,
         '--timeline-pointer-angle': `${timelinePointerAngle.toFixed(2)}deg`,
         '--timeline-pointer-length': `${(timelineRadius - 10).toFixed(1)}px`,
-        '--timeline-box': `${TIMELINE_BOX}px`,
-        '--anchor-box': `${ANCHOR_BOX}px`,
-        '--menu-min-height': `${MENU_MIN_HEIGHT}px`,
+        '--timeline-box': `${layoutMetrics.timelineBox}px`,
+        '--anchor-box': `${layoutMetrics.anchorBox}px`,
+        '--menu-min-height': `${layoutMetrics.menuMinHeight}px`,
+        '--orbit-box': `${layoutMetrics.orbitBox}px`,
+        '--menu-edge-offset': `${layoutMetrics.edgeOffset}px`,
+        '--core-size': `${layoutMetrics.coreSize}px`,
+        '--node-disc-size': `${layoutMetrics.nodeDiscSize}px`,
+        '--node-copy-max-width': `${layoutMetrics.nodeCopyMaxWidth}px`,
+        '--time-tick-width': `${layoutMetrics.timeTickWidth}px`,
+        '--core-count-bottom': `${Math.max(12, layoutMetrics.coreSize * 0.16).toFixed(1)}px`,
       } as CSSProperties}
     >
       {items.length === 0 ? (
@@ -116,6 +144,7 @@ export function RadialMenu({
                   timelineActiveArcPath={timelineActiveArcPath}
                   onSurfaceClick={handleTimelineSurfaceClick}
                   onSelectTimeline={selectTimelineIndex}
+                  layoutMetrics={layoutMetrics}
                 />
               ) : (
                 <RadialOrbit
@@ -126,6 +155,7 @@ export function RadialMenu({
                   activeItemId={activeItem?.id}
                   ariaLabel={ariaLabel}
                   onSelect={onSelect}
+                  layoutMetrics={layoutMetrics}
                 />
               )}
             </>

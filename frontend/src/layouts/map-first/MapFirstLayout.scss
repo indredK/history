@@ -128,6 +128,11 @@
       overscroll-behavior: none;
     }
 
+    &--emperors-cyber {
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+
     &--page {
       display: flex;
       flex-direction: column;
