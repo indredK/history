@@ -19,6 +19,7 @@ interface RadialTimelineProps {
   activeTimelineItemId: string | undefined;
   timelineRadius: number;
   timelineArcSpan: number;
+  timelineRatios: number[];
   timelineFullArcPath: string;
   timelineActiveArcPath: string;
   onSurfaceClick: (event: ReactMouseEvent<HTMLDivElement>) => void;
@@ -34,6 +35,7 @@ export function RadialTimeline({
   activeTimelineItemId,
   timelineRadius,
   timelineArcSpan,
+  timelineRatios,
   timelineFullArcPath,
   timelineActiveArcPath,
   onSurfaceClick,
@@ -60,7 +62,8 @@ export function RadialTimeline({
       </svg>
       <div className={cx('radial-menu__timeline-pointer')} aria-hidden="true" />
       {timelineItems.map((item, index) => {
-        const position = getTimelinePosition(index, timelineItems.length, side, timelineRadius, timelineArcSpan);
+        const ratio = timelineRatios[index] ?? (timelineItems.length > 1 ? index / (timelineItems.length - 1) : 0);
+        const position = getTimelinePosition(ratio, timelineItems.length, side, timelineRadius, timelineArcSpan);
         const isActive = item.id === activeTimelineItemId;
         const yearLabel = formatTimelineYear(item.yearValue, item.yearLabel);
 

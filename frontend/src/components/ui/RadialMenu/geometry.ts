@@ -22,6 +22,12 @@ export const TIMELINE_MAX_ARC = 120;     // 大量刻度时的弧度（1/3圆）
 export const TIMELINE_ITEMS_THRESHOLD_LOW = 5;   // 少量刻度阈值
 export const TIMELINE_ITEMS_THRESHOLD_HIGH = 20; // 大量刻度阈值
 
+// 时间轴「真实年代比例」与「均匀分布」的混合系数。
+// 1 = 完全按真实年份（密集时期刻度挤在一起，可能重叠）；
+// 0 = 完全均匀（退化为旧行为）。取 0.7：主体反映年代密度，
+// 同时保留 (1-0.7)/(n-1) 的最小间距，让相邻刻度不至于完全重合。
+export const TIMELINE_DENSITY_BLEND = 0.7;
+
 // ─── 尺寸推导链（单一数据源）───────────────────────────
 // 所有容器尺寸都由 TIMELINE_MAX_RADIUS 推导，改半径时其余自动联动。
 export const TICK_HALF_WIDTH = 36;       // 刻度按钮半宽，刻度最远触及 = 半径 + 此值
@@ -57,7 +63,7 @@ export function getTimelineArcConfig(itemCount: number) {
 }
 
 export function getTimelinePosition(
-  index: number,
+  ratio: number,
   totalItems: number,
   side: 'left' | 'right',
   radius: number,
@@ -74,9 +80,8 @@ export function getTimelinePosition(
     };
   }
 
-  // 从 -halfArc 到 +halfArc 度分布
-  const normalized = index / (totalItems - 1);
-  const angleDeg = (normalized * 2 - 1) * halfArc;
+  // ratio ∈ [0,1] → 从 -halfArc 到 +halfArc 度分布
+  const angleDeg = (clamp(ratio, 0, 1) * 2 - 1) * halfArc;
   const angleRad = toRadians(angleDeg);
   const direction = side === 'left' ? 1 : -1;
 
@@ -85,6 +90,46 @@ export function getTimelinePosition(
     y: Math.sin(angleRad) * radius,
     angle: angleDeg,
   };
+}
+
+/**
+ * 计算每个时间轴刻度的归一化位置比例（0=弧线起点，1=弧线终点）。
+ *
+ * 当所有刻度都有有效年份时，按真实年份在 [min,max] 区间内线性映射，
+ * 再与均匀分布按 TIMELINE_DENSITY_BLEND 混合：密集时期刻度自然靠拢、
+ * 长治时期拉开，弧线即成「时间密度图」；混合保留最小间距避免重叠。
+ *
+ * 任一年份缺失（null/NaN）或年份全相同时回退为纯均匀分布（旧行为）。
+ * 输入假定已按年份升序排列（消费方 emperors/dynasties 均已排序）。
+ */
+export function getTimelineRatios(years: Array<number | null | undefined>): number[] {
+  const count = years.length;
+
+  if (count <= 1) {
+    return years.map(() => 0);
+  }
+
+  const uniform = years.map((_, index) => index / (count - 1));
+  const allValid = years.every((year) => typeof year === 'number' && Number.isFinite(year));
+
+  if (!allValid) {
+    return uniform;
+  }
+
+  const numericYears = years as number[];
+  const minYear = Math.min(...numericYears);
+  const maxYear = Math.max(...numericYears);
+  const span = maxYear - minYear;
+
+  if (span <= 0) {
+    return uniform;
+  }
+
+  return numericYears.map((year, index) => {
+    const real = (year - minYear) / span;
+    const even = index / (count - 1);
+    return TIMELINE_DENSITY_BLEND * real + (1 - TIMELINE_DENSITY_BLEND) * even;
+  });
 }
 
 export function getPointerAngle(angle: number, side: 'left' | 'right') {

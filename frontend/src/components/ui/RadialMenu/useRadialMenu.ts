@@ -21,6 +21,7 @@ import {
   getTimelineArcConfig,
   getTimelineArcPath,
   getTimelinePosition,
+  getTimelineRatios,
 } from './geometry';
 import type { RadialMenuProps } from './types';
 
@@ -80,7 +81,13 @@ export function useRadialMenu({
   const timelineRadius = timelineArcConfig.radius;
   const timelineArcSpan = timelineArcConfig.arcSpan;
   const timelineHalfArc = timelineArcSpan / 2;
-  const timelineActivePosition = getTimelinePosition(timelineActiveIndex, timelineItems?.length ?? 0, side, timelineRadius, timelineArcSpan);
+  // 按真实年份计算各刻度归一化位置；年份缺失时回退均匀分布。
+  const timelineRatios = useMemo(
+    () => getTimelineRatios((timelineItems ?? []).map((item) => item.yearValue)),
+    [timelineItems],
+  );
+  const timelineActiveRatio = timelineRatios[timelineActiveIndex] ?? 0;
+  const timelineActivePosition = getTimelinePosition(timelineActiveRatio, timelineItems?.length ?? 0, side, timelineRadius, timelineArcSpan);
   const timelineActiveAngle = timelineActivePosition.angle;
   const timelinePointerAngle = getPointerAngle(timelineActiveAngle, side);
   const timelineFullArcPath = getTimelineArcPath(-timelineHalfArc, timelineHalfArc, timelineRadius);
@@ -88,6 +95,13 @@ export function useRadialMenu({
     ? getTimelineArcPath(-timelineHalfArc, timelineActiveAngle, timelineRadius)
     : '';
   const timelineCoreLabel = formatTimelineYear(activeTimelineItem?.yearValue, activeTimelineItem?.yearLabel);
+
+  // 当前位置计数（1-based）：随模式取径向/时间轴的索引与总数。
+  const isTimelineMode = mode === 'timeline' && !!timelineItems?.length;
+  const totalCount = isTimelineMode ? (timelineItems?.length ?? 0) : items.length;
+  const currentNumber = totalCount > 0
+    ? (isTimelineMode ? timelineActiveIndex : activeIndex) + 1
+    : 0;
 
   useEffect(() => {
     if (items.length === 0) {
@@ -298,20 +312,96 @@ export function useRadialMenu({
     // 使用弧线角度计算
     const clickAngle = Math.atan2(localY, Math.abs(localX)) * (180 / Math.PI);
     const halfArc = timelineArcSpan / 2;
-    const normalizedAngle = (clickAngle + halfArc) / timelineArcSpan; // -halfArc to +halfArc → 0 to 1
-    const targetIndex = Math.round(clamp(normalizedAngle, 0, 1) * Math.max(timelineItems.length - 1, 0));
+    const normalizedAngle = clamp((clickAngle + halfArc) / timelineArcSpan, 0, 1); // -halfArc..+halfArc → 0..1
+    // 刻度按真实年份非均匀分布，取归一化位置最接近点击处的刻度（最近邻）。
+    let targetIndex = 0;
+    let minDistance = Infinity;
+    timelineRatios.forEach((ratio, index) => {
+      const distance = Math.abs(ratio - normalizedAngle);
+      if (distance < minDistance) {
+        minDistance = distance;
+        targetIndex = index;
+      }
+    });
     const targetItem = timelineItems[targetIndex];
 
     if (targetItem && targetItem.id !== activeId) {
       pendingTimelineIndexRef.current = targetIndex;
       onSelect(targetItem.id);
     }
-  }, [activeId, onSelect, timelineItems, timelineArcSpan]);
+  }, [activeId, onSelect, timelineItems, timelineArcSpan, timelineRatios]);
 
   const selectTimelineIndex = useCallback((index: number, id: string) => {
     pendingTimelineIndexRef.current = index;
     onSelect(id);
   }, [onSelect]);
+
+  // 在当前模式对应的数据源里相对移动 step 步（方向键导航）。
+  const stepBy = useCallback((step: number) => {
+    const useTimeline = mode === 'timeline' && !!timelineItems?.length;
+    const sourceItems = useTimeline ? timelineItems! : items;
+
+    if (sourceItems.length === 0) {
+      return;
+    }
+
+    const currentIndex = useTimeline ? pendingTimelineIndexRef.current : pendingIndexRef.current;
+    const targetIndex = clamp(currentIndex + step, 0, sourceItems.length - 1);
+
+    if (targetIndex === currentIndex) {
+      return;
+    }
+
+    const targetItem = sourceItems[targetIndex];
+
+    if (!targetItem) {
+      return;
+    }
+
+    if (useTimeline) {
+      pendingTimelineIndexRef.current = targetIndex;
+      onSelect(targetItem.id);
+    } else {
+      selectIndex(targetIndex);
+    }
+  }, [items, mode, onSelect, selectIndex, timelineItems]);
+
+  // 方向键导航：↑/← 上一项，↓/→ 下一项，Home/End 首尾。
+  const handleNavKeyDown = useCallback((event: ReactKeyboardEvent<HTMLElement>) => {
+    const useTimeline = mode === 'timeline' && !!timelineItems?.length;
+    const total = useTimeline ? (timelineItems?.length ?? 0) : items.length;
+
+    if (total === 0) {
+      return;
+    }
+
+    switch (event.key) {
+      case 'ArrowUp':
+      case 'ArrowLeft':
+        event.preventDefault();
+        setIsExpanded(true);
+        stepBy(-1);
+        break;
+      case 'ArrowDown':
+      case 'ArrowRight':
+        event.preventDefault();
+        setIsExpanded(true);
+        stepBy(1);
+        break;
+      case 'Home':
+        event.preventDefault();
+        setIsExpanded(true);
+        stepBy(-total);
+        break;
+      case 'End':
+        event.preventDefault();
+        setIsExpanded(true);
+        stepBy(total);
+        break;
+      default:
+        break;
+    }
+  }, [items.length, mode, stepBy, timelineItems]);
 
   return {
     menuRef,
@@ -321,6 +411,8 @@ export function useRadialMenu({
     resolvedAccent,
     progressRatio,
     timelineProgressRatio,
+    currentNumber,
+    totalCount,
     // 径向视图
     activeItem,
     visibleItems,
@@ -330,6 +422,7 @@ export function useRadialMenu({
     activeTimelineItem,
     timelineRadius,
     timelineArcSpan,
+    timelineRatios,
     timelineFullArcPath,
     timelineActiveArcPath,
     timelinePointerAngle,
@@ -338,6 +431,7 @@ export function useRadialMenu({
     handleAnchorBlur,
     handleCoreClick,
     handleCoreKeyDown,
+    handleNavKeyDown,
     handleTimelineSurfaceClick,
     selectTimelineIndex,
   };

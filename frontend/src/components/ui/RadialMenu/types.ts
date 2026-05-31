@@ -8,6 +8,8 @@ export interface RadialMenuItem {
   subtitle?: string;
   meta?: string;
   accentColor?: string;
+  /** 选中节点下方展示的标签（如帝王年号）。通用字段，由消费方按领域填充。 */
+  tags?: string[];
 }
 
 export interface RadialTimelineItem {

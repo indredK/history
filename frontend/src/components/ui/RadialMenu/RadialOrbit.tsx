@@ -44,6 +44,8 @@ export function RadialOrbit({
         const radius = BASE_RADIUS + Math.abs(normalized) * RADIUS_VARIATION;
         const orbitX = Math.cos(angleInRadians) * radius * (side === 'left' ? 1 : -1);
         const orbitY = Math.sin(angleInRadians) * radius;
+        // 从弧线中心向两端递增的展开序号，驱动 stagger 级联淡入。
+        const staggerOrder = Math.round(Math.abs(normalized) * (visibleCount - 1));
 
         return (
           <button
@@ -56,6 +58,7 @@ export function RadialOrbit({
               '--item-accent-glow': `${item.accentColor || resolvedAccent}52`,
               '--orbit-x': `${orbitX.toFixed(1)}px`,
               '--orbit-y': `${orbitY.toFixed(1)}px`,
+              '--stagger-order': staggerOrder,
             } as CSSProperties}
             onClick={() => onSelect(item.id)}
             aria-label={`选择${item.label}`}
@@ -68,6 +71,13 @@ export function RadialOrbit({
               <span className={cx('radial-menu__node-title')}>{item.label}</span>
               {item.subtitle ? (
                 <span className={cx('radial-menu__node-subtitle')}>{item.subtitle}</span>
+              ) : null}
+              {isActive && item.tags?.length ? (
+                <span className={cx('radial-menu__node-tags')}>
+                  {item.tags.map((tag) => (
+                    <span key={tag} className={cx('radial-menu__node-tag')}>{tag}</span>
+                  ))}
+                </span>
               ) : null}
             </span>
           </button>

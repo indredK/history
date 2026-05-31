@@ -225,6 +225,21 @@
     opacity: 1;
     pointer-events: auto;
     transform: translate(-50%, -50%) translate(var(--orbit-x), var(--orbit-y)) scale(1);
+    /* V1 节点错位展开：按距中心序号递增延迟，从核心向外扇形绽开 */
+    transition:
+      transform 260ms cubic-bezier(0.22, 0.72, 0.2, 1) calc(var(--stagger-order, 0) * 45ms),
+      opacity 200ms ease calc(var(--stagger-order, 0) * 45ms),
+      filter 180ms ease;
+  }
+
+  /* V2 焦点景深：展开时非选中节点轻微虚化，突出当前项 */
+  &--expanded &__node:not(&__node--active) {
+    filter: blur(1.1px) brightness(0.9);
+
+    &:hover,
+    &:focus-visible {
+      filter: blur(0) brightness(1.08);
+    }
   }
 
   /* 顺序敏感：row-reverse 必须在合并的 row 规则之前，二者同特异性，靠书写顺序定胜负（最终生效 row）。 */
@@ -301,6 +316,27 @@
     font-size: 0.76rem;
     line-height: 1.45;
     color: var(--imperial-text-dim, rgba(243, 234, 215, 0.64));
+  }
+
+  /* 选中节点年号标签 */
+  &__node-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 2px;
+  }
+
+  &__node-tag {
+    padding: 1px 7px;
+    border: 1px solid var(--item-accent-soft);
+    border-radius: 999px;
+    background: rgba(216, 179, 106, 0.06);
+    color: var(--item-accent);
+    font-size: 0.66rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
   }
 
   /* ===== 时间刻度 ===== */
@@ -461,6 +497,27 @@
         radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.08), transparent 66%),
         rgba(18, 13, 11, 0.92);
     }
+
+    /* V3 进度环刻度化：按 item 数等分的细缝，叠在连续进度环上形成表盘感 */
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 999px;
+      background: repeating-conic-gradient(
+        from -90deg,
+        transparent 0deg,
+        transparent calc(360deg / max(var(--menu-count, 1), 1) - 1.4deg),
+        rgba(8, 6, 5, 0.92) calc(360deg / max(var(--menu-count, 1), 1) - 1.4deg),
+        rgba(8, 6, 5, 0.92) calc(360deg / max(var(--menu-count, 1), 1))
+      );
+      -webkit-mask:
+        radial-gradient(farthest-side, transparent calc(100% - 6px), #000 calc(100% - 5px), #000 calc(100% - 3px), transparent calc(100% - 2px));
+      mask:
+        radial-gradient(farthest-side, transparent calc(100% - 6px), #000 calc(100% - 5px), #000 calc(100% - 3px), transparent calc(100% - 2px));
+      opacity: 0.7;
+      pointer-events: none;
+    }
   }
 
   &__core-title {
@@ -473,6 +530,22 @@
     word-break: break-all;
     color: var(--menu-accent);
     text-shadow: 0 0 22px var(--menu-accent-glow);
+    /* V4 主色过渡：切换朝代时核心标题主色平滑流动 */
+    transition: color 320ms ease, text-shadow 320ms ease;
+  }
+
+  /* F4 位置计数 n / total */
+  &__core-count {
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--imperial-text-dim, rgba(243, 234, 215, 0.6));
+    white-space: nowrap;
+    pointer-events: none;
   }
 
   /* ===== 空状态 ===== */

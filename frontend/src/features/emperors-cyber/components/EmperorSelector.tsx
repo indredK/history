@@ -25,6 +25,7 @@ export function EmperorSelector({
     subtitle: emperor.title || emperor.period,
     meta: String(index + 1).padStart(2, '0'),
     accentColor,
+    tags: emperor.yearNames,
   }));
   const timelineItems: RadialTimelineItem[] = emperors.map((emperor) => ({
     id: emperor.id,

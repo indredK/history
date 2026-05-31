@@ -37,6 +37,8 @@ export function RadialMenu({
     resolvedAccent,
     progressRatio,
     timelineProgressRatio,
+    currentNumber,
+    totalCount,
     activeItem,
     visibleItems,
     visibleWindowStart,
@@ -44,6 +46,7 @@ export function RadialMenu({
     activeTimelineItem,
     timelineRadius,
     timelineArcSpan,
+    timelineRatios,
     timelineFullArcPath,
     timelineActiveArcPath,
     timelinePointerAngle,
@@ -51,6 +54,7 @@ export function RadialMenu({
     handleAnchorBlur,
     handleCoreClick,
     handleCoreKeyDown,
+    handleNavKeyDown,
     handleTimelineSurfaceClick,
     selectTimelineIndex,
   } = useRadialMenu({ items, timelineItems, activeId, onSelect, side, accentColor });
@@ -63,6 +67,7 @@ export function RadialMenu({
         '--menu-accent': resolvedAccent,
         '--menu-accent-glow': `${resolvedAccent}2e`,
         '--menu-progress': (mode === 'timeline' ? timelineProgressRatio : progressRatio).toFixed(4),
+        '--menu-count': totalCount,
         '--timeline-pointer-angle': `${timelinePointerAngle.toFixed(2)}deg`,
         '--timeline-pointer-length': `${(timelineRadius - 10).toFixed(1)}px`,
         '--timeline-box': `${TIMELINE_BOX}px`,
@@ -99,6 +104,7 @@ export function RadialMenu({
                   activeTimelineItemId={activeTimelineItem?.id}
                   timelineRadius={timelineRadius}
                   timelineArcSpan={timelineArcSpan}
+                  timelineRatios={timelineRatios}
                   timelineFullArcPath={timelineFullArcPath}
                   timelineActiveArcPath={timelineActiveArcPath}
                   onSurfaceClick={handleTimelineSurfaceClick}
@@ -125,7 +131,12 @@ export function RadialMenu({
                 className={cx('radial-menu__core-disc')}
                 onPointerEnter={() => setIsExpanded(true)}
                 onClick={handleCoreClick}
-                onKeyDown={handleCoreKeyDown}
+                onKeyDown={(event) => {
+                  handleCoreKeyDown(event);
+                  if (!event.defaultPrevented) {
+                    handleNavKeyDown(event);
+                  }
+                }}
                 tabIndex={0}
                 role={timelineItems?.length ? 'button' : undefined}
                 aria-label={timelineItems?.length ? `切换${ariaLabel}显示模式` : undefined}
@@ -135,6 +146,11 @@ export function RadialMenu({
                     ? (timelineCoreLabel || '未选中')
                     : (activeItem?.label || '未选中')}
                 </span>
+                {totalCount > 0 ? (
+                  <span className={cx('radial-menu__core-count')} aria-hidden="true">
+                    {currentNumber} / {totalCount}
+                  </span>
+                ) : null}
               </div>
             </div>
           </div>
