@@ -139,25 +139,43 @@ export function buildGanttOption(
       left: 88, // 容纳最长 4~5 字政权名
       right: 36, // 24 留白 + 右侧纵向滑块宽
       top: 32, // 顶部年份轴留白
-      bottom: 40, // 10 留白 + 底部横向时间滑块
+      bottom: 58, // 底部横向滑块(22) + 全程刻度轴 + 留白
       containLabel: false,
     },
-    xAxis: {
-      type: 'value',
-      position: 'top',
-      min: model.bounds[0],
-      max: model.bounds[1],
-      axisLabel: {
-        color: colors.axisText,
-        fontSize: 11,
-        formatter: (v: number) => formatTimelineYear(v, { short: true }),
+    xAxis: [
+      // [0] 顶部年份轴：随 dataZoom 缩放，显示当前窗口刻度
+      {
+        type: 'value',
+        position: 'top',
+        min: model.bounds[0],
+        max: model.bounds[1],
+        axisLabel: {
+          color: colors.axisText,
+          fontSize: 11,
+          formatter: (v: number) => formatTimelineYear(v, { short: true }),
+        },
+        axisLine: { lineStyle: { color: colors.axisLine } },
+        splitLine: {
+          show: true,
+          lineStyle: { color: colors.splitLine, type: 'dashed' },
+        },
       },
-      axisLine: { lineStyle: { color: colors.axisLine } },
-      splitLine: {
-        show: true,
-        lineStyle: { color: colors.splitLine, type: 'dashed' },
+      // [1] 底部全程刻度轴：固定整段 bounds、不受 dataZoom 影响，作为滑块的年份参照尺
+      {
+        type: 'value',
+        position: 'bottom',
+        min: model.bounds[0],
+        max: model.bounds[1],
+        axisLabel: {
+          color: colors.axisText,
+          fontSize: 10,
+          formatter: (v: number) => formatTimelineYear(v, { short: true }),
+        },
+        axisLine: { lineStyle: { color: colors.axisLine } },
+        axisTick: { show: true, lineStyle: { color: colors.axisLine } },
+        splitLine: { show: false },
       },
-    },
+    ],
     yAxis: {
       type: 'category',
       data: model.categories,
@@ -189,6 +207,7 @@ export function buildGanttOption(
         zoomOnMouseWheel: 'ctrl',
         moveOnMouseMove: true,
         moveOnMouseWheel: false,
+        minValueSpan: 10, // 最窄 10 年：放大极限
         startValue: win.xStartValue,
         endValue: win.xEndValue,
       },
@@ -204,7 +223,9 @@ export function buildGanttOption(
         bottom: 8,
         height: 22,
         brushSelect: false,
-        showDetail: false,
+        showDetail: true, // 拖动时两端显示具体年份
+        minValueSpan: 10, // 最窄 10 年：滑块收到最小即 10 年跨度
+        labelPrecision: 0, // 年份取整，不显示小数
         backgroundColor: colors.sliderBg,
         borderColor: colors.sliderBorder,
         fillerColor: colors.sliderFiller,

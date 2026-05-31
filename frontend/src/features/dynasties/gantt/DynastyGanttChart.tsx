@@ -51,15 +51,16 @@ const GRID_BOTTOM = 40;
 
 /** 横向密度：每年对应像素。默认贴合首版静态密度 */
 const DEFAULT_PX_PER_YEAR = 1.25;
-/** 最大收缩：2000+ 年可压进一屏概览 */
-const MIN_PX_PER_YEAR = 0.2;
-/** 最大展开：放大看君主 / 年号细节 */
-const MAX_PX_PER_YEAR = 10;
+/** 放大极限：最窄可见 10 年（与 ganttOption 的 minValueSpan 对齐） */
+const MIN_VISIBLE_YEARS = 10;
+/** px 上下限的兜底值（chart 尚未 init、拿不到绘图宽时用） */
+const FALLBACK_MIN_PX = 0.2;
+const FALLBACK_MAX_PX = 10;
 /** −/+ 每次按钮缩放的倍率 */
 const ZOOM_STEP = 1.5;
 
-const clampPx = (v: number) =>
-  Math.min(MAX_PX_PER_YEAR, Math.max(MIN_PX_PER_YEAR, v));
+const clampPx = (v: number, min: number, max: number) =>
+  Math.min(max, Math.max(min, v));
 
 /** 绘图区像素宽 = 画布宽 − 左右留白（与 grid 同坐标系，换算可见年数用） */
 const getPlotWidth = (chart: ECharts) =>
@@ -68,6 +69,22 @@ const getPlotWidth = (chart: ECharts) =>
 /** 绘图区像素高 = 画布高 − 上下留白（算可见行数用） */
 const getPlotHeight = (chart: ECharts) =>
   Math.max(1, chart.getHeight() - GRID_TOP - GRID_BOTTOM);
+
+/**
+ * px/年 的动态上下限：
+ *  - 上限 = 绘图宽 / 10  → 放大可推到 10 年窗口（最窄）
+ *  - 下限 = 绘图宽 / 总跨度 → 缩小到整段时间铺满一屏（最宽，无滑块死区）
+ */
+function pxBoundsFor(
+  plotW: number,
+  bounds: [number, number],
+): { minPx: number; maxPx: number } {
+  const span = Math.max(1, bounds[1] - bounds[0]);
+  const maxPx = plotW / MIN_VISIBLE_YEARS;
+  const minPx = plotW / span;
+  // 极端窄视口兜底：保证 min ≤ max
+  return { minPx: Math.min(minPx, maxPx), maxPx };
+}
 
 /** pxPerYear + 绘图宽 → 横向年值窗口；锚点保持左端，窗口比总跨度宽时铺满全程 */
 function xWindowFromPx(
@@ -116,6 +133,11 @@ export function DynastyGanttChart() {
   const [blocks, setBlocks] = useState<TimeBlock[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [pxPerYear, setPxPerYear] = useState<number>(DEFAULT_PX_PER_YEAR);
+  /** px/年 的动态上下限（随视口宽度变化），驱动滑块 min/max 与按钮禁用态 */
+  const [pxBounds, setPxBounds] = useState<{ minPx: number; maxPx: number }>({
+    minPx: FALLBACK_MIN_PX,
+    maxPx: FALLBACK_MAX_PX,
+  });
   const theme = useThemeStore((s) => s.theme);
 
   const hostRef = useRef<HTMLDivElement>(null);
@@ -126,6 +148,7 @@ export function DynastyGanttChart() {
   // 事件 / resize 回调里读最新值用的 ref（model 加载后不再变，故回调可保持稳定）
   const modelRef = useRef<GanttModel | null>(null);
   const pxPerYearRef = useRef(pxPerYear);
+  const pxBoundsRef = useRef(pxBounds);
   const viewRef = useRef<GanttViewWindow | null>(null);
   /** true 时屏蔽程序化 dispatch/setOption 引发的 dataZoom 事件回声 */
   const suppressDataZoomRef = useRef(false);
@@ -161,6 +184,15 @@ export function DynastyGanttChart() {
   // 让事件回调读到最新 model / pxPerYear
   modelRef.current = model;
   pxPerYearRef.current = pxPerYear;
+  pxBoundsRef.current = pxBounds;
+
+  /** 重算 px 上下限（init / resize 后调用），并把 pxPerYear 钳进新界 */
+  const refreshPxBounds = useCallback((chart: ECharts, m: GanttModel) => {
+    const next = pxBoundsFor(getPlotWidth(chart), m.bounds);
+    pxBoundsRef.current = next;
+    setPxBounds(next);
+    setPxPerYear((v) => clampPx(v, next.minPx, next.maxPx));
+  }, []);
 
   /** 用户拖滑块 / 滚轮 → 读窗口、反算 pxPerYear（防回环） */
   const handleDataZoom = useCallback(() => {
@@ -197,7 +229,8 @@ export function DynastyGanttChart() {
     };
 
     const visibleYears = Math.max(1e-6, xe - xs);
-    const nextPx = clampPx(getPlotWidth(chart) / visibleYears);
+    const b = pxBoundsRef.current;
+    const nextPx = clampPx(getPlotWidth(chart) / visibleYears, b.minPx, b.maxPx);
     if (Math.abs(nextPx - pxPerYearRef.current) > 1e-4) {
       skipNextOptionSyncRef.current = true; // 这次 setPxPerYear 不要再下发窗口
       setPxPerYear(nextPx);
@@ -210,10 +243,17 @@ export function DynastyGanttChart() {
     const m = modelRef.current;
     if (!chart || !m || !viewRef.current) return;
 
+    // 视口宽变 → 重算 px 上下限（可能把 pxPerYear 钳进新界）
+    const nextBounds = pxBoundsFor(getPlotWidth(chart), m.bounds);
+    pxBoundsRef.current = nextBounds;
+    setPxBounds(nextBounds);
+    const px = clampPx(pxPerYearRef.current, nextBounds.minPx, nextBounds.maxPx);
+    if (Math.abs(px - pxPerYearRef.current) > 1e-4) setPxPerYear(px);
+
     const plotW = getPlotWidth(chart);
     const plotH = getPlotHeight(chart);
     const anchor = viewRef.current.xStartValue;
-    const xWin = xWindowFromPx(pxPerYearRef.current, plotW, m.bounds, anchor);
+    const xWin = xWindowFromPx(px, plotW, m.bounds, anchor);
 
     const visibleRows = Math.max(1, Math.floor(plotH / ROW_HEIGHT));
     const yPct = Math.min(100, (visibleRows / m.categories.length) * 100);
@@ -243,6 +283,8 @@ export function DynastyGanttChart() {
     if (!isReady || !hostRef.current || chartRef.current) return;
     const chart = echarts.init(hostRef.current, undefined, { renderer: 'canvas' });
     chartRef.current = chart;
+    // 首帧据真实绘图宽确定 px 上下限
+    if (modelRef.current) refreshPxBounds(chart, modelRef.current);
 
     const observer = new ResizeObserver(() => {
       chart.resize();
@@ -257,7 +299,7 @@ export function DynastyGanttChart() {
       chart.dispose();
       chartRef.current = null;
     };
-  }, [isReady, handleResize, handleDataZoom]);
+  }, [isReady, handleResize, handleDataZoom, refreshPxBounds]);
 
   // 数据 / 主题变化时重设 option：首帧据视口算初始窗口，之后用 viewRef 回填（不丢窗口）
   useEffect(() => {
@@ -316,18 +358,24 @@ export function DynastyGanttChart() {
     });
   }, [pxPerYear]);
 
-  const zoomOut = useCallback(() => setPxPerYear((v) => clampPx(v / ZOOM_STEP)), []);
-  const zoomIn = useCallback(() => setPxPerYear((v) => clampPx(v * ZOOM_STEP)), []);
+  const zoomOut = useCallback(
+    () =>
+      setPxPerYear((v) =>
+        clampPx(v / ZOOM_STEP, pxBoundsRef.current.minPx, pxBoundsRef.current.maxPx),
+      ),
+    [],
+  );
+  const zoomIn = useCallback(
+    () =>
+      setPxPerYear((v) =>
+        clampPx(v * ZOOM_STEP, pxBoundsRef.current.minPx, pxBoundsRef.current.maxPx),
+      ),
+    [],
+  );
 
-  // 适应宽度：横向铺满全程（pxPerYear = 绘图宽 / 总跨度 → 窗口落到整 bounds）
+  // 适应宽度：横向铺满全程（pxPerYear = 下限 → 窗口落到整 bounds）
   const fitWidth = useCallback(() => {
-    const chart = chartRef.current;
-    const m = modelRef.current;
-    if (!m) return;
-    const span = m.bounds[1] - m.bounds[0];
-    if (span <= 0) return;
-    const plotW = chart ? getPlotWidth(chart) : (scrollRef.current?.clientWidth ?? 800);
-    setPxPerYear(clampPx(plotW / span));
+    setPxPerYear(pxBoundsRef.current.minPx);
   }, []);
 
   if (error) {
@@ -374,8 +422,8 @@ export function DynastyGanttChart() {
     );
   }
 
-  const atMin = pxPerYear <= MIN_PX_PER_YEAR + 1e-6;
-  const atMax = pxPerYear >= MAX_PX_PER_YEAR - 1e-6;
+  const atMin = pxPerYear <= pxBounds.minPx + 1e-6;
+  const atMax = pxPerYear >= pxBounds.maxPx - 1e-6;
 
   const zoomBtnSx = {
     width: 32,
@@ -422,11 +470,13 @@ export function DynastyGanttChart() {
         <Slider
           aria-label="时间轴横向缩放"
           value={pxPerYear}
-          min={MIN_PX_PER_YEAR}
-          max={MAX_PX_PER_YEAR}
-          step={0.05}
+          min={pxBounds.minPx}
+          max={pxBounds.maxPx}
+          step={(pxBounds.maxPx - pxBounds.minPx) / 100 || 0.05}
           size="small"
-          onChange={(_, val) => setPxPerYear(clampPx(val as number))}
+          onChange={(_, val) =>
+            setPxPerYear(clampPx(val as number, pxBounds.minPx, pxBounds.maxPx))
+          }
           sx={{ width: 160, mx: 1, ...uiUtils.getThemedSliderStyles('timeline') }}
         />
 
