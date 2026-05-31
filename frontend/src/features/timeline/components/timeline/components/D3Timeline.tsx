@@ -6,7 +6,7 @@ import { getEvents } from '@/services/dataClient';
 import { TimelineChart } from './TimelineChart';
 import type { TimelineChartRef } from '../types';
 import type { Event } from '@/services/timeline/types';
-import '../styles/D3Timeline.css';
+import '../styles/D3Timeline.scss';
 
 interface D3TimelineProps {
   focusRange?: [number, number] | null;

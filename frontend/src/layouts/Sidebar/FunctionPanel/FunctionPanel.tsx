@@ -1,6 +1,6 @@
 import { Box, Fade } from "@mui/material";
 import { TimelineFunctions, MapFunctions, PeopleFunctions, CultureFunctions, DynastiesFunctions } from "./";
-import "./FunctionPanel.css";
+import "./FunctionPanel.scss";
 
 interface FunctionPanelProps {
   activeTab: string;

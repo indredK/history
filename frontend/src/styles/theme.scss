@@ -1,9 +1,9 @@
 /**
  * 主题 CSS 变量
  * Theme CSS Variables
- * 
+ *
  * Requirements: 8.1, 8.2, 8.3, 7.1, 7.2
- * 
+ *
  * 定义暗黑模式和白天模式的 CSS 变量
  */
 
@@ -15,7 +15,7 @@
 :root {
   --theme-transition-duration: 250ms;
   --theme-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
-  --theme-transition: 
+  --theme-transition:
     background-color var(--theme-transition-duration) var(--theme-transition-easing),
     background-image var(--theme-transition-duration) var(--theme-transition-easing),
     border-color var(--theme-transition-duration) var(--theme-transition-easing),
@@ -41,39 +41,39 @@
   --theme-glass-bg: rgba(var(--theme-glass-bg-base), 0.72);
   --theme-glass-bg-light: rgba(var(--theme-glass-surface-soft-rgb), 0.56);
   --theme-glass-bg-heavy: rgba(var(--theme-glass-bg-base), 0.88);
-  
+
   /* 毛玻璃边框 */
   --theme-glass-border: rgba(226, 198, 140, 0.16);
   --theme-glass-border-light: rgba(226, 198, 140, 0.1);
   --theme-glass-border-heavy: rgba(226, 198, 140, 0.24);
-  
+
   /* UI 背景色 */
   --theme-bg-primary: rgba(20, 20, 20, 1);
   --theme-bg-secondary: rgb(30, 26, 22);
   --theme-bg-surface: rgb(38, 33, 28);
   --theme-bg-elevated: rgb(47, 40, 34);
-  
+
   /* 文字颜色 */
   --theme-text-primary: rgba(var(--theme-glass-on-surface-rgb), 0.95);
   --theme-text-secondary: rgba(var(--theme-glass-on-surface-rgb), 0.72);
   --theme-text-muted: rgba(var(--theme-glass-on-surface-rgb), 0.5);
   --theme-text-disabled: rgba(var(--theme-glass-on-surface-rgb), 0.32);
-  
+
   /* 边框和分割线 */
   --theme-border-color: rgba(226, 198, 140, 0.15);
   --theme-border-light: rgba(226, 198, 140, 0.1);
   --theme-divider: rgba(226, 198, 140, 0.1);
-  
+
   /* 阴影 */
   --theme-shadow-sm: 0 8px 18px rgba(0, 0, 0, 0.22);
   --theme-shadow-md: 0 18px 36px rgba(0, 0, 0, 0.28);
   --theme-shadow-lg: 0 28px 54px rgba(0, 0, 0, 0.34);
   --theme-shadow-glow: 0 0 24px rgba(199, 143, 69, 0.14);
-  
+
   /* 悬停效果 */
   --theme-hover-bg: rgba(199, 143, 69, 0.12);
   --theme-active-bg: rgba(199, 143, 69, 0.18);
-  
+
   /* 图标颜色 */
   --theme-icon-primary: rgba(var(--theme-glass-on-surface-rgb), 0.9);
   --theme-icon-secondary: rgba(var(--theme-glass-on-surface-rgb), 0.62);
@@ -94,39 +94,39 @@
   --theme-glass-bg: rgba(var(--theme-glass-bg-base), 0.74);
   --theme-glass-bg-light: rgba(var(--theme-glass-surface-soft-rgb), 0.62);
   --theme-glass-bg-heavy: rgba(var(--theme-glass-bg-base), 0.9);
-  
+
   /* 毛玻璃边框 */
   --theme-glass-border: rgba(118, 90, 51, 0.14);
   --theme-glass-border-light: rgba(118, 90, 51, 0.1);
   --theme-glass-border-heavy: rgba(118, 90, 51, 0.2);
-  
+
   /* UI 背景色 */
   --theme-bg-primary: rgba(245, 245, 245, 1);
   --theme-bg-secondary: rgb(255, 251, 243);
   --theme-bg-surface: rgba(250, 250, 250, 1);
   --theme-bg-elevated: rgb(255, 253, 249);
-  
+
   /* 文字颜色 */
   --theme-text-primary: rgba(0, 0, 0, 0.87);
   --theme-text-secondary: rgba(0, 0, 0, 0.6);
   --theme-text-muted: rgba(0, 0, 0, 0.38);
   --theme-text-disabled: rgba(0, 0, 0, 0.26);
-  
+
   /* 边框和分割线 */
   --theme-border-color: rgba(0, 0, 0, 0.12);
   --theme-border-light: rgba(0, 0, 0, 0.08);
   --theme-divider: rgba(0, 0, 0, 0.08);
-  
+
   /* 阴影 */
   --theme-shadow-sm: 0 8px 18px rgba(82, 58, 28, 0.08);
   --theme-shadow-md: 0 18px 36px rgba(82, 58, 28, 0.12);
   --theme-shadow-lg: 0 28px 54px rgba(82, 58, 28, 0.16);
   --theme-shadow-glow: 0 0 24px rgba(155, 97, 33, 0.1);
-  
+
   /* 悬停效果 */
   --theme-hover-bg: rgba(155, 97, 33, 0.08);
   --theme-active-bg: rgba(155, 97, 33, 0.14);
-  
+
   /* 图标颜色 */
   --theme-icon-primary: rgba(0, 0, 0, 0.8);
   --theme-icon-secondary: rgba(0, 0, 0, 0.54);
@@ -240,72 +240,76 @@
   --glass-nav-active-glow: none;
 }
 
-[data-style="glass"][data-theme="dark"] {
-  --app-topbar-bg: linear-gradient(180deg, rgba(148, 110, 52, 0.94), rgba(166, 129, 71, 0.9));
-  --app-topbar-border: rgba(176, 138, 87, 0.18);
-  --app-topbar-text: #fff7eb;
-  --app-topbar-shadow: 0 8px 26px rgba(88, 59, 18, 0.18);
-  --app-topbar-pill-bg: rgba(255, 247, 235, 0.16);
-  --app-topbar-pill-border: rgba(255, 245, 225, 0.45);
-  --app-topbar-pill-text: #fff7eb;
-  --app-topbar-pill-hover-bg: rgba(255, 247, 235, 0.3);
-  --app-topbar-pill-active-bg: rgba(255, 248, 236, 0.92);
-  --app-topbar-pill-active-border: rgba(255, 248, 236, 0.96);
-  --app-topbar-pill-active-text: #73491d;
-  --app-topbar-pill-shadow: 0 10px 18px rgba(92, 61, 20, 0.18);
-  --app-page-surface:
-    linear-gradient(180deg, rgba(255, 248, 236, 0.08), rgba(255, 248, 236, 0.02)),
-    radial-gradient(circle at top right, rgba(179, 138, 74, 0.12), transparent 28%);
+[data-style="glass"] {
+  &[data-theme="dark"] {
+    --app-topbar-bg: linear-gradient(180deg, rgba(148, 110, 52, 0.94), rgba(166, 129, 71, 0.9));
+    --app-topbar-border: rgba(176, 138, 87, 0.18);
+    --app-topbar-text: #fff7eb;
+    --app-topbar-shadow: 0 8px 26px rgba(88, 59, 18, 0.18);
+    --app-topbar-pill-bg: rgba(255, 247, 235, 0.16);
+    --app-topbar-pill-border: rgba(255, 245, 225, 0.45);
+    --app-topbar-pill-text: #fff7eb;
+    --app-topbar-pill-hover-bg: rgba(255, 247, 235, 0.3);
+    --app-topbar-pill-active-bg: rgba(255, 248, 236, 0.92);
+    --app-topbar-pill-active-border: rgba(255, 248, 236, 0.96);
+    --app-topbar-pill-active-text: #73491d;
+    --app-topbar-pill-shadow: 0 10px 18px rgba(92, 61, 20, 0.18);
+    --app-page-surface:
+      linear-gradient(180deg, rgba(255, 248, 236, 0.08), rgba(255, 248, 236, 0.02)),
+      radial-gradient(circle at top right, rgba(179, 138, 74, 0.12), transparent 28%);
+  }
+
+  &[data-theme="light"] {
+    --app-topbar-bg: linear-gradient(180deg, var(--color-bg-secondary), var(--color-bg-tertiary));
+    --app-topbar-border: var(--color-border-medium);
+    --app-topbar-text: var(--color-text-primary);
+    --app-topbar-shadow: var(--shadow-sm);
+    --app-topbar-pill-bg: rgba(var(--color-glass-surface-rgb), 0.5);
+    --app-topbar-pill-border: var(--color-border-medium);
+    --app-topbar-pill-text: var(--color-text-primary);
+    --app-topbar-pill-hover-bg: rgba(var(--color-glass-surface-rgb), 0.75);
+    --app-topbar-pill-active-bg: rgba(var(--color-glass-surface-rgb), 0.92);
+    --app-topbar-pill-active-border: var(--color-border-dark);
+    --app-topbar-pill-active-text: var(--color-primary-dark);
+    --app-topbar-pill-shadow: var(--shadow-sm);
+    --app-page-surface:
+      linear-gradient(180deg, rgba(var(--color-glass-surface-rgb), 0.5), rgba(var(--color-glass-surface-soft-rgb), 0.3)),
+      radial-gradient(circle at top right, rgba(var(--color-glass-tint-rgb), 0.06), transparent 28%);
+  }
 }
 
-[data-style="glass"][data-theme="light"] {
-  --app-topbar-bg: linear-gradient(180deg, var(--color-bg-secondary), var(--color-bg-tertiary));
-  --app-topbar-border: var(--color-border-medium);
-  --app-topbar-text: var(--color-text-primary);
-  --app-topbar-shadow: var(--shadow-sm);
-  --app-topbar-pill-bg: rgba(var(--color-glass-surface-rgb), 0.5);
-  --app-topbar-pill-border: var(--color-border-medium);
-  --app-topbar-pill-text: var(--color-text-primary);
-  --app-topbar-pill-hover-bg: rgba(var(--color-glass-surface-rgb), 0.75);
-  --app-topbar-pill-active-bg: rgba(var(--color-glass-surface-rgb), 0.92);
-  --app-topbar-pill-active-border: var(--color-border-dark);
-  --app-topbar-pill-active-text: var(--color-primary-dark);
-  --app-topbar-pill-shadow: var(--shadow-sm);
-  --app-page-surface:
-    linear-gradient(180deg, rgba(var(--color-glass-surface-rgb), 0.5), rgba(var(--color-glass-surface-soft-rgb), 0.3)),
-    radial-gradient(circle at top right, rgba(var(--color-glass-tint-rgb), 0.06), transparent 28%);
-}
+[data-style="classic"] {
+  &[data-theme="dark"] {
+    --app-topbar-bg: linear-gradient(180deg, var(--theme-bg-elevated), var(--theme-bg-secondary));
+    --app-topbar-border: var(--theme-border-color);
+    --app-topbar-text: var(--theme-text-primary);
+    --app-topbar-shadow: var(--theme-shadow-sm);
+    --app-topbar-pill-bg: var(--theme-bg-surface);
+    --app-topbar-pill-border: var(--theme-border-color);
+    --app-topbar-pill-text: var(--theme-text-primary);
+    --app-topbar-pill-hover-bg: var(--theme-hover-bg);
+    --app-topbar-pill-active-bg: var(--color-primary-gradient);
+    --app-topbar-pill-active-border: transparent;
+    --app-topbar-pill-active-text: var(--color-text-inverse);
+    --app-topbar-pill-shadow: var(--theme-shadow-sm);
+    --app-page-surface: var(--theme-bg-primary);
+  }
 
-[data-style="classic"][data-theme="dark"] {
-  --app-topbar-bg: linear-gradient(180deg, var(--theme-bg-elevated), var(--theme-bg-secondary));
-  --app-topbar-border: var(--theme-border-color);
-  --app-topbar-text: var(--theme-text-primary);
-  --app-topbar-shadow: var(--theme-shadow-sm);
-  --app-topbar-pill-bg: var(--theme-bg-surface);
-  --app-topbar-pill-border: var(--theme-border-color);
-  --app-topbar-pill-text: var(--theme-text-primary);
-  --app-topbar-pill-hover-bg: var(--theme-hover-bg);
-  --app-topbar-pill-active-bg: var(--color-primary-gradient);
-  --app-topbar-pill-active-border: transparent;
-  --app-topbar-pill-active-text: var(--color-text-inverse);
-  --app-topbar-pill-shadow: var(--theme-shadow-sm);
-  --app-page-surface: var(--theme-bg-primary);
-}
-
-[data-style="classic"][data-theme="light"] {
-  --app-topbar-bg: linear-gradient(180deg, var(--theme-bg-elevated), var(--theme-bg-secondary));
-  --app-topbar-border: var(--theme-border-color);
-  --app-topbar-text: var(--theme-text-primary);
-  --app-topbar-shadow: var(--theme-shadow-sm);
-  --app-topbar-pill-bg: var(--theme-bg-surface);
-  --app-topbar-pill-border: var(--theme-border-color);
-  --app-topbar-pill-text: var(--theme-text-primary);
-  --app-topbar-pill-hover-bg: var(--theme-hover-bg);
-  --app-topbar-pill-active-bg: var(--color-primary-gradient);
-  --app-topbar-pill-active-border: transparent;
-  --app-topbar-pill-active-text: var(--color-text-inverse);
-  --app-topbar-pill-shadow: var(--theme-shadow-sm);
-  --app-page-surface: var(--theme-bg-primary);
+  &[data-theme="light"] {
+    --app-topbar-bg: linear-gradient(180deg, var(--theme-bg-elevated), var(--theme-bg-secondary));
+    --app-topbar-border: var(--theme-border-color);
+    --app-topbar-text: var(--theme-text-primary);
+    --app-topbar-shadow: var(--theme-shadow-sm);
+    --app-topbar-pill-bg: var(--theme-bg-surface);
+    --app-topbar-pill-border: var(--theme-border-color);
+    --app-topbar-pill-text: var(--theme-text-primary);
+    --app-topbar-pill-hover-bg: var(--theme-hover-bg);
+    --app-topbar-pill-active-bg: var(--color-primary-gradient);
+    --app-topbar-pill-active-border: transparent;
+    --app-topbar-pill-active-text: var(--color-text-inverse);
+    --app-topbar-pill-shadow: var(--theme-shadow-sm);
+    --app-page-surface: var(--theme-bg-primary);
+  }
 }
 
 html.theme-transitioning body,
@@ -363,10 +367,10 @@ html.style-transitioning body * {
   border: 1px solid var(--theme-glass-border);
   color: var(--theme-text-primary);
   transition: var(--theme-transition);
-}
 
-.glass-effect-themed:hover {
-  background-color: var(--theme-glass-bg-heavy);
+  &:hover {
+    background-color: var(--theme-glass-bg-heavy);
+  }
 }
 
 /* 毛玻璃卡片 - 使用主题变量 */
@@ -379,11 +383,11 @@ html.style-transitioning body * {
   box-shadow: var(--theme-shadow-md);
   color: var(--theme-text-primary);
   transition: var(--theme-transition);
-}
 
-.glass-card-themed:hover {
-  background-color: var(--theme-glass-bg-heavy);
-  box-shadow: var(--theme-shadow-lg);
+  &:hover {
+    background-color: var(--theme-glass-bg-heavy);
+    box-shadow: var(--theme-shadow-lg);
+  }
 }
 
 /* 毛玻璃按钮 - 使用主题变量 */
@@ -397,17 +401,17 @@ html.style-transitioning body * {
   color: var(--theme-text-primary);
   transition: var(--theme-transition);
   cursor: pointer;
-}
 
-.glass-button-themed:hover {
-  background-color: var(--theme-glass-bg);
-  box-shadow: var(--theme-shadow-md);
-  transform: translateY(-1px);
-}
+  &:hover {
+    background-color: var(--theme-glass-bg);
+    box-shadow: var(--theme-shadow-md);
+    transform: translateY(-1px);
+  }
 
-.glass-button-themed:active {
-  background-color: var(--theme-glass-bg-light);
-  transform: translateY(0);
+  &:active {
+    background-color: var(--theme-glass-bg-light);
+    transform: translateY(0);
+  }
 }
 
 /* 毛玻璃图标按钮 - 使用主题变量 */
@@ -421,11 +425,11 @@ html.style-transitioning body * {
   color: var(--theme-icon-primary);
   transition: var(--theme-transition);
   cursor: pointer;
-}
 
-.glass-icon-button-themed:hover {
-  background-color: var(--theme-glass-bg);
-  box-shadow: var(--theme-shadow-glow);
+  &:hover {
+    background-color: var(--theme-glass-bg);
+    box-shadow: var(--theme-shadow-glow);
+  }
 }
 
 /* 毛玻璃侧边栏 - 使用主题变量 */
@@ -463,14 +467,14 @@ html.style-transitioning body * {
   transition: var(--theme-transition);
   width: 100%;
   text-align: left;
-}
 
-.settings-panel-button:hover {
-  background-color: var(--theme-hover-bg);
-}
+  &:hover {
+    background-color: var(--theme-hover-bg);
+  }
 
-.settings-panel-button:active {
-  background-color: var(--theme-active-bg);
+  &:active {
+    background-color: var(--theme-active-bg);
+  }
 }
 
 .settings-panel-button-icon {
@@ -498,11 +502,11 @@ html.style-transitioning body * {
 /* 折叠状态的设置面板 */
 .settings-panel-collapsed {
   padding: 4px;
-}
 
-.settings-panel-collapsed .settings-panel-button {
-  padding: 8px;
-  justify-content: center;
+  .settings-panel-button {
+    padding: 8px;
+    justify-content: center;
+  }
 }
 
 /* ============================================
@@ -567,10 +571,10 @@ html.style-transitioning body * {
 /* 白天模式下输入框 */
 [data-theme="light"] .MuiInputBase-root {
   color: var(--theme-text-primary);
-}
 
-[data-theme="light"] .MuiInputBase-root .MuiInputBase-input {
-  color: var(--theme-text-primary);
+  .MuiInputBase-input {
+    color: var(--theme-text-primary);
+  }
 }
 
 [data-theme="light"] .MuiInputLabel-root {
@@ -616,10 +620,10 @@ html.style-transitioning body * {
 /* 白天模式下 Tab */
 [data-theme="light"] .MuiTab-root {
   color: var(--theme-text-secondary);
-}
 
-[data-theme="light"] .MuiTab-root.Mui-selected {
-  color: var(--theme-text-primary);
+  &.Mui-selected {
+    color: var(--theme-text-primary);
+  }
 }
 
 /* 白天模式下 Accordion */
@@ -641,7 +645,7 @@ html.style-transitioning body * {
   /* 更深的主文字颜色 */
   --theme-text-primary: rgba(36, 28, 20, 0.92);
   --theme-text-secondary: rgba(76, 60, 44, 0.74);
-  
+
   /* 毛玻璃背景更不透明以提高可读性 */
   --theme-glass-bg: rgba(255, 251, 243, 0.85);
   --theme-glass-bg-light: rgba(244, 236, 223, 0.7);
@@ -705,11 +709,10 @@ html.style-transitioning body * {
 [data-theme="dark"] .period-header {
   background-color: rgba(var(--glass-surface-soft-rgb), 0.8) !important;
   border-left-color: var(--color-primary) !important;
-}
 
-[data-theme="dark"] .category-header:hover,
-[data-theme="dark"] .period-header:hover {
-  background-color: rgba(var(--glass-surface-soft-rgb), 0.9) !important;
+  &:hover {
+    background-color: rgba(var(--glass-surface-soft-rgb), 0.9) !important;
+  }
 }
 
 /* 分类标题区域 - 白天模式 */
@@ -717,11 +720,10 @@ html.style-transitioning body * {
 [data-theme="light"] .period-header {
   background-color: rgba(var(--glass-surface-rgb), 0.9) !important;
   border-left-color: var(--color-primary) !important;
-}
 
-[data-theme="light"] .category-header:hover,
-[data-theme="light"] .period-header:hover {
-  background-color: rgba(var(--glass-surface-rgb), 0.98) !important;
+  &:hover {
+    background-color: rgba(var(--glass-surface-rgb), 0.98) !important;
+  }
 }
 
 /* MUI Card 主题适配 */
@@ -734,10 +736,10 @@ html.style-transitioning body * {
   background-color: var(--app-panel-bg) !important;
   color: var(--color-text-primary);
   box-shadow: var(--app-panel-shadow-sm) !important;
-}
 
-[data-theme="light"] .MuiCard-root:hover {
-  box-shadow: var(--app-panel-shadow-md) !important;
+  &:hover {
+    box-shadow: var(--app-panel-shadow-md) !important;
+  }
 }
 
 /* MUI Paper 主题适配 */
@@ -894,18 +896,18 @@ html.style-transitioning body * {
 /* MenuItem 主题适配 */
 [data-theme="dark"] .MuiMenuItem-root {
   color: var(--color-text-primary);
-}
 
-[data-theme="dark"] .MuiMenuItem-root:hover {
-  background-color: rgba(var(--glass-tint-rgb), 0.08);
+  &:hover {
+    background-color: rgba(var(--glass-tint-rgb), 0.08);
+  }
 }
 
 [data-theme="light"] .MuiMenuItem-root {
   color: var(--color-text-primary);
-}
 
-[data-theme="light"] .MuiMenuItem-root:hover {
-  background-color: rgba(var(--glass-tint-rgb), 0.08);
+  &:hover {
+    background-color: rgba(var(--glass-tint-rgb), 0.08);
+  }
 }
 
 /* Select 主题适配 */
@@ -972,10 +974,10 @@ html.style-transitioning body * {
 
 [data-theme="dark"] .MuiListItem-root {
   color: var(--color-text-primary);
-}
 
-[data-theme="dark"] .MuiListItem-root:hover {
-  background-color: rgba(var(--glass-tint-rgb), 0.08);
+  &:hover {
+    background-color: rgba(var(--glass-tint-rgb), 0.08);
+  }
 }
 
 [data-theme="light"] .MuiList-root {
@@ -984,10 +986,10 @@ html.style-transitioning body * {
 
 [data-theme="light"] .MuiListItem-root {
   color: var(--color-text-primary);
-}
 
-[data-theme="light"] .MuiListItem-root:hover {
-  background-color: rgba(var(--glass-tint-rgb), 0.08);
+  &:hover {
+    background-color: rgba(var(--glass-tint-rgb), 0.08);
+  }
 }
 
 /* Breadcrumbs 主题适配 */
@@ -1092,18 +1094,18 @@ html.style-transitioning body * {
 
 [data-theme="dark"] .MuiBottomNavigationAction-root {
   color: var(--color-text-secondary);
-}
 
-[data-theme="dark"] .MuiBottomNavigationAction-root.Mui-selected {
-  color: var(--color-primary);
+  &.Mui-selected {
+    color: var(--color-primary);
+  }
 }
 
 [data-theme="light"] .MuiBottomNavigationAction-root {
   color: var(--color-text-secondary);
-}
 
-[data-theme="light"] .MuiBottomNavigationAction-root.Mui-selected {
-  color: var(--color-primary);
+  &.Mui-selected {
+    color: var(--color-primary);
+  }
 }
 
 /* AppBar 主题适配 */
@@ -1162,7 +1164,7 @@ html.style-transitioning body * {
 .MuiPopover-paper,
 .MuiAppBar-root,
 .MuiBottomNavigation-root {
-  transition: 
+  transition:
     background-color var(--theme-transition-duration) var(--theme-transition-easing),
     color var(--theme-transition-duration) var(--theme-transition-easing),
     border-color var(--theme-transition-duration) var(--theme-transition-easing),

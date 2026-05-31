@@ -19,7 +19,7 @@ import type { Dynasty } from '@/services/culture/types';
 import type { Event } from '@/services/timeline/types';
 import type { Place } from '@/services/map/types';
 import { useMapStore } from '@/store';
-import './MapWorkbench.css';
+import './MapWorkbench.scss';
 
 const MAP_STAGE_STYLE = { '--map-right-inset': '24px' } as CSSProperties;
 

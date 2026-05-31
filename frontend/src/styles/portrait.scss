@@ -7,13 +7,13 @@
   .app {
     flex-direction: column !important;
   }
-  
+
   /* 侧边栏在竖屏模式下的优化 */
   .MuiDrawer-root {
     /* 移除固定定位相关样式，因为现在由AppLayout控制 */
     display: none !important; /* 隐藏原有的Drawer */
   }
-  
+
   /* ============================================
      竖屏导航栏毛玻璃风格
      Requirements: 6.1, 6.2, 9.2
@@ -39,7 +39,7 @@
     z-index: auto !important;
     margin: 0 !important;
   }
-  
+
   /* ============================================
      竖屏侧边栏内容毛玻璃风格
      Requirements: 6.2
@@ -55,7 +55,7 @@
     /* 毛玻璃内容区域 */
     background: transparent !important;
   }
-  
+
   /* ============================================
      竖屏导航项目毛玻璃风格
      Requirements: 6.3, 6.4, 6.5
@@ -78,51 +78,51 @@
     backdrop-filter: blur(0px) !important;
     -webkit-backdrop-filter: blur(0px) !important;
     background-color: transparent !important;
+
+    /* 导航项目悬停状态 - 毛玻璃效果 */
+    &:hover {
+      backdrop-filter: blur(var(--glass-btn-secondary-blur, 6px)) !important;
+      -webkit-backdrop-filter: blur(var(--glass-btn-secondary-blur, 6px)) !important;
+      background: linear-gradient(135deg, rgba(199, 143, 69, 0.66) 0%, rgba(241, 199, 132, 0.56) 100%) !important;
+      color: var(--color-text-inverse) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 4px 15px rgba(199, 143, 69, 0.32), var(--glass-shadow-glow, 0 0 12px rgba(199, 143, 69, 0.18)) !important;
+    }
+
+    /* 导航项目活动状态 - 增强毛玻璃效果 */
+    &.active {
+      backdrop-filter: blur(var(--glass-btn-primary-blur, 8px)) !important;
+      -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur, 8px)) !important;
+      background: linear-gradient(135deg, rgba(199, 143, 69, 0.86) 0%, rgba(241, 199, 132, 0.82) 100%) !important;
+      color: var(--color-text-inverse) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 4px 15px rgba(199, 143, 69, 0.4), var(--glass-nav-active-glow, 0 0 10px rgba(199, 143, 69, 0.2)) !important;
+      border: var(--glass-border-width, 0.5px) solid var(--theme-glass-border-heavy) !important;
+    }
+
+    .nav-icon {
+      font-size: 18px !important;
+      margin-bottom: 2px !important;
+    }
+
+    .nav-label {
+      font-size: 8px !important;
+      font-weight: 500 !important;
+      text-align: center !important;
+      line-height: 1 !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      max-width: 100% !important;
+    }
   }
-  
-  /* 导航项目悬停状态 - 毛玻璃效果 */
-  .nav-item:hover {
-    backdrop-filter: blur(var(--glass-btn-secondary-blur, 6px)) !important;
-    -webkit-backdrop-filter: blur(var(--glass-btn-secondary-blur, 6px)) !important;
-    background: linear-gradient(135deg, rgba(199, 143, 69, 0.66) 0%, rgba(241, 199, 132, 0.56) 100%) !important;
-    color: var(--color-text-inverse) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 4px 15px rgba(199, 143, 69, 0.32), var(--glass-shadow-glow, 0 0 12px rgba(199, 143, 69, 0.18)) !important;
-  }
-  
-  /* 导航项目活动状态 - 增强毛玻璃效果 */
-  .nav-item.active {
-    backdrop-filter: blur(var(--glass-btn-primary-blur, 8px)) !important;
-    -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur, 8px)) !important;
-    background: linear-gradient(135deg, rgba(199, 143, 69, 0.86) 0%, rgba(241, 199, 132, 0.82) 100%) !important;
-    color: var(--color-text-inverse) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 4px 15px rgba(199, 143, 69, 0.4), var(--glass-nav-active-glow, 0 0 10px rgba(199, 143, 69, 0.2)) !important;
-    border: var(--glass-border-width, 0.5px) solid var(--theme-glass-border-heavy) !important;
-  }
-  
-  .nav-item .nav-icon {
-    font-size: 18px !important;
-    margin-bottom: 2px !important;
-  }
-  
-  .nav-item .nav-label {
-    font-size: 8px !important;
-    font-weight: 500 !important;
-    text-align: center !important;
-    line-height: 1 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    max-width: 100% !important;
-  }
-  
+
   /* 主内容区域调整 */
   main {
     padding-bottom: 0px !important;
     overflow: hidden !important;
   }
-  
+
   /* 表格容器在竖屏模式下的优化 - 毛玻璃风格 */
   .MuiTableContainer-root {
     height: 100% !important;
@@ -134,34 +134,34 @@
     border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15)) !important;
     border-radius: var(--glass-radius-md, 10px) !important;
   }
-  
+
   /* 隐藏桌面版侧边栏切换按钮 */
   .sidebar-toggle-btn {
     display: none !important;
   }
-  
+
   /* 功能面板在竖屏模式下隐藏或最小化 */
   .function-panel {
     display: none !important;
   }
-  
+
   /* 页面标题优化 */
   .page-title {
     font-size: 1.2rem !important;
     margin-bottom: 8px !important;
     padding: 0 16px !important;
   }
-  
+
   /* 内容区域内边距调整 */
   .content {
     padding: 8px !important;
   }
-  
+
   /* 表格在竖屏模式下的特殊优化 */
   .MuiTable-root {
     font-size: 0.7rem !important;
   }
-  
+
   .MuiTableCell-root {
     padding: 4px 6px !important;
     font-size: 0.65rem !important;
@@ -170,7 +170,7 @@
     background-color: rgba(var(--glass-surface-rgb), var(--glass-table-row-bg-opacity, 0.4)) !important;
     transition: background-color var(--glass-duration-hover, 100ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) !important;
   }
-  
+
   .MuiTableHead-root .MuiTableCell-root {
     padding: 6px 8px !important;
     font-size: 0.6rem !important;
@@ -180,18 +180,18 @@
     -webkit-backdrop-filter: blur(var(--glass-table-header-blur, 10px)) !important;
     background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-header-bg-opacity, 0.75)) !important;
   }
-  
+
   /* 朝代标题行优化 */
   .dynasty-header-row .MuiTableCell-root {
     padding: 8px 6px !important;
     font-size: 0.7rem !important;
   }
-  
+
   /* 展开图标调整 */
   .expand-icon {
     font-size: 1rem !important;
   }
-  
+
   /* 地图按钮优化 - 毛玻璃风格 */
   .map-icon-button {
     width: 20px !important;
@@ -202,22 +202,22 @@
     background-color: rgba(var(--glass-surface-rgb), var(--glass-btn-icon-bg-opacity, 0.5)) !important;
     border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15)) !important;
     border-radius: var(--glass-radius-full, 9999px) !important;
+
+    .MuiSvgIcon-root {
+      font-size: 0.7rem !important;
+    }
   }
-  
-  .map-icon-button .MuiSvgIcon-root {
-    font-size: 0.7rem !important;
-  }
-  
+
   /* 滚动指示器位置调整 */
   .scroll-indicator {
     bottom: 16px !important;
   }
-  
+
   /* 加载状态优化 */
   .loading-container {
     height: 100% !important;
   }
-  
+
   /* 错误状态优化 */
   .error-container {
     height: 100% !important;
@@ -235,7 +235,7 @@
     -webkit-backdrop-filter: blur(8px) !important;
     background: linear-gradient(135deg, rgba(var(--glass-surface-soft-rgb), 0.85) 0%, rgba(var(--glass-surface-rgb), 0.85) 100%) !important;
   }
-  
+
   .nav-item {
     flex: 1 !important;
     min-width: 0 !important;
@@ -244,34 +244,34 @@
     padding: 4px 2px !important;
     border-radius: var(--glass-radius-sm, 6px) !important;
   }
-  
+
   .nav-item:hover,
   .nav-item.active {
     backdrop-filter: blur(6px) !important;
     -webkit-backdrop-filter: blur(6px) !important;
   }
-  
+
   .nav-item .nav-icon {
     font-size: 16px !important;
   }
-  
+
   .nav-item .nav-label {
     font-size: 8px !important;
     max-width: 100% !important;
   }
-  
+
   main {
     padding-bottom: 0px !important;
     overflow: hidden !important;
   }
-  
+
   .MuiTableContainer-root {
     height: 100% !important;
     /* 小屏毛玻璃优化 */
     backdrop-filter: blur(6px) !important;
     -webkit-backdrop-filter: blur(6px) !important;
   }
-  
+
   .scroll-indicator {
     bottom: 16px !important;
   }
@@ -288,7 +288,7 @@
     background: linear-gradient(135deg, rgba(var(--glass-surface-soft-rgb), var(--glass-nav-bg-opacity, 0.8)) 0%, rgba(var(--glass-surface-rgb), var(--glass-nav-bg-opacity, 0.8)) 100%) !important;
     border-radius: var(--glass-radius-xl, 20px) !important;
   }
-  
+
   .nav-item {
     flex: 1 !important;
     min-width: 0 !important;
@@ -296,36 +296,36 @@
     height: 70px !important;
     padding: 4px 2px !important;
     border-radius: var(--glass-radius-md, 10px) !important;
+
+    &:hover {
+      backdrop-filter: blur(8px) !important;
+      -webkit-backdrop-filter: blur(8px) !important;
+      background: linear-gradient(135deg, rgba(199, 143, 69, 0.66) 0%, rgba(241, 199, 132, 0.56) 100%) !important;
+    }
+
+    &.active {
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      background: linear-gradient(135deg, rgba(199, 143, 69, 0.86) 0%, rgba(241, 199, 132, 0.82) 100%) !important;
+      box-shadow: 0 4px 20px rgba(199, 143, 69, 0.38), var(--glass-nav-active-glow, 0 0 10px rgba(199, 143, 69, 0.2)) !important;
+    }
+
+    .nav-icon {
+      font-size: 22px !important;
+      margin-bottom: 4px !important;
+    }
+
+    .nav-label {
+      font-size: 11px !important;
+      max-width: 100% !important;
+    }
   }
-  
-  .nav-item:hover {
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-    background: linear-gradient(135deg, rgba(199, 143, 69, 0.66) 0%, rgba(241, 199, 132, 0.56) 100%) !important;
-  }
-  
-  .nav-item.active {
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    background: linear-gradient(135deg, rgba(199, 143, 69, 0.86) 0%, rgba(241, 199, 132, 0.82) 100%) !important;
-    box-shadow: 0 4px 20px rgba(199, 143, 69, 0.38), var(--glass-nav-active-glow, 0 0 10px rgba(199, 143, 69, 0.2)) !important;
-  }
-  
-  .nav-item .nav-icon {
-    font-size: 22px !important;
-    margin-bottom: 4px !important;
-  }
-  
-  .nav-item .nav-label {
-    font-size: 11px !important;
-    max-width: 100% !important;
-  }
-  
+
   main {
     padding-bottom: 0px !important;
     overflow: hidden !important;
   }
-  
+
   .MuiTableContainer-root {
     height: 100% !important;
     /* 平板毛玻璃效果 */
@@ -334,17 +334,17 @@
     background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-container-bg-opacity, 0.6)) !important;
     border-radius: var(--glass-radius-lg, 14px) !important;
   }
-  
+
   .MuiTable-root {
     font-size: 0.8rem !important;
   }
-  
+
   .MuiTableCell-root {
     padding: 6px 8px !important;
     font-size: 0.75rem !important;
     background-color: rgba(var(--glass-surface-rgb), var(--glass-table-row-bg-opacity, 0.4)) !important;
   }
-  
+
   .MuiTableHead-root .MuiTableCell-root {
     padding: 8px 10px !important;
     font-size: 0.7rem !important;
@@ -352,7 +352,7 @@
     -webkit-backdrop-filter: blur(var(--glass-table-header-blur, 10px)) !important;
     background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-header-bg-opacity, 0.75)) !important;
   }
-  
+
   .scroll-indicator {
     bottom: 16px !important;
   }
@@ -362,16 +362,16 @@
 @media (orientation: portrait) {
   .nav-item {
     transition: all var(--glass-duration-normal, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1)) !important;
+
+    &:active {
+      transform: translateY(-1px) scale(0.95) !important;
+      /* 触摸反馈毛玻璃效果 */
+      backdrop-filter: blur(var(--glass-btn-primary-blur, 8px)) !important;
+      -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur, 8px)) !important;
+      background: linear-gradient(135deg, rgba(var(--glass-tint-rgb), 0.9) 0%, rgba(166, 122, 68, 0.88) 100%) !important;
+    }
   }
-  
-  .nav-item:active {
-    transform: translateY(-1px) scale(0.95) !important;
-    /* 触摸反馈毛玻璃效果 */
-    backdrop-filter: blur(var(--glass-btn-primary-blur, 8px)) !important;
-    -webkit-backdrop-filter: blur(var(--glass-btn-primary-blur, 8px)) !important;
-    background: linear-gradient(135deg, rgba(var(--glass-tint-rgb), 0.9) 0%, rgba(166, 122, 68, 0.88) 100%) !important;
-  }
-  
+
   /* 平滑的方向切换过渡 */
   .app,
   main,
@@ -387,7 +387,7 @@
     outline: 2px solid #FF3D00 !important;
     outline-offset: 2px !important;
   }
-  
+
   .nav-item:focus-visible {
     backdrop-filter: blur(var(--glass-btn-secondary-blur, 6px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-btn-secondary-blur, 6px)) !important;
@@ -406,11 +406,11 @@
     transform: translateZ(0) !important;
     contain: layout style !important;
   }
-  
+
   .sidebar-content {
     -webkit-overflow-scrolling: touch !important;
   }
-  
+
   /* 毛玻璃组件性能优化 */
   .MuiTableContainer-root,
   .MuiPaper-root {
@@ -426,12 +426,12 @@
     .app {
       height: -webkit-fill-available !important;
     }
-    
+
     main {
       overflow: hidden !important;
     }
   }
-  
+
   /* 安全区域适配（刘海屏等）- 毛玻璃导航栏 */
   .MuiDrawer-paper {
     padding-bottom: env(safe-area-inset-bottom) !important;
@@ -439,7 +439,7 @@
     backdrop-filter: blur(var(--glass-nav-blur, 12px)) !important;
     -webkit-backdrop-filter: blur(var(--glass-nav-blur, 12px)) !important;
   }
-  
+
   main {
     padding-bottom: 0px !important;
   }
@@ -455,7 +455,7 @@
   main {
     transition: none !important;
   }
-  
+
   .nav-item:hover,
   .nav-item.active,
   .nav-item:active {
@@ -471,16 +471,16 @@
     .MuiDrawer-paper {
       background: linear-gradient(135deg, rgba(28, 24, 20, 0.95) 0%, rgba(43, 37, 31, 0.95) 100%) !important;
     }
-    
+
     .nav-item:hover,
     .nav-item.active {
       background: linear-gradient(135deg, rgba(var(--glass-tint-rgb), 0.9) 0%, rgba(166, 122, 68, 0.88) 100%) !important;
     }
-    
+
     .MuiTableContainer-root {
       background-color: rgba(28, 24, 20, 0.9) !important;
     }
-    
+
     .MuiTableHead-root .MuiTableCell-root {
       background-color: rgba(28, 24, 20, 0.95) !important;
     }

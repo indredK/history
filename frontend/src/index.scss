@@ -1,15 +1,15 @@
 /* 中国历史全景 - 全局设计系统 */
 
 /* 导入毛玻璃样式系统 */
-@import './styles/glass.css';
+@use './styles/glass';
 /* 导入经典样式系统 */
-@import './styles/classic.css';
+@use './styles/classic';
 /* 导入主题样式系统 */
-@import './styles/theme.css';
+@use './styles/theme';
 /* 导入移动端适配样式 */
-@import './styles/mobile.css';
+@use './styles/mobile';
 /* 导入竖屏布局优化样式 */
-@import './styles/portrait.css';
+@use './styles/portrait';
 
 /* 中国历史全景 - 全局设计系统 */
 

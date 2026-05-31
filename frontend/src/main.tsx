@@ -4,8 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 import { AppProviders } from './components/AppProviders.tsx'
 import { initializeStyle, initializeTheme } from './store'
-import './index.css'
-import './styles/ui.css'
+import './index.scss'
+import './styles/ui.scss'
 import 'animate.css'
 
 console.info(

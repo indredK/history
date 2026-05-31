@@ -1,4 +1,4 @@
-import './TimelineList.css';
+import './TimelineList.scss';
 import { EChartsTimeline } from './components';
 import { Box } from '@mui/material';
 import { useRequest } from 'ahooks';

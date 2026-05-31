@@ -1,7 +1,7 @@
 /**
  * 宗教关系图样式
  * Religion Graph Styles
- * 
+ *
  * Requirements: 5.1, 5.2, 5.5, 5.6
  */
 
@@ -35,10 +35,10 @@
   cursor: grab;
   width: 100%;
   height: 100%;
-}
 
-.religion-graph-svg:active {
-  cursor: grabbing;
+  &:active {
+    cursor: grabbing;
+  }
 }
 
 .religion-graph-loading {
@@ -62,7 +62,7 @@
 .node-label {
   pointer-events: none;
   font-weight: 500;
-  text-shadow: 
+  text-shadow:
     0 1px 2px rgba(0, 0, 0, 0.5),
     0 0 10px rgba(0, 0, 0, 0.3);
   transition: opacity 0.2s ease;
@@ -109,10 +109,10 @@
   margin-bottom: 0.25rem;
   font-size: 0.75rem;
   color: var(--color-text-secondary);
-}
 
-.legend-item:last-child {
-  margin-bottom: 0;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .legend-color {
@@ -144,11 +144,11 @@
   color: var(--color-text-primary);
   cursor: pointer;
   transition: all 0.2s ease;
-}
 
-.zoom-button:hover {
-  background: rgba(var(--glass-surface-soft-rgb), 0.9);
-  transform: scale(1.05);
+  &:hover {
+    background: rgba(var(--glass-surface-soft-rgb), 0.9);
+    transform: scale(1.05);
+  }
 }
 
 /* 响应式 */
@@ -157,19 +157,19 @@
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .religion-graph-container {
     min-height: 300px;
   }
-  
+
   .religion-graph-legend {
     display: none;
   }
-  
+
   .node-label {
     font-size: 10px;
   }
-  
+
   .link-label {
     font-size: 8px;
   }
@@ -185,7 +185,7 @@
   .zoom-button {
     transition: none;
   }
-  
+
   .node-group:hover {
     transform: none;
   }
@@ -193,7 +193,7 @@
 
 /* 白天模式 */
 [data-theme="light"] .node-label {
-  text-shadow: 
+  text-shadow:
     0 1px 2px rgba(255, 251, 243, 0.8),
     0 0 10px rgba(255, 251, 243, 0.45);
 }

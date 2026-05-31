@@ -1,0 +1,39 @@
+.culture-page {
+  height: 100%;
+  overflow: hidden; /* 确保页面不滚动 */
+  display: flex;
+  flex-direction: column;
+}
+
+.culture-content {
+  flex: 1; /* 占用剩余空间 */
+  overflow-y: auto;
+  padding-right: 8px;
+
+  /* 自定义滚动条样式 */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(76, 175, 80, 0.6);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: rgba(76, 175, 80, 0.8);
+    }
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .culture-content {
+    flex: 1; /* 占用剩余空间 */
+  }
+}

@@ -59,3 +59,9 @@ coverage/
 # Deployment temporary keys
 temp_deploy_key
 temp_deploy_key.pub
+
+# Temporary work files
+.tmp/
+
+# Claude Code
+.claude/

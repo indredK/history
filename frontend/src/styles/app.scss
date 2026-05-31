@@ -17,37 +17,39 @@ html {
   scroll-behavior: smooth;
 }
 
-/* 主容器毛玻璃装饰效果 */
-.app::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), var(--panel-grid) calc(100% - 1px)),
-    linear-gradient(0deg, transparent 0, transparent calc(100% - 1px), var(--panel-grid) calc(100% - 1px)),
-    radial-gradient(circle at 18% 20%, rgba(227, 193, 129, 0.12) 0%, transparent 32%),
-    radial-gradient(circle at 82% 16%, rgba(107, 135, 151, 0.12) 0%, transparent 28%);
-  background-size: 72px 72px, 72px 72px, auto, auto;
-  backdrop-filter: blur(var(--glass-blur-none));
-  -webkit-backdrop-filter: blur(var(--glass-blur-none));
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.65;
-}
+.app {
+  /* 主容器毛玻璃装饰效果 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), var(--panel-grid) calc(100% - 1px)),
+      linear-gradient(0deg, transparent 0, transparent calc(100% - 1px), var(--panel-grid) calc(100% - 1px)),
+      radial-gradient(circle at 18% 20%, rgba(227, 193, 129, 0.12) 0%, transparent 32%),
+      radial-gradient(circle at 82% 16%, rgba(107, 135, 151, 0.12) 0%, transparent 28%);
+    background-size: 72px 72px, 72px 72px, auto, auto;
+    backdrop-filter: blur(var(--glass-blur-none));
+    -webkit-backdrop-filter: blur(var(--glass-blur-none));
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.65;
+  }
 
-/* 毛玻璃装饰层 - 顶部光晕 */
-.app::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(255, 248, 232, 0.06), transparent 18%),
-    radial-gradient(circle at center, transparent 58%, rgba(0, 0, 0, 0.22) 100%);
-  pointer-events: none;
-  z-index: 0;
+  /* 毛玻璃装饰层 - 顶部光晕 */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255, 248, 232, 0.06), transparent 18%),
+      radial-gradient(circle at center, transparent 58%, rgba(0, 0, 0, 0.22) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
 }
 
 /* 毛玻璃内容区域 */

@@ -19,7 +19,7 @@ import { useFilteredGraph } from './hooks/useFilteredGraph';
 import { renderTreeLayout } from './layouts/treeLayout';
 import { renderForceLayout } from './layouts/forceLayout';
 import type { D3Node, D3Edge } from './layouts/types';
-import './ReligionGraph.css';
+import './ReligionGraph.scss';
 
 interface ReligionGraphProps {
   width?: number;

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { getDynastyColor } from './data';
 import { DynastySelector, EmperorDetail, EmperorSelector } from './components';
 import { useEmperorsCyberData } from './hooks/useEmperorsCyberData';
-import './EmperorsCyberPage.css';
+import './EmperorsCyberPage.scss';
 
 function EmperorsCyberPage() {
   const { dynasties, emperors, loading } = useEmperorsCyberData();

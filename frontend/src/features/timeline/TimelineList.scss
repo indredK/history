@@ -13,20 +13,19 @@
   z-index: 1;
   border: var(--panel-border);
   transition: var(--glass-transition, all 250ms cubic-bezier(0.4, 0, 0.2, 1));
-}
 
-/* 移除悬停时的背景颜色变化 */
-.timeline-list-container:hover {
-  box-shadow: var(--shadow-xl);
-}
+  /* 移除悬停时的背景颜色变化 */
+  &:hover {
+    box-shadow: var(--shadow-xl);
+  }
 
-.timeline-list-container::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(255, 249, 236, 0.05), transparent 18%),
-    radial-gradient(circle at top right, rgba(107, 135, 151, 0.1), transparent 24%);
-  pointer-events: none;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255, 249, 236, 0.05), transparent 18%),
+      radial-gradient(circle at top right, rgba(107, 135, 151, 0.1), transparent 24%);
+    pointer-events: none;
+  }
 }
-

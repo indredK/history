@@ -18,7 +18,7 @@ import { CategoryFilter } from './components/CategoryFilter';
 import { MythologyGrid } from './components/MythologyGrid';
 import { MythologyDetailModal } from './components/MythologyDetailModal';
 import { ReligionGraph } from './components/ReligionGraph';
-import './MythologyPage.css';
+import './MythologyPage.scss';
 
 /**
  * 加载骨架屏组件

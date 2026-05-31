@@ -1,3 +1,3 @@
 // Centralized style imports
-import './ui.css';
-import './classic.css';
+import './ui.scss';
+import './classic.scss';

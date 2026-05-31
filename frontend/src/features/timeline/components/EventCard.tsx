@@ -1,4 +1,4 @@
-import './EventCard.css';
+import './EventCard.scss';
 import type { Event } from '@/services/timeline/types';
 import { useState } from 'react';
 

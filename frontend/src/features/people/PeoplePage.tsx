@@ -21,7 +21,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { FixedTabsPage, type FixedTabConfig } from '@/components/common';
 import { GridSkeleton } from './components';
 import { usePerformanceTrace } from '@/utils/performance';
-import './PeoplePage.css';
+import './PeoplePage.scss';
 
 // 懒加载标签页内容组件
 const EmperorsContent = lazy(() => import('./components/emperors/EmperorsContent'));

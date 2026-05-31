@@ -9,22 +9,22 @@
   --tablet-sm: 768px;  /* 小平板 */
   --tablet-md: 1024px; /* 大平板 */
   --desktop: 1200px;   /* 桌面 */
-  
+
   /* 移动端专用间距 */
   --mobile-padding: 12px;
   --mobile-margin: 8px;
   --mobile-gap: 8px;
-  
+
   /* 移动端字体大小 */
   --mobile-font-xs: 0.7rem;
   --mobile-font-sm: 0.75rem;
   --mobile-font-base: 0.8rem;
   --mobile-font-lg: 0.9rem;
   --mobile-font-xl: 1rem;
-  
+
   /* 移动端触摸目标最小尺寸 */
   --touch-target-min: 44px;
-  
+
   /* 移动端毛玻璃触摸反馈变量 */
   --mobile-touch-feedback-opacity: 0.15;
   --mobile-touch-feedback-duration: 100ms;
@@ -38,24 +38,24 @@
     line-height: 1.4;
     overflow-x: hidden;
   }
-  
+
   /* 应用布局调整 */
   .app {
     flex-direction: column;
   }
-  
+
   /* 主内容区域 */
   main {
     padding: var(--mobile-padding) !important;
     margin-top: 0 !important;
   }
-  
+
   /* 内容容器 */
   .content {
     padding: 0;
     overflow-x: hidden;
   }
-  
+
   /* ============================================
      移动端表格容器毛玻璃风格
      Requirements: 9.1, 9.3
@@ -72,13 +72,13 @@
     border-radius: var(--glass-radius-md, 10px);
     box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1));
   }
-  
+
   /* 表格适配 */
   .MuiTable-root {
     min-width: 100% !important;
     font-size: var(--mobile-font-sm);
   }
-  
+
   /* 表格头部 - 毛玻璃风格 */
   .MuiTableHead-root .MuiTableCell-root {
     padding: 6px 8px;
@@ -91,7 +91,7 @@
     background-color: rgba(var(--glass-surface-soft-rgb, 30, 30, 30), var(--glass-table-header-bg-opacity, 0.75));
     border-bottom: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15));
   }
-  
+
   /* 表格单元格 */
   .MuiTableCell-root {
     padding: 8px 6px;
@@ -101,12 +101,12 @@
     background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), var(--glass-table-row-bg-opacity, 0.4));
     transition: background-color var(--glass-duration-hover, 100ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
   }
-  
+
   /* 表格行悬停效果 */
   .MuiTableRow-root:hover .MuiTableCell-root {
     background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), var(--glass-table-row-hover-opacity, 0.55));
   }
-  
+
   /* 朝代名称列 - 毛玻璃粘性列 */
   .MuiTableCell-root:first-child {
     position: sticky;
@@ -119,18 +119,18 @@
     max-width: 100px;
     border-right: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15));
   }
-  
+
   /* 时期列 */
   .MuiTableCell-root:nth-child(2) {
     min-width: 120px;
     font-size: var(--mobile-font-xs);
   }
-  
+
   /* 详情列 */
   .MuiTableCell-root:last-child {
     min-width: 200px;
   }
-  
+
   /* ============================================
      移动端按钮毛玻璃风格
      Requirements: 9.3
@@ -147,18 +147,18 @@
     border-radius: var(--glass-radius-md, 10px);
     box-shadow: var(--glass-shadow-sm, 0 1px 4px rgba(0, 0, 0, 0.08));
     transition: all var(--glass-duration-normal, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
+
+    &:hover {
+      background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), calc(var(--glass-btn-primary-bg-opacity, 0.75) + 0.1));
+      box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1));
+    }
+
+    &:active {
+      background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), calc(var(--glass-btn-primary-bg-opacity, 0.75) - 0.05));
+      transform: scale(0.98);
+    }
   }
-  
-  .MuiButton-root:hover {
-    background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), calc(var(--glass-btn-primary-bg-opacity, 0.75) + 0.1));
-    box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1));
-  }
-  
-  .MuiButton-root:active {
-    background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), calc(var(--glass-btn-primary-bg-opacity, 0.75) - 0.05));
-    transform: scale(0.98);
-  }
-  
+
   /* 图标按钮 - 毛玻璃风格 */
   .MuiIconButton-root {
     width: var(--touch-target-min);
@@ -171,13 +171,13 @@
     border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15));
     border-radius: var(--glass-radius-full, 9999px);
     transition: all var(--glass-duration-normal, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
+
+    &:hover {
+      background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), calc(var(--glass-btn-icon-bg-opacity, 0.5) + 0.15));
+      box-shadow: var(--glass-shadow-glow, 0 0 12px rgba(199, 143, 69, 0.14));
+    }
   }
-  
-  .MuiIconButton-root:hover {
-    background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), calc(var(--glass-btn-icon-bg-opacity, 0.5) + 0.15));
-    box-shadow: var(--glass-shadow-glow, 0 0 12px rgba(199, 143, 69, 0.14));
-  }
-  
+
   /* ============================================
      移动端卡片毛玻璃风格
      Requirements: 9.3
@@ -192,34 +192,34 @@
     border-radius: var(--glass-radius-md, 10px);
     box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1));
     transition: all var(--glass-duration-normal, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
+
+    &:hover {
+      background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), calc(var(--glass-card-bg-opacity, 0.7) + var(--glass-card-hover-delta, 0.08)));
+      box-shadow: var(--glass-shadow-lg, 0 4px 16px rgba(0, 0, 0, 0.12));
+    }
   }
-  
-  .MuiPaper-root:hover {
-    background-color: rgba(var(--glass-surface-rgb, 30, 30, 30), calc(var(--glass-card-bg-opacity, 0.7) + var(--glass-card-hover-delta, 0.08)));
-    box-shadow: var(--glass-shadow-lg, 0 4px 16px rgba(0, 0, 0, 0.12));
-  }
-  
+
   /* 排版组件 */
   .MuiTypography-h4 {
     font-size: 1.2rem;
   }
-  
+
   .MuiTypography-h5 {
     font-size: 1.1rem;
   }
-  
+
   .MuiTypography-h6 {
     font-size: 1rem;
   }
-  
+
   .MuiTypography-body1 {
     font-size: var(--mobile-font-base);
   }
-  
+
   .MuiTypography-body2 {
     font-size: var(--mobile-font-sm);
   }
-  
+
   .MuiTypography-caption {
     font-size: var(--mobile-font-xs);
   }
@@ -232,21 +232,21 @@
     --mobile-margin: 4px;
     --mobile-gap: 4px;
   }
-  
+
   body {
     font-size: var(--mobile-font-sm);
   }
-  
+
   .MuiTableCell-root {
     padding: 4px 3px;
     font-size: var(--mobile-font-xs);
   }
-  
+
   .MuiTableHead-root .MuiTableCell-root {
     padding: 4px 3px;
     font-size: 0.65rem;
   }
-  
+
   /* 朝代名称列更窄 - 保持毛玻璃效果 */
   .MuiTableCell-root:first-child {
     min-width: 60px;
@@ -255,19 +255,19 @@
     -webkit-backdrop-filter: blur(var(--glass-table-header-blur, 10px));
     background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-header-bg-opacity, 0.75));
   }
-  
+
   /* 时期列更窄 */
   .MuiTableCell-root:nth-child(2) {
     min-width: 100px;
   }
-  
+
   /* 小屏卡片毛玻璃优化 */
   .MuiPaper-root {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     background-color: rgba(var(--glass-surface-soft-rgb), 0.75);
   }
-  
+
   /* 小屏按钮毛玻璃优化 */
   .MuiButton-root {
     backdrop-filter: blur(6px);
@@ -280,11 +280,11 @@
   .MuiTableContainer-root {
     height: 100%;
   }
-  
+
   .MuiTable-root {
     font-size: var(--font-size-sm);
   }
-  
+
   .MuiTableCell-root {
     padding: 12px 16px;
   }
@@ -295,11 +295,11 @@
   .MuiTableContainer-root {
     height: 100%;
   }
-  
+
   main {
     padding: 8px !important;
   }
-  
+
   .MuiTableCell-root {
     padding: 4px 6px;
     font-size: var(--mobile-font-xs);
@@ -313,49 +313,49 @@
   .MuiTableRow-root:hover {
     background-color: transparent;
   }
-  
+
   /* 毛玻璃触摸反馈效果 */
   .MuiTableRow-root:active {
     background-color: rgba(var(--glass-tint-rgb), var(--mobile-touch-feedback-opacity, 0.15));
     transition: background-color var(--mobile-touch-feedback-duration, 100ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
+
+    .MuiTableCell-root {
+      background-color: rgba(var(--glass-tint-rgb), var(--mobile-touch-feedback-opacity, 0.15));
+    }
   }
-  
-  .MuiTableRow-root:active .MuiTableCell-root {
-    background-color: rgba(var(--glass-tint-rgb), var(--mobile-touch-feedback-opacity, 0.15));
-  }
-  
+
   /* 按钮触摸反馈 */
   .MuiButton-root:active {
     background-color: rgba(var(--glass-tint-rgb), 0.24);
     transform: scale(0.96);
     box-shadow: var(--glass-shadow-sm, 0 1px 4px rgba(0, 0, 0, 0.08));
   }
-  
+
   /* 图标按钮触摸反馈 */
   .MuiIconButton-root:active {
     background-color: rgba(var(--glass-tint-rgb), 0.22);
     transform: scale(0.92);
     box-shadow: 0 0 8px rgba(var(--glass-tint-rgb), 0.24);
   }
-  
+
   /* 卡片触摸反馈 */
   .MuiPaper-root:active {
     background-color: rgba(var(--glass-surface-rgb), calc(var(--glass-card-bg-opacity, 0.7) + 0.1));
     transform: scale(0.99);
     box-shadow: var(--glass-shadow-lg, 0 4px 16px rgba(0, 0, 0, 0.12));
   }
-  
+
   /* 增大可点击区域 */
   .MuiTableCell-root {
     min-height: var(--touch-target-min);
   }
-  
+
   /* 滚动条在触摸设备上隐藏 */
   ::-webkit-scrollbar {
     width: 0;
     height: 0;
   }
-  
+
   /* 但保持滚动功能 */
   .MuiTableContainer-root {
     scrollbar-width: none;
@@ -370,7 +370,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   /* 调整边框宽度 */
   .MuiTableCell-root {
     border-width: 0.5px;
@@ -397,11 +397,11 @@
     height: auto !important;
     overflow: visible !important;
   }
-  
+
   .MuiTable-root {
     font-size: 10px;
   }
-  
+
   .MuiTableCell-root {
     padding: 2px 4px;
     border: 1px solid #000;
@@ -421,7 +421,7 @@
   .mobile-only {
     display: block;
   }
-  
+
   .desktop-only {
     display: none;
   }
@@ -438,19 +438,19 @@
   background-color: rgba(var(--glass-surface-soft-rgb), var(--glass-table-container-bg-opacity, 0.6));
   border: var(--glass-border-width, 0.5px) solid var(--glass-border-color, rgba(226, 198, 140, 0.15));
   border-radius: var(--glass-radius-md, 10px);
-}
 
-.mobile-table-wrapper::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 20px;
-  height: 100%;
-  background: linear-gradient(to left, rgba(var(--glass-surface-soft-rgb), 0.6), transparent);
-  pointer-events: none;
-  z-index: 1;
-  border-radius: 0 var(--glass-radius-md, 10px) var(--glass-radius-md, 10px) 0;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(to left, rgba(var(--glass-surface-soft-rgb), 0.6), transparent);
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 0 var(--glass-radius-md, 10px) var(--glass-radius-md, 10px) 0;
+  }
 }
 
 /* 移动端加载状态 */
@@ -466,10 +466,10 @@
   .error-container {
     padding: var(--mobile-padding);
     text-align: center;
-  }
-  
-  .error-container .MuiTypography-root {
-    font-size: var(--mobile-font-base);
+
+    .MuiTypography-root {
+      font-size: var(--mobile-font-base);
+    }
   }
 }
 
@@ -502,16 +502,16 @@
     opacity: 0;
     transform: translateY(20px);
     transition: all var(--glass-duration-normal, 200ms) var(--glass-easing, cubic-bezier(0.4, 0, 0.2, 1));
-  }
-  
-  .scroll-indicator.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  .scroll-indicator:active {
-    transform: scale(0.92);
-    box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1)), 0 0 15px rgba(199, 143, 69, 0.28);
+
+    &.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &:active {
+      transform: scale(0.92);
+      box-shadow: var(--glass-shadow-md, 0 2px 8px rgba(0, 0, 0, 0.1)), 0 0 15px rgba(199, 143, 69, 0.28);
+    }
   }
 }
 
@@ -530,16 +530,16 @@
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
-  
+
   .MuiTableContainer-root {
     will-change: scroll-position;
     contain: layout style;
   }
-  
+
   .MuiTableRow-root {
     will-change: background-color;
   }
-  
+
   /* 毛玻璃组件性能优化 */
   .MuiPaper-root,
   .MuiButton-root,
@@ -558,7 +558,7 @@
     height: 100% !important;
     -webkit-overflow-scrolling: touch !important;
   }
-  
+
   #root {
     position: fixed !important;
     top: 0 !important;
@@ -567,7 +567,7 @@
     height: 100% !important;
     overflow: hidden !important;
   }
-  
+
   .app {
     position: relative !important;
     width: 100% !important;
@@ -583,7 +583,7 @@
     overscroll-behavior: none !important;
     -webkit-overscroll-behavior: none !important;
   }
-  
+
   * {
     -webkit-overflow-scrolling: auto !important;
     overscroll-behavior: none !important;

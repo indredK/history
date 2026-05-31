@@ -6,7 +6,7 @@ import DashboardCustomizeRoundedIcon from '@mui/icons-material/DashboardCustomiz
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import type { RouteConfig } from '@/router/routes';
 import { useStyleStore, useThemeStore } from '@/store';
-import './MapFirstLayout.css';
+import './MapFirstLayout.scss';
 
 interface MapFirstLayoutProps {
   routes: RouteConfig[];

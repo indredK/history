@@ -22,7 +22,7 @@ import { Scene } from './Scene';
 import { useDynastyWheelScroll } from './useDynastyWheelScroll';
 import { EffectSwitcher } from './EffectSwitcher';
 import { DEFAULT_EFFECT_ID, getEffectById } from './effects/registry';
-import './Dynasty3DWheel.css';
+import './Dynasty3DWheel.scss';
 
 interface Dynasty3DWheelProps {
   className?: string;

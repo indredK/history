@@ -22,7 +22,7 @@ import {
   SchoolsList,
 } from './components';
 
-import './CulturePage.css';
+import './CulturePage.scss';
 
 function CulturePage() {
   // Schools store

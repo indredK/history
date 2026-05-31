@@ -1,7 +1,7 @@
 import { ErrorBoundary } from './components/ui/ErrorBoundary';
 import { AppRouter } from './router/Router';
-import './styles/app.css';
-import './styles/ui.css';
+import './styles/app.scss';
+import './styles/ui.scss';
 
 function App() {
   return (
