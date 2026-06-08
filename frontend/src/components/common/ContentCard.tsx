@@ -16,6 +16,7 @@
  * - 标签云（如核心思想）
  */
 
+import type { ReactNode } from 'react';
 import { Card, CardContent, Box, Typography, Chip, Avatar } from '@mui/material';
 import { getCardHeight } from '@/config/responsive';
 
@@ -66,6 +67,8 @@ export interface ContentCardProps {
   footerTags?: ContentTagConfig[] | undefined;
   /** 底部标签最大显示数量 */
   footerTagsMax?: number | undefined;
+  /** 卡片右上角操作 */
+  actions?: ReactNode;
   /** 点击回调 */
   onClick: () => void;
   /** 卡片最小高度 */
@@ -94,6 +97,7 @@ export function ContentCard({
   footerText,
   footerTags = [],
   footerTagsMax = 3,
+  actions,
   onClick,
   minHeight = getCardHeight('content'),
   glassEffect = true,
@@ -141,7 +145,7 @@ export function ContentCard({
     >
       <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', p: 1.5, '&:last-child': { pb: 1.5 } }}>
         {/* 头部：图标 + 标题 */}
-        <Box sx={{ display: 'flex', alignItems: icon ? 'center' : 'flex-start', mb: 1 }}>
+        <Box sx={{ display: 'flex', alignItems: icon ? 'center' : 'flex-start', mb: 1, gap: 1 }}>
           {icon && (
             <Avatar
               sx={{
@@ -157,7 +161,7 @@ export function ContentCard({
               {icon.char}
             </Avatar>
           )}
-          <Box sx={{ flex: 1 }}>
+          <Box sx={{ flex: 1, minWidth: 0 }}>
             <Typography
               variant="subtitle1"
               component="h3"
@@ -198,6 +202,15 @@ export function ContentCard({
               />
             )}
           </Box>
+          {actions && (
+            <Box
+              onClick={(event) => event.stopPropagation()}
+              onKeyDown={(event) => event.stopPropagation()}
+              sx={{ display: 'flex', gap: 0.25, flexShrink: 0 }}
+            >
+              {actions}
+            </Box>
+          )}
         </Box>
 
         {/* 图标模式下的副标题行 */}

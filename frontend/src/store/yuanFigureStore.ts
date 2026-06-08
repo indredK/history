@@ -6,7 +6,7 @@
 
 import type { YuanFigure, YuanFigureRole } from '@/services/person/yuan/types';
 import {
-  yuanFigureServiceHelper,
+  yuanFigureService,
   type YuanFigureSortBy,
 } from '@/services/person/yuan';
 import { YUAN_PERIODS } from '@/services/person/yuan/types';
@@ -17,7 +17,7 @@ export const useYuanFigureStore = createFigureStore<
   YuanFigureRole,
   YuanFigureSortBy
 >({
-  service: yuanFigureServiceHelper,
+  service: yuanFigureService,
   roleOptions: [
     '全部',
     'emperor',

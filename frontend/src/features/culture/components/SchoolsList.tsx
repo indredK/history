@@ -8,13 +8,25 @@
  * Requirements: 3.1, 3.4, 5.1
  */
 
-import { Box, Typography, Skeleton, Card, CardContent } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Skeleton,
+  Card,
+  CardContent,
+  IconButton,
+  Tooltip,
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { SchoolCard } from './SchoolCard';
 import type { PhilosophicalSchool } from '@/services/school/types';
 
 interface SchoolsListProps {
   schools: PhilosophicalSchool[];
   onSchoolClick: (school: PhilosophicalSchool) => void;
+  onSchoolEdit?: (school: PhilosophicalSchool) => void;
+  onSchoolDelete?: (school: PhilosophicalSchool) => void;
   loading: boolean;
 }
 
@@ -117,6 +129,8 @@ function SchoolsListSkeleton({ count = 10 }: { count?: number }) {
 export function SchoolsList({
   schools,
   onSchoolClick,
+  onSchoolEdit,
+  onSchoolDelete,
   loading,
 }: SchoolsListProps) {
   // 加载状态 - Requirements 5.1
@@ -167,11 +181,64 @@ export function SchoolsList({
       }}
     >
       {schools.map((school) => (
-        <SchoolCard
+        <Box
           key={school.id}
-          school={school}
-          onClick={() => onSchoolClick(school)}
-        />
+          sx={{
+            position: 'relative',
+            minWidth: 0,
+            '& .MuiCardContent-root': { pr: onSchoolEdit || onSchoolDelete ? 7 : 2 },
+          }}
+        >
+          {(onSchoolEdit || onSchoolDelete) && (
+            <Box
+              sx={{
+                position: 'absolute',
+                top: 8,
+                right: 8,
+                zIndex: 2,
+                display: 'flex',
+                gap: 0.5,
+                backgroundColor: 'var(--color-bg-card)',
+                border: '1px solid var(--color-border)',
+                borderRadius: 'var(--radius-md)',
+                boxShadow: 'var(--shadow-sm)',
+              }}
+            >
+              {onSchoolEdit && (
+                <Tooltip title="编辑">
+                  <IconButton
+                    size="small"
+                    aria-label={`编辑${school.name}`}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      onSchoolEdit(school);
+                    }}
+                  >
+                    <EditIcon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+              )}
+              {onSchoolDelete && (
+                <Tooltip title="删除">
+                  <IconButton
+                    size="small"
+                    aria-label={`删除${school.name}`}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      onSchoolDelete(school);
+                    }}
+                  >
+                    <DeleteIcon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </Box>
+          )}
+          <SchoolCard
+            school={school}
+            onClick={() => onSchoolClick(school)}
+          />
+        </Box>
       ))}
     </Box>
   );

@@ -2,7 +2,7 @@
  * 人物页面主组件
  * People Page Component
  * 
- * 重构后的人物页面，包含多个标签页：历代帝王、三国人物、唐朝人物、宋朝人物、元朝人物、明朝人物、清朝人物
+ * 重构后的人物页面，包含人物档案、历代帝王、文化名人和朝代人物专题
  * 使用公共的FixedTabsPage组件
  * 
  * Requirements: 1.1, 1.2, 1.3, 1.4, 6.4
@@ -17,6 +17,7 @@ import TempleBuddhistIcon from '@mui/icons-material/TempleBuddhist';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import FortIcon from '@mui/icons-material/Fort';
 import PersonIcon from '@mui/icons-material/Person';
+import BadgeIcon from '@mui/icons-material/Badge';
 
 import { FixedTabsPage, type FixedTabConfig } from '@/components/common';
 import { GridSkeleton } from './components';
@@ -24,6 +25,7 @@ import { usePerformanceTrace } from '@/utils/performance';
 import './PeoplePage.scss';
 
 // 懒加载标签页内容组件
+const PeopleArchiveContent = lazy(() => import('./components/archive/PeopleArchiveContent'));
 const EmperorsContent = lazy(() => import('./components/emperors/EmperorsContent'));
 const SanguoContent = lazy(() => import('./components/sanguo/SanguoContent'));
 const TangContent = lazy(() => import('./components/tang/TangContent'));
@@ -41,6 +43,16 @@ function PeoplePage() {
 
   // 定义标签页配置
   const tabs: FixedTabConfig[] = [
+    {
+      value: 'archive',
+      label: '人物档案',
+      icon: <BadgeIcon />,
+      content: (
+        <Suspense fallback={<GridSkeleton />}>
+          <PeopleArchiveContent />
+        </Suspense>
+      ),
+    },
     {
       value: 'emperors',
       label: '历代帝王',
@@ -126,7 +138,7 @@ function PeoplePage() {
   return (
     <FixedTabsPage
       tabs={tabs}
-      defaultTab="emperors"
+      defaultTab="archive"
       className="people-page"
       tabsProps={{
         variant: 'scrollable',

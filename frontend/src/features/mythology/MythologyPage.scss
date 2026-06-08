@@ -23,19 +23,6 @@
         0 0 20px rgba(var(--color-primary-rgb, 100, 150, 255), 0.1);
     }
   }
-
-  /* 古典中国风装饰 */
-  &::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(var(--color-primary-rgb, 100, 150, 255), 0.05) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
 }
 
 /* 页面进入动画 */
@@ -114,10 +101,6 @@
 
 /* 手机适配 */
 @media (max-width: 768px) {
-  .mythology-page::before {
-    display: none;
-  }
-
   .mythology-tabs {
     margin-bottom: 1rem;
   }
@@ -175,6 +158,7 @@
   flex: 1;
   overflow: auto;
   min-height: 0;
+  padding-right: 0.25rem;
 }
 
 /* 神话故事视图容器 */
@@ -184,6 +168,42 @@
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
+}
+
+.mythology-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+
+  .mythology-search {
+    flex: 1 1 280px;
+    min-width: 220px;
+
+    .MuiInputBase-root {
+      color: var(--color-text-primary);
+      background: var(--app-interactive-bg-soft);
+      border-radius: var(--radius-unified-md);
+    }
+
+    .MuiOutlinedInput-notchedOutline {
+      border-color: var(--color-border);
+    }
+  }
+}
+
+.mythology-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--color-text-secondary);
+  border-top: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--color-border-light);
+  padding: 0.5rem 0;
+  margin-bottom: 0.75rem;
+  flex-shrink: 0;
 }
 
 /* 筛选栏 - 固定在顶部 */
@@ -210,6 +230,22 @@
 }
 
 @media (max-width: 768px) {
+  .mythology-action-bar {
+    align-items: stretch;
+
+    .mythology-search,
+    .MuiButton-root {
+      width: 100%;
+      flex-basis: 100%;
+    }
+  }
+
+  .mythology-summary {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
   .religion-graph-view {
     min-height: 400px;
   }

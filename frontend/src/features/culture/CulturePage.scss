@@ -31,9 +31,32 @@
   }
 }
 
+.culture-action-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 4px 12px;
+
+  .MuiButton-root {
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    white-space: nowrap;
+  }
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .culture-content {
     flex: 1; /* 占用剩余空间 */
+  }
+
+  .culture-action-bar {
+    justify-content: stretch;
+    padding: 2px 2px 10px;
+
+    .MuiButton-root {
+      width: 100%;
+    }
   }
 }

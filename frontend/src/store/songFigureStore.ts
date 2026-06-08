@@ -6,7 +6,7 @@
 
 import type { SongFigure, SongFigureRole } from '@/services/person/song/types';
 import {
-  songFigureServiceHelper,
+  songFigureService,
   type SongFigureSortBy,
 } from '@/services/person/song';
 import { SONG_PERIODS } from '@/services/person/song/types';
@@ -17,7 +17,7 @@ export const useSongFigureStore = createFigureStore<
   SongFigureRole,
   SongFigureSortBy
 >({
-  service: songFigureServiceHelper,
+  service: songFigureService,
   roleOptions: [
     '全部',
     'emperor',

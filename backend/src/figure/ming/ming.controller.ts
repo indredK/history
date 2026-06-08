@@ -1,5 +1,5 @@
-import { Controller, Get, Query } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Controller, Get, Param, Query } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { MingService } from './ming.service';
 import { FigureQueryDto } from '../common/query.dto';
 import { MingFigureDto } from './ming.dto';
@@ -42,5 +42,24 @@ export class MingController {
     @Query() query: FigureQueryDto,
   ): Promise<PaginatedResponseDto<MingFigureDto>> {
     return this.mingService.getMingFigures(query);
+  }
+
+  @Get('ming-figures/:id')
+  @ApiOperation({
+    summary: 'Get Ming Dynasty figure by ID (compatible endpoint)',
+    description: 'Retrieve detailed information about a specific Ming Dynasty figure',
+  })
+  @ApiParam({ name: 'id', description: 'Ming figure ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully retrieved Ming figure',
+    type: MingFigureDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Ming figure not found',
+  })
+  async getMingFigureById(@Param('id') id: string): Promise<MingFigureDto> {
+    return this.mingService.getMingFigureById(id);
   }
 }

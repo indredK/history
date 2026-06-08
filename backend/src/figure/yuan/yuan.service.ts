@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { FigureBaseService } from '../common/figure-base.service';
 import { Prisma } from '../../generated/prisma/client';
 import { FigureQueryDto } from '../common/query.dto';
@@ -37,5 +37,17 @@ export class YuanService extends FigureBaseService {
     );
 
     return new PaginatedResponseDto(transformedFigures, total, page, limit);
+  }
+
+  async getYuanFigureById(id: string): Promise<YuanFigureDto> {
+    const figure = await this.prisma.yuanFigure.findUnique({
+      where: { id },
+    });
+
+    if (!figure) {
+      throw new NotFoundException(`未找到 ID 为 ${id} 的元朝人物记录`);
+    }
+
+    return this.transformFigure<YuanFigureDto>(figure);
   }
 }

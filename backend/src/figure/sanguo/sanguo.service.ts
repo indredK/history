@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { FigureBaseService } from '../common/figure-base.service';
 import { Prisma } from '../../generated/prisma/client';
 import { SanguoFigureQueryDto } from '../common/query.dto';
@@ -34,5 +34,17 @@ export class SanguoService extends FigureBaseService {
     );
 
     return new PaginatedResponseDto(transformedFigures, total, page, limit);
+  }
+
+  async getSanguoFigureById(id: string): Promise<SanguoFigureDto> {
+    const figure = await this.prisma.sanguoFigure.findUnique({
+      where: { id },
+    });
+
+    if (!figure) {
+      throw new NotFoundException(`未找到 ID 为 ${id} 的三国人物记录`);
+    }
+
+    return this.transformFigure<SanguoFigureDto>(figure);
   }
 }

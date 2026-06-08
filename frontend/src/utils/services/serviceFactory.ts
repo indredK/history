@@ -10,6 +10,7 @@ import { ApiError, ApiErrorType, fallbackManager, retryOperation } from './error
 import { apiClient, handleApiResponse, handleSingleApiResponse } from './apiClient';
 
 const isDev = import.meta.env.DEV;
+const API_PAGE_LIMIT = 100;
 
 /**
  * 是否为瞬时错误：网络/超时/5xx 才重试，4xx 客户端错误不重试
@@ -42,6 +43,43 @@ async function withTransientRetry<T>(
       throw error;
     }
   }, maxRetries, delay);
+}
+
+/**
+ * Fetch a list endpoint as the full collection expected by client-side filters.
+ * The first request is plain so non-paginated compatible endpoints do not receive
+ * unexpected query params; when a paginated response advertises more pages, the
+ * endpoint is refetched with the maximum supported page size and walked to the end.
+ */
+export async function fetchApiListData(apiEndpoint: string): Promise<unknown[]> {
+  const firstResponse = await withTransientRetry(() => apiClient.get(apiEndpoint));
+  const firstPage = handleApiResponse<unknown>(firstResponse);
+
+  if (!firstPage.meta?.hasNext) {
+    return firstPage.data;
+  }
+
+  const allItems: unknown[] = [];
+  let page = 1;
+  let hasNext = true;
+
+  while (hasNext) {
+    const response = await withTransientRetry(() =>
+      apiClient.get(apiEndpoint, {
+        params: {
+          page,
+          limit: API_PAGE_LIMIT,
+        },
+      }),
+    );
+    const currentPage = handleApiResponse<unknown>(response);
+    allItems.push(...currentPage.data);
+
+    hasNext = Boolean(currentPage.meta?.hasNext);
+    page += 1;
+  }
+
+  return allItems;
 }
 
 /**
@@ -94,9 +132,8 @@ export function createUnifiedService<T>(
   // API数据获取函数 —— GET 列表带瞬时错误重试
   const getApiData = async (): Promise<ApiResponse<T[]>> => {
     try {
-      const response = await withTransientRetry(() => apiClient.get(apiEndpoint));
-      const apiResponse = handleApiResponse<unknown>(response);
-      const transformedData = apiResponse.data.map((item, index) =>
+      const apiItems = await fetchApiListData(apiEndpoint);
+      const transformedData = apiItems.map((item, index) =>
         transformer(item, index),
       );
       return { data: transformedData };

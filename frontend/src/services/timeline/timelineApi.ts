@@ -42,22 +42,29 @@ interface TimelineByEventTypeFile {
 function transformEvent(
   raw: TimelineByEventTypeFile['events'][number]
 ): Event {
-  return {
+  const event: Event = {
     id: raw.id,
     title: raw.title,
     startYear: raw.time.startYear,
     endYear: raw.time.endYear,
-    description: raw.description || undefined,
     eventType: raw.eventType[0] || 'unknown',
-    categories: raw.eventType.length > 0 ? [raw.eventType] : undefined,
     dynastyId: raw.dynastyId,
-    imageUrls: raw.imageUrls,
-    rawLocations: raw.rawLocations,
-    rawParticipants: raw.rawParticipants,
-    sources: raw.sources,
-    confidence: raw.confidence,
-    demoPriority: raw.demoPriority,
-  } as Event;
+  };
+
+  if (raw.description) event.description = raw.description;
+  if (raw.eventType.length > 0) event.categories = [raw.eventType];
+  if (raw.imageUrls) event.imageUrls = raw.imageUrls;
+  if (raw.rawLocations) event.rawLocations = raw.rawLocations;
+  if (raw.rawParticipants) event.rawParticipants = raw.rawParticipants;
+  if (raw.sources) event.sources = raw.sources;
+  if (raw.confidence !== undefined) event.confidence = raw.confidence;
+  if (raw.demoPriority !== undefined) event.demoPriority = raw.demoPriority;
+  if (raw.mapFocusStartYear !== undefined) event.mapFocusStartYear = raw.mapFocusStartYear;
+  if (raw.mapFocusEndYear !== undefined) event.mapFocusEndYear = raw.mapFocusEndYear;
+  if (raw.mapLocationHints) event.mapLocationHints = raw.mapLocationHints;
+  if (raw.source_ids) event.source_ids = raw.source_ids;
+
+  return event;
 }
 
 async function getEventsFromAllFiles(): Promise<{ data: Event[] }> {
@@ -78,6 +85,17 @@ async function getEventsFromAllFiles(): Promise<{ data: Event[] }> {
   });
 
   await Promise.all(loadPromises);
+  allEvents.sort((left, right) => {
+    const yearDiff = left.startYear - right.startYear;
+    if (yearDiff !== 0) return yearDiff;
+
+    const endYearDiff =
+      (left.endYear ?? left.startYear) - (right.endYear ?? right.startYear);
+    if (endYearDiff !== 0) return endYearDiff;
+
+    return left.title.localeCompare(right.title, 'zh-Hans-CN');
+  });
+
   return { data: allEvents };
 }
 

@@ -37,6 +37,11 @@ const tabs: CommonTabItem[] = [
   },
 ];
 
+function renderTabValue(value: unknown): string {
+  const normalized = String(value ?? '');
+  return tabs.find((tab) => tab.value === normalized)?.label ?? normalized;
+}
+
 /**
  * 神话页面分类标签组件
  */
@@ -59,6 +64,7 @@ export function CategoryTabs({ activeTab, onTabChange }: CategoryTabsProps) {
         <Select
           value={activeTab}
           onChange={handleSelectChange}
+          renderValue={renderTabValue}
           sx={{
             backgroundColor: 'rgba(var(--glass-surface-rgb), 0.1)',
             backdropFilter: 'blur(var(--glass-blur-light, 12px))',

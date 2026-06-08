@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '../generated/prisma/client';
+import type { ReligionEdgeGetPayload } from '../generated/prisma/models';
 import { ReligionGraphQueryDto } from './dto/religion-query.dto';
 import { ReligionGraphDto } from './dto/religion-graph.dto';
 import { ReligionNodeDto } from './dto/religion-node.dto';
@@ -82,10 +83,10 @@ export class ReligionService {
 
     /**
      * Edge 在 includeNodeDetails=true 分支会带 sourceNode/targetNode,
-     * 用 Prisma.GetPayload 把 include 形态固化下来,后面的 truthy 守卫
+     * 用 generated payload 类型把 include 形态固化下来,后面的 truthy 守卫
      * (`edge.sourceNode && edge.targetNode`)处理 false 分支没有 include 的情况。
      */
-    type EdgeWithNodes = Prisma.ReligionEdgeGetPayload<{
+    type EdgeWithNodes = ReligionEdgeGetPayload<{
       include: { sourceNode: true; targetNode: true };
     }>;
 

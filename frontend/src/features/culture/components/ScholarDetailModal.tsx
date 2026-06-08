@@ -39,8 +39,16 @@ interface ScholarDetailModalProps {
  * 朝代颜色映射
  */
 const dynastyColors: Record<string, { bg: string; text: string }> = {
+  '春秋': { bg: 'rgba(46, 125, 50, 0.15)', text: '#2e7d32' },
+  '春秋时期': { bg: 'rgba(46, 125, 50, 0.15)', text: '#2e7d32' },
+  '战国': { bg: 'rgba(217, 119, 6, 0.15)', text: '#b45309' },
+  '战国时期': { bg: 'rgba(217, 119, 6, 0.15)', text: '#b45309' },
+  '秦代': { bg: 'rgba(97, 97, 97, 0.15)', text: '#616161' },
+  '汉代': { bg: 'rgba(21, 101, 192, 0.15)', text: '#1565c0' },
   '唐代': { bg: 'rgba(156, 39, 176, 0.15)', text: '#9c27b0' },
   '宋代': { bg: 'rgba(33, 150, 243, 0.15)', text: '#2196f3' },
+  '明代': { bg: 'rgba(198, 40, 40, 0.15)', text: '#c62828' },
+  '清代': { bg: 'rgba(0, 105, 92, 0.15)', text: '#00695c' },
 };
 
 /**
@@ -52,6 +60,10 @@ const workTypeLabels: Record<string, string> = {
   'essay': '论说文',
   'memorial': '奏疏',
 };
+
+function isLiteraryWork(work: LiteraryWork | string): work is LiteraryWork {
+  return typeof work === 'object' && work !== null && 'title' in work;
+}
 
 /**
  * 学者详情弹窗组件
@@ -298,80 +310,106 @@ export function ScholarDetailModal({
             
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               {/* 详细的代表作品 */}
-              {representativeWorks.map((work: LiteraryWork) => (
-                <Box
-                  key={work.id}
-                  sx={{
-                    p: 2,
-                    borderRadius: 'var(--radius-md)',
-                    backgroundColor: 'var(--color-bg-tertiary)',
-                    border: '1px solid var(--color-border)',
-                  }}
-                >
-                  {/* 作品标题和类型 */}
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                    <Typography
-                      variant="subtitle2"
-                      sx={{
-                        fontWeight: 600,
-                        color: 'var(--color-text-primary)',
-                      }}
-                    >
-                      《{work.title}》
-                    </Typography>
-                    <Chip
-                      label={workTypeLabels[work.type] || work.type}
-                      size="small"
-                      sx={{
-                        fontSize: '0.65rem',
-                        height: '20px',
-                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
-                        color: 'var(--color-success)',
-                      }}
-                    />
-                  </Box>
-                  
-                  {/* 作品描述 */}
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: 'var(--color-text-secondary)',
-                      mb: work.contentExcerpt ? 1 : 0,
-                    }}
-                  >
-                    {work.description}
-                  </Typography>
-                  
-                  {/* 内容摘录 */}
-                  {work.contentExcerpt && (
+              {representativeWorks.map((work, index) => {
+                if (!isLiteraryWork(work)) {
+                  return (
                     <Box
+                      key={`${work}-${index}`}
                       sx={{
-                        mt: 1,
-                        p: 1.5,
-                        borderLeft: `3px solid ${dynastyColor.text}`,
-                        backgroundColor: 'var(--color-bg-secondary)',
-                        borderRadius: '0 var(--radius-sm) var(--radius-sm) 0',
+                        p: 2,
+                        borderRadius: 'var(--radius-md)',
+                        backgroundColor: 'var(--color-bg-tertiary)',
+                        border: '1px solid var(--color-border)',
                       }}
                     >
                       <Typography
-                        variant="body2"
+                        variant="subtitle2"
                         sx={{
+                          fontWeight: 600,
                           color: 'var(--color-text-primary)',
-                          fontStyle: 'italic',
-                          lineHeight: 1.6,
                         }}
                       >
-                        "{work.contentExcerpt}"
+                        {work}
                       </Typography>
                     </Box>
-                  )}
-                </Box>
-              ))}
+                  );
+                }
+
+                return (
+                  <Box
+                    key={work.id || `${work.title}-${index}`}
+                    sx={{
+                      p: 2,
+                      borderRadius: 'var(--radius-md)',
+                      backgroundColor: 'var(--color-bg-tertiary)',
+                      border: '1px solid var(--color-border)',
+                    }}
+                  >
+                    {/* 作品标题和类型 */}
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                      <Typography
+                        variant="subtitle2"
+                        sx={{
+                          fontWeight: 600,
+                          color: 'var(--color-text-primary)',
+                        }}
+                      >
+                        《{work.title}》
+                      </Typography>
+                      <Chip
+                        label={workTypeLabels[work.type] || work.type}
+                        size="small"
+                        sx={{
+                          fontSize: '0.65rem',
+                          height: '20px',
+                          backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                          color: 'var(--color-success)',
+                        }}
+                      />
+                    </Box>
+                    
+                    {/* 作品描述 */}
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: 'var(--color-text-secondary)',
+                        mb: work.contentExcerpt ? 1 : 0,
+                      }}
+                    >
+                      {work.description}
+                    </Typography>
+                    
+                    {/* 内容摘录 */}
+                    {work.contentExcerpt && (
+                      <Box
+                        sx={{
+                          mt: 1,
+                          p: 1.5,
+                          borderLeft: `3px solid ${dynastyColor.text}`,
+                          backgroundColor: 'var(--color-bg-secondary)',
+                          borderRadius: '0 var(--radius-sm) var(--radius-sm) 0',
+                        }}
+                      >
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: 'var(--color-text-primary)',
+                            fontStyle: 'italic',
+                            lineHeight: 1.6,
+                          }}
+                        >
+                          "{work.contentExcerpt}"
+                        </Typography>
+                      </Box>
+                    )}
+                  </Box>
+                );
+              })}
               
               {/* 简单的主要作品列表 */}
               {majorWorks.map((work, index) => (
                 <Box
-                  key={index}
+                  key={isLiteraryWork(work) ? work.id : `${work}-${index}`}
                   sx={{
                     p: 2,
                     borderRadius: 'var(--radius-md)',
@@ -386,8 +424,16 @@ export function ScholarDetailModal({
                       color: 'var(--color-text-primary)',
                     }}
                   >
-                    {work}
+                    {isLiteraryWork(work) ? `《${work.title}》` : work}
                   </Typography>
+                  {isLiteraryWork(work) && work.description && (
+                    <Typography
+                      variant="body2"
+                      sx={{ color: 'var(--color-text-secondary)', mt: 1 }}
+                    >
+                      {work.description}
+                    </Typography>
+                  )}
                 </Box>
               ))}
             </Box>

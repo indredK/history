@@ -40,7 +40,7 @@ const baseHelper = createFigureServiceHelper<SanguoFigure, SanguoFigureRole, San
   roleLabels: ROLE_LABELS,
   getPeriod: () => '三国', // 三国不使用时期筛选
   roleOrder: {
-    ruler: 1, strategist: 2, general: 3, official: 4, other: 5,
+    ruler: 1, strategist: 2, general: 3, advisor: 4, official: 5, other: 6,
   },
   extraSearchFields: [
     (figure) => figure.kingdom,

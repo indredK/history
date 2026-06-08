@@ -12,6 +12,8 @@ export { ScholarGrid } from './ScholarGrid';
 
 export { CultureTabs } from './CultureTabs';
 
+export { CultureEditDialog } from './CultureEditDialog';
+
 export { SchoolCard } from './SchoolCard';
 
 export { SchoolDetail } from './SchoolDetail';

@@ -27,11 +27,41 @@ export class MythologyDto {
   })
   category: string;
 
+  @ApiPropertyOptional({
+    description: 'Database/source name alias',
+    example: '盘古开天',
+  })
+  name?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Geographic, textual, or cultural origin',
+    example: '《山海经·北山经》',
+  })
+  origin?: string | null;
+
+  @ApiPropertyOptional({
+    description: 'Historical or legendary period',
+    example: '上古',
+  })
+  period?: string | null;
+
   @ApiProperty({ description: 'Story description' })
   description: string;
 
   @ApiPropertyOptional({ description: 'Related characters', type: [String] })
   characters?: string[] | null;
+
+  @ApiPropertyOptional({
+    description: 'Story beats or detail sections',
+    type: [String],
+  })
+  stories?: string[] | null;
+
+  @ApiPropertyOptional({
+    description: 'Symbolic meanings and cultural motifs',
+    type: [String],
+  })
+  symbolism?: string[] | null;
 
   @ApiPropertyOptional({
     description: 'Source/reference',
@@ -44,4 +74,10 @@ export class MythologyDto {
     example: '/images/mythologies/pangu.jpg',
   })
   imageUrl?: string | null;
+
+  @ApiPropertyOptional({ description: 'Creation timestamp' })
+  createdAt?: Date;
+
+  @ApiPropertyOptional({ description: 'Last update timestamp' })
+  updatedAt?: Date;
 }

@@ -8,8 +8,10 @@ import type { Dynasty } from '@/services/culture/types';
 import { useTimelineStore } from '@/store';
 import { usePerformanceTrace } from '@/utils/performance';
 import {
+  buildTimelineDynastyClusters,
   deriveTimelineEvents,
   filterTimelineEvents,
+  shouldUseClusterMode,
   shouldUseMajorOnlyMode,
 } from './utils/timelineFilters';
 import { useEffect, useMemo, useState } from 'react';
@@ -72,10 +74,6 @@ export function TimelineList() {
 
     return filteredEvents;
   }, [densityMode, filteredEvents, stableTimeRange]);
-  const dynastyClusters = useMemo(
-    () => [],
-    [],
-  );
   const filteredDynasties = useMemo(() => {
     const allDynasties = data?.dynasties ?? [];
     const scopedDynasties = selectedDynastyIds.length === 0
@@ -93,9 +91,34 @@ export function TimelineList() {
     return scopedDynasties.map((dynasty: Dynasty) =>
       dynasty.id === lastDynasty.id
         ? { ...dynasty, endYear: Math.max(dynasty.endYear ?? dynasty.startYear, currentYear) }
-        : dynasty,
+      : dynasty,
     );
   }, [currentYear, data?.dynasties, selectedDynastyIds]);
+  const clusterRange = useMemo<[number, number] | null>(() => {
+    if (stableTimeRange) {
+      return stableTimeRange;
+    }
+
+    if (currentTimeRange) {
+      return currentTimeRange;
+    }
+
+    if (filteredDynasties.length === 0) {
+      return null;
+    }
+
+    return [
+      Math.min(...filteredDynasties.map((dynasty) => dynasty.startYear)),
+      Math.max(...filteredDynasties.map((dynasty) => dynasty.endYear ?? dynasty.startYear)),
+    ];
+  }, [currentTimeRange, filteredDynasties, stableTimeRange]);
+  const dynastyClusters = useMemo(
+    () =>
+      shouldUseClusterMode(clusterRange)
+        ? buildTimelineDynastyClusters(filteredEvents, filteredDynasties)
+        : [],
+    [clusterRange, filteredDynasties, filteredEvents],
+  );
 
   const handleTimeRangeChange = (range: [number, number]) => {
     setCurrentTimeRange(range);

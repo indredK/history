@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { FigureBaseService } from '../common/figure-base.service';
 import { Prisma } from '../../generated/prisma/client';
 import { FigureQueryDto } from '../common/query.dto';
@@ -46,5 +46,17 @@ export class TangService extends FigureBaseService {
     );
 
     return new PaginatedResponseDto(transformedFigures, total, page, limit);
+  }
+
+  async getTangFigureById(id: string): Promise<TangFigureDto> {
+    const figure = await this.prisma.tangFigure.findUnique({
+      where: { id },
+    });
+
+    if (!figure) {
+      throw new NotFoundException(`未找到 ID 为 ${id} 的唐朝人物记录`);
+    }
+
+    return this.transformFigure<TangFigureDto>(figure);
   }
 }

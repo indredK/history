@@ -1,286 +1,1154 @@
 [
   {
-    "id": "han-yu",
+    "id": "b02917d9-874d-4218-b304-72aba4266b6b",
+    "name": "孔子",
+    "name_en": "Confucius",
+    "dynasty": "春秋",
+    "dynastyPeriod": "春秋晚期",
+    "birthYear": -551,
+    "deathYear": -479,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
+    "schoolOfThought": "儒家",
+    "majorWorks": [
+      {
+        "id": "confucius-work-analects",
+        "title": "论语",
+        "type": "essay",
+        "description": "孔子弟子及再传弟子记录孔子言行的儒家经典",
+        "contentExcerpt": "仁者爱人，克己复礼为仁。"
+      },
+      {
+        "id": "confucius-work-spring-autumn",
+        "title": "春秋",
+        "type": "essay",
+        "description": "传统上归于孔子整理的鲁国编年史，后世形成春秋学传统"
+      }
+    ],
+    "contributions": [
+      "创立儒家学说的核心传统",
+      "强调仁、礼、君子人格与教育实践",
+      "整理并传承诗、书、礼、乐等古典文化"
+    ],
+    "achievements": [
+      "儒家学派奠基人",
+      "中国古代私学与伦理教育的重要象征",
+      "深刻影响东亚政治伦理和教育传统"
+    ],
+    "biography": "孔子名丘，字仲尼，鲁国人。其思想以仁、礼和君子修养为中心，主张通过学习、礼乐和道德实践改造个人与社会。孔子生前周游列国，晚年整理经典、讲学授徒，后世将其视为儒家传统的开端。",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: Confucius - https://plato.stanford.edu/entries/confucius/",
+      "Chinese Text Project: Analects - https://ctext.org/analects"
+    ],
+    "createdAt": "2025-12-24T19:50:18.754+00:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "5f87dba9-9120-42cb-9547-6147165c8c8e",
+    "name": "孟子",
+    "name_en": "Mencius",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国时期",
+    "birthYear": -372,
+    "deathYear": -289,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
+    "schoolOfThought": "儒家",
+    "majorWorks": [
+      {
+        "id": "mencius-work-mencius",
+        "title": "孟子",
+        "type": "essay",
+        "description": "记录孟子及其弟子言论，集中呈现性善、仁政、民本与义利之辨"
+      }
+    ],
+    "contributions": [
+      "发展性善论和四端说",
+      "提出仁政、王道和民贵君轻的政治理想",
+      "强化儒家道德主体与政治责任之间的关系"
+    ],
+    "achievements": [
+      "战国儒家代表人物",
+      "被后世尊为亚圣",
+      "四书体系中的核心思想来源"
+    ],
+    "biography": "孟子名轲，邹国人，是战国时期儒家重要代表。他继承孔子学说，强调人的道德端绪可以通过扩充修养成为仁义礼智，并以仁政回应诸侯争霸时代的政治焦虑。",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: Mencius - https://plato.stanford.edu/entries/mencius/",
+      "Chinese Text Project: Mencius - https://ctext.org/mengzi"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "f784a9d3-bbd6-424f-b917-770c65d73035",
+    "name": "荀子",
+    "name_en": "Xunzi",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国末期",
+    "birthYear": -310,
+    "deathYear": -235,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
+    "schoolOfThought": "儒家",
+    "majorWorks": [
+      {
+        "id": "xunzi-work-xunzi",
+        "title": "荀子",
+        "type": "essay",
+        "description": "以礼、学习、制度、天人之分和人性论构成系统化儒学文本"
+      }
+    ],
+    "contributions": [
+      "提出性恶论和化性起伪的修养路线",
+      "强调礼法、教育和制度塑造人的行为",
+      "连接儒家礼治与战国制度治理议题"
+    ],
+    "achievements": [
+      "战国儒学集大成者之一",
+      "对汉代经学和礼学有重要影响",
+      "其门下韩非、李斯也影响法家与秦制"
+    ],
+    "biography": "荀子名况，赵国人，长期活动于齐、楚等地。他比孟子更强调学习、礼法和制度的力量，认为人需要通过师法、礼义和实践训练完成道德转化。",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: Xunzi - https://plato.stanford.edu/entries/xunzi/",
+      "Chinese Text Project: Xunzi - https://ctext.org/xunzi"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "f4b179f7-45ef-41d5-ba6b-50571cb7a5a9",
+    "name": "老子",
+    "name_en": "Laozi",
+    "dynasty": "春秋",
+    "dynastyPeriod": "春秋时期",
+    "birthYear": -571,
+    "deathYear": -471,
+    "philosophicalSchoolId": "a7cf3482-329f-4096-8b10-49d59e4c428a",
+    "schoolOfThought": "道家",
+    "majorWorks": [
+      {
+        "id": "laozi-work-daodejing",
+        "title": "道德经",
+        "type": "essay",
+        "description": "以道、德、无为、自然和柔弱胜刚强等命题构成道家根本文本"
+      }
+    ],
+    "contributions": [
+      "奠定道家关于道、德、自然和无为的思想语汇",
+      "以反强制、贵柔弱的视角批评过度治理",
+      "深刻影响中国哲学、宗教、文学与艺术"
+    ],
+    "achievements": [
+      "道家传统的象征性奠基者",
+      "《道德经》是传播最广的中国经典之一",
+      "对道教和中国审美精神影响深远"
+    ],
+    "biography": "老子又称老聃，生平充满传说色彩。传统认为他曾任周守藏室之史，其思想以道为万物根源，主张无为、自然和反身修养，构成后来道家与道教传统的重要源头。",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: Daoism - https://plato.stanford.edu/entries/daoism/",
+      "Chinese Text Project: Dao De Jing - https://ctext.org/dao-de-jing"
+    ],
+    "createdAt": "2025-12-24T19:50:18.757+00:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "f01fac5a-09e9-481d-8cd1-eaf8cd3808e8",
+    "name": "庄子",
+    "name_en": "Zhuangzi",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国中期",
+    "birthYear": -369,
+    "deathYear": -286,
+    "philosophicalSchoolId": "a7cf3482-329f-4096-8b10-49d59e4c428a",
+    "schoolOfThought": "道家",
+    "majorWorks": [
+      {
+        "id": "zhuangzi-work-zhuangzi",
+        "title": "庄子",
+        "type": "essay",
+        "description": "以寓言、重言和卮言讨论逍遥、齐物、生命自由与语言边界"
+      }
+    ],
+    "contributions": [
+      "发展逍遥游、齐物论和物化思想",
+      "通过寓言重新审视名利、是非和知识边界",
+      "塑造中国文学与哲学中自由精神的重要传统"
+    ],
+    "achievements": [
+      "道家哲学代表人物",
+      "中国寓言与散文传统的重要高峰",
+      "对魏晋玄学、诗画审美和人生哲学影响深远"
+    ],
+    "biography": "庄子名周，宋国蒙人。其文本以丰富寓言和辩证结构展示对功名、知识与语言的反思，强调人在变化世界中获得精神自由。",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: Daoism - https://plato.stanford.edu/entries/daoism/",
+      "Chinese Text Project: Zhuangzi - https://ctext.org/zhuangzi"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "237a841d-402b-4ba1-83f0-5f882474e17a",
+    "name": "墨子",
+    "name_en": "Mozi",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国初期",
+    "birthYear": -470,
+    "deathYear": -391,
+    "philosophicalSchoolId": "34672484-a5c7-4c90-9174-742caaa34105",
+    "schoolOfThought": "墨家",
+    "majorWorks": [
+      {
+        "id": "mozi-work-mozi",
+        "title": "墨子",
+        "type": "essay",
+        "description": "保存兼爱、非攻、尚贤、节用以及墨家逻辑、认识论和防御技术"
+      }
+    ],
+    "contributions": [
+      "创立墨家并组织具有纪律性的学派共同体",
+      "提出兼爱、非攻、尚贤和节用等社会主张",
+      "推动先秦逻辑、技术和实用主义取向的发展"
+    ],
+    "achievements": [
+      "战国显学之一的创始人",
+      "先秦反战思想的重要代表",
+      "中国古代逻辑和工程防御传统的重要源头"
+    ],
+    "biography": "墨子名翟，活动于春秋战国之际。墨家重视社会功利和公共利益，反对攻伐战争与铺张礼俗，也以严格组织和技术能力参与诸侯之间的防御实践。",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: Mohism - https://plato.stanford.edu/entries/mohism/",
+      "Internet Encyclopedia of Philosophy: Mozi - https://iep.utm.edu/mozi/"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "f17303ad-6fc4-4e57-b5bd-942d86174694",
+    "name": "商鞅",
+    "name_en": "Shang Yang",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国中期",
+    "birthYear": -390,
+    "deathYear": -338,
+    "philosophicalSchoolId": "de7716ab-9e78-4e9c-a28c-6cea6aae3cc7",
+    "schoolOfThought": "法家",
+    "majorWorks": [
+      {
+        "id": "shang-yang-work-shangjunshu",
+        "title": "商君书",
+        "type": "essay",
+        "description": "反映商鞅变法、军功爵制、重农战和法令治理的法家文本"
+      }
+    ],
+    "contributions": [
+      "在秦国推行变法，强化县制、军功爵和户籍管理",
+      "强调重农战、法令统一和赏罚分明",
+      "为秦国后来的强盛提供制度基础"
+    ],
+    "achievements": [
+      "法家制度实践代表",
+      "战国变法运动中影响最大的改革者之一",
+      "秦统一前制度转型的关键人物"
+    ],
+    "biography": "商鞅本为卫国人，后入秦辅佐秦孝公推行变法。他将法家治理理念落实为土地、户籍、军功和行政制度，显著增强秦国的组织动员能力。",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: Chinese Legalism - https://plato.stanford.edu/entries/chinese-legalism/",
+      "Chinese Text Project: Book of Lord Shang - https://ctext.org/shang-jun-shu"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "778ebdab-15cd-40fc-b5ec-140dc857d575",
+    "name": "韩非",
+    "name_en": "Han Fei",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国末期",
+    "birthYear": -280,
+    "deathYear": -233,
+    "philosophicalSchoolId": "de7716ab-9e78-4e9c-a28c-6cea6aae3cc7",
+    "schoolOfThought": "法家",
+    "majorWorks": [
+      {
+        "id": "han-fei-work-hanfeizi",
+        "title": "韩非子",
+        "type": "essay",
+        "description": "系统综合法、术、势，分析君主权力、官僚控制和法令治理"
+      }
+    ],
+    "contributions": [
+      "集法家理论之大成",
+      "综合商鞅之法、申不害之术和慎到之势",
+      "以冷静的政治分析回应战国末期国家竞争"
+    ],
+    "achievements": [
+      "法家思想最系统的理论家",
+      "《韩非子》保存大量寓言、政治论证和制度思想",
+      "深刻影响秦汉以后的国家治理观念"
+    ],
+    "biography": "韩非为韩国公子，曾受学于荀子。其思想强调君主应依靠公开法令、行政技术和权势结构治理国家，对德治与私人恩情保持高度警惕。",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: Chinese Legalism - https://plato.stanford.edu/entries/chinese-legalism/",
+      "Chinese Text Project: Han Feizi - https://ctext.org/hanfeizi"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "975346f1-f865-4e70-9ed1-ba0931616652",
+    "name": "公孙龙",
+    "name_en": "Gongsun Long",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国中后期",
+    "birthYear": -325,
+    "deathYear": -250,
+    "philosophicalSchoolId": "fa854264-34f5-455a-9d47-c46c6aac91ac",
+    "schoolOfThought": "名家",
+    "majorWorks": [
+      {
+        "id": "gongsun-long-work-gongsunlongzi",
+        "title": "公孙龙子",
+        "type": "essay",
+        "description": "以白马论、坚白论等命题讨论名称、对象和概念分类"
+      }
+    ],
+    "contributions": [
+      "推动名实关系和概念分析的先秦讨论",
+      "以白马非马等辩题展示语言分类的复杂性",
+      "影响中国逻辑和语言哲学研究"
+    ],
+    "achievements": [
+      "名家代表人物",
+      "白马论成为中国哲学史上最著名的辩难之一",
+      "为文化模块提供语言哲学维度"
+    ],
+    "biography": "公孙龙为战国赵人，以辩者身份闻名。他的命题常被视为诡辩，但也呈现了先秦思想对名、实、类别和推理形式的细致关注。",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: School of Names - https://plato.stanford.edu/entries/school-names/",
+      "Chinese Text Project: Gongsun Longzi - https://ctext.org/gongsunlongzi"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "9a1629ed-1c8d-454a-b180-96fc1f5def20",
+    "name": "惠施",
+    "name_en": "Hui Shi",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国中期",
+    "birthYear": -370,
+    "deathYear": -310,
+    "philosophicalSchoolId": "fa854264-34f5-455a-9d47-c46c6aac91ac",
+    "schoolOfThought": "名家",
+    "majorWorks": [
+      {
+        "id": "hui-shi-work-ten-theses",
+        "title": "惠施十事",
+        "type": "essay",
+        "description": "传世材料保存于《庄子·天下》等篇，体现空间、时间和相对性的辩题"
+      }
+    ],
+    "contributions": [
+      "以辩者传统参与战国名实讨论",
+      "提出大一、小一等相对性命题",
+      "在《庄子》中成为重要思想对话者"
+    ],
+    "achievements": [
+      "名家重要代表",
+      "战国辩者传统的核心人物之一",
+      "连接语言哲学与庄子文本的重要线索"
+    ],
+    "biography": "惠施为宋国人，曾任魏相。他的著作多已佚失，思想主要见于《庄子》等文献，常以辩论形式探讨尺度、差异和相对性。",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: School of Names - https://plato.stanford.edu/entries/school-names/",
+      "Chinese Text Project: Zhuangzi, Tianxia - https://ctext.org/zhuangzi/tian-xia"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "e0b90e31-df5f-403b-87b2-d86e096a2421",
+    "name": "邹衍",
+    "name_en": "Zou Yan",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国后期",
+    "birthYear": -305,
+    "deathYear": -240,
+    "philosophicalSchoolId": "83332efb-0f01-490f-bb43-eec4036cb9c7",
+    "schoolOfThought": "阴阳家",
+    "majorWorks": [
+      {
+        "id": "zou-yan-work-yinyang",
+        "title": "五德终始说",
+        "type": "essay",
+        "description": "以五行德运解释历史王朝更替和政治合法性，原书已佚"
+      }
+    ],
+    "contributions": [
+      "系统化阴阳五行和五德终始观念",
+      "以宇宙分类解释历史、政治与自然秩序",
+      "推动天人感应和五行德运进入帝国政治象征"
+    ],
+    "achievements": [
+      "阴阳家代表人物",
+      "先秦宇宙论和历史循环观的重要来源",
+      "影响秦汉政治合法性叙事和知识分类"
+    ],
+    "biography": "邹衍为齐国稷下学宫相关思想家，传世著作不存。后世通过史书记载认识其阴阳五行、五德终始与大九州等学说。",
+    "sources": [
+      "Internet Encyclopedia of Philosophy: Yin-Yang - https://iep.utm.edu/yinyang/",
+      "Britannica: Chinese philosophy - https://www.britannica.com/topic/Chinese-philosophy"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "86109654-2f02-44f7-a00a-a4542e3fc7f9",
+    "name": "孙武",
+    "name_en": "Sunzi",
+    "dynasty": "春秋",
+    "dynastyPeriod": "春秋末期",
+    "birthYear": -544,
+    "deathYear": -496,
+    "philosophicalSchoolId": "3a949f8f-d8de-4602-bf2c-cc575d17d245",
+    "schoolOfThought": "兵家",
+    "majorWorks": [
+      {
+        "id": "sunzi-work-art-of-war",
+        "title": "孙子兵法",
+        "type": "essay",
+        "description": "以十三篇讨论战争筹划、势、虚实、地形、用间与将道"
+      }
+    ],
+    "contributions": [
+      "提出知己知彼、不战而屈人之兵等战略思想",
+      "重视情报、形势、军纪和统帅判断",
+      "将战争视为国家政治与资源配置的一部分"
+    ],
+    "achievements": [
+      "兵家经典代表人物",
+      "《孙子兵法》成为世界范围内影响巨大的战略文本",
+      "长期影响军事、管理和竞争策略思想"
+    ],
+    "biography": "孙武一般被认为活动于春秋末年吴国。《孙子兵法》通过高度凝练的篇章讨论战争胜负背后的组织、时机、判断和信息问题。",
+    "sources": [
+      "Britannica: Sunzi - https://www.britannica.com/biography/Sunzi",
+      "Chinese Text Project: Sunzi Bingfa - https://ctext.org/art-of-war"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "32a7e465-8954-4e71-9224-3e7c97ffa3b4",
+    "name": "吴起",
+    "name_en": "Wu Qi",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国初期",
+    "birthYear": -440,
+    "deathYear": -381,
+    "philosophicalSchoolId": "3a949f8f-d8de-4602-bf2c-cc575d17d245",
+    "schoolOfThought": "兵家",
+    "majorWorks": [
+      {
+        "id": "wu-qi-work-wuzi",
+        "title": "吴子",
+        "type": "essay",
+        "description": "讨论治军、国家治理、地形和将帅能力的兵家文本"
+      }
+    ],
+    "contributions": [
+      "以军事改革和治军实践闻名",
+      "强调士卒训练、法令和国家动员",
+      "兼具军事家与变法者身份"
+    ],
+    "achievements": [
+      "战国兵家代表人物",
+      "魏武卒和楚国变法传统中的关键人物",
+      "与孙武并称孙吴"
+    ],
+    "biography": "吴起先后活动于鲁、魏、楚等国，是战国早期重要军事家和改革者。其兵学强调将帅德行、法令纪律与国家治理的整体配合。",
+    "sources": [
+      "Chinese Text Project: Wuzi - https://ctext.org/wuzi",
+      "Britannica: Chinese philosophy - https://www.britannica.com/topic/Chinese-philosophy"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "f45b8eca-6d19-4f1c-a136-f6627ab65075",
+    "name": "鬼谷子",
+    "name_en": "Guiguzi",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国时期",
+    "birthYear": null,
+    "deathYear": null,
+    "philosophicalSchoolId": "0744f387-427a-4798-9788-35e1a096a97e",
+    "schoolOfThought": "纵横家",
+    "majorWorks": [
+      {
+        "id": "guiguzi-work-guiguzi",
+        "title": "鬼谷子",
+        "type": "essay",
+        "description": "围绕捭阖、反应、内揵等主题讨论说服、谋略和权变"
+      }
+    ],
+    "contributions": [
+      "成为纵横家谋略和游说传统的象征人物",
+      "将说服、审势、权变和心理判断纳入思想讨论",
+      "为战国外交文化提供代表性文本入口"
+    ],
+    "achievements": [
+      "纵横家传统中的核心符号",
+      "《鬼谷子》长期被视为谋略、游说和谈判文本",
+      "补足文化模块中外交与说服术维度"
+    ],
+    "biography": "鬼谷子生平多属传说，常被说成苏秦、张仪之师。相关文本体现战国竞争时代对游说、权变和心理判断的高度重视。",
+    "sources": [
+      "Chinese Text Project: Guiguzi - https://ctext.org/gui-gu-zi",
+      "Chinese Text Project: Zhanguoce - https://ctext.org/zhan-guo-ce"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "0dfd0f38-06bb-4906-9f8a-48ebf53e7544",
+    "name": "苏秦",
+    "name_en": "Su Qin",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国中期",
+    "birthYear": null,
+    "deathYear": -284,
+    "philosophicalSchoolId": "0744f387-427a-4798-9788-35e1a096a97e",
+    "schoolOfThought": "纵横家",
+    "majorWorks": [
+      {
+        "id": "su-qin-work-zhanguoce",
+        "title": "战国策",
+        "type": "prose",
+        "description": "保存苏秦相关游说材料，展示合纵策略和战国外交辞令"
+      }
+    ],
+    "contributions": [
+      "以合纵策略游说东方诸国对抗秦国",
+      "体现纵横家通过联盟结构改变权力平衡的实践",
+      "代表战国游士在政治格局中的能动性"
+    ],
+    "achievements": [
+      "纵横家合纵路线代表人物",
+      "战国策叙事中的重要游说者",
+      "帮助用户理解战国外交竞争"
+    ],
+    "biography": "苏秦为战国纵横家代表，传统叙事中以合纵六国抗秦闻名。其故事集中体现游士凭借辞令、情报和联盟策略参与大国政治。",
+    "sources": [
+      "Chinese Text Project: Zhanguoce - https://ctext.org/zhan-guo-ce"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "23438815-2136-4821-b911-ce1fd3daaab2",
+    "name": "张仪",
+    "name_en": "Zhang Yi",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国中期",
+    "birthYear": null,
+    "deathYear": -309,
+    "philosophicalSchoolId": "0744f387-427a-4798-9788-35e1a096a97e",
+    "schoolOfThought": "纵横家",
+    "majorWorks": [
+      {
+        "id": "zhang-yi-work-zhanguoce",
+        "title": "战国策",
+        "type": "prose",
+        "description": "保存张仪相关游说材料，展示连横策略和秦国外交优势"
+      }
+    ],
+    "contributions": [
+      "以连横策略瓦解合纵联盟",
+      "服务秦国扩张，重塑战国外交格局",
+      "体现纵横家审势和利益交换能力"
+    ],
+    "achievements": [
+      "纵横家连横路线代表人物",
+      "战国后期秦外交战略的重要执行者",
+      "与苏秦构成合纵连横的对照叙事"
+    ],
+    "biography": "张仪为战国纵横家代表，长期为秦服务。传统材料常将他与苏秦并举，用来展示战国外交中合纵与连横两种策略的竞争。",
+    "sources": [
+      "Chinese Text Project: Zhanguoce - https://ctext.org/zhan-guo-ce"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "e24130b1-083d-4093-a6c2-bf24eb1c1806",
+    "name": "许行",
+    "name_en": "Xu Xing",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国中期",
+    "birthYear": null,
+    "deathYear": null,
+    "philosophicalSchoolId": "9e0ea795-d447-4a56-b146-1ef0bffdf3dd",
+    "schoolOfThought": "农家",
+    "majorWorks": [
+      {
+        "id": "xu-xing-work-mencius",
+        "title": "孟子·滕文公上",
+        "type": "essay",
+        "description": "通过孟子与陈相的辩论保存许行君民并耕的农家主张"
+      }
+    ],
+    "contributions": [
+      "主张君民并耕，强调农业劳动的政治伦理意义",
+      "代表先秦诸子中重视民生生产的一支",
+      "使文化模块能呈现思想与基层经济生活的关系"
+    ],
+    "achievements": [
+      "农家代表人物",
+      "其主张因《孟子》辩论而被后世保存",
+      "补足诸子百家中生产与民生维度"
+    ],
+    "biography": "许行是战国时期农家代表，传世材料主要见于《孟子》。他主张统治者也应参与耕作，反映了对劳动、民生和等级分工的独特思考。",
+    "sources": [
+      "Chinese Text Project: Mencius, Teng Wen Gong I - https://ctext.org/mengzi/teng-wen-gong-i"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "9e66331f-51cd-4485-8a5c-cefa7babe486",
+    "name": "吕不韦",
+    "name_en": "Lu Buwei",
+    "dynasty": "战国",
+    "dynastyPeriod": "战国末期",
+    "birthYear": -292,
+    "deathYear": -235,
+    "philosophicalSchoolId": "4f91b9a3-8b00-4896-986e-1e37ab2b6fd2",
+    "schoolOfThought": "杂家",
+    "majorWorks": [
+      {
+        "id": "lu-buwei-work-lushi",
+        "title": "吕氏春秋",
+        "type": "essay",
+        "description": "组织门客编成的综合性思想汇编，兼采诸子并服务秦国治国实践"
+      }
+    ],
+    "contributions": [
+      "组织编纂《吕氏春秋》",
+      "将诸子思想、时令政治和治理经验汇编成系统知识",
+      "连接战国末期百家争鸣与秦汉帝国知识整合"
+    ],
+    "achievements": [
+      "杂家代表人物",
+      "战国末政治家和知识组织者",
+      "《吕氏春秋》成为理解诸子综合的重要文本"
+    ],
+    "biography": "吕不韦为战国末期秦国相邦。他组织门客编成《吕氏春秋》，试图将多家思想与政治实践综合起来，反映了思想汇编走向帝国治理知识的趋势。",
+    "sources": [
+      "Chinese Text Project: Lushi Chunqiu - https://ctext.org/lv-shi-chun-qiu"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "35d90301-eb97-4d3c-83cb-31b9920e5063",
+    "name": "刘安",
+    "name_en": "Liu An",
+    "dynasty": "汉代",
+    "dynastyPeriod": "西汉",
+    "birthYear": -179,
+    "deathYear": -122,
+    "philosophicalSchoolId": "4f91b9a3-8b00-4896-986e-1e37ab2b6fd2",
+    "schoolOfThought": "杂家",
+    "majorWorks": [
+      {
+        "id": "liu-an-work-huainanzi",
+        "title": "淮南子",
+        "type": "essay",
+        "description": "由刘安及其门客编纂，综合道家、阴阳、政治和宇宙论知识"
+      }
+    ],
+    "contributions": [
+      "主持编撰《淮南子》",
+      "综合道家、阴阳和政治治理思想",
+      "推动汉代知识体系的综合化和宇宙论化"
+    ],
+    "achievements": [
+      "西汉淮南王",
+      "杂家与黄老思想综合传统代表",
+      "《淮南子》是汉代思想和知识分类的重要文本"
+    ],
+    "biography": "刘安为西汉淮南王，聚集宾客编成《淮南子》。该书内容广泛，展示了汉代对宇宙、政治、修身和自然知识的综合整理。",
+    "sources": [
+      "Chinese Text Project: Huainanzi - https://ctext.org/huainanzi"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "1843a027-a04d-4b00-912e-ee8d2e62588c",
+    "name": "董仲舒",
+    "name_en": "Dong Zhongshu",
+    "dynasty": "汉代",
+    "dynastyPeriod": "西汉",
+    "birthYear": -179,
+    "deathYear": -104,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
+    "schoolOfThought": "儒家",
+    "majorWorks": [
+      {
+        "id": "dong-zhongshu-work-chunqiu",
+        "title": "春秋繁露",
+        "type": "essay",
+        "description": "以春秋学、天人感应和王道政治为中心的汉代儒学文本"
+      }
+    ],
+    "contributions": [
+      "推动汉代儒学与国家制度结合",
+      "发展天人感应、三纲五常等政治伦理观念",
+      "使儒学在帝国教育和政治中获得核心位置"
+    ],
+    "achievements": [
+      "汉代儒学代表人物",
+      "经学政治化的重要推动者",
+      "影响两汉以后国家意识形态建设"
+    ],
+    "biography": "董仲舒为西汉儒者，擅长春秋公羊学。他将儒学、阴阳五行和帝国政治秩序结合起来，推动儒学成为汉代国家治理的重要思想资源。",
+    "sources": [
+      "Britannica: Chinese philosophy - https://www.britannica.com/topic/Chinese-philosophy",
+      "Chinese Text Project: Chunqiu Fanlu - https://ctext.org/chun-qiu-fan-lu"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "0759ced7-6ea3-4a01-8323-64a7e9af02e6",
+    "name": "朱熹",
+    "name_en": "Zhu Xi",
+    "dynasty": "宋代",
+    "dynastyPeriod": "南宋",
+    "birthYear": 1130,
+    "deathYear": 1200,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
+    "schoolOfThought": "儒家",
+    "majorWorks": [
+      {
+        "id": "zhu-xi-work-sishu",
+        "title": "四书章句集注",
+        "type": "essay",
+        "description": "对《大学》《中庸》《论语》《孟子》的系统注解，奠定后世科举和儒学教育核心"
+      },
+      {
+        "id": "zhu-xi-work-jinsi",
+        "title": "近思录",
+        "type": "essay",
+        "description": "与吕祖谦编选周敦颐、程颢、程颐、张载等理学材料"
+      }
+    ],
+    "contributions": [
+      "系统化宋代理学的理、气、格物和修养论",
+      "确立四书在儒学教育中的中心地位",
+      "重塑东亚儒学经典解释和教育制度"
+    ],
+    "achievements": [
+      "宋代理学集大成者",
+      "四书学传统最重要的注释家之一",
+      "影响中国、朝鲜、日本和越南的儒学教育"
+    ],
+    "biography": "朱熹字元晦，号晦庵，南宋理学家。他综合北宋理学传统，以理气论、格物致知和敬的修养方法构建庞大的哲学体系，并通过四书注解深刻影响后世教育。",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: Zhu Xi - https://plato.stanford.edu/entries/zhu-xi/"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "42b45b4c-1f19-46bb-b115-d097a32bb1b3",
+    "name": "王阳明",
+    "name_en": "Wang Yangming",
+    "dynasty": "明代",
+    "dynastyPeriod": "明代中期",
+    "birthYear": 1472,
+    "deathYear": 1529,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
+    "schoolOfThought": "儒家",
+    "majorWorks": [
+      {
+        "id": "wang-yangming-work-chuanxi",
+        "title": "传习录",
+        "type": "essay",
+        "description": "记录王阳明讲学语录和书信，集中呈现心即理、致良知与知行合一"
+      }
+    ],
+    "contributions": [
+      "发展心学，提出心即理和致良知",
+      "强调知行合一，重视道德实践的当下完成",
+      "影响明清思想、东亚儒学和近代思想转型"
+    ],
+    "achievements": [
+      "明代心学集大成者",
+      "兼具思想家、军事家与政治实践者身份",
+      "其学说在东亚文化圈广泛传播"
+    ],
+    "biography": "王阳明名守仁，字伯安，浙江余姚人。他在政治挫折和军事实践中发展心学，强调良知是道德判断的根本，并主张知识必须落实为行动。",
+    "sources": [
+      "Internet Encyclopedia of Philosophy: Wang Yangming - https://iep.utm.edu/wangyang/",
+      "Britannica: Wang Yangming - https://www.britannica.com/biography/Wang-Yangming"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "e81ab373-7585-49a2-8572-a918a1669903",
     "name": "韩愈",
     "name_en": "Han Yu",
     "dynasty": "唐代",
+    "dynastyPeriod": "唐代",
     "birthYear": 768,
     "deathYear": 824,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
     "schoolOfThought": "儒家",
-    "biography": "韩愈（768年—824年），字退之，河南河阳（今河南孟州）人，唐代杰出的文学家、思想家、哲学家。他是唐代古文运动的倡导者，被后人尊为「唐宋八大家」之首。韩愈主张文以载道，反对六朝以来的骈俪文风，提倡学习先秦两汉的散文，对后世散文发展产生了深远影响。",
-    "achievements": [
-      "唐代古文运动的倡导者和领袖",
-      "提出「文以载道」的文学主张",
-      "被誉为「文章巨公」和「百代文宗」",
-      "对儒学复兴做出重要贡献"
-    ],
-    "representativeWorks": [
+    "majorWorks": [
       {
         "id": "han-yu-work-1",
         "title": "师说",
         "type": "prose",
-        "description": "论述从师学习的重要性，批判当时士大夫耻于从师的风气",
+        "description": "论述从师学习的重要性，批判士大夫耻于从师的风气",
         "contentExcerpt": "古之学者必有师。师者，所以传道受业解惑也。"
       },
       {
         "id": "han-yu-work-2",
         "title": "进学解",
         "type": "prose",
-        "description": "以问答形式阐述治学之道，表达怀才不遇的感慨",
-        "contentExcerpt": "业精于勤，荒于嬉；行成于思，毁于随。"
+        "description": "以问答形式阐述治学之道，表达怀才不遇的感慨"
       },
       {
         "id": "han-yu-work-3",
         "title": "原道",
         "type": "essay",
-        "description": "阐述儒家道统思想，批判佛老，维护儒学正统地位",
-        "contentExcerpt": "博爱之谓仁，行而宜之之谓义，由是而之焉之谓道。"
+        "description": "阐述儒家道统思想，批判佛老，维护儒学正统地位"
       }
-    ]
+    ],
+    "contributions": [
+      "倡导唐代古文运动",
+      "提出文以载道的文学与思想主张",
+      "推动中唐儒学复兴和道统意识形成"
+    ],
+    "achievements": [
+      "唐宋八大家之首",
+      "被誉为文章巨公、百代文宗",
+      "对宋代古文和儒学复兴影响深远"
+    ],
+    "biography": "韩愈字退之，河南河阳人。作为唐代文学家和思想家，他反对骈俪文风，倡导古文，强调文章承载道统与伦理责任。",
+    "sources": [
+      "Britannica: Han Yu - https://www.britannica.com/biography/Han-Yu"
+    ],
+    "createdAt": "2025-12-24T19:53:48.266+00:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
   },
   {
-    "id": "liu-zongyuan",
+    "id": "695bc3b7-d845-42c0-b9d6-d2f6346dd738",
     "name": "柳宗元",
     "name_en": "Liu Zongyuan",
     "dynasty": "唐代",
+    "dynastyPeriod": "唐代",
     "birthYear": 773,
     "deathYear": 819,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
     "schoolOfThought": "儒家",
-    "biography": "柳宗元（773年—819年），字子厚，河东解县（今山西运城）人，世称「柳河东」。唐代著名文学家、哲学家，与韩愈并称「韩柳」，同为唐代古文运动的领袖。柳宗元的山水游记独具特色，被誉为「游记之祖」。",
-    "achievements": [
-      "唐代古文运动的重要领袖",
-      "山水游记的开创者",
-      "寓言文学的杰出代表",
-      "与韩愈并称「韩柳」"
-    ],
-    "representativeWorks": [
+    "majorWorks": [
       {
         "id": "liu-zongyuan-work-1",
         "title": "永州八记",
         "type": "prose",
-        "description": "描写永州山水的系列游记散文，开创了山水游记的新境界",
-        "contentExcerpt": "潭中鱼可百许头，皆若空游无所依，日光下澈，影布石上。"
+        "description": "描写永州山水的系列游记散文，开创山水游记的新境界"
       },
       {
         "id": "liu-zongyuan-work-2",
         "title": "捕蛇者说",
         "type": "prose",
-        "description": "通过捕蛇者的遭遇，揭露苛政猛于虎的社会现实",
-        "contentExcerpt": "苛政猛于虎也。"
+        "description": "通过捕蛇者遭遇揭露苛政对民生的压迫"
       },
       {
         "id": "liu-zongyuan-work-3",
         "title": "黔之驴",
         "type": "prose",
-        "description": "著名寓言，讽刺外强中干、虚有其表的人",
-        "contentExcerpt": "黔无驴，有好事者船载以入。"
+        "description": "寓言名篇，讽刺外强中干、虚有其表者"
       }
-    ]
+    ],
+    "contributions": [
+      "唐代古文运动重要参与者",
+      "开拓山水游记和寓言散文表现空间",
+      "以政治寓言和哲学文章回应中唐现实"
+    ],
+    "achievements": [
+      "唐宋八大家之一",
+      "与韩愈并称韩柳",
+      "山水游记传统的重要开创者"
+    ],
+    "biography": "柳宗元字子厚，河东解县人。其文学成就与政治遭遇紧密相关，贬居永州期间创作大量山水游记和寓言，形成冷峻而深刻的文风。",
+    "sources": [
+      "Britannica: Liu Zongyuan - https://www.britannica.com/biography/Liu-Zongyuan"
+    ],
+    "createdAt": "2025-12-24T19:53:48.267+00:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
   },
   {
-    "id": "ouyang-xiu",
+    "id": "4a826113-53c8-4d43-8620-85137fe73ffd",
     "name": "欧阳修",
     "name_en": "Ouyang Xiu",
     "dynasty": "宋代",
+    "dynastyPeriod": "北宋",
     "birthYear": 1007,
     "deathYear": 1072,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
     "schoolOfThought": "儒家",
-    "biography": "欧阳修（1007年—1072年），字永叔，号醉翁，晚号六一居士，吉州永丰（今江西永丰）人。北宋政治家、文学家、史学家，唐宋八大家之一。他领导了北宋诗文革新运动，对宋代文学发展影响深远。",
-    "achievements": [
-      "北宋诗文革新运动的领袖",
-      "主持编修《新唐书》《新五代史》",
-      "提携苏轼、曾巩等后辈文人",
-      "开创宋代散文平易自然的新风格"
-    ],
-    "representativeWorks": [
+    "majorWorks": [
       {
         "id": "ouyang-xiu-work-1",
         "title": "醉翁亭记",
         "type": "prose",
-        "description": "描写滁州山水之美和与民同乐的情怀，文风优美流畅",
-        "contentExcerpt": "醉翁之意不在酒，在乎山水之间也。"
+        "description": "描写滁州山水与民同乐情怀的宋代散文名篇"
       },
       {
         "id": "ouyang-xiu-work-2",
         "title": "秋声赋",
         "type": "prose",
-        "description": "借秋声抒发人生感慨，是宋代赋体散文的代表作",
-        "contentExcerpt": "盖夫秋之为状也，其色惨淡，烟霏云敛。"
+        "description": "借秋声抒发人生感慨，是宋代赋体散文代表作"
       }
-    ]
+    ],
+    "contributions": [
+      "领导北宋诗文革新运动",
+      "提携苏轼、曾巩等后辈文人",
+      "主持编修《新唐书》《新五代史》"
+    ],
+    "achievements": [
+      "唐宋八大家之一",
+      "北宋文坛领袖",
+      "宋代散文平易自然风格的重要塑造者"
+    ],
+    "biography": "欧阳修字永叔，号醉翁，晚号六一居士。作为北宋政治家、文学家和史学家，他推动诗文革新，使宋代文章走向平易、清通和议论化。",
+    "sources": [
+      "Britannica: Ouyang Xiu - https://www.britannica.com/biography/Ouyang-Xiu"
+    ],
+    "createdAt": "2025-12-24T19:53:48.267+00:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
   },
   {
-    "id": "su-xun",
+    "id": "ae0c7461-d90d-46f5-b3b7-68531015f1f2",
     "name": "苏洵",
     "name_en": "Su Xun",
     "dynasty": "宋代",
+    "dynastyPeriod": "北宋",
     "birthYear": 1009,
     "deathYear": 1066,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
     "schoolOfThought": "儒家",
-    "biography": "苏洵（1009年—1066年），字明允，号老泉，眉州眉山（今四川眉山）人。北宋文学家，与其子苏轼、苏辙并称「三苏」。苏洵二十七岁始发愤读书，以文章著称于世，尤长于策论。",
-    "achievements": [
-      "与苏轼、苏辙并称「三苏」",
-      "策论文章雄辩有力",
-      "大器晚成的典范",
-      "对北宋政论文发展有重要贡献"
-    ],
-    "representativeWorks": [
+    "majorWorks": [
       {
         "id": "su-xun-work-1",
         "title": "六国论",
         "type": "essay",
-        "description": "分析六国灭亡原因，借古讽今，警示北宋朝廷",
-        "contentExcerpt": "六国破灭，非兵不利，战不善，弊在赂秦。"
+        "description": "分析六国灭亡原因，借古讽今，警示北宋边防和外交困境"
       },
       {
         "id": "su-xun-work-2",
         "title": "管仲论",
         "type": "essay",
-        "description": "评论管仲的功过得失，展现独到的历史见解",
-        "contentExcerpt": "管仲相桓公，霸诸侯，一匡天下。"
+        "description": "评论管仲功过，展现史论和政论文特色"
       }
-    ]
+    ],
+    "contributions": [
+      "以策论文章见长",
+      "与苏轼、苏辙共同构成三苏文学传统",
+      "推动北宋古文和政论文发展"
+    ],
+    "achievements": [
+      "唐宋八大家之一",
+      "三苏之一",
+      "大器晚成的宋代散文名家"
+    ],
+    "biography": "苏洵字明允，号老泉，眉州眉山人。他晚年发愤读书，以雄辩有力的策论文章成名，对北宋政治散文具有重要影响。",
+    "sources": [
+      "Wikipedia: Su Xun - https://en.wikipedia.org/wiki/Su_Xun"
+    ],
+    "createdAt": "2025-12-24T19:53:48.268+00:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
   },
   {
-    "id": "su-shi",
+    "id": "b5ab0494-e590-40e6-b74b-6ef84731d425",
     "name": "苏轼",
     "name_en": "Su Shi",
     "dynasty": "宋代",
+    "dynastyPeriod": "北宋",
     "birthYear": 1037,
     "deathYear": 1101,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
     "schoolOfThought": "儒家",
-    "biography": "苏轼（1037年—1101年），字子瞻，号东坡居士，眉州眉山（今四川眉山）人。北宋著名文学家、书画家，唐宋八大家之一。苏轼才华横溢，诗词文赋书画皆精，被誉为「全才」，对后世文学艺术影响极大。",
-    "achievements": [
-      "宋代文学的最高成就代表",
-      "豪放词派的开创者",
-      "书法「宋四家」之首",
-      "诗词文赋书画皆精的全才"
-    ],
-    "representativeWorks": [
+    "majorWorks": [
       {
         "id": "su-shi-work-1",
         "title": "前赤壁赋",
         "type": "prose",
-        "description": "游赤壁时所作，融写景、抒情、议论于一体的千古名篇",
-        "contentExcerpt": "寄蜉蝣于天地，渺沧海之一粟。"
+        "description": "融写景、抒情和哲思于一体的宋代赋体散文名篇"
       },
       {
         "id": "su-shi-work-2",
         "title": "念奴娇·赤壁怀古",
         "type": "poetry",
-        "description": "豪放词的代表作，怀古伤今，气势磅礴",
-        "contentExcerpt": "大江东去，浪淘尽，千古风流人物。"
+        "description": "豪放词代表作，以赤壁怀古抒发历史兴亡与个人遭际"
       },
       {
         "id": "su-shi-work-3",
         "title": "石钟山记",
         "type": "prose",
-        "description": "记述考察石钟山得名由来的经过，强调实地考察的重要性",
-        "contentExcerpt": "事不目见耳闻，而臆断其有无，可乎？"
+        "description": "强调实地考察和反对臆断的游记议论文"
       }
-    ]
+    ],
+    "contributions": [
+      "诗、词、文、书、画皆有重要成就",
+      "开拓豪放词风",
+      "以旷达生命态度影响后世文学和士人文化"
+    ],
+    "achievements": [
+      "唐宋八大家之一",
+      "宋代文学最高成就代表之一",
+      "宋四家之一，东坡文化影响深远"
+    ],
+    "biography": "苏轼字子瞻，号东坡居士，眉州眉山人。其人生多次遭贬，却在诗文书画和思想气质上形成旷达、通脱而深厚的文化形象。",
+    "sources": [
+      "Britannica: Su Shi - https://www.britannica.com/biography/Su-Shi"
+    ],
+    "createdAt": "2025-12-24T19:53:48.269+00:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
   },
   {
-    "id": "su-zhe",
+    "id": "374cb60c-0b60-4acf-8fff-9e20c14d384c",
     "name": "苏辙",
     "name_en": "Su Zhe",
     "dynasty": "宋代",
+    "dynastyPeriod": "北宋",
     "birthYear": 1039,
     "deathYear": 1112,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
     "schoolOfThought": "儒家",
-    "biography": "苏辙（1039年—1112年），字子由，号颍滨遗老，眉州眉山（今四川眉山）人。北宋文学家、政治家，与父苏洵、兄苏轼并称「三苏」。苏辙文风汪洋澹泊，与苏轼风格相近而更为平和。",
-    "achievements": [
-      "与父兄并称「三苏」",
-      "文风汪洋澹泊，自成一家",
-      "政治上多有建树",
-      "晚年著述丰富"
-    ],
-    "representativeWorks": [
+    "majorWorks": [
       {
         "id": "su-zhe-work-1",
         "title": "黄州快哉亭记",
         "type": "prose",
-        "description": "为张梦得所建快哉亭作记，阐发「快哉」之意",
-        "contentExcerpt": "士生于世，使其中不自得，将何往而非病？"
+        "description": "借亭台风物阐发胸中自得与外物关系的名篇"
       },
       {
         "id": "su-zhe-work-2",
         "title": "上枢密韩太尉书",
         "type": "memorial",
-        "description": "求见韩琦的书信，表达养气为文的主张",
-        "contentExcerpt": "文者气之所形，然文不可以学而能，气可以养而致。"
+        "description": "表达养气为文主张的书信名篇"
       }
-    ]
+    ],
+    "contributions": [
+      "与父兄并称三苏",
+      "散文汪洋澹泊、议论平正",
+      "晚年著述丰富，兼具政治和文学影响"
+    ],
+    "achievements": [
+      "唐宋八大家之一",
+      "北宋散文重要代表",
+      "三苏文学传统的重要成员"
+    ],
+    "biography": "苏辙字子由，眉州眉山人。其文风较苏轼更平稳疏阔，政治生涯起伏中仍保持大量著述。",
+    "sources": [
+      "Wikipedia: Su Zhe - https://en.wikipedia.org/wiki/Su_Zhe"
+    ],
+    "createdAt": "2025-12-24T19:53:48.270+00:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
   },
   {
-    "id": "wang-anshi",
+    "id": "ee0ed0d4-8cc5-4abf-98aa-12c5bf4bc67b",
     "name": "王安石",
     "name_en": "Wang Anshi",
     "dynasty": "宋代",
+    "dynastyPeriod": "北宋",
     "birthYear": 1021,
     "deathYear": 1086,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
     "schoolOfThought": "儒家",
-    "biography": "王安石（1021年—1086年），字介甫，号半山，抚州临川（今江西抚州）人。北宋著名政治家、文学家、思想家，唐宋八大家之一。王安石主持「熙宁变法」，是中国历史上著名的改革家。其文章论点鲜明，逻辑严密。",
-    "achievements": [
-      "主持「熙宁变法」的改革家",
-      "政论文章逻辑严密、说理透彻",
-      "诗歌清新峻拔",
-      "被列宁誉为「中国十一世纪的改革家」"
-    ],
-    "representativeWorks": [
+    "majorWorks": [
       {
         "id": "wang-anshi-work-1",
         "title": "答司马谏议书",
         "type": "memorial",
-        "description": "回复司马光反对变法的书信，阐明变法立场",
-        "contentExcerpt": "人习于苟且非一日，士大夫多以不恤国事、同俗自媚于众为善。"
+        "description": "回应司马光反对变法的书信，集中表达变法立场"
       },
       {
         "id": "wang-anshi-work-2",
         "title": "游褒禅山记",
         "type": "prose",
-        "description": "记游褒禅山的经历，阐发治学须深入探究的道理",
-        "contentExcerpt": "世之奇伟、瑰怪、非常之观，常在于险远。"
+        "description": "由游历引出治学和求道须深入险远的议论"
       },
       {
         "id": "wang-anshi-work-3",
         "title": "伤仲永",
         "type": "prose",
-        "description": "记述神童方仲永的故事，强调后天学习的重要性",
-        "contentExcerpt": "仲永之通悟，受之天也。其受之天也，贤于材人远矣。"
+        "description": "通过神童方仲永故事强调后天学习的重要性"
       }
-    ]
+    ],
+    "contributions": [
+      "主持熙宁变法",
+      "政论文逻辑严密、论点鲜明",
+      "诗文兼具清峻和理性风格"
+    ],
+    "achievements": [
+      "唐宋八大家之一",
+      "北宋改革家和思想家",
+      "中国十一世纪重要政治改革代表"
+    ],
+    "biography": "王安石字介甫，号半山，抚州临川人。他以政治改革和文章著称，试图通过制度调整解决北宋财政、军事和社会问题。",
+    "sources": [
+      "Britannica: Wang Anshi - https://www.britannica.com/biography/Wang-Anshi"
+    ],
+    "createdAt": "2025-12-24T19:53:48.271+00:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
   },
   {
-    "id": "zeng-gong",
+    "id": "3eb7bd87-9704-4a3c-8e62-5de0ea49a6d3",
     "name": "曾巩",
     "name_en": "Zeng Gong",
     "dynasty": "宋代",
+    "dynastyPeriod": "北宋",
     "birthYear": 1019,
     "deathYear": 1083,
+    "philosophicalSchoolId": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
     "schoolOfThought": "儒家",
-    "biography": "曾巩（1019年—1083年），字子固，建昌南丰（今江西南丰）人，世称「南丰先生」。北宋文学家、史学家，唐宋八大家之一。曾巩文风质朴自然，长于议论，为欧阳修所赏识。",
-    "achievements": [
-      "文风质朴自然，长于议论",
-      "为欧阳修所赏识和提携",
-      "整理校勘古籍有重要贡献",
-      "世称「南丰先生」"
-    ],
-    "representativeWorks": [
+    "majorWorks": [
       {
         "id": "zeng-gong-work-1",
         "title": "墨池记",
         "type": "prose",
-        "description": "记王羲之墨池，阐发勤学苦练的道理",
-        "contentExcerpt": "羲之之书晚乃善，则其所能，盖亦以精力自致者，非天成也。"
+        "description": "借王羲之墨池阐发勤学苦练和自我成就的道理"
       },
       {
         "id": "zeng-gong-work-2",
         "title": "寄欧阳舍人书",
         "type": "memorial",
-        "description": "致欧阳修的书信，表达对欧阳修的敬仰和感激",
-        "contentExcerpt": "生而为英，死而为灵。"
+        "description": "致欧阳修书信，表达对其文章、道德和奖掖之恩的敬重"
       }
-    ]
+    ],
+    "contributions": [
+      "散文质朴自然，长于议论和叙事",
+      "整理校勘古籍有重要贡献",
+      "承接欧阳修文统并影响后世文章法度"
+    ],
+    "achievements": [
+      "唐宋八大家之一",
+      "世称南丰先生",
+      "北宋古文传统的重要代表"
+    ],
+    "biography": "曾巩字子固，建昌南丰人。其文章不事奇崛，重在法度、条理和质实，是北宋古文传统中稳健的一支。",
+    "sources": [
+      "Wikipedia: Zeng Gong - https://en.wikipedia.org/wiki/Zeng_Gong"
+    ],
+    "createdAt": "2025-12-24T19:53:48.273+00:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
   }
 ]

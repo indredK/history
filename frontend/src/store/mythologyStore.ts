@@ -34,7 +34,7 @@ export const useMythologyStore = create<MythologyStore>((set, get) => ({
     set({ loading });
   },
 
-  setError: (error: string | null) => {
+  setError: (error: Error | null) => {
     set({ error });
   },
 

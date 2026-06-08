@@ -70,14 +70,21 @@ function compareRows(left: FlatYearRow, right: FlatYearRow) {
 }
 
 async function loadFlatYearRows() {
-  const responses = await Promise.all(
+  const responses = await Promise.allSettled(
     Array.from({ length: RESPONSE_FILE_COUNT }, (_, index) => (
       loadJsonData<FlatApiResponse>(`/data/json/response${index + 1}.json`)
     )),
   );
 
   return responses
-    .flatMap((response) => response.yearRows ?? [])
+    .flatMap((result, index) => {
+      if (result.status === 'fulfilled') {
+        return result.value.yearRows ?? [];
+      }
+
+      console.warn(`加载 response${index + 1}.json 失败:`, result.reason);
+      return [];
+    })
     .filter((row) => row.polity && (row.rulerAlias || row.ruler))
     .sort(compareRows);
 }

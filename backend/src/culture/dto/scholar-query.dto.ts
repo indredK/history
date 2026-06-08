@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsOptional, IsInt, Min, IsUUID } from 'class-validator';
+import { IsOptional, IsInt, Min, IsUUID, IsString } from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 export class ScholarQueryDto extends PaginationQueryDto {
@@ -9,7 +9,16 @@ export class ScholarQueryDto extends PaginationQueryDto {
     example: '唐朝',
   })
   @IsOptional()
+  @IsString()
   dynastyPeriod?: string;
+
+  @ApiPropertyOptional({
+    description: 'Filter by frontend dynasty label',
+    example: '唐代',
+  })
+  @IsOptional()
+  @IsString()
+  dynasty?: string;
 
   @ApiPropertyOptional({
     description: 'Filter by philosophical school ID',
@@ -24,14 +33,32 @@ export class ScholarQueryDto extends PaginationQueryDto {
     example: '儒家',
   })
   @IsOptional()
+  @IsString()
   schoolName?: string;
+
+  @ApiPropertyOptional({
+    description: 'Filter by denormalized school of thought',
+    example: '儒家',
+  })
+  @IsOptional()
+  @IsString()
+  schoolOfThought?: string;
 
   @ApiPropertyOptional({
     description: 'Search by scholar name (partial match)',
     example: '孔',
   })
   @IsOptional()
+  @IsString()
   name?: string;
+
+  @ApiPropertyOptional({
+    description: 'Keyword search across name, dynasty, school, and biography',
+    example: '古文运动',
+  })
+  @IsOptional()
+  @IsString()
+  q?: string;
 
   @ApiPropertyOptional({
     description: 'Filter by birth year (scholars born from this year)',

@@ -54,6 +54,7 @@ export function FixedTabsPage({
   description,
   onTabChange,
   queryKey = 'tab',
+  tabsProps,
 }: FixedTabsPageProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const requestedTab = searchParams.get(queryKey);
@@ -167,6 +168,7 @@ export function FixedTabsPage({
           value={activeTab}
           onChange={handleTabChange}
           ariaLabel="标签页导航"
+          {...tabsProps}
         />
       </SectionToolbar>
 

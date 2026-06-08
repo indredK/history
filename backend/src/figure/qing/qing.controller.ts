@@ -1,5 +1,5 @@
-import { Controller, Get, Query } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Controller, Get, Param, Query } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { QingService } from './qing.service';
 import { FigureQueryDto } from '../common/query.dto';
 import { QingRulerDto } from './qing.dto';
@@ -42,5 +42,24 @@ export class QingController {
     @Query() query: FigureQueryDto,
   ): Promise<PaginatedResponseDto<QingRulerDto>> {
     return this.qingService.getQingRulers(query);
+  }
+
+  @Get('qing-rulers/:id')
+  @ApiOperation({
+    summary: 'Get Qing Dynasty ruler by ID (compatible endpoint)',
+    description: 'Retrieve detailed information about a specific Qing Dynasty ruler',
+  })
+  @ApiParam({ name: 'id', description: 'Qing ruler ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully retrieved Qing ruler',
+    type: QingRulerDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Qing ruler not found',
+  })
+  async getQingRulerById(@Param('id') id: string): Promise<QingRulerDto> {
+    return this.qingService.getQingRulerById(id);
   }
 }

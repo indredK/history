@@ -44,9 +44,38 @@ export interface Mythology {
   description: string;
   /** 相关人物 */
   characters: string[];
+  /** 历史或传说时期 */
+  period?: string;
+  /** 地域/文本来源 */
+  origin?: string;
+  /** 故事情节要点 */
+  stories?: string[];
+  /** 象征含义 */
+  symbolism?: string[];
   /** 出处/来源（可选） */
   source?: string;
   /** 配图URL（可选） */
+  imageUrl?: string;
+  /** 创建时间 */
+  createdAt?: string | Date;
+  /** 更新时间 */
+  updatedAt?: string | Date;
+}
+
+/**
+ * 神话新增/编辑入参
+ */
+export interface MythologyInput {
+  title: string;
+  category: MythologyCategory;
+  description: string;
+  englishTitle?: string;
+  characters?: string[];
+  period?: string;
+  origin?: string;
+  stories?: string[];
+  symbolism?: string[];
+  source?: string;
   imageUrl?: string;
 }
 
@@ -63,7 +92,7 @@ export interface MythologyState {
   /** 加载状态 */
   loading: boolean;
   /** 错误信息 */
-  error: string | null;
+  error: Error | null;
 }
 
 /**
@@ -79,7 +108,7 @@ export interface MythologyActions {
   /** 设置加载状态 */
   setLoading: (loading: boolean) => void;
   /** 设置错误信息 */
-  setError: (error: string | null) => void;
+  setError: (error: Error | null) => void;
   /** 获取筛选后的神话列表 */
   getFilteredMythologies: () => Mythology[];
 }

@@ -26,7 +26,7 @@ export async function loadJsonData<T>(path: string): Promise<T> {
     
     const response = await fetch(fullPath);
     if (!response.ok) {
-      throw new Error(`Failed to load ${fullPath}: ${response.statusText}`);
+      throw new Error(`加载资源失败 ${fullPath}: ${response.statusText}`);
     }
     return await response.json();
   } catch (error) {
@@ -204,7 +204,7 @@ export async function retryLoad<T>(
   }
   
   throw new DataLoadError(
-    `Failed to load data after ${maxRetries} retries`,
+    `重试 ${maxRetries} 次后仍无法加载数据`,
     'unknown',
     lastError!
   );
@@ -225,6 +225,14 @@ export const dataLoaders = {
  */
 export interface ApiResponse<T> {
   data: T;
+  meta?: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+  };
   success?: boolean;
   message?: string;
 }
@@ -250,7 +258,10 @@ export function handleApiResponse<T>(response: any): ApiResponse<T[]> {
         }
         // 如果是分页响应
         if (typeof backendData.data === 'object' && 'data' in backendData.data) {
-          return { data: backendData.data.data };
+          return {
+            data: backendData.data.data,
+            meta: backendData.data.meta,
+          };
         }
         // 单个对象包装成数组
         return { data: [backendData.data] };
@@ -278,7 +289,7 @@ export function handleSingleApiResponse<T>(response: any): ApiResponse<T> {
         throw new Error(backendData.message || 'API请求失败');
       }
       
-      if (backendData.data) {
+      if (Object.prototype.hasOwnProperty.call(backendData, 'data')) {
         return { data: backendData.data };
       }
     }

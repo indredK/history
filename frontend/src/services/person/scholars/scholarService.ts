@@ -1,4 +1,4 @@
-import type { Scholar } from './types';
+import type { Scholar, ScholarMutationInput } from './types';
 import type { BaseService } from '@/utils/services/serviceFactory';
 
 export type ScholarSortBy = 'dynasty' | 'name' | 'birthYear';
@@ -7,6 +7,10 @@ export type ScholarSortBy = 'dynasty' | 'name' | 'birthYear';
  * 学者服务接口
  */
 export interface ScholarService extends BaseService<Scholar> {
+  createScholar(input: ScholarMutationInput): Promise<{ data: Scholar }>;
+  updateScholar(id: string, input: Partial<ScholarMutationInput>): Promise<{ data: Scholar }>;
+  deleteScholar(id: string): Promise<{ data: Scholar | null }>;
+
   /**
    * 按朝代筛选学者
    */
@@ -47,6 +51,21 @@ export interface ScholarService extends BaseService<Scholar> {
 export const scholarServiceHelper: ScholarService = {
   getAll: () => Promise.resolve({ data: [] }),
   getById: () => Promise.resolve({ data: null }),
+  createScholar: (input) => Promise.resolve({
+    data: {
+      id: input.id || `scholar_${Date.now()}`,
+      name: input.name,
+      ...input,
+    },
+  }),
+  updateScholar: (id, input) => Promise.resolve({
+    data: {
+      id,
+      name: input.name || '',
+      ...input,
+    },
+  }),
+  deleteScholar: () => Promise.resolve({ data: null }),
   /**
    * 按朝代筛选学者
    */

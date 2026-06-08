@@ -6,21 +6,38 @@ import type { Place } from './types';
 
 // 数据转换器
 function transformJsonToPlace(jsonPlace: any, index: number): Place {
-  const altNames = jsonPlace.alt_names ? 
-    jsonPlace.alt_names.split(',').map((name: string) => name.trim()) : 
-    undefined;
-  
-  return {
-    id: `place_${jsonPlace.canonical_name.replace(/\s+/g, '_')}_${index}`,
-    canonical_name: jsonPlace.canonical_name,
-    alt_names: altNames,
-    description: jsonPlace.description,
-    location: {
-      type: 'Point',
-      coordinates: [jsonPlace.longitude, jsonPlace.latitude],
-    },
-    source_ids: jsonPlace.source ? [`src_${jsonPlace.source}`] : [],
+  const canonicalName = jsonPlace.canonical_name || jsonPlace.name || `place_${index}`;
+  const altNames = Array.isArray(jsonPlace.alt_names)
+    ? jsonPlace.alt_names
+    : jsonPlace.alt_names
+      ? String(jsonPlace.alt_names).split(',').map((name: string) => name.trim()).filter(Boolean)
+      : [];
+  const location = jsonPlace.location?.type === 'Point' && Array.isArray(jsonPlace.location.coordinates)
+    ? jsonPlace.location
+    : typeof jsonPlace.longitude === 'number' && typeof jsonPlace.latitude === 'number'
+      ? {
+          type: 'Point' as const,
+          coordinates: [jsonPlace.longitude, jsonPlace.latitude] as [number, number],
+        }
+      : undefined;
+
+  const place: Place = {
+    id: jsonPlace.id || `place_${canonicalName.replace(/\s+/g, '_')}_${index}`,
+    canonical_name: canonicalName,
+    source_ids: jsonPlace.source_ids || (jsonPlace.source ? [`src_${jsonPlace.source}`] : []),
   };
+
+  if (altNames.length > 0) {
+    place.alt_names = altNames;
+  }
+  if (typeof jsonPlace.description === 'string' && jsonPlace.description.trim()) {
+    place.description = jsonPlace.description;
+  }
+  if (location) {
+    place.location = location;
+  }
+
+  return place;
 }
 
 // 创建统一服务

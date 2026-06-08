@@ -39,10 +39,10 @@ describe('ApiResponseDto', () => {
   });
 
   describe('ApiResponseDto.success()', () => {
-    it('默认 message=Success,success=true,data 透传', () => {
+    it('默认 message=操作成功,success=true,data 透传', () => {
       const dto = ApiResponseDto.success({ items: [1, 2, 3] });
       expect(dto.success).toBe(true);
-      expect(dto.message).toBe('Success');
+      expect(dto.message).toBe('操作成功');
       expect(dto.data).toEqual({ items: [1, 2, 3] });
       expect(dto.error).toBeUndefined();
     });

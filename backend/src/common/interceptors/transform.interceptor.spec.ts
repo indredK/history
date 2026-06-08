@@ -32,7 +32,7 @@ describe('TransformInterceptor', () => {
     it('裸对象包成 ApiResponseDto.success', async () => {
       const result = (await runWith({ id: 1 })) as ApiResponseDto<unknown>;
       expect(result.success).toBe(true);
-      expect(result.message).toBe('Success');
+      expect(result.message).toBe('操作成功');
       expect(result.data).toEqual({ id: 1 });
       expect(result.timestamp).toEqual(expect.any(String));
     });
@@ -61,7 +61,7 @@ describe('TransformInterceptor', () => {
       }>;
       // 因为缺 timestamp,走 else 分支被再包一层
       expect(result.data).toEqual({ success: true });
-      expect(result.message).toBe('Success');
+      expect(result.message).toBe('操作成功');
     });
 
     it('对象只有 timestamp 一个键(缺 success)仍被包装', async () => {
@@ -69,7 +69,7 @@ describe('TransformInterceptor', () => {
         timestamp: '2026-01-01T00:00:00.000Z',
       })) as ApiResponseDto<{ timestamp: string }>;
       expect(result.data).toEqual({ timestamp: '2026-01-01T00:00:00.000Z' });
-      expect(result.message).toBe('Success');
+      expect(result.message).toBe('操作成功');
     });
   });
 

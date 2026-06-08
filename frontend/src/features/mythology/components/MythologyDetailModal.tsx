@@ -15,6 +15,7 @@ import {
   Box,
   Chip,
   IconButton,
+  Divider,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import type { Mythology } from '@/services/mythology';
@@ -29,10 +30,12 @@ interface MythologyDetailModalProps {
  * 分类颜色映射
  */
 const categoryColors: Record<string, { bg: string; text: string }> = {
-  '创世神话': { bg: 'rgba(156, 39, 176, 0.15)', text: '#9c27b0' },
-  '英雄神话': { bg: 'rgba(244, 67, 54, 0.15)', text: '#f44336' },
-  '自然神话': { bg: 'rgba(76, 175, 80, 0.15)', text: '#4caf50' },
-  '爱情神话': { bg: 'rgba(233, 30, 99, 0.15)', text: '#e91e63' },
+  '创世神话': { bg: 'rgba(156, 39, 176, 0.15)', text: 'var(--color-purple)' },
+  '英雄神话': { bg: 'rgba(244, 67, 54, 0.15)', text: 'var(--color-error)' },
+  '自然神话': { bg: 'rgba(76, 175, 80, 0.15)', text: 'var(--color-success)' },
+  '爱情神话': { bg: 'rgba(233, 30, 99, 0.15)', text: 'var(--color-error)' },
+  '神仙传说': { bg: 'rgba(33, 150, 243, 0.15)', text: 'var(--color-info)' },
+  '民间传说': { bg: 'rgba(255, 152, 0, 0.15)', text: 'var(--color-warning)' },
 };
 
 /**
@@ -48,14 +51,14 @@ export function MythologyDetailModal({
 
   const categoryColor = categoryColors[mythology.category] || {
     bg: 'rgba(158, 158, 158, 0.15)',
-    text: '#9e9e9e',
+    text: 'var(--color-text-secondary)',
   };
 
   return (
     <Dialog
       open={open}
       onClose={onClose}
-      maxWidth="sm"
+      maxWidth="md"
       fullWidth
       aria-labelledby="mythology-detail-title"
       aria-describedby="mythology-detail-description"
@@ -63,7 +66,8 @@ export function MythologyDetailModal({
         paper: {
           sx: {
             background: 'var(--color-bg-card)',
-            borderRadius: 'var(--radius-lg)',
+            border: 'var(--app-panel-border)',
+            borderRadius: 'var(--radius-unified-lg)',
           },
         },
       }}
@@ -113,7 +117,7 @@ export function MythologyDetailModal({
       {/* 内容区域 */}
       <DialogContent dividers>
         {/* 分类标签 */}
-        <Box sx={{ mb: 2 }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 2 }}>
           <Chip
             label={mythology.category}
             size="small"
@@ -123,6 +127,17 @@ export function MythologyDetailModal({
               fontWeight: 500,
             }}
           />
+          {mythology.period && (
+            <Chip
+              label={mythology.period}
+              size="small"
+              variant="outlined"
+              sx={{
+                borderColor: 'var(--color-border)',
+                color: 'var(--color-text-secondary)',
+              }}
+            />
+          )}
         </Box>
 
         {/* 完整描述 */}
@@ -161,6 +176,67 @@ export function MythologyDetailModal({
                   variant="outlined"
                   sx={{
                     borderColor: 'var(--color-border)',
+                    color: 'var(--color-text-primary)',
+                  }}
+                />
+              ))}
+            </Box>
+          </Box>
+        )}
+
+        {mythology.stories && mythology.stories.length > 0 && (
+          <>
+            <Divider sx={{ my: 2, borderColor: 'var(--color-border)' }} />
+            <Box sx={{ mb: 2 }}>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  color: 'var(--color-text-secondary)',
+                  mb: 1,
+                  fontWeight: 600,
+                }}
+              >
+                故事要点
+              </Typography>
+              <Box component="ul" sx={{ pl: 2.5, m: 0 }}>
+                {mythology.stories.map((story, index) => (
+                  <Typography
+                    key={`${story}-${index}`}
+                    component="li"
+                    variant="body2"
+                    sx={{
+                      color: 'var(--color-text-primary)',
+                      lineHeight: 1.8,
+                    }}
+                  >
+                    {story}
+                  </Typography>
+                ))}
+              </Box>
+            </Box>
+          </>
+        )}
+
+        {mythology.symbolism && mythology.symbolism.length > 0 && (
+          <Box sx={{ mb: 2 }}>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                color: 'var(--color-text-secondary)',
+                mb: 1,
+                fontWeight: 600,
+              }}
+            >
+              象征含义
+            </Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+              {mythology.symbolism.map((item, index) => (
+                <Chip
+                  key={`${item}-${index}`}
+                  label={item}
+                  size="small"
+                  sx={{
+                    backgroundColor: 'var(--app-interactive-bg-soft)',
                     color: 'var(--color-text-primary)',
                   }}
                 />

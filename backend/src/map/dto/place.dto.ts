@@ -1,15 +1,15 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
 class LocationDto {
   @ApiProperty({ description: 'Location type', example: 'Point' })
-  type: string;
+  type: 'Point';
 
   @ApiProperty({
     description: 'Coordinates [longitude, latitude]',
     example: [116.4074, 39.9042],
   })
-  coordinates: number[];
+  coordinates: [number, number];
 }
 
 export class PlaceDto {
@@ -26,15 +26,15 @@ export class PlaceDto {
   })
   alt_names?: string[];
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'Place description',
     example: 'Capital city of China',
   })
-  description: string;
+  description?: string;
 
-  @ApiProperty({ description: 'Geographical location' })
+  @ApiPropertyOptional({ description: 'Geographical location' })
   @Type(() => LocationDto)
-  location: LocationDto;
+  location?: LocationDto;
 
   @ApiProperty({
     description: 'Source IDs',

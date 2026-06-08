@@ -224,7 +224,7 @@ export type EventParticipantCreateInput = {
   id?: string
   role?: string | null
   event: Prisma.EventCreateNestedOneWithoutParticipantsInput
-  person: Prisma.PersonCreateNestedOneWithoutEventsInput
+  person: Prisma.PersonCreateNestedOneWithoutEventParticipantsInput
 }
 
 export type EventParticipantUncheckedCreateInput = {
@@ -238,7 +238,7 @@ export type EventParticipantUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   event?: Prisma.EventUpdateOneRequiredWithoutParticipantsNestedInput
-  person?: Prisma.PersonUpdateOneRequiredWithoutEventsNestedInput
+  person?: Prisma.PersonUpdateOneRequiredWithoutEventParticipantsNestedInput
 }
 
 export type EventParticipantUncheckedUpdateInput = {
@@ -437,7 +437,7 @@ export type EventParticipantScalarWhereInput = {
 export type EventParticipantCreateWithoutEventInput = {
   id?: string
   role?: string | null
-  person: Prisma.PersonCreateNestedOneWithoutEventsInput
+  person: Prisma.PersonCreateNestedOneWithoutEventParticipantsInput
 }
 
 export type EventParticipantUncheckedCreateWithoutEventInput = {
@@ -504,7 +504,7 @@ export type EventParticipantCreateManyEventInput = {
 export type EventParticipantUpdateWithoutEventInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  person?: Prisma.PersonUpdateOneRequiredWithoutEventsNestedInput
+  person?: Prisma.PersonUpdateOneRequiredWithoutEventParticipantsNestedInput
 }
 
 export type EventParticipantUncheckedUpdateWithoutEventInput = {

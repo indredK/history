@@ -396,14 +396,6 @@ export type PlaceScalarRelationFilter = {
   isNot?: Prisma.PlaceWhereInput
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type PlaceCreateNestedOneWithoutPlaceSourcesInput = {
   create?: Prisma.XOR<Prisma.PlaceCreateWithoutPlaceSourcesInput, Prisma.PlaceUncheckedCreateWithoutPlaceSourcesInput>
   connectOrCreate?: Prisma.PlaceCreateOrConnectWithoutPlaceSourcesInput

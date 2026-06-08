@@ -19,8 +19,16 @@ interface ScholarCardProps {
  * 朝代颜色映射
  */
 const dynastyColors: Record<string, TagColor> = {
+  '春秋': { bg: 'rgba(46, 125, 50, 0.15)', text: '#2e7d32' },
+  '春秋时期': { bg: 'rgba(46, 125, 50, 0.15)', text: '#2e7d32' },
+  '战国': { bg: 'rgba(217, 119, 6, 0.15)', text: '#b45309' },
+  '战国时期': { bg: 'rgba(217, 119, 6, 0.15)', text: '#b45309' },
+  '秦代': { bg: 'rgba(97, 97, 97, 0.15)', text: '#616161' },
+  '汉代': { bg: 'rgba(21, 101, 192, 0.15)', text: '#1565c0' },
   '唐代': { bg: 'rgba(156, 39, 176, 0.15)', text: '#9c27b0' },
   '宋代': { bg: 'rgba(33, 150, 243, 0.15)', text: '#2196f3' },
+  '明代': { bg: 'rgba(198, 40, 40, 0.15)', text: '#c62828' },
+  '清代': { bg: 'rgba(0, 105, 92, 0.15)', text: '#00695c' },
 };
 
 const defaultColor: TagColor = { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e' };

@@ -28,8 +28,8 @@ function asQuery<T>(partial: Partial<T>): T {
  *
  * 覆盖目标:
  * - findAllScholars:
- *   * where 拼装:dynastyPeriod / philosophicalSchoolId / schoolName(嵌套) /
- *     name / birthYear gte / deathYear OR(lte + null)
+ *   * where 拼装:dynastyPeriod / philosophicalSchoolId / schoolName(关联或冗余字段) /
+ *     name / birthYear gte / deathYear AND + OR(lte + null)
  *   * 双 orderBy:birthYear asc → name asc
  *   * include philosophicalSchool 关联,返回时剥离
  *   * JSON 字段 majorWorks / contributions 解析
@@ -134,7 +134,7 @@ describe('CultureService', () => {
       expect(call.where.philosophicalSchoolId).toBe('confucianism');
     });
 
-    it('schoolName 走嵌套 philosophicalSchool.name contains 联表筛选', async () => {
+    it('schoolName 同时匹配 schoolOfThought 和关联 philosophicalSchool.name', async () => {
       prisma.scholar.findMany.mockResolvedValue([]);
       prisma.scholar.count.mockResolvedValue(0);
 
@@ -144,7 +144,16 @@ describe('CultureService', () => {
 
       expect(prisma.scholar.findMany).toHaveBeenCalledWith(
         expect.objectContaining({
-          where: { philosophicalSchool: { name: { contains: '儒' } } },
+          where: {
+            AND: [
+              {
+                OR: [
+                  { schoolOfThought: { contains: '儒' } },
+                  { philosophicalSchool: { name: { contains: '儒' } } },
+                ],
+              },
+            ],
+          },
         }),
       );
     });
@@ -176,7 +185,11 @@ describe('CultureService', () => {
       expect(prisma.scholar.findMany).toHaveBeenCalledWith(
         expect.objectContaining({
           where: {
-            OR: [{ deathYear: { lte: 0 } }, { deathYear: null }],
+            AND: [
+              {
+                OR: [{ deathYear: { lte: 0 } }, { deathYear: null }],
+              },
+            ],
           },
         }),
       );
@@ -200,12 +213,16 @@ describe('CultureService', () => {
         asQuery<ScholarQueryDto>({}),
       );
 
-      expect(result.data[0]).toEqual({
+      expect(result.data[0]).toEqual(expect.objectContaining({
         id: 'kongzi',
         name: '孔子',
         majorWorks: ['论语', '春秋'],
+        representativeWorks: [],
         contributions: ['仁', '礼'],
-      });
+        achievements: ['仁', '礼'],
+        schoolOfThought: '儒家',
+        sources: null,
+      }));
       expect(
         (result.data[0] as { philosophicalSchool?: unknown })
           .philosophicalSchool,
@@ -262,7 +279,10 @@ describe('CultureService', () => {
         (result as { philosophicalSchool?: unknown }).philosophicalSchool,
       ).toBeUndefined();
       expect(result.majorWorks).toEqual(['孟子']);
+      expect(result.representativeWorks).toEqual([]);
       expect(result.contributions).toEqual(['性善论']);
+      expect(result.achievements).toEqual(['性善论']);
+      expect(result.schoolOfThought).toBe('儒家');
     });
 
     it('未命中时抛 NotFoundException,异常信息含传入 ID', async () => {
@@ -382,15 +402,15 @@ describe('CultureService', () => {
         id: 'x',
         name: 'x',
         coreBeliefs: '',
-        keyTexts: '   ', // 仅空白也应回落到 null 路径(value && trim === '' → 走 default)
+        keyTexts: '   ',
       });
 
       const result = await service.findSchoolById('x');
 
       // '' → falsy → null
       expect(result.coreBeliefs).toBeNull();
-      // '   ' → truthy 但 trim === '' → 进 if 但不进 parse,返回原值
-      expect(result.keyTexts).toBe('   ');
+      // 仅空白字符串也应兜底为 null
+      expect(result.keyTexts).toBeNull();
     });
 
     it('null / undefined → null', async () => {

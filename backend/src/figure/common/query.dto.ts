@@ -59,17 +59,16 @@ export class SanguoFigureQueryDto extends PaginationQueryDto {
   @ApiPropertyOptional({
     description: 'Filter by role',
     example: 'strategist',
-    enum: ['general', 'strategist', 'ruler', 'advisor', 'other'],
+    enum: ['general', 'strategist', 'ruler', 'advisor', 'official', 'other'],
   })
   @IsOptional()
-  @IsIn(['general', 'strategist', 'ruler', 'advisor', 'other'])
+  @IsIn(['general', 'strategist', 'ruler', 'advisor', 'official', 'other'])
   role?: string;
 
   @ApiPropertyOptional({
     description: 'Search by name (partial match)',
     example: '诸葛',
   })
-  @IsOptional()
   @IsOptional()
   name?: string;
 }

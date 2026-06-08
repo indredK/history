@@ -65,6 +65,17 @@ function transformJsonToEmperor(jsonPerson: any, index: number): Emperor {
   // 处理后端 DTO 格式
   if (jsonPerson.dynastyId || jsonPerson.reignStart !== undefined) {
     const historicalEval = jsonPerson.historicalEvaluation;
+    const dynasty =
+      typeof jsonPerson.dynasty === 'string'
+        ? jsonPerson.dynasty
+        : jsonPerson.dynasty?.name || jsonPerson.dynastyName || '未知';
+    const reignStart = jsonPerson.reignStart ?? jsonPerson.reign_start ?? 0;
+    const reignEnd =
+      jsonPerson.reignEnd ??
+      jsonPerson.reign_end ??
+      jsonPerson.deathYear ??
+      jsonPerson.death_year ??
+      reignStart;
     const evaluations = historicalEval ? [{
       source: historicalEval.source || '历史评估',
       content: historicalEval.content || '',
@@ -75,9 +86,9 @@ function transformJsonToEmperor(jsonPerson: any, index: number): Emperor {
       id: jsonPerson.id,
       name: jsonPerson.name,
       templeName: jsonPerson.templeName,
-      dynasty: jsonPerson.dynasty?.name || '未知', // 后端可能包含关联的朝代对象
-      reignStart: jsonPerson.reignStart,
-      reignEnd: jsonPerson.reignEnd,
+      dynasty,
+      reignStart,
+      reignEnd,
       eraNames: jsonPerson.eraNames || [],
       achievements: jsonPerson.achievements || [],
       failures: jsonPerson.failures || [],

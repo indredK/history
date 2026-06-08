@@ -2104,9 +2104,26 @@ export type SourceScalarFieldEnum = (typeof SourceScalarFieldEnum)[keyof typeof 
 export const PersonScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  nameEn: 'nameEn',
+  courtesy: 'courtesy',
+  dynasty: 'dynasty',
+  period: 'period',
+  gender: 'gender',
   birthYear: 'birthYear',
+  birthMonth: 'birthMonth',
   deathYear: 'deathYear',
+  deathMonth: 'deathMonth',
+  birthplace: 'birthplace',
   biography: 'biography',
+  roles: 'roles',
+  aliases: 'aliases',
+  achievements: 'achievements',
+  works: 'works',
+  events: 'events',
+  evaluations: 'evaluations',
+  portraitUrl: 'portraitUrl',
+  sources: 'sources',
+  confidence: 'confidence',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2226,13 +2243,19 @@ export type EmperorScalarFieldEnum = (typeof EmperorScalarFieldEnum)[keyof typeo
 export const ScholarScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  name_en: 'name_en',
+  dynasty: 'dynasty',
   dynastyPeriod: 'dynastyPeriod',
   birthYear: 'birthYear',
   deathYear: 'deathYear',
   philosophicalSchoolId: 'philosophicalSchoolId',
+  schoolOfThought: 'schoolOfThought',
   majorWorks: 'majorWorks',
   contributions: 'contributions',
+  achievements: 'achievements',
   biography: 'biography',
+  portraitUrl: 'portraitUrl',
+  sources: 'sources',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2243,11 +2266,19 @@ export type ScholarScalarFieldEnum = (typeof ScholarScalarFieldEnum)[keyof typeo
 export const PhilosophicalSchoolScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  name_en: 'name_en',
   founder: 'founder',
+  founderEn: 'founderEn',
   foundingYear: 'foundingYear',
+  foundingPeriod: 'foundingPeriod',
   coreBeliefs: 'coreBeliefs',
   keyTexts: 'keyTexts',
+  representativeFigures: 'representativeFigures',
+  classicWorks: 'classicWorks',
   description: 'description',
+  influence: 'influence',
+  color: 'color',
+  sources: 'sources',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -2531,13 +2562,6 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
 
 
 /**
- * Reference to a field of type 'Float'
- */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-/**
  * Reference to a field of type 'Json'
  */
 export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -2548,6 +2572,13 @@ export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'J
  * Reference to a field of type 'QueryMode'
  */
 export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 /**

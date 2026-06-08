@@ -7,11 +7,20 @@ export class PhilosophicalSchoolDto {
   @ApiProperty({ description: 'School name', example: '儒家' })
   name: string;
 
+  @ApiPropertyOptional({ description: 'English school name', example: 'Confucianism' })
+  name_en?: string | null;
+
   @ApiPropertyOptional({ description: 'School founder', example: '孔子' })
   founder?: string | null;
 
+  @ApiPropertyOptional({ description: 'Founder English name', example: 'Confucius' })
+  founderEn?: string | null;
+
   @ApiPropertyOptional({ description: 'Founding year', example: -551 })
   foundingYear?: number | null;
+
+  @ApiPropertyOptional({ description: 'Founding period', example: '春秋时期' })
+  foundingPeriod?: string | null;
 
   @ApiPropertyOptional({ description: 'Core beliefs', type: [String] })
   coreBeliefs?: string[] | null;
@@ -19,8 +28,23 @@ export class PhilosophicalSchoolDto {
   @ApiPropertyOptional({ description: 'Key texts', type: [String] })
   keyTexts?: string[] | null;
 
+  @ApiPropertyOptional({ description: 'Representative figures', type: [Object] })
+  representativeFigures?: Record<string, unknown>[] | null;
+
+  @ApiPropertyOptional({ description: 'Classic works', type: [Object] })
+  classicWorks?: Record<string, unknown>[] | null;
+
   @ApiPropertyOptional({ description: 'School description' })
   description?: string | null;
+
+  @ApiPropertyOptional({ description: 'Historical influence' })
+  influence?: string | null;
+
+  @ApiPropertyOptional({ description: 'Theme color' })
+  color?: string | null;
+
+  @ApiPropertyOptional({ description: 'Source names or URLs', type: [String] })
+  sources?: string[] | null;
 
   @ApiProperty({ description: 'Creation timestamp' })
   createdAt: Date;

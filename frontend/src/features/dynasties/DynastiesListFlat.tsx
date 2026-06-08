@@ -50,13 +50,13 @@ export function DynastiesListFlat() {
 
         const allData = chunks.flat(); // 顺序 = response1..9，保持原合并顺序
         if (allData.length === 0) {
-          setError('No data loaded from response files');
+          setError('未从年表响应文件中加载到数据');
         } else {
           setData(allData);
         }
       } catch (err) {
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : 'Unknown error');
+          setError(err instanceof Error ? err.message : '未知错误');
         }
       } finally {
         if (!cancelled) setLoading(false);

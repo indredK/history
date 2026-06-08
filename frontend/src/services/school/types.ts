@@ -31,22 +31,31 @@ export interface ClassicWork {
 export interface PhilosophicalSchool {
   id: string;
   name: string;
-  name_en?: string;
+  name_en?: string | null;
   founder?: string | null;
-  founderEn?: string;
+  founderEn?: string | null;
   foundingYear?: number | null;
-  foundingPeriod?: string;
+  foundingPeriod?: string | null;
   coreBeliefs?: string[] | null;
   coreIdeas?: string[]; // 兼容旧字段名
   keyTexts?: string[] | null;
   representativeFigures?: RepresentativeFigure[];
   classicWorks?: ClassicWork[];
   description?: string | null;
-  influence?: string;
-  color?: string;
+  influence?: string | null;
+  color?: string | null;
+  sources?: string[] | null;
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export type PhilosophicalSchoolMutationInput = Omit<
+  PhilosophicalSchool,
+  'id' | 'createdAt' | 'updatedAt'
+> & {
+  id?: string;
+  sources?: string[];
+};
 
 /**
  * Zod schema for RepresentativeFigure validation
@@ -89,6 +98,7 @@ export const PhilosophicalSchoolSchema = z.object({
   description: z.string().nullable().optional(),
   influence: z.string().optional(),
   color: z.string().optional(),
+  sources: z.array(z.string()).optional(),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
 });

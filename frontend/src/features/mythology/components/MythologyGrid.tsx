@@ -12,13 +12,20 @@ import type { Mythology } from '@/services/mythology';
 interface MythologyGridProps {
   mythologies: Mythology[];
   onCardClick: (mythology: Mythology) => void;
+  onEdit: (mythology: Mythology) => void;
+  onDelete: (mythology: Mythology) => void;
 }
 
 /**
  * 神话卡片网格组件
  * 响应式布局：桌面3列、平板2列、手机1列
  */
-export function MythologyGrid({ mythologies, onCardClick }: MythologyGridProps) {
+export function MythologyGrid({
+  mythologies,
+  onCardClick,
+  onEdit,
+  onDelete,
+}: MythologyGridProps) {
   // 空状态处理
   if (mythologies.length === 0) {
     return (
@@ -64,6 +71,8 @@ export function MythologyGrid({ mythologies, onCardClick }: MythologyGridProps) 
           key={mythology.id}
           mythology={mythology}
           onClick={onCardClick}
+          onEdit={onEdit}
+          onDelete={onDelete}
         />
       ))}
     </Box>

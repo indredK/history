@@ -112,7 +112,7 @@ export function DynastiesList() {
         
         // 确保config不为空
         if (!config) {
-          throw new Error('Failed to load dynasties config');
+          throw new Error('朝代配置文件加载失败');
         }
 
         // 2. 检查是否使用新的数据源结构
@@ -157,7 +157,7 @@ export function DynastiesList() {
           setData(dynastiesData);
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
+        setError(err instanceof Error ? err.message : '未知错误');
       } finally {
         setLoading(false);
       }

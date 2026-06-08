@@ -5,6 +5,9 @@
  * Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7
  */
 
+import { IconButton, Tooltip } from '@mui/material';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { ContentCard, type ContentTagColor } from '@/components/common';
 import type { Mythology } from '@/services/mythology';
 import { getCardHeight } from '@/config/responsive';
@@ -12,6 +15,8 @@ import { getCardHeight } from '@/config/responsive';
 interface MythologyCardProps {
   mythology: Mythology;
   onClick: (mythology: Mythology) => void;
+  onEdit: (mythology: Mythology) => void;
+  onDelete: (mythology: Mythology) => void;
 }
 
 /**
@@ -31,7 +36,12 @@ const defaultColor: ContentTagColor = { bg: 'rgba(158, 158, 158, 0.15)', text: '
 /**
  * 神话卡片组件
  */
-export function MythologyCard({ mythology, onClick }: MythologyCardProps) {
+export function MythologyCard({
+  mythology,
+  onClick,
+  onEdit,
+  onDelete,
+}: MythologyCardProps) {
   const categoryColor = categoryColors[mythology.category] || defaultColor;
 
   // 相关人物标签
@@ -45,8 +55,40 @@ export function MythologyCard({ mythology, onClick }: MythologyCardProps) {
       title={mythology.title}
       primaryTag={{ label: mythology.category, color: categoryColor }}
       description={mythology.description}
+      descriptionLines={3}
       footerTags={footerTags}
       footerTagsMax={3}
+      footerText={[mythology.period, mythology.source].filter(Boolean).join(' / ')}
+      actions={
+        <>
+          <Tooltip title="编辑">
+            <IconButton
+              size="small"
+              aria-label={`编辑${mythology.title}`}
+              onClick={(event) => {
+                event.stopPropagation();
+                onEdit(mythology);
+              }}
+              sx={{ color: 'var(--color-text-secondary)' }}
+            >
+              <EditOutlinedIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="删除">
+            <IconButton
+              size="small"
+              aria-label={`删除${mythology.title}`}
+              onClick={(event) => {
+                event.stopPropagation();
+                onDelete(mythology);
+              }}
+              sx={{ color: 'var(--color-text-secondary)' }}
+            >
+              <DeleteOutlinedIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
+        </>
+      }
       onClick={() => onClick(mythology)}
       minHeight={getCardHeight('content')}
     />

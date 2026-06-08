@@ -8,13 +8,25 @@
  * Requirements: 6.4, 7.1
  */
 
-import { Box, Typography, Skeleton, Card, CardContent } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Skeleton,
+  Card,
+  CardContent,
+  IconButton,
+  Tooltip,
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { ScholarCard } from './ScholarCard';
 import type { Scholar } from '@/services/person/scholars/types';
 
 interface ScholarGridProps {
   scholars: Scholar[];
   onScholarClick: (scholar: Scholar) => void;
+  onScholarEdit?: (scholar: Scholar) => void;
+  onScholarDelete?: (scholar: Scholar) => void;
   loading: boolean;
 }
 
@@ -109,6 +121,8 @@ function ScholarGridSkeleton({ count = 8 }: { count?: number }) {
 export function ScholarGrid({
   scholars,
   onScholarClick,
+  onScholarEdit,
+  onScholarDelete,
   loading,
 }: ScholarGridProps) {
   // 加载状态 - Requirements 7.1
@@ -159,11 +173,64 @@ export function ScholarGrid({
       }}
     >
       {scholars.map((scholar) => (
-        <ScholarCard
+        <Box
           key={scholar.id}
-          scholar={scholar}
-          onClick={() => onScholarClick(scholar)}
-        />
+          sx={{
+            position: 'relative',
+            minWidth: 0,
+            '& .MuiCardContent-root': { pr: onScholarEdit || onScholarDelete ? 7 : 2 },
+          }}
+        >
+          {(onScholarEdit || onScholarDelete) && (
+            <Box
+              sx={{
+                position: 'absolute',
+                top: 8,
+                right: 8,
+                zIndex: 2,
+                display: 'flex',
+                gap: 0.5,
+                backgroundColor: 'var(--color-bg-card)',
+                border: '1px solid var(--color-border)',
+                borderRadius: 'var(--radius-md)',
+                boxShadow: 'var(--shadow-sm)',
+              }}
+            >
+              {onScholarEdit && (
+                <Tooltip title="编辑">
+                  <IconButton
+                    size="small"
+                    aria-label={`编辑${scholar.name}`}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      onScholarEdit(scholar);
+                    }}
+                  >
+                    <EditIcon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+              )}
+              {onScholarDelete && (
+                <Tooltip title="删除">
+                  <IconButton
+                    size="small"
+                    aria-label={`删除${scholar.name}`}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      onScholarDelete(scholar);
+                    }}
+                  >
+                    <DeleteIcon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </Box>
+          )}
+          <ScholarCard
+            scholar={scholar}
+            onClick={() => onScholarClick(scholar)}
+          />
+        </Box>
       ))}
     </Box>
   );

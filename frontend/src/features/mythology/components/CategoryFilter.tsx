@@ -12,13 +12,20 @@ import { VALID_CATEGORIES } from '@/services/mythology';
 interface CategoryFilterProps {
   activeCategory: MythologyCategory | null;
   onCategoryChange: (category: MythologyCategory | null) => void;
+  counts?: Partial<Record<MythologyCategory, number>>;
+  totalCount?: number;
 }
 
 /**
  * 分类筛选器组件
  * 显示"全部"和各分类按钮，支持点击切换筛选
  */
-export function CategoryFilter({ activeCategory, onCategoryChange }: CategoryFilterProps) {
+export function CategoryFilter({
+  activeCategory,
+  onCategoryChange,
+  counts = {},
+  totalCount = 0,
+}: CategoryFilterProps) {
   return (
     <Box
       sx={{
@@ -32,7 +39,7 @@ export function CategoryFilter({ activeCategory, onCategoryChange }: CategoryFil
     >
       {/* 全部选项 */}
       <Chip
-        label="全部"
+        label={`全部 ${totalCount}`}
         onClick={() => onCategoryChange(null)}
         variant={activeCategory === null ? 'filled' : 'outlined'}
         color={activeCategory === null ? 'primary' : 'default'}
@@ -53,7 +60,7 @@ export function CategoryFilter({ activeCategory, onCategoryChange }: CategoryFil
       {VALID_CATEGORIES.map((category) => (
         <Chip
           key={category}
-          label={category}
+          label={`${category} ${counts[category] || 0}`}
           onClick={() => onCategoryChange(category)}
           variant={activeCategory === category ? 'filled' : 'outlined'}
           color={activeCategory === category ? 'primary' : 'default'}

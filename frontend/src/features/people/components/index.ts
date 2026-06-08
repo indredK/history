@@ -6,6 +6,9 @@
 // 共享组件
 export * from './common';
 
+// 人物档案组件
+export * from './archive';
+
 // 帝王组件
 export * from './emperors';
 

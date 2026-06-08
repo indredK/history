@@ -19,6 +19,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { prisma } from '../src/prisma/prisma.extension';
+import { Prisma } from '../src/generated/prisma/client';
 
 const DATA_DIR = join(__dirname, 'seed-data');
 
@@ -70,6 +71,77 @@ function toDate(v: unknown): Date | undefined {
   return undefined;
 }
 
+function toNullableString(v: unknown): string | null {
+  if (typeof v !== 'string') return null;
+  const trimmed = v.trim();
+  return trimmed.length > 0 ? trimmed : null;
+}
+
+function toJson(v: unknown): string | null {
+  if (v === null || v === undefined) return null;
+  return JSON.stringify(v);
+}
+
+function toNullableNumber(v: unknown): number | null {
+  if (v === null || v === undefined || v === '') return null;
+  const next = Number(v);
+  return Number.isFinite(next) ? next : null;
+}
+
+async function upsertPerson(row: RowBase): Promise<unknown> {
+  const r = row as Record<string, unknown>;
+  const now = new Date();
+  const createdAt = toDate(r.createdAt) ?? now;
+  const updatedAt = toDate(r.updatedAt) ?? now;
+
+  return prisma.$executeRaw(Prisma.sql`
+    INSERT INTO persons (
+      id, name, nameEn, courtesy, dynasty, period, gender,
+      birthYear, birthMonth, deathYear, deathMonth, birthplace,
+      biography, roles, aliases, achievements, works, events, evaluations,
+      portraitUrl, sources, confidence, createdAt, updatedAt
+    )
+    VALUES (
+      ${row.id}, ${String(r.name ?? '').trim()},
+      ${toNullableString(r.nameEn ?? r.name_en)},
+      ${toNullableString(r.courtesy)}, ${toNullableString(r.dynasty)},
+      ${toNullableString(r.period)}, ${toNullableString(r.gender)},
+      ${toNullableNumber(r.birthYear ?? r.birth_year)},
+      ${toNullableNumber(r.birthMonth ?? r.birth_month)},
+      ${toNullableNumber(r.deathYear ?? r.death_year)},
+      ${toNullableNumber(r.deathMonth ?? r.death_month)},
+      ${toNullableString(r.birthplace)}, ${toNullableString(r.biography)},
+      ${toJson(r.roles)}, ${toJson(r.aliases)}, ${toJson(r.achievements)},
+      ${toJson(r.works)}, ${toJson(r.events)}, ${toJson(r.evaluations)},
+      ${toNullableString(r.portraitUrl)}, ${toJson(r.sources)},
+      ${toNullableNumber(r.confidence)}, ${createdAt}, ${updatedAt}
+    )
+    ON CONFLICT(id) DO UPDATE SET
+      name = excluded.name,
+      nameEn = excluded.nameEn,
+      courtesy = excluded.courtesy,
+      dynasty = excluded.dynasty,
+      period = excluded.period,
+      gender = excluded.gender,
+      birthYear = excluded.birthYear,
+      birthMonth = excluded.birthMonth,
+      deathYear = excluded.deathYear,
+      deathMonth = excluded.deathMonth,
+      birthplace = excluded.birthplace,
+      biography = excluded.biography,
+      roles = excluded.roles,
+      aliases = excluded.aliases,
+      achievements = excluded.achievements,
+      works = excluded.works,
+      events = excluded.events,
+      evaluations = excluded.evaluations,
+      portraitUrl = excluded.portraitUrl,
+      sources = excluded.sources,
+      confidence = excluded.confidence,
+      updatedAt = excluded.updatedAt
+  `);
+}
+
 async function main() {
   console.log(`▶ 从 ${DATA_DIR} 加载 seed 数据`);
 
@@ -101,17 +173,7 @@ async function main() {
       }),
   );
 
-  await upsertAll('persons', loadJson('persons'), (r) =>
-    prisma.person.upsert({
-      where: { id: r.id },
-      create: {
-        ...r,
-        createdAt: toDate(r.createdAt),
-        updatedAt: toDate(r.updatedAt),
-      } as never,
-      update: { ...r, createdAt: undefined, updatedAt: undefined } as never,
-    }),
-  );
+  await upsertAll('persons', loadJson('persons'), upsertPerson);
 
   await upsertAll('events', loadJson('events'), (r) =>
     prisma.event.upsert({

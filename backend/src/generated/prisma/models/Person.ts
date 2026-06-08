@@ -28,20 +28,36 @@ export type AggregatePerson = {
 
 export type PersonAvgAggregateOutputType = {
   birthYear: number | null
+  birthMonth: number | null
   deathYear: number | null
+  deathMonth: number | null
+  confidence: number | null
 }
 
 export type PersonSumAggregateOutputType = {
   birthYear: number | null
+  birthMonth: number | null
   deathYear: number | null
+  deathMonth: number | null
+  confidence: number | null
 }
 
 export type PersonMinAggregateOutputType = {
   id: string | null
   name: string | null
+  nameEn: string | null
+  courtesy: string | null
+  dynasty: string | null
+  period: string | null
+  gender: string | null
   birthYear: number | null
+  birthMonth: number | null
   deathYear: number | null
+  deathMonth: number | null
+  birthplace: string | null
   biography: string | null
+  portraitUrl: string | null
+  confidence: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -49,9 +65,19 @@ export type PersonMinAggregateOutputType = {
 export type PersonMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  nameEn: string | null
+  courtesy: string | null
+  dynasty: string | null
+  period: string | null
+  gender: string | null
   birthYear: number | null
+  birthMonth: number | null
   deathYear: number | null
+  deathMonth: number | null
+  birthplace: string | null
   biography: string | null
+  portraitUrl: string | null
+  confidence: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -59,9 +85,26 @@ export type PersonMaxAggregateOutputType = {
 export type PersonCountAggregateOutputType = {
   id: number
   name: number
+  nameEn: number
+  courtesy: number
+  dynasty: number
+  period: number
+  gender: number
   birthYear: number
+  birthMonth: number
   deathYear: number
+  deathMonth: number
+  birthplace: number
   biography: number
+  roles: number
+  aliases: number
+  achievements: number
+  works: number
+  events: number
+  evaluations: number
+  portraitUrl: number
+  sources: number
+  confidence: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -70,20 +113,36 @@ export type PersonCountAggregateOutputType = {
 
 export type PersonAvgAggregateInputType = {
   birthYear?: true
+  birthMonth?: true
   deathYear?: true
+  deathMonth?: true
+  confidence?: true
 }
 
 export type PersonSumAggregateInputType = {
   birthYear?: true
+  birthMonth?: true
   deathYear?: true
+  deathMonth?: true
+  confidence?: true
 }
 
 export type PersonMinAggregateInputType = {
   id?: true
   name?: true
+  nameEn?: true
+  courtesy?: true
+  dynasty?: true
+  period?: true
+  gender?: true
   birthYear?: true
+  birthMonth?: true
   deathYear?: true
+  deathMonth?: true
+  birthplace?: true
   biography?: true
+  portraitUrl?: true
+  confidence?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -91,9 +150,19 @@ export type PersonMinAggregateInputType = {
 export type PersonMaxAggregateInputType = {
   id?: true
   name?: true
+  nameEn?: true
+  courtesy?: true
+  dynasty?: true
+  period?: true
+  gender?: true
   birthYear?: true
+  birthMonth?: true
   deathYear?: true
+  deathMonth?: true
+  birthplace?: true
   biography?: true
+  portraitUrl?: true
+  confidence?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -101,9 +170,26 @@ export type PersonMaxAggregateInputType = {
 export type PersonCountAggregateInputType = {
   id?: true
   name?: true
+  nameEn?: true
+  courtesy?: true
+  dynasty?: true
+  period?: true
+  gender?: true
   birthYear?: true
+  birthMonth?: true
   deathYear?: true
+  deathMonth?: true
+  birthplace?: true
   biography?: true
+  roles?: true
+  aliases?: true
+  achievements?: true
+  works?: true
+  events?: true
+  evaluations?: true
+  portraitUrl?: true
+  sources?: true
+  confidence?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -198,9 +284,26 @@ export type PersonGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 export type PersonGroupByOutputType = {
   id: string
   name: string
+  nameEn: string | null
+  courtesy: string | null
+  dynasty: string | null
+  period: string | null
+  gender: string | null
   birthYear: number | null
+  birthMonth: number | null
   deathYear: number | null
+  deathMonth: number | null
+  birthplace: string | null
   biography: string | null
+  roles: runtime.JsonValue | null
+  aliases: runtime.JsonValue | null
+  achievements: runtime.JsonValue | null
+  works: runtime.JsonValue | null
+  events: runtime.JsonValue | null
+  evaluations: runtime.JsonValue | null
+  portraitUrl: string | null
+  sources: runtime.JsonValue | null
+  confidence: number | null
   createdAt: Date
   updatedAt: Date
   _count: PersonCountAggregateOutputType | null
@@ -231,25 +334,59 @@ export type PersonWhereInput = {
   NOT?: Prisma.PersonWhereInput | Prisma.PersonWhereInput[]
   id?: Prisma.StringFilter<"Person"> | string
   name?: Prisma.StringFilter<"Person"> | string
+  nameEn?: Prisma.StringNullableFilter<"Person"> | string | null
+  courtesy?: Prisma.StringNullableFilter<"Person"> | string | null
+  dynasty?: Prisma.StringNullableFilter<"Person"> | string | null
+  period?: Prisma.StringNullableFilter<"Person"> | string | null
+  gender?: Prisma.StringNullableFilter<"Person"> | string | null
   birthYear?: Prisma.IntNullableFilter<"Person"> | number | null
+  birthMonth?: Prisma.IntNullableFilter<"Person"> | number | null
   deathYear?: Prisma.IntNullableFilter<"Person"> | number | null
+  deathMonth?: Prisma.IntNullableFilter<"Person"> | number | null
+  birthplace?: Prisma.StringNullableFilter<"Person"> | string | null
   biography?: Prisma.StringNullableFilter<"Person"> | string | null
+  roles?: Prisma.JsonNullableFilter<"Person">
+  aliases?: Prisma.JsonNullableFilter<"Person">
+  achievements?: Prisma.JsonNullableFilter<"Person">
+  works?: Prisma.JsonNullableFilter<"Person">
+  events?: Prisma.JsonNullableFilter<"Person">
+  evaluations?: Prisma.JsonNullableFilter<"Person">
+  portraitUrl?: Prisma.StringNullableFilter<"Person"> | string | null
+  sources?: Prisma.JsonNullableFilter<"Person">
+  confidence?: Prisma.FloatNullableFilter<"Person"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   personSources?: Prisma.PersonSourceListRelationFilter
-  events?: Prisma.EventParticipantListRelationFilter
+  eventParticipants?: Prisma.EventParticipantListRelationFilter
 }
 
 export type PersonOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  nameEn?: Prisma.SortOrderInput | Prisma.SortOrder
+  courtesy?: Prisma.SortOrderInput | Prisma.SortOrder
+  dynasty?: Prisma.SortOrderInput | Prisma.SortOrder
+  period?: Prisma.SortOrderInput | Prisma.SortOrder
+  gender?: Prisma.SortOrderInput | Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  birthMonth?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  deathMonth?: Prisma.SortOrderInput | Prisma.SortOrder
+  birthplace?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  roles?: Prisma.SortOrderInput | Prisma.SortOrder
+  aliases?: Prisma.SortOrderInput | Prisma.SortOrder
+  achievements?: Prisma.SortOrderInput | Prisma.SortOrder
+  works?: Prisma.SortOrderInput | Prisma.SortOrder
+  events?: Prisma.SortOrderInput | Prisma.SortOrder
+  evaluations?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
+  confidence?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   personSources?: Prisma.PersonSourceOrderByRelationAggregateInput
-  events?: Prisma.EventParticipantOrderByRelationAggregateInput
+  eventParticipants?: Prisma.EventParticipantOrderByRelationAggregateInput
 }
 
 export type PersonWhereUniqueInput = Prisma.AtLeast<{
@@ -258,21 +395,55 @@ export type PersonWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.PersonWhereInput[]
   NOT?: Prisma.PersonWhereInput | Prisma.PersonWhereInput[]
   name?: Prisma.StringFilter<"Person"> | string
+  nameEn?: Prisma.StringNullableFilter<"Person"> | string | null
+  courtesy?: Prisma.StringNullableFilter<"Person"> | string | null
+  dynasty?: Prisma.StringNullableFilter<"Person"> | string | null
+  period?: Prisma.StringNullableFilter<"Person"> | string | null
+  gender?: Prisma.StringNullableFilter<"Person"> | string | null
   birthYear?: Prisma.IntNullableFilter<"Person"> | number | null
+  birthMonth?: Prisma.IntNullableFilter<"Person"> | number | null
   deathYear?: Prisma.IntNullableFilter<"Person"> | number | null
+  deathMonth?: Prisma.IntNullableFilter<"Person"> | number | null
+  birthplace?: Prisma.StringNullableFilter<"Person"> | string | null
   biography?: Prisma.StringNullableFilter<"Person"> | string | null
+  roles?: Prisma.JsonNullableFilter<"Person">
+  aliases?: Prisma.JsonNullableFilter<"Person">
+  achievements?: Prisma.JsonNullableFilter<"Person">
+  works?: Prisma.JsonNullableFilter<"Person">
+  events?: Prisma.JsonNullableFilter<"Person">
+  evaluations?: Prisma.JsonNullableFilter<"Person">
+  portraitUrl?: Prisma.StringNullableFilter<"Person"> | string | null
+  sources?: Prisma.JsonNullableFilter<"Person">
+  confidence?: Prisma.FloatNullableFilter<"Person"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Person"> | Date | string
   personSources?: Prisma.PersonSourceListRelationFilter
-  events?: Prisma.EventParticipantListRelationFilter
+  eventParticipants?: Prisma.EventParticipantListRelationFilter
 }, "id">
 
 export type PersonOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  nameEn?: Prisma.SortOrderInput | Prisma.SortOrder
+  courtesy?: Prisma.SortOrderInput | Prisma.SortOrder
+  dynasty?: Prisma.SortOrderInput | Prisma.SortOrder
+  period?: Prisma.SortOrderInput | Prisma.SortOrder
+  gender?: Prisma.SortOrderInput | Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  birthMonth?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  deathMonth?: Prisma.SortOrderInput | Prisma.SortOrder
+  birthplace?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  roles?: Prisma.SortOrderInput | Prisma.SortOrder
+  aliases?: Prisma.SortOrderInput | Prisma.SortOrder
+  achievements?: Prisma.SortOrderInput | Prisma.SortOrder
+  works?: Prisma.SortOrderInput | Prisma.SortOrder
+  events?: Prisma.SortOrderInput | Prisma.SortOrder
+  evaluations?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
+  confidence?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PersonCountOrderByAggregateInput
@@ -288,9 +459,26 @@ export type PersonScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PersonScalarWhereWithAggregatesInput | Prisma.PersonScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Person"> | string
   name?: Prisma.StringWithAggregatesFilter<"Person"> | string
+  nameEn?: Prisma.StringNullableWithAggregatesFilter<"Person"> | string | null
+  courtesy?: Prisma.StringNullableWithAggregatesFilter<"Person"> | string | null
+  dynasty?: Prisma.StringNullableWithAggregatesFilter<"Person"> | string | null
+  period?: Prisma.StringNullableWithAggregatesFilter<"Person"> | string | null
+  gender?: Prisma.StringNullableWithAggregatesFilter<"Person"> | string | null
   birthYear?: Prisma.IntNullableWithAggregatesFilter<"Person"> | number | null
+  birthMonth?: Prisma.IntNullableWithAggregatesFilter<"Person"> | number | null
   deathYear?: Prisma.IntNullableWithAggregatesFilter<"Person"> | number | null
+  deathMonth?: Prisma.IntNullableWithAggregatesFilter<"Person"> | number | null
+  birthplace?: Prisma.StringNullableWithAggregatesFilter<"Person"> | string | null
   biography?: Prisma.StringNullableWithAggregatesFilter<"Person"> | string | null
+  roles?: Prisma.JsonNullableWithAggregatesFilter<"Person">
+  aliases?: Prisma.JsonNullableWithAggregatesFilter<"Person">
+  achievements?: Prisma.JsonNullableWithAggregatesFilter<"Person">
+  works?: Prisma.JsonNullableWithAggregatesFilter<"Person">
+  events?: Prisma.JsonNullableWithAggregatesFilter<"Person">
+  evaluations?: Prisma.JsonNullableWithAggregatesFilter<"Person">
+  portraitUrl?: Prisma.StringNullableWithAggregatesFilter<"Person"> | string | null
+  sources?: Prisma.JsonNullableWithAggregatesFilter<"Person">
+  confidence?: Prisma.FloatNullableWithAggregatesFilter<"Person"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Person"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Person"> | Date | string
 }
@@ -298,57 +486,142 @@ export type PersonScalarWhereWithAggregatesInput = {
 export type PersonCreateInput = {
   id?: string
   name: string
+  nameEn?: string | null
+  courtesy?: string | null
+  dynasty?: string | null
+  period?: string | null
+  gender?: string | null
   birthYear?: number | null
+  birthMonth?: number | null
   deathYear?: number | null
+  deathMonth?: number | null
+  birthplace?: string | null
   biography?: string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   personSources?: Prisma.PersonSourceCreateNestedManyWithoutPersonInput
-  events?: Prisma.EventParticipantCreateNestedManyWithoutPersonInput
+  eventParticipants?: Prisma.EventParticipantCreateNestedManyWithoutPersonInput
 }
 
 export type PersonUncheckedCreateInput = {
   id?: string
   name: string
+  nameEn?: string | null
+  courtesy?: string | null
+  dynasty?: string | null
+  period?: string | null
+  gender?: string | null
   birthYear?: number | null
+  birthMonth?: number | null
   deathYear?: number | null
+  deathMonth?: number | null
+  birthplace?: string | null
   biography?: string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   personSources?: Prisma.PersonSourceUncheckedCreateNestedManyWithoutPersonInput
-  events?: Prisma.EventParticipantUncheckedCreateNestedManyWithoutPersonInput
+  eventParticipants?: Prisma.EventParticipantUncheckedCreateNestedManyWithoutPersonInput
 }
 
 export type PersonUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deathMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthplace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personSources?: Prisma.PersonSourceUpdateManyWithoutPersonNestedInput
-  events?: Prisma.EventParticipantUpdateManyWithoutPersonNestedInput
+  eventParticipants?: Prisma.EventParticipantUpdateManyWithoutPersonNestedInput
 }
 
 export type PersonUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deathMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthplace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personSources?: Prisma.PersonSourceUncheckedUpdateManyWithoutPersonNestedInput
-  events?: Prisma.EventParticipantUncheckedUpdateManyWithoutPersonNestedInput
+  eventParticipants?: Prisma.EventParticipantUncheckedUpdateManyWithoutPersonNestedInput
 }
 
 export type PersonCreateManyInput = {
   id?: string
   name: string
+  nameEn?: string | null
+  courtesy?: string | null
+  dynasty?: string | null
+  period?: string | null
+  gender?: string | null
   birthYear?: number | null
+  birthMonth?: number | null
   deathYear?: number | null
+  deathMonth?: number | null
+  birthplace?: string | null
   biography?: string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -356,9 +629,26 @@ export type PersonCreateManyInput = {
 export type PersonUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deathMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthplace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -366,9 +656,26 @@ export type PersonUpdateManyMutationInput = {
 export type PersonUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deathMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthplace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -376,24 +683,54 @@ export type PersonUncheckedUpdateManyInput = {
 export type PersonCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  nameEn?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
+  dynasty?: Prisma.SortOrder
+  period?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
+  birthMonth?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
+  deathMonth?: Prisma.SortOrder
+  birthplace?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  roles?: Prisma.SortOrder
+  aliases?: Prisma.SortOrder
+  achievements?: Prisma.SortOrder
+  works?: Prisma.SortOrder
+  events?: Prisma.SortOrder
+  evaluations?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
+  sources?: Prisma.SortOrder
+  confidence?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type PersonAvgOrderByAggregateInput = {
   birthYear?: Prisma.SortOrder
+  birthMonth?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
+  deathMonth?: Prisma.SortOrder
+  confidence?: Prisma.SortOrder
 }
 
 export type PersonMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  nameEn?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
+  dynasty?: Prisma.SortOrder
+  period?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
+  birthMonth?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
+  deathMonth?: Prisma.SortOrder
+  birthplace?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
+  confidence?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -401,16 +738,29 @@ export type PersonMaxOrderByAggregateInput = {
 export type PersonMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  nameEn?: Prisma.SortOrder
+  courtesy?: Prisma.SortOrder
+  dynasty?: Prisma.SortOrder
+  period?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
+  birthMonth?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
+  deathMonth?: Prisma.SortOrder
+  birthplace?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
+  confidence?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type PersonSumOrderByAggregateInput = {
   birthYear?: Prisma.SortOrder
+  birthMonth?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
+  deathMonth?: Prisma.SortOrder
+  confidence?: Prisma.SortOrder
 }
 
 export type PersonScalarRelationFilter = {
@@ -419,6 +769,14 @@ export type PersonScalarRelationFilter = {
 }
 
 export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type NullableFloatFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
   decrement?: number
@@ -440,40 +798,74 @@ export type PersonUpdateOneRequiredWithoutPersonSourcesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PersonUpdateToOneWithWhereWithoutPersonSourcesInput, Prisma.PersonUpdateWithoutPersonSourcesInput>, Prisma.PersonUncheckedUpdateWithoutPersonSourcesInput>
 }
 
-export type PersonCreateNestedOneWithoutEventsInput = {
-  create?: Prisma.XOR<Prisma.PersonCreateWithoutEventsInput, Prisma.PersonUncheckedCreateWithoutEventsInput>
-  connectOrCreate?: Prisma.PersonCreateOrConnectWithoutEventsInput
+export type PersonCreateNestedOneWithoutEventParticipantsInput = {
+  create?: Prisma.XOR<Prisma.PersonCreateWithoutEventParticipantsInput, Prisma.PersonUncheckedCreateWithoutEventParticipantsInput>
+  connectOrCreate?: Prisma.PersonCreateOrConnectWithoutEventParticipantsInput
   connect?: Prisma.PersonWhereUniqueInput
 }
 
-export type PersonUpdateOneRequiredWithoutEventsNestedInput = {
-  create?: Prisma.XOR<Prisma.PersonCreateWithoutEventsInput, Prisma.PersonUncheckedCreateWithoutEventsInput>
-  connectOrCreate?: Prisma.PersonCreateOrConnectWithoutEventsInput
-  upsert?: Prisma.PersonUpsertWithoutEventsInput
+export type PersonUpdateOneRequiredWithoutEventParticipantsNestedInput = {
+  create?: Prisma.XOR<Prisma.PersonCreateWithoutEventParticipantsInput, Prisma.PersonUncheckedCreateWithoutEventParticipantsInput>
+  connectOrCreate?: Prisma.PersonCreateOrConnectWithoutEventParticipantsInput
+  upsert?: Prisma.PersonUpsertWithoutEventParticipantsInput
   connect?: Prisma.PersonWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PersonUpdateToOneWithWhereWithoutEventsInput, Prisma.PersonUpdateWithoutEventsInput>, Prisma.PersonUncheckedUpdateWithoutEventsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PersonUpdateToOneWithWhereWithoutEventParticipantsInput, Prisma.PersonUpdateWithoutEventParticipantsInput>, Prisma.PersonUncheckedUpdateWithoutEventParticipantsInput>
 }
 
 export type PersonCreateWithoutPersonSourcesInput = {
   id?: string
   name: string
+  nameEn?: string | null
+  courtesy?: string | null
+  dynasty?: string | null
+  period?: string | null
+  gender?: string | null
   birthYear?: number | null
+  birthMonth?: number | null
   deathYear?: number | null
+  deathMonth?: number | null
+  birthplace?: string | null
   biography?: string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventParticipantCreateNestedManyWithoutPersonInput
+  eventParticipants?: Prisma.EventParticipantCreateNestedManyWithoutPersonInput
 }
 
 export type PersonUncheckedCreateWithoutPersonSourcesInput = {
   id?: string
   name: string
+  nameEn?: string | null
+  courtesy?: string | null
+  dynasty?: string | null
+  period?: string | null
+  gender?: string | null
   birthYear?: number | null
+  birthMonth?: number | null
   deathYear?: number | null
+  deathMonth?: number | null
+  birthplace?: string | null
   biography?: string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  events?: Prisma.EventParticipantUncheckedCreateNestedManyWithoutPersonInput
+  eventParticipants?: Prisma.EventParticipantUncheckedCreateNestedManyWithoutPersonInput
 }
 
 export type PersonCreateOrConnectWithoutPersonSourcesInput = {
@@ -495,80 +887,182 @@ export type PersonUpdateToOneWithWhereWithoutPersonSourcesInput = {
 export type PersonUpdateWithoutPersonSourcesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deathMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthplace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventParticipantUpdateManyWithoutPersonNestedInput
+  eventParticipants?: Prisma.EventParticipantUpdateManyWithoutPersonNestedInput
 }
 
 export type PersonUncheckedUpdateWithoutPersonSourcesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deathMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthplace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  events?: Prisma.EventParticipantUncheckedUpdateManyWithoutPersonNestedInput
+  eventParticipants?: Prisma.EventParticipantUncheckedUpdateManyWithoutPersonNestedInput
 }
 
-export type PersonCreateWithoutEventsInput = {
+export type PersonCreateWithoutEventParticipantsInput = {
   id?: string
   name: string
+  nameEn?: string | null
+  courtesy?: string | null
+  dynasty?: string | null
+  period?: string | null
+  gender?: string | null
   birthYear?: number | null
+  birthMonth?: number | null
   deathYear?: number | null
+  deathMonth?: number | null
+  birthplace?: string | null
   biography?: string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   personSources?: Prisma.PersonSourceCreateNestedManyWithoutPersonInput
 }
 
-export type PersonUncheckedCreateWithoutEventsInput = {
+export type PersonUncheckedCreateWithoutEventParticipantsInput = {
   id?: string
   name: string
+  nameEn?: string | null
+  courtesy?: string | null
+  dynasty?: string | null
+  period?: string | null
+  gender?: string | null
   birthYear?: number | null
+  birthMonth?: number | null
   deathYear?: number | null
+  deathMonth?: number | null
+  birthplace?: string | null
   biography?: string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   personSources?: Prisma.PersonSourceUncheckedCreateNestedManyWithoutPersonInput
 }
 
-export type PersonCreateOrConnectWithoutEventsInput = {
+export type PersonCreateOrConnectWithoutEventParticipantsInput = {
   where: Prisma.PersonWhereUniqueInput
-  create: Prisma.XOR<Prisma.PersonCreateWithoutEventsInput, Prisma.PersonUncheckedCreateWithoutEventsInput>
+  create: Prisma.XOR<Prisma.PersonCreateWithoutEventParticipantsInput, Prisma.PersonUncheckedCreateWithoutEventParticipantsInput>
 }
 
-export type PersonUpsertWithoutEventsInput = {
-  update: Prisma.XOR<Prisma.PersonUpdateWithoutEventsInput, Prisma.PersonUncheckedUpdateWithoutEventsInput>
-  create: Prisma.XOR<Prisma.PersonCreateWithoutEventsInput, Prisma.PersonUncheckedCreateWithoutEventsInput>
+export type PersonUpsertWithoutEventParticipantsInput = {
+  update: Prisma.XOR<Prisma.PersonUpdateWithoutEventParticipantsInput, Prisma.PersonUncheckedUpdateWithoutEventParticipantsInput>
+  create: Prisma.XOR<Prisma.PersonCreateWithoutEventParticipantsInput, Prisma.PersonUncheckedCreateWithoutEventParticipantsInput>
   where?: Prisma.PersonWhereInput
 }
 
-export type PersonUpdateToOneWithWhereWithoutEventsInput = {
+export type PersonUpdateToOneWithWhereWithoutEventParticipantsInput = {
   where?: Prisma.PersonWhereInput
-  data: Prisma.XOR<Prisma.PersonUpdateWithoutEventsInput, Prisma.PersonUncheckedUpdateWithoutEventsInput>
+  data: Prisma.XOR<Prisma.PersonUpdateWithoutEventParticipantsInput, Prisma.PersonUncheckedUpdateWithoutEventParticipantsInput>
 }
 
-export type PersonUpdateWithoutEventsInput = {
+export type PersonUpdateWithoutEventParticipantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deathMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthplace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personSources?: Prisma.PersonSourceUpdateManyWithoutPersonNestedInput
 }
 
-export type PersonUncheckedUpdateWithoutEventsInput = {
+export type PersonUncheckedUpdateWithoutEventParticipantsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  courtesy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  period?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deathMonth?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  birthplace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  aliases?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  works?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  events?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  evaluations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   personSources?: Prisma.PersonSourceUncheckedUpdateManyWithoutPersonNestedInput
@@ -581,12 +1075,12 @@ export type PersonUncheckedUpdateWithoutEventsInput = {
 
 export type PersonCountOutputType = {
   personSources: number
-  events: number
+  eventParticipants: number
 }
 
 export type PersonCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   personSources?: boolean | PersonCountOutputTypeCountPersonSourcesArgs
-  events?: boolean | PersonCountOutputTypeCountEventsArgs
+  eventParticipants?: boolean | PersonCountOutputTypeCountEventParticipantsArgs
 }
 
 /**
@@ -609,7 +1103,7 @@ export type PersonCountOutputTypeCountPersonSourcesArgs<ExtArgs extends runtime.
 /**
  * PersonCountOutputType without action
  */
-export type PersonCountOutputTypeCountEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type PersonCountOutputTypeCountEventParticipantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.EventParticipantWhereInput
 }
 
@@ -617,22 +1111,56 @@ export type PersonCountOutputTypeCountEventsArgs<ExtArgs extends runtime.Types.E
 export type PersonSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  nameEn?: boolean
+  courtesy?: boolean
+  dynasty?: boolean
+  period?: boolean
+  gender?: boolean
   birthYear?: boolean
+  birthMonth?: boolean
   deathYear?: boolean
+  deathMonth?: boolean
+  birthplace?: boolean
   biography?: boolean
+  roles?: boolean
+  aliases?: boolean
+  achievements?: boolean
+  works?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
+  confidence?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   personSources?: boolean | Prisma.Person$personSourcesArgs<ExtArgs>
-  events?: boolean | Prisma.Person$eventsArgs<ExtArgs>
+  eventParticipants?: boolean | Prisma.Person$eventParticipantsArgs<ExtArgs>
   _count?: boolean | Prisma.PersonCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["person"]>
 
 export type PersonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  nameEn?: boolean
+  courtesy?: boolean
+  dynasty?: boolean
+  period?: boolean
+  gender?: boolean
   birthYear?: boolean
+  birthMonth?: boolean
   deathYear?: boolean
+  deathMonth?: boolean
+  birthplace?: boolean
   biography?: boolean
+  roles?: boolean
+  aliases?: boolean
+  achievements?: boolean
+  works?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
+  confidence?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["person"]>
@@ -640,9 +1168,26 @@ export type PersonSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type PersonSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  nameEn?: boolean
+  courtesy?: boolean
+  dynasty?: boolean
+  period?: boolean
+  gender?: boolean
   birthYear?: boolean
+  birthMonth?: boolean
   deathYear?: boolean
+  deathMonth?: boolean
+  birthplace?: boolean
   biography?: boolean
+  roles?: boolean
+  aliases?: boolean
+  achievements?: boolean
+  works?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
+  confidence?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["person"]>
@@ -650,17 +1195,34 @@ export type PersonSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type PersonSelectScalar = {
   id?: boolean
   name?: boolean
+  nameEn?: boolean
+  courtesy?: boolean
+  dynasty?: boolean
+  period?: boolean
+  gender?: boolean
   birthYear?: boolean
+  birthMonth?: boolean
   deathYear?: boolean
+  deathMonth?: boolean
+  birthplace?: boolean
   biography?: boolean
+  roles?: boolean
+  aliases?: boolean
+  achievements?: boolean
+  works?: boolean
+  events?: boolean
+  evaluations?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
+  confidence?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PersonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "birthYear" | "deathYear" | "biography" | "createdAt" | "updatedAt", ExtArgs["result"]["person"]>
+export type PersonOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "nameEn" | "courtesy" | "dynasty" | "period" | "gender" | "birthYear" | "birthMonth" | "deathYear" | "deathMonth" | "birthplace" | "biography" | "roles" | "aliases" | "achievements" | "works" | "events" | "evaluations" | "portraitUrl" | "sources" | "confidence" | "createdAt" | "updatedAt", ExtArgs["result"]["person"]>
 export type PersonInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   personSources?: boolean | Prisma.Person$personSourcesArgs<ExtArgs>
-  events?: boolean | Prisma.Person$eventsArgs<ExtArgs>
+  eventParticipants?: boolean | Prisma.Person$eventParticipantsArgs<ExtArgs>
   _count?: boolean | Prisma.PersonCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PersonIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -670,14 +1232,31 @@ export type $PersonPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Person"
   objects: {
     personSources: Prisma.$PersonSourcePayload<ExtArgs>[]
-    events: Prisma.$EventParticipantPayload<ExtArgs>[]
+    eventParticipants: Prisma.$EventParticipantPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    nameEn: string | null
+    courtesy: string | null
+    dynasty: string | null
+    period: string | null
+    gender: string | null
     birthYear: number | null
+    birthMonth: number | null
     deathYear: number | null
+    deathMonth: number | null
+    birthplace: string | null
     biography: string | null
+    roles: runtime.JsonValue | null
+    aliases: runtime.JsonValue | null
+    achievements: runtime.JsonValue | null
+    works: runtime.JsonValue | null
+    events: runtime.JsonValue | null
+    evaluations: runtime.JsonValue | null
+    portraitUrl: string | null
+    sources: runtime.JsonValue | null
+    confidence: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["person"]>
@@ -1075,7 +1654,7 @@ readonly fields: PersonFieldRefs;
 export interface Prisma__PersonClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   personSources<T extends Prisma.Person$personSourcesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Person$personSourcesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PersonSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  events<T extends Prisma.Person$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Person$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  eventParticipants<T extends Prisma.Person$eventParticipantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Person$eventParticipantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1107,9 +1686,26 @@ export interface Prisma__PersonClient<T, Null = never, ExtArgs extends runtime.T
 export interface PersonFieldRefs {
   readonly id: Prisma.FieldRef<"Person", 'String'>
   readonly name: Prisma.FieldRef<"Person", 'String'>
+  readonly nameEn: Prisma.FieldRef<"Person", 'String'>
+  readonly courtesy: Prisma.FieldRef<"Person", 'String'>
+  readonly dynasty: Prisma.FieldRef<"Person", 'String'>
+  readonly period: Prisma.FieldRef<"Person", 'String'>
+  readonly gender: Prisma.FieldRef<"Person", 'String'>
   readonly birthYear: Prisma.FieldRef<"Person", 'Int'>
+  readonly birthMonth: Prisma.FieldRef<"Person", 'Int'>
   readonly deathYear: Prisma.FieldRef<"Person", 'Int'>
+  readonly deathMonth: Prisma.FieldRef<"Person", 'Int'>
+  readonly birthplace: Prisma.FieldRef<"Person", 'String'>
   readonly biography: Prisma.FieldRef<"Person", 'String'>
+  readonly roles: Prisma.FieldRef<"Person", 'Json'>
+  readonly aliases: Prisma.FieldRef<"Person", 'Json'>
+  readonly achievements: Prisma.FieldRef<"Person", 'Json'>
+  readonly works: Prisma.FieldRef<"Person", 'Json'>
+  readonly events: Prisma.FieldRef<"Person", 'Json'>
+  readonly evaluations: Prisma.FieldRef<"Person", 'Json'>
+  readonly portraitUrl: Prisma.FieldRef<"Person", 'String'>
+  readonly sources: Prisma.FieldRef<"Person", 'Json'>
+  readonly confidence: Prisma.FieldRef<"Person", 'Float'>
   readonly createdAt: Prisma.FieldRef<"Person", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Person", 'DateTime'>
 }
@@ -1527,9 +2123,9 @@ export type Person$personSourcesArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * Person.events
+ * Person.eventParticipants
  */
-export type Person$eventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Person$eventParticipantsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the EventParticipant
    */

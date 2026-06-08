@@ -6,6 +6,7 @@
 // 类型导出
 export type { 
   Mythology, 
+  MythologyInput,
   MythologyCategory, 
   MythologyState, 
   MythologyActions,
@@ -15,8 +16,18 @@ export type {
 export { VALID_CATEGORIES } from './types';
 
 // 服务函数导出
-export { validateMythology, getMythologies, filterByCategory } from './mythologyService';
+export { 
+  validateMythology, 
+  getMythologies, 
+  createMythology,
+  updateMythology,
+  deleteMythology,
+  filterByCategory,
+} from './mythologyService';
 
 // API 导出
-export { fetchMythologies, fetchMythologyById, mythologyApi } from './mythologyApi';
-
+export { 
+  fetchMythologies, 
+  fetchMythologyById, 
+  mythologyApi,
+} from './mythologyApi';

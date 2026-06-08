@@ -1,5 +1,5 @@
-import { Controller, Get, Query } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Controller, Get, Param, Query } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { YuanService } from './yuan.service';
 import { FigureQueryDto } from '../common/query.dto';
 import { YuanFigureDto } from './yuan.dto';
@@ -42,5 +42,24 @@ export class YuanController {
     @Query() query: FigureQueryDto,
   ): Promise<PaginatedResponseDto<YuanFigureDto>> {
     return this.yuanService.getYuanFigures(query);
+  }
+
+  @Get('yuan-figures/:id')
+  @ApiOperation({
+    summary: 'Get Yuan Dynasty figure by ID (compatible endpoint)',
+    description: 'Retrieve detailed information about a specific Yuan Dynasty figure',
+  })
+  @ApiParam({ name: 'id', description: 'Yuan figure ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully retrieved Yuan figure',
+    type: YuanFigureDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Yuan figure not found',
+  })
+  async getYuanFigureById(@Param('id') id: string): Promise<YuanFigureDto> {
+    return this.yuanService.getYuanFigureById(id);
   }
 }

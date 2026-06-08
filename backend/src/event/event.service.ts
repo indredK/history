@@ -81,7 +81,7 @@ export class EventService {
     });
 
     if (!event) {
-      throw new NotFoundException(`Event with ID ${id} not found`);
+      throw new NotFoundException(`未找到 ID 为 ${id} 的历史事件记录`);
     }
 
     // 仅返回基础字段,关联关系预留后续扩展

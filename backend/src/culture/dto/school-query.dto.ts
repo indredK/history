@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsOptional, IsInt, Min } from 'class-validator';
+import { IsOptional, IsInt, Min, IsString } from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 export class SchoolQueryDto extends PaginationQueryDto {
@@ -9,6 +9,7 @@ export class SchoolQueryDto extends PaginationQueryDto {
     example: '儒',
   })
   @IsOptional()
+  @IsString()
   name?: string;
 
   @ApiPropertyOptional({
@@ -16,7 +17,16 @@ export class SchoolQueryDto extends PaginationQueryDto {
     example: '孔子',
   })
   @IsOptional()
+  @IsString()
   founder?: string;
+
+  @ApiPropertyOptional({
+    description: 'Keyword search across name, founder, period, description, and influence',
+    example: '兼爱',
+  })
+  @IsOptional()
+  @IsString()
+  q?: string;
 
   @ApiPropertyOptional({
     description: 'Filter by founding year (schools founded from this year)',

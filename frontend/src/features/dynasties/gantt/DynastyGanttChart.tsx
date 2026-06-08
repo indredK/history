@@ -170,7 +170,7 @@ export function DynastyGanttChart() {
       })
       .catch((err) => {
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : 'Unknown error');
+          setError(err instanceof Error ? err.message : '未知错误');
         }
       });
     return () => {

@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
 import { MapService } from './map.service';
 
 @Controller('places')
@@ -22,7 +22,7 @@ export class MapDataController {
   }
 
   @Get('boundary-data/year')
-  async getBoundaryDataByYear(@Query('year') year: number) {
+  async getBoundaryDataByYear(@Query('year', ParseIntPipe) year: number) {
     return await this.mapService.getBoundaryDataByYear(year);
   }
 

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Box } from '@mui/material';
 import * as echarts from 'echarts';
 import { StateView } from '@/components/ui';
+import { loadJsonData } from '@/utils/services/dataLoaders';
 import type { BoundaryGeoJSON } from '@/services/map/types';
 
 // 朝代配置
@@ -14,16 +15,16 @@ interface DynastyConfig {
 }
 
 const DYNASTIES: DynastyConfig[] = [
-  { id: 'qin', name: '秦朝', file: 'boundaries_qin.geojson', period: '前221年-前206年', color: 'var(--color-error)' },
-  { id: 'han', name: '汉朝', file: 'boundaries_han.geojson', period: '前206年-220年', color: 'var(--color-error)' },
-  { id: 'three_kingdoms', name: '三国', file: 'boundaries_three_kingdoms.geojson', period: '220年-280年', color: 'var(--color-warning)' },
-  { id: 'jin', name: '晋朝', file: 'boundaries_jin.geojson', period: '266年-420年', color: 'var(--color-warning)' },
-  { id: 'sui', name: '隋朝', file: 'boundaries_sui.geojson', period: '581年-618年', color: 'var(--color-warning)' },
-  { id: 'tang', name: '唐朝', file: 'boundaries_tang.geojson', period: '618年-907年', color: 'var(--color-warning)' },
-  { id: 'song', name: '宋朝', file: 'boundaries_song.geojson', period: '960年-1279年', color: 'var(--color-success)' },
-  { id: 'yuan', name: '元朝', file: 'boundaries_yuan.geojson', period: '1271年-1368年', color: 'var(--color-success)' },
-  { id: 'ming', name: '明朝', file: 'boundaries_ming.geojson', period: '1368年-1644年', color: 'var(--color-info)' },
-  { id: 'qing', name: '清朝', file: 'boundaries_qing.geojson', period: '1644年-1912年', color: 'var(--color-purple)' },
+  { id: 'qin', name: '秦朝', file: 'boundaries_qin.geojson', period: '前221年-前206年', color: '#b91c1c' },
+  { id: 'han', name: '汉朝', file: 'boundaries_han.geojson', period: '前206年-220年', color: '#dc6803' },
+  { id: 'three_kingdoms', name: '三国', file: 'boundaries_three_kingdoms.geojson', period: '220年-280年', color: '#ca8a04' },
+  { id: 'jin', name: '晋朝', file: 'boundaries_jin.geojson', period: '266年-420年', color: '#7c3aed' },
+  { id: 'sui', name: '隋朝', file: 'boundaries_sui.geojson', period: '581年-618年', color: '#0891b2' },
+  { id: 'tang', name: '唐朝', file: 'boundaries_tang.geojson', period: '618年-907年', color: '#16a34a' },
+  { id: 'song', name: '宋朝', file: 'boundaries_song.geojson', period: '960年-1279年', color: '#2563eb' },
+  { id: 'yuan', name: '元朝', file: 'boundaries_yuan.geojson', period: '1271年-1368年', color: '#0f766e' },
+  { id: 'ming', name: '明朝', file: 'boundaries_ming.geojson', period: '1368年-1644年', color: '#be185d' },
+  { id: 'qing', name: '清朝', file: 'boundaries_qing.geojson', period: '1644年-1912年', color: '#4f46e5' },
 ];
 
 interface DynastyBoundaryMapProps {
@@ -89,12 +90,9 @@ export function DynastyBoundaryMap({
 
         for (const dynasty of DYNASTIES) {
           try {
-            const response = await fetch(`/data/map/boundaries/${dynasty.file}`);
-            if (!response.ok) {
-              console.warn(`Failed to load ${dynasty.file}`);
-              continue;
-            }
-            const geojson = await response.json();
+            const geojson = await loadJsonData<BoundaryGeoJSON>(
+              `/data/map/boundaries/${dynasty.file}`,
+            );
             data[dynasty.id] = geojson;
           } catch (err) {
             console.warn(`Error loading ${dynasty.file}:`, err);
@@ -103,7 +101,11 @@ export function DynastyBoundaryMap({
 
         if (!mounted) return;
 
-        setBoundaryData(data);
+        if (Object.keys(data).length === 0) {
+          setError('未加载到可用的疆域数据');
+        } else {
+          setBoundaryData(data);
+        }
         setLoading(false);
       } catch (err) {
         if (mounted) {

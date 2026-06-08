@@ -53,7 +53,7 @@ export class DynastyService {
     });
 
     if (!dynasty) {
-      throw new NotFoundException(`Dynasty with ID ${id} not found`);
+      throw new NotFoundException(`未找到 ID 为 ${id} 的朝代记录`);
     }
 
     return dynasty;

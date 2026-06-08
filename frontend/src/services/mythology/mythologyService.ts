@@ -1,9 +1,12 @@
-import type { Mythology } from './types';
+import type { Mythology, MythologyInput } from './types';
 import type { BaseService } from '../base/types';
 
 export interface MythologyService extends BaseService<Mythology> {
   getMythologies(): Promise<{ data: Mythology[] }>;
   getMythology(id: string): Promise<{ data: Mythology | null }>;
+  createMythology(input: MythologyInput): Promise<{ data: Mythology }>;
+  updateMythology(id: string, input: MythologyInput): Promise<{ data: Mythology }>;
+  deleteMythology(id: string): Promise<{ data: Mythology | null }>;
 }
 
 /**
@@ -30,6 +33,21 @@ export function validateMythology(mythology: Mythology): { valid: boolean; error
 export async function getMythologies() {
   const { mythologyApi } = await import('./mythologyApi');
   return mythologyApi.getMythologies();
+}
+
+export async function createMythology(input: MythologyInput) {
+  const { mythologyApi } = await import('./mythologyApi');
+  return mythologyApi.createMythology(input);
+}
+
+export async function updateMythology(id: string, input: MythologyInput) {
+  const { mythologyApi } = await import('./mythologyApi');
+  return mythologyApi.updateMythology(id, input);
+}
+
+export async function deleteMythology(id: string) {
+  const { mythologyApi } = await import('./mythologyApi');
+  return mythologyApi.deleteMythology(id);
 }
 
 /**

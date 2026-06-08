@@ -22,22 +22,30 @@ export interface LiteraryWork {
 export interface Scholar {
   id: string;
   name: string;
-  name_en?: string;
-  dynasty?: string;
-  dynastyPeriod?: string; // 后端字段名
+  name_en?: string | null;
+  dynasty?: string | null;
+  dynastyPeriod?: string | null; // 后端字段名
   birthYear?: number | null;
   deathYear?: number | null;
-  schoolOfThought?: string;
-  philosophicalSchoolId?: string; // 后端字段名
+  schoolOfThought?: string | null;
+  philosophicalSchoolId?: string | null; // 后端字段名
   biography?: string | null;
-  portraitUrl?: string;
-  achievements?: string[];
+  portraitUrl?: string | null;
+  achievements?: string[] | null;
   contributions?: string[] | null; // 后端字段名
-  representativeWorks?: LiteraryWork[];
-  majorWorks?: string[] | null; // 后端字段名
+  representativeWorks?: Array<LiteraryWork | string>;
+  majorWorks?: Array<LiteraryWork | string> | null; // 后端字段名
+  sources?: string[] | null;
   createdAt?: Date | undefined;
   updatedAt?: Date | undefined;
 }
+
+export type ScholarMutationInput = Omit<
+  Scholar,
+  'id' | 'createdAt' | 'updatedAt' | 'representativeWorks'
+> & {
+  id?: string;
+};
 
 /**
  * Zod schema for LiteraryWork validation
@@ -65,10 +73,11 @@ export const ScholarSchema = z.object({
   philosophicalSchoolId: z.string().optional(),
   biography: z.string().nullable().optional(),
   portraitUrl: z.string().optional(),
-  achievements: z.array(z.string()).optional(),
+  achievements: z.array(z.string()).nullable().optional(),
   contributions: z.array(z.string()).nullable().optional(),
-  representativeWorks: z.array(LiteraryWorkSchema).optional(),
-  majorWorks: z.array(z.string()).nullable().optional(),
+  representativeWorks: z.array(z.union([LiteraryWorkSchema, z.string()])).optional(),
+  majorWorks: z.array(z.union([LiteraryWorkSchema, z.string()])).nullable().optional(),
+  sources: z.array(z.string()).nullable().optional(),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
 });

@@ -26,6 +26,28 @@
   }
 }
 
+.people-archive-toolbar {
+  background: var(--app-panel-bg);
+  border: var(--app-panel-border);
+  border-radius: var(--radius-unified-md);
+  box-shadow: var(--app-panel-shadow-sm);
+  padding: 12px;
+
+  .MuiTextField-root {
+    background: var(--app-field-bg, var(--color-bg-primary));
+    border-radius: var(--radius-md);
+  }
+
+  .MuiInputBase-root {
+    color: var(--color-text-primary);
+  }
+
+  .MuiInputLabel-root,
+  .MuiTypography-root {
+    color: var(--color-text-secondary);
+  }
+}
+
 /* 筛选器样式 */
 .people-filter {
   background: var(--color-bg-card);
@@ -110,6 +132,10 @@
     padding: 16px;
     margin-bottom: 20px;
   }
+
+  .people-archive-toolbar {
+    padding: 10px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -121,6 +147,12 @@
   .people-modal {
     .MuiDialogContent-root {
       padding: 16px;
+    }
+  }
+
+  .people-archive-toolbar {
+    .MuiTextField-root {
+      min-width: 100%;
     }
   }
 }

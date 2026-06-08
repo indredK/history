@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useRequest } from 'ahooks';
+import { useCallback, useEffect, useRef } from 'react';
 
 interface UseCollectionResourceOptions<T> {
   cacheKey: string;
@@ -22,29 +21,58 @@ export function useCollectionResource<T>({
   setError,
   errorMessage,
 }: UseCollectionResourceOptions<T>) {
-  const { run, loading: requestLoading } = useRequest(load, {
-    manual: true,
-    cacheKey,
-    onBefore: () => setLoading(true),
-    onSuccess: (data) => {
-      setItems(data);
-      setError(null);
-    },
-    onError: (err) => {
-      console.error(errorMessage, err);
-      setError(err as Error);
-    },
-    onFinally: () => setLoading(false),
-  });
+  const autoLoadKeyRef = useRef<string | null>(null);
+  const mountedRef = useRef(false);
+  const requestIdRef = useRef(0);
+
+  const run = useCallback(async () => {
+    const requestId = requestIdRef.current + 1;
+    requestIdRef.current = requestId;
+    setLoading(true);
+
+    try {
+      const data = await load();
+      if (mountedRef.current && requestIdRef.current === requestId) {
+        setItems(data);
+        setError(null);
+      }
+      return data;
+    } catch (err) {
+      if (mountedRef.current && requestIdRef.current === requestId) {
+        console.error(errorMessage, err);
+        setError(err as Error);
+      }
+      throw err;
+    } finally {
+      if (mountedRef.current && requestIdRef.current === requestId) {
+        setLoading(false);
+      }
+    }
+  }, [errorMessage, load, setError, setItems, setLoading]);
 
   useEffect(() => {
-    if (items.length === 0 && !loading && !requestLoading) {
-      run();
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      autoLoadKeyRef.current = null;
+      requestIdRef.current += 1;
+      setLoading(false);
+    };
+  }, [setLoading]);
+
+  useEffect(() => {
+    if (
+      autoLoadKeyRef.current !== cacheKey &&
+      items.length === 0 &&
+      !loading
+    ) {
+      autoLoadKeyRef.current = cacheKey;
+      void run();
     }
-  }, [items.length, loading, requestLoading, run]);
+  }, [cacheKey, items.length, loading, run]);
 
   return {
     reload: run,
-    requestLoading,
+    requestLoading: loading,
   };
 }

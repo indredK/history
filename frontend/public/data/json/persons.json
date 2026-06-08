@@ -1,222 +1,1903 @@
 [
   {
+    "id": "person-kong-zi",
+    "name": "孔子",
+    "nameEn": "Confucius",
+    "courtesy": "仲尼",
+    "dynasty": "春秋",
+    "period": "东周",
+    "gender": "male",
+    "birthYear": -551,
+    "deathYear": -479,
+    "birthplace": "鲁国陬邑",
+    "roles": [
+      "philosopher",
+      "scholar"
+    ],
+    "aliases": [
+      "孔丘",
+      "至圣先师"
+    ],
+    "achievements": [
+      "创立儒家思想传统",
+      "整理六经传统",
+      "倡导仁礼与君子人格"
+    ],
+    "works": [
+      "论语"
+    ],
+    "events": [
+      {
+        "year": -497,
+        "name": "周游列国",
+        "role": "思想传播",
+        "description": "离鲁后游历多国，宣讲政治与伦理主张。"
+      }
+    ],
+    "biography": "春秋末期思想家、教育家，儒家学派创始人。其思想以仁、礼、德治和修身为核心，深刻影响中国政治伦理、教育制度与东亚文化秩序。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=15887&o=json",
+        "author": "Harvard University"
+      },
+      {
+        "title": "Confucius",
+        "url": "https://www.britannica.com/biography/Confucius",
+        "author": "Encyclopaedia Britannica"
+      }
+    ],
+    "confidence": 0.93,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-meng-zi",
+    "name": "孟子",
+    "nameEn": "Mencius",
+    "courtesy": "子舆",
+    "dynasty": "战国",
+    "period": "东周",
+    "gender": "male",
+    "birthYear": -372,
+    "deathYear": -289,
+    "birthplace": "邹国",
+    "roles": [
+      "philosopher",
+      "scholar"
+    ],
+    "aliases": [
+      "孟轲",
+      "亚圣"
+    ],
+    "achievements": [
+      "发展儒家性善论",
+      "提出仁政与民贵君轻",
+      "成为宋代以后四书体系核心人物"
+    ],
+    "works": [
+      "孟子"
+    ],
+    "events": [
+      {
+        "year": -320,
+        "name": "游说诸侯",
+        "role": "思想传播",
+        "description": "赴齐、梁等国阐述仁政思想。"
+      }
+    ],
+    "biography": "战国时期儒家代表人物，继承并发展孔子思想。他强调性善、仁政和民本观念，后世与孔子并称孔孟。",
+    "sources": [
+      {
+        "title": "Mencius",
+        "url": "https://www.britannica.com/biography/Mencius-Chinese-philosopher",
+        "author": "Encyclopaedia Britannica"
+      }
+    ],
+    "confidence": 0.86,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-qu-yuan",
+    "name": "屈原",
+    "nameEn": "Qu Yuan",
+    "dynasty": "战国",
+    "period": "楚国",
+    "gender": "male",
+    "birthYear": -340,
+    "deathYear": -278,
+    "birthplace": "楚国丹阳",
+    "roles": [
+      "poet",
+      "official"
+    ],
+    "aliases": [
+      "屈平"
+    ],
+    "achievements": [
+      "开创楚辞传统",
+      "塑造忠君爱国诗人形象",
+      "深刻影响端午文化记忆"
+    ],
+    "works": [
+      "离骚",
+      "九歌",
+      "天问"
+    ],
+    "events": [
+      {
+        "year": -278,
+        "name": "楚郢陷落",
+        "role": "殉国传说",
+        "description": "秦军攻破楚郢后，屈原投汨罗江的叙事成为后世重要文化记忆。"
+      }
+    ],
+    "biography": "战国时期楚国诗人、政治人物，楚辞代表作者。其作品情感强烈、想象瑰丽，是中国抒情诗传统的重要源头。",
+    "sources": [
+      {
+        "title": "Qu Yuan",
+        "url": "https://www.britannica.com/biography/Qu-Yuan",
+        "author": "Encyclopaedia Britannica"
+      }
+    ],
+    "confidence": 0.78,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-qin-shi-huang",
     "name": "秦始皇",
-    "name_en": "Qin Shi Huang",
-    "birth_year": -259,
-    "birth_month": 12,
-    "death_year": -210,
-    "death_month": 9,
-    "roles": "emperor,military_leader,reformer",
-    "biography": "中国历史上第一位皇帝，完成了中国的统一，建立了秦朝。在位期间推行了郡县制、统一度量衡等重要改革，对中国历史产生了深远影响。",
-    "source": "史记"
+    "nameEn": "Qin Shi Huang",
+    "dynasty": "秦",
+    "period": "秦朝",
+    "gender": "male",
+    "birthYear": -259,
+    "deathYear": -210,
+    "birthplace": "赵国邯郸",
+    "roles": [
+      "emperor",
+      "reformer",
+      "founder"
+    ],
+    "aliases": [
+      "嬴政",
+      "始皇帝"
+    ],
+    "achievements": [
+      "统一六国",
+      "推行郡县制",
+      "统一文字、度量衡与车轨"
+    ],
+    "works": [],
+    "events": [
+      {
+        "year": -221,
+        "name": "秦统一六国",
+        "role": "最高统治者",
+        "description": "结束战国长期分裂，建立中国历史上第一个皇帝制度国家。"
+      }
+    ],
+    "biography": "秦朝开国皇帝，完成战国统一并确立皇帝制度。其中央集权、郡县行政与制度统一对后世王朝国家结构影响深远。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=562723&o=json",
+        "author": "Harvard University"
+      },
+      {
+        "title": "Qin Shi Huang",
+        "url": "https://www.britannica.com/biography/Qin-Shi-Huang",
+        "author": "Encyclopaedia Britannica"
+      }
+    ],
+    "confidence": 0.92,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
+    "id": "person-liu-bang",
+    "name": "刘邦",
+    "nameEn": "Liu Bang",
+    "dynasty": "西汉",
+    "period": "汉朝",
+    "gender": "male",
+    "birthYear": -256,
+    "deathYear": -195,
+    "birthplace": "沛县丰邑",
+    "roles": [
+      "emperor",
+      "founder",
+      "politician"
+    ],
+    "aliases": [
+      "汉高祖"
+    ],
+    "achievements": [
+      "建立西汉",
+      "结束楚汉战争",
+      "确立汉初郡国并行格局"
+    ],
+    "works": [
+      "大风歌"
+    ],
+    "events": [
+      {
+        "year": -202,
+        "name": "垓下之战后称帝",
+        "role": "汉王",
+        "description": "击败项羽后即皇帝位，建立汉朝。"
+      }
+    ],
+    "biography": "西汉开国皇帝，出身基层，秦末起兵后在楚汉战争中取胜。其统治奠定汉代政治秩序的基础。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=16622&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.9,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-han-wu-di",
     "name": "汉武帝",
-    "name_en": "Han Wudi",
-    "birth_year": -156,
-    "birth_month": 6,
-    "death_year": -87,
-    "death_month": 3,
-    "roles": "emperor,military_strategist",
-    "biography": "西汉中期的皇帝，推行了对匈奴的大规模军事行动，开拓了丝绸之路，使汉朝达到了极盛。",
-    "source": "史记"
+    "nameEn": "Emperor Wu of Han",
+    "dynasty": "西汉",
+    "period": "汉朝",
+    "gender": "male",
+    "birthYear": -156,
+    "deathYear": -87,
+    "birthplace": "长安",
+    "roles": [
+      "emperor",
+      "ruler",
+      "reformer"
+    ],
+    "aliases": [
+      "刘彻"
+    ],
+    "achievements": [
+      "加强中央集权",
+      "开拓河西与丝绸之路",
+      "确立儒学独尊的国家意识形态"
+    ],
+    "works": [],
+    "events": [
+      {
+        "year": -138,
+        "name": "张骞出使西域",
+        "role": "决策者",
+        "description": "派遣张骞通西域，推动汉与中亚交通和外交展开。"
+      }
+    ],
+    "biography": "西汉第七位皇帝，在位期间强化皇权、拓展边疆并推动儒学国家化，使汉朝进入强盛阶段。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=16626&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.92,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
-    "name": "唐太宗",
-    "name_en": "Tang Taizong",
-    "birth_year": 599,
-    "birth_month": 1,
-    "death_year": 649,
-    "death_month": 6,
-    "roles": "emperor,military_leader,reformer",
-    "biography": "唐初杰出皇帝，开创了贞观之治。在位期间推崇文治，任用贤能的廷臣，国家政治清明，经济发展，军事力量强大。",
-    "source": "《资治通鉴》"
+    "id": "person-sima-qian",
+    "name": "司马迁",
+    "nameEn": "Sima Qian",
+    "dynasty": "西汉",
+    "period": "汉朝",
+    "gender": "male",
+    "birthYear": -145,
+    "deathYear": -86,
+    "birthplace": "夏阳",
+    "roles": [
+      "historian",
+      "writer"
+    ],
+    "aliases": [
+      "太史公"
+    ],
+    "achievements": [
+      "撰写纪传体通史",
+      "奠定中国正史叙事范式",
+      "保存先秦至汉初大量史料"
+    ],
+    "works": [
+      "史记"
+    ],
+    "events": [
+      {
+        "year": -99,
+        "name": "李陵事件",
+        "role": "辩护者",
+        "description": "因替李陵辩护遭受宫刑，后继续完成史记。"
+      }
+    ],
+    "biography": "西汉史学家、文学家，所著史记贯通上古至汉武帝时期，以纪传体体例成为中国史学经典。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=148844&o=json",
+        "author": "Harvard University"
+      },
+      {
+        "title": "Sima Qian",
+        "url": "https://www.britannica.com/biography/Sima-Qian",
+        "author": "Encyclopaedia Britannica"
+      }
+    ],
+    "confidence": 0.84,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
-    "name": "唐玄宗",
-    "name_en": "Tang Xuanzong",
-    "birth_year": 685,
-    "birth_month": 9,
-    "death_year": 762,
-    "death_month": 12,
-    "roles": "emperor,cultural_patron",
-    "biography": "唐中期皇帝，前期推行开元盛世政策，使唐朝达到鼎盛。但后期宠幸杨贵妃，导致政治腐败，最终引发安史之乱。",
-    "source": "《资治通鉴》"
+    "id": "person-wang-mang",
+    "name": "王莽",
+    "nameEn": "Wang Mang",
+    "dynasty": "新",
+    "period": "两汉之际",
+    "gender": "male",
+    "birthYear": -45,
+    "deathYear": 23,
+    "birthplace": "魏郡元城",
+    "roles": [
+      "ruler",
+      "reformer"
+    ],
+    "aliases": [
+      "新始祖"
+    ],
+    "achievements": [
+      "建立新朝",
+      "推行托古改制",
+      "重塑货币与土地制度"
+    ],
+    "works": [],
+    "events": [
+      {
+        "year": 9,
+        "name": "建立新朝",
+        "role": "皇帝",
+        "description": "废孺子婴后称帝，改国号为新。"
+      }
+    ],
+    "biography": "西汉外戚出身的政治人物，篡汉建立新朝。他的制度改革规模庞大，但实施激烈，最终在社会动荡中失败。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=339519&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.9,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
-    "name": "安禄山",
-    "name_en": "An Lushan",
-    "birth_year": 703,
-    "birth_month": 1,
-    "death_year": 757,
-    "death_month": 2,
-    "roles": "general,military_leader,rebel",
-    "biography": "唐代胡人将领，因军功得宠。后起兵反唐，引发了影响深远的安史之乱，最终兵败自杀。",
-    "source": "《资治通鉴》"
+    "id": "person-cao-cao",
+    "name": "曹操",
+    "nameEn": "Cao Cao",
+    "courtesy": "孟德",
+    "dynasty": "东汉",
+    "period": "三国前期",
+    "gender": "male",
+    "birthYear": 155,
+    "deathYear": 220,
+    "birthplace": "沛国谯县",
+    "roles": [
+      "politician",
+      "general",
+      "writer"
+    ],
+    "aliases": [
+      "魏武帝"
+    ],
+    "achievements": [
+      "统一中国北方",
+      "奠定曹魏政权基础",
+      "推动建安文学"
+    ],
+    "works": [
+      "短歌行",
+      "观沧海"
+    ],
+    "events": [
+      {
+        "year": 200,
+        "name": "官渡之战",
+        "role": "统帅",
+        "description": "以少胜多击败袁绍，确立北方优势。"
+      }
+    ],
+    "biography": "东汉末年政治家、军事家、文学家。曹操挟天子以令诸侯，统一北方，为曹魏建立奠定基础。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=30257&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.94,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
-    "name": "杜甫",
-    "name_en": "Du Fu",
-    "birth_year": 712,
-    "birth_month": 2,
-    "death_year": 770,
-    "death_month": 5,
-    "roles": "poet,official,scholar",
-    "biography": "唐代伟大诗人，被誉为'诗圣'。一生经历坎坷，历经开元盛世和安史之乱，诗歌内容丰富，反映了社会现实。",
-    "source": "旧唐书"
+    "id": "person-zhuge-liang",
+    "name": "诸葛亮",
+    "nameEn": "Zhuge Liang",
+    "courtesy": "孔明",
+    "dynasty": "蜀汉",
+    "period": "三国",
+    "gender": "male",
+    "birthYear": 181,
+    "deathYear": 234,
+    "birthplace": "琅琊阳都",
+    "roles": [
+      "strategist",
+      "politician",
+      "official"
+    ],
+    "aliases": [
+      "卧龙"
+    ],
+    "achievements": [
+      "辅佐刘备建立蜀汉",
+      "主持蜀汉政务",
+      "北伐曹魏"
+    ],
+    "works": [
+      "出师表",
+      "诫子书"
+    ],
+    "events": [
+      {
+        "year": 208,
+        "name": "赤壁之战",
+        "role": "联盟推动者",
+        "description": "促成孙刘联盟，对抗曹操南下。"
+      }
+    ],
+    "biography": "三国时期蜀汉丞相，以政治治理、军事谋略和忠勤形象著称。其生平在历史与文学传统中都极具影响力。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=25403&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.93,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
-    "name": "李白",
-    "name_en": "Li Bai",
-    "birth_year": 701,
-    "birth_month": 2,
-    "death_year": 762,
-    "death_month": 11,
-    "roles": "poet,writer,scholar",
-    "biography": "唐代伟大诗人，被誉为'诗仙'。风格豪迈奔放，想象力丰富，是中国古代最伟大的诗人之一。",
-    "source": "旧唐书"
+    "id": "person-wang-xizhi",
+    "name": "王羲之",
+    "nameEn": "Wang Xizhi",
+    "courtesy": "逸少",
+    "dynasty": "东晋",
+    "period": "魏晋南北朝",
+    "gender": "male",
+    "birthYear": 321,
+    "deathYear": 379,
+    "birthplace": "琅琊临沂",
+    "roles": [
+      "calligrapher",
+      "official"
+    ],
+    "aliases": [
+      "书圣"
+    ],
+    "achievements": [
+      "确立行书审美典范",
+      "深刻影响中国书法史",
+      "兰亭序成为书法经典"
+    ],
+    "works": [
+      "兰亭序"
+    ],
+    "events": [
+      {
+        "year": 353,
+        "name": "兰亭雅集",
+        "role": "组织者与书写者",
+        "description": "会稽兰亭雅集后书写兰亭序。"
+      }
+    ],
+    "biography": "东晋书法家，被尊为书圣。其行草书风韵生动，对中国书法的笔法、结构和审美影响极深。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=25793&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.87,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
+    "id": "person-xuan-zang",
+    "name": "玄奘",
+    "nameEn": "Xuanzang",
+    "dynasty": "唐",
+    "period": "初唐",
+    "gender": "male",
+    "birthYear": 602,
+    "deathYear": 664,
+    "birthplace": "洛州缑氏",
+    "roles": [
+      "monk",
+      "scholar"
+    ],
+    "aliases": [
+      "陈祎",
+      "三藏法师"
+    ],
+    "achievements": [
+      "西行求法",
+      "译出大量佛经",
+      "促进中印佛教文化交流"
+    ],
+    "works": [
+      "大唐西域记"
+    ],
+    "events": [
+      {
+        "year": 629,
+        "name": "玄奘西行",
+        "role": "求法僧",
+        "description": "从长安出发，经中亚赴印度求取佛典。"
+      }
+    ],
+    "biography": "唐代高僧、翻译家和旅行家。玄奘西行印度求法，回国后主持译经，其经历和著作成为研究中亚、印度与唐代交流的重要资料。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=92423&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.94,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-li-shimin",
+    "name": "李世民",
+    "nameEn": "Li Shimin",
+    "dynasty": "唐",
+    "period": "初唐",
+    "gender": "male",
+    "birthYear": 598,
+    "deathYear": 649,
+    "birthplace": "武功",
+    "roles": [
+      "emperor",
+      "ruler"
+    ],
+    "aliases": [
+      "唐太宗"
+    ],
+    "achievements": [
+      "开创贞观之治",
+      "完善三省六部运行",
+      "稳定唐初内外秩序"
+    ],
+    "works": [],
+    "events": [
+      {
+        "year": 626,
+        "name": "玄武门之变",
+        "role": "秦王",
+        "description": "取得继承权后即位为唐太宗。"
+      }
+    ],
+    "biography": "唐朝第二位皇帝，政治上善用谏臣、整饬制度，军事上巩固边疆，贞观之治成为后世政治理想之一。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=13060&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.92,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-wu-zetian",
     "name": "武则天",
-    "name_en": "Wu Zetian",
-    "birth_year": 624,
-    "birth_month": 2,
-    "death_year": 705,
-    "death_month": 11,
-    "roles": "emperor,empress_consort,political_leader",
-    "biography": "中国历史上唯一的女皇帝，曾为唐高宗皇后，后建立武周。推行了一系列改革，使国家富强。",
-    "source": "《资治通鉴》"
+    "nameEn": "Wu Zetian",
+    "dynasty": "武周",
+    "period": "唐代",
+    "gender": "female",
+    "birthYear": 624,
+    "deathYear": 705,
+    "birthplace": "并州文水",
+    "roles": [
+      "emperor",
+      "empress",
+      "reformer"
+    ],
+    "aliases": [
+      "武曌",
+      "则天大圣皇帝"
+    ],
+    "achievements": [
+      "建立武周政权",
+      "扩大科举取士",
+      "加强中央监察与官僚选拔"
+    ],
+    "works": [],
+    "events": [
+      {
+        "year": 690,
+        "name": "改唐为周",
+        "role": "皇帝",
+        "description": "称帝并改国号周，成为中国历史上唯一正统女皇帝。"
+      }
+    ],
+    "biography": "唐至武周时期政治人物，中国历史上唯一正式称帝的女性。其统治强化科举与官僚体系，也留下复杂的历史评价。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=93663&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.94,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
-    "name": "康熙",
-    "name_en": "Kangxi",
-    "birth_year": 1654,
-    "birth_month": 4,
-    "death_year": 1722,
-    "death_month": 11,
-    "roles": "emperor,military_strategist,patron_of_learning",
-    "biography": "清代杰出皇帝，在位 61 年。平定三藩之乱，统一台湾，对外用兵成功，对内推崇儒学，使清朝进入康乾盛世。",
-    "source": "清史稿"
+    "id": "person-li-bai",
+    "name": "李白",
+    "nameEn": "Li Bai",
+    "courtesy": "太白",
+    "dynasty": "唐",
+    "period": "盛唐",
+    "gender": "male",
+    "birthYear": 701,
+    "deathYear": 762,
+    "birthplace": "碎叶或绵州昌隆",
+    "roles": [
+      "poet",
+      "writer"
+    ],
+    "aliases": [
+      "诗仙",
+      "青莲居士"
+    ],
+    "achievements": [
+      "盛唐浪漫主义诗歌代表",
+      "推动七古与绝句艺术成熟",
+      "形成极具个性的诗人形象"
+    ],
+    "works": [
+      "将进酒",
+      "蜀道难",
+      "静夜思"
+    ],
+    "events": [
+      {
+        "year": 742,
+        "name": "入长安供奉翰林",
+        "role": "文士",
+        "description": "受召入长安，短期供奉翰林。"
+      }
+    ],
+    "biography": "唐代诗人，以奔放想象、豪迈气象和高度音乐性著称。其诗歌成为中国文学中最具代表性的个人风格之一。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=32540&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.9,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
-    "name": "乾隆",
-    "name_en": "Qianlong",
-    "birth_year": 1711,
-    "birth_month": 9,
-    "death_year": 1799,
-    "death_month": 2,
-    "roles": "emperor,military_strategist,cultural_patron",
-    "biography": "清代最后一位有作为的皇帝。在其统治期间，清朝领土最大，国力最强，文化艺术达到中国古代的最高成就。",
-    "source": "清史稿"
+    "id": "person-du-fu",
+    "name": "杜甫",
+    "nameEn": "Du Fu",
+    "courtesy": "子美",
+    "dynasty": "唐",
+    "period": "盛唐至中唐",
+    "gender": "male",
+    "birthYear": 712,
+    "deathYear": 770,
+    "birthplace": "河南巩县",
+    "roles": [
+      "poet",
+      "writer"
+    ],
+    "aliases": [
+      "诗圣",
+      "杜工部"
+    ],
+    "achievements": [
+      "现实主义诗歌高峰",
+      "以诗记录安史之乱前后社会变迁",
+      "完善律诗艺术"
+    ],
+    "works": [
+      "三吏",
+      "三别",
+      "春望"
+    ],
+    "events": [
+      {
+        "year": 755,
+        "name": "安史之乱",
+        "role": "亲历者",
+        "description": "战乱经历成为其诗歌现实关怀的重要来源。"
+      }
+    ],
+    "biography": "唐代诗人，被称为诗圣。杜甫作品沉郁顿挫，兼具个人苦难、社会关怀和历史见证价值。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=3915&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.93,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
-    "name": "曾国藩",
-    "name_en": "Zeng Guofan",
-    "birth_year": 1811,
-    "birth_month": 11,
-    "death_year": 1872,
-    "death_month": 3,
-    "roles": "military_leader,official,scholar",
-    "biography": "晚清中兴名臣，军事家和政治家。组织湘军对抗太平天国，战胜后逐渐成为晚清权力中枢的重要人物。",
-    "source": "晚清人物传记"
+    "id": "person-an-lushan",
+    "name": "安禄山",
+    "nameEn": "An Lushan",
+    "dynasty": "唐",
+    "period": "盛唐",
+    "gender": "male",
+    "birthYear": 703,
+    "deathYear": 757,
+    "birthplace": "营州柳城一带",
+    "roles": [
+      "general"
+    ],
+    "aliases": [
+      "燕帝"
+    ],
+    "achievements": [
+      "长期掌握范阳等节度使军权",
+      "发动安史之乱",
+      "改变唐代由盛转衰的历史进程"
+    ],
+    "works": [],
+    "events": [
+      {
+        "year": 755,
+        "name": "安史之乱",
+        "role": "发动者",
+        "description": "从范阳起兵反唐，迅速攻占洛阳、长安。"
+      }
+    ],
+    "biography": "唐玄宗时期边镇将领，兼领多个节度使。其叛乱重创唐朝政治、财政与军事结构，是唐代中后期格局变化的关键节点。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=379873&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.82,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
-    "name": "李鸿章",
-    "name_en": "Li Hongzhang",
-    "birth_year": 1823,
-    "birth_month": 2,
-    "death_year": 1901,
-    "death_month": 11,
-    "roles": "military_leader,official,diplomat",
-    "biography": "晚清洋务派代表，军事家和外交家。推行洋务运动，参与多次对外谈判，对晚清政治产生了重大影响。",
-    "source": "晚清人物传记"
+    "id": "person-han-yu",
+    "name": "韩愈",
+    "nameEn": "Han Yu",
+    "courtesy": "退之",
+    "dynasty": "唐",
+    "period": "中唐",
+    "gender": "male",
+    "birthYear": 768,
+    "deathYear": 824,
+    "birthplace": "河南河阳",
+    "roles": [
+      "writer",
+      "official"
+    ],
+    "aliases": [
+      "韩昌黎"
+    ],
+    "achievements": [
+      "倡导古文运动",
+      "重振儒学道统论",
+      "影响宋代散文与理学"
+    ],
+    "works": [
+      "师说",
+      "原道",
+      "进学解"
+    ],
+    "events": [
+      {
+        "year": 819,
+        "name": "谏迎佛骨",
+        "role": "谏臣",
+        "description": "上表反对迎佛骨，被贬潮州。"
+      }
+    ],
+    "biography": "唐代文学家、思想家和官员，古文运动代表。其散文风格雄健，思想上强调儒家道统。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=3332&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.93,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
+    "id": "person-wang-anshi",
+    "name": "王安石",
+    "nameEn": "Wang Anshi",
+    "courtesy": "介甫",
+    "dynasty": "北宋",
+    "period": "宋朝",
+    "gender": "male",
+    "birthYear": 1021,
+    "deathYear": 1086,
+    "birthplace": "临川",
+    "roles": [
+      "politician",
+      "reformer",
+      "writer"
+    ],
+    "aliases": [
+      "荆公"
+    ],
+    "achievements": [
+      "主持熙宁变法",
+      "推动财政、军事与教育制度改革",
+      "唐宋八大家之一"
+    ],
+    "works": [
+      "临川集",
+      "伤仲永"
+    ],
+    "events": [
+      {
+        "year": 1069,
+        "name": "熙宁变法",
+        "role": "主持者",
+        "description": "出任参知政事后推行青苗、募役、保甲等新法。"
+      }
+    ],
+    "biography": "北宋政治家、文学家，宋神宗时期主持变法。其改革围绕富国强兵与制度重建展开，引发长期政治争论。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=1762&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.95,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-su-shi",
+    "name": "苏轼",
+    "nameEn": "Su Shi",
+    "courtesy": "子瞻",
+    "dynasty": "北宋",
+    "period": "宋朝",
+    "gender": "male",
+    "birthYear": 1036,
+    "deathYear": 1101,
+    "birthplace": "眉州眉山",
+    "roles": [
+      "writer",
+      "poet",
+      "official"
+    ],
+    "aliases": [
+      "东坡居士",
+      "苏东坡"
+    ],
+    "achievements": [
+      "宋代文学艺术代表",
+      "诗词文书画多领域成就突出",
+      "唐宋八大家之一"
+    ],
+    "works": [
+      "念奴娇·赤壁怀古",
+      "赤壁赋",
+      "水调歌头"
+    ],
+    "events": [
+      {
+        "year": 1079,
+        "name": "乌台诗案",
+        "role": "被告",
+        "description": "因诗文被构陷入狱，后贬黄州。"
+      }
+    ],
+    "biography": "北宋文学家、书画家和官员，作品横跨诗、词、文、书画。苏轼以旷达风格和复杂仕宦经历成为宋代文化象征。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=3767&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.95,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-sima-guang",
+    "name": "司马光",
+    "nameEn": "Sima Guang",
+    "courtesy": "君实",
+    "dynasty": "北宋",
+    "period": "宋朝",
+    "gender": "male",
+    "birthYear": 1019,
+    "deathYear": 1086,
+    "birthplace": "陕州夏县",
+    "roles": [
+      "historian",
+      "official"
+    ],
+    "aliases": [
+      "涑水先生"
+    ],
+    "achievements": [
+      "主编资治通鉴",
+      "参与北宋政治改革争论",
+      "形成编年体通史高峰"
+    ],
+    "works": [
+      "资治通鉴"
+    ],
+    "events": [
+      {
+        "year": 1085,
+        "name": "元祐更化",
+        "role": "宰相",
+        "description": "宋哲宗初年入相，废除部分新法。"
+      }
+    ],
+    "biography": "北宋史学家、政治人物，主持编纂资治通鉴。其政治立场与王安石新法相对，是北宋党争中的关键人物。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=1488&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.95,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-yue-fei",
+    "name": "岳飞",
+    "nameEn": "Yue Fei",
+    "courtesy": "鹏举",
+    "dynasty": "南宋",
+    "period": "宋朝",
+    "gender": "male",
+    "birthYear": 1103,
+    "deathYear": 1142,
+    "birthplace": "相州汤阴",
+    "roles": [
+      "general"
+    ],
+    "aliases": [
+      "武穆王"
+    ],
+    "achievements": [
+      "组织岳家军抗金",
+      "收复襄阳六郡",
+      "成为忠义文化象征"
+    ],
+    "works": [
+      "满江红·怒发冲冠"
+    ],
+    "events": [
+      {
+        "year": 1140,
+        "name": "郾城之战",
+        "role": "统帅",
+        "description": "率军击败金军主力，取得重要战果。"
+      }
+    ],
+    "biography": "南宋抗金名将，以治军严整和忠义形象著称。其被害与平反在后世形成强烈历史记忆。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=8175&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.91,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-zhu-xi",
+    "name": "朱熹",
+    "nameEn": "Zhu Xi",
+    "courtesy": "元晦",
+    "dynasty": "南宋",
+    "period": "宋朝",
+    "gender": "male",
+    "birthYear": 1130,
+    "deathYear": 1200,
+    "birthplace": "徽州婺源",
+    "roles": [
+      "philosopher",
+      "scholar"
+    ],
+    "aliases": [
+      "晦庵",
+      "朱子"
+    ],
+    "achievements": [
+      "集大成宋代理学",
+      "编定四书章句集注",
+      "深刻影响科举与东亚儒学"
+    ],
+    "works": [
+      "四书章句集注",
+      "朱子语类"
+    ],
+    "events": [
+      {
+        "year": 1190,
+        "name": "漳州讲学与整治",
+        "role": "地方官与学者",
+        "description": "任地方官期间推行教化和书院建设。"
+      }
+    ],
+    "biography": "南宋理学家，建立系统的理气心性学说。其四书注解在元明清成为科举与官方儒学核心文本。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=3257&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.95,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-genghis-khan",
+    "name": "成吉思汗",
+    "nameEn": "Genghis Khan",
+    "dynasty": "蒙古",
+    "period": "蒙元前期",
+    "gender": "male",
+    "birthYear": 1162,
+    "deathYear": 1227,
+    "birthplace": "斡难河流域",
+    "roles": [
+      "ruler",
+      "general",
+      "founder"
+    ],
+    "aliases": [
+      "铁木真"
+    ],
+    "achievements": [
+      "统一蒙古诸部",
+      "建立大蒙古国",
+      "开启欧亚大陆大规模征服"
+    ],
+    "works": [],
+    "events": [
+      {
+        "year": 1206,
+        "name": "忽里勒台称汗",
+        "role": "大汗",
+        "description": "被推举为成吉思汗，建立大蒙古国。"
+      }
+    ],
+    "biography": "蒙古帝国创建者，统一蒙古草原并发动欧亚征服。其政治军事遗产直接影响元朝建立和欧亚历史格局。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=29239&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.88,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-kublai-khan",
+    "name": "忽必烈",
+    "nameEn": "Kublai Khan",
+    "dynasty": "元",
+    "period": "元朝",
+    "gender": "male",
+    "birthYear": 1215,
+    "deathYear": 1294,
+    "birthplace": "漠北草原",
+    "roles": [
+      "emperor",
+      "ruler",
+      "founder"
+    ],
+    "aliases": [
+      "元世祖"
+    ],
+    "achievements": [
+      "建立元朝",
+      "完成南北统一",
+      "建设大都并推行多族群帝国治理"
+    ],
+    "works": [],
+    "events": [
+      {
+        "year": 1271,
+        "name": "建国号大元",
+        "role": "皇帝",
+        "description": "取易经“大哉乾元”之义，建立元朝。"
+      }
+    ],
+    "biography": "元朝开国皇帝，蒙古帝国大汗之一。他建立元朝并灭南宋，实现中国范围内的大一统。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=29244&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.93,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-guan-hanqing",
+    "name": "关汉卿",
+    "nameEn": "Guan Hanqing",
+    "dynasty": "元",
+    "period": "元朝",
+    "gender": "male",
+    "birthYear": 1219,
+    "deathYear": 1301,
+    "birthplace": "大都一带",
+    "roles": [
+      "writer"
+    ],
+    "aliases": [
+      "已斋叟"
+    ],
+    "achievements": [
+      "元杂剧代表作家",
+      "塑造窦娥等经典戏剧人物",
+      "推动中国戏曲成熟"
+    ],
+    "works": [
+      "窦娥冤",
+      "救风尘",
+      "望江亭"
+    ],
+    "events": [
+      {
+        "year": 1280,
+        "name": "元杂剧兴盛",
+        "role": "剧作家",
+        "description": "活跃于元代杂剧创作与演出圈。"
+      }
+    ],
+    "biography": "元代杂剧作家，被视为中国戏曲史上的代表人物。其作品关注社会压迫与女性命运，戏剧结构成熟。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=112918&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.72,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-zhu-yuanzhang",
+    "name": "朱元璋",
+    "nameEn": "Zhu Yuanzhang",
+    "dynasty": "明",
+    "period": "明朝",
+    "gender": "male",
+    "birthYear": 1328,
+    "deathYear": 1398,
+    "birthplace": "濠州钟离",
+    "roles": [
+      "emperor",
+      "founder",
+      "reformer"
+    ],
+    "aliases": [
+      "明太祖",
+      "洪武帝"
+    ],
+    "achievements": [
+      "建立明朝",
+      "废除中书省强化皇权",
+      "重建赋役与里甲制度"
+    ],
+    "works": [
+      "皇明祖训"
+    ],
+    "events": [
+      {
+        "year": 1368,
+        "name": "明朝建立",
+        "role": "皇帝",
+        "description": "在应天称帝，国号大明。"
+      }
+    ],
+    "biography": "明朝开国皇帝，由元末起义军领袖转为王朝创建者。其制度设计强化皇权，对明清政治结构影响深远。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=30148&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.94,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-zheng-he",
+    "name": "郑和",
+    "nameEn": "Zheng He",
+    "dynasty": "明",
+    "period": "明朝",
+    "gender": "male",
+    "birthYear": 1371,
+    "deathYear": 1433,
+    "birthplace": "云南昆阳",
+    "roles": [
+      "explorer",
+      "diplomat",
+      "official"
+    ],
+    "aliases": [
+      "马和",
+      "三宝太监"
+    ],
+    "achievements": [
+      "七下西洋",
+      "扩大明代海上外交网络",
+      "促进印度洋贸易与朝贡交流"
+    ],
+    "works": [],
+    "events": [
+      {
+        "year": 1405,
+        "name": "第一次下西洋",
+        "role": "正使",
+        "description": "率大型船队出使东南亚与印度洋地区。"
+      }
+    ],
+    "biography": "明代宦官、航海家和外交使者，永乐至宣德年间多次率船队远航，展现明初海上交通与外交能力。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=132376&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.82,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-wang-yangming",
+    "name": "王阳明",
+    "nameEn": "Wang Yangming",
+    "courtesy": "伯安",
+    "dynasty": "明",
+    "period": "明朝",
+    "gender": "male",
+    "birthYear": 1472,
+    "deathYear": 1529,
+    "birthplace": "浙江余姚",
+    "roles": [
+      "philosopher",
+      "official",
+      "general"
+    ],
+    "aliases": [
+      "王守仁",
+      "阳明先生"
+    ],
+    "achievements": [
+      "创立阳明心学",
+      "提出致良知与知行合一",
+      "平定宁王之乱"
+    ],
+    "works": [
+      "传习录"
+    ],
+    "events": [
+      {
+        "year": 1519,
+        "name": "平定宁王之乱",
+        "role": "军事统帅",
+        "description": "快速组织兵力平定朱宸濠叛乱。"
+      }
+    ],
+    "biography": "明代思想家、军事家和官员，心学集大成者。其知行合一和致良知思想对明清及东亚思想史影响深远。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=30374&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.93,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-hai-rui",
+    "name": "海瑞",
+    "nameEn": "Hai Rui",
+    "courtesy": "汝贤",
+    "dynasty": "明",
+    "period": "明朝",
+    "gender": "male",
+    "birthYear": 1514,
+    "deathYear": 1587,
+    "birthplace": "琼山",
+    "roles": [
+      "official"
+    ],
+    "aliases": [
+      "刚峰"
+    ],
+    "achievements": [
+      "以清廉刚直著称",
+      "上疏批评嘉靖政治",
+      "成为清官文化典型"
+    ],
+    "works": [
+      "治安疏"
+    ],
+    "events": [
+      {
+        "year": 1566,
+        "name": "上治安疏",
+        "role": "谏臣",
+        "description": "直言批评嘉靖帝长期怠政。"
+      }
+    ],
+    "biography": "明代官员，以刚直清廉和敢言著称。其形象在后世成为清官与政治道德的代表。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=30284&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.92,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-zhang-juzheng",
+    "name": "张居正",
+    "nameEn": "Zhang Juzheng",
+    "courtesy": "叔大",
+    "dynasty": "明",
+    "period": "明朝",
+    "gender": "male",
+    "birthYear": 1525,
+    "deathYear": 1582,
+    "birthplace": "江陵",
+    "roles": [
+      "politician",
+      "reformer"
+    ],
+    "aliases": [
+      "张江陵"
+    ],
+    "achievements": [
+      "主持万历新政",
+      "推行一条鞭法",
+      "整顿吏治与财政"
+    ],
+    "works": [
+      "张太岳集"
+    ],
+    "events": [
+      {
+        "year": 1581,
+        "name": "推行一条鞭法",
+        "role": "首辅",
+        "description": "整合赋役征收方式，改善财政效率。"
+      }
+    ],
+    "biography": "明代政治家，万历初年以内阁首辅身份主持改革。其新政在财政、考成和边防方面成效显著。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=69011&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.94,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-nurhaci",
+    "name": "努尔哈赤",
+    "nameEn": "Nurhaci",
+    "dynasty": "后金",
+    "period": "明清之际",
+    "gender": "male",
+    "birthYear": 1559,
+    "deathYear": 1626,
+    "birthplace": "建州左卫",
+    "roles": [
+      "ruler",
+      "founder",
+      "general"
+    ],
+    "aliases": [
+      "清太祖"
+    ],
+    "achievements": [
+      "统一建州女真",
+      "建立后金",
+      "创制八旗制度"
+    ],
+    "works": [],
+    "events": [
+      {
+        "year": 1616,
+        "name": "建立后金",
+        "role": "大汗",
+        "description": "在赫图阿拉称汗，国号金。"
+      }
+    ],
+    "biography": "后金创建者，统一女真诸部并建立八旗制度，为清朝入主中原奠定政治军事基础。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=66013&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.93,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-kangxi",
+    "name": "康熙帝",
+    "nameEn": "Kangxi Emperor",
+    "dynasty": "清",
+    "period": "清朝",
+    "gender": "male",
+    "birthYear": 1654,
+    "deathYear": 1722,
+    "birthplace": "北京紫禁城",
+    "roles": [
+      "emperor",
+      "ruler"
+    ],
+    "aliases": [
+      "爱新觉罗·玄烨",
+      "清圣祖"
+    ],
+    "achievements": [
+      "平定三藩",
+      "统一台湾",
+      "签订尼布楚条约并巩固边疆"
+    ],
+    "works": [
+      "康熙字典（敕修）"
+    ],
+    "events": [
+      {
+        "year": 1683,
+        "name": "统一台湾",
+        "role": "皇帝",
+        "description": "清军击败郑氏政权，台湾纳入清朝版图。"
+      }
+    ],
+    "biography": "清朝第四位皇帝，在位时间长，处理三藩、台湾、沙俄边界等重大问题，奠定康乾时期的政治基础。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=65884&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.94,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-qianlong",
+    "name": "乾隆帝",
+    "nameEn": "Qianlong Emperor",
+    "dynasty": "清",
+    "period": "清朝",
+    "gender": "male",
+    "birthYear": 1711,
+    "deathYear": 1799,
+    "birthplace": "北京",
+    "roles": [
+      "emperor",
+      "ruler"
+    ],
+    "aliases": [
+      "爱新觉罗·弘历",
+      "清高宗"
+    ],
+    "achievements": [
+      "完成十全武功叙事",
+      "主持四库全书编纂",
+      "清朝版图达到高峰"
+    ],
+    "works": [
+      "四库全书（敕修）"
+    ],
+    "events": [
+      {
+        "year": 1772,
+        "name": "开修四库全书",
+        "role": "皇帝",
+        "description": "以国家力量组织大型文献整理工程。"
+      }
+    ],
+    "biography": "清代皇帝，统治前中期国力强盛，疆域和文化工程达到高峰；晚期也暴露财政、吏治与社会矛盾。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=55870&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.94,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-lin-zexu",
     "name": "林则徐",
-    "name_en": "Lin Zexu",
-    "birth_year": 1785,
-    "birth_month": 8,
-    "death_year": 1850,
-    "death_month": 11,
-    "roles": "official,military_leader,reformer",
-    "biography": "清代中期官员，著名的禁烟运动领导者。与英军的鸦片战争中奋力抵抗，为中国早期反帝国主义斗争的先驱。",
-    "source": "清史稿"
+    "nameEn": "Lin Zexu",
+    "courtesy": "元抚",
+    "dynasty": "清",
+    "period": "晚清",
+    "gender": "male",
+    "birthYear": 1785,
+    "deathYear": 1850,
+    "birthplace": "福建侯官",
+    "roles": [
+      "official",
+      "reformer"
+    ],
+    "aliases": [
+      "少穆"
+    ],
+    "achievements": [
+      "主持虎门销烟",
+      "推动禁烟与海防认知",
+      "近代中国开眼看世界代表人物"
+    ],
+    "works": [
+      "四洲志"
+    ],
+    "events": [
+      {
+        "year": 1839,
+        "name": "虎门销烟",
+        "role": "钦差大臣",
+        "description": "在广东虎门集中销毁鸦片。"
+      }
+    ],
+    "biography": "清代官员，禁烟运动代表人物。其处理鸦片问题和对外知识搜集，成为中国近代转型中的重要节点。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=54819&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.95,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
+    "id": "person-zeng-guofan",
+    "name": "曾国藩",
+    "nameEn": "Zeng Guofan",
+    "courtesy": "伯涵",
+    "dynasty": "清",
+    "period": "晚清",
+    "gender": "male",
+    "birthYear": 1811,
+    "deathYear": 1872,
+    "birthplace": "湖南湘乡",
+    "roles": [
+      "official",
+      "general",
+      "scholar"
+    ],
+    "aliases": [
+      "曾文正"
+    ],
+    "achievements": [
+      "创建湘军",
+      "镇压太平天国",
+      "推动洋务事业起步"
+    ],
+    "works": [
+      "曾国藩家书"
+    ],
+    "events": [
+      {
+        "year": 1864,
+        "name": "攻克天京",
+        "role": "湘军统帅",
+        "description": "湘军攻入天京，太平天国失败。"
+      }
+    ],
+    "biography": "晚清政治、军事人物，湘军创立者。其地方军事力量与官僚网络改变晚清权力结构。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=34344&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.95,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-li-hongzhang",
+    "name": "李鸿章",
+    "nameEn": "Li Hongzhang",
+    "courtesy": "少荃",
+    "dynasty": "清",
+    "period": "晚清",
+    "gender": "male",
+    "birthYear": 1823,
+    "deathYear": 1901,
+    "birthplace": "安徽合肥",
+    "roles": [
+      "official",
+      "diplomat"
+    ],
+    "aliases": [
+      "李中堂"
+    ],
+    "achievements": [
+      "创办淮军和北洋海军",
+      "推动洋务运动",
+      "参与晚清重大外交谈判"
+    ],
+    "works": [],
+    "events": [
+      {
+        "year": 1895,
+        "name": "签订马关条约",
+        "role": "谈判代表",
+        "description": "甲午战败后代表清廷与日本议和。"
+      }
+    ],
+    "biography": "晚清重臣，洋务运动核心人物之一。其一生贯穿军事建设、工业引进和对外谈判，体现晚清改革困境。",
+    "sources": [
+      {
+        "title": "CBDB 中国历代人物传记资料库",
+        "url": "https://cbdb.fas.harvard.edu/cbdbapi/person.php?id=58961&o=json",
+        "author": "Harvard University"
+      }
+    ],
+    "confidence": 0.95,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
+  },
+  {
+    "id": "person-sun-yat-sen",
     "name": "孙中山",
-    "name_en": "Sun Yat-sen",
-    "birth_year": 1866,
-    "birth_month": 11,
-    "death_year": 1925,
-    "death_month": 3,
-    "roles": "revolutionary,political_leader,founder",
-    "biography": "中国近代民族民主革命的伟大先驱，中华民国的创建者。推翻了满清统治，建立了共和制政体。",
-    "source": "民国人物传记"
+    "nameEn": "Sun Yat-sen",
+    "dynasty": "中华民国",
+    "period": "近代",
+    "gender": "male",
+    "birthYear": 1866,
+    "deathYear": 1925,
+    "birthplace": "广东香山",
+    "roles": [
+      "revolutionary",
+      "founder",
+      "politician"
+    ],
+    "aliases": [
+      "孙文",
+      "中山先生"
+    ],
+    "achievements": [
+      "领导辛亥革命",
+      "创建中华民国",
+      "提出三民主义"
+    ],
+    "works": [
+      "建国方略",
+      "三民主义"
+    ],
+    "events": [
+      {
+        "year": 1912,
+        "name": "就任临时大总统",
+        "role": "革命领袖",
+        "description": "中华民国南京临时政府成立后就任临时大总统。"
+      }
+    ],
+    "biography": "中国近代民主革命先行者，长期组织反清革命并提出三民主义。辛亥革命后成为共和政治的重要象征。",
+    "sources": [
+      {
+        "title": "Sun Yat-sen",
+        "url": "https://www.britannica.com/biography/Sun-Yat-sen",
+        "author": "Encyclopaedia Britannica"
+      }
+    ],
+    "confidence": 0.94,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
+    "id": "person-mao-zedong",
     "name": "毛泽东",
-    "name_en": "Mao Zedong",
-    "birth_year": 1893,
-    "birth_month": 12,
-    "death_year": 1976,
-    "death_month": 9,
-    "roles": "military_leader,political_leader,founder",
-    "biography": "中国共产党和新中国的主要创建人。领导中国人民进行了伟大的社会主义建设，改变了中国的历史面貌。",
-    "source": "中国共产党历史"
+    "nameEn": "Mao Zedong",
+    "dynasty": "中华人民共和国",
+    "period": "现代",
+    "gender": "male",
+    "birthYear": 1893,
+    "deathYear": 1976,
+    "birthplace": "湖南湘潭韶山",
+    "roles": [
+      "politician",
+      "founder"
+    ],
+    "aliases": [
+      "毛主席"
+    ],
+    "achievements": [
+      "中国共产党主要领导人",
+      "中华人民共和国主要缔造者",
+      "深刻影响二十世纪中国政治社会"
+    ],
+    "works": [
+      "毛泽东选集",
+      "实践论",
+      "矛盾论"
+    ],
+    "events": [
+      {
+        "year": 1949,
+        "name": "中华人民共和国成立",
+        "role": "主要领导人",
+        "description": "在北京宣告中华人民共和国中央人民政府成立。"
+      }
+    ],
+    "biography": "中国共产党和中华人民共和国主要领导人之一，对二十世纪中国革命、国家建设和政治制度产生决定性影响。",
+    "sources": [
+      {
+        "title": "Mao Zedong",
+        "url": "https://www.britannica.com/biography/Mao-Zedong",
+        "author": "Encyclopaedia Britannica"
+      }
+    ],
+    "confidence": 0.94,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
+    "id": "person-zhou-enlai",
     "name": "周恩来",
-    "name_en": "Zhou Enlai",
-    "birth_year": 1898,
-    "birth_month": 3,
-    "death_year": 1976,
-    "death_month": 1,
-    "roles": "political_leader,diplomat,military_leader",
-    "biography": "中国共产党和新中国的重要领导人。担任总理期间，推行独立自主的外交政策，为中国国力的增强做出了巨大贡献。",
-    "source": "中国共产党历史"
+    "nameEn": "Zhou Enlai",
+    "dynasty": "中华人民共和国",
+    "period": "现代",
+    "gender": "male",
+    "birthYear": 1898,
+    "deathYear": 1976,
+    "birthplace": "江苏淮安",
+    "roles": [
+      "politician",
+      "diplomat"
+    ],
+    "aliases": [
+      "周总理"
+    ],
+    "achievements": [
+      "长期担任国务院总理",
+      "主持新中国外交工作",
+      "参与万隆会议与和平共处五项原则实践"
+    ],
+    "works": [],
+    "events": [
+      {
+        "year": 1955,
+        "name": "万隆会议",
+        "role": "中国代表团团长",
+        "description": "推动亚非国家外交合作，展示新中国外交姿态。"
+      }
+    ],
+    "biography": "中华人民共和国重要领导人和外交家，长期担任总理，在政务协调和外交实践中发挥核心作用。",
+    "sources": [
+      {
+        "title": "Zhou Enlai",
+        "url": "https://www.britannica.com/biography/Zhou-Enlai",
+        "author": "Encyclopaedia Britannica"
+      }
+    ],
+    "confidence": 0.94,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   },
   {
+    "id": "person-deng-xiaoping",
     "name": "邓小平",
-    "name_en": "Deng Xiaoping",
-    "birth_year": 1904,
-    "birth_month": 8,
-    "death_year": 1997,
-    "death_month": 2,
-    "roles": "political_leader,military_leader,reformer",
-    "biography": "中国改革开放的总设计师。推行了一系列改革开放政策，使中国开始走向现代化，成为了新时代的领路人。",
-    "source": "当代中国政治史"
-  },
-  {
-    "name": "织田信长",
-    "name_en": "Oda Nobunaga",
-    "birth_year": 1534,
-    "birth_month": 7,
-    "death_year": 1582,
-    "death_month": 6,
-    "roles": "military_leader,warlord",
-    "biography": "日本战国时代的著名将领，在日本统一战争中起了重要作用，但后来在本能寺之变中遇难身亡。",
-    "source": "日本战国史"
-  },
-  {
-    "name": "豐臣秀吉",
-    "name_en": "Toyotomi Hideyoshi",
-    "birth_year": 1537,
-    "birth_month": 1,
-    "death_year": 1598,
-    "death_month": 9,
-    "roles": "military_leader,political_leader,warlord",
-    "biography": "日本战国晚期的杰出统治者，继织田信长之后，完成了日本列岛的统一，建立了丰臣政权。",
-    "source": "日本战国史"
-  },
-  {
-    "name": "德川家康",
-    "name_en": "Tokugawa Ieyasu",
-    "birth_year": 1543,
-    "birth_month": 1,
-    "death_year": 1616,
-    "death_month": 1,
-    "roles": "military_leader,political_leader,founder",
-    "biography": "日本江户时代的创建者。战国末期建立了德川幕府，使日本进入了长期的和平与稳定时期，统治长达 265 年。",
-    "source": "日本江户史"
+    "nameEn": "Deng Xiaoping",
+    "dynasty": "中华人民共和国",
+    "period": "现代",
+    "gender": "male",
+    "birthYear": 1904,
+    "deathYear": 1997,
+    "birthplace": "四川广安",
+    "roles": [
+      "politician",
+      "reformer"
+    ],
+    "aliases": [
+      "改革开放总设计师"
+    ],
+    "achievements": [
+      "推动改革开放",
+      "提出社会主义现代化建设路线",
+      "推动一国两制构想"
+    ],
+    "works": [
+      "邓小平文选"
+    ],
+    "events": [
+      {
+        "year": 1978,
+        "name": "改革开放启动",
+        "role": "主要决策者",
+        "description": "中共十一届三中全会后，中国进入改革开放新时期。"
+      }
+    ],
+    "biography": "中华人民共和国重要领导人，推动改革开放和现代化建设。其政策路线深刻改变中国经济、社会与国际关系格局。",
+    "sources": [
+      {
+        "title": "Deng Xiaoping",
+        "url": "https://www.britannica.com/biography/Deng-Xiaoping",
+        "author": "Encyclopaedia Britannica"
+      }
+    ],
+    "confidence": 0.94,
+    "createdAt": "2026-06-08T00:00:00.000Z",
+    "updatedAt": "2026-06-08T00:00:00.000Z"
   }
 ]

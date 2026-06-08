@@ -55,7 +55,7 @@ export function QingContent() {
       },
     ],
     sortOptions: [
-      { value: 'chronological', label: '按时间顺序' },
+      { value: 'reignStart', label: '按时间顺序' },
       { value: 'name', label: '按姓名' },
     ],
   });

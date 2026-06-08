@@ -1,11 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '../generated/prisma/client';
+import type { EmperorGetPayload } from '../generated/prisma/models';
 import { EmperorQueryDto } from './dto/emperor-query.dto';
 import { PaginatedResponseDto } from '../common/dto/paginated-response.dto';
 import { EmperorDto } from './dto/emperor.dto';
 import { EraNameDto } from './dto/era-name.dto';
 import { HistoricalEvaluationDto } from './dto/historical-evaluation.dto';
+
+type EmperorWithDynasty = EmperorGetPayload<{
+  include: { dynasty: true };
+}>;
 
 @Injectable()
 export class EmperorService {
@@ -67,19 +72,9 @@ export class EmperorService {
       this.prisma.emperor.count({ where }),
     ]);
 
-    // Transform the data to match DTO structure
-    const transformedEmperors = emperors.map((emperor) => {
-      const { dynasty: _dynasty, ...emperorData } = emperor;
-      return {
-        ...emperorData,
-        // Parse JSON fields if they exist and are strings
-        eraNames: this.safeJsonParse<EraNameDto[]>(emperorData.eraNames),
-        achievements: this.safeJsonParse<string[]>(emperorData.achievements),
-        historicalEvaluation: this.safeJsonParse<HistoricalEvaluationDto>(
-          emperorData.historicalEvaluation,
-        ),
-      };
-    });
+    const transformedEmperors = emperors.map((emperor) =>
+      this.transformEmperor(emperor),
+    );
 
     return new PaginatedResponseDto(transformedEmperors, total, page, limit);
   }
@@ -93,14 +88,23 @@ export class EmperorService {
     });
 
     if (!emperor) {
-      throw new NotFoundException(`Emperor with ID ${id} not found`);
+      throw new NotFoundException(`未找到 ID 为 ${id} 的帝王记录`);
     }
 
-    // Transform the data to match DTO structure
-    const { dynasty: _dynasty, ...emperorData } = emperor;
+    return this.transformEmperor(emperor);
+  }
+
+  private transformEmperor(emperor: EmperorWithDynasty): EmperorDto {
+    const { dynasty, ...emperorData } = emperor;
     return {
       ...emperorData,
-      // Parse JSON fields if they exist
+      dynasty: dynasty
+        ? {
+            id: dynasty.id,
+            name: dynasty.name,
+          }
+        : null,
+      dynastyName: dynasty?.name ?? null,
       eraNames: this.safeJsonParse<EraNameDto[]>(emperorData.eraNames),
       achievements: this.safeJsonParse<string[]>(emperorData.achievements),
       historicalEvaluation: this.safeJsonParse<HistoricalEvaluationDto>(

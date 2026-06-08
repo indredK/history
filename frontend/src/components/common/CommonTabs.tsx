@@ -32,6 +32,12 @@ export interface CommonTabsProps {
   showBorder?: boolean;
   /** 底部间距，默认 0 */
   marginBottom?: number;
+  /** MUI Tabs variant */
+  variant?: 'standard' | 'scrollable' | 'fullWidth';
+  /** 是否显示滚动按钮 */
+  scrollButtons?: boolean | 'auto';
+  /** 移动端是否允许显示滚动按钮 */
+  allowScrollButtonsMobile?: boolean;
 }
 
 /**
@@ -82,6 +88,9 @@ export function CommonTabs({
   ariaLabel = '标签页导航',
   showBorder = true,
   marginBottom = 0,
+  variant = 'scrollable',
+  scrollButtons = false,
+  allowScrollButtonsMobile = false,
 }: CommonTabsProps) {
   const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     onChange(newValue);
@@ -100,8 +109,9 @@ export function CommonTabs({
         value={value}
         onChange={handleChange}
         aria-label={ariaLabel}
-        variant="scrollable"
-        scrollButtons={false}
+        variant={variant}
+        scrollButtons={scrollButtons}
+        allowScrollButtonsMobile={allowScrollButtonsMobile}
         sx={tabsStyles}
       >
         {tabs.map((tab) => (

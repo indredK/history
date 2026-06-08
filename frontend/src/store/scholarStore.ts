@@ -15,6 +15,9 @@ interface ScholarState {
 
   // Actions
   setScholars: (scholars: Scholar[]) => void;
+  addScholar: (scholar: Scholar) => void;
+  updateScholar: (scholar: Scholar) => void;
+  removeScholar: (id: string) => void;
   setSelectedScholar: (scholar: Scholar | null) => void;
   setLoading: (loading: boolean) => void;
   setError: (error: Error | null) => void;
@@ -34,6 +37,27 @@ export const useScholarStore = create<ScholarState>((set, get) => ({
   },
 
   setScholars: (scholars: Scholar[]) => set({ scholars }),
+
+  addScholar: (scholar: Scholar) =>
+    set((state) => ({ scholars: [scholar, ...state.scholars] })),
+
+  updateScholar: (scholar: Scholar) =>
+    set((state) => ({
+      scholars: state.scholars.map((item) =>
+        item.id === scholar.id ? scholar : item,
+      ),
+      selectedScholar:
+        state.selectedScholar?.id === scholar.id
+          ? scholar
+          : state.selectedScholar,
+    })),
+
+  removeScholar: (id: string) =>
+    set((state) => ({
+      scholars: state.scholars.filter((scholar) => scholar.id !== id),
+      selectedScholar:
+        state.selectedScholar?.id === id ? null : state.selectedScholar,
+    })),
 
   setSelectedScholar: (scholar: Scholar | null) => set({ selectedScholar: scholar }),
 

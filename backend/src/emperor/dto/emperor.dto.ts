@@ -2,6 +2,14 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { EraNameDto } from './era-name.dto';
 import { HistoricalEvaluationDto } from './historical-evaluation.dto';
 
+class EmperorDynastyDto {
+  @ApiProperty({ description: 'Dynasty ID', example: 'uuid-string' })
+  id: string;
+
+  @ApiProperty({ description: 'Dynasty name', example: '唐' })
+  name: string;
+}
+
 export class EmperorDto {
   @ApiProperty({ description: 'Emperor ID', example: 'uuid-string' })
   id: string;
@@ -11,6 +19,15 @@ export class EmperorDto {
 
   @ApiProperty({ description: 'Dynasty ID', example: 'uuid-string' })
   dynastyId: string;
+
+  @ApiPropertyOptional({
+    description: 'Dynasty display payload',
+    type: EmperorDynastyDto,
+  })
+  dynasty?: EmperorDynastyDto | null;
+
+  @ApiPropertyOptional({ description: 'Dynasty display name', example: '唐' })
+  dynastyName?: string | null;
 
   @ApiProperty({ description: 'Reign start year', example: 626 })
   reignStart: number;

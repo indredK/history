@@ -1,9 +1,11 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { CultureService } from './culture.service';
 import { SchoolQueryDto } from './dto/school-query.dto';
 import { PhilosophicalSchoolDto } from './dto/philosophical-school.dto';
 import { PaginatedResponseDto } from '../common/dto/paginated-response.dto';
+import { CreatePhilosophicalSchoolDto } from './dto/create-philosophical-school.dto';
+import { UpdatePhilosophicalSchoolDto } from './dto/update-philosophical-school.dto';
 
 @ApiTags('Schools')
 @Controller('schools')
@@ -27,6 +29,22 @@ export class SchoolController {
     return this.cultureService.findAllSchools(query);
   }
 
+  @Post()
+  @ApiOperation({
+    summary: 'Create philosophical school',
+    description: 'Create a philosophical school with structured detail fields',
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'Successfully created philosophical school',
+    type: PhilosophicalSchoolDto,
+  })
+  async create(
+    @Body() dto: CreatePhilosophicalSchoolDto,
+  ): Promise<PhilosophicalSchoolDto> {
+    return this.cultureService.createSchool(dto);
+  }
+
   @Get(':id')
   @ApiOperation({
     summary: 'Get philosophical school by ID',
@@ -45,5 +63,46 @@ export class SchoolController {
   })
   async findOne(@Param('id') id: string): Promise<PhilosophicalSchoolDto> {
     return this.cultureService.findSchoolById(id);
+  }
+
+  @Put(':id')
+  @ApiOperation({
+    summary: 'Update philosophical school',
+    description: 'Update a philosophical school and its structured display data',
+  })
+  @ApiParam({ name: 'id', description: 'Philosophical school ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully updated philosophical school',
+    type: PhilosophicalSchoolDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Philosophical school not found',
+  })
+  async update(
+    @Param('id') id: string,
+    @Body() dto: UpdatePhilosophicalSchoolDto,
+  ): Promise<PhilosophicalSchoolDto> {
+    return this.cultureService.updateSchool(id, dto);
+  }
+
+  @Delete(':id')
+  @ApiOperation({
+    summary: 'Delete philosophical school',
+    description: 'Delete a philosophical school and detach related scholars',
+  })
+  @ApiParam({ name: 'id', description: 'Philosophical school ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully deleted philosophical school',
+    type: PhilosophicalSchoolDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Philosophical school not found',
+  })
+  async remove(@Param('id') id: string): Promise<PhilosophicalSchoolDto> {
+    return this.cultureService.removeSchool(id);
   }
 }

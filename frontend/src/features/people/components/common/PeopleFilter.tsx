@@ -30,6 +30,11 @@ interface PeopleFilterProps {
   resultLabel: string;
 }
 
+function renderSelectedLabel(options: FilterOption[], selected: unknown): string {
+  const value = String(selected ?? '');
+  return options.find((option) => option.value === value)?.label ?? value;
+}
+
 export function PeopleFilter({
   searchQuery,
   onSearchChange,
@@ -49,7 +54,7 @@ export function PeopleFilter({
           placeholder={searchPlaceholder}
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
-          sx={{ minWidth: 200, flex: 1 }}
+          sx={{ minWidth: { xs: '100%', sm: 200 }, flex: 1 }}
         />
         {filters.map((filter) => (
           <TextField
@@ -59,7 +64,15 @@ export function PeopleFilter({
             label={filter.label}
             value={filter.value}
             onChange={(e) => filter.onChange(e.target.value)}
-            sx={{ minWidth: 120 }}
+            slotProps={{
+              select: {
+                renderValue: (selected) => renderSelectedLabel(filter.options, selected),
+              },
+            }}
+            sx={{
+              minWidth: { xs: 'calc(50% - 4px)', sm: 120 },
+              flex: { xs: '1 1 calc(50% - 4px)', sm: '0 0 auto' },
+            }}
           >
             {filter.options.map((opt) => (
               <MenuItem key={opt.value} value={opt.value}>
@@ -74,7 +87,15 @@ export function PeopleFilter({
           label="排序"
           value={sortBy}
           onChange={(e) => onSortChange(e.target.value)}
-          sx={{ minWidth: 120 }}
+          slotProps={{
+            select: {
+              renderValue: (selected) => renderSelectedLabel(sortOptions, selected),
+            },
+          }}
+          sx={{
+            minWidth: { xs: 'calc(50% - 4px)', sm: 120 },
+            flex: { xs: '1 1 calc(50% - 4px)', sm: '0 0 auto' },
+          }}
         >
           {sortOptions.map((opt) => (
             <MenuItem key={opt.value} value={opt.value}>

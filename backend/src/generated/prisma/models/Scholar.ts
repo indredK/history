@@ -39,11 +39,15 @@ export type ScholarSumAggregateOutputType = {
 export type ScholarMinAggregateOutputType = {
   id: string | null
   name: string | null
+  name_en: string | null
+  dynasty: string | null
   dynastyPeriod: string | null
   birthYear: number | null
   deathYear: number | null
   philosophicalSchoolId: string | null
+  schoolOfThought: string | null
   biography: string | null
+  portraitUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -51,11 +55,15 @@ export type ScholarMinAggregateOutputType = {
 export type ScholarMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  name_en: string | null
+  dynasty: string | null
   dynastyPeriod: string | null
   birthYear: number | null
   deathYear: number | null
   philosophicalSchoolId: string | null
+  schoolOfThought: string | null
   biography: string | null
+  portraitUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -63,13 +71,19 @@ export type ScholarMaxAggregateOutputType = {
 export type ScholarCountAggregateOutputType = {
   id: number
   name: number
+  name_en: number
+  dynasty: number
   dynastyPeriod: number
   birthYear: number
   deathYear: number
   philosophicalSchoolId: number
+  schoolOfThought: number
   majorWorks: number
   contributions: number
+  achievements: number
   biography: number
+  portraitUrl: number
+  sources: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -89,11 +103,15 @@ export type ScholarSumAggregateInputType = {
 export type ScholarMinAggregateInputType = {
   id?: true
   name?: true
+  name_en?: true
+  dynasty?: true
   dynastyPeriod?: true
   birthYear?: true
   deathYear?: true
   philosophicalSchoolId?: true
+  schoolOfThought?: true
   biography?: true
+  portraitUrl?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -101,11 +119,15 @@ export type ScholarMinAggregateInputType = {
 export type ScholarMaxAggregateInputType = {
   id?: true
   name?: true
+  name_en?: true
+  dynasty?: true
   dynastyPeriod?: true
   birthYear?: true
   deathYear?: true
   philosophicalSchoolId?: true
+  schoolOfThought?: true
   biography?: true
+  portraitUrl?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -113,13 +135,19 @@ export type ScholarMaxAggregateInputType = {
 export type ScholarCountAggregateInputType = {
   id?: true
   name?: true
+  name_en?: true
+  dynasty?: true
   dynastyPeriod?: true
   birthYear?: true
   deathYear?: true
   philosophicalSchoolId?: true
+  schoolOfThought?: true
   majorWorks?: true
   contributions?: true
+  achievements?: true
   biography?: true
+  portraitUrl?: true
+  sources?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -214,13 +242,19 @@ export type ScholarGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type ScholarGroupByOutputType = {
   id: string
   name: string
+  name_en: string | null
+  dynasty: string | null
   dynastyPeriod: string | null
   birthYear: number | null
   deathYear: number | null
   philosophicalSchoolId: string | null
+  schoolOfThought: string | null
   majorWorks: runtime.JsonValue | null
   contributions: runtime.JsonValue | null
+  achievements: runtime.JsonValue | null
   biography: string | null
+  portraitUrl: string | null
+  sources: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: ScholarCountAggregateOutputType | null
@@ -251,13 +285,19 @@ export type ScholarWhereInput = {
   NOT?: Prisma.ScholarWhereInput | Prisma.ScholarWhereInput[]
   id?: Prisma.StringFilter<"Scholar"> | string
   name?: Prisma.StringFilter<"Scholar"> | string
+  name_en?: Prisma.StringNullableFilter<"Scholar"> | string | null
+  dynasty?: Prisma.StringNullableFilter<"Scholar"> | string | null
   dynastyPeriod?: Prisma.StringNullableFilter<"Scholar"> | string | null
   birthYear?: Prisma.IntNullableFilter<"Scholar"> | number | null
   deathYear?: Prisma.IntNullableFilter<"Scholar"> | number | null
   philosophicalSchoolId?: Prisma.StringNullableFilter<"Scholar"> | string | null
+  schoolOfThought?: Prisma.StringNullableFilter<"Scholar"> | string | null
   majorWorks?: Prisma.JsonNullableFilter<"Scholar">
   contributions?: Prisma.JsonNullableFilter<"Scholar">
+  achievements?: Prisma.JsonNullableFilter<"Scholar">
   biography?: Prisma.StringNullableFilter<"Scholar"> | string | null
+  portraitUrl?: Prisma.StringNullableFilter<"Scholar"> | string | null
+  sources?: Prisma.JsonNullableFilter<"Scholar">
   createdAt?: Prisma.DateTimeFilter<"Scholar"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Scholar"> | Date | string
   philosophicalSchool?: Prisma.XOR<Prisma.PhilosophicalSchoolNullableScalarRelationFilter, Prisma.PhilosophicalSchoolWhereInput> | null
@@ -266,13 +306,19 @@ export type ScholarWhereInput = {
 export type ScholarOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  name_en?: Prisma.SortOrderInput | Prisma.SortOrder
+  dynasty?: Prisma.SortOrderInput | Prisma.SortOrder
   dynastyPeriod?: Prisma.SortOrderInput | Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
   philosophicalSchoolId?: Prisma.SortOrderInput | Prisma.SortOrder
+  schoolOfThought?: Prisma.SortOrderInput | Prisma.SortOrder
   majorWorks?: Prisma.SortOrderInput | Prisma.SortOrder
   contributions?: Prisma.SortOrderInput | Prisma.SortOrder
+  achievements?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   philosophicalSchool?: Prisma.PhilosophicalSchoolOrderByWithRelationInput
@@ -284,13 +330,19 @@ export type ScholarWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ScholarWhereInput[]
   NOT?: Prisma.ScholarWhereInput | Prisma.ScholarWhereInput[]
   name?: Prisma.StringFilter<"Scholar"> | string
+  name_en?: Prisma.StringNullableFilter<"Scholar"> | string | null
+  dynasty?: Prisma.StringNullableFilter<"Scholar"> | string | null
   dynastyPeriod?: Prisma.StringNullableFilter<"Scholar"> | string | null
   birthYear?: Prisma.IntNullableFilter<"Scholar"> | number | null
   deathYear?: Prisma.IntNullableFilter<"Scholar"> | number | null
   philosophicalSchoolId?: Prisma.StringNullableFilter<"Scholar"> | string | null
+  schoolOfThought?: Prisma.StringNullableFilter<"Scholar"> | string | null
   majorWorks?: Prisma.JsonNullableFilter<"Scholar">
   contributions?: Prisma.JsonNullableFilter<"Scholar">
+  achievements?: Prisma.JsonNullableFilter<"Scholar">
   biography?: Prisma.StringNullableFilter<"Scholar"> | string | null
+  portraitUrl?: Prisma.StringNullableFilter<"Scholar"> | string | null
+  sources?: Prisma.JsonNullableFilter<"Scholar">
   createdAt?: Prisma.DateTimeFilter<"Scholar"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Scholar"> | Date | string
   philosophicalSchool?: Prisma.XOR<Prisma.PhilosophicalSchoolNullableScalarRelationFilter, Prisma.PhilosophicalSchoolWhereInput> | null
@@ -299,13 +351,19 @@ export type ScholarWhereUniqueInput = Prisma.AtLeast<{
 export type ScholarOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  name_en?: Prisma.SortOrderInput | Prisma.SortOrder
+  dynasty?: Prisma.SortOrderInput | Prisma.SortOrder
   dynastyPeriod?: Prisma.SortOrderInput | Prisma.SortOrder
   birthYear?: Prisma.SortOrderInput | Prisma.SortOrder
   deathYear?: Prisma.SortOrderInput | Prisma.SortOrder
   philosophicalSchoolId?: Prisma.SortOrderInput | Prisma.SortOrder
+  schoolOfThought?: Prisma.SortOrderInput | Prisma.SortOrder
   majorWorks?: Prisma.SortOrderInput | Prisma.SortOrder
   contributions?: Prisma.SortOrderInput | Prisma.SortOrder
+  achievements?: Prisma.SortOrderInput | Prisma.SortOrder
   biography?: Prisma.SortOrderInput | Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ScholarCountOrderByAggregateInput
@@ -321,13 +379,19 @@ export type ScholarScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ScholarScalarWhereWithAggregatesInput | Prisma.ScholarScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Scholar"> | string
   name?: Prisma.StringWithAggregatesFilter<"Scholar"> | string
+  name_en?: Prisma.StringNullableWithAggregatesFilter<"Scholar"> | string | null
+  dynasty?: Prisma.StringNullableWithAggregatesFilter<"Scholar"> | string | null
   dynastyPeriod?: Prisma.StringNullableWithAggregatesFilter<"Scholar"> | string | null
   birthYear?: Prisma.IntNullableWithAggregatesFilter<"Scholar"> | number | null
   deathYear?: Prisma.IntNullableWithAggregatesFilter<"Scholar"> | number | null
   philosophicalSchoolId?: Prisma.StringNullableWithAggregatesFilter<"Scholar"> | string | null
+  schoolOfThought?: Prisma.StringNullableWithAggregatesFilter<"Scholar"> | string | null
   majorWorks?: Prisma.JsonNullableWithAggregatesFilter<"Scholar">
   contributions?: Prisma.JsonNullableWithAggregatesFilter<"Scholar">
+  achievements?: Prisma.JsonNullableWithAggregatesFilter<"Scholar">
   biography?: Prisma.StringNullableWithAggregatesFilter<"Scholar"> | string | null
+  portraitUrl?: Prisma.StringNullableWithAggregatesFilter<"Scholar"> | string | null
+  sources?: Prisma.JsonNullableWithAggregatesFilter<"Scholar">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Scholar"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Scholar"> | Date | string
 }
@@ -335,12 +399,18 @@ export type ScholarScalarWhereWithAggregatesInput = {
 export type ScholarCreateInput = {
   id?: string
   name: string
+  name_en?: string | null
+  dynasty?: string | null
   dynastyPeriod?: string | null
   birthYear?: number | null
   deathYear?: number | null
+  schoolOfThought?: string | null
   majorWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contributions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   philosophicalSchool?: Prisma.PhilosophicalSchoolCreateNestedOneWithoutScholarsInput
@@ -349,13 +419,19 @@ export type ScholarCreateInput = {
 export type ScholarUncheckedCreateInput = {
   id?: string
   name: string
+  name_en?: string | null
+  dynasty?: string | null
   dynastyPeriod?: string | null
   birthYear?: number | null
   deathYear?: number | null
   philosophicalSchoolId?: string | null
+  schoolOfThought?: string | null
   majorWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contributions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -363,12 +439,18 @@ export type ScholarUncheckedCreateInput = {
 export type ScholarUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  name_en?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dynastyPeriod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  schoolOfThought?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   majorWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contributions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   philosophicalSchool?: Prisma.PhilosophicalSchoolUpdateOneWithoutScholarsNestedInput
@@ -377,13 +459,19 @@ export type ScholarUpdateInput = {
 export type ScholarUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  name_en?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dynastyPeriod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   philosophicalSchoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolOfThought?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   majorWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contributions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -391,13 +479,19 @@ export type ScholarUncheckedUpdateInput = {
 export type ScholarCreateManyInput = {
   id?: string
   name: string
+  name_en?: string | null
+  dynasty?: string | null
   dynastyPeriod?: string | null
   birthYear?: number | null
   deathYear?: number | null
   philosophicalSchoolId?: string | null
+  schoolOfThought?: string | null
   majorWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contributions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -405,12 +499,18 @@ export type ScholarCreateManyInput = {
 export type ScholarUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  name_en?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dynastyPeriod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  schoolOfThought?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   majorWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contributions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -418,13 +518,19 @@ export type ScholarUpdateManyMutationInput = {
 export type ScholarUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  name_en?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dynastyPeriod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   philosophicalSchoolId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  schoolOfThought?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   majorWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contributions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -432,13 +538,19 @@ export type ScholarUncheckedUpdateManyInput = {
 export type ScholarCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  name_en?: Prisma.SortOrder
+  dynasty?: Prisma.SortOrder
   dynastyPeriod?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
   philosophicalSchoolId?: Prisma.SortOrder
+  schoolOfThought?: Prisma.SortOrder
   majorWorks?: Prisma.SortOrder
   contributions?: Prisma.SortOrder
+  achievements?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
+  sources?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -451,11 +563,15 @@ export type ScholarAvgOrderByAggregateInput = {
 export type ScholarMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  name_en?: Prisma.SortOrder
+  dynasty?: Prisma.SortOrder
   dynastyPeriod?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
   philosophicalSchoolId?: Prisma.SortOrder
+  schoolOfThought?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -463,11 +579,15 @@ export type ScholarMaxOrderByAggregateInput = {
 export type ScholarMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  name_en?: Prisma.SortOrder
+  dynasty?: Prisma.SortOrder
   dynastyPeriod?: Prisma.SortOrder
   birthYear?: Prisma.SortOrder
   deathYear?: Prisma.SortOrder
   philosophicalSchoolId?: Prisma.SortOrder
+  schoolOfThought?: Prisma.SortOrder
   biography?: Prisma.SortOrder
+  portraitUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -532,12 +652,18 @@ export type ScholarUncheckedUpdateManyWithoutPhilosophicalSchoolNestedInput = {
 export type ScholarCreateWithoutPhilosophicalSchoolInput = {
   id?: string
   name: string
+  name_en?: string | null
+  dynasty?: string | null
   dynastyPeriod?: string | null
   birthYear?: number | null
   deathYear?: number | null
+  schoolOfThought?: string | null
   majorWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contributions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -545,12 +671,18 @@ export type ScholarCreateWithoutPhilosophicalSchoolInput = {
 export type ScholarUncheckedCreateWithoutPhilosophicalSchoolInput = {
   id?: string
   name: string
+  name_en?: string | null
+  dynasty?: string | null
   dynastyPeriod?: string | null
   birthYear?: number | null
   deathYear?: number | null
+  schoolOfThought?: string | null
   majorWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contributions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -586,13 +718,19 @@ export type ScholarScalarWhereInput = {
   NOT?: Prisma.ScholarScalarWhereInput | Prisma.ScholarScalarWhereInput[]
   id?: Prisma.StringFilter<"Scholar"> | string
   name?: Prisma.StringFilter<"Scholar"> | string
+  name_en?: Prisma.StringNullableFilter<"Scholar"> | string | null
+  dynasty?: Prisma.StringNullableFilter<"Scholar"> | string | null
   dynastyPeriod?: Prisma.StringNullableFilter<"Scholar"> | string | null
   birthYear?: Prisma.IntNullableFilter<"Scholar"> | number | null
   deathYear?: Prisma.IntNullableFilter<"Scholar"> | number | null
   philosophicalSchoolId?: Prisma.StringNullableFilter<"Scholar"> | string | null
+  schoolOfThought?: Prisma.StringNullableFilter<"Scholar"> | string | null
   majorWorks?: Prisma.JsonNullableFilter<"Scholar">
   contributions?: Prisma.JsonNullableFilter<"Scholar">
+  achievements?: Prisma.JsonNullableFilter<"Scholar">
   biography?: Prisma.StringNullableFilter<"Scholar"> | string | null
+  portraitUrl?: Prisma.StringNullableFilter<"Scholar"> | string | null
+  sources?: Prisma.JsonNullableFilter<"Scholar">
   createdAt?: Prisma.DateTimeFilter<"Scholar"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Scholar"> | Date | string
 }
@@ -600,12 +738,18 @@ export type ScholarScalarWhereInput = {
 export type ScholarCreateManyPhilosophicalSchoolInput = {
   id?: string
   name: string
+  name_en?: string | null
+  dynasty?: string | null
   dynastyPeriod?: string | null
   birthYear?: number | null
   deathYear?: number | null
+  schoolOfThought?: string | null
   majorWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contributions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: string | null
+  portraitUrl?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -613,12 +757,18 @@ export type ScholarCreateManyPhilosophicalSchoolInput = {
 export type ScholarUpdateWithoutPhilosophicalSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  name_en?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dynastyPeriod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  schoolOfThought?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   majorWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contributions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -626,12 +776,18 @@ export type ScholarUpdateWithoutPhilosophicalSchoolInput = {
 export type ScholarUncheckedUpdateWithoutPhilosophicalSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  name_en?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dynastyPeriod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  schoolOfThought?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   majorWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contributions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -639,12 +795,18 @@ export type ScholarUncheckedUpdateWithoutPhilosophicalSchoolInput = {
 export type ScholarUncheckedUpdateManyWithoutPhilosophicalSchoolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  name_en?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dynasty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dynastyPeriod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birthYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deathYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  schoolOfThought?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   majorWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contributions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  achievements?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   biography?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  portraitUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -654,13 +816,19 @@ export type ScholarUncheckedUpdateManyWithoutPhilosophicalSchoolInput = {
 export type ScholarSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  name_en?: boolean
+  dynasty?: boolean
   dynastyPeriod?: boolean
   birthYear?: boolean
   deathYear?: boolean
   philosophicalSchoolId?: boolean
+  schoolOfThought?: boolean
   majorWorks?: boolean
   contributions?: boolean
+  achievements?: boolean
   biography?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   philosophicalSchool?: boolean | Prisma.Scholar$philosophicalSchoolArgs<ExtArgs>
@@ -669,13 +837,19 @@ export type ScholarSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type ScholarSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  name_en?: boolean
+  dynasty?: boolean
   dynastyPeriod?: boolean
   birthYear?: boolean
   deathYear?: boolean
   philosophicalSchoolId?: boolean
+  schoolOfThought?: boolean
   majorWorks?: boolean
   contributions?: boolean
+  achievements?: boolean
   biography?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   philosophicalSchool?: boolean | Prisma.Scholar$philosophicalSchoolArgs<ExtArgs>
@@ -684,13 +858,19 @@ export type ScholarSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type ScholarSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  name_en?: boolean
+  dynasty?: boolean
   dynastyPeriod?: boolean
   birthYear?: boolean
   deathYear?: boolean
   philosophicalSchoolId?: boolean
+  schoolOfThought?: boolean
   majorWorks?: boolean
   contributions?: boolean
+  achievements?: boolean
   biography?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   philosophicalSchool?: boolean | Prisma.Scholar$philosophicalSchoolArgs<ExtArgs>
@@ -699,18 +879,24 @@ export type ScholarSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type ScholarSelectScalar = {
   id?: boolean
   name?: boolean
+  name_en?: boolean
+  dynasty?: boolean
   dynastyPeriod?: boolean
   birthYear?: boolean
   deathYear?: boolean
   philosophicalSchoolId?: boolean
+  schoolOfThought?: boolean
   majorWorks?: boolean
   contributions?: boolean
+  achievements?: boolean
   biography?: boolean
+  portraitUrl?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ScholarOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "dynastyPeriod" | "birthYear" | "deathYear" | "philosophicalSchoolId" | "majorWorks" | "contributions" | "biography" | "createdAt" | "updatedAt", ExtArgs["result"]["scholar"]>
+export type ScholarOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "name_en" | "dynasty" | "dynastyPeriod" | "birthYear" | "deathYear" | "philosophicalSchoolId" | "schoolOfThought" | "majorWorks" | "contributions" | "achievements" | "biography" | "portraitUrl" | "sources" | "createdAt" | "updatedAt", ExtArgs["result"]["scholar"]>
 export type ScholarInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   philosophicalSchool?: boolean | Prisma.Scholar$philosophicalSchoolArgs<ExtArgs>
 }
@@ -729,13 +915,19 @@ export type $ScholarPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    name_en: string | null
+    dynasty: string | null
     dynastyPeriod: string | null
     birthYear: number | null
     deathYear: number | null
     philosophicalSchoolId: string | null
+    schoolOfThought: string | null
     majorWorks: runtime.JsonValue | null
     contributions: runtime.JsonValue | null
+    achievements: runtime.JsonValue | null
     biography: string | null
+    portraitUrl: string | null
+    sources: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["scholar"]>
@@ -1164,13 +1356,19 @@ export interface Prisma__ScholarClient<T, Null = never, ExtArgs extends runtime.
 export interface ScholarFieldRefs {
   readonly id: Prisma.FieldRef<"Scholar", 'String'>
   readonly name: Prisma.FieldRef<"Scholar", 'String'>
+  readonly name_en: Prisma.FieldRef<"Scholar", 'String'>
+  readonly dynasty: Prisma.FieldRef<"Scholar", 'String'>
   readonly dynastyPeriod: Prisma.FieldRef<"Scholar", 'String'>
   readonly birthYear: Prisma.FieldRef<"Scholar", 'Int'>
   readonly deathYear: Prisma.FieldRef<"Scholar", 'Int'>
   readonly philosophicalSchoolId: Prisma.FieldRef<"Scholar", 'String'>
+  readonly schoolOfThought: Prisma.FieldRef<"Scholar", 'String'>
   readonly majorWorks: Prisma.FieldRef<"Scholar", 'Json'>
   readonly contributions: Prisma.FieldRef<"Scholar", 'Json'>
+  readonly achievements: Prisma.FieldRef<"Scholar", 'Json'>
   readonly biography: Prisma.FieldRef<"Scholar", 'String'>
+  readonly portraitUrl: Prisma.FieldRef<"Scholar", 'String'>
+  readonly sources: Prisma.FieldRef<"Scholar", 'Json'>
   readonly createdAt: Prisma.FieldRef<"Scholar", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Scholar", 'DateTime'>
 }

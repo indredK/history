@@ -6,7 +6,7 @@ export class ApiResponseDto<T> {
 
   @ApiProperty({
     description: 'Response message',
-    example: 'Operation completed successfully',
+    example: '操作成功',
   })
   message: string;
 
@@ -30,7 +30,7 @@ export class ApiResponseDto<T> {
     this.timestamp = new Date().toISOString();
   }
 
-  static success<T>(data: T, message = 'Success'): ApiResponseDto<T> {
+  static success<T>(data: T, message = '操作成功'): ApiResponseDto<T> {
     return new ApiResponseDto(true, message, data);
   }
 

@@ -1,5 +1,5 @@
-import { Controller, Get, Query } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Controller, Get, Param, Query } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { SanguoService } from './sanguo.service';
 import { SanguoFigureQueryDto } from '../common/query.dto';
 import { SanguoFigureDto } from './sanguo.dto';
@@ -42,5 +42,25 @@ export class SanguoController {
     @Query() query: SanguoFigureQueryDto,
   ): Promise<PaginatedResponseDto<SanguoFigureDto>> {
     return this.sanguoService.getSanguoFigures(query);
+  }
+
+  @Get('sanguo-figures/:id')
+  @ApiOperation({
+    summary: 'Get Three Kingdoms figure by ID (compatible endpoint)',
+    description:
+      'Retrieve detailed information about a specific Three Kingdoms period figure',
+  })
+  @ApiParam({ name: 'id', description: 'Three Kingdoms figure ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully retrieved Three Kingdoms figure',
+    type: SanguoFigureDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Three Kingdoms figure not found',
+  })
+  async getSanguoFigureById(@Param('id') id: string): Promise<SanguoFigureDto> {
+    return this.sanguoService.getSanguoFigureById(id);
   }
 }

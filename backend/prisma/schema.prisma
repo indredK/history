@@ -29,16 +29,35 @@ model Source {
 model Person {
   id           String   @id @default(uuid())
   name         String
+  nameEn       String?
+  courtesy     String?
+  dynasty      String?
+  period       String?
+  gender       String?
   birthYear    Int?
+  birthMonth   Int?
   deathYear    Int?
+  deathMonth   Int?
+  birthplace   String?
   biography    String?
+  roles        Json?    // Array of role keys
+  aliases      Json?    // Array of alternate names/titles
+  achievements Json?    // Array of achievements
+  works        Json?    // Array of representative works
+  events       Json?    // Array of related historical events
+  evaluations  Json?    // Array of historical evaluations
+  portraitUrl  String?
+  sources      Json?    // Array of source names/links
+  confidence   Float?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  personSources PersonSource[]
-  events        EventParticipant[]
+  personSources      PersonSource[]
+  eventParticipants  EventParticipant[]
 
   @@index([name])
+  @@index([dynasty])
+  @@index([birthYear])
   @@map("persons")
 }
 
@@ -178,33 +197,48 @@ model Emperor {
 model Scholar {
   id                    String   @id @default(uuid())
   name                  String
+  name_en               String?
+  dynasty               String?
   dynastyPeriod         String?
   birthYear             Int?
   deathYear             Int?
   philosophicalSchoolId String?
+  schoolOfThought       String?
   majorWorks            Json?    // Array of major works
   contributions         Json?    // Array of contributions
+  achievements          Json?    // Array of visible achievements
   biography             String?
+  portraitUrl           String?
+  sources               Json?    // Array of source names/links
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
 
   philosophicalSchool PhilosophicalSchool? @relation(fields: [philosophicalSchoolId], references: [id])
 
   @@index([name])
+  @@index([schoolOfThought])
   @@index([dynastyPeriod])
   @@map("scholars")
 }
 
 model PhilosophicalSchool {
-  id            String   @id @default(uuid())
-  name          String   @unique
-  founder       String?
-  foundingYear  Int?
-  coreBeliefs   Json?    // Array of core beliefs
-  keyTexts      Json?    // Array of key texts
-  description   String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id                    String   @id @default(uuid())
+  name                  String   @unique
+  name_en               String?
+  founder               String?
+  founderEn             String?
+  foundingYear          Int?
+  foundingPeriod        String?
+  coreBeliefs           Json?    // Array of core beliefs
+  keyTexts              Json?    // Array of key texts
+  representativeFigures Json?    // Array of representative figures
+  classicWorks          Json?    // Array of classic works
+  description           String?
+  influence             String?
+  color                 String?
+  sources               Json?    // Array of source names/links
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
 
   scholars Scholar[]
 

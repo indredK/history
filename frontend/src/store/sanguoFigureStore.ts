@@ -24,7 +24,7 @@ const sanguoServiceAdapter: FigureServiceLike<SanguoFigure, SanguoFigureRole, Sa
 // 使用工厂创建底层 store
 const _useBase = createFigureStore<SanguoFigure, SanguoFigureRole, SanguoFigureSortBy>({
   service: sanguoServiceAdapter,
-  roleOptions: ['全部', 'ruler', 'strategist', 'general', 'official', 'other'],
+  roleOptions: ['全部', 'ruler', 'strategist', 'general', 'advisor', 'official', 'other'],
   periodOptions: ['全部', '魏', '蜀', '吴', '其他'],
   defaultSortBy: 'kingdom',
   filterField: 'kingdom',

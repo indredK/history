@@ -2,77 +2,623 @@
   {
     "id": "19d0ffc1-c5f1-4f44-a0dc-a3c4e0a8deeb",
     "name": "儒家",
+    "name_en": "Confucianism",
     "founder": "孔子",
+    "founderEn": "Confucius",
     "foundingYear": -551,
+    "foundingPeriod": "春秋晚期",
     "coreBeliefs": [
       "仁",
       "义",
       "礼",
       "智",
-      "信"
+      "信",
+      "修身齐家治国"
     ],
     "keyTexts": [
       "论语",
       "孟子",
+      "荀子",
       "大学",
       "中庸"
     ],
-    "description": "以仁为核心的伦理哲学体系",
+    "representativeFigures": [
+      {
+        "id": "fig_confucius",
+        "name": "孔子",
+        "name_en": "Confucius",
+        "period": "春秋",
+        "contribution": "奠定以仁、礼、君子人格和教育实践为核心的儒家传统"
+      },
+      {
+        "id": "fig_mencius",
+        "name": "孟子",
+        "name_en": "Mencius",
+        "period": "战国",
+        "contribution": "发展性善论、仁政与民本思想"
+      },
+      {
+        "id": "fig_xunzi",
+        "name": "荀子",
+        "name_en": "Xunzi",
+        "period": "战国",
+        "contribution": "以礼法、学习和制度论强化儒家政治哲学"
+      },
+      {
+        "id": "fig_zhu_xi",
+        "name": "朱熹",
+        "name_en": "Zhu Xi",
+        "period": "宋代",
+        "contribution": "系统化理学，确立四书诠释传统"
+      },
+      {
+        "id": "fig_wang_yangming",
+        "name": "王阳明",
+        "name_en": "Wang Yangming",
+        "period": "明代",
+        "contribution": "提出心学与知行合一，重塑宋明儒学的实践面向"
+      }
+    ],
+    "classicWorks": [
+      {
+        "id": "work_analects",
+        "title": "论语",
+        "title_en": "The Analects",
+        "author": "孔子弟子及再传弟子",
+        "description": "记录孔子及弟子言行，是理解早期儒家伦理和政治思想的核心文本"
+      },
+      {
+        "id": "work_mencius",
+        "title": "孟子",
+        "title_en": "Mencius",
+        "author": "孟子及其弟子",
+        "description": "集中呈现性善、仁政、义利之辨等战国儒学论题"
+      },
+      {
+        "id": "work_xunzi",
+        "title": "荀子",
+        "title_en": "Xunzi",
+        "author": "荀子及其学派",
+        "description": "以礼、学习、制度和天人之分构成更制度化的儒学体系"
+      }
+    ],
+    "description": "儒家以个人修养、伦理关系、礼乐秩序和仁政理想为轴心，将家庭伦理、社会秩序与政治责任连接成一套持久的文化框架。",
+    "influence": "自汉代以后，儒学长期参与国家制度、教育体系、士人伦理和东亚文化圈的价值建构；宋明理学又使其进入形上学与日常实践并重的新阶段。",
+    "color": "#c84c31",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: Confucius - https://plato.stanford.edu/entries/confucius/",
+      "Stanford Encyclopedia of Philosophy: Mencius - https://plato.stanford.edu/entries/mencius/",
+      "Stanford Encyclopedia of Philosophy: Xunzi - https://plato.stanford.edu/entries/xunzi/",
+      "Stanford Encyclopedia of Philosophy: Zhu Xi - https://plato.stanford.edu/entries/zhu-xi/"
+    ],
     "createdAt": "2025-12-24T19:50:18.748+00:00",
-    "updatedAt": "2025-12-24T20:08:26.338+00:00"
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
   },
   {
     "id": "a7cf3482-329f-4096-8b10-49d59e4c428a",
     "name": "道家",
+    "name_en": "Daoism",
     "founder": "老子",
-    "foundingYear": -600,
+    "founderEn": "Laozi",
+    "foundingYear": -500,
+    "foundingPeriod": "春秋至战国",
     "coreBeliefs": [
       "道法自然",
-      "无为而治",
-      "阴阳平衡"
+      "无为",
+      "齐物",
+      "柔弱胜刚强",
+      "返璞归真"
     ],
     "keyTexts": [
       "道德经",
-      "庄子"
+      "庄子",
+      "列子"
     ],
-    "description": "强调顺应自然、无为而治的哲学思想",
+    "representativeFigures": [
+      {
+        "id": "fig_laozi",
+        "name": "老子",
+        "name_en": "Laozi",
+        "period": "春秋",
+        "contribution": "以道、德、无为和自然构成道家思想的根本语汇"
+      },
+      {
+        "id": "fig_zhuangzi",
+        "name": "庄子",
+        "name_en": "Zhuangzi",
+        "period": "战国",
+        "contribution": "以逍遥、齐物、寓言和反思语言边界发展道家哲学"
+      }
+    ],
+    "classicWorks": [
+      {
+        "id": "work_daodejing",
+        "title": "道德经",
+        "title_en": "Daodejing",
+        "author": "老子",
+        "description": "以短章形式讨论道、德、无为、政治与生命姿态"
+      },
+      {
+        "id": "work_zhuangzi",
+        "title": "庄子",
+        "title_en": "Zhuangzi",
+        "author": "庄子及后学",
+        "description": "通过寓言和辩难展现自由、相对性与精神超越"
+      }
+    ],
+    "description": "道家关注万物根源、自然生成与人在世界中的安顿方式，强调少私寡欲、顺应变化和对强制秩序的反思。",
+    "influence": "道家深刻影响中国哲学、文学艺术、养生传统、政治批评与宗教道教的发展，也为中国审美中的自然、空灵和游心提供思想资源。",
+    "color": "#2f855a",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: Daoism - https://plato.stanford.edu/entries/daoism/",
+      "Internet Encyclopedia of Philosophy: Daoism - https://iep.utm.edu/daoism/"
+    ],
     "createdAt": "2025-12-24T19:50:18.751+00:00",
-    "updatedAt": "2025-12-24T20:08:26.339+00:00"
-  },
-  {
-    "id": "de7716ab-9e78-4e9c-a28c-6cea6aae3cc7",
-    "name": "法家",
-    "founder": "韩非子",
-    "foundingYear": -280,
-    "coreBeliefs": [
-      "法治",
-      "严刑峻法",
-      "富国强兵"
-    ],
-    "keyTexts": [
-      "韩非子",
-      "商君书"
-    ],
-    "description": "强调法治和中央集权的政治哲学",
-    "createdAt": "2025-12-24T19:53:48.264+00:00",
-    "updatedAt": "2025-12-24T20:08:26.340+00:00"
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
   },
   {
     "id": "34672484-a5c7-4c90-9174-742caaa34105",
     "name": "墨家",
+    "name_en": "Mohism",
     "founder": "墨子",
+    "founderEn": "Mozi",
     "foundingYear": -470,
+    "foundingPeriod": "战国时期",
     "coreBeliefs": [
       "兼爱",
       "非攻",
+      "尚贤",
+      "尚同",
       "节用",
-      "尚贤"
+      "节葬"
     ],
     "keyTexts": [
       "墨子"
     ],
-    "description": "提倡兼爱、非攻、节俭的哲学思想",
+    "representativeFigures": [
+      {
+        "id": "fig_mozi",
+        "name": "墨子",
+        "name_en": "Mozi",
+        "period": "战国",
+        "contribution": "创立墨家，提出兼爱、非攻、尚贤、节用等主张"
+      }
+    ],
+    "classicWorks": [
+      {
+        "id": "work_mozi",
+        "title": "墨子",
+        "title_en": "Mozi",
+        "author": "墨子及墨家后学",
+        "description": "保存墨家伦理、政治、逻辑、认识论和防御技术等内容"
+      }
+    ],
+    "description": "墨家以公共利益和可验证的社会功效为重，反对侵略战争与奢侈礼俗，强调任用贤能和节制资源。",
+    "influence": "墨家在战国时期曾与儒家并称显学，其逻辑、语言和实用技术传统为中国思想史提供了独特路径。",
+    "color": "#8a5a2b",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: Mohism - https://plato.stanford.edu/entries/mohism/",
+      "Internet Encyclopedia of Philosophy: Mozi - https://iep.utm.edu/mozi/"
+    ],
     "createdAt": "2025-12-24T19:53:48.265+00:00",
-    "updatedAt": "2025-12-24T20:08:26.341+00:00"
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "de7716ab-9e78-4e9c-a28c-6cea6aae3cc7",
+    "name": "法家",
+    "name_en": "Legalism",
+    "founder": "韩非",
+    "founderEn": "Han Fei",
+    "foundingYear": -350,
+    "foundingPeriod": "战国时期",
+    "coreBeliefs": [
+      "法",
+      "术",
+      "势",
+      "赏罚分明",
+      "富国强兵",
+      "中央集权"
+    ],
+    "keyTexts": [
+      "韩非子",
+      "商君书",
+      "管子"
+    ],
+    "representativeFigures": [
+      {
+        "id": "fig_shang_yang",
+        "name": "商鞅",
+        "name_en": "Shang Yang",
+        "period": "战国",
+        "contribution": "在秦国变法，推动法家制度实践"
+      },
+      {
+        "id": "fig_han_fei",
+        "name": "韩非",
+        "name_en": "Han Fei",
+        "period": "战国",
+        "contribution": "综合法、术、势，形成法家理论集大成"
+      },
+      {
+        "id": "fig_li_si",
+        "name": "李斯",
+        "name_en": "Li Si",
+        "period": "秦代",
+        "contribution": "参与秦中央集权制度和文字、行政整合"
+      }
+    ],
+    "classicWorks": [
+      {
+        "id": "work_hanfeizi",
+        "title": "韩非子",
+        "title_en": "Han Feizi",
+        "author": "韩非及后学",
+        "description": "法家思想集大成文本，系统讨论法、术、势和君主治理"
+      },
+      {
+        "id": "work_shangjunshu",
+        "title": "商君书",
+        "title_en": "Book of Lord Shang",
+        "author": "商鞅及后学",
+        "description": "反映战国秦国变法、军功爵制、农业与法令治理的思想"
+      }
+    ],
+    "description": "法家以制度、法令、权势结构和赏罚机制解释国家治理，强调可执行的行政秩序而非道德感化。",
+    "influence": "法家思想直接影响秦的统一与帝国制度，也长期作为中国古代国家治理中制度化、官僚化的一面存在。",
+    "color": "#546a7b",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: Chinese Legalism - https://plato.stanford.edu/entries/chinese-legalism/"
+    ],
+    "createdAt": "2025-12-24T19:53:48.264+00:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "fa854264-34f5-455a-9d47-c46c6aac91ac",
+    "name": "名家",
+    "name_en": "School of Names",
+    "founder": "公孙龙",
+    "founderEn": "Gongsun Long",
+    "foundingYear": -350,
+    "foundingPeriod": "战国时期",
+    "coreBeliefs": [
+      "名实之辨",
+      "辩者之学",
+      "语言分析",
+      "概念区分",
+      "白马非马"
+    ],
+    "keyTexts": [
+      "公孙龙子",
+      "惠子"
+    ],
+    "representativeFigures": [
+      {
+        "id": "fig_gongsun_long",
+        "name": "公孙龙",
+        "name_en": "Gongsun Long",
+        "period": "战国",
+        "contribution": "以白马论、坚白论等命题推动名实和逻辑讨论"
+      },
+      {
+        "id": "fig_hui_shi",
+        "name": "惠施",
+        "name_en": "Hui Shi",
+        "period": "战国",
+        "contribution": "以辩者传统和相对性命题影响庄子等文本"
+      }
+    ],
+    "classicWorks": [
+      {
+        "id": "work_gongsunlongzi",
+        "title": "公孙龙子",
+        "title_en": "Gongsun Longzi",
+        "author": "公孙龙及后学",
+        "description": "保存名家辩论材料，集中讨论名、实、概念分类与推理"
+      }
+    ],
+    "description": "名家关注名称、概念与现实对象之间的关系，是先秦思想中最接近语言哲学和逻辑分析的一支。",
+    "influence": "名家的辩难传统影响了墨家后期逻辑、庄子文本中的语言反思，也为中国哲学提供了概念分析的独特遗产。",
+    "color": "#6d5bd0",
+    "sources": [
+      "Stanford Encyclopedia of Philosophy: School of Names - https://plato.stanford.edu/entries/school-names/",
+      "Chinese Text Project: Gongsun Longzi - https://ctext.org/gongsunlongzi"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "83332efb-0f01-490f-bb43-eec4036cb9c7",
+    "name": "阴阳家",
+    "name_en": "Yin-Yang School",
+    "founder": "邹衍",
+    "founderEn": "Zou Yan",
+    "foundingYear": -320,
+    "foundingPeriod": "战国时期",
+    "coreBeliefs": [
+      "阴阳消长",
+      "五行相胜",
+      "天人感应",
+      "时令秩序",
+      "宇宙分类"
+    ],
+    "keyTexts": [
+      "吕氏春秋",
+      "淮南子",
+      "黄帝内经"
+    ],
+    "representativeFigures": [
+      {
+        "id": "fig_zou_yan",
+        "name": "邹衍",
+        "name_en": "Zou Yan",
+        "period": "战国",
+        "contribution": "以阴阳五行解释自然、政治和历史循环"
+      }
+    ],
+    "classicWorks": [
+      {
+        "id": "work_lushi_chunqiu_yinyang",
+        "title": "吕氏春秋",
+        "title_en": "Lushi Chunqiu",
+        "author": "吕不韦门客",
+        "description": "综合诸子思想，也保存阴阳五行、时令政治等材料"
+      },
+      {
+        "id": "work_huainanzi_yinyang",
+        "title": "淮南子",
+        "title_en": "Huainanzi",
+        "author": "刘安及其门客",
+        "description": "以宇宙论、政治论和养生论综合阴阳、道家与诸子知识"
+      }
+    ],
+    "description": "阴阳家以阴阳和五行构成解释宇宙、季节、政治合法性和历史更替的分类体系。",
+    "influence": "阴阳五行成为中国传统医学、历法、风水、政治象征和宇宙论的重要框架，并持续影响东亚知识体系。",
+    "color": "#0f766e",
+    "sources": [
+      "Internet Encyclopedia of Philosophy: Yin-Yang - https://iep.utm.edu/yinyang/",
+      "Britannica: yin-yang - https://www.britannica.com/topic/yinyang"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "3a949f8f-d8de-4602-bf2c-cc575d17d245",
+    "name": "兵家",
+    "name_en": "Military School",
+    "founder": "孙武",
+    "founderEn": "Sunzi",
+    "foundingYear": -512,
+    "foundingPeriod": "春秋至战国",
+    "coreBeliefs": [
+      "知己知彼",
+      "不战而屈人之兵",
+      "奇正相生",
+      "因势制胜",
+      "将道与军纪"
+    ],
+    "keyTexts": [
+      "孙子兵法",
+      "吴子",
+      "司马法",
+      "六韬"
+    ],
+    "representativeFigures": [
+      {
+        "id": "fig_sunzi",
+        "name": "孙武",
+        "name_en": "Sunzi",
+        "period": "春秋",
+        "contribution": "以战略、情报、势与军纪奠定兵家经典范式"
+      },
+      {
+        "id": "fig_wu_qi",
+        "name": "吴起",
+        "name_en": "Wu Qi",
+        "period": "战国",
+        "contribution": "兼具军事统帅与变法实践，著有兵书传统"
+      }
+    ],
+    "classicWorks": [
+      {
+        "id": "work_sunzi",
+        "title": "孙子兵法",
+        "title_en": "The Art of War",
+        "author": "孙武",
+        "description": "以十三篇讨论战争筹划、形势、虚实、用间和统帅能力"
+      },
+      {
+        "id": "work_wuzi",
+        "title": "吴子",
+        "title_en": "Wuzi",
+        "author": "吴起",
+        "description": "强调治军、民心、地形与国家动员之间的关系"
+      }
+    ],
+    "description": "兵家研究战争组织、战略判断和国家军事能力，强调以最小代价达成政治目标。",
+    "influence": "兵家文本长期影响中国军事教育、政治战略和管理思想，《孙子兵法》更成为全球传播最广的中国经典之一。",
+    "color": "#7f1d1d",
+    "sources": [
+      "Britannica: Sunzi - https://www.britannica.com/biography/Sunzi",
+      "Chinese Text Project: Sunzi Bingfa - https://ctext.org/art-of-war"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "0744f387-427a-4798-9788-35e1a096a97e",
+    "name": "纵横家",
+    "name_en": "School of Diplomacy",
+    "founder": "鬼谷子",
+    "founderEn": "Guiguzi",
+    "foundingYear": -350,
+    "foundingPeriod": "战国时期",
+    "coreBeliefs": [
+      "合纵连横",
+      "权变游说",
+      "审势制谋",
+      "外交联盟",
+      "辩说术"
+    ],
+    "keyTexts": [
+      "战国策",
+      "鬼谷子"
+    ],
+    "representativeFigures": [
+      {
+        "id": "fig_guiguzi",
+        "name": "鬼谷子",
+        "name_en": "Guiguzi",
+        "period": "战国",
+        "contribution": "纵横家传统中的谋略与游说象征人物"
+      },
+      {
+        "id": "fig_su_qin",
+        "name": "苏秦",
+        "name_en": "Su Qin",
+        "period": "战国",
+        "contribution": "以合纵策略游说六国抗秦"
+      },
+      {
+        "id": "fig_zhang_yi",
+        "name": "张仪",
+        "name_en": "Zhang Yi",
+        "period": "战国",
+        "contribution": "以连横策略服务秦国外交扩张"
+      }
+    ],
+    "classicWorks": [
+      {
+        "id": "work_zhanguoce",
+        "title": "战国策",
+        "title_en": "Strategies of the Warring States",
+        "author": "刘向整理",
+        "description": "保存战国游说、谋略、外交辞令和政治判断的材料"
+      },
+      {
+        "id": "work_guiguzi",
+        "title": "鬼谷子",
+        "title_en": "Guiguzi",
+        "author": "题鬼谷子",
+        "description": "围绕捭阖、反应、内揵等主题展开说服和谋略理论"
+      }
+    ],
+    "description": "纵横家以战国列强竞争为背景，重视外交结盟、形势判断、利益交换和说服技术。",
+    "influence": "纵横家文本让用户能从文化模块中看到思想不只在书斋，也发生在战国外交、谈判和权力博弈现场。",
+    "color": "#b45309",
+    "sources": [
+      "Chinese Text Project: Zhanguoce - https://ctext.org/zhan-guo-ce",
+      "Chinese Text Project: Guiguzi - https://ctext.org/gui-gu-zi"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "9e0ea795-d447-4a56-b146-1ef0bffdf3dd",
+    "name": "农家",
+    "name_en": "Agriculturalists",
+    "founder": "许行",
+    "founderEn": "Xu Xing",
+    "foundingYear": -315,
+    "foundingPeriod": "战国时期",
+    "coreBeliefs": [
+      "重农",
+      "君民并耕",
+      "民生本位",
+      "反奢侈",
+      "农时与政令"
+    ],
+    "keyTexts": [
+      "孟子·滕文公上",
+      "管子·地员",
+      "氾胜之书"
+    ],
+    "representativeFigures": [
+      {
+        "id": "fig_xu_xing",
+        "name": "许行",
+        "name_en": "Xu Xing",
+        "period": "战国",
+        "contribution": "主张君民并耕，被孟子文本保存为农家代表"
+      }
+    ],
+    "classicWorks": [
+      {
+        "id": "work_mencius_tengwen",
+        "title": "孟子·滕文公上",
+        "title_en": "Mencius, Teng Wen Gong I",
+        "author": "孟子及弟子",
+        "description": "通过孟子与陈相的辩论保存许行农家主张的关键线索"
+      }
+    ],
+    "description": "农家强调农业生产与民生秩序，关注统治者是否真正理解和参与百姓劳动。",
+    "influence": "农家资料虽少，但它提醒文化模块呈现基层生产、民生经济与政治伦理之间的关联。",
+    "color": "#4d7c0f",
+    "sources": [
+      "Chinese Text Project: Mencius, Teng Wen Gong I - https://ctext.org/mengzi/teng-wen-gong-i",
+      "Britannica: Chinese philosophy - https://www.britannica.com/topic/Chinese-philosophy"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
+  },
+  {
+    "id": "4f91b9a3-8b00-4896-986e-1e37ab2b6fd2",
+    "name": "杂家",
+    "name_en": "Syncretists",
+    "founder": "吕不韦",
+    "founderEn": "Lu Buwei",
+    "foundingYear": -239,
+    "foundingPeriod": "战国末至汉代",
+    "coreBeliefs": [
+      "兼采诸子",
+      "综合治理",
+      "时令政治",
+      "宇宙与制度合参",
+      "实用汇编"
+    ],
+    "keyTexts": [
+      "吕氏春秋",
+      "淮南子"
+    ],
+    "representativeFigures": [
+      {
+        "id": "fig_lu_buwei",
+        "name": "吕不韦",
+        "name_en": "Lu Buwei",
+        "period": "战国末",
+        "contribution": "组织门客编成《吕氏春秋》，综合先秦诸子"
+      },
+      {
+        "id": "fig_liu_an",
+        "name": "刘安",
+        "name_en": "Liu An",
+        "period": "西汉",
+        "contribution": "组织编撰《淮南子》，融汇道家、阴阳和治术"
+      }
+    ],
+    "classicWorks": [
+      {
+        "id": "work_lushi_chunqiu",
+        "title": "吕氏春秋",
+        "title_en": "Lushi Chunqiu",
+        "author": "吕不韦门客",
+        "description": "战国末综合性思想汇编，覆盖政治、时令、音乐、修身与诸子论题"
+      },
+      {
+        "id": "work_huainanzi",
+        "title": "淮南子",
+        "title_en": "Huainanzi",
+        "author": "刘安及其门客",
+        "description": "西汉综合性著作，连接宇宙论、道家政治和知识分类"
+      }
+    ],
+    "description": "杂家并非单一教义，而是兼采诸子、整理知识、服务治国实践的综合思想传统。",
+    "influence": "杂家适合帮助用户理解战国末至汉初思想从百家竞争走向汇编、综合和帝国治理知识的过程。",
+    "color": "#9f7aea",
+    "sources": [
+      "Chinese Text Project: Lushi Chunqiu - https://ctext.org/lv-shi-chun-qiu",
+      "Chinese Text Project: Huainanzi - https://ctext.org/huainanzi"
+    ],
+    "createdAt": "2026-06-08T00:00:00.000+08:00",
+    "updatedAt": "2026-06-08T00:00:00.000+08:00"
   }
 ]

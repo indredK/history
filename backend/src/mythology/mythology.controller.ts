@@ -1,9 +1,25 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
+import {
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { MythologyService } from './mythology.service';
 import { MythologyQueryDto } from './dto/mythology-query.dto';
 import { MythologyDto } from './dto/mythology.dto';
 import { PaginatedResponseDto } from '../common/dto/paginated-response.dto';
+import { CreateMythologyDto } from './dto/create-mythology.dto';
+import { UpdateMythologyDto } from './dto/update-mythology.dto';
 
 @ApiTags('Mythology')
 @Controller('mythologies')
@@ -45,5 +61,62 @@ export class MythologyController {
   })
   async findOne(@Param('id') id: string): Promise<MythologyDto> {
     return this.mythologyService.findOne(id);
+  }
+
+  @Post()
+  @ApiOperation({
+    summary: 'Create mythology',
+    description:
+      'Create a mythology story record with title, category, story beats, symbolism, and related characters',
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'Successfully created mythology',
+    type: MythologyDto,
+  })
+  async create(@Body() body: CreateMythologyDto): Promise<MythologyDto> {
+    return this.mythologyService.create(body);
+  }
+
+  @Patch(':id')
+  @ApiOperation({
+    summary: 'Update mythology',
+    description:
+      'Update an existing mythology story record and keep frontend-friendly fields aligned with database fields',
+  })
+  @ApiParam({ name: 'id', description: 'Mythology ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully updated mythology',
+    type: MythologyDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Mythology not found',
+  })
+  async update(
+    @Param('id') id: string,
+    @Body() body: UpdateMythologyDto,
+  ): Promise<MythologyDto> {
+    return this.mythologyService.update(id, body);
+  }
+
+  @Delete(':id')
+  @ApiOperation({
+    summary: 'Delete mythology',
+    description: 'Delete a mythology story record by ID',
+  })
+  @ApiParam({ name: 'id', description: 'Mythology ID' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully deleted mythology',
+    type: MythologyDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Mythology not found',
+  })
+  async remove(@Param('id') id: string): Promise<MythologyDto> {
+    return this.mythologyService.remove(id);
   }
 }

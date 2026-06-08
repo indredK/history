@@ -5,7 +5,7 @@
 
 import { z } from 'zod';
 
-export type SanguoFigureRole = 'ruler' | 'strategist' | 'general' | 'official' | 'other';
+export type SanguoFigureRole = 'ruler' | 'strategist' | 'general' | 'advisor' | 'official' | 'other';
 export type SanguoKingdom = '魏' | '蜀' | '吴' | '其他';
 
 export interface HistoricalEvent {
@@ -41,7 +41,7 @@ export interface SanguoFigure {
 }
 
 export const SanguoFigureRoleSchema = z.enum([
-  'ruler', 'strategist', 'general', 'official', 'other'
+  'ruler', 'strategist', 'general', 'advisor', 'official', 'other'
 ]);
 
 export const SanguoKingdomSchema = z.enum(['魏', '蜀', '吴', '其他']);
@@ -82,6 +82,7 @@ export const ROLE_LABELS: Record<SanguoFigureRole, string> = {
   ruler: '君主',
   strategist: '谋士',
   general: '将领',
+  advisor: '谋臣',
   official: '官员',
   other: '其他',
 };

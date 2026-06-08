@@ -6,6 +6,7 @@ export { useStyleStore, initializeStyle } from './styleStore';
 export { useDynastiesStore, useDynastiesExpanded } from './dynastyExpandedStore';
 export { useScholarStore } from './scholarStore';
 export { useSchoolStore } from './schoolStore';
+export { usePersonStore } from './personStore';
 export { useEmperorStore } from './emperorStore';
 export { useMingFigureStore } from './mingFigureStore';
 export { useQingRulerStore } from './qingRulerStore';

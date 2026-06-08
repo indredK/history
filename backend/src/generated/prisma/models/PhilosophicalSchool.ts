@@ -37,9 +37,14 @@ export type PhilosophicalSchoolSumAggregateOutputType = {
 export type PhilosophicalSchoolMinAggregateOutputType = {
   id: string | null
   name: string | null
+  name_en: string | null
   founder: string | null
+  founderEn: string | null
   foundingYear: number | null
+  foundingPeriod: string | null
   description: string | null
+  influence: string | null
+  color: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -47,9 +52,14 @@ export type PhilosophicalSchoolMinAggregateOutputType = {
 export type PhilosophicalSchoolMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  name_en: string | null
   founder: string | null
+  founderEn: string | null
   foundingYear: number | null
+  foundingPeriod: string | null
   description: string | null
+  influence: string | null
+  color: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -57,11 +67,19 @@ export type PhilosophicalSchoolMaxAggregateOutputType = {
 export type PhilosophicalSchoolCountAggregateOutputType = {
   id: number
   name: number
+  name_en: number
   founder: number
+  founderEn: number
   foundingYear: number
+  foundingPeriod: number
   coreBeliefs: number
   keyTexts: number
+  representativeFigures: number
+  classicWorks: number
   description: number
+  influence: number
+  color: number
+  sources: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -79,9 +97,14 @@ export type PhilosophicalSchoolSumAggregateInputType = {
 export type PhilosophicalSchoolMinAggregateInputType = {
   id?: true
   name?: true
+  name_en?: true
   founder?: true
+  founderEn?: true
   foundingYear?: true
+  foundingPeriod?: true
   description?: true
+  influence?: true
+  color?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -89,9 +112,14 @@ export type PhilosophicalSchoolMinAggregateInputType = {
 export type PhilosophicalSchoolMaxAggregateInputType = {
   id?: true
   name?: true
+  name_en?: true
   founder?: true
+  founderEn?: true
   foundingYear?: true
+  foundingPeriod?: true
   description?: true
+  influence?: true
+  color?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -99,11 +127,19 @@ export type PhilosophicalSchoolMaxAggregateInputType = {
 export type PhilosophicalSchoolCountAggregateInputType = {
   id?: true
   name?: true
+  name_en?: true
   founder?: true
+  founderEn?: true
   foundingYear?: true
+  foundingPeriod?: true
   coreBeliefs?: true
   keyTexts?: true
+  representativeFigures?: true
+  classicWorks?: true
   description?: true
+  influence?: true
+  color?: true
+  sources?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -198,11 +234,19 @@ export type PhilosophicalSchoolGroupByArgs<ExtArgs extends runtime.Types.Extensi
 export type PhilosophicalSchoolGroupByOutputType = {
   id: string
   name: string
+  name_en: string | null
   founder: string | null
+  founderEn: string | null
   foundingYear: number | null
+  foundingPeriod: string | null
   coreBeliefs: runtime.JsonValue | null
   keyTexts: runtime.JsonValue | null
+  representativeFigures: runtime.JsonValue | null
+  classicWorks: runtime.JsonValue | null
   description: string | null
+  influence: string | null
+  color: string | null
+  sources: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: PhilosophicalSchoolCountAggregateOutputType | null
@@ -233,11 +277,19 @@ export type PhilosophicalSchoolWhereInput = {
   NOT?: Prisma.PhilosophicalSchoolWhereInput | Prisma.PhilosophicalSchoolWhereInput[]
   id?: Prisma.StringFilter<"PhilosophicalSchool"> | string
   name?: Prisma.StringFilter<"PhilosophicalSchool"> | string
+  name_en?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
   founder?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
+  founderEn?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
   foundingYear?: Prisma.IntNullableFilter<"PhilosophicalSchool"> | number | null
+  foundingPeriod?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
   coreBeliefs?: Prisma.JsonNullableFilter<"PhilosophicalSchool">
   keyTexts?: Prisma.JsonNullableFilter<"PhilosophicalSchool">
+  representativeFigures?: Prisma.JsonNullableFilter<"PhilosophicalSchool">
+  classicWorks?: Prisma.JsonNullableFilter<"PhilosophicalSchool">
   description?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
+  influence?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
+  color?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
+  sources?: Prisma.JsonNullableFilter<"PhilosophicalSchool">
   createdAt?: Prisma.DateTimeFilter<"PhilosophicalSchool"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PhilosophicalSchool"> | Date | string
   scholars?: Prisma.ScholarListRelationFilter
@@ -246,11 +298,19 @@ export type PhilosophicalSchoolWhereInput = {
 export type PhilosophicalSchoolOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  name_en?: Prisma.SortOrderInput | Prisma.SortOrder
   founder?: Prisma.SortOrderInput | Prisma.SortOrder
+  founderEn?: Prisma.SortOrderInput | Prisma.SortOrder
   foundingYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  foundingPeriod?: Prisma.SortOrderInput | Prisma.SortOrder
   coreBeliefs?: Prisma.SortOrderInput | Prisma.SortOrder
   keyTexts?: Prisma.SortOrderInput | Prisma.SortOrder
+  representativeFigures?: Prisma.SortOrderInput | Prisma.SortOrder
+  classicWorks?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  influence?: Prisma.SortOrderInput | Prisma.SortOrder
+  color?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   scholars?: Prisma.ScholarOrderByRelationAggregateInput
@@ -262,11 +322,19 @@ export type PhilosophicalSchoolWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.PhilosophicalSchoolWhereInput | Prisma.PhilosophicalSchoolWhereInput[]
   OR?: Prisma.PhilosophicalSchoolWhereInput[]
   NOT?: Prisma.PhilosophicalSchoolWhereInput | Prisma.PhilosophicalSchoolWhereInput[]
+  name_en?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
   founder?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
+  founderEn?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
   foundingYear?: Prisma.IntNullableFilter<"PhilosophicalSchool"> | number | null
+  foundingPeriod?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
   coreBeliefs?: Prisma.JsonNullableFilter<"PhilosophicalSchool">
   keyTexts?: Prisma.JsonNullableFilter<"PhilosophicalSchool">
+  representativeFigures?: Prisma.JsonNullableFilter<"PhilosophicalSchool">
+  classicWorks?: Prisma.JsonNullableFilter<"PhilosophicalSchool">
   description?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
+  influence?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
+  color?: Prisma.StringNullableFilter<"PhilosophicalSchool"> | string | null
+  sources?: Prisma.JsonNullableFilter<"PhilosophicalSchool">
   createdAt?: Prisma.DateTimeFilter<"PhilosophicalSchool"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PhilosophicalSchool"> | Date | string
   scholars?: Prisma.ScholarListRelationFilter
@@ -275,11 +343,19 @@ export type PhilosophicalSchoolWhereUniqueInput = Prisma.AtLeast<{
 export type PhilosophicalSchoolOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  name_en?: Prisma.SortOrderInput | Prisma.SortOrder
   founder?: Prisma.SortOrderInput | Prisma.SortOrder
+  founderEn?: Prisma.SortOrderInput | Prisma.SortOrder
   foundingYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  foundingPeriod?: Prisma.SortOrderInput | Prisma.SortOrder
   coreBeliefs?: Prisma.SortOrderInput | Prisma.SortOrder
   keyTexts?: Prisma.SortOrderInput | Prisma.SortOrder
+  representativeFigures?: Prisma.SortOrderInput | Prisma.SortOrder
+  classicWorks?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  influence?: Prisma.SortOrderInput | Prisma.SortOrder
+  color?: Prisma.SortOrderInput | Prisma.SortOrder
+  sources?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PhilosophicalSchoolCountOrderByAggregateInput
@@ -295,11 +371,19 @@ export type PhilosophicalSchoolScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PhilosophicalSchoolScalarWhereWithAggregatesInput | Prisma.PhilosophicalSchoolScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PhilosophicalSchool"> | string
   name?: Prisma.StringWithAggregatesFilter<"PhilosophicalSchool"> | string
+  name_en?: Prisma.StringNullableWithAggregatesFilter<"PhilosophicalSchool"> | string | null
   founder?: Prisma.StringNullableWithAggregatesFilter<"PhilosophicalSchool"> | string | null
+  founderEn?: Prisma.StringNullableWithAggregatesFilter<"PhilosophicalSchool"> | string | null
   foundingYear?: Prisma.IntNullableWithAggregatesFilter<"PhilosophicalSchool"> | number | null
+  foundingPeriod?: Prisma.StringNullableWithAggregatesFilter<"PhilosophicalSchool"> | string | null
   coreBeliefs?: Prisma.JsonNullableWithAggregatesFilter<"PhilosophicalSchool">
   keyTexts?: Prisma.JsonNullableWithAggregatesFilter<"PhilosophicalSchool">
+  representativeFigures?: Prisma.JsonNullableWithAggregatesFilter<"PhilosophicalSchool">
+  classicWorks?: Prisma.JsonNullableWithAggregatesFilter<"PhilosophicalSchool">
   description?: Prisma.StringNullableWithAggregatesFilter<"PhilosophicalSchool"> | string | null
+  influence?: Prisma.StringNullableWithAggregatesFilter<"PhilosophicalSchool"> | string | null
+  color?: Prisma.StringNullableWithAggregatesFilter<"PhilosophicalSchool"> | string | null
+  sources?: Prisma.JsonNullableWithAggregatesFilter<"PhilosophicalSchool">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"PhilosophicalSchool"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PhilosophicalSchool"> | Date | string
 }
@@ -307,11 +391,19 @@ export type PhilosophicalSchoolScalarWhereWithAggregatesInput = {
 export type PhilosophicalSchoolCreateInput = {
   id?: string
   name: string
+  name_en?: string | null
   founder?: string | null
+  founderEn?: string | null
   foundingYear?: number | null
+  foundingPeriod?: string | null
   coreBeliefs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   keyTexts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  representativeFigures?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  classicWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   description?: string | null
+  influence?: string | null
+  color?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   scholars?: Prisma.ScholarCreateNestedManyWithoutPhilosophicalSchoolInput
@@ -320,11 +412,19 @@ export type PhilosophicalSchoolCreateInput = {
 export type PhilosophicalSchoolUncheckedCreateInput = {
   id?: string
   name: string
+  name_en?: string | null
   founder?: string | null
+  founderEn?: string | null
   foundingYear?: number | null
+  foundingPeriod?: string | null
   coreBeliefs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   keyTexts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  representativeFigures?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  classicWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   description?: string | null
+  influence?: string | null
+  color?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   scholars?: Prisma.ScholarUncheckedCreateNestedManyWithoutPhilosophicalSchoolInput
@@ -333,11 +433,19 @@ export type PhilosophicalSchoolUncheckedCreateInput = {
 export type PhilosophicalSchoolUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  name_en?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   founder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  founderEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foundingYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  foundingPeriod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coreBeliefs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   keyTexts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  representativeFigures?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  classicWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  influence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scholars?: Prisma.ScholarUpdateManyWithoutPhilosophicalSchoolNestedInput
@@ -346,11 +454,19 @@ export type PhilosophicalSchoolUpdateInput = {
 export type PhilosophicalSchoolUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  name_en?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   founder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  founderEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foundingYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  foundingPeriod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coreBeliefs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   keyTexts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  representativeFigures?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  classicWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  influence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scholars?: Prisma.ScholarUncheckedUpdateManyWithoutPhilosophicalSchoolNestedInput
@@ -359,11 +475,19 @@ export type PhilosophicalSchoolUncheckedUpdateInput = {
 export type PhilosophicalSchoolCreateManyInput = {
   id?: string
   name: string
+  name_en?: string | null
   founder?: string | null
+  founderEn?: string | null
   foundingYear?: number | null
+  foundingPeriod?: string | null
   coreBeliefs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   keyTexts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  representativeFigures?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  classicWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   description?: string | null
+  influence?: string | null
+  color?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -371,11 +495,19 @@ export type PhilosophicalSchoolCreateManyInput = {
 export type PhilosophicalSchoolUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  name_en?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   founder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  founderEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foundingYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  foundingPeriod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coreBeliefs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   keyTexts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  representativeFigures?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  classicWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  influence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -383,11 +515,19 @@ export type PhilosophicalSchoolUpdateManyMutationInput = {
 export type PhilosophicalSchoolUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  name_en?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   founder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  founderEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foundingYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  foundingPeriod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coreBeliefs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   keyTexts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  representativeFigures?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  classicWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  influence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -400,11 +540,19 @@ export type PhilosophicalSchoolNullableScalarRelationFilter = {
 export type PhilosophicalSchoolCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  name_en?: Prisma.SortOrder
   founder?: Prisma.SortOrder
+  founderEn?: Prisma.SortOrder
   foundingYear?: Prisma.SortOrder
+  foundingPeriod?: Prisma.SortOrder
   coreBeliefs?: Prisma.SortOrder
   keyTexts?: Prisma.SortOrder
+  representativeFigures?: Prisma.SortOrder
+  classicWorks?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  influence?: Prisma.SortOrder
+  color?: Prisma.SortOrder
+  sources?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -416,9 +564,14 @@ export type PhilosophicalSchoolAvgOrderByAggregateInput = {
 export type PhilosophicalSchoolMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  name_en?: Prisma.SortOrder
   founder?: Prisma.SortOrder
+  founderEn?: Prisma.SortOrder
   foundingYear?: Prisma.SortOrder
+  foundingPeriod?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  influence?: Prisma.SortOrder
+  color?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -426,9 +579,14 @@ export type PhilosophicalSchoolMaxOrderByAggregateInput = {
 export type PhilosophicalSchoolMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  name_en?: Prisma.SortOrder
   founder?: Prisma.SortOrder
+  founderEn?: Prisma.SortOrder
   foundingYear?: Prisma.SortOrder
+  foundingPeriod?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  influence?: Prisma.SortOrder
+  color?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -456,11 +614,19 @@ export type PhilosophicalSchoolUpdateOneWithoutScholarsNestedInput = {
 export type PhilosophicalSchoolCreateWithoutScholarsInput = {
   id?: string
   name: string
+  name_en?: string | null
   founder?: string | null
+  founderEn?: string | null
   foundingYear?: number | null
+  foundingPeriod?: string | null
   coreBeliefs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   keyTexts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  representativeFigures?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  classicWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   description?: string | null
+  influence?: string | null
+  color?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -468,11 +634,19 @@ export type PhilosophicalSchoolCreateWithoutScholarsInput = {
 export type PhilosophicalSchoolUncheckedCreateWithoutScholarsInput = {
   id?: string
   name: string
+  name_en?: string | null
   founder?: string | null
+  founderEn?: string | null
   foundingYear?: number | null
+  foundingPeriod?: string | null
   coreBeliefs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   keyTexts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  representativeFigures?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  classicWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   description?: string | null
+  influence?: string | null
+  color?: string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -496,11 +670,19 @@ export type PhilosophicalSchoolUpdateToOneWithWhereWithoutScholarsInput = {
 export type PhilosophicalSchoolUpdateWithoutScholarsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  name_en?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   founder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  founderEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foundingYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  foundingPeriod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coreBeliefs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   keyTexts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  representativeFigures?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  classicWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  influence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -508,11 +690,19 @@ export type PhilosophicalSchoolUpdateWithoutScholarsInput = {
 export type PhilosophicalSchoolUncheckedUpdateWithoutScholarsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  name_en?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   founder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  founderEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   foundingYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  foundingPeriod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coreBeliefs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   keyTexts?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  representativeFigures?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  classicWorks?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  influence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sources?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -551,11 +741,19 @@ export type PhilosophicalSchoolCountOutputTypeCountScholarsArgs<ExtArgs extends 
 export type PhilosophicalSchoolSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  name_en?: boolean
   founder?: boolean
+  founderEn?: boolean
   foundingYear?: boolean
+  foundingPeriod?: boolean
   coreBeliefs?: boolean
   keyTexts?: boolean
+  representativeFigures?: boolean
+  classicWorks?: boolean
   description?: boolean
+  influence?: boolean
+  color?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   scholars?: boolean | Prisma.PhilosophicalSchool$scholarsArgs<ExtArgs>
@@ -565,11 +763,19 @@ export type PhilosophicalSchoolSelect<ExtArgs extends runtime.Types.Extensions.I
 export type PhilosophicalSchoolSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  name_en?: boolean
   founder?: boolean
+  founderEn?: boolean
   foundingYear?: boolean
+  foundingPeriod?: boolean
   coreBeliefs?: boolean
   keyTexts?: boolean
+  representativeFigures?: boolean
+  classicWorks?: boolean
   description?: boolean
+  influence?: boolean
+  color?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["philosophicalSchool"]>
@@ -577,11 +783,19 @@ export type PhilosophicalSchoolSelectCreateManyAndReturn<ExtArgs extends runtime
 export type PhilosophicalSchoolSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  name_en?: boolean
   founder?: boolean
+  founderEn?: boolean
   foundingYear?: boolean
+  foundingPeriod?: boolean
   coreBeliefs?: boolean
   keyTexts?: boolean
+  representativeFigures?: boolean
+  classicWorks?: boolean
   description?: boolean
+  influence?: boolean
+  color?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["philosophicalSchool"]>
@@ -589,16 +803,24 @@ export type PhilosophicalSchoolSelectUpdateManyAndReturn<ExtArgs extends runtime
 export type PhilosophicalSchoolSelectScalar = {
   id?: boolean
   name?: boolean
+  name_en?: boolean
   founder?: boolean
+  founderEn?: boolean
   foundingYear?: boolean
+  foundingPeriod?: boolean
   coreBeliefs?: boolean
   keyTexts?: boolean
+  representativeFigures?: boolean
+  classicWorks?: boolean
   description?: boolean
+  influence?: boolean
+  color?: boolean
+  sources?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PhilosophicalSchoolOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "founder" | "foundingYear" | "coreBeliefs" | "keyTexts" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["philosophicalSchool"]>
+export type PhilosophicalSchoolOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "name_en" | "founder" | "founderEn" | "foundingYear" | "foundingPeriod" | "coreBeliefs" | "keyTexts" | "representativeFigures" | "classicWorks" | "description" | "influence" | "color" | "sources" | "createdAt" | "updatedAt", ExtArgs["result"]["philosophicalSchool"]>
 export type PhilosophicalSchoolInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   scholars?: boolean | Prisma.PhilosophicalSchool$scholarsArgs<ExtArgs>
   _count?: boolean | Prisma.PhilosophicalSchoolCountOutputTypeDefaultArgs<ExtArgs>
@@ -614,11 +836,19 @@ export type $PhilosophicalSchoolPayload<ExtArgs extends runtime.Types.Extensions
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    name_en: string | null
     founder: string | null
+    founderEn: string | null
     foundingYear: number | null
+    foundingPeriod: string | null
     coreBeliefs: runtime.JsonValue | null
     keyTexts: runtime.JsonValue | null
+    representativeFigures: runtime.JsonValue | null
+    classicWorks: runtime.JsonValue | null
     description: string | null
+    influence: string | null
+    color: string | null
+    sources: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["philosophicalSchool"]>
@@ -1047,11 +1277,19 @@ export interface Prisma__PhilosophicalSchoolClient<T, Null = never, ExtArgs exte
 export interface PhilosophicalSchoolFieldRefs {
   readonly id: Prisma.FieldRef<"PhilosophicalSchool", 'String'>
   readonly name: Prisma.FieldRef<"PhilosophicalSchool", 'String'>
+  readonly name_en: Prisma.FieldRef<"PhilosophicalSchool", 'String'>
   readonly founder: Prisma.FieldRef<"PhilosophicalSchool", 'String'>
+  readonly founderEn: Prisma.FieldRef<"PhilosophicalSchool", 'String'>
   readonly foundingYear: Prisma.FieldRef<"PhilosophicalSchool", 'Int'>
+  readonly foundingPeriod: Prisma.FieldRef<"PhilosophicalSchool", 'String'>
   readonly coreBeliefs: Prisma.FieldRef<"PhilosophicalSchool", 'Json'>
   readonly keyTexts: Prisma.FieldRef<"PhilosophicalSchool", 'Json'>
+  readonly representativeFigures: Prisma.FieldRef<"PhilosophicalSchool", 'Json'>
+  readonly classicWorks: Prisma.FieldRef<"PhilosophicalSchool", 'Json'>
   readonly description: Prisma.FieldRef<"PhilosophicalSchool", 'String'>
+  readonly influence: Prisma.FieldRef<"PhilosophicalSchool", 'String'>
+  readonly color: Prisma.FieldRef<"PhilosophicalSchool", 'String'>
+  readonly sources: Prisma.FieldRef<"PhilosophicalSchool", 'Json'>
   readonly createdAt: Prisma.FieldRef<"PhilosophicalSchool", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"PhilosophicalSchool", 'DateTime'>
 }

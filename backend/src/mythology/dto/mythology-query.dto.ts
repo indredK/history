@@ -1,15 +1,22 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsIn } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 export class MythologyQueryDto extends PaginationQueryDto {
   @ApiPropertyOptional({
     description: 'Filter by mythology category',
-    example: 'deity',
-    enum: ['deity', 'legend', 'folklore', 'creation_myth', 'other'],
+    example: '创世神话',
+    enum: [
+      '创世神话',
+      '英雄神话',
+      '自然神话',
+      '爱情神话',
+      '神仙传说',
+      '民间传说',
+    ],
   })
   @IsOptional()
-  @IsIn(['deity', 'legend', 'folklore', 'creation_myth', 'other'])
+  @IsString()
   category?: string;
 
   @ApiPropertyOptional({
@@ -17,6 +24,7 @@ export class MythologyQueryDto extends PaginationQueryDto {
     example: '中原',
   })
   @IsOptional()
+  @IsString()
   origin?: string;
 
   @ApiPropertyOptional({
@@ -24,6 +32,7 @@ export class MythologyQueryDto extends PaginationQueryDto {
     example: '上古',
   })
   @IsOptional()
+  @IsString()
   period?: string;
 
   @ApiPropertyOptional({
@@ -31,5 +40,14 @@ export class MythologyQueryDto extends PaginationQueryDto {
     example: '盘古',
   })
   @IsOptional()
+  @IsString()
   name?: string;
+
+  @ApiPropertyOptional({
+    description: 'Search by name, description, origin, or period',
+    example: '补天',
+  })
+  @IsOptional()
+  @IsString()
+  keyword?: string;
 }

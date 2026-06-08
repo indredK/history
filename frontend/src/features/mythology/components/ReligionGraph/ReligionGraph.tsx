@@ -9,6 +9,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { Box, CircularProgress, Typography } from '@mui/material';
 import * as d3 from 'd3';
 import { useRequest } from 'ahooks';
+import { StateView } from '@/components/ui';
 import { useReligionStore } from '@/store/religionStore';
 import { getReligionGraphData } from '@/services/religion';
 import { FilterControls } from './FilterControls';
@@ -55,7 +56,7 @@ export function ReligionGraph({ width: propWidth, height: propHeight }: Religion
     async () => {
       const result = await getReligionGraphData();
       if (!result.success) {
-        throw new Error((result as any).message || '获取数据失败');
+        throw new Error(result.message || '获取数据失败');
       }
       return result.data!;
     },
@@ -141,20 +142,21 @@ export function ReligionGraph({ width: propWidth, height: propHeight }: Religion
 
   // 搜索高亮 —— 不重新渲染整个图表，仅调整透明度
   useEffect(() => {
-    if (!svgRef.current || highlightedNodes.size === 0) return;
+    if (!svgRef.current) return;
 
     const svg = d3.select(svgRef.current);
+    const hasHighlights = highlightedNodes.size > 0;
 
     svg
       .selectAll<SVGGElement, D3Node>('.node-group')
       .select('circle')
-      .attr('opacity', (d) => (highlightedNodes.has(d.id) ? 1 : 0.3))
-      .attr('stroke-width', (d) => (highlightedNodes.has(d.id) ? 4 : 2));
+      .attr('opacity', (d) => (!hasHighlights || highlightedNodes.has(d.id) ? 1 : 0.3))
+      .attr('stroke-width', (d) => (hasHighlights && highlightedNodes.has(d.id) ? 4 : 2));
 
     svg
       .selectAll<SVGGElement, D3Node>('.node-group')
       .select('.node-label')
-      .attr('opacity', (d) => (highlightedNodes.has(d.id) ? 1 : 0.3));
+      .attr('opacity', (d) => (!hasHighlights || highlightedNodes.has(d.id) ? 1 : 0.3));
   }, [highlightedNodes]);
 
   // 处理关闭详情面板
@@ -197,7 +199,7 @@ export function ReligionGraph({ width: propWidth, height: propHeight }: Religion
       <Box
         ref={containerRef}
         className="religion-graph-container glass-card-dark"
-        sx={{ width: '100%', height: '100%' }}
+        sx={{ width: '100%', height: '100%', position: 'relative' }}
       >
         <svg
           ref={svgRef}
@@ -207,6 +209,25 @@ export function ReligionGraph({ width: propWidth, height: propHeight }: Religion
           preserveAspectRatio="xMidYMid meet"
           className="religion-graph-svg"
         />
+        {graphData && filteredNodes.length === 0 && (
+          <Box
+            sx={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              pointerEvents: 'none',
+            }}
+          >
+            <StateView
+              mode="empty"
+              title="没有匹配的节点"
+              description="请调整门派筛选或搜索关键词"
+              minHeight="100%"
+            />
+          </Box>
+        )}
       </Box>
 
       {/* 节点详情面板 */}
