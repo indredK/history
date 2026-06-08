@@ -30,7 +30,10 @@ const periodColors: Record<string, TagColor> = {
 /**
  * 根据在位时间确定时期
  */
-function getPeriod(reignStart: number): string {
+function getPeriod(reignStart: number | null | undefined): string {
+  if (typeof reignStart !== 'number' || !Number.isFinite(reignStart) || reignStart === 0) {
+    return '其他';
+  }
   if (reignStart >= 1616 && reignStart <= 1722) return '清初（1616-1722）';
   if (reignStart >= 1723 && reignStart <= 1795) return '盛清（1723-1795）';
   if (reignStart >= 1796 && reignStart <= 1861) return '清中期（1796-1861）';
@@ -51,7 +54,7 @@ export function QingRulerCard({ ruler, onClick }: QingRulerCardProps) {
   // 构建信息行
   const infoLines = [
     { label: '在位：', value: reignPeriod },
-    { value: `共 ${reignYears} 年` },
+    ...(reignYears === null ? [] : [{ value: `共 ${reignYears} 年` }]),
   ];
 
   return (

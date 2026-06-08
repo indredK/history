@@ -5,8 +5,7 @@
 import { Chip } from '@mui/material';
 import {
   BaseFigureDetailModal,
-  formatLifespan,
-  calculateAge,
+  formatLifespanWithAge,
   type ThemeColor,
 } from '@/features/people/components/common/BaseFigureDetailModal';
 import type { MingFigure } from '@/services/person/ming/types';
@@ -31,14 +30,13 @@ export function MingFigureDetailModal({ figure, open, onClose }: MingFigureDetai
   if (!figure) return null;
 
   const themeColor = roleColors[figure.role] ?? roleColors['other']!;
-  const lifespan = formatLifespan(figure);
-  const age = calculateAge(figure);
   const roleLabel = ROLE_LABELS[figure.role];
+  const lifespanLabel = formatLifespanWithAge(figure);
 
   const headerChips = (
     <>
       <Chip label={roleLabel} size="small" sx={{ backgroundColor: themeColor.bg, color: themeColor.text, fontWeight: 500 }} />
-      <Chip label={`${lifespan}（享年${age}岁）`} size="small" variant="outlined" sx={{ borderColor: 'var(--color-border)', color: 'var(--color-text-secondary)' }} />
+      <Chip label={lifespanLabel} size="small" variant="outlined" sx={{ borderColor: 'var(--color-border)', color: 'var(--color-text-secondary)' }} />
       {figure.faction && (
         <Chip label={figure.faction} size="small" variant="outlined" sx={{ borderColor: themeColor.text, color: themeColor.text }} />
       )}

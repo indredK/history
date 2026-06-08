@@ -6,8 +6,8 @@
 export interface FigureBase {
   name: string;
   courtesy?: string;
-  birthYear: number;
-  deathYear: number;
+  birthYear?: number | null;
+  deathYear?: number | null;
   positions: string[];
   faction?: string;
   role: string;
@@ -62,7 +62,7 @@ export function createFigureServiceHelper<
 
     filterByPeriod(figures: T[], period: string): T[] {
       if (period === '全部' || !period) return figures;
-      return figures.filter(f => getPeriod(f.birthYear) === period);
+      return figures.filter(f => isKnownHistoricalYear(f.birthYear) && getPeriod(f.birthYear) === period);
     },
 
     filterByFaction(figures: T[], faction: string): T[] {
@@ -99,14 +99,14 @@ export function createFigureServiceHelper<
 
       switch (sortBy as string) {
         case 'birthYear':
-          return sorted.sort((a, b) => a.birthYear - b.birthYear);
+          return sorted.sort((a, b) => getSortableYear(a.birthYear) - getSortableYear(b.birthYear));
         case 'name':
           return sorted.sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
         case 'role':
           return sorted.sort((a, b) => {
             const orderDiff = (roleOrder[a.role as TRole] ?? 99) - (roleOrder[b.role as TRole] ?? 99);
             if (orderDiff !== 0) return orderDiff;
-            return a.birthYear - b.birthYear;
+            return getSortableYear(a.birthYear) - getSortableYear(b.birthYear);
           });
         default:
           return sorted;
@@ -137,11 +137,32 @@ export function createFigureServiceHelper<
     },
 
     formatLifespan(figure: T): string {
-      return `${figure.birthYear}年 - ${figure.deathYear}年`;
+      const birthKnown = isKnownHistoricalYear(figure.birthYear);
+      const deathKnown = isKnownHistoricalYear(figure.deathYear);
+      if (!birthKnown && !deathKnown) return '生卒不详';
+      const birthYear = birthKnown ? formatHistoricalYear(figure.birthYear) : '生年不详';
+      const deathYear = deathKnown ? formatHistoricalYear(figure.deathYear) : '卒年不详';
+      return `${birthYear} - ${deathYear}`;
     },
 
     calculateAge(figure: T): number {
+      if (!isKnownHistoricalYear(figure.birthYear) || !isKnownHistoricalYear(figure.deathYear)) {
+        return 0;
+      }
+      if (figure.deathYear < figure.birthYear) return 0;
       return figure.deathYear - figure.birthYear;
     },
   };
+}
+
+function isKnownHistoricalYear(year: number | null | undefined): year is number {
+  return typeof year === 'number' && Number.isFinite(year) && year !== 0;
+}
+
+function formatHistoricalYear(year: number): string {
+  return year < 0 ? `公元前${Math.abs(year)}年` : `${year}年`;
+}
+
+function getSortableYear(year: number | null | undefined): number {
+  return isKnownHistoricalYear(year) ? year : Number.POSITIVE_INFINITY;
 }

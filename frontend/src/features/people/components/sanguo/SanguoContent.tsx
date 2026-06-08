@@ -42,7 +42,7 @@ export function SanguoContent() {
     filters, sortBy, sortOptions, onSortChange,
     resultCount, resultLabel,
     filteredItems, selectedItem, handleItemClick, handleCloseModal,
-  } = useFigureCollection<SanguoFigure>({
+  } = useFigureCollection<SanguoFigure, SanguoFigureSortBy>({
     cacheKey: 'sanguoFigures',
     store: adaptedStore,
     loadData: getSanguoFigures,

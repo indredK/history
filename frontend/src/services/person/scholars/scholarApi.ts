@@ -4,55 +4,92 @@ import type { ScholarService } from './scholarService';
 import { scholarServiceHelper } from './scholarService';
 import { getDataSourceMode } from '@/config/dataSource';
 import { apiClient, handleSingleApiResponse } from '@/utils/services/apiClient';
+import {
+  isRecord,
+  readNumber,
+  readOptionalString,
+  readString,
+  readStringArray,
+} from '../common/figureTransform';
+
+type RawScholarRecord = Record<string, unknown>;
 
 function isLiteraryWork(work: unknown): work is LiteraryWork {
   return Boolean(
     work &&
     typeof work === 'object' &&
     'title' in work &&
-    'description' in work,
+  );
+}
+
+function readNullableNumber(record: RawScholarRecord, keys: string | string[]): number | null {
+  const value = readNumber(record, keys, Number.NaN);
+  return Number.isFinite(value) ? value : null;
+}
+
+function readDate(record: RawScholarRecord, keys: string | string[]): Date | undefined {
+  const value = readOptionalString(record, keys);
+  if (!value) return undefined;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date;
+}
+
+function readDynasty(record: RawScholarRecord): string {
+  const dynasty = record.dynasty;
+  if (isRecord(dynasty)) return readString(dynasty, 'name');
+  return readString(record, 'dynasty');
+}
+
+function readStringArrayWithFallback(record: RawScholarRecord, keys: string[]): string[] {
+  for (const key of keys) {
+    const values = readStringArray(record, key);
+    if (values.length > 0) return values;
+  }
+  return [];
+}
+
+function readWorks(value: unknown): Array<LiteraryWork | string> {
+  if (!Array.isArray(value)) return [];
+  return value.filter((work): work is LiteraryWork | string =>
+    typeof work === 'string' || isLiteraryWork(work),
   );
 }
 
 /**
  * 转换JSON数据为Scholar类型
  */
-const transformJsonToScholar = (jsonData: any, index: number): Scholar => {
-  const representativeSource = Array.isArray(jsonData.representativeWorks)
-    ? jsonData.representativeWorks
-    : [];
-  const majorSource = Array.isArray(jsonData.majorWorks)
-    ? jsonData.majorWorks
-    : [];
+const transformJsonToScholar = (jsonData: unknown, index: number): Scholar => {
+  const record = isRecord(jsonData) ? jsonData : {};
+  const name = readString(record, 'name');
+  const representativeSource = readWorks(record.representativeWorks ?? record.representative_works);
+  const majorSource = readWorks(record.majorWorks ?? record.major_works);
   const works = representativeSource.length > 0
     ? [...representativeSource, ...majorSource.filter((work) => !isLiteraryWork(work))]
     : majorSource;
 
   const scholar: Scholar = {
-    id: jsonData.id || `scholar_${jsonData.name?.replace(/\s+/g, '_') || `unknown_${index}`}`,
-    name: jsonData.name || '',
-    name_en: jsonData.name_en || jsonData.nameEn || '',
-    dynasty: jsonData.dynasty?.name || jsonData.dynasty || '',
-    dynastyPeriod: jsonData.dynastyPeriod || '',
-    birthYear: jsonData.birthYear ?? null,
-    deathYear: jsonData.deathYear ?? null,
-    schoolOfThought: jsonData.schoolOfThought || '',
-    philosophicalSchoolId: jsonData.philosophicalSchoolId || '',
-    biography: jsonData.biography || '',
-    portraitUrl: jsonData.portraitUrl || null,
-    achievements: jsonData.achievements || jsonData.contributions || [],
-    contributions: jsonData.contributions || [],
+    id: readString(record, 'id', `scholar_${name.replace(/\s+/g, '_') || `unknown_${index}`}`),
+    name,
+    name_en: readString(record, ['name_en', 'nameEn']),
+    dynasty: readDynasty(record),
+    dynastyPeriod: readString(record, ['dynastyPeriod', 'dynasty_period']),
+    birthYear: readNullableNumber(record, ['birthYear', 'birth_year']),
+    deathYear: readNullableNumber(record, ['deathYear', 'death_year']),
+    schoolOfThought: readString(record, ['schoolOfThought', 'school_of_thought']),
+    philosophicalSchoolId: readString(record, ['philosophicalSchoolId', 'philosophical_school_id']),
+    biography: readString(record, 'biography'),
+    portraitUrl: readOptionalString(record, ['portraitUrl', 'portrait_url']) ?? null,
+    achievements: readStringArrayWithFallback(record, ['achievements', 'contributions']),
+    contributions: readStringArray(record, 'contributions'),
     representativeWorks: works.filter(isLiteraryWork),
     majorWorks: works.filter((work) => !isLiteraryWork(work)),
-    sources: jsonData.sources || [],
+    sources: readStringArray(record, 'sources'),
   };
 
-  if (jsonData.createdAt) {
-    scholar.createdAt = new Date(jsonData.createdAt);
-  }
-  if (jsonData.updatedAt) {
-    scholar.updatedAt = new Date(jsonData.updatedAt);
-  }
+  const createdAt = readDate(record, ['createdAt', 'created_at']);
+  if (createdAt) scholar.createdAt = createdAt;
+  const updatedAt = readDate(record, ['updatedAt', 'updated_at']);
+  if (updatedAt) scholar.updatedAt = updatedAt;
 
   return scholar;
 };

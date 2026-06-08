@@ -39,7 +39,7 @@ export function QingContent() {
     filters, sortBy, sortOptions, onSortChange,
     resultCount, resultLabel,
     filteredItems, selectedItem, handleItemClick, handleCloseModal,
-  } = useFigureCollection<QingRuler>({
+  } = useFigureCollection<QingRuler, QingRulerSortBy>({
     cacheKey: 'qingRulers',
     store: adaptedStore,
     loadData: getQingRulers,

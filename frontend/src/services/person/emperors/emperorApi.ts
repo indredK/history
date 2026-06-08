@@ -187,7 +187,7 @@ function normalizeEvaluations(source: RawRecord): HistoricalEvaluation[] {
 
 function transformApiEmperor(source: RawRecord, index: number): Emperor {
   const name = readString(source.name) || `未命名帝王 ${index + 1}`;
-  const reignStart = readNumber(source.reignStart ?? source.reign_start) ?? 0;
+  const reignStart = readNumber(source.reignStart ?? source.reign_start) ?? null;
   const rawReignEnd = readNullableNumberField(source, ['reignEnd', 'reign_end']);
   const reignEnd = rawReignEnd !== undefined
     ? rawReignEnd
@@ -229,10 +229,10 @@ function transformStaticPersonToEmperor(source: RawRecord, index: number): Emper
   const templeName = isEmperor ? TEMPLE_NAME_MAP[name] : undefined;
   const achievements = isEmperor ? ACHIEVEMENTS_MAP[name] || [] : [];
   const failures = isEmperor ? FAILURES_MAP[name] || [] : [];
-  const birthYear = readNumber(person.birth_year) ?? 0;
+  const birthYear = readNumber(person.birth_year);
   const deathYear = readNumber(person.death_year) ?? null;
 
-  let reignStart = birthYear + 20;
+  let reignStart: number | null = birthYear === undefined ? null : birthYear + 20;
   let reignEnd = deathYear;
 
   if (name === '秦始皇') {
@@ -267,11 +267,13 @@ function transformStaticPersonToEmperor(source: RawRecord, index: number): Emper
     reignStart,
     reignEnd,
     eraNames: [
-      {
-        name: templeName || name,
-        startYear: reignStart,
-        endYear: reignEnd,
-      },
+      ...(reignStart === null
+        ? []
+        : [{
+            name: templeName || name,
+            startYear: reignStart,
+            endYear: reignEnd,
+          }]),
     ],
     achievements,
     failures,

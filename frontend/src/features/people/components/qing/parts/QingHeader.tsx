@@ -70,15 +70,17 @@ export function QingHeader({ ruler, onClose }: QingHeaderProps) {
                 fontWeight: 500,
               }}
             />
-            <Chip
-              label={`在位${reignYears}年`}
-              size="small"
-              variant="outlined"
-              sx={{
-                borderColor: 'var(--color-border)',
-                color: 'var(--color-text-secondary)',
-              }}
-            />
+            {reignYears !== null && (
+              <Chip
+                label={`在位${reignYears}年`}
+                size="small"
+                variant="outlined"
+                sx={{
+                  borderColor: 'var(--color-border)',
+                  color: 'var(--color-text-secondary)',
+                }}
+              />
+            )}
           </Box>
         </Box>
       </Box>

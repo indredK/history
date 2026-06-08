@@ -7,8 +7,7 @@
 import { Chip } from '@mui/material';
 import {
   BaseFigureDetailModal,
-  formatLifespan,
-  calculateAge,
+  formatLifespanWithAge,
   type ThemeColor,
 } from '@/features/people/components/common/BaseFigureDetailModal';
 import type { SanguoFigure } from '@/services/person/sanguo/types';
@@ -33,16 +32,15 @@ export function SanguoFigureDetailModal({ figure, open, onClose }: SanguoFigureD
 
   const kingdomColor = KINGDOM_COLORS[figure.kingdom] || KINGDOM_COLORS['其他']!;
   const roleColor = roleColors[figure.role] ?? roleColors['other']!;
-  const lifespan = formatLifespan(figure);
-  const age = calculateAge(figure);
   const roleLabel = ROLE_LABELS[figure.role];
-  const kingdomLabel = KINGDOM_LABELS[figure.kingdom];
+  const kingdomLabel = KINGDOM_LABELS[figure.kingdom] ?? figure.kingdom;
+  const lifespanLabel = formatLifespanWithAge(figure);
 
   const headerChips = (
     <>
       <Chip label={kingdomLabel} size="small" sx={{ backgroundColor: kingdomColor.bg, color: kingdomColor.text, fontWeight: 500 }} />
       <Chip label={roleLabel} size="small" sx={{ backgroundColor: roleColor.bg, color: roleColor.text, fontWeight: 500 }} />
-      <Chip label={`${lifespan}（享年${age}岁）`} size="small" variant="outlined" sx={{ borderColor: 'var(--color-border)', color: 'var(--color-text-secondary)' }} />
+      <Chip label={lifespanLabel} size="small" variant="outlined" sx={{ borderColor: 'var(--color-border)', color: 'var(--color-text-secondary)' }} />
     </>
   );
 

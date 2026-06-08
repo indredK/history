@@ -39,7 +39,7 @@ export function EmperorsContent() {
     filters, sortBy, sortOptions, onSortChange,
     resultCount, resultLabel,
     filteredItems, selectedItem, handleItemClick, handleCloseModal,
-  } = useFigureCollection<Emperor>({
+  } = useFigureCollection<Emperor, EmperorSortBy>({
     cacheKey: 'emperors',
     store: adaptedStore,
     loadData: getEmperors,

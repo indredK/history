@@ -33,8 +33,8 @@ const dynastyColors: Record<string, { bg: string; text: string }> = {
 };
 
 function formatEraYear(year: number | null | undefined): string {
-  if (year === null || year === undefined) return '未知';
-  return year < 0 ? `前${Math.abs(year)}` : String(year);
+  if (year === null || year === undefined || year === 0) return '未知';
+  return year < 0 ? `公元前${Math.abs(year)}年` : `${year}年`;
 }
 
 export function EmperorDetailModal({ emperor, open, onClose }: EmperorDetailModalProps) {

@@ -7,7 +7,19 @@ export { PeopleFilter } from './PeopleFilter';
 export { PeopleCollectionContent } from './PeopleCollectionContent';
 export { FigureGrid } from './FigureGrid';
 export { DynastyFigureCard } from './DynastyFigureCard';
-export { BaseFigureDetailModal, calculateAge, formatLifespan } from './BaseFigureDetailModal';
+export {
+  BaseFigureDetailModal,
+  calculateAge,
+  formatHistoricalYear,
+  formatLifespan,
+  formatLifespanWithAge,
+} from './BaseFigureDetailModal';
 export { useFigureCollection } from './useFigureCollection';
 export type { DynastyFigureData, ThemeColor } from './BaseFigureDetailModal';
-export type { FilterOption, FilterConfig, SortOption, FigureCollectionOptions } from './useFigureCollection';
+export type {
+  FilterOption,
+  FilterConfig,
+  SortOption,
+  FigureCollectionOptions,
+  FigureCollectionStore,
+} from './useFigureCollection';

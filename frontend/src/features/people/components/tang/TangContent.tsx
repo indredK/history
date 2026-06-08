@@ -42,7 +42,7 @@ export function TangContent() {
     filters, sortBy, sortOptions, onSortChange,
     resultCount, resultLabel,
     filteredItems, selectedItem, handleItemClick, handleCloseModal,
-  } = useFigureCollection<TangFigure>({
+  } = useFigureCollection<TangFigure, TangFigureSortBy>({
     cacheKey: 'tangFigures',
     store: adaptedStore,
     loadData: getTangFigures,

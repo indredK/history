@@ -90,12 +90,12 @@ export const emperorServiceHelper = {
     const sorted = [...emperors];
     switch (sortBy) {
       case 'reignStart':
-        return sorted.sort((a, b) => a.reignStart - b.reignStart);
+        return sorted.sort((a, b) => getSortableReignYear(a.reignStart) - getSortableReignYear(b.reignStart));
       case 'dynasty':
         return sorted.sort((a, b) => {
           const orderDiff = getDynastyOrder(a.dynasty) - getDynastyOrder(b.dynasty);
           if (orderDiff !== 0) return orderDiff;
-          return a.reignStart - b.reignStart;
+          return getSortableReignYear(a.reignStart) - getSortableReignYear(b.reignStart);
         });
       default:
         return sorted;
@@ -137,16 +137,12 @@ export const emperorServiceHelper = {
    * 格式化在位时间
    */
   formatReignPeriod(emperor: Emperor): string {
-    const formatYear = (year: number | null) => {
-      if (year === null) {
-        return '未知';
-      }
-      if (year < 0) {
-        return `公元前${Math.abs(year)}年`;
-      }
-      return `${year}年`;
-    };
-    return `${formatYear(emperor.reignStart)} - ${formatYear(emperor.reignEnd)}`;
+    const startKnown = isKnownReignYear(emperor.reignStart);
+    const endKnown = isKnownReignYear(emperor.reignEnd);
+    if (!startKnown && !endKnown) return '在位时间不详';
+    const startYear = startKnown ? formatHistoricalYear(emperor.reignStart) : '起始不详';
+    const endYear = endKnown ? formatHistoricalYear(emperor.reignEnd) : '结束不详';
+    return `${startYear} - ${endYear}`;
   },
 
   /**
@@ -163,9 +159,22 @@ export const emperorServiceHelper = {
    * 计算在位年数
    */
   calculateReignYears(emperor: Emperor): number | null {
-    if (emperor.reignEnd === null) {
+    if (!isKnownReignYear(emperor.reignStart) || !isKnownReignYear(emperor.reignEnd)) {
       return null;
     }
+    if (emperor.reignEnd < emperor.reignStart) return null;
     return emperor.reignEnd - emperor.reignStart;
   }
 };
+
+function isKnownReignYear(year: number | null | undefined): year is number {
+  return typeof year === 'number' && Number.isFinite(year) && year !== 0;
+}
+
+function formatHistoricalYear(year: number): string {
+  return year < 0 ? `公元前${Math.abs(year)}年` : `${year}年`;
+}
+
+function getSortableReignYear(year: number | null | undefined): number {
+  return isKnownReignYear(year) ? year : Number.POSITIVE_INFINITY;
+}

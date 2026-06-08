@@ -9,6 +9,7 @@
 
 import { PersonCard, type TagColor } from '@/components/common';
 import type { Scholar } from '@/services/person/scholars/types';
+import { formatScholarLifespan } from './scholarYearFormat';
 
 interface ScholarCardProps {
   scholar: Scholar;
@@ -33,25 +34,13 @@ const dynastyColors: Record<string, TagColor> = {
 
 const defaultColor: TagColor = { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e' };
 
-function hasYear(value: number | null | undefined): value is number {
-  return value !== null && value !== undefined;
-}
-
-function formatYearRange(
-  birthYear: number | null | undefined,
-  deathYear: number | null | undefined,
-): string | null {
-  if (!hasYear(birthYear) && !hasYear(deathYear)) return null;
-  return `${hasYear(birthYear) ? birthYear : '未知'}-${hasYear(deathYear) ? deathYear : '未知'}`;
-}
-
 /**
  * 学者卡片组件
  */
 export function ScholarCard({ scholar, onClick }: ScholarCardProps) {
   const dynasty = scholar.dynasty || scholar.dynastyPeriod || '未知朝代';
   const dynastyColor = dynastyColors[dynasty] || defaultColor;
-  const lifespan = formatYearRange(scholar.birthYear, scholar.deathYear);
+  const lifespan = formatScholarLifespan(scholar.birthYear, scholar.deathYear);
 
   // 构建次标签
   const secondaryTags = [

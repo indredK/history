@@ -6,7 +6,7 @@
 
 - 第一轮：进行中（当前推进至 map）
 - 第二轮：待第一轮全模块完成后重新执行更严格复查
-- 已修复问题计数：60
+- 已修复问题计数：66
 
 ## 复扫结论
 
@@ -466,3 +466,51 @@
 - 问题：唐、宋、元、明、清、三国前端转换器仍以 `any` 读取 API/JSON 原始数据，三国 `role/kingdom` 和明朝 `role` 还直接 cast 为合法枚举；未知后端值会绕过前端角色/阵营白名单，筛选、详情徽标和中文映射都可能出现非法值。后端 `FigureQueryDto.role/period/name` 与三国 `name` 仅声明可选，缺少字符串校验。
 - 修复：新增 `person/common/figureTransform.ts`，统一以 `unknown` 输入收口字符串、数字、字符串数组、历史事件和评价；六个分朝代转换器改用白名单归一角色/阵营，未知值回落到 `other/其他`，年份读取保留 `0` 的有效语义；后端 figure 查询 DTO 为 `role/period/name` 补 `@IsString()`。
 - 验证：按当前约束仅做静态搜索和代码审查；`rg` 确认六个分朝代转换器中不再存在 `any` 命中，未运行 lint、type-check 或测试。
+
+### 61. 开发启动连到旧 SQLite 导致真实 API 列表 500
+
+- 轮次：浏览器联调 / 开发启动修复
+- 模块：后端 Prisma 数据源、开发启动脚本、README、person/culture API 启动链路
+- 问题：接管 Browser 复查真实页面时，`/map`、`/people`、`/mythology`、`/culture`、`/dynasties`、`/timeline`、`/dynasty-boundaries` 均能渲染数据；进一步直连后端发现 `/api/v1/persons`、`/api/v1/scholars`、`/api/v1/schools` 返回 500。根因是后端默认 `DATABASE_URL` 回落到 `file:./dev.db`，而 README/seed 流程声明的是 `backend/prisma/dev.db`；两个本地库的 `persons` 表也都停留在旧 7 列结构，缺少 `nameEn/courtesy/dynasty/roles/...` 等迁移列，手写 SQL 查询完整人物档案字段时会直接失败。
+- 修复：Prisma 运行时和 `prisma.config.ts` 的默认数据库路径统一为 `file:./prisma/dev.db`；`scripts/dev.sh` 在启动后端/前端前自动执行 `db:migrate` 和幂等 `db:seed`，避免开发服务器连到未迁移旧库；README 修正 `db:seed` 命令并补充 API 空数据/500 的数据库恢复步骤。
+- 验证：Browser 复查确认当前真实路由页面本身有数据；提权 `curl` 确认 `/api/v1/health` 前端代理与后端直连均为 200，`events` 有 283 条、`dynasties` 有 39 条；修复前确认 `persons/scholars/schools` 为 500 且 SQLite 表结构缺列。随后执行 `bun run db:migrate` 成功应用 culture/person 两个缺失迁移，`bun run db:seed` 成功完成；复验 `/api/v1/persons`、`/api/v1/scholars`、`/api/v1/schools` 均为 200，`persons/scholars/philosophical_schools` 当前分别为 84/38/10 条；Browser 刷新 `/people` 与 `/culture` 无错误态，分别渲染 82/20 个卡片。
+
+### 62. 分朝代人物详情和卡片年份/标签显示不一致
+
+- 轮次：阶段一模块推进
+- 模块：前端人物页公共 figure 组件、唐/宋/元/明/三国人物 tab、人物集合 hook
+- 问题：分朝代人物详情弹窗重复拼接 `生卒年 + 享年`，当 API/JSON 缺失年份被转换器兜底为 `0` 时会显示 `0年 - 0年（享年0岁）`；列表卡片走 service helper，也会暴露同类假年份。三国人物筛选和详情已把 `魏/蜀/吴` 显示为 `曹魏/蜀汉/东吴`，但卡片二级标签仍显示短值，国际化显示不一致。公共 `useFigureCollection` 仍以 `store: any` 接入各 tab store，排序枚举和值读取绕过类型约束。
+- 修复：`BaseFigureDetailModal` 增加 `formatHistoricalYear`、安全 `formatLifespan`、`calculateAge` 和 `formatLifespanWithAge`，唐/宋/元/明/三国详情统一复用，未知年份显示为“生卒不详 / 生年不详 / 卒年不详”，负数年份显示为“公元前 N 年”；`createFigureServiceHelper` 同步安全格式化卡片寿命并把未知年份排序到后面；三国人物卡片使用 `KINGDOM_LABELS` 回显完整中文势力名；`useFigureCollection` 增加 `FigureCollectionStore<T, TSortBy>` 泛型接口并移除 `any`。
+- 验证：按当前约束仅做静态搜索和代码审查；`rg` 确认旧的详情寿命拼接、`store: any` / `no-explicit-any` 注释、三国卡片 `label: figure.kingdom` 均无残留。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 63. 清朝统治者在位时间缺失时会显示假年份和假年数
+
+- 轮次：阶段一模块推进
+- 模块：前端人物页清朝统治者 tab、清朝统治者 service、详情头部和卡片
+- 问题：清朝统治者 Prisma 字段允许 `reignStart/reignEnd` 为空，前端转换器缺字段时会以 `0` 兜底；service 直接格式化 `${reignStart}年 - ${reignEnd}年` 并相减计算年数，卡片和详情头部可能显示 `0年 - 0年`、`共 0 年` 或 `在位0年`。时期筛选和排序也直接使用原始年份，没有把未知年份作为不可筛选/后置排序处理。
+- 修复：`qingRulerServiceHelper` 增加安全在位年份判断，未知年份显示为“在位时间不详 / 起始不详 / 结束不详”，在位年数仅在起止年份都可靠且顺序合法时返回；清朝卡片和详情头部仅在年数可靠时显示年数 chip；时期判断接收空值并回落“其他”，未知年份排序到列表后面。
+- 验证：按当前约束仅做静态代码审查；未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 64. 人物档案生卒年和事件年份直接显示裸数字
+
+- 轮次：阶段一模块推进
+- 模块：前端人物档案 archive 卡片、详情弹窗、年份格式化工具
+- 问题：人物档案卡片和详情使用 `formatLifespan()` 直接输出 `birthYear - deathYear`，缺失年份显示 `?`，公元前年份显示为负数（如 `-551 - -479`），与其他人物模块的中文历史纪年不一致；详情相关事件也直接拼接 `${event.year}年`，公元前事件同样会露出负数。
+- 修复：人物档案工具新增 `formatHistoricalYear()` 和安全 `formatLifespan()`，缺失年份显示“生卒不详 / 生年不详 / 卒年不详”，负数年份显示为“公元前 N 年”；人物详情相关事件年份复用同一格式化函数。
+- 验证：按当前约束仅做静态代码审查；未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 65. 帝王在位起始年缺失时被兜底为 0
+
+- 轮次：阶段一模块推进
+- 模块：前端人物页帝王 tab、帝王 service/API 转换器、帝王详情弹窗
+- 问题：帝王 API 转换器在缺少 `reignStart` 时会回退为 `0`，静态人物转换也会用缺失生年推导 `0 + 20`；service 排序和在位年数计算会把这些值当作真实年份，可能显示 `0年` 或计算出假在位年数。详情年号年份也用 `前221` 这类短格式，与其他人物模块的中文历史纪年不一致。
+- 修复：`Emperor.reignStart` 类型允许 `null`，API/静态转换器缺失起始年时保留未知语义；帝王 service 使用安全在位年份格式化、排序和年数计算，未知起始年排序后置且不显示假年数；详情年号年份统一显示“公元前 N 年 / N 年 / 未知”。
+- 验证：按当前约束仅做静态代码审查；未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 66. 文化学者年份显示和转换器字段收口不完整
+
+- 轮次：阶段一模块推进
+- 模块：前端文化页学者卡片/详情、人物页文化名人 service/API 转换器
+- 问题：学者卡片和详情直接拼接生卒年，公元前年份会显示为负数，缺失年份也容易出现 `未知-未知` 或被排序到真实年份前；`scholarApi` 转换器以宽松原始数据读取字段，未兼容 snake_case 别名，作品、成就和日期字段在 API/JSON/mock 形态切换时可能丢失或混入无效值。
+- 修复：新增学者历史年份格式化工具，卡片和详情统一显示“公元前 N 年 / N 年 / 生年不详 / 卒年不详”，两端未知时不渲染寿命标签；出生年排序将未知值后置；`scholarApi` 改为 `unknown` 输入和公共 `figureTransform` 读取工具，兼容 `birth_year`、`school_of_thought`、`major_works`、`created_at` 等别名，作品只按 `title` 判定代表作并过滤无效日期，成就字段在空数组时回退到 contributions。
+- 验证：按当前约束仅做静态搜索和代码审查；`rg` 确认学者路径不再有显式 `any`、`birthYear || 0`、`未知-未知`、`0年` 等旧模式。未运行 lint、type-check、测试、开发服务器或浏览器。

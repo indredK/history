@@ -16,6 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import type { CommonPerson } from '@/services/person/common';
 import {
+  formatHistoricalYear,
   formatLifespan,
   formatSource,
   getRoleColor,
@@ -228,7 +229,7 @@ export function PersonDetailModal({
                   sx={{ borderLeft: '3px solid var(--color-primary)', pl: 1.25 }}
                 >
                   <Typography sx={{ color: 'var(--color-text-primary)', fontWeight: 600 }}>
-                    {event.year ? `${event.year}年 · ` : ''}{event.name}
+                    {event.year ? `${formatHistoricalYear(event.year)} · ` : ''}{event.name}
                   </Typography>
                   {(event.role || event.description) && (
                     <Typography variant="body2" sx={{ color: 'var(--color-text-secondary)' }}>

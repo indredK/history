@@ -67,6 +67,10 @@ trap cleanup EXIT SIGINT SIGTERM
 echo "🔎 Verifying workspace tooling..."
 (cd "$ROOT_DIR" && bun run verify:tooling) || fail "Dependency check failed."
 
+echo "🗄️ Preparing backend database..."
+(cd "$ROOT_DIR" && bun run db:migrate) || fail "Database migration failed."
+(cd "$ROOT_DIR" && bun run db:seed) || fail "Database seed failed."
+
 echo "📦 Starting backend server..."
 (cd "$ROOT_DIR" && bun run dev:backend) &
 BACKEND_PID=$!

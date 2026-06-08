@@ -133,3 +133,48 @@
 - 新增 `frontend/src/services/person/common/figureTransform.ts`，统一收口原始 API/JSON 数据的字符串、数字、字符串数组、事件和评价读取。
 - 唐、宋、元、明、清、三国转换器从 `any` 改为 `unknown` 输入；角色/阵营统一白名单归一，未知值回落到 `other/其他`，避免非法枚举污染筛选和详情中文映射。
 - 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 60；按当前约束仅做静态搜索和代码审查，未运行 lint、type-check、测试或开发服务器。
+
+## 2026-06-08 浏览器联调：真实 API 数据库启动链路
+
+- 接管 Browser 逐页复查真实路由：`/map` 显示 117 个事件与秦朝边界，`/people`、`/mythology`、`/culture`、`/dynasties`、`/timeline`、`/dynasty-boundaries` 均能渲染数据；`/emperors-cyber` 有 630 条帝王年表记录，只有当前详情纪事为空态。
+- 提权接口探测确认前端代理 `/api/v1/health` 和后端直连 `/api/v1/health` 均为 200；`events` 返回 283 条，`dynasties` 返回 39 条，但 `persons`、`scholars`、`schools` 返回 500。
+- 定位根因：后端默认数据库路径曾回落到 `file:./dev.db`，与 README/Prisma seed 流程的 `backend/prisma/dev.db` 不一致；本地 SQLite 的 `persons` 表仍是旧 7 列结构，缺少扩展人物档案列，导致真实 API 模式人物/文化基础列表启动后失败。
+- 修复 Prisma 默认路径为 `file:./prisma/dev.db`，并让 `scripts/dev.sh` 启动前自动执行 `db:migrate` 与幂等 `db:seed`；README 同步修正 seed 命令和 API 空数据恢复步骤。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 61；本轮按用户要求接管 Browser 和本地接口验证，未运行 lint、type-check 或测试。
+
+## 2026-06-08 阶段一：people 分朝代公共组件收尾
+
+- 继续复查人物页公共 figure 组件和唐/宋/元/明/三国 tab，确认 `PeopleFilter` 选中态中文回显仍有效，问题集中在详情年份、三国卡片标签和集合 hook 类型。
+- 公共详情弹窗新增安全年份格式化：缺失年份不再显示 `0年`，负数年份显示为“公元前 N 年”，享年只在生卒年都可靠且顺序合法时展示。
+- 分朝代 service helper 同步安全化列表卡片寿命格式，并将未知出生年排序到后面，避免卡片和详情语义分裂。
+- 三国人物卡片二级标签统一使用 `曹魏/蜀汉/东吴`，与筛选下拉和详情弹窗一致。
+- `useFigureCollection` 增加泛型 store 契约，唐/宋/元/明/三国/清/帝王 tab 传入各自排序枚举，移除公共 hook 的 `any`。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 62；本轮按当前约束仅做静态搜索和代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：qing 统治者时间显示收尾
+
+- 继续复查清朝统治者 tab，发现 `reignStart/reignEnd` 缺失时会被前端转换器兜底为 `0`，service 与 UI 又直接格式化和相减。
+- 修复清朝统治者在位时间格式化：未知年份显示为“在位时间不详 / 起始不详 / 结束不详”，可靠年数才显示“共 N 年”和“在位 N 年” chip。
+- 清朝时期判断支持空值回落“其他”，按在位时间排序时未知年份后置，避免筛选/排序把兜底 `0` 当真实历史年份。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 63；本轮按当前约束仅做静态代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：person archive 年份显示
+
+- 复查人物档案 archive 卡片、详情和表单，确认性别选择框选中态已有中文 `renderValue`，继续收敛年份展示问题。
+- 修复人物档案生卒年格式：缺失年份显示“生卒不详 / 生年不详 / 卒年不详”，公元前年份显示为“公元前 N 年”，不再露出 `?` 或负数裸值。
+- 人物详情相关事件年份复用同一中文纪年格式，避免公元前事件显示成 `-551年`。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 64；本轮按当前约束仅做静态代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：emperor 在位起始年兜底
+
+- 继续复查人物页帝王 tab，发现转换器缺失 `reignStart` 时会兜底为 `0`，service 排序和年数计算会把它当真实年份。
+- 帝王类型允许 `reignStart: null`，API/静态转换器保留未知起始年；service 在位时间格式、排序和年数计算统一做可靠性判断。
+- 帝王详情年号年份改为“公元前 N 年 / N 年 / 未知”，与人物档案和分朝代人物详情保持一致。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 65；本轮按当前约束仅做静态代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：culture 学者年份和转换器收口
+
+- 继续复查人物页文化名人与文化页学者卡片/详情，确认问题集中在学者生卒年中文纪年、未知年份排序和 API/JSON 转换字段兼容。
+- 新增 `scholarYearFormat`，学者卡片和详情统一显示“公元前 N 年 / N 年 / 生年不详 / 卒年不详”，两端未知时不渲染寿命标签。
+- 学者按出生年排序时将未知年份后置；`scholarApi` 改为 `unknown` 输入，兼容 camelCase 与 snake_case 字段，过滤无效日期并让 achievements 在空值时回退 contributions。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 66；本轮按当前约束仅做静态搜索和代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。

@@ -54,7 +54,7 @@ export interface QingRulerService extends BaseService<QingRuler> {
   /**
    * 计算在位年数
    */
-  calculateReignYears(ruler: QingRuler): number;
+  calculateReignYears(ruler: QingRuler): number | null;
   
   /**
    * 获取统治者称号（庙号 + 年号）
@@ -75,7 +75,7 @@ export const qingRulerServiceHelper: QingRulerService = {
     if (period === '全部' || !period) {
       return rulers;
     }
-    return rulers.filter(r => getQingPeriod(r.reignStart) === period);
+    return rulers.filter(r => isKnownReignYear(r.reignStart) && getQingPeriod(r.reignStart) === period);
   },
 
   /**
@@ -112,7 +112,7 @@ export const qingRulerServiceHelper: QingRulerService = {
     const sorted = [...rulers];
     switch (sortBy) {
       case 'reignStart':
-        return sorted.sort((a, b) => a.reignStart - b.reignStart);
+        return sorted.sort((a, b) => getSortableReignYear(a.reignStart) - getSortableReignYear(b.reignStart));
       case 'name':
         return sorted.sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'));
       default:
@@ -155,13 +155,22 @@ export const qingRulerServiceHelper: QingRulerService = {
    * 格式化在位时间
    */
   formatReignPeriod(ruler: QingRuler): string {
-    return `${ruler.reignStart}年 - ${ruler.reignEnd}年`;
+    const startKnown = isKnownReignYear(ruler.reignStart);
+    const endKnown = isKnownReignYear(ruler.reignEnd);
+    if (!startKnown && !endKnown) return '在位时间不详';
+    const startYear = startKnown ? formatHistoricalYear(ruler.reignStart) : '起始不详';
+    const endYear = endKnown ? formatHistoricalYear(ruler.reignEnd) : '结束不详';
+    return `${startYear} - ${endYear}`;
   },
 
   /**
    * 计算在位年数
    */
-  calculateReignYears(ruler: QingRuler): number {
+  calculateReignYears(ruler: QingRuler): number | null {
+    if (!isKnownReignYear(ruler.reignStart) || !isKnownReignYear(ruler.reignEnd)) {
+      return null;
+    }
+    if (ruler.reignEnd < ruler.reignStart) return null;
     return ruler.reignEnd - ruler.reignStart;
   },
 
@@ -175,3 +184,15 @@ export const qingRulerServiceHelper: QingRulerService = {
     return `清${ruler.templeName}（${ruler.eraName}）`;
   }
 };
+
+function isKnownReignYear(year: number | null | undefined): year is number {
+  return typeof year === 'number' && Number.isFinite(year) && year !== 0;
+}
+
+function formatHistoricalYear(year: number): string {
+  return year < 0 ? `公元前${Math.abs(year)}年` : `${year}年`;
+}
+
+function getSortableReignYear(year: number | null | undefined): number {
+  return isKnownReignYear(year) ? year : Number.POSITIVE_INFINITY;
+}

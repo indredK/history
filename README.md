@@ -51,7 +51,7 @@ cd backend
 bunx prisma migrate deploy   # 应用现有迁移到 SQLite
 bunx prisma generate         # 生成 Prisma Client
 # 可选:导入样例数据
-bun run seed
+bun run db:seed
 ```
 
 #### 3. 启动开发服务器
@@ -94,6 +94,13 @@ bun run dev
 bun run deps:clean    # 只清依赖
 bun run deps:install  # 一键重装并校验依赖
 bun run deps:reset    # 清依赖 + 重装 + 校验
+```
+
+如果启动后 API 模式页面为空或 `/api/v1/persons`、`/api/v1/scholars` 返回 500，通常是本地 SQLite 仍停留在旧表结构。当前 `bun run dev` 会在启动前自动执行 `db:migrate` 和幂等 `db:seed`；也可以手动运行：
+
+```bash
+bun run db:migrate
+bun run db:seed
 ```
 
 ### 常用脚本

@@ -42,7 +42,7 @@ export function SongContent() {
     filters, sortBy, sortOptions, onSortChange,
     resultCount, resultLabel,
     filteredItems, selectedItem, handleItemClick, handleCloseModal,
-  } = useFigureCollection<SongFigure>({
+  } = useFigureCollection<SongFigure, SongFigureSortBy>({
     cacheKey: 'songFigures',
     store: adaptedStore,
     loadData: getSongFigures,

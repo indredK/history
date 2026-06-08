@@ -4,7 +4,7 @@
 
 import { PersonCard, type TagColor } from '@/components/common';
 import type { SanguoFigure } from '@/services/person/sanguo/types';
-import { ROLE_LABELS, KINGDOM_COLORS } from '@/services/person/sanguo/types';
+import { ROLE_LABELS, KINGDOM_LABELS, KINGDOM_COLORS } from '@/services/person/sanguo/types';
 import { sanguoFigureService } from '@/services/person/sanguo';
 
 interface SanguoFigureCardProps {
@@ -25,9 +25,10 @@ export function SanguoFigureCard({ figure, onClick }: SanguoFigureCardProps) {
   const kingdomColor = KINGDOM_COLORS[figure.kingdom] || KINGDOM_COLORS['其他'];
   const lifespan = sanguoFigureService.formatLifespan(figure);
   const roleLabel = ROLE_LABELS[figure.role];
+  const kingdomLabel = KINGDOM_LABELS[figure.kingdom] ?? figure.kingdom;
 
   const secondaryTags = [
-    { label: figure.kingdom, color: kingdomColor as TagColor, variant: 'outlined' as const }
+    { label: kingdomLabel, color: kingdomColor as TagColor, variant: 'outlined' as const }
   ];
 
   const infoLines = [

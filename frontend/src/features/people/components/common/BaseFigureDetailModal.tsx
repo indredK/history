@@ -23,8 +23,8 @@ export interface DynastyFigureData {
   faction?: string;
   positions: string[];
   biography?: string;
-  birthYear: number;
-  deathYear: number;
+  birthYear?: number | null;
+  deathYear?: number | null;
   achievements?: string[];
   evaluations?: Array<{ source: string; content: string; author?: string }>;
   events?: Array<{ name: string; year: number; role?: string; description?: string }>;
@@ -42,11 +42,38 @@ interface BaseFigureDetailModalProps<T extends DynastyFigureData> {
 }
 
 export function formatLifespan(figure: DynastyFigureData): string {
-  return `${figure.birthYear}年 - ${figure.deathYear}年`;
+  const birthKnown = isKnownHistoricalYear(figure.birthYear);
+  const deathKnown = isKnownHistoricalYear(figure.deathYear);
+
+  if (!birthKnown && !deathKnown) return '生卒不详';
+
+  const birthYear = birthKnown ? formatHistoricalYear(figure.birthYear) : '生年不详';
+  const deathYear = deathKnown ? formatHistoricalYear(figure.deathYear) : '卒年不详';
+
+  return `${birthYear} - ${deathYear}`;
 }
 
-export function calculateAge(figure: DynastyFigureData): number {
+export function calculateAge(figure: DynastyFigureData): number | null {
+  if (!isKnownHistoricalYear(figure.birthYear) || !isKnownHistoricalYear(figure.deathYear)) {
+    return null;
+  }
+  if (figure.deathYear < figure.birthYear) return null;
   return figure.deathYear - figure.birthYear;
+}
+
+export function formatLifespanWithAge(figure: DynastyFigureData): string {
+  const lifespan = formatLifespan(figure);
+  const age = calculateAge(figure);
+  return age === null ? lifespan : `${lifespan}（享年${age}岁）`;
+}
+
+export function formatHistoricalYear(year: number | null | undefined): string {
+  if (!isKnownHistoricalYear(year)) return '年份不详';
+  return year < 0 ? `公元前${Math.abs(year)}年` : `${year}年`;
+}
+
+function isKnownHistoricalYear(year: number | null | undefined): year is number {
+  return typeof year === 'number' && Number.isFinite(year) && year !== 0;
 }
 
 export function BaseFigureDetailModal<T extends DynastyFigureData>({
@@ -151,7 +178,7 @@ export function BaseFigureDetailModal<T extends DynastyFigureData>({
             {figure.events.map((event, i) => (
               <Box key={i} sx={{ display: 'flex', gap: 1, mb: 0.5 }}>
                 <Typography variant="body2" color="text.secondary">
-                  {event.year}年
+                  {formatHistoricalYear(event.year)}
                 </Typography>
                 <Typography variant="body2">
                   {event.name}

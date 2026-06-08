@@ -28,6 +28,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import type { Scholar, LiteraryWork } from '@/services/person/scholars/types';
+import { formatScholarLifespan } from './scholarYearFormat';
 
 interface ScholarDetailModalProps {
   scholar: Scholar | null;
@@ -65,18 +66,6 @@ function isLiteraryWork(work: LiteraryWork | string): work is LiteraryWork {
   return typeof work === 'object' && work !== null && 'title' in work;
 }
 
-function hasYear(value: number | null | undefined): value is number {
-  return value !== null && value !== undefined;
-}
-
-function formatYearRange(
-  birthYear: number | null | undefined,
-  deathYear: number | null | undefined,
-): string | null {
-  if (!hasYear(birthYear) && !hasYear(deathYear)) return null;
-  return `${hasYear(birthYear) ? birthYear : '未知'} - ${hasYear(deathYear) ? deathYear : '未知'}`;
-}
-
 /**
  * 学者详情弹窗组件
  * 展示学者的完整传记、成就和代表作品
@@ -104,7 +93,7 @@ export function ScholarDetailModal({
   // 获取代表作品，优先使用representativeWorks，兼容majorWorks
   const representativeWorks = scholar.representativeWorks || [];
   const majorWorks = scholar.majorWorks || [];
-  const lifespan = formatYearRange(scholar.birthYear, scholar.deathYear);
+  const lifespan = formatScholarLifespan(scholar.birthYear, scholar.deathYear);
 
   return (
     <Dialog

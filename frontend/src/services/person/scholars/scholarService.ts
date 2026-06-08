@@ -135,9 +135,7 @@ export const scholarServiceHelper: ScholarService = {
         });
       case 'birthYear':
         return sorted.sort((a, b) => {
-          const yearA = a.birthYear || 0;
-          const yearB = b.birthYear || 0;
-          return yearA - yearB;
+          return getSortableYear(a.birthYear) - getSortableYear(b.birthYear);
         });
       default:
         return sorted;
@@ -181,3 +179,9 @@ export const scholarServiceHelper: ScholarService = {
     return result;
   }
 };
+
+function getSortableYear(year: number | null | undefined): number {
+  return typeof year === 'number' && Number.isFinite(year) && year !== 0
+    ? year
+    : Number.POSITIVE_INFINITY;
+}

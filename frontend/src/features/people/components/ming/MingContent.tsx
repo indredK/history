@@ -42,7 +42,7 @@ export function MingContent() {
     filters, sortBy, sortOptions, onSortChange,
     resultCount, resultLabel,
     filteredItems, selectedItem, handleItemClick, handleCloseModal,
-  } = useFigureCollection<MingFigure>({
+  } = useFigureCollection<MingFigure, MingFigureSortBy>({
     cacheKey: 'mingFigures',
     store: adaptedStore,
     loadData: getMingFigures,

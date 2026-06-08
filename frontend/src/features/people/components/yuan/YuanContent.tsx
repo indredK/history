@@ -42,7 +42,7 @@ export function YuanContent() {
     filters, sortBy, sortOptions, onSortChange,
     resultCount, resultLabel,
     filteredItems, selectedItem, handleItemClick, handleCloseModal,
-  } = useFigureCollection<YuanFigure>({
+  } = useFigureCollection<YuanFigure, YuanFigureSortBy>({
     cacheKey: 'yuanFigures',
     store: adaptedStore,
     loadData: getYuanFigures,

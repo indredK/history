@@ -62,9 +62,19 @@ export function getRoleColor(role?: string): TagColor {
 }
 
 export function formatLifespan(person: CommonPerson): string {
-  const birth = person.birthYear ?? '?';
-  const death = person.deathYear ?? '?';
+  const birthKnown = isKnownHistoricalYear(person.birthYear);
+  const deathKnown = isKnownHistoricalYear(person.deathYear);
+
+  if (!birthKnown && !deathKnown) return '生卒不详';
+
+  const birth = birthKnown ? formatHistoricalYear(person.birthYear) : '生年不详';
+  const death = deathKnown ? formatHistoricalYear(person.deathYear) : '卒年不详';
   return `${birth} - ${death}`;
+}
+
+export function formatHistoricalYear(year: number | null | undefined): string {
+  if (!isKnownHistoricalYear(year)) return '年份不详';
+  return year < 0 ? `公元前${Math.abs(year)}年` : `${year}年`;
 }
 
 export function formatSource(source: SourceRef): string {
@@ -73,4 +83,8 @@ export function formatSource(source: SourceRef): string {
 
 export function getPrimaryRole(person: CommonPerson): string | undefined {
   return person.roles?.[0];
+}
+
+function isKnownHistoricalYear(year: number | null | undefined): year is number {
+  return typeof year === 'number' && Number.isFinite(year) && year !== 0;
 }

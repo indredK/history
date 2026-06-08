@@ -20,15 +20,29 @@ export interface FilterConfig {
   onChange: (value: string) => void;
 }
 
-export interface SortOption {
-  value: string;
+export interface SortOption<TValue extends string = string> {
+  value: TValue;
   label: string;
 }
 
-export interface FigureCollectionOptions<T> {
+export interface FigureCollectionStore<T, TSortBy extends string = string> {
+  items: T[];
+  selectedItem: T | null;
+  loading: boolean;
+  error: Error | null;
+  filters: object;
+  setItems: (items: T[]) => void;
+  setSelectedItem: (item: T | null) => void;
+  setLoading: (loading: boolean) => void;
+  setError: (error: Error | null) => void;
+  setSearchQuery: (value: string) => void;
+  setSortBy: (value: TSortBy) => void;
+  getFilteredItems: () => T[];
+}
+
+export interface FigureCollectionOptions<T, TSortBy extends string = string> {
   cacheKey: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  store: any;
+  store: FigureCollectionStore<T, TSortBy>;
   loadData: () => Promise<{ data: T[] }>;
   errorMessage: string;
   searchPlaceholder: string;
@@ -39,10 +53,12 @@ export interface FigureCollectionOptions<T> {
     getOptions: () => Array<{ value: string; label: string }>;
     setFilter: (value: string) => void;
   }>;
-  sortOptions: SortOption[];
+  sortOptions: SortOption<TSortBy>[];
 }
 
-export function useFigureCollection<T>(options: FigureCollectionOptions<T>) {
+export function useFigureCollection<T, TSortBy extends string = string>(
+  options: FigureCollectionOptions<T, TSortBy>,
+) {
   const {
     cacheKey,
     store,
@@ -78,7 +94,7 @@ export function useFigureCollection<T>(options: FigureCollectionOptions<T>) {
       filterConfigs.map((config) => ({
         name: config.field,
         label: config.label,
-        value: store.filters[config.field] || '全部',
+        value: readFilterValue(store.filters, config.field) || '全部',
         options: config.getOptions(),
         onChange: config.setFilter,
       })),
@@ -100,11 +116,11 @@ export function useFigureCollection<T>(options: FigureCollectionOptions<T>) {
     error: store.error,
     reload,
     requestLoading,
-    searchQuery: store.filters['searchQuery'] || '',
+    searchQuery: readFilterValue(store.filters, 'searchQuery') || '',
     onSearchChange: store.setSearchQuery,
     searchPlaceholder,
     filters,
-    sortBy: store.filters['sortBy'] || '',
+    sortBy: readFilterValue(store.filters, 'sortBy') || '',
     sortOptions,
     onSortChange: store.setSortBy,
     resultCount: filteredItems.length,
@@ -114,4 +130,9 @@ export function useFigureCollection<T>(options: FigureCollectionOptions<T>) {
     handleItemClick,
     handleCloseModal,
   };
+}
+
+function readFilterValue(filters: object, key: string): string | undefined {
+  const value = (filters as Record<string, unknown>)[key];
+  return typeof value === 'string' ? value : undefined;
 }

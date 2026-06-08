@@ -38,7 +38,7 @@ export interface Emperor {
   posthumousName?: string | null;      // 谥号
   dynasty: string;                     // 朝代
   dynastyPeriod?: string | null;       // 朝代时期（如西汉、东汉）
-  reignStart: number;                  // 在位起始年（负数表示公元前）
+  reignStart: number | null;           // 在位起始年（负数表示公元前）
   reignEnd: number | null;             // 在位结束年
   eraNames: EraName[];                 // 年号列表
   achievements: string[];              // 主要功绩
@@ -78,7 +78,7 @@ export const EmperorSchema = z.object({
   posthumousName: z.string().nullable().optional(),
   dynasty: z.string().min(1, '朝代不能为空'),
   dynastyPeriod: z.string().nullable().optional(),
-  reignStart: z.number(),
+  reignStart: z.number().nullable(),
   reignEnd: z.number().nullable(),
   eraNames: z.array(EraNameSchema),
   achievements: z.array(z.string()),
