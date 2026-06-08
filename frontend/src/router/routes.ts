@@ -4,7 +4,7 @@ export interface RouteConfig {
   key: string;
   path: string;
   label: string;
-  component: React.LazyExoticComponent<ComponentType<any>>;
+  component: React.LazyExoticComponent<ComponentType>;
   index?: boolean;
 }
 

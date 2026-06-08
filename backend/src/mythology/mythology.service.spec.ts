@@ -342,21 +342,25 @@ describe('MythologyService', () => {
   describe('create/update - 保存校验', () => {
     it('创建神话时标题不能为空', async () => {
       await expect(
-        service.create(asQuery({
-          title: '   ',
-          category: '创世神话',
-          description: '描述',
-        })),
+        service.create(
+          asQuery({
+            title: '   ',
+            category: '创世神话',
+            description: '描述',
+          }),
+        ),
       ).rejects.toThrow(BadRequestException);
     });
 
     it('创建神话时分类必须有效', async () => {
       await expect(
-        service.create(asQuery({
-          title: '盘古开天',
-          category: '未知分类',
-          description: '描述',
-        })),
+        service.create(
+          asQuery({
+            title: '盘古开天',
+            category: '未知分类',
+            description: '描述',
+          }),
+        ),
       ).rejects.toThrow(BadRequestException);
     });
 

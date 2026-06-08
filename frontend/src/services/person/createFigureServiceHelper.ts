@@ -140,8 +140,12 @@ export function createFigureServiceHelper<
       const birthKnown = isKnownHistoricalYear(figure.birthYear);
       const deathKnown = isKnownHistoricalYear(figure.deathYear);
       if (!birthKnown && !deathKnown) return '生卒不详';
-      const birthYear = birthKnown ? formatHistoricalYear(figure.birthYear) : '生年不详';
-      const deathYear = deathKnown ? formatHistoricalYear(figure.deathYear) : '卒年不详';
+      const birthYear = birthKnown && figure.birthYear !== null && figure.birthYear !== undefined
+        ? formatHistoricalYear(figure.birthYear)
+        : '生年不详';
+      const deathYear = deathKnown && figure.deathYear !== null && figure.deathYear !== undefined
+        ? formatHistoricalYear(figure.deathYear)
+        : '卒年不详';
       return `${birthYear} - ${deathYear}`;
     },
 

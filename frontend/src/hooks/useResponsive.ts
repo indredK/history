@@ -95,7 +95,6 @@ export function useResponsive(breakpoints: Breakpoints = defaultBreakpoints): Re
  * @param query 媒体查询字符串
  * @returns 是否匹配
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -152,15 +151,34 @@ export function useTouchDevice(): boolean {
  * 使用设备方向
  * @returns 设备方向信息
  */
+type DeviceOrientationType =
+  | 'portrait-primary'
+  | 'portrait-secondary'
+  | 'landscape-primary'
+  | 'landscape-secondary'
+  | 'unknown';
+
+function normalizeOrientationType(type: string): DeviceOrientationType {
+  switch (type) {
+    case 'portrait-primary':
+    case 'portrait-secondary':
+    case 'landscape-primary':
+    case 'landscape-secondary':
+      return type;
+    default:
+      return 'unknown';
+  }
+}
+
 export function useOrientation() {
   const [orientation, setOrientation] = useState<{
     angle: number;
-    type: 'portrait-primary' | 'portrait-secondary' | 'landscape-primary' | 'landscape-secondary' | 'unknown';
+    type: DeviceOrientationType;
   }>(() => {
     if (typeof window !== 'undefined' && window.screen.orientation) {
       return {
         angle: window.screen.orientation.angle,
-        type: window.screen.orientation.type as any,
+        type: normalizeOrientationType(window.screen.orientation.type),
       };
     }
     return {
@@ -174,7 +192,7 @@ export function useOrientation() {
       if (window.screen.orientation) {
         setOrientation({
           angle: window.screen.orientation.angle,
-          type: window.screen.orientation.type as any,
+          type: normalizeOrientationType(window.screen.orientation.type),
         });
       }
     };
@@ -200,7 +218,6 @@ export function useOrientation() {
  * 使用视口尺寸
  * @returns 视口宽度和高度
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function useViewport() {
   const [viewport, setViewport] = useState({
     width: window.innerWidth,

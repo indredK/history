@@ -41,8 +41,12 @@ export function useSidebar() {
 
   // 监听跨标签页的状态变化
   useEffect(() => {
-    const handleStorageChange = (key: string, newValue: boolean) => {
-      if (key === STORAGE_KEYS.SIDEBAR_COLLAPSED && newValue !== collapsed) {
+    const handleStorageChange = (key: string, newValue: unknown) => {
+      if (
+        key === STORAGE_KEYS.SIDEBAR_COLLAPSED &&
+        typeof newValue === 'boolean' &&
+        newValue !== collapsed
+      ) {
         console.debug('Sidebar state synced from another tab:', newValue);
         setCollapsed(newValue);
       }

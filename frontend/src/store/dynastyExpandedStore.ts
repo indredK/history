@@ -78,8 +78,13 @@ export const useDynastiesStore = create<DynastiesState>((set, get) => ({
 
 // 监听跨标签页的状态变化
 StorageListener.addListener(STORAGE_KEYS.DYNASTIES_EXPANDED, (_, newValue) => {
-  if (newValue && typeof newValue === 'object') {
-    useDynastiesStore.setState({ expandedStates: newValue });
+  if (
+    newValue &&
+    typeof newValue === 'object' &&
+    !Array.isArray(newValue) &&
+    Object.values(newValue).every((value) => typeof value === 'boolean')
+  ) {
+    useDynastiesStore.setState({ expandedStates: newValue as Record<string, boolean> });
   }
 });
 

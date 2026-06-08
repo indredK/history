@@ -8,6 +8,7 @@ import {
   Matches,
   MaxLength,
   Min,
+  NotEquals,
   ValidateNested,
 } from 'class-validator';
 
@@ -45,6 +46,7 @@ export class CreateEventDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'startYear 不能为 0，历史纪年没有公元 0 年' })
   startYear: number;
 
   @ApiPropertyOptional({ description: 'Event end year', example: 763 })
@@ -52,6 +54,7 @@ export class CreateEventDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'endYear 不能为 0，历史纪年没有公元 0 年' })
   endYear?: number | null;
 
   @ApiPropertyOptional({ description: 'Event description' })

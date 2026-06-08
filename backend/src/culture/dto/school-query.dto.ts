@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsOptional, IsInt, Min, IsString } from 'class-validator';
+import { IsOptional, IsInt, Min, IsString, NotEquals } from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 export class SchoolQueryDto extends PaginationQueryDto {
@@ -21,7 +21,8 @@ export class SchoolQueryDto extends PaginationQueryDto {
   founder?: string;
 
   @ApiPropertyOptional({
-    description: 'Keyword search across name, founder, period, description, and influence',
+    description:
+      'Keyword search across name, founder, period, description, and influence',
     example: '兼爱',
   })
   @IsOptional()
@@ -36,5 +37,6 @@ export class SchoolQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'foundingYear 不能为 0，历史纪年没有公元 0 年' })
   foundingYear?: number;
 }

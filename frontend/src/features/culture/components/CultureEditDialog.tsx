@@ -104,6 +104,11 @@ function isInvalidNumber(value: string): boolean {
   return value.trim() !== '' && !Number.isFinite(Number(value));
 }
 
+function isZeroHistoricalYear(value: string): boolean {
+  if (value.trim() === '') return false;
+  return Number(value) === 0;
+}
+
 function validateSchoolForm(form: typeof emptySchoolForm): string | null {
   if (!form.name.trim()) {
     return '请填写思想流派名称';
@@ -111,6 +116,10 @@ function validateSchoolForm(form: typeof emptySchoolForm): string | null {
 
   if (isInvalidNumber(form.foundingYear)) {
     return '创立年份必须是有效数字';
+  }
+
+  if (isZeroHistoricalYear(form.foundingYear)) {
+    return '创立年份不能为 0，历史纪年没有公元 0 年';
   }
 
   return null;
@@ -123,6 +132,10 @@ function validateScholarForm(form: typeof emptyScholarForm): string | null {
 
   if (isInvalidNumber(form.birthYear) || isInvalidNumber(form.deathYear)) {
     return '生年和卒年必须是有效数字';
+  }
+
+  if (isZeroHistoricalYear(form.birthYear) || isZeroHistoricalYear(form.deathYear)) {
+    return '生年和卒年不能为 0，历史纪年没有公元 0 年';
   }
 
   const birthYear = clearableNumber(form.birthYear);
@@ -234,19 +247,20 @@ function normalizeWorkType(value: string): LiteraryWorkType {
     : 'essay';
 }
 
-function parseScholarWorks(value: string) {
+function parseScholarWorks(value: string): Array<string | { id: string; title: string; type: LiteraryWorkType; description: string; contentExcerpt?: string }> {
   return splitLines(value).map((line, index) => {
     const parts = line.split('|').map((part) => part.trim());
-    if (parts.length === 1) return parts[0];
+    if (parts.length === 1) return parts[0] ?? '';
     const [title = '', type = 'prose', description = '', contentExcerpt = ''] =
       parts;
-    return {
+    const work: { id: string; title: string; type: LiteraryWorkType; description: string; contentExcerpt?: string } = {
       id: `scholar_work_${index}_${title || 'unknown'}`,
       title,
       type: normalizeWorkType(type),
       description,
-      contentExcerpt,
     };
+    if (contentExcerpt) work.contentExcerpt = contentExcerpt;
+    return work;
   });
 }
 

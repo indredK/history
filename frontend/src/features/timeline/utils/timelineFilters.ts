@@ -279,20 +279,24 @@ export function buildTimelineDynastyClusters(
 
   return [...bucket.entries()]
     .filter(([, group]) => group.length > 2)
-    .map(([key, group]) => {
+    .flatMap(([key, group]) => {
       const [dynastyId, category, bucketIndexText] = key.split(':');
       const dynasty = dynastyMap.get(dynastyId ?? '');
       const bucketIndex = Number(bucketIndexText);
-      const startYear = (dynasty?.startYear ?? 0) + bucketIndex * bucketSize;
+      if (!dynasty || !Number.isFinite(bucketIndex)) {
+        return [];
+      }
+
+      const startYear = dynasty.startYear + bucketIndex * bucketSize;
       const endYear = startYear + bucketSize - 1;
 
-      return {
+      return [{
         id: `dynasty:${key}`,
         dynastyId: dynastyId ?? '',
         category: getTimelineEventCategory(category),
         startYear,
         endYear,
         events: group,
-      };
+      }];
     });
 }

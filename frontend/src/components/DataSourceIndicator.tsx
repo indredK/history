@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Tooltip, IconButton, Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography, Alert } from '@mui/material';
 import { Refresh as RefreshIcon, Science as ScienceIcon, Cloud as CloudIcon } from '@mui/icons-material';
-import { getDataSourceInfo, DATA_SOURCE_MODE } from '@/config/dataSource';
-import { testApiConnection, testAllApiEndpoints, testFrontendProxy } from '@/utils/apiTest';
+import { getDataSourceInfo, DATA_SOURCE_MODE, DATA_SOURCE_CONFIG } from '@/config/dataSource';
+import {
+  testApiConnection,
+  testAllApiEndpoints,
+  testFrontendProxy,
+  type AllEndpointsResult,
+  type EndpointTestResult,
+  type TestResult,
+} from '@/utils/apiTest';
 import { useResponsive } from '@/hooks';
 import { getGlassConfig } from '@/config/glassConfig';
 
@@ -11,6 +18,19 @@ interface DataSourceIndicatorProps {
   collapsed?: boolean;
 }
 
+type DataSourceTestResults = {
+  success: boolean;
+  message: string;
+  details?: {
+    mode: 'mock';
+    delay: number;
+    description: string;
+  };
+  proxyTest?: TestResult;
+  connectionTest?: TestResult;
+  endpointTests?: AllEndpointsResult | null;
+};
+
 /**
  * 数据源状态指示器组件
  * 显示当前使用的数据源，并提供测试功能
@@ -18,7 +38,7 @@ interface DataSourceIndicatorProps {
 export const DataSourceIndicator: React.FC<DataSourceIndicatorProps> = ({ collapsed = false }) => {
   const [open, setOpen] = useState(false);
   const [testing, setTesting] = useState(false);
-  const [testResults, setTestResults] = useState<any>(null);
+  const [testResults, setTestResults] = useState<DataSourceTestResults | null>(null);
 
   const { screenWidth } = useResponsive();
   const glassConfig = getGlassConfig(screenWidth);
@@ -76,7 +96,7 @@ export const DataSourceIndicator: React.FC<DataSourceIndicatorProps> = ({ collap
           message: '✅ Mock数据源正常工作',
           details: {
             mode: 'mock',
-            delay: (dataSourceInfo.config as any).delay,
+            delay: DATA_SOURCE_CONFIG.mock.delay,
             description: '使用本地JSON文件作为数据源',
           },
         });
@@ -218,7 +238,7 @@ export const DataSourceIndicator: React.FC<DataSourceIndicatorProps> = ({ collap
                       <Typography variant="subtitle2" gutterBottom>
                         API端点测试结果:
                       </Typography>
-                      {testResults.endpointTests.results.map((result: any, index: number) => (
+                      {testResults.endpointTests.results.map((result: EndpointTestResult, index: number) => (
                         <Alert
                           key={index}
                           severity={result.success ? 'success' : 'error'}
@@ -241,8 +261,8 @@ export const DataSourceIndicator: React.FC<DataSourceIndicatorProps> = ({ collap
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 • 数据来源: <code>/data/json/*.json</code>
-                <br />• 模拟延迟: <code>{(dataSourceInfo.config as any).delay}ms</code>
-                <br />• 错误率: <code>{(dataSourceInfo.config as any).errorRate * 100}%</code>
+                <br />• 模拟延迟: <code>{DATA_SOURCE_CONFIG.mock.delay}ms</code>
+                <br />• 错误率: <code>{DATA_SOURCE_CONFIG.mock.errorRate * 100}%</code>
               </Typography>
             </Box>
           )}

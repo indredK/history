@@ -127,6 +127,10 @@ function validatePersonInput(input: CreateCommonPersonInput): string | null {
     return '请填写人物姓名';
   }
 
+  if (input.birthYear === 0 || input.deathYear === 0) {
+    return '人物生卒年不能为 0，历史纪年没有公元 0 年';
+  }
+
   if (
     input.birthYear !== undefined
     && input.birthYear !== null
@@ -135,6 +139,10 @@ function validatePersonInput(input: CreateCommonPersonInput): string | null {
     && input.deathYear < input.birthYear
   ) {
     return '人物卒年不能早于生年';
+  }
+
+  if (input.events?.some((event) => event.year === 0)) {
+    return '相关事件年份不能为 0，历史纪年没有公元 0 年';
   }
 
   if (
@@ -153,12 +161,16 @@ function parseEvents(value: string): PersonEvent[] {
     const [year = '', name = '', role = '', description = ''] = line
       .split('|')
       .map((part) => part.trim());
-    return {
+    const event: PersonEvent = {
       name: name || year,
-      year: optionalNumber(name ? year : ''),
-      role: optionalText(role),
-      description: optionalText(description),
     };
+    const parsedYear = optionalNumber(name ? year : '');
+    const parsedRole = optionalText(role);
+    const parsedDescription = optionalText(description);
+    if (parsedYear !== undefined) event.year = parsedYear;
+    if (parsedRole !== undefined) event.role = parsedRole;
+    if (parsedDescription !== undefined) event.description = parsedDescription;
+    return event;
   });
 }
 
@@ -167,11 +179,12 @@ function parseSources(value: string): SourceRef[] {
     const [title = '', url = '', author = ''] = line
       .split('|')
       .map((part) => part.trim());
-    return {
-      title,
-      url: optionalText(url),
-      author: optionalText(author),
-    };
+    const source: SourceRef = { title };
+    const parsedUrl = optionalText(url);
+    const parsedAuthor = optionalText(author);
+    if (parsedUrl !== undefined) source.url = parsedUrl;
+    if (parsedAuthor !== undefined) source.author = parsedAuthor;
+    return source;
   }).filter((source) => source.title);
 }
 

@@ -1,6 +1,7 @@
 import { Box, Paper, Typography, Button } from '@mui/material';
 import { StarOutlined, Star, Share, Info } from '@mui/icons-material';
 import type { Event } from '@/services/timeline/types';
+import { formatTimelineYear } from '@/features/timeline/utils/dynastyUtils';
 
 interface EventDetailPanelProps {
   event: Event;
@@ -10,6 +11,11 @@ interface EventDetailPanelProps {
 }
 
 export function EventDetailPanel({ event, isFavorite, onToggleFavorite, onShare }: EventDetailPanelProps) {
+  const yearLabel =
+    event.endYear !== undefined && event.endYear !== null && event.endYear !== event.startYear
+      ? `${formatTimelineYear(event.startYear)} - ${formatTimelineYear(event.endYear)}`
+      : formatTimelineYear(event.startYear);
+
   return (
     <Paper 
       sx={{ 
@@ -41,9 +47,7 @@ export function EventDetailPanel({ event, isFavorite, onToggleFavorite, onShare 
       </Box>
       
       <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-        {event.startYear}
-        {event.endYear && event.endYear !== event.startYear && 
-          ` - ${event.endYear}`}年
+        {yearLabel}
       </Typography>
       
       {event.description && (

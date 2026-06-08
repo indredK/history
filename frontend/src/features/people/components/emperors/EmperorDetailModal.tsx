@@ -41,7 +41,8 @@ export function EmperorDetailModal({ emperor, open, onClose }: EmperorDetailModa
   if (!emperor) return null;
 
   const dynastyColor = dynastyColors[emperor.dynasty] || { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e' };
-  const hasPortrait = emperor.portraitUrl && emperor.portraitUrl.trim() !== '';
+  const portraitUrl = emperor.portraitUrl?.trim() ? emperor.portraitUrl : undefined;
+  const hasPortrait = Boolean(portraitUrl);
   const firstChar = emperor.name.charAt(0);
   const reignPeriod = emperorService.formatReignPeriod(emperor);
   const reignYears = emperorService.calculateReignYears(emperor);
@@ -50,7 +51,7 @@ export function EmperorDetailModal({ emperor, open, onClose }: EmperorDetailModa
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth aria-labelledby="emperor-detail-title" slotProps={{ paper: { sx: { background: 'var(--color-bg-card)', borderRadius: 'var(--radius-lg)', maxHeight: '90vh' } } }}>
       <DialogTitle id="emperor-detail-title" sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', pb: 1 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Avatar {...(hasPortrait ? { src: emperor.portraitUrl } : {})} alt={emperor.name} sx={{ width: 72, height: 72, backgroundColor: dynastyColor.bg, color: dynastyColor.text, fontWeight: 'bold', fontSize: '2rem', border: `3px solid ${dynastyColor.text}` }}>
+          <Avatar {...(portraitUrl ? { src: portraitUrl } : {})} alt={emperor.name} sx={{ width: 72, height: 72, backgroundColor: dynastyColor.bg, color: dynastyColor.text, fontWeight: 'bold', fontSize: '2rem', border: `3px solid ${dynastyColor.text}` }}>
             {!hasPortrait && firstChar}
           </Avatar>
           <Box>

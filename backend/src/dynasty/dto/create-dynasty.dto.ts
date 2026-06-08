@@ -1,6 +1,13 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsInt, IsNotEmpty, IsOptional, IsString, Min } from 'class-validator';
+import {
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Min,
+  NotEquals,
+} from 'class-validator';
 
 export class CreateDynastyDto {
   @ApiProperty({ description: 'Dynasty name', example: '唐朝' })
@@ -12,6 +19,7 @@ export class CreateDynastyDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'startYear 不能为 0，历史纪年没有公元 0 年' })
   startYear: number;
 
   @ApiPropertyOptional({ description: 'Dynasty end year', example: 907 })
@@ -19,6 +27,7 @@ export class CreateDynastyDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'endYear 不能为 0，历史纪年没有公元 0 年' })
   endYear?: number | null;
 
   @ApiPropertyOptional({ description: 'Dynasty capital', example: '长安' })

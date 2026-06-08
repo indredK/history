@@ -47,7 +47,8 @@ export class TangController {
   @Get('tang-figures/:id')
   @ApiOperation({
     summary: 'Get Tang Dynasty figure by ID (compatible endpoint)',
-    description: 'Retrieve detailed information about a specific Tang Dynasty figure',
+    description:
+      'Retrieve detailed information about a specific Tang Dynasty figure',
   })
   @ApiParam({ name: 'id', description: 'Tang figure ID' })
   @ApiResponse({

@@ -463,8 +463,8 @@ function CulturePage() {
         open={editor.open}
         entity={editor.entity}
         mode={editor.mode}
-        school={editor.school}
-        scholar={editor.scholar}
+        school={editor.school ?? null}
+        scholar={editor.scholar ?? null}
         schools={schools}
         saving={saving}
         error={actionError}

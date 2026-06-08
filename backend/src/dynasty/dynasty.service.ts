@@ -91,7 +91,8 @@ export class DynastyService {
   async update(id: string, input: UpdateDynastyDto): Promise<DynastyDto> {
     const existing = await this.findRecordOrThrow(id);
     const nextStartYear = input.startYear ?? existing.startYear;
-    const nextEndYear = input.endYear !== undefined ? input.endYear : existing.endYear;
+    const nextEndYear =
+      input.endYear !== undefined ? input.endYear : existing.endYear;
 
     this.assertValidYearRange(nextStartYear, nextEndYear);
 
@@ -179,6 +180,10 @@ export class DynastyService {
     startYear: number,
     endYear?: number | null,
   ): void {
+    if (startYear === 0 || endYear === 0) {
+      throw new BadRequestException('朝代年份不能为 0，历史纪年没有公元 0 年');
+    }
+
     if (endYear != null && endYear < startYear) {
       throw new BadRequestException('结束年份不能早于开始年份');
     }

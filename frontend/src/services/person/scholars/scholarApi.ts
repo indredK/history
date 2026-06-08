@@ -1,4 +1,9 @@
-import type { Scholar, ScholarMutationInput, LiteraryWork } from './types';
+import type {
+  Scholar,
+  ScholarMutationInput,
+  LiteraryWork,
+  LiteraryWorkType,
+} from './types';
 import { createUnifiedService } from '@/utils/services/serviceFactory';
 import type { ScholarService } from './scholarService';
 import { scholarServiceHelper } from './scholarService';
@@ -12,14 +17,89 @@ import {
   readStringArray,
 } from '../common/figureTransform';
 
-type RawScholarRecord = Record<string, unknown>;
+interface RawScholarRecord {
+  [key: string]: unknown;
+  id?: unknown;
+  name?: unknown;
+  name_en?: unknown;
+  nameEn?: unknown;
+  dynasty?: unknown;
+  dynastyPeriod?: unknown;
+  dynasty_period?: unknown;
+  birthYear?: unknown;
+  birth_year?: unknown;
+  deathYear?: unknown;
+  death_year?: unknown;
+  schoolOfThought?: unknown;
+  school_of_thought?: unknown;
+  philosophicalSchoolId?: unknown;
+  philosophical_school_id?: unknown;
+  biography?: unknown;
+  portraitUrl?: unknown;
+  portrait_url?: unknown;
+  achievements?: unknown;
+  contributions?: unknown;
+  representativeWorks?: unknown;
+  representative_works?: unknown;
+  majorWorks?: unknown;
+  major_works?: unknown;
+  sources?: unknown;
+  createdAt?: unknown;
+  created_at?: unknown;
+  updatedAt?: unknown;
+  updated_at?: unknown;
+}
+
+const LITERARY_WORK_TYPES = new Set<LiteraryWorkType>([
+  'prose',
+  'poetry',
+  'essay',
+  'memorial',
+]);
+
+function normalizeWorkType(value: string): LiteraryWorkType {
+  return LITERARY_WORK_TYPES.has(value as LiteraryWorkType)
+    ? (value as LiteraryWorkType)
+    : 'essay';
+}
 
 function isLiteraryWork(work: unknown): work is LiteraryWork {
-  return Boolean(
-    work &&
-    typeof work === 'object' &&
-    'title' in work &&
+  if (!isRecord(work)) return false;
+  return (
+    typeof work['title'] === 'string' &&
+    work['title'].trim() !== '' &&
+    typeof work['type'] === 'string' &&
+    LITERARY_WORK_TYPES.has(work['type'] as LiteraryWorkType) &&
+    typeof work['description'] === 'string'
   );
+}
+
+function buildWorkId(index: number, title: string): string {
+  return `literary-work-${index}-${title.trim().replace(/\s+/g, '-') || 'work'}`;
+}
+
+function normalizeLiteraryWork(work: unknown, index: number): LiteraryWork | string | null {
+  if (typeof work === 'string') {
+    const title = work.trim();
+    return title || null;
+  }
+
+  if (!isRecord(work)) return null;
+
+  const title = readOptionalString(work, 'title');
+  if (!title) return null;
+
+  const result: LiteraryWork = {
+    id: readString(work, 'id', buildWorkId(index, title)),
+    title,
+    type: normalizeWorkType(readString(work, 'type', 'essay')),
+    description: readString(work, 'description'),
+  };
+
+  const contentExcerpt = readOptionalString(work, ['contentExcerpt', 'content_excerpt']);
+  if (contentExcerpt) result.contentExcerpt = contentExcerpt;
+
+  return result;
 }
 
 function readNullableNumber(record: RawScholarRecord, keys: string | string[]): number | null {
@@ -50,16 +130,16 @@ function readStringArrayWithFallback(record: RawScholarRecord, keys: string[]): 
 
 function readWorks(value: unknown): Array<LiteraryWork | string> {
   if (!Array.isArray(value)) return [];
-  return value.filter((work): work is LiteraryWork | string =>
-    typeof work === 'string' || isLiteraryWork(work),
-  );
+  return value
+    .map(normalizeLiteraryWork)
+    .filter((work): work is LiteraryWork | string => work !== null);
 }
 
 /**
  * 转换JSON数据为Scholar类型
  */
 const transformJsonToScholar = (jsonData: unknown, index: number): Scholar => {
-  const record = isRecord(jsonData) ? jsonData : {};
+  const record = isRecord(jsonData) ? jsonData as RawScholarRecord : {};
   const name = readString(record, 'name');
   const representativeSource = readWorks(record.representativeWorks ?? record.representative_works);
   const majorSource = readWorks(record.majorWorks ?? record.major_works);

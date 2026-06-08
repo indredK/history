@@ -43,8 +43,12 @@ export interface GanttModel {
 }
 
 export function buildGanttModel(blocks: TimeBlock[]): GanttModel {
+  const validBlocks = blocks.filter(
+    (block) => block.startYear !== 0 && block.endYear !== 0 && block.endYear >= block.startYear,
+  );
+
   // 1. 政权按起始年升序 → 行顺序（秦最先）
-  const polities = blocks
+  const polities = validBlocks
     .filter((b) => b.type === 'polity')
     .sort((a, b) => a.startYear - b.startYear);
 
@@ -66,7 +70,7 @@ export function buildGanttModel(blocks: TimeBlock[]): GanttModel {
   let min = Infinity;
   let max = -Infinity;
 
-  for (const b of blocks) {
+  for (const b of validBlocks) {
     if (b.startYear < min) min = b.startYear;
     if (b.endYear > max) max = b.endYear;
 
@@ -88,9 +92,9 @@ export function buildGanttModel(blocks: TimeBlock[]): GanttModel {
     }
   }
 
-  // 兜底：blocks 为空时给出合法范围，避免 Infinity 传入 ECharts
+  // 兜底：blocks 为空时给出非 0 合法范围，避免 Infinity 传入 ECharts
   const bounds: [number, number] =
-    min === Infinity || max === -Infinity ? [0, 1] : [min, max];
+    min === Infinity || max === -Infinity ? [-3000, new Date().getFullYear()] : [min, max];
 
   return { categories, polityData, rulerData, eraData, bounds };
 }

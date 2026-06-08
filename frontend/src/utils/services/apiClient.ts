@@ -6,6 +6,7 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import { handleApiResponse, handleSingleApiResponse } from './dataLoaders';
 import { ApiError, ApiErrorType, fallbackManager } from './errorHandling';
+import type { FallbackConfig } from './errorHandling';
 
 const isDev = import.meta.env.DEV;
 
@@ -147,7 +148,7 @@ export const fallbackControl = {
   /**
    * 更新降级配置
    */
-  updateConfig: (config: any) => fallbackManager.updateConfig(config),
+  updateConfig: (config: Partial<FallbackConfig>) => fallbackManager.updateConfig(config),
 
   /**
    * 获取当前状态

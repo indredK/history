@@ -47,7 +47,8 @@ export class SongController {
   @Get('song-figures/:id')
   @ApiOperation({
     summary: 'Get Song Dynasty figure by ID (compatible endpoint)',
-    description: 'Retrieve detailed information about a specific Song Dynasty figure',
+    description:
+      'Retrieve detailed information about a specific Song Dynasty figure',
   })
   @ApiParam({ name: 'id', description: 'Song figure ID' })
   @ApiResponse({

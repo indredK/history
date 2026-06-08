@@ -178,3 +178,92 @@
 - 新增 `scholarYearFormat`，学者卡片和详情统一显示“公元前 N 年 / N 年 / 生年不详 / 卒年不详”，两端未知时不渲染寿命标签。
 - 学者按出生年排序时将未知年份后置；`scholarApi` 改为 `unknown` 输入，兼容 camelCase 与 snake_case 字段，过滤无效日期并让 achievements 在空值时回退 contributions。
 - 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 66；本轮按当前约束仅做静态搜索和代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：culture/people 筛选和 tabs 响应式
+
+- 复查文化名人筛选器和人物页公共 tabs，发现文化页与人物页共用学者 store 后，旧筛选值可能不在当前朝代/学派选项中，导致 Select 进入 out-of-range 状态。
+- `ScholarFilter` 对空值和旧值做安全归一化，把当前选中值纳入选项集合并补 `renderValue`，保证选中态始终可见且不会丢失有效选项。
+- 人物页 9 个 tabs 在移动端开启滚动按钮，窄屏切换入口更明确。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 67；本轮按当前约束仅做静态代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：culture 思想流派转换器类型收口
+
+- 继续复查文化模块 service，发现 `schoolApi` 仍以 `any` 读取 API/JSON/mock 原始数据，思想流派字段转换缺少统一收口。
+- `transformJsonToSchool` 改为 `unknown` 输入，复用公共读取工具兼容 camelCase/snake_case 字段，代表人物、经典著作、日期和核心思想数组都做结构化读取。
+- `coreBeliefs/coreIdeas` 保持旧字段兼容，避免学派卡片和详情在不同数据源下丢失核心思想。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 68；本轮按当前约束仅做静态搜索和代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：culture 思想流派创立年份兜底
+
+- 复查学派详情头部，发现 `foundingYear === 0` 会被当作真实年份并显示为“公元元年”。
+- `SchoolHeader` 增加可靠年份判断，只有有限且非 0 的创立年份才渲染年份 chip；0、空值或无效值不再显示假时间。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 69；本轮按当前约束仅做静态搜索和代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：common FixedTabsPage URL 同步
+
+- 复查公共 `FixedTabsPage`，发现只有点击标签才通知 `onTabChange`，URL 参数初始化或变化导致的 tab 切换不会同步父组件状态。
+- 将 `onTabChange` 通知放到 activeTab effect 中，点击、默认值和 `?tab=` 参数驱动的切换都会统一通知父组件。
+- 该修复覆盖神话页宗教关系 tab 的 `religion-view` class 同步问题，避免 URL 直达宗教 tab 时外层样式仍停在神话故事视图。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 70；本轮按当前约束仅做静态代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：common 显式 any 收口
+
+- 复查后端业务源码和前端 people/culture/common/person/school/router 相关路径，定位到公共日志拦截器与路由表仍残留显式 `any`。
+- 后端 `LoggingInterceptor` 返回类型从 `Observable<any>` 改为 `Observable<unknown>`；前端路由表懒加载组件类型从 `ComponentType<any>` 改为 `ComponentType` 默认 props。
+- 后端 figure 公共 service 注释中的 `any` 改为“任意类型”，避免后续纯 grep 审查误报。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 71；本轮按当前约束仅做静态搜索和代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：common 数据加载工具类型收口
+
+- 继续复查前端公共服务工具，发现 `dataLoaders`、`apiClient` 降级配置入口和 storage 监听器仍有显式 `any`。
+- `handleApiResponse` / `handleSingleApiResponse` 改为 `unknown` 输入，通过结构判断兼容后端标准响应、分页响应、直接数组和单值响应；公共缓存改为 `Map<string, unknown>`。
+- `fallbackControl.updateConfig` 改为 `Partial<FallbackConfig>`；storage 监听值改为 `unknown`，并对 storage 事件旧值/新值做安全 JSON 解析，非法 JSON 保留原字符串。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 72；本轮按当前约束仅做静态搜索和代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：frontend 显式 any 全量收口
+
+- 继续复查 `frontend/src` 全量显式 `any`，剩余问题集中在公共组件、响应式 hook、宗教关系图 D3 布局和时间线 D3 渲染器。
+- 数据源指示器复用导出的 API 测试结果类型，错误边界使用 `ErrorInfo`，响应式表格继承 MUI `TableCellProps` 安全子集，分享 payload、屏幕方向和 storage/数据响应链路保持具体类型。
+- 宗教图谱 force/tree 布局补齐节点/边 datum 类型；时间线渲染器补齐 D3 轴、hover SVG 元素和 `TimelineConfig` 子类型，移除 `xAxis as any` 与配置参数兜底类型。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 73；本轮按当前约束仅做静态搜索和代码审查，`rg` 确认 `frontend/src` 已无显式 `any` 命中，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：event/timeline 年份语义收口
+
+- 继续复查时间线 UI 和后端 event 业务逻辑，发现事件卡片会在缺失 `endYear` 时显示 `undefined`，公元前年份在卡片、管理面板、详情和 D3 标签中仍是裸负数。
+- 后端事件 create/update/query DTO 与 service 拒绝年份 0；空时间线 bounds 不再返回 `0/0`，会优先使用查询边界，否则回落到 `-3000` 至当前年并保证顺序。
+- 前端时间线 API 转换器过滤缺失/无效开始年份，mock/API 写入拒绝 0 年和结束早于开始；事件卡片、管理面板、详情、D3 年份标签和 3D 朝代卡片统一使用中文历史纪年。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 74；本轮按当前约束仅做静态搜索和代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：dynasty 年份边界收口
+
+- 继续复查朝代模块，发现后端朝代写入/查询允许公元 0 年，甘特图空数据 bounds 会回落 `[0, 1]`。
+- 朝代 create/update/query DTO 和 service 年份校验同步拒绝 0 年；朝代表公元纪年列改为显式空值判断，避免以后字段类型变化时误把 0 当缺失。
+- 朝代甘特图数据转换过滤 0 年和反向区间，空数据 bounds 回落到 `-3000` 至当前年，轴标签继续复用中文历史纪年格式。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 75；本轮按当前约束仅做静态搜索和代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：map 年份边界收口
+
+- 继续复查地图模块，发现边界年份查询允许公元 0 年，地图事件详情仍直接拼裸年份，工作台年份 chip 本地拼接会显示“公元0年”。
+- 地图边界 DTO 和 service 均拒绝 0 年；工作台年份 chip 复用 `formatTimelineYear()`，年份筛选解析忽略 0 年。
+- 地图事件详情统一中文历史纪年，嵌入时间线初始范围去掉 `0` 兜底，朝代首尾缺失时直接返回 `undefined`。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 76；本轮按当前约束仅做静态搜索和代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：backend 年份 DTO 横扫
+
+- 横扫后端历史年份 DTO，发现 person/culture/emperor/figure 多个查询或写入字段只有 `@Min(-3000)`，未统一拒绝公元 0 年。
+- person 相关事件年份、生卒年，culture 学者生卒年/学派创立年，emperor 在位起止查询，以及 figure 公共生卒年查询均增加 `NotEquals(0)`。
+- person service 和 culture service 写入校验同步拒绝 0 年，避免绕过 Controller 时写入假历史年份。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 77；本轮按当前约束仅做静态搜索和代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 阶段一：frontend 年份表单前置校验
+
+- 继续复查前端写入表单，发现文化编辑、人物档案和事件管理会先提交公元 0 年，再等后端或 service 抛错。
+- 文化编辑弹窗在学派创立年、学者生卒年输入 0 时直接显示本地错误；人物档案表单本地校验生卒年和相关事件年份 0。
+- 时间线事件管理新增保存期输入校验，0 年和结束早于开始年份会显示在当前面板，`buildEventInput()` 保持渲染期只负责构造 payload。
+- 同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 78；本轮按当前约束仅做静态搜索和代码审查，未运行 lint、type-check、测试、开发服务器或浏览器。
+
+## 2026-06-08 收尾：启动报错与门禁修复
+
+- 接管浏览器复查启动后页面无数据，发现文化页动态导入失败源自 `scholarApi.ts` 中未完成的 `isLiteraryWork()` 布尔表达式，Vite OXC 解析失败后页面被 ErrorBoundary 接管。
+- 修复学者作品转换器，兼容字符串作品和结构化作品；随后根据 type-check 暴露的问题收紧人物/帝王/时间线/学派/公共响应转换器类型、MUI 空值传参、storage 监听值判断和 D3 tree link datum。
+- lint 首次复跑只剩 3 个无用 `eslint-disable`，已删除；同步更新 `MODULE_AUDIT_FIXES.md`，已修复问题计数推进到 79；最终按用户要求复跑 `bun run lint` 与 `bun run type-check`，均已通过。

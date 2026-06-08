@@ -7,13 +7,19 @@ export class PhilosophicalSchoolDto {
   @ApiProperty({ description: 'School name', example: '儒家' })
   name: string;
 
-  @ApiPropertyOptional({ description: 'English school name', example: 'Confucianism' })
+  @ApiPropertyOptional({
+    description: 'English school name',
+    example: 'Confucianism',
+  })
   name_en?: string | null;
 
   @ApiPropertyOptional({ description: 'School founder', example: '孔子' })
   founder?: string | null;
 
-  @ApiPropertyOptional({ description: 'Founder English name', example: 'Confucius' })
+  @ApiPropertyOptional({
+    description: 'Founder English name',
+    example: 'Confucius',
+  })
   founderEn?: string | null;
 
   @ApiPropertyOptional({ description: 'Founding year', example: -551 })
@@ -28,7 +34,10 @@ export class PhilosophicalSchoolDto {
   @ApiPropertyOptional({ description: 'Key texts', type: [String] })
   keyTexts?: string[] | null;
 
-  @ApiPropertyOptional({ description: 'Representative figures', type: [Object] })
+  @ApiPropertyOptional({
+    description: 'Representative figures',
+    type: [Object],
+  })
   representativeFigures?: Record<string, unknown>[] | null;
 
   @ApiPropertyOptional({ description: 'Classic works', type: [Object] })

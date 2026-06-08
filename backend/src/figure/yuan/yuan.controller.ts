@@ -47,7 +47,8 @@ export class YuanController {
   @Get('yuan-figures/:id')
   @ApiOperation({
     summary: 'Get Yuan Dynasty figure by ID (compatible endpoint)',
-    description: 'Retrieve detailed information about a specific Yuan Dynasty figure',
+    description:
+      'Retrieve detailed information about a specific Yuan Dynasty figure',
   })
   @ApiParam({ name: 'id', description: 'Yuan figure ID' })
   @ApiResponse({

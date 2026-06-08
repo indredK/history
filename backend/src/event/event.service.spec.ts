@@ -1,8 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import {
-  BadRequestException,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { EventService } from './event.service';
 import { PrismaService } from '../prisma/prisma.service';
 import type { EventQueryDto } from './dto/event-query.dto';
@@ -139,7 +136,7 @@ describe('EventService', () => {
 
     prisma = {
       client: {
-        $transaction: jest.fn(async (callback: (client: typeof tx) => unknown) =>
+        $transaction: jest.fn((callback: (client: typeof tx) => unknown) =>
           callback(tx),
         ),
       },
@@ -276,11 +273,43 @@ describe('EventService', () => {
 
       expect(prisma.event.findUnique).toHaveBeenCalledWith({
         where: { id: 'event-1' },
-        include: expect.objectContaining({
-          participants: expect.any(Object),
-          locations: expect.any(Object),
-          eventSources: expect.any(Object),
-        }),
+        include: {
+          participants: {
+            include: {
+              person: {
+                select: {
+                  id: true,
+                  name: true,
+                  dynasty: true,
+                },
+              },
+            },
+          },
+          locations: {
+            include: {
+              place: {
+                select: {
+                  id: true,
+                  name: true,
+                  latitude: true,
+                  longitude: true,
+                },
+              },
+            },
+          },
+          eventSources: {
+            include: {
+              source: {
+                select: {
+                  id: true,
+                  title: true,
+                  url: true,
+                  author: true,
+                },
+              },
+            },
+          },
+        },
       });
       expect(result.participants?.[0]).toEqual({
         id: 'ep-1',
@@ -485,7 +514,7 @@ describe('EventService', () => {
       expect(result.endYear).toBe(900);
     });
 
-    it('有事件时:bounds 取实际 min(startYear) / max(endYear || startYear)', async () => {
+    it('有事件时:bounds 取实际 min(startYear) / max(endYear ?? startYear)', async () => {
       prisma.event.findMany.mockResolvedValue([
         {
           id: 'a',

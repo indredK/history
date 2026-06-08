@@ -1,6 +1,14 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsIn, IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
+import {
+  IsIn,
+  IsInt,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+  NotEquals,
+} from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 export class PersonQueryDto extends PaginationQueryDto {
@@ -12,6 +20,7 @@ export class PersonQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'birthYear 不能为 0，历史纪年没有公元 0 年' })
   birthYear?: number;
 
   @ApiPropertyOptional({
@@ -22,6 +31,7 @@ export class PersonQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'deathYear 不能为 0，历史纪年没有公元 0 年' })
   deathYear?: number;
 
   @ApiPropertyOptional({
@@ -57,7 +67,8 @@ export class PersonQueryDto extends PaginationQueryDto {
   gender?: string;
 
   @ApiPropertyOptional({
-    description: 'Full-text keyword across name, alias, biography, dynasty and birthplace',
+    description:
+      'Full-text keyword across name, alias, biography, dynasty and birthplace',
     example: '变法',
   })
   @IsOptional()
@@ -72,6 +83,7 @@ export class PersonQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'birthYearEnd 不能为 0，历史纪年没有公元 0 年' })
   birthYearEnd?: number;
 
   @ApiPropertyOptional({
@@ -82,6 +94,7 @@ export class PersonQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'deathYearStart 不能为 0，历史纪年没有公元 0 年' })
   deathYearStart?: number;
 
   @ApiPropertyOptional({
@@ -96,7 +109,14 @@ export class PersonQueryDto extends PaginationQueryDto {
 
   @ApiPropertyOptional({
     description: 'Sort field',
-    enum: ['birthYear', 'deathYear', 'name', 'dynasty', 'updatedAt', 'createdAt'],
+    enum: [
+      'birthYear',
+      'deathYear',
+      'name',
+      'dynasty',
+      'updatedAt',
+      'createdAt',
+    ],
     example: 'birthYear',
   })
   @IsOptional()

@@ -127,18 +127,22 @@ export function renderForceLayout(
       });
 
       node
-        .select('.node')
-        .attr('opacity', (n: any) => (relatedNodeIds.has(n.id) ? 1 : 0.3))
-        .attr('stroke-width', (n: any) => (relatedNodeIds.has(n.id) ? 4 : 2));
+        .select<SVGCircleElement>('.node')
+        .attr('opacity', (n: D3Node) => (relatedNodeIds.has(n.id) ? 1 : 0.3))
+        .attr('stroke-width', (n: D3Node) => (relatedNodeIds.has(n.id) ? 4 : 2));
 
-      node.select('.node-label').attr('opacity', (n: any) => (relatedNodeIds.has(n.id) ? 1 : 0.3));
+      node
+        .select<SVGTextElement>('.node-label')
+        .attr('opacity', (n: D3Node) => (relatedNodeIds.has(n.id) ? 1 : 0.3));
 
       link
-        .select('line')
-        .attr('stroke-opacity', (e: any) => (relatedEdgeIds.has(e.id) ? 1 : 0.1))
-        .attr('stroke-width', (e: any) => (relatedEdgeIds.has(e.id) ? 3 : 2));
+        .select<SVGLineElement>('line')
+        .attr('stroke-opacity', (e: D3Edge) => (relatedEdgeIds.has(e.id) ? 1 : 0.1))
+        .attr('stroke-width', (e: D3Edge) => (relatedEdgeIds.has(e.id) ? 3 : 2));
 
-      link.select('text').attr('opacity', (e: any) => (relatedEdgeIds.has(e.id) ? 1 : 0.2));
+      link
+        .select<SVGTextElement>('text')
+        .attr('opacity', (e: D3Edge) => (relatedEdgeIds.has(e.id) ? 1 : 0.2));
     })
     .on('mouseleave', () => {
       node.select('.node').attr('opacity', 1).attr('stroke-width', 2);

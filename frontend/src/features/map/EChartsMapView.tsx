@@ -9,6 +9,7 @@ import type { Dynasty } from '@/services/culture/types';
 import type { Place } from '@/services/map/types';
 import { EChartsTimeline } from '@/features/timeline/components';
 import { getTimelineEventCategories } from '@/features/timeline/utils/timelineFilters';
+import { formatTimelineYear } from '@/features/timeline/utils/dynastyUtils';
 import { mapDataService } from '@/services/map/mapDataService';
 import { resolveEventLocations } from './utils/resolveEventLocations';
 import { useHistoricalPlayback } from './hooks/useHistoricalPlayback';
@@ -23,6 +24,12 @@ function findDefaultBoundaryDynasty(dynasties: Dynasty[]): Dynasty | undefined {
     (dynasty) => dynasty.startYear >= EARLIEST_BOUNDARY_YEAR,
   );
   return boundaryDynasties[0] ?? dynasties[0];
+}
+
+function formatMapEventYear(event: Event): string {
+  return event.endYear !== undefined && event.endYear !== null && event.endYear !== event.startYear
+    ? `${formatTimelineYear(event.startYear)} - ${formatTimelineYear(event.endYear)}`
+    : formatTimelineYear(event.startYear);
 }
 
 // ── Props interface ──
@@ -284,14 +291,21 @@ export function EChartsMapView({
       return undefined;
     }
 
-    const start = dynasties[0]?.startYear ?? 0;
-    const end = dynasties[dynasties.length - 1]?.endYear ?? currentYear;
+    const firstDynasty = dynasties[0];
+    const lastDynasty = dynasties[dynasties.length - 1];
+    if (!firstDynasty || !lastDynasty) {
+      return undefined;
+    }
+
+    const start = firstDynasty.startYear;
+    const end = lastDynasty.endYear ?? currentYear;
     return [start, end];
   }, [currentYear, dynasties]);
   const selectedEvent = useMemo(
     () => events.find((item) => item.id === selectedEventId) ?? null,
     [events, selectedEventId],
   );
+  const selectedEventYearLabel = selectedEvent ? formatMapEventYear(selectedEvent) : '';
   const selectedEventCategoryLabel = useMemo(
     () => (selectedEvent ? getTimelineEventCategories(selectedEvent).join(' / ') : ''),
     [selectedEvent],
@@ -595,10 +609,7 @@ export function EChartsMapView({
                   {selectedEvent.title}
                 </div>
                 <div style={{ marginTop: 8, fontSize: 13, color: 'var(--color-text-secondary)' }}>
-                  {selectedEvent.startYear}
-                  {selectedEvent.endYear && selectedEvent.endYear !== selectedEvent.startYear
-                    ? ` - ${selectedEvent.endYear}`
-                    : ''}年
+                  {selectedEventYearLabel}
                 </div>
               </div>
               <button

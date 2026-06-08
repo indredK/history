@@ -37,7 +37,7 @@ interface PersonState {
   getRoleOptions: () => string[];
 }
 
-function includesText(value: string | undefined, query: string): boolean {
+function includesText(value: string | null | undefined, query: string): boolean {
   return Boolean(value?.toLowerCase().includes(query));
 }
 

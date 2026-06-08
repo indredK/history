@@ -26,7 +26,10 @@ export class EventRelatedPersonDto {
 }
 
 export class EventParticipantDto {
-  @ApiProperty({ description: 'Event participant relation ID', example: 'uuid-string' })
+  @ApiProperty({
+    description: 'Event participant relation ID',
+    example: 'uuid-string',
+  })
   id: string;
 
   @ApiProperty({ description: 'Referenced person ID', example: 'uuid-string' })
@@ -57,7 +60,10 @@ export class EventRelatedPlaceDto {
 }
 
 export class EventLocationDto {
-  @ApiProperty({ description: 'Event location relation ID', example: 'uuid-string' })
+  @ApiProperty({
+    description: 'Event location relation ID',
+    example: 'uuid-string',
+  })
   id: string;
 
   @ApiProperty({ description: 'Referenced place ID', example: 'uuid-string' })

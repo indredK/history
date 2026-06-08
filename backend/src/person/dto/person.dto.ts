@@ -82,7 +82,10 @@ export class PersonDto {
   @ApiPropertyOptional({ description: 'Role keys', type: [String] })
   roles?: string[] | null;
 
-  @ApiPropertyOptional({ description: 'Aliases and alternate names', type: [String] })
+  @ApiPropertyOptional({
+    description: 'Aliases and alternate names',
+    type: [String],
+  })
   aliases?: string[] | null;
 
   @ApiPropertyOptional({ description: 'Major achievements', type: [String] })
@@ -91,16 +94,25 @@ export class PersonDto {
   @ApiPropertyOptional({ description: 'Representative works', type: [String] })
   works?: string[] | null;
 
-  @ApiPropertyOptional({ description: 'Related historical events', type: [PersonEventDto] })
+  @ApiPropertyOptional({
+    description: 'Related historical events',
+    type: [PersonEventDto],
+  })
   events?: PersonEventDto[] | null;
 
-  @ApiPropertyOptional({ description: 'Historical evaluations', type: [PersonEvaluationDto] })
+  @ApiPropertyOptional({
+    description: 'Historical evaluations',
+    type: [PersonEvaluationDto],
+  })
   evaluations?: PersonEvaluationDto[] | null;
 
   @ApiPropertyOptional({ description: 'Portrait URL' })
   portraitUrl?: string | null;
 
-  @ApiPropertyOptional({ description: 'Data sources', type: [PersonSourceRefDto] })
+  @ApiPropertyOptional({
+    description: 'Data sources',
+    type: [PersonSourceRefDto],
+  })
   sources?: PersonSourceRefDto[] | string[] | null;
 
   @ApiPropertyOptional({

@@ -84,7 +84,8 @@ export function ScholarDetailModal({
   };
 
   // Property 7: Portrait Fallback
-  const hasPortrait = scholar.portraitUrl && scholar.portraitUrl.trim() !== '';
+  const portraitUrl = scholar.portraitUrl?.trim() ? scholar.portraitUrl : undefined;
+  const hasPortrait = Boolean(portraitUrl);
   const firstChar = scholar.name.charAt(0);
 
   // 获取成就列表，优先使用achievements，兼容contributions
@@ -126,7 +127,7 @@ export function ScholarDetailModal({
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           {/* 头像 */}
           <Avatar
-            {...(hasPortrait ? { src: scholar.portraitUrl } : {})}
+            {...(portraitUrl ? { src: portraitUrl } : {})}
             alt={scholar.name}
             sx={{
               width: 64,

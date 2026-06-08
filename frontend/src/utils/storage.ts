@@ -112,7 +112,16 @@ export const dynastiesStorage = {
 /**
  * 存储事件监听器类型
  */
-export type StorageEventListener = (key: string, newValue: any, oldValue: any) => void;
+export type StorageEventListener = (key: string, newValue: unknown, oldValue: unknown) => void;
+
+function parseStoredValue(value: string | null): unknown {
+  if (value === null) return null;
+  try {
+    return JSON.parse(value) as unknown;
+  } catch {
+    return value;
+  }
+}
 
 /**
  * 存储变化监听器
@@ -166,8 +175,8 @@ export class StorageListener {
 
     const keyListeners = this.listeners.get(event.key);
     if (keyListeners) {
-      const oldValue = event.oldValue ? JSON.parse(event.oldValue) : null;
-      const newValue = event.newValue ? JSON.parse(event.newValue) : null;
+      const oldValue = parseStoredValue(event.oldValue);
+      const newValue = parseStoredValue(event.newValue);
       
       keyListeners.forEach(listener => {
         try {

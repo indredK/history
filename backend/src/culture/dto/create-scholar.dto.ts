@@ -8,6 +8,7 @@ import {
   IsString,
   IsUUID,
   Min,
+  NotEquals,
 } from 'class-validator';
 
 export class CreateScholarDto {
@@ -16,12 +17,18 @@ export class CreateScholarDto {
   @IsNotEmpty()
   name: string;
 
-  @ApiPropertyOptional({ description: 'English scholar name', example: 'Confucius' })
+  @ApiPropertyOptional({
+    description: 'English scholar name',
+    example: 'Confucius',
+  })
   @IsOptional()
   @IsString()
   name_en?: string | null;
 
-  @ApiPropertyOptional({ description: 'Dynasty label for frontend display', example: '春秋' })
+  @ApiPropertyOptional({
+    description: 'Dynasty label for frontend display',
+    example: '春秋',
+  })
   @IsOptional()
   @IsString()
   dynasty?: string | null;
@@ -36,6 +43,7 @@ export class CreateScholarDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'birthYear 不能为 0，历史纪年没有公元 0 年' })
   birthYear?: number | null;
 
   @ApiPropertyOptional({ description: 'Death year', example: -479 })
@@ -43,6 +51,7 @@ export class CreateScholarDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'deathYear 不能为 0，历史纪年没有公元 0 年' })
   deathYear?: number | null;
 
   @ApiPropertyOptional({
@@ -53,12 +62,18 @@ export class CreateScholarDto {
   @IsUUID()
   philosophicalSchoolId?: string | null;
 
-  @ApiPropertyOptional({ description: 'Philosophical school name', example: '儒家' })
+  @ApiPropertyOptional({
+    description: 'Philosophical school name',
+    example: '儒家',
+  })
   @IsOptional()
   @IsString()
   schoolOfThought?: string | null;
 
-  @ApiPropertyOptional({ description: 'Major or representative works', type: [Object] })
+  @ApiPropertyOptional({
+    description: 'Major or representative works',
+    type: [Object],
+  })
   @IsOptional()
   @IsArray()
   majorWorks?: unknown[];

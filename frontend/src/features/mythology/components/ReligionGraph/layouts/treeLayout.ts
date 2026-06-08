@@ -178,8 +178,8 @@ export function renderTreeLayout(
   container
     .append('g')
     .attr('class', 'links')
-    .selectAll('path')
-    .data(root.links().filter((l) => l.source.data.id !== 'root'))
+    .selectAll<SVGPathElement, d3.HierarchyPointLink<TreeDatum>>('path')
+    .data(root.links().filter((l) => l.source.data.id !== 'root') as d3.HierarchyPointLink<TreeDatum>[])
     .join('path')
     .attr('class', 'tree-link')
     .attr('fill', 'none')
@@ -189,7 +189,11 @@ export function renderTreeLayout(
     .attr(
       'd',
       d3
-        .linkHorizontal<any, any>()
+        .linkHorizontal<
+          unknown,
+          d3.HierarchyPointLink<TreeDatum>,
+          d3.HierarchyPointNode<TreeDatum>
+        >()
         .x((d) => d.y)
         .y((d) => d.x)
     );

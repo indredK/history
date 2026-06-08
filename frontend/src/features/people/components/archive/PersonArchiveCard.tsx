@@ -83,7 +83,7 @@ export function PersonArchiveCard({
           person.courtesy ? `字 ${person.courtesy}` : '',
           person.nameEn || person.name_en || '',
         ].filter(Boolean).join(' · ')}
-        portraitUrl={person.portraitUrl}
+        portraitUrl={person.portraitUrl ?? undefined}
         primaryTag={{
           label: getRoleLabel(primaryRole),
           color: primaryColor,
@@ -95,7 +95,7 @@ export function PersonArchiveCard({
             ? [{ label: '籍贯：', value: person.birthplace, truncate: true }]
             : []),
         ]}
-        biography={person.biography}
+        biography={person.biography ?? undefined}
         onClick={() => onClick(person)}
         avatarColor={primaryColor}
       />

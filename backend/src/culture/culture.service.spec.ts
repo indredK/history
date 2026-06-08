@@ -225,16 +225,18 @@ describe('CultureService', () => {
         asQuery<ScholarQueryDto>({}),
       );
 
-      expect(result.data[0]).toEqual(expect.objectContaining({
-        id: 'kongzi',
-        name: '孔子',
-        majorWorks: ['论语', '春秋'],
-        representativeWorks: [],
-        contributions: ['仁', '礼'],
-        achievements: ['仁', '礼'],
-        schoolOfThought: '儒家',
-        sources: null,
-      }));
+      expect(result.data[0]).toEqual(
+        expect.objectContaining({
+          id: 'kongzi',
+          name: '孔子',
+          majorWorks: ['论语', '春秋'],
+          representativeWorks: [],
+          contributions: ['仁', '礼'],
+          achievements: ['仁', '礼'],
+          schoolOfThought: '儒家',
+          sources: null,
+        }),
+      );
       expect(
         (result.data[0] as { philosophicalSchool?: unknown })
           .philosophicalSchool,
@@ -333,11 +335,13 @@ describe('CultureService', () => {
 
     it('创建学者时卒年不能早于生年', async () => {
       await expect(
-        service.createScholar(asQuery({
-          name: '孔子',
-          birthYear: -479,
-          deathYear: -551,
-        })),
+        service.createScholar(
+          asQuery({
+            name: '孔子',
+            birthYear: -479,
+            deathYear: -551,
+          }),
+        ),
       ).rejects.toThrow(BadRequestException);
     });
 
@@ -441,9 +445,9 @@ describe('CultureService', () => {
 
   describe('create/update school - 保存校验', () => {
     it('创建思想流派时名称不能为空', async () => {
-      await expect(
-        service.createSchool(asQuery({ name: '' })),
-      ).rejects.toThrow(BadRequestException);
+      await expect(service.createSchool(asQuery({ name: '' }))).rejects.toThrow(
+        BadRequestException,
+      );
     });
 
     it('更新思想流派时名称不能清空', async () => {

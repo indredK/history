@@ -48,11 +48,37 @@ interface TimelineByEventTypeFile {
   }>;
 }
 
+interface RawTimelineRecord {
+  [key: string]: unknown;
+  id?: unknown;
+  title?: unknown;
+  description?: unknown;
+  eventType?: unknown;
+  startYear?: unknown;
+  endYear?: unknown;
+  participants?: unknown;
+  personId?: unknown;
+  person?: unknown;
+  role?: unknown;
+  name?: unknown;
+  dynasty?: unknown;
+  locations?: unknown;
+  placeId?: unknown;
+  place?: unknown;
+  latitude?: unknown;
+  longitude?: unknown;
+  sources?: unknown;
+  url?: unknown;
+  author?: unknown;
+  createdAt?: unknown;
+  updatedAt?: unknown;
+}
+
 const API_ENDPOINT = '/events';
 
 let mockCache: Event[] | null = null;
 
-function isRecord(value: unknown): value is Record<string, unknown> {
+function isRecord(value: unknown): value is RawTimelineRecord {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 }
 
@@ -69,6 +95,25 @@ function readNumber(value: unknown): number | undefined {
   return undefined;
 }
 
+function readHistoricalYear(value: unknown): number | undefined {
+  const year = readNumber(value);
+  return year === undefined || year === 0 ? undefined : year;
+}
+
+function isEvent(value: Event | null): value is Event {
+  return value !== null;
+}
+
+function assertWritableEventYears(input: EventInput): void {
+  if (input.startYear === 0 || input.endYear === 0) {
+    throw new Error('事件年份不能为 0，历史纪年没有公元 0 年');
+  }
+
+  if (input.endYear !== undefined && input.endYear !== null && input.endYear < input.startYear) {
+    throw new Error('事件结束年份不能早于开始年份');
+  }
+}
+
 function eventTypeToTokens(eventType?: string | null): string[] {
   return (eventType ?? '')
     .split(',')
@@ -77,6 +122,8 @@ function eventTypeToTokens(eventType?: string | null): string[] {
 }
 
 function normalizeEventInput(input: EventInput, id: string): Event {
+  assertWritableEventYears(input);
+
   const eventType = input.eventType
     ? Array.from(new Set(eventTypeToTokens(input.eventType))).join(',')
     : '';
@@ -145,12 +192,16 @@ function transformStaticEvent(
   return event;
 }
 
-function transformApiEvent(raw: unknown, index = 0): Event {
+function transformApiEvent(raw: unknown, index = 0): Event | null {
   const source = isRecord(raw) ? raw : {};
   const id = readString(source.id) || `event-${index + 1}`;
   const eventType = readString(source.eventType);
-  const startYear = readNumber(source.startYear) ?? 0;
-  const endYear = readNumber(source.endYear);
+  const startYear = readHistoricalYear(source.startYear);
+  const endYear = readHistoricalYear(source.endYear);
+  if (startYear === undefined) {
+    return null;
+  }
+
   const participants: EventParticipantRef[] = Array.isArray(source.participants)
     ? source.participants.filter(isRecord).map((item) => {
         const participant: EventParticipantRef = {
@@ -275,19 +326,31 @@ async function getStaticEvents(): Promise<Event[]> {
 
 async function getApiEvents(): Promise<Event[]> {
   const apiItems = await fetchApiListData(API_ENDPOINT);
-  return sortEvents(apiItems.map((item, index) => transformApiEvent(item, index)));
+  return sortEvents(apiItems.map((item, index) => transformApiEvent(item, index)).filter(isEvent));
 }
 
 async function createApiEvent(input: EventInput): Promise<Event> {
+  assertWritableEventYears(input);
+
   const response = await apiClient.post(API_ENDPOINT, input);
   const apiResponse = handleSingleApiResponse<unknown>(response);
-  return transformApiEvent(apiResponse.data);
+  const event = transformApiEvent(apiResponse.data);
+  if (!event) {
+    throw new Error('接口返回的事件年份无效');
+  }
+  return event;
 }
 
 async function updateApiEvent(id: string, input: EventInput): Promise<Event> {
+  assertWritableEventYears(input);
+
   const response = await apiClient.patch(`${API_ENDPOINT}/${id}`, input);
   const apiResponse = handleSingleApiResponse<unknown>(response);
-  return transformApiEvent(apiResponse.data);
+  const event = transformApiEvent(apiResponse.data);
+  if (!event) {
+    throw new Error('接口返回的事件年份无效');
+  }
+  return event;
 }
 
 async function deleteApiEvent(id: string): Promise<Event | null> {

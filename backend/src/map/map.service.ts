@@ -57,16 +57,76 @@ export interface CacheStatsResponse {
 export class MapService {
   private readonly boundaryCache = new Map<string, unknown>();
   private readonly boundaryMappings: BoundaryMapping[] = [
-    { file: 'boundaries_qin.geojson', validFrom: -221, validTo: -206, name: '秦朝', period: 'qin' },
-    { file: 'boundaries_han.geojson', validFrom: -206, validTo: 220, name: '汉朝', period: 'han' },
-    { file: 'boundaries_three_kingdoms.geojson', validFrom: 220, validTo: 280, name: '三国', period: 'sanguo' },
-    { file: 'boundaries_jin.geojson', validFrom: 266, validTo: 420, name: '晋朝', period: 'jin' },
-    { file: 'boundaries_sui.geojson', validFrom: 581, validTo: 618, name: '隋朝', period: 'sui' },
-    { file: 'boundaries_tang.geojson', validFrom: 618, validTo: 907, name: '唐朝', period: 'tang' },
-    { file: 'boundaries_song.geojson', validFrom: 960, validTo: 1279, name: '宋朝', period: 'song' },
-    { file: 'boundaries_yuan.geojson', validFrom: 1271, validTo: 1368, name: '元朝', period: 'yuan' },
-    { file: 'boundaries_ming.geojson', validFrom: 1368, validTo: 1644, name: '明朝', period: 'ming' },
-    { file: 'boundaries_qing.geojson', validFrom: 1644, validTo: 1912, name: '清朝', period: 'qing' },
+    {
+      file: 'boundaries_qin.geojson',
+      validFrom: -221,
+      validTo: -206,
+      name: '秦朝',
+      period: 'qin',
+    },
+    {
+      file: 'boundaries_han.geojson',
+      validFrom: -206,
+      validTo: 220,
+      name: '汉朝',
+      period: 'han',
+    },
+    {
+      file: 'boundaries_three_kingdoms.geojson',
+      validFrom: 220,
+      validTo: 280,
+      name: '三国',
+      period: 'sanguo',
+    },
+    {
+      file: 'boundaries_jin.geojson',
+      validFrom: 266,
+      validTo: 420,
+      name: '晋朝',
+      period: 'jin',
+    },
+    {
+      file: 'boundaries_sui.geojson',
+      validFrom: 581,
+      validTo: 618,
+      name: '隋朝',
+      period: 'sui',
+    },
+    {
+      file: 'boundaries_tang.geojson',
+      validFrom: 618,
+      validTo: 907,
+      name: '唐朝',
+      period: 'tang',
+    },
+    {
+      file: 'boundaries_song.geojson',
+      validFrom: 960,
+      validTo: 1279,
+      name: '宋朝',
+      period: 'song',
+    },
+    {
+      file: 'boundaries_yuan.geojson',
+      validFrom: 1271,
+      validTo: 1368,
+      name: '元朝',
+      period: 'yuan',
+    },
+    {
+      file: 'boundaries_ming.geojson',
+      validFrom: 1368,
+      validTo: 1644,
+      name: '明朝',
+      period: 'ming',
+    },
+    {
+      file: 'boundaries_qing.geojson',
+      validFrom: 1644,
+      validTo: 1912,
+      name: '清朝',
+      period: 'qing',
+    },
   ];
 
   constructor(private readonly prisma: PrismaService) {}
@@ -107,7 +167,9 @@ export class MapService {
     );
 
     if (!mapping) {
-      throw new NotFoundException(`未找到 ${normalizedPeriod} 对应的疆域边界配置`);
+      throw new NotFoundException(
+        `未找到 ${normalizedPeriod} 对应的疆域边界配置`,
+      );
     }
 
     return {
@@ -123,6 +185,10 @@ export class MapService {
   async getBoundaryDataByYear(year: number): Promise<BoundaryDataResponse> {
     if (!Number.isFinite(year)) {
       throw new BadRequestException('年份必须是有效数字');
+    }
+
+    if (year === 0) {
+      throw new BadRequestException('年份不能为 0，历史纪年没有公元 0 年');
     }
 
     const mapping = this.boundaryMappings
@@ -198,8 +264,25 @@ export class MapService {
 
   private resolveBoundaryPath(file: string): string {
     const candidates = [
-      join(process.cwd(), 'frontend', 'public', 'data', 'map', 'boundaries', file),
-      join(process.cwd(), '..', 'frontend', 'public', 'data', 'map', 'boundaries', file),
+      join(
+        process.cwd(),
+        'frontend',
+        'public',
+        'data',
+        'map',
+        'boundaries',
+        file,
+      ),
+      join(
+        process.cwd(),
+        '..',
+        'frontend',
+        'public',
+        'data',
+        'map',
+        'boundaries',
+        file,
+      ),
     ];
     const matchedPath = candidates.find((candidate) => existsSync(candidate));
 
@@ -262,9 +345,7 @@ export class MapService {
       throw new BadRequestException('疆域时期不能为空');
     }
 
-    if (
-      !ACCEPTED_BOUNDARY_PERIODS.includes(normalized as BoundaryPeriod)
-    ) {
+    if (!ACCEPTED_BOUNDARY_PERIODS.includes(normalized as BoundaryPeriod)) {
       throw new NotFoundException(`未找到 ${normalized} 对应的疆域边界配置`);
     }
 

@@ -18,6 +18,7 @@ import {
   EVENT_TYPE_LABELS,
   getTimelineEventCategories,
 } from '@/features/timeline/utils/timelineFilters';
+import { formatTimelineYear } from '@/features/timeline/utils/dynastyUtils';
 import { getDynasties, getEvents, getPlaces } from '@/services/dataClient';
 import type { Dynasty } from '@/services/culture/types';
 import type { Event } from '@/services/timeline/types';
@@ -50,11 +51,7 @@ function formatYearLabel(year: number | null) {
     return '未锁定';
   }
 
-  if (year < 0) {
-    return `公元前${Math.abs(year)}年`;
-  }
-
-  return `公元${year}年`;
+  return formatTimelineYear(year);
 }
 
 function parseOptionalYear(value: string): number | null {
@@ -64,7 +61,7 @@ function parseOptionalYear(value: string): number | null {
   }
 
   const parsed = Number(trimmed);
-  return Number.isFinite(parsed) ? parsed : null;
+  return Number.isFinite(parsed) && parsed !== 0 ? parsed : null;
 }
 
 export function MapWorkbench() {

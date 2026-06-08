@@ -98,7 +98,6 @@ export function useFigureCollection<T, TSortBy extends string = string>(
         options: config.getOptions(),
         onChange: config.setFilter,
       })),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [store.filters, store.items]
   );
 

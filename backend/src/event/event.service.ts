@@ -192,10 +192,10 @@ export class EventService {
     const shouldReplaceSources = input.sourceIds !== undefined;
 
     if (
-      !hasScalarChanges
-      && !shouldReplaceParticipants
-      && !shouldReplaceLocations
-      && !shouldReplaceSources
+      !hasScalarChanges &&
+      !shouldReplaceParticipants &&
+      !shouldReplaceLocations &&
+      !shouldReplaceSources
     ) {
       return this.toEventDto(current);
     }
@@ -286,7 +286,9 @@ export class EventService {
     return event;
   }
 
-  private normalizeCreateInput(input: CreateEventDto): NormalizedEventWriteInput {
+  private normalizeCreateInput(
+    input: CreateEventDto,
+  ): NormalizedEventWriteInput {
     const title = this.requireTitle(input.title);
     this.assertYearRange(input.startYear, input.endYear ?? null);
 
@@ -312,7 +314,7 @@ export class EventService {
         : current.title;
     const startYear = input.startYear ?? current.startYear;
     const endYear =
-      input.endYear !== undefined ? input.endYear ?? null : current.endYear;
+      input.endYear !== undefined ? (input.endYear ?? null) : current.endYear;
 
     this.assertYearRange(startYear, endYear);
 
@@ -354,11 +356,11 @@ export class EventService {
     next: NormalizedEventWriteInput,
   ): boolean {
     return (
-      current.title !== next.title
-      || current.startYear !== next.startYear
-      || current.endYear !== next.endYear
-      || current.description !== next.description
-      || current.eventType !== next.eventType
+      current.title !== next.title ||
+      current.startYear !== next.startYear ||
+      current.endYear !== next.endYear ||
+      current.description !== next.description ||
+      current.eventType !== next.eventType
     );
   }
 
@@ -371,6 +373,10 @@ export class EventService {
   }
 
   private assertYearRange(startYear: number, endYear: number | null): void {
+    if (startYear === 0 || endYear === 0) {
+      throw new BadRequestException('事件年份不能为 0，历史纪年没有公元 0 年');
+    }
+
     if (endYear !== null && endYear < startYear) {
       throw new BadRequestException('事件结束年份不能早于开始年份');
     }
@@ -453,7 +459,10 @@ export class EventService {
 
   private async validateRelations(
     tx: Prisma.TransactionClient,
-    input: Pick<NormalizedEventWriteInput, 'participants' | 'locations' | 'sourceIds'>,
+    input: Pick<
+      NormalizedEventWriteInput,
+      'participants' | 'locations' | 'sourceIds'
+    >,
   ): Promise<void> {
     await Promise.all([
       this.assertReferencedIdsExist(
@@ -477,11 +486,7 @@ export class EventService {
         select: { id: true };
       }) => Promise<Array<{ id: string }>>;
     },
-  >(
-    delegate: TDelegate,
-    ids: string[],
-    label: string,
-  ): Promise<void> {
+  >(delegate: TDelegate, ids: string[], label: string): Promise<void> {
     if (ids.length === 0) {
       return;
     }
@@ -642,7 +647,7 @@ export class EventService {
   }
 
   /**
-   * 时间轴边界计算:有事件时取实际 min/max,无事件时落回入参边界(或 0)。
+   * 时间轴边界计算:有事件时取实际 min/max,无事件时优先落回入参边界。
    * endYear 为 null 的事件用 startYear 兜底参与 max 计算。
    */
   private calculateTimelineBounds(
@@ -651,9 +656,12 @@ export class EventService {
     fallbackEnd?: number,
   ): { startYear: number; endYear: number } {
     if (events.length === 0) {
+      const emptyStart = fallbackStart ?? fallbackEnd ?? -3000;
+      const emptyEnd = fallbackEnd ?? fallbackStart ?? new Date().getFullYear();
+
       return {
-        startYear: fallbackStart ?? 0,
-        endYear: fallbackEnd ?? 0,
+        startYear: Math.min(emptyStart, emptyEnd),
+        endYear: Math.max(emptyStart, emptyEnd),
       };
     }
     return {

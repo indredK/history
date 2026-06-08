@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { randomUUID } from 'node:crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '../generated/prisma/client';
@@ -7,7 +11,7 @@ import { PaginatedResponseDto } from '../common/dto/paginated-response.dto';
 import { PersonDto } from './dto/person.dto';
 import { CreatePersonDto, UpdatePersonDto } from './dto/person-mutation.dto';
 
-type JsonField = string | null | unknown;
+type JsonField = unknown;
 
 interface PersonRecord {
   id: string;
@@ -40,10 +44,7 @@ interface PersonCountRecord {
   total: number | bigint;
 }
 
-const SORT_COLUMN_MAP: Record<
-  NonNullable<PersonQueryDto['sortBy']>,
-  string
-> = {
+const SORT_COLUMN_MAP: Record<NonNullable<PersonQueryDto['sortBy']>, string> = {
   birthYear: 'birthYear',
   deathYear: 'deathYear',
   name: 'name',
@@ -355,12 +356,16 @@ export class PersonService {
     birthYear?: number | null,
     deathYear?: number | null,
   ): void {
+    if (birthYear === 0 || deathYear === 0) {
+      throw new BadRequestException('人物年份不能为 0，历史纪年没有公元 0 年');
+    }
+
     if (
-      birthYear !== undefined
-      && birthYear !== null
-      && deathYear !== undefined
-      && deathYear !== null
-      && deathYear < birthYear
+      birthYear !== undefined &&
+      birthYear !== null &&
+      deathYear !== undefined &&
+      deathYear !== null &&
+      deathYear < birthYear
     ) {
       throw new BadRequestException('人物卒年不能早于生年');
     }
@@ -368,9 +373,9 @@ export class PersonService {
 
   private assertConfidence(confidence?: number | null): void {
     if (
-      confidence !== undefined
-      && confidence !== null
-      && (confidence < 0 || confidence > 1)
+      confidence !== undefined &&
+      confidence !== null &&
+      (confidence < 0 || confidence > 1)
     ) {
       throw new BadRequestException('人物可信度必须在 0 到 1 之间');
     }

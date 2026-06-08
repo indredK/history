@@ -2,6 +2,7 @@ import './EventCard.scss';
 import type { Event } from '@/services/timeline/types';
 import { useState } from 'react';
 import { getTimelineEventCategories } from '@/features/timeline/utils/timelineFilters';
+import { formatTimelineYear } from '@/features/timeline/utils/dynastyUtils';
 
 type Props = {
   event: Event;
@@ -13,13 +14,17 @@ export function EventCard({ event, index }: Props) {
   const panelBg = 'var(--app-panel-bg)';
   const panelBorder = 'var(--app-panel-border)';
   const categoryLabel = getTimelineEventCategories(event).join(' / ');
+  const eventYearLabel =
+    event.endYear !== undefined && event.endYear !== null && event.endYear !== event.startYear
+      ? `${formatTimelineYear(event.startYear)} - ${formatTimelineYear(event.endYear)}`
+      : formatTimelineYear(event.startYear);
 
   const handleShare = () => {
-    const data = {
+    const data: ShareData = {
       title: event.title,
       text: event.description ?? '',
       url: location.href,
-    } as any;
+    };
     if (navigator.share) {
       navigator.share(data);
     } else {
@@ -33,8 +38,7 @@ export function EventCard({ event, index }: Props) {
       style={{ animationDelay: `${index * 0.05}s` }}
     >
       <div className="event-year">
-        {event.startYear}
-        {event.endYear !== event.startYear && ` - ${event.endYear}`}
+        {eventYearLabel}
       </div>
       <div className="event-content">
         <h3>{event.title}</h3>

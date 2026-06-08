@@ -13,6 +13,7 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { dynastyConfig, dynastyUtils } from '@/config';
 import type { Dynasty } from '@/services/culture/types';
+import { formatTimelineYear } from '@/features/timeline/utils/dynastyUtils';
 
 export interface DynastyCardProps {
   dynasty: Dynasty;
@@ -46,6 +47,11 @@ export function DynastyCard({
 
   const dynastyColor = dynasty.color || dynastyConfig.defaultColor;
   const { threeDConfig, cardStyles } = dynastyConfig;
+  const dynastyYearLabel = `${formatTimelineYear(dynasty.startYear, { short: true })} - ${
+    dynasty.endYear === undefined || dynasty.endYear === null
+      ? '现在'
+      : formatTimelineYear(dynasty.endYear, { short: true })
+  }`;
 
   useFrame((state, delta) => {
     if (!groupRef.current) return;
@@ -197,7 +203,7 @@ export function DynastyCard({
                 marginBottom: dynasty.description && (isActive || hovered) ? '6px' : 0,
               }}
             >
-              {dynasty.startYear} - {dynasty.endYear || '现在'}
+              {dynastyYearLabel}
             </div>
 
             {dynasty.description && (isActive || hovered) && (

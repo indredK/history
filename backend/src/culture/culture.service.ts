@@ -271,9 +271,7 @@ export class CultureService {
     });
 
     if (!school) {
-      throw new NotFoundException(
-        `未找到 ID 为 ${id} 的思想流派记录`,
-      );
+      throw new NotFoundException(`未找到 ID 为 ${id} 的思想流派记录`);
     }
 
     return this.transformSchool(school);
@@ -283,6 +281,10 @@ export class CultureService {
     dto: CreatePhilosophicalSchoolDto,
   ): Promise<PhilosophicalSchoolDto> {
     this.assertRequiredName(dto.name, '思想流派名称不能为空');
+    this.assertHistoricalYear(
+      dto.foundingYear,
+      '思想流派创立年份不能为 0，历史纪年没有公元 0 年',
+    );
 
     const school = await this.prisma.philosophicalSchool.create({
       data: this.buildSchoolData(dto) as never,
@@ -298,6 +300,12 @@ export class CultureService {
     await this.ensureSchoolExists(id);
     if (this.hasOwn(dto, 'name')) {
       this.assertRequiredName(dto.name, '思想流派名称不能为空');
+    }
+    if (this.hasOwn(dto, 'foundingYear')) {
+      this.assertHistoricalYear(
+        dto.foundingYear,
+        '思想流派创立年份不能为 0，历史纪年没有公元 0 年',
+      );
     }
 
     const school = await this.prisma.philosophicalSchool.update({
@@ -347,9 +355,7 @@ export class CultureService {
     });
 
     if (!school) {
-      throw new NotFoundException(
-        `未找到 ID 为 ${id} 的思想流派记录`,
-      );
+      throw new NotFoundException(`未找到 ID 为 ${id} 的思想流派记录`);
     }
 
     return school;
@@ -416,7 +422,10 @@ export class CultureService {
       return { id: null, name: null };
     }
 
-    if (typeof dto.philosophicalSchoolId === 'string' && dto.philosophicalSchoolId.trim()) {
+    if (
+      typeof dto.philosophicalSchoolId === 'string' &&
+      dto.philosophicalSchoolId.trim()
+    ) {
       const school = await this.prisma.philosophicalSchool.findUnique({
         where: { id: dto.philosophicalSchoolId.trim() },
         select: { id: true, name: true },
@@ -468,6 +477,10 @@ export class CultureService {
     deathYear: number | null | undefined,
     message: string,
   ): void {
+    if (birthYear === 0 || deathYear === 0) {
+      throw new BadRequestException('学者年份不能为 0，历史纪年没有公元 0 年');
+    }
+
     if (
       birthYear !== undefined &&
       birthYear !== null &&
@@ -475,6 +488,15 @@ export class CultureService {
       deathYear !== null &&
       deathYear < birthYear
     ) {
+      throw new BadRequestException(message);
+    }
+  }
+
+  private assertHistoricalYear(
+    year: number | null | undefined,
+    message: string,
+  ): void {
+    if (year === 0) {
       throw new BadRequestException(message);
     }
   }
@@ -513,11 +535,12 @@ export class CultureService {
 
     return {
       ...scholarData,
-      dynasty: (scholarData.dynasty ??
-        scholarData.dynastyPeriod) as string | null,
-      schoolOfThought: (scholarData.schoolOfThought ??
-        school?.name ??
-        null) as string | null,
+      dynasty: (scholarData.dynasty ?? scholarData.dynastyPeriod) as
+        | string
+        | null,
+      schoolOfThought: (scholarData.schoolOfThought ?? school?.name ?? null) as
+        | string
+        | null,
       majorWorks,
       representativeWorks: this.toRepresentativeWorks(majorWorks),
       contributions,

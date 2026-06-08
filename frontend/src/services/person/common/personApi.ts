@@ -10,7 +10,46 @@ import { apiClient, handleSingleApiResponse } from '@/utils/services/apiClient';
 import { fetchApiListData } from '@/utils/services/serviceFactory';
 import { loadJsonArray } from '@/utils/services/dataLoaders';
 
-type RawPerson = Record<string, unknown>;
+interface RawPerson {
+  id?: unknown;
+  name?: unknown;
+  nameEn?: unknown;
+  name_en?: unknown;
+  courtesy?: unknown;
+  dynasty?: unknown;
+  period?: unknown;
+  gender?: unknown;
+  birthYear?: unknown;
+  birth_year?: unknown;
+  birthMonth?: unknown;
+  birth_month?: unknown;
+  deathYear?: unknown;
+  death_year?: unknown;
+  deathMonth?: unknown;
+  death_month?: unknown;
+  birthplace?: unknown;
+  biography?: unknown;
+  roles?: unknown;
+  role?: unknown;
+  aliases?: unknown;
+  achievements?: unknown;
+  works?: unknown;
+  events?: unknown;
+  evaluations?: unknown;
+  portraitUrl?: unknown;
+  portrait_url?: unknown;
+  sources?: unknown;
+  source?: unknown;
+  source_ids?: unknown;
+  confidence?: unknown;
+  createdAt?: unknown;
+  created_at?: unknown;
+  updatedAt?: unknown;
+  updated_at?: unknown;
+  title?: unknown;
+  url?: unknown;
+  author?: unknown;
+}
 
 const API_ENDPOINT = '/persons';
 const JSON_DATA_PATH = '/data/json/persons.json';
@@ -78,7 +117,9 @@ function stringOrUndefined(value: unknown): string | undefined {
 }
 
 function transformJsonToPerson(jsonPerson: unknown, index: number): CommonPerson {
-  const raw = jsonPerson as RawPerson;
+  const raw = (jsonPerson && typeof jsonPerson === 'object' && !Array.isArray(jsonPerson))
+    ? jsonPerson as RawPerson
+    : {};
   const name = String(raw.name ?? `person_${index}`);
   const id = String(raw.id ?? `person_${name.replace(/\s+/g, '_')}_${index}`);
 
@@ -89,9 +130,11 @@ function transformJsonToPerson(jsonPerson: unknown, index: number): CommonPerson
     aliases: splitList(raw.aliases),
     achievements: splitList(raw.achievements),
     works: splitList(raw.works),
-    events: Array.isArray(raw.events) ? (raw.events as CommonPerson['events']) : [],
+    events: Array.isArray(raw.events)
+      ? (raw.events as NonNullable<CommonPerson['events']>)
+      : [],
     evaluations: Array.isArray(raw.evaluations)
-      ? (raw.evaluations as CommonPerson['evaluations'])
+      ? (raw.evaluations as NonNullable<CommonPerson['evaluations']>)
       : [],
     sources: normalizeSources(raw),
     source_ids: Array.isArray(raw.source_ids)
@@ -124,12 +167,12 @@ function transformJsonToPerson(jsonPerson: unknown, index: number): CommonPerson
 
   for (const [key, value] of Object.entries(optionalTextFields)) {
     if (value !== undefined) {
-      (person as Record<string, unknown>)[key] = value;
+      (person as unknown as Record<string, unknown>)[key] = value;
     }
   }
   for (const [key, value] of Object.entries(optionalNumberFields)) {
     if (value !== undefined) {
-      (person as Record<string, unknown>)[key] = value;
+      (person as unknown as Record<string, unknown>)[key] = value;
     }
   }
 
@@ -263,7 +306,7 @@ export const personApi: PersonService = {
       ...input,
       id: createMockId(input.name),
       name: input.name,
-      nameEn: input.nameEn ?? input.name_en,
+      nameEn: input.nameEn ?? input.name_en ?? null,
       createdAt: now,
       updatedAt: now,
       created_at: now,
@@ -284,11 +327,15 @@ export const personApi: PersonService = {
     if (index === -1) {
       throw new Error('人物不存在');
     }
+    const current = persons[index];
+    if (!current) {
+      throw new Error('人物不存在');
+    }
 
-    const updated = {
-      ...persons[index],
+    const updated: CommonPerson = {
+      ...current,
       ...input,
-      nameEn: input.nameEn ?? input.name_en ?? persons[index].nameEn,
+      nameEn: input.nameEn ?? input.name_en ?? current.nameEn ?? null,
       updatedAt: new Date().toISOString(),
     };
     mockCache = [

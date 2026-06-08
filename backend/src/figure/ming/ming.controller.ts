@@ -47,7 +47,8 @@ export class MingController {
   @Get('ming-figures/:id')
   @ApiOperation({
     summary: 'Get Ming Dynasty figure by ID (compatible endpoint)',
-    description: 'Retrieve detailed information about a specific Ming Dynasty figure',
+    description:
+      'Retrieve detailed information about a specific Ming Dynasty figure',
   })
   @ApiParam({ name: 'id', description: 'Ming figure ID' })
   @ApiResponse({

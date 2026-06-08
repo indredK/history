@@ -29,6 +29,10 @@ export function formatTimelineYear(
   const normalizedYear = Math.round(year);
   const absoluteYear = Math.abs(normalizedYear);
 
+  if (normalizedYear === 0) {
+    return options.short ? '元年' : '公元元年';
+  }
+
   if (options.short) {
     return normalizedYear < 0 ? `前${absoluteYear}` : `${normalizedYear}`;
   }

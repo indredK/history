@@ -21,7 +21,7 @@ import {
 } from '../common/figureTransform';
 
 function readPolicies(record: Record<string, unknown>): QingRuler['policies'] {
-  const policies = record.policies;
+  const policies = record['policies'];
   if (!Array.isArray(policies)) return [];
 
   return policies.map((item, index) => {
@@ -52,7 +52,7 @@ const transformJsonToQingRuler = (jsonData: unknown, index: number): QingRuler =
     reignStart: readNumber(record, 'reignStart'),
     reignEnd: readNumber(record, 'reignEnd'),
     policies: readPolicies(record),
-    majorEvents: readEvents({ events: record.majorEvents }),
+    majorEvents: readEvents({ events: record['majorEvents'] }),
     contribution: readString(record, 'contribution'),
     responsibility: readString(record, 'responsibility'),
     evaluations: readEvaluations(record),

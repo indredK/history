@@ -143,6 +143,7 @@ function PeoplePage() {
       tabsProps={{
         variant: 'scrollable',
         scrollButtons: 'auto',
+        allowScrollButtonsMobile: true,
       }}
     />
   );

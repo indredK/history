@@ -65,7 +65,7 @@ export function ScholarCard({ scholar, onClick }: ScholarCardProps) {
     <PersonCard
       name={scholar.name}
       subtitle={scholar.name_en || ''}
-      portraitUrl={scholar.portraitUrl}
+      portraitUrl={scholar.portraitUrl ?? undefined}
       primaryTag={{ label: dynasty, color: dynastyColor }}
       secondaryTags={secondaryTags}
       infoLines={infoLines}

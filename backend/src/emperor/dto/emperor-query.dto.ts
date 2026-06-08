@@ -1,6 +1,13 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsOptional, IsInt, IsString, Min, IsUUID } from 'class-validator';
+import {
+  IsOptional,
+  IsInt,
+  IsString,
+  Min,
+  IsUUID,
+  NotEquals,
+} from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 export class EmperorQueryDto extends PaginationQueryDto {
@@ -21,6 +28,7 @@ export class EmperorQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'reignStart 不能为 0，历史纪年没有公元 0 年' })
   reignStart?: number;
 
   @ApiPropertyOptional({
@@ -32,6 +40,7 @@ export class EmperorQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'reignEnd 不能为 0，历史纪年没有公元 0 年' })
   reignEnd?: number;
 
   @ApiPropertyOptional({

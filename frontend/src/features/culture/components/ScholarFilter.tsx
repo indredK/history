@@ -19,6 +19,7 @@ import {
 } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import { useMemo } from 'react';
 
 interface ScholarFilterProps {
   selectedDynasty: string;
@@ -28,6 +29,18 @@ interface ScholarFilterProps {
   dynastyOptions: string[];
   schoolOptions: string[];
   resultCount: number;
+}
+
+function normalizeSelectedValue(selected: string): string {
+  return selected.trim() || '全部';
+}
+
+function includeSelectedOption(options: string[], selected: string): string[] {
+  const normalizedSelected = normalizeSelectedValue(selected);
+  const uniqueOptions = Array.from(new Set(['全部', ...options.filter(Boolean)]));
+  return uniqueOptions.includes(normalizedSelected)
+    ? uniqueOptions
+    : [...uniqueOptions, normalizedSelected];
 }
 
 /**
@@ -46,6 +59,17 @@ export function ScholarFilter({
   schoolOptions,
   resultCount,
 }: ScholarFilterProps) {
+  const normalizedDynasty = normalizeSelectedValue(selectedDynasty);
+  const normalizedSchool = normalizeSelectedValue(selectedSchool);
+  const safeDynastyOptions = useMemo(
+    () => includeSelectedOption(dynastyOptions, normalizedDynasty),
+    [dynastyOptions, normalizedDynasty],
+  );
+  const safeSchoolOptions = useMemo(
+    () => includeSelectedOption(schoolOptions, normalizedSchool),
+    [schoolOptions, normalizedSchool],
+  );
+
   const handleDynastyChange = (event: SelectChangeEvent<string>) => {
     onDynastyChange(event.target.value);
   };
@@ -88,9 +112,10 @@ export function ScholarFilter({
         <Select
           labelId="dynasty-filter-label"
           id="dynasty-filter"
-          value={selectedDynasty}
+          value={normalizedDynasty}
           label="朝代"
           onChange={handleDynastyChange}
+          renderValue={(selected) => String(selected || '全部')}
           sx={{
             backgroundColor: 'var(--color-bg-card)',
             '& .MuiOutlinedInput-notchedOutline': {
@@ -101,7 +126,7 @@ export function ScholarFilter({
             },
           }}
         >
-          {dynastyOptions.map((dynasty) => (
+          {safeDynastyOptions.map((dynasty) => (
             <MenuItem key={dynasty} value={dynasty}>
               {dynasty}
             </MenuItem>
@@ -115,9 +140,10 @@ export function ScholarFilter({
         <Select
           labelId="school-filter-label"
           id="school-filter"
-          value={selectedSchool}
+          value={normalizedSchool}
           label="学派"
           onChange={handleSchoolChange}
+          renderValue={(selected) => String(selected || '全部')}
           sx={{
             backgroundColor: 'var(--color-bg-card)',
             '& .MuiOutlinedInput-notchedOutline': {
@@ -128,7 +154,7 @@ export function ScholarFilter({
             },
           }}
         >
-          {schoolOptions.map((school) => (
+          {safeSchoolOptions.map((school) => (
             <MenuItem key={school} value={school}>
               {school}
             </MenuItem>

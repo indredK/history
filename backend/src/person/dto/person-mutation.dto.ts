@@ -9,6 +9,7 @@ import {
   IsUrl,
   Max,
   Min,
+  NotEquals,
   ValidateNested,
 } from 'class-validator';
 
@@ -41,6 +42,7 @@ export class PersonEventInputDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'year 不能为 0，历史纪年没有公元 0 年' })
   year?: number | null;
 
   @ApiPropertyOptional({ description: 'Person role in the event' })
@@ -104,6 +106,7 @@ export class CreatePersonDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'birthYear 不能为 0，历史纪年没有公元 0 年' })
   birthYear?: number | null;
 
   @ApiPropertyOptional({ description: 'Birth month', example: 2 })
@@ -119,6 +122,7 @@ export class CreatePersonDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'deathYear 不能为 0，历史纪年没有公元 0 年' })
   deathYear?: number | null;
 
   @ApiPropertyOptional({ description: 'Death month', example: 12 })
@@ -145,7 +149,10 @@ export class CreatePersonDto {
   @IsString({ each: true })
   roles?: string[];
 
-  @ApiPropertyOptional({ description: 'Aliases and alternate names', type: [String] })
+  @ApiPropertyOptional({
+    description: 'Aliases and alternate names',
+    type: [String],
+  })
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
@@ -163,14 +170,20 @@ export class CreatePersonDto {
   @IsString({ each: true })
   works?: string[];
 
-  @ApiPropertyOptional({ description: 'Related historical events', type: [PersonEventInputDto] })
+  @ApiPropertyOptional({
+    description: 'Related historical events',
+    type: [PersonEventInputDto],
+  })
   @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => PersonEventInputDto)
   events?: PersonEventInputDto[];
 
-  @ApiPropertyOptional({ description: 'Historical evaluations', type: [PersonEvaluationInputDto] })
+  @ApiPropertyOptional({
+    description: 'Historical evaluations',
+    type: [PersonEvaluationInputDto],
+  })
   @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
@@ -182,7 +195,10 @@ export class CreatePersonDto {
   @IsUrl({ require_tld: false })
   portraitUrl?: string | null;
 
-  @ApiPropertyOptional({ description: 'Data sources', type: [PersonSourceRefInputDto] })
+  @ApiPropertyOptional({
+    description: 'Data sources',
+    type: [PersonSourceRefInputDto],
+  })
   @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })

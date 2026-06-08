@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsOptional, IsInt, IsString, Min } from 'class-validator';
+import { IsOptional, IsInt, IsString, Min, NotEquals } from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 export class DynastyQueryDto extends PaginationQueryDto {
@@ -12,6 +12,7 @@ export class DynastyQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'startYear 不能为 0，历史纪年没有公元 0 年' })
   startYear?: number;
 
   @ApiPropertyOptional({
@@ -22,6 +23,7 @@ export class DynastyQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'endYear 不能为 0，历史纪年没有公元 0 年' })
   endYear?: number;
 
   @ApiPropertyOptional({

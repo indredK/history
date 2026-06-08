@@ -82,7 +82,7 @@ export function readStringArray(
 }
 
 export function readEvents(record: RawFigureRecord): FigureEventLike[] {
-  const value = record.events;
+  const value = record['events'];
   if (!Array.isArray(value)) return [];
 
   return value.map((item, index) => {
@@ -97,7 +97,7 @@ export function readEvents(record: RawFigureRecord): FigureEventLike[] {
 }
 
 export function readEvaluations(record: RawFigureRecord): FigureEvaluationLike[] {
-  const value = record.evaluations;
+  const value = record['evaluations'];
   if (!Array.isArray(value)) return [];
 
   return value.map((item, index) => {

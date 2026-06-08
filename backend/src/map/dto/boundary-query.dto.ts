@@ -1,6 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
-import { IsIn, IsInt, IsNotEmpty, IsString, Min } from 'class-validator';
+import {
+  IsIn,
+  IsInt,
+  IsNotEmpty,
+  IsString,
+  Min,
+  NotEquals,
+} from 'class-validator';
 
 export const ACCEPTED_BOUNDARY_PERIODS = [
   'qin',
@@ -23,7 +30,7 @@ export class BoundaryPeriodQueryDto {
     enum: ACCEPTED_BOUNDARY_PERIODS,
     example: 'qin',
   })
-  @Transform(({ value }) =>
+  @Transform(({ value }: { value: unknown }) =>
     typeof value === 'string' ? value.trim().toLowerCase() : value,
   )
   @IsString()
@@ -40,5 +47,6 @@ export class BoundaryYearQueryDto {
   @Type(() => Number)
   @IsInt({ message: '年份必须是整数' })
   @Min(-3000, { message: '年份不能早于公元前3000年' })
+  @NotEquals(0, { message: '年份不能为 0，历史纪年没有公元 0 年' })
   year: number;
 }

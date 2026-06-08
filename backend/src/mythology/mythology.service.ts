@@ -226,9 +226,7 @@ export class MythologyService {
       origin: this.normalizeOptionalString(input.origin || input.source),
       period: this.normalizeOptionalString(input.period),
       description,
-      stories: this.hasStoryPayload(storyPayload)
-        ? (storyPayload as Prisma.InputJsonValue)
-        : undefined,
+      stories: this.hasStoryPayload(storyPayload) ? storyPayload : undefined,
       symbolism: symbolism.length > 0 ? symbolism : undefined,
     };
   }
@@ -241,10 +239,7 @@ export class MythologyService {
 
     if (input.title !== undefined || input.name !== undefined) {
       const nextName = input.name || input.title;
-      data.name = this.normalizeRequiredString(
-        nextName,
-        '神话标题不能为空',
-      );
+      data.name = this.normalizeRequiredString(nextName, '神话标题不能为空');
     }
 
     if (input.category !== undefined) {
@@ -274,7 +269,7 @@ export class MythologyService {
     ) {
       const storyPayload = this.buildStoryPayload(input, currentStories);
       data.stories = this.hasStoryPayload(storyPayload)
-        ? (storyPayload as Prisma.InputJsonValue)
+        ? storyPayload
         : Prisma.JsonNull;
     }
 
@@ -325,7 +320,10 @@ export class MythologyService {
     return this.unique(strings);
   }
 
-  private extractCharacters(rawStories: unknown, storyItems: string[]): string[] {
+  private extractCharacters(
+    rawStories: unknown,
+    storyItems: string[],
+  ): string[] {
     const parsed = this.safeJsonParse<unknown>(rawStories);
 
     if (Array.isArray(parsed)) {
@@ -341,7 +339,10 @@ export class MythologyService {
       });
 
       if (nestedStrings.length > 0) {
-        return this.unique(nestedStrings.map((item) => item.trim())).slice(0, 5);
+        return this.unique(nestedStrings.map((item) => item.trim())).slice(
+          0,
+          5,
+        );
       }
     }
 

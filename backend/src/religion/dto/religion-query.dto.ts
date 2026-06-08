@@ -1,6 +1,13 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
-import { IsBoolean, IsOptional, IsIn, IsString, Min, Max } from 'class-validator';
+import {
+  IsBoolean,
+  IsOptional,
+  IsIn,
+  IsString,
+  Min,
+  Max,
+} from 'class-validator';
 
 export class ReligionGraphQueryDto {
   @ApiPropertyOptional({
@@ -79,7 +86,7 @@ export class ReligionGraphQueryDto {
     default: true,
   })
   @IsOptional()
-  @Transform(({ value }) => {
+  @Transform(({ value }: { value: unknown }) => {
     if (value === 'false') return false;
     if (value === 'true') return true;
     return value;

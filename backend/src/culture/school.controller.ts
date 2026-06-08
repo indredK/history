@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { CultureService } from './culture.service';
 import { SchoolQueryDto } from './dto/school-query.dto';
@@ -68,7 +77,8 @@ export class SchoolController {
   @Put(':id')
   @ApiOperation({
     summary: 'Update philosophical school',
-    description: 'Update a philosophical school and its structured display data',
+    description:
+      'Update a philosophical school and its structured display data',
   })
   @ApiParam({ name: 'id', description: 'Philosophical school ID' })
   @ApiResponse({

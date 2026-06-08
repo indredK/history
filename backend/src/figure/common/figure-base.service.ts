@@ -7,7 +7,7 @@ import { PrismaService } from '../../prisma/prisma.service';
  * - 各朝代模型可能拥有这里的全部或部分字段;
  * - transformFigure 把 string 反序列化成结构化对象。
  *
- * 用 unknown(而非 any)防止任意成员访问污染调用方。
+ * 用 unknown(而非任意类型)防止任意成员访问污染调用方。
  */
 export interface FigureJsonRecord {
   achievements?: unknown;

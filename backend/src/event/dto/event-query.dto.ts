@@ -7,6 +7,7 @@ import {
   IsString,
   Matches,
   MaxLength,
+  NotEquals,
 } from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
@@ -19,6 +20,7 @@ export class EventQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'startYear 不能为 0，历史纪年没有公元 0 年' })
   startYear?: number;
 
   @ApiPropertyOptional({
@@ -29,6 +31,7 @@ export class EventQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'endYear 不能为 0，历史纪年没有公元 0 年' })
   endYear?: number;
 
   @ApiPropertyOptional({
@@ -40,6 +43,7 @@ export class EventQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'yearRangeStart 不能为 0，历史纪年没有公元 0 年' })
   yearRangeStart?: number;
 
   @ApiPropertyOptional({
@@ -51,6 +55,7 @@ export class EventQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'yearRangeEnd 不能为 0，历史纪年没有公元 0 年' })
   yearRangeEnd?: number;
 
   @ApiPropertyOptional({

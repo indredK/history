@@ -1,6 +1,13 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsOptional, IsInt, Min, IsIn, IsString } from 'class-validator';
+import {
+  IsOptional,
+  IsInt,
+  Min,
+  IsIn,
+  IsString,
+  NotEquals,
+} from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 export class FigureQueryDto extends PaginationQueryDto {
@@ -36,6 +43,7 @@ export class FigureQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'birthYear 不能为 0，历史纪年没有公元 0 年' })
   birthYear?: number;
 
   @ApiPropertyOptional({
@@ -46,6 +54,7 @@ export class FigureQueryDto extends PaginationQueryDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'deathYear 不能为 0，历史纪年没有公元 0 年' })
   deathYear?: number;
 }
 

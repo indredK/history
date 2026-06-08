@@ -95,14 +95,14 @@ export async function loadMapGeoJson() {
  * 支持各种类型的静态资源
  */
 export class ResourceLoader {
-  private static cache = new Map<string, any>();
+  private static cache = new Map<string, unknown>();
 
   /**
    * 加载并缓存JSON数据
    */
   static async loadJson<T>(path: string, useCache = true): Promise<T> {
     if (useCache && this.cache.has(path)) {
-      return this.cache.get(path);
+      return this.cache.get(path) as T;
     }
 
     const data = await loadJsonData<T>(path);
@@ -237,74 +237,132 @@ export interface ApiResponse<T> {
   message?: string;
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+function hasOwn(record: Record<string, unknown>, key: string): boolean {
+  return Object.prototype.hasOwnProperty.call(record, key);
+}
+
+function readMessage(record: Record<string, unknown>, fallback: string): string {
+  return typeof record['message'] === 'string' && record['message'].trim()
+    ? record['message']
+    : fallback;
+}
+
+function readMeta(value: unknown): ApiResponse<unknown>['meta'] | undefined {
+  if (!isRecord(value)) return undefined;
+
+  const page = Number(value['page']);
+  const limit = Number(value['limit']);
+  const total = Number(value['total']);
+  const totalPages = Number(value['totalPages']);
+
+  if (
+    !Number.isFinite(page) ||
+    !Number.isFinite(limit) ||
+    !Number.isFinite(total) ||
+    !Number.isFinite(totalPages)
+  ) {
+    return undefined;
+  }
+
+  return {
+    page,
+    limit,
+    total,
+    totalPages,
+    hasNext: Boolean(value['hasNext']),
+    hasPrev: Boolean(value['hasPrev']),
+  };
+}
+
+function getResponseData(response: unknown): unknown {
+  return isRecord(response) && hasOwn(response, 'data')
+    ? response['data']
+    : response;
+}
+
 /**
  * 统一的API响应处理函数
  */
-export function handleApiResponse<T>(response: any): ApiResponse<T[]> {
-  // 如果是axios响应对象
-  if (response.data) {
-    const backendData = response.data;
-    
+export function handleApiResponse<T>(response: unknown): ApiResponse<T[]> {
+  const backendData = getResponseData(response);
+
+  if (isRecord(backendData)) {
     // 检查后端响应格式
-    if (backendData.success !== undefined) {
-      if (!backendData.success) {
-        throw new Error(backendData.message || 'API请求失败');
+    if (backendData['success'] !== undefined) {
+      if (!backendData['success']) {
+        throw new Error(readMessage(backendData, 'API请求失败'));
       }
-      
+
       // 提取实际数据
-      if (backendData.data) {
-        if (Array.isArray(backendData.data)) {
-          return { data: backendData.data };
+      if (hasOwn(backendData, 'data')) {
+        const payload = backendData['data'];
+
+        if (payload === null || payload === undefined) {
+          return { data: [] };
         }
+
+        if (Array.isArray(payload)) {
+          return { data: payload as T[] };
+        }
+
         // 如果是分页响应
-        if (typeof backendData.data === 'object' && 'data' in backendData.data) {
-          return {
-            data: backendData.data.data,
-            meta: backendData.data.meta,
-          };
+        if (isRecord(payload) && Array.isArray(payload['data'])) {
+          const meta = readMeta(payload['meta']);
+          return meta
+            ? { data: payload['data'] as T[], meta }
+            : { data: payload['data'] as T[] };
         }
+
         // 单个对象包装成数组
-        return { data: [backendData.data] };
+        return { data: [payload as T] };
       }
-    }
-    
-    // 直接是数组数据
-    if (Array.isArray(backendData)) {
-      return { data: backendData };
     }
   }
-  
+
+  // 直接是数组数据
+  if (Array.isArray(backendData)) {
+    return { data: backendData as T[] };
+  }
+
   return { data: [] };
 }
 
 /**
  * 处理单个对象的API响应
  */
-export function handleSingleApiResponse<T>(response: any): ApiResponse<T> {
-  if (response.data) {
-    const backendData = response.data;
-    
-    if (backendData.success !== undefined) {
-      if (!backendData.success) {
-        throw new Error(backendData.message || 'API请求失败');
+export function handleSingleApiResponse<T>(response: unknown): ApiResponse<T> {
+  const backendData = getResponseData(response);
+
+  if (isRecord(backendData)) {
+    if (backendData['success'] !== undefined) {
+      if (!backendData['success']) {
+        throw new Error(readMessage(backendData, 'API请求失败'));
       }
-      
-      if (Object.prototype.hasOwnProperty.call(backendData, 'data')) {
-        return { data: backendData.data };
+
+      if (hasOwn(backendData, 'data')) {
+        return { data: backendData['data'] as T };
       }
     }
-    
+
     // 直接返回数据
-    return { data: backendData };
+    return { data: backendData as T };
   }
-  
+
+  if (backendData !== null && backendData !== undefined) {
+    return { data: backendData as T };
+  }
+
   throw new Error('响应数据为空');
 }
 
 /**
  * 创建统一的数据获取函数
  */
-export function createDataFetcher<TArgs extends any[], TReturn>(
+export function createDataFetcher<TArgs extends unknown[], TReturn>(
   apiFetcher: (...args: TArgs) => TReturn,
   mockFetcher: (...args: TArgs) => TReturn,
   dataSourceMode: 'api' | 'mock' = 'mock'

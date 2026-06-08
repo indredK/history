@@ -18,8 +18,12 @@ function createBoundsRange(events: TimelineChartProps['events']): TimeRange | nu
     return null;
   }
 
-  const minYear = d3.min(events, (event) => event.startYear) ?? 0;
-  const maxYear = d3.max(events, (event) => event.endYear || event.startYear) ?? 0;
+  const minYear = d3.min(events, (event) => event.startYear);
+  const maxYear = d3.max(events, (event) => event.endYear ?? event.startYear);
+  if (minYear === undefined || maxYear === undefined) {
+    return null;
+  }
+
   return [minYear - 50, maxYear + 50];
 }
 
@@ -74,7 +78,7 @@ export const TimelineChart = forwardRef<TimelineChartRef, TimelineChartProps>(
       }
 
       return events.filter((event) => {
-        const eventEnd = event.endYear || event.startYear;
+        const eventEnd = event.endYear ?? event.startYear;
         return event.startYear <= timeRange[1] && eventEnd >= timeRange[0];
       });
     }, [events, timeRange]);

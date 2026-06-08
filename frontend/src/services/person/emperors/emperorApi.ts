@@ -14,7 +14,49 @@ interface PersonData {
   source?: string;
 }
 
-type RawRecord = Record<string, unknown>;
+interface RawRecord {
+  [key: string]: unknown;
+  id?: unknown;
+  name?: unknown;
+  dynasty?: unknown;
+  dynastyName?: unknown;
+  dynasty_name?: unknown;
+  dynastyId?: unknown;
+  dynastyPeriod?: unknown;
+  dynasty_period?: unknown;
+  reignStart?: unknown;
+  reign_start?: unknown;
+  reignEnd?: unknown;
+  reign_end?: unknown;
+  birthYear?: unknown;
+  birth_year?: unknown;
+  deathYear?: unknown;
+  death_year?: unknown;
+  eraNames?: unknown;
+  era_names?: unknown;
+  achievements?: unknown;
+  failures?: unknown;
+  evaluations?: unknown;
+  historicalEvaluation?: unknown;
+  summary?: unknown;
+  positives?: unknown;
+  negatives?: unknown;
+  impact?: unknown;
+  content?: unknown;
+  source?: unknown;
+  author?: unknown;
+  templeName?: unknown;
+  temple_name?: unknown;
+  posthumousName?: unknown;
+  posthumous_name?: unknown;
+  description?: unknown;
+  startYear?: unknown;
+  start_year?: unknown;
+  biography?: unknown;
+  portraitUrl?: unknown;
+  portrait_url?: unknown;
+  sources?: unknown;
+}
 
 const UNKNOWN_DYNASTY = '未知';
 

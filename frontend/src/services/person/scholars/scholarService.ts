@@ -51,20 +51,20 @@ export interface ScholarService extends BaseService<Scholar> {
 export const scholarServiceHelper: ScholarService = {
   getAll: () => Promise.resolve({ data: [] }),
   getById: () => Promise.resolve({ data: null }),
-  createScholar: (input) => Promise.resolve({
-    data: {
-      id: input.id || `scholar_${Date.now()}`,
-      name: input.name,
-      ...input,
-    },
-  }),
-  updateScholar: (id, input) => Promise.resolve({
-    data: {
-      id,
-      name: input.name || '',
-      ...input,
-    },
-  }),
+	  createScholar: (input) => Promise.resolve({
+	    data: {
+	      ...input,
+	      id: input.id || `scholar_${Date.now()}`,
+	      name: input.name,
+	    },
+	  }),
+	  updateScholar: (id, input) => Promise.resolve({
+	    data: {
+	      ...input,
+	      id,
+	      name: input.name || '',
+	    },
+	  }),
   deleteScholar: () => Promise.resolve({ data: null }),
   /**
    * 按朝代筛选学者

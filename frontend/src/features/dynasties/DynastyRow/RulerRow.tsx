@@ -18,6 +18,10 @@ const muted = (
   <span style={{ color: 'var(--color-text-muted)' }}>-</span>
 );
 
+function renderTextValue(...values: Array<string | undefined>): string | typeof muted {
+  return values.find((value) => value !== undefined && value.trim().length > 0) ?? muted;
+}
+
 interface RulerRowProps extends ResponsiveFlags {
   ruler: Ruler;
   dynastyName: string;
@@ -171,7 +175,7 @@ export const RulerRow = memo(
         align="center"
       >
         <span style={tableStyles.startYear}>
-          {yearName?.startYear || ruler.startYear || muted}
+          {renderTextValue(yearName?.startYear, ruler.startYear)}
         </span>
       </TableCell>
     </TableRow>

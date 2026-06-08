@@ -11,16 +11,21 @@ interface SchoolHeaderProps {
   onClose: () => void;
 }
 
+function isKnownFoundingYear(year: number | null | undefined): year is number {
+  return typeof year === 'number' && Number.isFinite(year) && year !== 0;
+}
+
 function formatYear(year: number): string {
   if (year < 0) return `公元前${Math.abs(year)}年`;
-  if (year === 0) return '公元元年';
   return `公元${year}年`;
 }
 
 export function SchoolHeader({ school, onClose }: SchoolHeaderProps) {
   const firstChar = school.name.charAt(0);
-  const hasFoundingYear =
-    school.foundingYear !== undefined && school.foundingYear !== null;
+  const foundingYear = school.foundingYear;
+  const hasFoundingYear = isKnownFoundingYear(foundingYear);
+  const foundingTimeLabel = school.foundingPeriod
+    || (hasFoundingYear ? formatYear(foundingYear) : '');
 
   return (
     <DialogTitle
@@ -79,12 +84,9 @@ export function SchoolHeader({ school, onClose }: SchoolHeaderProps) {
                 }}
               />
             )}
-            {(school.foundingPeriod || hasFoundingYear) && (
+            {foundingTimeLabel && (
               <Chip
-                label={
-                  school.foundingPeriod ||
-                  formatYear(school.foundingYear as number)
-                }
+                label={foundingTimeLabel}
                 size="small"
                 variant="outlined"
                 sx={{

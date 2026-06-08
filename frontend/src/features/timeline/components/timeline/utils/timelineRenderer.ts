@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import type { Event } from '@/services/timeline/types';
-import type { LabelLayout } from '../types';
+import type { LabelLayout, TimelineConfig } from '../types';
 import { TIMELINE_CONFIG, createTimelineGradient } from '../config/timelineConfig';
 import { calculateLabelLayout, calculateYearLayout } from './layoutAlgorithms';
 import { formatTimelineYear } from '@/features/timeline/utils/dynastyUtils';
@@ -68,7 +68,7 @@ export class TimelineRenderer {
   renderStandardAxis(): void {
     const { styles } = TIMELINE_CONFIG;
     
-    const xAxis = d3.axisBottom(this.xScale)
+    const xAxis: d3.Axis<number> = d3.axisBottom<number>(this.xScale)
       .tickFormat((d) => formatTimelineYear(Number(d), { short: true }))
       .ticks(Math.min(8, Math.floor(this.width / 120)))
       .tickSize(styles.axis.tick.size);
@@ -77,7 +77,7 @@ export class TimelineRenderer {
       .attr('class', 'x-axis')
       .attr('transform', `translate(0,${this.height})`);
     
-    xAxisGroup.call(xAxis as any);
+    xAxisGroup.call(xAxis);
     
     // 样式化轴线
     xAxisGroup.select('.domain')
@@ -112,7 +112,7 @@ export class TimelineRenderer {
 
     // 绘制事件跨度线
     eventGroups
-      .filter((d: Event) => Boolean(d.endYear && d.endYear !== d.startYear))
+      .filter((d: Event) => d.endYear !== undefined && d.endYear !== null && d.endYear !== d.startYear)
       .append('line')
       .attr('class', 'event-span')
       .attr('x1', 0)
@@ -149,9 +149,13 @@ export class TimelineRenderer {
   /**
    * 处理事件点悬停
    */
-  private handleDotHover(event: any, d: Event, isHover: boolean): void {
+  private handleDotHover(event: MouseEvent, d: Event, isHover: boolean): void {
     const { event: eventConfig } = TIMELINE_CONFIG;
-    const dot = d3.select(event.target);
+    if (!(event.currentTarget instanceof SVGCircleElement)) {
+      return;
+    }
+
+    const dot = d3.select<SVGCircleElement, Event>(event.currentTarget);
     
     if (isHover) {
       dot.transition().duration(200).attr('r', eventConfig.dot.hoverRadius);
@@ -353,9 +357,13 @@ export class TimelineRenderer {
   /**
    * 处理标签悬停
    */
-  private handleLabelHover(event: any, d: LabelLayout, isHover: boolean): void {
+  private handleLabelHover(event: MouseEvent, d: LabelLayout, isHover: boolean): void {
     const { label } = TIMELINE_CONFIG;
-    const rect = d3.select(event.target);
+    if (!(event.currentTarget instanceof SVGRectElement)) {
+      return;
+    }
+
+    const rect = d3.select<SVGRectElement, LabelLayout>(event.currentTarget);
     
     if (isHover) {
       rect.transition().duration(200)
@@ -393,7 +401,7 @@ export class TimelineRenderer {
   /**
    * 渲染事件刻度线
    */
-  private renderEventTick(x: number, isFavorite: boolean, eventConfig: any): void {
+  private renderEventTick(x: number, isFavorite: boolean, eventConfig: TimelineConfig['event']): void {
     // 阴影
     this.g.append('line')
       .attr('class', 'event-tick-shadow')
@@ -420,7 +428,12 @@ export class TimelineRenderer {
   /**
    * 渲染年份标签
    */
-  private renderYearLabel(x: number, yearText: string, isFavorite: boolean, yearConfig: any): void {
+  private renderYearLabel(
+    x: number,
+    yearText: string,
+    isFavorite: boolean,
+    yearConfig: TimelineConfig['label']['year']
+  ): void {
     const bgWidth = yearText.length * 6 + 8;
     
     // 背景

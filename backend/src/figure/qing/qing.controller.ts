@@ -47,7 +47,8 @@ export class QingController {
   @Get('qing-rulers/:id')
   @ApiOperation({
     summary: 'Get Qing Dynasty ruler by ID (compatible endpoint)',
-    description: 'Retrieve detailed information about a specific Qing Dynasty ruler',
+    description:
+      'Retrieve detailed information about a specific Qing Dynasty ruler',
   })
   @ApiParam({ name: 'id', description: 'Qing ruler ID' })
   @ApiResponse({

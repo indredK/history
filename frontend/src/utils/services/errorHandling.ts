@@ -21,11 +21,17 @@ export class ApiError extends Error {
   constructor(
     public type: ApiErrorType,
     message: string,
-    public originalError?: any
+    public originalError?: unknown
   ) {
     super(message);
     this.name = 'ApiError';
   }
+}
+
+function getErrorMessage(error: unknown): string {
+  if (error instanceof Error) return error.message;
+  if (typeof error === 'string') return error;
+  return '未知错误';
 }
 
 /**
@@ -89,13 +95,13 @@ export class SimpleFallbackManager {
   }
 
   private async handleApiError<T>(
-    error: any,
+    error: unknown,
     fallbackOperation: () => Promise<T>,
     operationName: string
   ): Promise<T> {
     const apiError = error instanceof ApiError ? error : new ApiError(
       ApiErrorType.NETWORK_ERROR,
-      error.message || '未知错误',
+      getErrorMessage(error),
       error
     );
 

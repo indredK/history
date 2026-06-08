@@ -140,8 +140,12 @@ export const emperorServiceHelper = {
     const startKnown = isKnownReignYear(emperor.reignStart);
     const endKnown = isKnownReignYear(emperor.reignEnd);
     if (!startKnown && !endKnown) return '在位时间不详';
-    const startYear = startKnown ? formatHistoricalYear(emperor.reignStart) : '起始不详';
-    const endYear = endKnown ? formatHistoricalYear(emperor.reignEnd) : '结束不详';
+    const startYear = startKnown && emperor.reignStart !== null
+      ? formatHistoricalYear(emperor.reignStart)
+      : '起始不详';
+    const endYear = endKnown && emperor.reignEnd !== null
+      ? formatHistoricalYear(emperor.reignEnd)
+      : '结束不详';
     return `${startYear} - ${endYear}`;
   },
 

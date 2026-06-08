@@ -16,6 +16,7 @@ import {
   TableRow,
   Paper,
 } from '@mui/material';
+import type { TableCellProps } from '@mui/material';
 import { useResponsive } from '@/hooks/useResponsive';
 import { getTableStyles } from '@/config/responsive';
 import { getGlassConfig } from '@/config/glassConfig';
@@ -30,7 +31,7 @@ interface ResponsiveTableProps {
   glassEffect?: boolean;
 }
 
-interface ResponsiveTableCellProps {
+interface ResponsiveTableCellProps extends Omit<TableCellProps, 'align' | 'children' | 'component'> {
   children: React.ReactNode;
   component?: 'th' | 'td';
   sticky?: boolean;
@@ -42,7 +43,6 @@ interface ResponsiveTableCellProps {
   className?: string;
   priority?: 'high' | 'medium' | 'low';
   glassEffect?: boolean;
-  [key: string]: any;
 }
 
 export function ResponsiveTable({

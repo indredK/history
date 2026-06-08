@@ -7,6 +7,7 @@ import {
   IsOptional,
   IsString,
   Min,
+  NotEquals,
 } from 'class-validator';
 
 export class CreatePhilosophicalSchoolDto {
@@ -15,7 +16,10 @@ export class CreatePhilosophicalSchoolDto {
   @IsNotEmpty()
   name: string;
 
-  @ApiPropertyOptional({ description: 'English school name', example: 'Confucianism' })
+  @ApiPropertyOptional({
+    description: 'English school name',
+    example: 'Confucianism',
+  })
   @IsOptional()
   @IsString()
   name_en?: string | null;
@@ -25,7 +29,10 @@ export class CreatePhilosophicalSchoolDto {
   @IsString()
   founder?: string | null;
 
-  @ApiPropertyOptional({ description: 'Founder English name', example: 'Confucius' })
+  @ApiPropertyOptional({
+    description: 'Founder English name',
+    example: 'Confucius',
+  })
   @IsOptional()
   @IsString()
   founderEn?: string | null;
@@ -35,6 +42,7 @@ export class CreatePhilosophicalSchoolDto {
   @Type(() => Number)
   @IsInt()
   @Min(-3000)
+  @NotEquals(0, { message: 'foundingYear 不能为 0，历史纪年没有公元 0 年' })
   foundingYear?: number | null;
 
   @ApiPropertyOptional({ description: 'Founding period', example: '春秋时期' })
@@ -54,7 +62,10 @@ export class CreatePhilosophicalSchoolDto {
   @IsString({ each: true })
   keyTexts?: string[];
 
-  @ApiPropertyOptional({ description: 'Representative figures', type: [Object] })
+  @ApiPropertyOptional({
+    description: 'Representative figures',
+    type: [Object],
+  })
   @IsOptional()
   @IsArray()
   representativeFigures?: Record<string, unknown>[];

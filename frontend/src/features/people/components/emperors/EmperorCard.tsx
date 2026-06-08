@@ -69,12 +69,12 @@ export function EmperorCard({ emperor, onClick }: EmperorCardProps) {
   return (
     <PersonCard
       name={emperor.name}
-      subtitle={emperor.templeName}
-      portraitUrl={emperor.portraitUrl}
+      subtitle={emperor.templeName ?? undefined}
+      portraitUrl={emperor.portraitUrl ?? undefined}
       primaryTag={{ label: emperor.dynasty, color: dynastyColor }}
       secondaryTags={secondaryTags}
       infoLines={infoLines}
-      biography={emperor.biography}
+      biography={emperor.biography ?? undefined}
       onClick={onClick}
     />
   );

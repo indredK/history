@@ -5,18 +5,18 @@
 
 import { apiClient } from './services/apiClient';
 
-interface TestResult {
+export interface TestResult {
   success: boolean;
   message: string;
 }
 
-interface EndpointTestResult {
+export interface EndpointTestResult {
   endpoint: string;
   success: boolean;
   message: string;
 }
 
-interface AllEndpointsResult {
+export interface AllEndpointsResult {
   results: EndpointTestResult[];
 }
 

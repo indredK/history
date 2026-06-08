@@ -19,6 +19,7 @@ import { useRequest } from 'ahooks';
 import type { Event, EventInput } from '@/services/timeline/types';
 import { createEvent, deleteEvent, updateEvent } from '@/services/timeline/timelineApi';
 import { getTimelineEventCategories } from '../utils/timelineFilters';
+import { formatTimelineYear } from '../utils/dynastyUtils';
 
 type FormMode = 'create' | 'edit';
 
@@ -50,9 +51,9 @@ const emptyForm: EventFormState = {
 };
 
 function formatEventYear(event: Event): string {
-  return event.endYear && event.endYear !== event.startYear
-    ? `${event.startYear} - ${event.endYear}`
-    : String(event.startYear);
+  return event.endYear !== undefined && event.endYear !== null && event.endYear !== event.startYear
+    ? `${formatTimelineYear(event.startYear)} - ${formatTimelineYear(event.endYear)}`
+    : formatTimelineYear(event.startYear);
 }
 
 function parseYear(value: string): number | null {
@@ -166,6 +167,18 @@ function buildEventInput(form: EventFormState, originalEvent: Event | null = nul
   return input;
 }
 
+function validateEventInput(input: EventInput): string | null {
+  if (input.startYear === 0 || input.endYear === 0) {
+    return '事件年份不能为 0，历史纪年没有公元 0 年';
+  }
+
+  if (input.endYear !== undefined && input.endYear !== null && input.endYear < input.startYear) {
+    return '事件结束年份不能早于开始年份';
+  }
+
+  return null;
+}
+
 function sortEvents(events: Event[]): Event[] {
   return [...events].sort((left, right) => {
     const yearDiff = left.startYear - right.startYear;
@@ -221,6 +234,11 @@ export function EventManager({ events, onEventsChange }: EventManagerProps) {
       const input = buildEventInput(form, formMode === 'edit' ? selectedEvent : null);
       if (!input) {
         throw new Error('请填写标题和开始年份');
+      }
+
+      const inputError = validateEventInput(input);
+      if (inputError) {
+        throw new Error(inputError);
       }
 
       if (formMode === 'edit' && selectedEvent) {

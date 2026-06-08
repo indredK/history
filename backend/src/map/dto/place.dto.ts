@@ -15,13 +15,20 @@ function parseNumberRange(value: unknown): number[] | undefined {
     return undefined;
   }
 
-  const rawValues = Array.isArray(value) ? value : String(value).split(',');
+  const rawValues: unknown[] = Array.isArray(value)
+    ? value
+    : typeof value === 'string' || typeof value === 'number'
+      ? String(value).split(',')
+      : [];
   return rawValues.map((item) => {
     if (typeof item === 'number') {
       return item;
     }
+    if (typeof item !== 'string') {
+      return Number.NaN;
+    }
 
-    const normalized = String(item).trim();
+    const normalized = item.trim();
     return normalized ? Number(normalized) : Number.NaN;
   });
 }

@@ -82,8 +82,15 @@ export function FixedTabsPage({
       },
       { replace: true },
     );
-    onTabChange?.(newValue);
   };
+
+  useEffect(() => {
+    if (!activeTab) {
+      return;
+    }
+
+    onTabChange?.(activeTab);
+  }, [activeTab, onTabChange]);
 
   useEffect(() => {
     if (requestedTabIsValid && requestedTab !== activeTab) {

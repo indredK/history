@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { PersonService } from './person.service';
 import { PersonQueryDto } from './dto/person-query.dto';
@@ -51,7 +60,8 @@ export class PersonController {
   @Post()
   @ApiOperation({
     summary: 'Create person',
-    description: 'Create a historical person record for the unified people archive',
+    description:
+      'Create a historical person record for the unified people archive',
   })
   @ApiResponse({
     status: 201,

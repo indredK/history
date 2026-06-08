@@ -1,6 +1,7 @@
 import type { Event } from '@/services/timeline/types';
 import type { LabelLayout, YearLayout } from '../types';
 import { TIMELINE_CONFIG } from '../config/timelineConfig';
+import { formatTimelineYear } from '@/features/timeline/utils/dynastyUtils';
 
 /**
  * 智能标签布局算法
@@ -130,8 +131,10 @@ export const calculateYearLayout = (
 
   sortedEvents.forEach((event) => {
     const x = xScale(event.startYear);
-    const yearText = event.endYear && event.endYear !== event.startYear ? 
-      `${event.startYear}-${event.endYear}` : `${event.startYear}`;
+    const yearText =
+      event.endYear !== undefined && event.endYear !== null && event.endYear !== event.startYear
+        ? `${formatTimelineYear(event.startYear, { short: true })}-${formatTimelineYear(event.endYear, { short: true })}`
+        : formatTimelineYear(event.startYear, { short: true });
     const textWidth = yearText.length * 6; // 估算文字宽度
     const priority = favorites.includes(event.id) ? 10 : 1;
     

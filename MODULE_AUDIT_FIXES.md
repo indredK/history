@@ -4,15 +4,15 @@
 
 ## 进度
 
-- 第一轮：进行中（当前推进至 map）
-- 第二轮：待第一轮全模块完成后重新执行更严格复查
-- 已修复问题计数：66
+- 第一轮：按用户要求到此收尾（当前推进至 map）
+- 第二轮：未执行；用户要求先修完剩余启动/门禁报错并结束本任务
+- 已修复问题计数：79
 
 ## 复扫结论
 
-- 当前仍处于第一轮模块审查推进中；第二轮更严格复查尚未开始，不能将本任务视为完整完成。
+- 当前按用户最新要求停止长程逐模块推进；第二轮更严格复查未执行。
 - 本轮启动后无数据排查确认 `/map` 本身已有事件与边界数据；已修复公共代理、代理检测与集合加载兜底，后续仍需继续逐模块审查人物分朝代、公共组件、国际化和响应式。
-- 验证方式按当前环境和用户约束记录到每条修复项中；未运行的 lint、type-check、测试或浏览器复查均不得作为已完成证明。
+- 验证方式按当前环境和用户约束记录到每条修复项中；本次收尾按用户要求补跑 lint 与 type-check。
 
 ## 修复记录
 
@@ -514,3 +514,107 @@
 - 问题：学者卡片和详情直接拼接生卒年，公元前年份会显示为负数，缺失年份也容易出现 `未知-未知` 或被排序到真实年份前；`scholarApi` 转换器以宽松原始数据读取字段，未兼容 snake_case 别名，作品、成就和日期字段在 API/JSON/mock 形态切换时可能丢失或混入无效值。
 - 修复：新增学者历史年份格式化工具，卡片和详情统一显示“公元前 N 年 / N 年 / 生年不详 / 卒年不详”，两端未知时不渲染寿命标签；出生年排序将未知值后置；`scholarApi` 改为 `unknown` 输入和公共 `figureTransform` 读取工具，兼容 `birth_year`、`school_of_thought`、`major_works`、`created_at` 等别名，作品只按 `title` 判定代表作并过滤无效日期，成就字段在空数组时回退到 contributions。
 - 验证：按当前约束仅做静态搜索和代码审查；`rg` 确认学者路径不再有显式 `any`、`birthYear || 0`、`未知-未知`、`0年` 等旧模式。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 67. 文化名人筛选旧值会让 Select 失去有效选项
+
+- 轮次：阶段一模块推进
+- 模块：前端文化页学者筛选器、人物页文化名人 tab、人物页公共 tabs 响应式
+- 问题：文化页和人物页文化名人共用学者 store。切换页面、刷新数据源或删除记录后，旧的朝代/学派筛选值可能不在当前选项列表中，MUI `Select` 会出现 out-of-range 状态，选中态也容易只剩一个不可解释的旧过滤条件。人物页 9 个标签在窄屏下虽然可横向滚动，但未开启移动端滚动按钮，切换入口提示不足。
+- 修复：`ScholarFilter` 对空值和旧筛选值做归一化，把当前选中值纳入安全选项集合并增加 `renderValue`，避免选择框失去有效选项；人物页 `FixedTabsPage` 开启 `allowScrollButtonsMobile`，大量 tabs 在移动端保留明确滚动控制。
+- 验证：按当前约束仅做静态代码审查；`rg` 确认学者筛选器已有安全选项兜底和 `renderValue`，人物页 tabs 已开启移动端滚动按钮。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 68. 思想流派转换器仍以 any 读取 API/JSON 数据
+
+- 轮次：阶段一模块推进
+- 模块：前端文化页思想流派 service/API 转换器、文化页学派卡片/详情
+- 问题：`schoolApi` 的 `transformJsonToSchool` 仍以 `any` 读取后端 API、静态 JSON 和 mock 写入结果，数组字段、日期字段和中英文字段没有统一类型收口；未来后端或静态数据使用 snake_case 时，`founding_year`、`core_beliefs`、`representative_figures`、`classic_works` 等字段会被丢掉。
+- 修复：`transformJsonToSchool` 改为 `unknown` 输入，复用公共 `figureTransform` 读取字符串、数字和数组；兼容 camelCase/snake_case 字段，代表人物与经典著作按结构读取并生成稳定兜底 id，日期只在有效时写入；`coreBeliefs/coreIdeas` 保持旧字段兼容。
+- 验证：按当前约束仅做静态搜索和代码审查；`rg` 确认 people/culture/common/person/school 相关路径不再有显式 `any` 命中。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 69. 思想流派创立年份为 0 时显示为公元元年
+
+- 轮次：阶段一模块推进
+- 模块：前端文化页思想流派详情头部
+- 问题：`SchoolHeader` 只判断 `foundingYear !== null/undefined`，当 API/JSON/mock 将缺失创立年份兜底为 `0` 时，会显示“公元元年”时间 chip；这和人物、学者、帝王等模块已统一的 `0 = 年份未知` 语义不一致。
+- 修复：新增 `isKnownFoundingYear()`，仅在创立年份是有限且非 0 的数字时才渲染年份 chip；`0`、空值或无效值不再显示假创立时间。
+- 验证：按当前约束仅做静态搜索和代码审查；`rg` 确认文化模块不再存在 `公元元年` 或 `foundingYear as number` 旧模式。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 70. URL 参数切换固定标签页不会通知父组件
+
+- 轮次：阶段一模块推进
+- 模块：前端公共 `FixedTabsPage`、神话页宗教关系 tab
+- 问题：`FixedTabsPage` 只有用户点击标签时才调用 `onTabChange`。当页面通过 `?tab=religion` 初始化或 URL 参数变化切换 tab 时，内部 activeTab 会更新，但父组件状态不会同步；神话页因此可能已经显示“宗教关系”内容，外层却仍缺少 `religion-view` class，影响宗教图谱布局样式。
+- 修复：将 `onTabChange` 通知统一放到 activeTab effect 中，任何来源造成的有效 tab 变化都会通知父组件；点击切换仍只更新内部状态和 URL，避免重复通知。
+- 验证：按当前约束仅做静态代码审查；已确认 `onTabChange` 不再只存在于点击处理路径，`FixedTabsPage` 会在 activeTab 变化后统一回调。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 71. 公共路由和后端日志拦截器仍有显式 any
+
+- 轮次：阶段一模块推进 / 项目级类型债
+- 模块：后端公共日志拦截器、前端路由表、后端 figure 公共 service 注释
+- 问题：后端 `LoggingInterceptor` 返回 `Observable<any>`，前端路由表以 `ComponentType<any>` 声明懒加载页面组件；这两处公共入口会让类型债继续向全局扩散。后端 figure 公共 service 注释中也包含 `any`，会干扰后续纯 grep 审查。
+- 修复：日志拦截器返回类型改为 `Observable<unknown>`；路由表组件类型改为 `ComponentType` 默认 props；figure 公共 service 注释改为“任意类型”，避免误报。
+- 验证：按当前约束仅做静态搜索和代码审查；排除 Prisma generated 与测试断言后，`backend/src` 业务源码不再有 `any` 命中，people/culture/common/person/school/router 前端限定路径也不再有显式 `any` 命中。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 72. 公共数据加载与 storage 工具显式 any 扩散
+
+- 轮次：阶段一模块推进 / 项目级类型债
+- 模块：前端公共数据加载工具、API 客户端降级配置、storage 监听器
+- 问题：`dataLoaders` 的缓存、API 响应解析和 `createDataFetcher` 仍使用显式 `any`，`apiClient.fallbackControl.updateConfig` 也绕过 `FallbackConfig` 类型；storage 监听器用 `any` 传值，且 `storage` 事件中的旧值/新值 JSON 解析失败会中断监听链。
+- 修复：公共缓存改为 `Map<string, unknown>`；`handleApiResponse` / `handleSingleApiResponse` 改为 `unknown` 输入并通过 `isRecord`、`hasOwn` 和 meta 读取器收口后端 `{ success, data, meta }`、分页、直接数组和单值响应；`createDataFetcher` 参数改为 `unknown[]`；降级配置入口改为 `Partial<FallbackConfig>`；storage 监听值改为 `unknown` 并增加安全解析，非法 JSON 保留原字符串。
+- 验证：按当前约束仅做静态搜索和代码审查；`rg` 确认 `frontend/src/utils/services` 与 `frontend/src/utils/storage.ts` 不再有显式 `any` 命中。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 73. 前端公共组件、宗教图谱和时间线仍有显式 any 残留
+
+- 轮次：阶段一模块推进 / 项目级类型债
+- 模块：前端数据源指示器、公共错误边界、响应式表格、响应式 hook、时间线事件卡片与 D3 渲染器、宗教关系图布局
+- 问题：前端剩余显式 `any` 集中在公共 UI 与可视化链路：数据源测试结果没有导出/复用结构类型，错误边界和响应式表格 props 绕过 MUI 类型，分享 payload、屏幕方向和 D3 hover 事件使用宽松类型，时间线渲染器还通过 `xAxis as any` 与未类型化配置参数规避编译器检查。
+- 修复：导出并复用 API 测试结果类型，数据源指示器 mock 配置改用 `DATA_SOURCE_CONFIG.mock`；错误边界使用 `ErrorInfo`，响应式表格继承 `TableCellProps` 的安全子集；分享 payload 使用 `ShareData`，屏幕方向增加白名单归一；宗教图谱 force/tree 布局使用具体 D3 节点/边类型；时间线渲染器补齐 D3 轴、hover SVG 元素和 `TimelineConfig` 子类型，移除最后的 `any`。
+- 验证：按当前约束仅做静态搜索和代码审查；`rg -n "\\bany\\b" frontend/src -g '*.ts' -g '*.tsx'` 已无命中。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 74. 时间线年份会显示裸负数、undefined 或假 0 年
+
+- 轮次：阶段一模块推进 / event + timeline UI
+- 模块：后端事件 DTO/service、前端时间线 API 转换器、事件卡片、事件管理面板、事件详情、D3 时间线、3D 朝代卡片和聚合算法
+- 问题：事件卡片在 `endYear` 缺失时会拼出 ` - undefined`，事件卡片/管理面板/详情直接显示 `-221` 等裸负数年份；D3 年份标签和 3D 朝代卡片也直接拼年份并用 truthy 判断吞掉 `0`；后端事件写入和查询 DTO 允许年份 `0`，时间线无事件 bounds 会落到 `0/0`，前端 API 转换器缺 `startYear` 时也会兜底为 `0`。
+- 修复：时间线可见年份统一使用 `formatTimelineYear()`，公元前年份显示中文历史纪年，0 刻度显示“公元元年/元年”；事件卡片、管理面板、详情、D3 年份标签和 3D 朝代卡片均改为显式 `null/undefined` 判断；后端 create/update/query DTO 和 service 拒绝 0 年，空 bounds 优先使用查询边界，否则回落到 `-3000` 至当前年且保证顺序；前端 API 列表过滤无效开始年份，mock/API 写入拒绝 0 年和结束早于开始；聚合算法不再用 `dynasty?.startYear ?? 0` 生成假聚合块。
+- 验证：按当前约束仅做静态搜索和代码审查；已确认时间线/event 相关路径不再存在 `endYear &&`、`endYear || startYear`、`dynasty?.startYear ?? 0` 或 `公元0年` 旧展示模式。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 75. 朝代年份写入和甘特空数据仍可能产生公元 0 年
+
+- 轮次：阶段一模块推进 / dynasty
+- 模块：后端朝代 DTO/service、前端朝代表行、朝代甘特图数据转换
+- 问题：朝代 create/update/query DTO 只限制最小年份，未拒绝公元 0 年；service 直接调用时也只检查结束年份是否早于开始年份。前端朝代表公元纪年列用 `||` 兜底，未来字段改成数字时会把 `0` 当缺失；甘特图 `buildGanttModel()` 在空数据时返回 `[0, 1]`，会让坐标轴出现假公元 0 年区间，且未过滤 0 年/反向区间块。
+- 修复：朝代写入和查询 DTO 增加 `NotEquals(0)`，service 年份范围校验同步拒绝 0 年；朝代表公元纪年列改为显式空字符串/空值判断；甘特数据转换先过滤 0 年和反向区间，空数据 bounds 回落到 `-3000` 至当前年，不再使用 `[0, 1]`。
+- 验证：按当前约束仅做静态搜索和代码审查；已确认 `frontend/src/features/dynasties` 与 `backend/src/dynasty` 不再存在年份 `[0, 1]` 空 bounds、`endYear || '现在'` 或显式 `any` 命中。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 76. 地图边界和事件详情仍可能显示公元 0 年或裸年份
+
+- 轮次：阶段一模块推进 / map
+- 模块：后端地图边界 DTO/service、前端 ECharts 地图视图、地图工作台年份筛选和状态 chip
+- 问题：`/map/boundary-data/year` 只校验最小年份，允许公元 0 年请求；地图工作台年份 chip 本地拼接 `公元${year}年`，0 年会显示为“公元0年”；地图事件详情仍直接显示裸 `startYear/endYear` 并用 `endYear &&` 判断；嵌入时间线初始范围在朝代数组类型收窄失败时有 `dynasties[0]?.startYear ?? 0` 兜底。
+- 修复：地图边界查询 DTO 增加 `NotEquals(0)`，service 直接调用也拒绝 0 年；地图工作台复用 `formatTimelineYear()`，筛选解析忽略 0 年；地图事件详情抽出 `formatMapEventYear()` 并统一中文历史纪年；嵌入时间线初始范围改为显式读取首尾朝代，无首尾时返回 `undefined`，不再兜底到 0。
+- 验证：按当前约束仅做静态搜索和代码审查；已确认 `frontend/src/features/map` 与 `backend/src/map` 不再存在 `selectedEvent.endYear &&`、`dynasties[0]?.startYear ?? 0`、`公元${year}年` 或显式 `any` 命中。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 77. 后端 person/culture/figure/emperor 年份 DTO 未统一拒绝公元 0 年
+
+- 轮次：阶段一模块推进 / 后端年份语义横扫
+- 模块：后端人物档案 DTO/service、文化学者/思想流派 DTO/service、帝王查询 DTO、分朝代 figure 公共查询 DTO
+- 问题：person、culture、emperor、figure 的历史年份字段多只配置 `@Min(-3000)`，未拒绝公元 0 年；person/culture 写入 service 直接调用时也只检查生卒年顺序或必填名称，仍可能保存 `birthYear/deathYear/foundingYear = 0`。这些字段虽然前端已尽量把 0 当未知隐藏，但后端写入/筛选层不收口会继续制造假年份。
+- 修复：person 相关事件年份、生卒年写入和查询字段，culture 学者生卒年/学派创立年写入和查询字段，emperor 在位起止查询字段，以及 figure 公共生卒年查询字段均增加 `NotEquals(0)`；person service 生卒年校验、culture service 学者生卒年和学派创立年校验同步拒绝 0 年。
+- 验证：按当前约束仅做静态搜索和代码审查；`rg` 确认后端业务源码中所有 `@Min(-3000)` 历史年份字段均已配套 `NotEquals(0)`，且 `frontend/src`/`backend/src` 业务源码仍无显式 `any` 命中。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 78. 前端年份表单仍会先提交公元 0 年再等后端兜底
+
+- 轮次：阶段一模块推进 / 前端表单年份语义横扫
+- 模块：文化编辑弹窗、人物档案表单、时间线事件管理面板
+- 问题：后端已统一拒绝公元 0 年后，前端部分表单仍会把 `0` 解析为有效数字并提交：文化学派创立年、文化名人生卒年、人物档案生卒年和相关事件年份、时间线事件起止年份都会等 API/service 层报错；用户无法在当前表单校验阶段直接看到准确原因。
+- 修复：文化编辑弹窗新增 `isZeroHistoricalYear()`，学派创立年和学者生卒年在提交前提示“历史纪年没有公元 0 年”；人物档案表单在本地校验生卒年和相关事件年份 0；时间线事件管理新增 `validateEventInput()`，保存时提示 0 年和结束早于开始年份，且 `buildEventInput()` 保持渲染期无异常。
+- 验证：按当前约束仅做静态搜索和代码审查；已确认三处表单都有本地 0 年错误提示，`buildEventInput()` 不在渲染期抛错，且 `frontend/src`/`backend/src` 业务源码仍无显式 `any` 命中。未运行 lint、type-check、测试、开发服务器或浏览器。
+
+### 79. 文化页动态导入失败与前端类型/lint 门禁报错
+
+- 轮次：收尾修复 / 用户要求停止长程审查
+- 模块：文化页学者 API 转换器、人物/帝王/时间线/公共响应解析类型链路、响应式 hook lint
+- 问题：`frontend/src/services/person/scholars/scholarApi.ts` 的 `isLiteraryWork()` 表达式停在 `&&`，Vite OXC 解析失败，导致 `CulturePage.tsx` 动态导入失败并出现“页面没数据”的表象；修复语法后，`exactOptionalPropertyTypes`、索引签名访问和 MUI v9 组件参数又暴露出一批类型门禁报错，lint 还发现 3 个无用 `eslint-disable`。
+- 修复：补全并收紧学者作品归一化，支持字符串作品与结构化 `LiteraryWork`；文化/人物/帝王卡片和头像将 `null` 规范为组件可接受的 `undefined`；人物表单解析仅在有值时写入可选字段；人物、帝王、时间线、学派和公共响应转换器补齐 raw record 类型或方括号访问；storage 监听器增加值类型判断；D3 tree link datum 类型收窄；删除无用 lint 禁用指令。
+- 验证：浏览器复查文化页已渲染学派数据；按用户要求执行 `bun run lint` 与 `bun run type-check`，前后端均通过。

@@ -8,12 +8,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import {
-  ApiOperation,
-  ApiParam,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MythologyService } from './mythology.service';
 import { MythologyQueryDto } from './dto/mythology-query.dto';
 import { MythologyDto } from './dto/mythology.dto';
