@@ -106,7 +106,8 @@ export const useReligionStore = create<ExtendedReligionStore>((set, get) => ({
     graphData.nodes.forEach(node => {
       if (
         node.name.toLowerCase().includes(normalizedQuery) ||
-        node.title?.toLowerCase().includes(normalizedQuery)
+        node.title?.toLowerCase().includes(normalizedQuery) ||
+        node.description.toLowerCase().includes(normalizedQuery)
       ) {
         matchedNodes.add(node.id);
       }

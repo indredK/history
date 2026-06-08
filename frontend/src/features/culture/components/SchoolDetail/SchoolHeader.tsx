@@ -11,8 +11,16 @@ interface SchoolHeaderProps {
   onClose: () => void;
 }
 
+function formatYear(year: number): string {
+  if (year < 0) return `公元前${Math.abs(year)}年`;
+  if (year === 0) return '公元元年';
+  return `公元${year}年`;
+}
+
 export function SchoolHeader({ school, onClose }: SchoolHeaderProps) {
   const firstChar = school.name.charAt(0);
+  const hasFoundingYear =
+    school.foundingYear !== undefined && school.foundingYear !== null;
 
   return (
     <DialogTitle
@@ -47,9 +55,14 @@ export function SchoolHeader({ school, onClose }: SchoolHeaderProps) {
           >
             {school.name}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'var(--color-text-secondary)', mt: 0.5 }}>
-            {school.name_en}
-          </Typography>
+          {school.name_en && (
+            <Typography
+              variant="body2"
+              sx={{ color: 'var(--color-text-secondary)', mt: 0.5 }}
+            >
+              {school.name_en}
+            </Typography>
+          )}
 
           <Box sx={{ display: 'flex', gap: 0.5, mt: 1, flexWrap: 'wrap' }}>
             {school.founder && (
@@ -66,9 +79,12 @@ export function SchoolHeader({ school, onClose }: SchoolHeaderProps) {
                 }}
               />
             )}
-            {(school.foundingPeriod || school.foundingYear) && (
+            {(school.foundingPeriod || hasFoundingYear) && (
               <Chip
-                label={school.foundingPeriod || `公元${school.foundingYear}年`}
+                label={
+                  school.foundingPeriod ||
+                  formatYear(school.foundingYear as number)
+                }
                 size="small"
                 variant="outlined"
                 sx={{

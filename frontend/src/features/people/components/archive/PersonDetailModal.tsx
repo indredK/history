@@ -161,7 +161,7 @@ export function PersonDetailModal({
               时期：{person.period}
             </Typography>
           )}
-          {person.confidence !== undefined && (
+          {person.confidence !== undefined && person.confidence !== null && (
             <Typography variant="body2" sx={{ color: 'var(--color-text-secondary)' }}>
               可信度：{Math.round(person.confidence * 100)}%
             </Typography>

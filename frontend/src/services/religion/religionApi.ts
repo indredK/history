@@ -1,5 +1,7 @@
 import type { ReligionService } from './religionService';
-import { createUnifiedService } from '../base/serviceFactory';
+import { getDataSourceMode } from '@/config/dataSource';
+import { apiClient, handleSingleApiResponse } from '@/utils/services/apiClient';
+import { loadJsonArray } from '@/utils/services/dataLoaders';
 import type {
   ReligionEdge,
   ReligionGraphData,
@@ -8,6 +10,15 @@ import type {
   RelationshipType,
   SectType,
 } from './types';
+
+const API_GRAPH_ENDPOINT = '/religion/graph';
+const JSON_DATA_PATH = '/data/json/religions.json';
+
+const emptyGraph: ReligionGraphData = {
+  nodes: [],
+  edges: [],
+  metadata: { version: '', lastUpdated: '', sources: [] },
+};
 
 const nodeTypeMap: Record<string, ReligionNodeType> = {
   deity: 'deity',
@@ -110,27 +121,47 @@ function transformJsonToReligion(jsonReligion: unknown): ReligionGraphData {
   };
 }
 
-// 创建统一服务
-const unifiedService = createUnifiedService<ReligionGraphData>(
-  '/religions',
-  '/data/json/religions.json',
-  transformJsonToReligion
-);
+let mockCache: ReligionGraphData | null = null;
+
+async function getMockReligionGraph(): Promise<ReligionGraphData> {
+  if (mockCache) return mockCache;
+  const jsonData = await loadJsonArray(JSON_DATA_PATH);
+  mockCache = jsonData[0] ? transformJsonToReligion(jsonData[0]) : emptyGraph;
+  return mockCache;
+}
+
+async function getApiReligionGraph(): Promise<ReligionGraphData> {
+  const response = await apiClient.get(API_GRAPH_ENDPOINT);
+  const apiResponse = handleSingleApiResponse<unknown>(response);
+  return transformJsonToReligion(apiResponse.data);
+}
+
+async function getReligionGraph(): Promise<{ data: ReligionGraphData }> {
+  if (getDataSourceMode() === 'api') {
+    try {
+      return { data: await getApiReligionGraph() };
+    } catch (error) {
+      console.error('宗教关系 API 加载失败，回退到静态数据:', error);
+    }
+  }
+
+  return { data: await getMockReligionGraph() };
+}
+
+async function getReligionNode(id: string): Promise<{ data: ReligionNode | null }> {
+  const result = await getReligionGraph();
+  const node = result.data.nodes.find((item) => item.id === id) || null;
+  return { data: node };
+}
 
 // 实现宗教服务
 export const religionApi: ReligionService = {
-  ...unifiedService,
-  getReligionGraph: async () => {
-    const result = await unifiedService.getAll();
-    const data = Array.isArray(result.data) ? result.data[0] : result.data;
-    return { data: data || { nodes: [], edges: [], metadata: { version: '', lastUpdated: '', sources: [] } } };
+  getAll: async () => {
+    const result = await getReligionGraph();
+    return { data: [result.data] };
   },
-  getReligionNode: async (id: string) => {
-    const result = await unifiedService.getAll();
-    const graphData = Array.isArray(result.data) ? result.data[0] : result.data;
-    const node = graphData?.nodes.find((n: { id: string }) => n.id === id) || null;
-    return { data: node };
-  },
+  getReligionGraph,
+  getReligionNode,
 };
 
 // 保持向后兼容的导出

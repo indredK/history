@@ -3,30 +3,59 @@
  * Song Dynasty Figure API Service
  */
 
-import type { SongFigure } from './types';
+import type { SongFigure, SongFigureRole } from './types';
 import { createUnifiedService } from '../../base/serviceFactory';
 import type { SongFigureService } from './songService';
 import { songFigureServiceHelper } from './songService';
+import {
+  isRecord,
+  readEvaluations,
+  readEvents,
+  readNumber,
+  readOptionalString,
+  readString,
+  readStringArray,
+} from '../common/figureTransform';
+
+const SONG_ROLES: SongFigureRole[] = [
+  'emperor',
+  'chancellor',
+  'general',
+  'official',
+  'scholar',
+  'other',
+];
+
+function normalizeSongRole(value: string): SongFigureRole {
+  return SONG_ROLES.includes(value as SongFigureRole) ? (value as SongFigureRole) : 'other';
+}
 
 /**
  * 数据转换函数
  */
-const transformJsonToSongFigure = (jsonData: any, index: number): SongFigure => ({
-  id: jsonData.id || `song_figure_${jsonData.name?.replace(/\s+/g, '_') || `unknown_${index}`}`,
-  name: jsonData.name || '',
-  birthYear: jsonData.birthYear ?? jsonData.birth_year ?? 0,
-  deathYear: jsonData.deathYear ?? jsonData.death_year ?? 0,
-  role: jsonData.role || 'other',
-  positions: jsonData.positions || [],
-  biography: jsonData.biography || '',
-  politicalViews: jsonData.politicalViews || jsonData.political_views || '',
-  achievements: jsonData.achievements || [],
-  events: jsonData.events || [],
-  evaluations: jsonData.evaluations || [],
-  sources: jsonData.sources || [],
-  courtesy: jsonData.courtesy,
-  faction: jsonData.faction
-});
+const transformJsonToSongFigure = (jsonData: unknown, index: number): SongFigure => {
+  const record = isRecord(jsonData) ? jsonData : {};
+  const name = readString(record, 'name');
+  const figure: SongFigure = {
+    id: readString(record, 'id', `song_figure_${name.replace(/\s+/g, '_') || `unknown_${index}`}`),
+    name,
+    birthYear: readNumber(record, ['birthYear', 'birth_year']),
+    deathYear: readNumber(record, ['deathYear', 'death_year']),
+    role: normalizeSongRole(readString(record, 'role', 'other')),
+    positions: readStringArray(record, 'positions'),
+    biography: readString(record, 'biography'),
+    politicalViews: readString(record, ['politicalViews', 'political_views']),
+    achievements: readStringArray(record, 'achievements'),
+    events: readEvents(record),
+    evaluations: readEvaluations(record),
+    sources: readStringArray(record, 'sources'),
+  };
+  const courtesy = readOptionalString(record, 'courtesy');
+  const faction = readOptionalString(record, 'faction');
+  if (courtesy) figure.courtesy = courtesy;
+  if (faction) figure.faction = faction;
+  return figure;
+};
 
 /**
  * 创建统一服务
@@ -63,4 +92,3 @@ export const songFigureService: SongFigureService = {
 // 保持向后兼容的导出
 export const getSongFigures = () => songFigureService.getAll();
 export const getSongFigureById = (id: string) => songFigureService.getById!(id);
-

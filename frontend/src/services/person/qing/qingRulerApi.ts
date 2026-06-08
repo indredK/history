@@ -10,29 +10,60 @@
 import type { QingRuler } from './types';
 import { createUnifiedService } from '@/utils/services/serviceFactory';
 import { type QingRulerService, qingRulerServiceHelper } from './qingRulerService';
+import {
+  isRecord,
+  readEvaluations,
+  readEvents,
+  readNumber,
+  readOptionalString,
+  readString,
+  readStringArray,
+} from '../common/figureTransform';
 
+function readPolicies(record: Record<string, unknown>): QingRuler['policies'] {
+  const policies = record.policies;
+  if (!Array.isArray(policies)) return [];
+
+  return policies.map((item, index) => {
+    const policy = isRecord(item) ? item : {};
+    const result: QingRuler['policies'][number] = {
+      name: readString(policy, 'name', `政策${index + 1}`),
+      description: readString(policy, 'description'),
+      impact: readString(policy, 'impact'),
+    };
+    const year = readNumber(policy, 'year', Number.NaN);
+    if (Number.isFinite(year)) result.year = year;
+    return result;
+  });
+}
 
 
 /**
  * 转换JSON数据为QingRuler类型
  */
-const transformJsonToQingRuler = (jsonData: any, index: number): QingRuler => {
-  return {
-    id: jsonData.id || `qing_ruler_${jsonData.name?.replace(/\s+/g, '_') || `unknown_${index}`}`,
-    name: jsonData.name || '',
-    templeName: jsonData.templeName || '',
-    eraName: jsonData.eraName || '',
-    reignStart: jsonData.reignStart || 0,
-    reignEnd: jsonData.reignEnd || 0,
-    policies: jsonData.policies || [],
-    majorEvents: jsonData.majorEvents || [],
-    contribution: jsonData.contribution || '',
-    responsibility: jsonData.responsibility || '',
-    evaluations: jsonData.evaluations || [],
-    biography: jsonData.biography || '',
-    portraitUrl: jsonData.portraitUrl || '',
-    sources: jsonData.sources || []
+const transformJsonToQingRuler = (jsonData: unknown, index: number): QingRuler => {
+  const record = isRecord(jsonData) ? jsonData : {};
+  const name = readString(record, 'name');
+  const figure: QingRuler = {
+    id: readString(record, 'id', `qing_ruler_${name.replace(/\s+/g, '_') || `unknown_${index}`}`),
+    name,
+    templeName: readString(record, 'templeName'),
+    eraName: readString(record, 'eraName'),
+    reignStart: readNumber(record, 'reignStart'),
+    reignEnd: readNumber(record, 'reignEnd'),
+    policies: readPolicies(record),
+    majorEvents: readEvents({ events: record.majorEvents }),
+    contribution: readString(record, 'contribution'),
+    responsibility: readString(record, 'responsibility'),
+    evaluations: readEvaluations(record),
+    sources: readStringArray(record, 'sources'),
   };
+
+  const biography = readOptionalString(record, 'biography');
+  const portraitUrl = readOptionalString(record, 'portraitUrl');
+  if (biography) figure.biography = biography;
+  if (portraitUrl) figure.portraitUrl = portraitUrl;
+  return figure;
 };
 
 // 创建统一服务

@@ -1,42 +1,54 @@
 import type { TangFigureService } from './tangService';
 import { createUnifiedService } from '../../base/serviceFactory';
-import type { TangFigure } from './types';
+import type { TangFigure, TangFigureRole } from './types';
 import { tangFigureServiceHelper } from './tangService';
+import {
+  isRecord,
+  readEvaluations,
+  readEvents,
+  readNumber,
+  readOptionalString,
+  readString,
+  readStringArray,
+} from '../common/figureTransform';
+
+const TANG_ROLES: TangFigureRole[] = [
+  'emperor',
+  'chancellor',
+  'general',
+  'official',
+  'poet',
+  'other',
+];
+
+function normalizeTangRole(roles: string[]): TangFigureRole {
+  return TANG_ROLES.find((role) => role !== 'other' && roles.includes(role)) ?? 'other';
+}
 
 // 数据转换器
-function transformJsonToTangFigure(jsonFigure: any, index: number): TangFigure {
-  const rawRoles = jsonFigure.role || jsonFigure.position || jsonFigure.roles;
-  const roles = Array.isArray(rawRoles)
-    ? rawRoles
-    : rawRoles
-      ? String(rawRoles).split(',').map((r: string) => r.trim())
-      : [];
+function transformJsonToTangFigure(jsonFigure: unknown, index: number): TangFigure {
+  const record = isRecord(jsonFigure) ? jsonFigure : {};
+  const roles = readStringArray(record, ['role', 'position', 'roles']);
   
-  // 处理派系：如果是数组直接使用，否则分割字符串
-  const factions = Array.isArray(jsonFigure.factions) ? jsonFigure.factions : 
-                  jsonFigure.factions ? jsonFigure.factions.split(',').map((f: string) => f.trim()) : [];
-  
-  // 处理成就：如果是数组直接使用，否则分割字符串
-  const achievements = Array.isArray(jsonFigure.achievements) ? jsonFigure.achievements : 
-                      jsonFigure.achievements ? jsonFigure.achievements.split('|').map((a: string) => a.trim()) : [];
-  
-  // 处理职位：优先使用positions字段（mock数据），如果没有则使用角色
-  const positions = jsonFigure.positions || roles;
+  const factions = readStringArray(record, 'factions');
+  const achievements = readStringArray(record, 'achievements');
+  const positions = readStringArray(record, 'positions');
+  const name = readString(record, 'name', `唐朝人物${index + 1}`);
   
   const figure: TangFigure = {
-    id: jsonFigure.id || `tang_figure_${jsonFigure.name.replace(/\s+/g, '_')}_${index}`,
-    name: jsonFigure.name,
-    birthYear: jsonFigure.birthYear ?? jsonFigure.birth_year ?? 0,
-    deathYear: jsonFigure.deathYear ?? jsonFigure.death_year ?? 0,
-    biography: jsonFigure.biography || '',
-    role: roles.includes('emperor') ? 'emperor' : roles.includes('chancellor') ? 'chancellor' : 
-          roles.includes('general') ? 'general' : roles.includes('official') ? 'official' : 
-          roles.includes('poet') ? 'poet' : 'other',
-    positions: positions,
+    id: readString(record, 'id', `tang_figure_${name.replace(/\s+/g, '_')}_${index}`),
+    name,
+    birthYear: readNumber(record, ['birthYear', 'birth_year']),
+    deathYear: readNumber(record, ['deathYear', 'death_year']),
+    biography: readString(record, 'biography'),
+    role: normalizeTangRole(roles),
+    positions: positions.length > 0 ? positions : roles,
     achievements: achievements,
-    events: jsonFigure.events || [],
-    evaluations: jsonFigure.evaluations || [],
-    sources: jsonFigure.source ? [`src_${jsonFigure.source}`] : jsonFigure.sources || [],
+    events: readEvents(record),
+    evaluations: readEvaluations(record),
+    sources: readOptionalString(record, 'source')
+      ? [`src_${readString(record, 'source')}`]
+      : readStringArray(record, 'sources'),
   };
 
   if (factions[0]) {

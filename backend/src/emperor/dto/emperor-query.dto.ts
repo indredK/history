@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsOptional, IsInt, Min, IsUUID } from 'class-validator';
+import { IsOptional, IsInt, IsString, Min, IsUUID } from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 export class EmperorQueryDto extends PaginationQueryDto {
@@ -39,6 +39,7 @@ export class EmperorQueryDto extends PaginationQueryDto {
     example: '李',
   })
   @IsOptional()
+  @IsString()
   name?: string;
 
   @ApiPropertyOptional({
@@ -46,5 +47,6 @@ export class EmperorQueryDto extends PaginationQueryDto {
     example: '唐朝',
   })
   @IsOptional()
+  @IsString()
   dynastyName?: string;
 }

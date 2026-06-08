@@ -1,6 +1,14 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsOptional, IsInt, Min, Max } from 'class-validator';
+import {
+  IsOptional,
+  IsInt,
+  Min,
+  Max,
+  IsString,
+  Matches,
+  MaxLength,
+} from 'class-validator';
 
 export class TimelineQueryDto {
   @ApiPropertyOptional({
@@ -36,9 +44,15 @@ export class TimelineQueryDto {
   limit?: number = 100;
 
   @ApiPropertyOptional({
-    description: 'Filter by event type',
+    description:
+      'Filter by a single event type tag. Multi-tag event rows are matched by token boundary.',
     example: 'war',
   })
   @IsOptional()
+  @IsString()
+  @MaxLength(64)
+  @Matches(/^[A-Za-z0-9_'-]+$/, {
+    message: 'eventType 只能包含英文字母、数字、下划线、连字符或英文撇号',
+  })
   eventType?: string;
 }

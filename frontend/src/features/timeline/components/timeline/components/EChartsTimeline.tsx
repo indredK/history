@@ -16,7 +16,7 @@ import { formatTimelineYear } from '@/features/timeline/utils/dynastyUtils';
 import { EventDetailPanel } from './EventDetailPanel';
 import {
   EVENT_TYPE_LABELS,
-  getTimelineEventCategory,
+  getTimelineEventCategories,
   type TimelineEventCategory,
 } from '@/features/timeline/utils/timelineFilters';
 import {
@@ -429,7 +429,7 @@ function buildCategorizedEventRenderData(
   // 1. Group events by category
   const categoryGroups = new Map<string, Event[]>();
   for (const event of events) {
-    const cat = getTimelineEventCategory(event.eventType);
+    const cat = getTimelineEventCategories(event)[0] ?? '其他';
     if (!categoryGroups.has(cat)) {
       categoryGroups.set(cat, []);
     }
@@ -496,7 +496,7 @@ function buildCategorizedEventRenderData(
 
 function buildEventLabelData(renderData: EventRenderDataItem[]): EventLabelDataItem[] {
   return renderData.map((item) => {
-    const category = getTimelineEventCategory(item.event.eventType);
+    const category = getTimelineEventCategories(item.event)[0] ?? '其他';
     const [start, end] = item.value;
     return {
       value: [(start + end) / 2, item.yValue],
@@ -1268,6 +1268,7 @@ export function EChartsTimeline({
   const [_isCondensed, _setIsCondensed] = useState(initialIsCondensed);
   const [_timeRange, _setTimeRange] = useState<TimeRange | null>(initialTimeRange ?? null);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const [chartReadyVersion, setChartReadyVersion] = useState(0);
 
   // ── Resolved values (controlled > uncontrolled) ──
   const isCondensed = isCondensedProp !== undefined ? isCondensedProp : _isCondensed;
@@ -1351,24 +1352,49 @@ export function EChartsTimeline({
   }, [boundsRange, defaultWindowRange, setTimeRange, timeRangeProp]);
 
   useEffect(() => {
-    if (!chartContainerRef.current || chartRef.current) {
-      return;
-    }
+    let frameId: number | null = null;
+    let cleanupChart: (() => void) | null = null;
+    let active = true;
 
-    const chart = echarts.init(chartContainerRef.current, undefined, { renderer: 'canvas' });
-    chartRef.current = chart;
+    const initChart = () => {
+      const container = chartContainerRef.current;
+      if (!active || !container || chartRef.current) {
+        return;
+      }
 
-    const handleResize = () => {
-      chart.resize();
+      if (container.clientWidth === 0 || container.clientHeight === 0) {
+        frameId = window.requestAnimationFrame(initChart);
+        return;
+      }
+
+      const chart = echarts.init(container, undefined, { renderer: 'canvas' });
+      chartRef.current = chart;
+      setChartReadyVersion((version) => version + 1);
+
+      const handleResize = () => {
+        if (container.clientWidth > 0 && container.clientHeight > 0) {
+          chart.resize();
+        }
+      };
+
+      const observer = new ResizeObserver(handleResize);
+      observer.observe(container);
+
+      cleanupChart = () => {
+        observer.disconnect();
+        chart.dispose();
+        chartRef.current = null;
+      };
     };
 
-    const observer = new ResizeObserver(handleResize);
-    observer.observe(chartContainerRef.current);
+    frameId = window.requestAnimationFrame(initChart);
 
     return () => {
-      observer.disconnect();
-      chart.dispose();
-      chartRef.current = null;
+      active = false;
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+      cleanupChart?.();
     };
   }, []);
 
@@ -1430,6 +1456,7 @@ export function EChartsTimeline({
     boundsRange,
     clusterData,
     colors,
+    chartReadyVersion,
     dynasties,
     enableAnimation,
     animationDuration,
@@ -1579,7 +1606,7 @@ export function EChartsTimeline({
         pointerEvents: 'auto',
         width: '100%',
         flex: isCondensed || hasExplicitHeight ? '0 0 auto' : 1,
-        minHeight: isCondensed ? 'auto' : (hasExplicitHeight ? `${chartHeight + 56}px` : 0),
+        minHeight: isCondensed ? 'auto' : `${chartHeight + 56}px`,
         overflow: 'hidden',
         border: 'var(--app-panel-border, 1px solid rgba(148, 163, 184, 0.18))',
         borderRadius: '12px',
@@ -1719,9 +1746,9 @@ export function EChartsTimeline({
         ref={chartContainerRef}
         sx={{
           width: '100%',
-          flex: isCondensed ? '0 0 auto' : 1,
-          minHeight: isCondensed ? chartHeight : 0,
-          height: isCondensed ? chartHeight : '100%',
+          flex: '0 0 auto',
+          minHeight: chartHeight,
+          height: chartHeight,
         }}
       />
 

@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsOptional, IsInt, Min } from 'class-validator';
+import { IsOptional, IsInt, IsString, Min } from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 export class DynastyQueryDto extends PaginationQueryDto {
@@ -29,5 +29,6 @@ export class DynastyQueryDto extends PaginationQueryDto {
     example: '唐',
   })
   @IsOptional()
+  @IsString()
   name?: string;
 }

@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
-import { IsBoolean, IsOptional, IsIn, Min, Max } from 'class-validator';
+import { IsBoolean, IsOptional, IsIn, IsString, Min, Max } from 'class-validator';
 
 export class ReligionGraphQueryDto {
   @ApiPropertyOptional({
@@ -47,6 +47,7 @@ export class ReligionGraphQueryDto {
     example: '唐朝',
   })
   @IsOptional()
+  @IsString()
   period?: string;
 
   @ApiPropertyOptional({

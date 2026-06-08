@@ -1,6 +1,7 @@
 import './EventCard.scss';
 import type { Event } from '@/services/timeline/types';
 import { useState } from 'react';
+import { getTimelineEventCategories } from '@/features/timeline/utils/timelineFilters';
 
 type Props = {
   event: Event;
@@ -11,6 +12,7 @@ export function EventCard({ event, index }: Props) {
   const [isFav, setIsFav] = useState(false);
   const panelBg = 'var(--app-panel-bg)';
   const panelBorder = 'var(--app-panel-border)';
+  const categoryLabel = getTimelineEventCategories(event).join(' / ');
 
   const handleShare = () => {
     const data = {
@@ -104,8 +106,8 @@ export function EventCard({ event, index }: Props) {
                   }}
                 />
               )}
-              {event.categories && (
-                <div>分类：{event.categories.map((p) => p.join('/')).join('，')}</div>
+              {categoryLabel && (
+                <div>分类：{categoryLabel}</div>
               )}
             </div>
           </details>

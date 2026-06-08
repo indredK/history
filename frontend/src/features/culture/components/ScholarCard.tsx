@@ -33,18 +33,31 @@ const dynastyColors: Record<string, TagColor> = {
 
 const defaultColor: TagColor = { bg: 'rgba(158, 158, 158, 0.15)', text: '#9e9e9e' };
 
+function hasYear(value: number | null | undefined): value is number {
+  return value !== null && value !== undefined;
+}
+
+function formatYearRange(
+  birthYear: number | null | undefined,
+  deathYear: number | null | undefined,
+): string | null {
+  if (!hasYear(birthYear) && !hasYear(deathYear)) return null;
+  return `${hasYear(birthYear) ? birthYear : '未知'}-${hasYear(deathYear) ? deathYear : '未知'}`;
+}
+
 /**
  * 学者卡片组件
  */
 export function ScholarCard({ scholar, onClick }: ScholarCardProps) {
   const dynasty = scholar.dynasty || scholar.dynastyPeriod || '未知朝代';
   const dynastyColor = dynastyColors[dynasty] || defaultColor;
+  const lifespan = formatYearRange(scholar.birthYear, scholar.deathYear);
 
   // 构建次标签
   const secondaryTags = [
     scholar.schoolOfThought && { label: scholar.schoolOfThought, color: defaultColor, variant: 'outlined' as const },
-    (scholar.birthYear && scholar.deathYear) && { 
-      label: `${scholar.birthYear}-${scholar.deathYear}`, 
+    lifespan && {
+      label: lifespan,
       color: defaultColor, 
       variant: 'outlined' as const 
     },

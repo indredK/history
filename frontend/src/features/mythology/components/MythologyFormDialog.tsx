@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
+  Alert,
   Box,
   Button,
   Dialog,
@@ -11,7 +12,6 @@ import {
   MenuItem,
   Select,
   TextField,
-  Typography,
 } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
 import type { Mythology, MythologyCategory, MythologyInput } from '@/services/mythology';
@@ -160,6 +160,11 @@ export function MythologyFormDialog({
         {mode === 'create' ? '新增神话' : '编辑神话'}
       </DialogTitle>
       <DialogContent dividers sx={{ borderColor: 'var(--color-border)' }}>
+        {error && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        )}
         <Box
           sx={{
             display: 'grid',
@@ -255,11 +260,6 @@ export function MythologyFormDialog({
             sx={{ gridColumn: { xs: '1', md: '1 / -1' } }}
           />
         </Box>
-        {error && (
-          <Typography color="error" variant="body2" sx={{ mt: 2 }}>
-            {error}
-          </Typography>
-        )}
       </DialogContent>
       <DialogActions sx={{ px: 3, py: 2 }}>
         <Button onClick={onClose} disabled={saving}>

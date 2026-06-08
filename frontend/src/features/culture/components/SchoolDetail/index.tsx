@@ -8,6 +8,7 @@
  * Requirements: 4.1, 4.2, 4.3
  */
 
+import { Fragment, type ReactNode } from 'react';
 import {
   Box,
   Button,
@@ -33,6 +34,56 @@ interface SchoolDetailProps {
 export function SchoolDetail({ school, open, onClose }: SchoolDetailProps) {
   if (!school) return null;
 
+  const coreBeliefs = school.coreBeliefs || school.coreIdeas || [];
+  const sections: ReactNode[] = [];
+
+  if (school.description?.trim()) {
+    sections.push(
+      <Box sx={{ mb: 3 }}>
+        <Typography
+          variant="subtitle1"
+          sx={{
+            color: 'var(--color-text-primary)',
+            fontWeight: 600,
+            mb: 1.5,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+          }}
+        >
+          流派简介
+        </Typography>
+        <Typography
+          id="school-detail-description"
+          variant="body1"
+          sx={{
+            color: 'var(--color-text-primary)',
+            lineHeight: 1.8,
+            textAlign: 'justify',
+          }}
+        >
+          {school.description}
+        </Typography>
+      </Box>,
+    );
+  }
+
+  if (coreBeliefs.length > 0) {
+    sections.push(<SchoolCoreBeliefs school={school} />);
+  }
+
+  if (school.representativeFigures?.length) {
+    sections.push(<SchoolFigures school={school} />);
+  }
+
+  if (school.classicWorks?.length || school.keyTexts?.length) {
+    sections.push(<SchoolWorks school={school} />);
+  }
+
+  if (school.influence?.trim()) {
+    sections.push(<SchoolInfluence influence={school.influence} />);
+  }
+
   return (
     <Dialog
       open={open}
@@ -54,45 +105,12 @@ export function SchoolDetail({ school, open, onClose }: SchoolDetailProps) {
       <SchoolHeader school={school} onClose={onClose} />
 
       <DialogContent dividers sx={{ py: 3 }}>
-        {/* 简介 */}
-        <Box sx={{ mb: 3 }}>
-          <Typography
-            variant="subtitle1"
-            sx={{
-              color: 'var(--color-text-primary)',
-              fontWeight: 600,
-              mb: 1.5,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-            }}
-          >
-            流派简介
-          </Typography>
-          <Typography
-            id="school-detail-description"
-            variant="body1"
-            sx={{
-              color: 'var(--color-text-primary)',
-              lineHeight: 1.8,
-              textAlign: 'justify',
-            }}
-          >
-            {school.description}
-          </Typography>
-        </Box>
-
-        <Divider sx={{ my: 2 }} />
-        <SchoolCoreBeliefs school={school} />
-
-        <Divider sx={{ my: 2 }} />
-        <SchoolFigures school={school} />
-
-        <Divider sx={{ my: 2 }} />
-        <SchoolWorks school={school} />
-
-        <Divider sx={{ my: 2 }} />
-        <SchoolInfluence influence={school.influence} />
+        {sections.map((section, index) => (
+          <Fragment key={index}>
+            {index > 0 && <Divider sx={{ my: 2 }} />}
+            {section}
+          </Fragment>
+        ))}
       </DialogContent>
 
       <DialogActions sx={{ px: 3, py: 2 }}>

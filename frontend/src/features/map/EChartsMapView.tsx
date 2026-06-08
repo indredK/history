@@ -8,12 +8,22 @@ import type { Event } from '@/services/timeline/types';
 import type { Dynasty } from '@/services/culture/types';
 import type { Place } from '@/services/map/types';
 import { EChartsTimeline } from '@/features/timeline/components';
+import { getTimelineEventCategories } from '@/features/timeline/utils/timelineFilters';
 import { mapDataService } from '@/services/map/mapDataService';
 import { resolveEventLocations } from './utils/resolveEventLocations';
 import { useHistoricalPlayback } from './hooks/useHistoricalPlayback';
 import type { HistoricalPlaybackOptions } from './hooks/useHistoricalPlayback';
 import { usePerformanceTrace } from '@/utils/performance';
 import type { HistoricalFocusMode, PlaybackState, PlaybackSpeed } from '@/store/mapStore';
+
+const EARLIEST_BOUNDARY_YEAR = -221;
+
+function findDefaultBoundaryDynasty(dynasties: Dynasty[]): Dynasty | undefined {
+  const boundaryDynasties = dynasties.filter(
+    (dynasty) => dynasty.startYear >= EARLIEST_BOUNDARY_YEAR,
+  );
+  return boundaryDynasties[0] ?? dynasties[0];
+}
 
 // ── Props interface ──
 export interface EChartsMapViewProps extends EChartsMapLayerVisibility {
@@ -243,7 +253,7 @@ export function EChartsMapView({
     if (dynasties.length === 0) return;
     if (selectedDynastyIdProp != null) return;
     if (selectedDynastyId || selectedEventId || focusYear !== null) return;
-    const defaultDynasty = dynasties[0];
+    const defaultDynasty = findDefaultBoundaryDynasty(dynasties);
     if (defaultDynasty) {
       selectDynasty(defaultDynasty.id, defaultDynasty.startYear);
     }
@@ -281,6 +291,10 @@ export function EChartsMapView({
   const selectedEvent = useMemo(
     () => events.find((item) => item.id === selectedEventId) ?? null,
     [events, selectedEventId],
+  );
+  const selectedEventCategoryLabel = useMemo(
+    () => (selectedEvent ? getTimelineEventCategories(selectedEvent).join(' / ') : ''),
+    [selectedEvent],
   );
   const resolvedEventLocations = useMemo(
     () => resolveEventLocations(selectedEvent, places),
@@ -619,7 +633,7 @@ export function EChartsMapView({
                   {selectedEventDynasty.name}
                 </span>
               )}
-              {selectedEvent.eventType && (
+              {selectedEventCategoryLabel && (
                 <span
                   style={{
                     padding: '4px 10px',
@@ -630,7 +644,7 @@ export function EChartsMapView({
                     fontWeight: 600,
                   }}
                 >
-                  {selectedEvent.eventType}
+                  {selectedEventCategoryLabel}
                 </span>
               )}
               {eventFocusRange && (

@@ -32,6 +32,11 @@ const dynastyColors: Record<string, { bg: string; text: string }> = {
   '清': { bg: 'rgba(255, 235, 59, 0.15)', text: '#F9A825' },
 };
 
+function formatEraYear(year: number | null | undefined): string {
+  if (year === null || year === undefined) return '未知';
+  return year < 0 ? `前${Math.abs(year)}` : String(year);
+}
+
 export function EmperorDetailModal({ emperor, open, onClose }: EmperorDetailModalProps) {
   if (!emperor) return null;
 
@@ -53,7 +58,9 @@ export function EmperorDetailModal({ emperor, open, onClose }: EmperorDetailModa
             {emperor.templeName && <Typography variant="body2" sx={{ color: 'var(--color-text-secondary)', mt: 0.5 }}>{emperor.templeName}{emperor.posthumousName && ` · ${emperor.posthumousName}`}</Typography>}
             <Box sx={{ display: 'flex', gap: 0.5, mt: 1, flexWrap: 'wrap' }}>
               <Chip label={emperor.dynasty} size="small" sx={{ backgroundColor: dynastyColor.bg, color: dynastyColor.text, fontWeight: 500 }} />
-              <Chip label={`在位${reignYears}年`} size="small" variant="outlined" sx={{ borderColor: 'var(--color-border)', color: 'var(--color-text-secondary)' }} />
+              {reignYears !== null && (
+                <Chip label={`在位${reignYears}年`} size="small" variant="outlined" sx={{ borderColor: 'var(--color-border)', color: 'var(--color-text-secondary)' }} />
+              )}
             </Box>
           </Box>
         </Box>
@@ -69,7 +76,7 @@ export function EmperorDetailModal({ emperor, open, onClose }: EmperorDetailModa
           {emperor.eraNames.length > 0 && (
             <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
               {emperor.eraNames.map((era, index) => (
-                <Chip key={index} label={`${era.name} (${era.startYear < 0 ? `前${Math.abs(era.startYear)}` : era.startYear}-${era.endYear < 0 ? `前${Math.abs(era.endYear)}` : era.endYear})`} size="small" variant="outlined" sx={{ borderColor: dynastyColor.text, color: dynastyColor.text }} />
+                <Chip key={index} label={`${era.name} (${formatEraYear(era.startYear)}-${formatEraYear(era.endYear)})`} size="small" variant="outlined" sx={{ borderColor: dynastyColor.text, color: dynastyColor.text }} />
               ))}
             </Box>
           )}

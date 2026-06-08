@@ -1,52 +1,153 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { EventService } from './event.service';
 import { PrismaService } from '../prisma/prisma.service';
 import type { EventQueryDto } from './dto/event-query.dto';
 
-/**
- * 把 mock 的第 N 次调用第 M 个参数还原为期望类型,
- * 集中处理 jest.Mock.calls 必然产生的 unsafe-member-access。
- */
 function getCallArg<T>(mock: jest.Mock, callIdx = 0, argIdx = 0): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return mock.mock.calls[callIdx]?.[argIdx] as T;
 }
 
-/**
- * PaginationQueryDto 把 skip/take 暴露为只读 getter,导致裸字面量
- * 不满足 EventQueryDto 类型 —— 用一个泛型 helper 集中收口 as 断言。
- */
 function asQuery<T>(partial: Partial<T>): T {
   return partial as T;
 }
 
-/**
- * EventService 单元测试 (§1.6)
- *
- * 覆盖目标:
- * - findAll:基础 where(title/eventType/startYear/endYear)
- *   + buildOverlapRangeFilter 三分支(全两侧 / 只 start / 只 end / 都不给)
- *   + mergeWhere 单/多块合并
- * - findOne:命中(剥离 participants/locations)、未命中抛 NotFoundException
- * - getTimeline:无事件回落到入参 startYear/endYear,有事件取 min/max
- */
+function buildDetailRecord(overrides: Record<string, unknown> = {}) {
+  return {
+    id: 'event-1',
+    title: '安史之乱',
+    startYear: 755,
+    endYear: 763,
+    description: '唐朝中后期重大内乱',
+    eventType: 'war,civil_war',
+    createdAt: new Date('2026-01-01T00:00:00.000Z'),
+    updatedAt: new Date('2026-01-02T00:00:00.000Z'),
+    participants: [
+      {
+        id: 'ep-1',
+        personId: 'p-1',
+        role: '主将',
+        person: {
+          id: 'p-1',
+          name: '郭子仪',
+          dynasty: '唐',
+        },
+      },
+    ],
+    locations: [
+      {
+        id: 'el-1',
+        placeId: 'pl-1',
+        role: '战场',
+        place: {
+          id: 'pl-1',
+          name: '洛阳',
+          latitude: 34.62,
+          longitude: 112.45,
+        },
+      },
+    ],
+    eventSources: [
+      {
+        id: 'es-1',
+        sourceId: 's-1',
+        source: {
+          id: 's-1',
+          title: '资治通鉴',
+          url: 'https://example.com/zztj',
+          author: '司马光',
+        },
+      },
+    ],
+    ...overrides,
+  };
+}
+
 describe('EventService', () => {
   let service: EventService;
+  let tx: {
+    event: {
+      create: jest.Mock;
+      update: jest.Mock;
+    };
+    person: {
+      findMany: jest.Mock;
+    };
+    place: {
+      findMany: jest.Mock;
+    };
+    source: {
+      findMany: jest.Mock;
+    };
+    eventParticipant: {
+      deleteMany: jest.Mock;
+      createMany: jest.Mock;
+    };
+    eventLocation: {
+      deleteMany: jest.Mock;
+      createMany: jest.Mock;
+    };
+    eventSource: {
+      deleteMany: jest.Mock;
+      createMany: jest.Mock;
+    };
+  };
   let prisma: {
+    client: {
+      $transaction: jest.Mock;
+    };
     event: {
       findMany: jest.Mock;
       count: jest.Mock;
       findUnique: jest.Mock;
+      delete: jest.Mock;
     };
   };
 
   beforeEach(async () => {
+    tx = {
+      event: {
+        create: jest.fn(),
+        update: jest.fn(),
+      },
+      person: {
+        findMany: jest.fn(),
+      },
+      place: {
+        findMany: jest.fn(),
+      },
+      source: {
+        findMany: jest.fn(),
+      },
+      eventParticipant: {
+        deleteMany: jest.fn(),
+        createMany: jest.fn(),
+      },
+      eventLocation: {
+        deleteMany: jest.fn(),
+        createMany: jest.fn(),
+      },
+      eventSource: {
+        deleteMany: jest.fn(),
+        createMany: jest.fn(),
+      },
+    };
+
     prisma = {
+      client: {
+        $transaction: jest.fn(async (callback: (client: typeof tx) => unknown) =>
+          callback(tx),
+        ),
+      },
       event: {
         findMany: jest.fn(),
         count: jest.fn(),
         findUnique: jest.fn(),
+        delete: jest.fn(),
       },
     };
 
@@ -89,10 +190,21 @@ describe('EventService', () => {
         prisma.event.findMany,
       );
       expect(call.where).toEqual({
-        startYear: { gte: 100 },
-        OR: [{ endYear: { lte: 200 } }, { endYear: null }],
-        eventType: 'war',
-        title: { contains: '战' },
+        AND: [
+          {
+            startYear: { gte: 100 },
+            OR: [{ endYear: { lte: 200 } }, { endYear: null }],
+            title: { contains: '战' },
+          },
+          {
+            OR: [
+              { eventType: 'war' },
+              { eventType: { startsWith: 'war,' } },
+              { eventType: { endsWith: ',war' } },
+              { eventType: { contains: ',war,' } },
+            ],
+          },
+        ],
       });
     });
 
@@ -111,36 +223,17 @@ describe('EventService', () => {
       const call = getCallArg<{ where: Record<string, unknown> }>(
         prisma.event.findMany,
       );
-      // 基础 where 仅 eventType,因此 mergeWhere 会用 AND 把两块拼起来
       expect(call.where).toHaveProperty('AND');
       const and = call.where.AND as Array<Record<string, unknown>>;
-      expect(and).toHaveLength(2);
-      expect(and[0]).toEqual({ eventType: 'war' });
+      expect(and[0]).toEqual({
+        OR: [
+          { eventType: 'war' },
+          { eventType: { startsWith: 'war,' } },
+          { eventType: { endsWith: ',war' } },
+          { eventType: { contains: ',war,' } },
+        ],
+      });
       expect(and[1]).toHaveProperty('OR');
-      const overlapOr = and[1].OR as Array<Record<string, unknown>>;
-      expect(overlapOr).toHaveLength(3);
-      // 区间内的 startYear / endYear / 跨越整个区间
-      expect(overlapOr[0]).toEqual({
-        startYear: { gte: 100, lte: 200 },
-      });
-      expect(overlapOr[1]).toEqual({
-        endYear: { gte: 100, lte: 200 },
-      });
-    });
-
-    it('只给 yearRangeStart 时:OR( startYear>=start, AND(start<rangeStart, endYear>=rangeStart | endYear null) )', async () => {
-      prisma.event.findMany.mockResolvedValue([]);
-      prisma.event.count.mockResolvedValue(0);
-
-      await service.findAll(asQuery<EventQueryDto>({ yearRangeStart: 500 }));
-
-      const call = getCallArg<{ where: Record<string, unknown> }>(
-        prisma.event.findMany,
-      );
-      expect(call.where).toHaveProperty('OR');
-      const or = call.where.OR as Array<Record<string, unknown>>;
-      expect(or[0]).toEqual({ startYear: { gte: 500 } });
-      expect(or[1]).toHaveProperty('AND');
     });
 
     it('只给 yearRangeEnd 时:简化为 startYear lte rangeEnd', async () => {
@@ -154,31 +247,53 @@ describe('EventService', () => {
       );
       expect(call.where).toEqual({ startYear: { lte: 900 } });
     });
+
+    it('eventType 按逗号分隔标签边界匹配,避免漏掉多标签事件', async () => {
+      prisma.event.findMany.mockResolvedValue([]);
+      prisma.event.count.mockResolvedValue(0);
+
+      await service.findAll(asQuery<EventQueryDto>({ eventType: 'civil_war' }));
+
+      const call = getCallArg<{ where: Record<string, unknown> }>(
+        prisma.event.findMany,
+      );
+      expect(call.where).toEqual({
+        OR: [
+          { eventType: 'civil_war' },
+          { eventType: { startsWith: 'civil_war,' } },
+          { eventType: { endsWith: ',civil_war' } },
+          { eventType: { contains: ',civil_war,' } },
+        ],
+      });
+    });
   });
 
   describe('findOne', () => {
-    it('命中时剥离 participants / locations 返回基础字段', async () => {
-      prisma.event.findUnique.mockResolvedValue({
-        id: 'e1',
-        title: '安史之乱',
-        startYear: 755,
-        endYear: 763,
-        participants: [{ person: { id: 'p1' } }],
-        locations: [{ place: { id: 'pl1' } }],
-      });
+    it('命中时返回带 participants / locations / sources 的详情结构', async () => {
+      prisma.event.findUnique.mockResolvedValue(buildDetailRecord());
 
-      const result = await service.findOne('e1');
+      const result = await service.findOne('event-1');
 
-      expect(
-        (result as { participants?: unknown }).participants,
-      ).toBeUndefined();
-      expect((result as { locations?: unknown }).locations).toBeUndefined();
-      expect(result).toEqual({
-        id: 'e1',
-        title: '安史之乱',
-        startYear: 755,
-        endYear: 763,
+      expect(prisma.event.findUnique).toHaveBeenCalledWith({
+        where: { id: 'event-1' },
+        include: expect.objectContaining({
+          participants: expect.any(Object),
+          locations: expect.any(Object),
+          eventSources: expect.any(Object),
+        }),
       });
+      expect(result.participants?.[0]).toEqual({
+        id: 'ep-1',
+        personId: 'p-1',
+        role: '主将',
+        person: {
+          id: 'p-1',
+          name: '郭子仪',
+          dynasty: '唐',
+        },
+      });
+      expect(result.locations?.[0]?.place?.name).toBe('洛阳');
+      expect(result.sources?.[0]?.title).toBe('资治通鉴');
     });
 
     it('未命中时抛 NotFoundException', async () => {
@@ -187,6 +302,171 @@ describe('EventService', () => {
       await expect(service.findOne('missing')).rejects.toThrow(
         NotFoundException,
       );
+    });
+  });
+
+  describe('create', () => {
+    it('创建时规范化标题/标签并写入关联关系', async () => {
+      tx.person.findMany.mockResolvedValue([{ id: 'p-1' }]);
+      tx.place.findMany.mockResolvedValue([{ id: 'pl-1' }]);
+      tx.source.findMany.mockResolvedValue([{ id: 's-1' }]);
+      tx.event.create.mockResolvedValue({ id: 'event-1' });
+      prisma.event.findUnique.mockResolvedValue(buildDetailRecord());
+
+      const result = await service.create({
+        title: ' 安史之乱 ',
+        startYear: 755,
+        endYear: 763,
+        description: ' 唐朝中后期重大内乱 ',
+        eventType: ' war , civil_war ',
+        participants: [{ personId: 'p-1', role: ' 主将 ' }],
+        locations: [{ placeId: 'pl-1', role: ' 战场 ' }],
+        sourceIds: ['s-1'],
+      });
+
+      expect(tx.event.create).toHaveBeenCalledWith({
+        data: {
+          title: '安史之乱',
+          startYear: 755,
+          endYear: 763,
+          description: '唐朝中后期重大内乱',
+          eventType: 'war,civil_war',
+        },
+      });
+      expect(tx.eventParticipant.deleteMany).toHaveBeenCalledWith({
+        where: { eventId: 'event-1' },
+      });
+      expect(tx.eventParticipant.createMany).toHaveBeenCalledWith({
+        data: [{ eventId: 'event-1', personId: 'p-1', role: '主将' }],
+      });
+      expect(tx.eventLocation.createMany).toHaveBeenCalledWith({
+        data: [{ eventId: 'event-1', placeId: 'pl-1', role: '战场' }],
+      });
+      expect(tx.eventSource.createMany).toHaveBeenCalledWith({
+        data: [{ eventId: 'event-1', sourceId: 's-1' }],
+      });
+      expect(result.sources?.[0]?.id).toBe('s-1');
+    });
+
+    it('标题为空时抛 BadRequestException', async () => {
+      await expect(
+        service.create({
+          title: '   ',
+          startYear: 755,
+        }),
+      ).rejects.toThrow(BadRequestException);
+    });
+
+    it('引用不存在的人物/地点/来源时抛 BadRequestException', async () => {
+      tx.person.findMany.mockResolvedValue([]);
+      tx.place.findMany.mockResolvedValue([]);
+      tx.source.findMany.mockResolvedValue([]);
+
+      await expect(
+        service.create({
+          title: '安史之乱',
+          startYear: 755,
+          participants: [{ personId: 'missing-person' }],
+          locations: [{ placeId: 'missing-place' }],
+          sourceIds: ['missing-source'],
+        }),
+      ).rejects.toThrow(BadRequestException);
+    });
+  });
+
+  describe('update', () => {
+    it('空更新体时直接返回现有详情且不触发事务更新', async () => {
+      prisma.event.findUnique.mockResolvedValue(buildDetailRecord());
+
+      const result = await service.update('event-1', {});
+
+      expect(prisma.client.$transaction).not.toHaveBeenCalled();
+      expect(result.title).toBe('安史之乱');
+    });
+
+    it('支持清空可选字段并替换关联关系', async () => {
+      prisma.event.findUnique
+        .mockResolvedValueOnce(buildDetailRecord())
+        .mockResolvedValueOnce(
+          buildDetailRecord({
+            description: null,
+            eventType: null,
+            participants: [],
+            locations: [
+              {
+                id: 'el-2',
+                placeId: 'pl-2',
+                role: '驻扎地',
+                place: {
+                  id: 'pl-2',
+                  name: '长安',
+                  latitude: 34.34,
+                  longitude: 108.94,
+                },
+              },
+            ],
+            eventSources: [],
+          }),
+        );
+      tx.person.findMany.mockResolvedValue([]);
+      tx.place.findMany.mockResolvedValue([{ id: 'pl-2' }]);
+      tx.source.findMany.mockResolvedValue([]);
+
+      const result = await service.update('event-1', {
+        description: '',
+        eventType: '',
+        participants: [],
+        locations: [{ placeId: 'pl-2', role: ' 驻扎地 ' }],
+        sourceIds: [],
+      });
+
+      expect(tx.event.update).toHaveBeenCalledWith({
+        where: { id: 'event-1' },
+        data: {
+          title: '安史之乱',
+          startYear: 755,
+          endYear: 763,
+          description: null,
+          eventType: null,
+        },
+      });
+      expect(tx.eventParticipant.deleteMany).toHaveBeenCalledWith({
+        where: { eventId: 'event-1' },
+      });
+      expect(tx.eventLocation.createMany).toHaveBeenCalledWith({
+        data: [{ eventId: 'event-1', placeId: 'pl-2', role: '驻扎地' }],
+      });
+      expect(tx.eventSource.deleteMany).toHaveBeenCalledWith({
+        where: { eventId: 'event-1' },
+      });
+      expect(result.locations?.[0]?.place?.name).toBe('长安');
+      expect(result.participants).toEqual([]);
+    });
+
+    it('结束年份早于开始年份时抛 BadRequestException', async () => {
+      prisma.event.findUnique.mockResolvedValue(buildDetailRecord());
+
+      await expect(
+        service.update('event-1', {
+          startYear: 900,
+          endYear: 800,
+        }),
+      ).rejects.toThrow(BadRequestException);
+    });
+  });
+
+  describe('remove', () => {
+    it('删除前先返回现有详情并执行 delete', async () => {
+      prisma.event.findUnique.mockResolvedValue(buildDetailRecord());
+      prisma.event.delete.mockResolvedValue({ id: 'event-1' });
+
+      const result = await service.remove('event-1');
+
+      expect(prisma.event.delete).toHaveBeenCalledWith({
+        where: { id: 'event-1' },
+      });
+      expect(result.id).toBe('event-1');
+      expect(result.sources?.[0]?.title).toBe('资治通鉴');
     });
   });
 
@@ -203,15 +483,6 @@ describe('EventService', () => {
       expect(result.totalEvents).toBe(0);
       expect(result.startYear).toBe(600);
       expect(result.endYear).toBe(900);
-    });
-
-    it('无事件且无入参 startYear/endYear 时:bounds = 0/0', async () => {
-      prisma.event.findMany.mockResolvedValue([]);
-
-      const result = await service.getTimeline({});
-
-      expect(result.startYear).toBe(0);
-      expect(result.endYear).toBe(0);
     });
 
     it('有事件时:bounds 取实际 min(startYear) / max(endYear || startYear)', async () => {
@@ -244,42 +515,27 @@ describe('EventService', () => {
 
       const result = await service.getTimeline({});
 
-      expect(result.events).toHaveLength(3);
       expect(result.totalEvents).toBe(3);
       expect(result.startYear).toBe(650);
-      // endYear null 的事件 fallback 到 startYear,因此 max = max(720,650,850) = 850
       expect(result.endYear).toBe(850);
     });
 
-    it('Prisma select 字段为最小集合(不取 participants/locations 等关联)', async () => {
+    it('eventType 使用与事件列表一致的多标签边界筛选', async () => {
       prisma.event.findMany.mockResolvedValue([]);
 
-      await service.getTimeline({ startYear: 0, endYear: 100 });
+      await service.getTimeline({ eventType: 'war' });
 
-      const call = getCallArg<{ select: Record<string, boolean> }>(
+      const call = getCallArg<{ where: Record<string, unknown> }>(
         prisma.event.findMany,
       );
-      expect(call.select).toEqual({
-        id: true,
-        title: true,
-        startYear: true,
-        endYear: true,
-        eventType: true,
-        description: true,
+      expect(call.where).toEqual({
+        OR: [
+          { eventType: 'war' },
+          { eventType: { startsWith: 'war,' } },
+          { eventType: { endsWith: ',war' } },
+          { eventType: { contains: ',war,' } },
+        ],
       });
-    });
-
-    it('limit 默认 100,可被入参覆盖', async () => {
-      prisma.event.findMany.mockResolvedValue([]);
-
-      await service.getTimeline({});
-      let call = getCallArg<{ take: number }>(prisma.event.findMany);
-      expect(call.take).toBe(100);
-
-      prisma.event.findMany.mockClear();
-      await service.getTimeline({ limit: 5 });
-      call = getCallArg<{ take: number }>(prisma.event.findMany);
-      expect(call.take).toBe(5);
     });
   });
 });

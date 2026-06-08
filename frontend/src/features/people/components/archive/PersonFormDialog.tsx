@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from 'react';
 import {
+  Alert,
   Box,
   Button,
   Dialog,
@@ -26,6 +27,7 @@ interface PersonFormDialogProps {
   mode: DialogMode;
   person?: CommonPerson | null;
   saving?: boolean;
+  error?: Error | null;
   onClose: () => void;
   onSave: (input: CreateCommonPersonInput, id?: string) => Promise<void>;
 }
@@ -120,6 +122,32 @@ function clearableNumber(value: string): number | null {
   return Number.isFinite(parsed) ? parsed : null;
 }
 
+function validatePersonInput(input: CreateCommonPersonInput): string | null {
+  if (!input.name.trim()) {
+    return '请填写人物姓名';
+  }
+
+  if (
+    input.birthYear !== undefined
+    && input.birthYear !== null
+    && input.deathYear !== undefined
+    && input.deathYear !== null
+    && input.deathYear < input.birthYear
+  ) {
+    return '人物卒年不能早于生年';
+  }
+
+  if (
+    input.confidence !== undefined
+    && input.confidence !== null
+    && (input.confidence < 0 || input.confidence > 1)
+  ) {
+    return '可信度必须在 0 到 1 之间';
+  }
+
+  return null;
+}
+
 function parseEvents(value: string): PersonEvent[] {
   return splitLines(value).map((line) => {
     const [year = '', name = '', role = '', description = ''] = line
@@ -182,16 +210,19 @@ export function PersonFormDialog({
   mode,
   person,
   saving = false,
+  error,
   onClose,
   onSave,
 }: PersonFormDialogProps) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [form, setForm] = useState(emptyForm);
+  const [formError, setFormError] = useState<string | null>(null);
 
   useEffect(() => {
     if (open) {
       setForm(personToForm(person));
+      setFormError(null);
     }
   }, [open, person]);
 
@@ -228,9 +259,17 @@ export function PersonFormDialog({
       sources: parseSources(form.sources),
       confidence: clearableNumber(form.confidence),
     };
+    const validationError = validatePersonInput(input);
+    if (validationError) {
+      setFormError(validationError);
+      return;
+    }
 
+    setFormError(null);
     await onSave(input, person?.id);
   };
+
+  const visibleError = formError || error?.message;
 
   return (
     <Dialog
@@ -340,6 +379,11 @@ export function PersonFormDialog({
             sx={{ gridColumn: '1 / -1' }}
           />
         </Box>
+        {visibleError && (
+          <Alert severity="error" sx={{ mt: 2 }}>
+            {visibleError}
+          </Alert>
+        )}
       </DialogContent>
       <DialogActions sx={{ px: 3, py: 2 }}>
         <Button onClick={onClose} disabled={saving}>

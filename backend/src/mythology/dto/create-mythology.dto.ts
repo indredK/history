@@ -1,5 +1,20 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsArray, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsIn, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+
+const ACCEPTED_MYTHOLOGY_CATEGORIES = [
+  '创世神话',
+  '英雄神话',
+  '自然神话',
+  '爱情神话',
+  '神仙传说',
+  '民间传说',
+  'creation_myth',
+  'creation',
+  'deity',
+  'legend',
+  'folklore',
+  'other',
+];
 
 export class CreateMythologyDto {
   @ApiPropertyOptional({
@@ -15,6 +30,7 @@ export class CreateMythologyDto {
     example: '盘古开天',
   })
   @IsString()
+  @IsNotEmpty({ message: '神话标题不能为空' })
   title: string;
 
   @ApiPropertyOptional({
@@ -30,6 +46,8 @@ export class CreateMythologyDto {
     example: '创世神话',
   })
   @IsString()
+  @IsNotEmpty({ message: '神话分类不能为空' })
+  @IsIn(ACCEPTED_MYTHOLOGY_CATEGORIES, { message: '神话分类无效' })
   category: string;
 
   @ApiPropertyOptional({
@@ -66,6 +84,7 @@ export class CreateMythologyDto {
 
   @ApiProperty({ description: 'Story description' })
   @IsString()
+  @IsNotEmpty({ message: '神话描述不能为空' })
   description: string;
 
   @ApiPropertyOptional({ description: 'Related characters', type: [String] })

@@ -14,6 +14,10 @@ import { EChartsMapView } from '@/features/map/EChartsMapView';
 import type { EChartsMapViewProps } from '@/features/map/EChartsMapView';
 import { MapErrorBoundary } from '@/features/map/components/MapErrorBoundary';
 import { EChartsTimeline } from '@/features/timeline/components';
+import {
+  EVENT_TYPE_LABELS,
+  getTimelineEventCategories,
+} from '@/features/timeline/utils/timelineFilters';
 import { getDynasties, getEvents, getPlaces } from '@/services/dataClient';
 import type { Dynasty } from '@/services/culture/types';
 import type { Event } from '@/services/timeline/types';
@@ -53,6 +57,16 @@ function formatYearLabel(year: number | null) {
   return `公元${year}年`;
 }
 
+function parseOptionalYear(value: string): number | null {
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return null;
+  }
+
+  const parsed = Number(trimmed);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
 export function MapWorkbench() {
   const {
     historicalFocusMode,
@@ -87,7 +101,7 @@ export function MapWorkbench() {
   const [startYear, setStartYear] = useState('');
   const [endYear, setEndYear] = useState('');
   const [selectedEventTypes, setSelectedEventTypes] = useState<string[]>([]);
-  const [showAllEvents, setShowAllEvents] = useState(false);
+  const [showAllEvents, setShowAllEvents] = useState(true);
 
   const onDynastySelect: NonNullable<EChartsMapViewProps['onDynastySelect']> = useCallback(
     (dynastyId, year) => selectDynasty(dynastyId, year),
@@ -148,9 +162,11 @@ export function MapWorkbench() {
   const eventTypes = useMemo(() => {
     const types = new Set<string>();
     for (const event of data?.events ?? []) {
-      types.add(event.eventType?.trim() || '未分类');
+      for (const category of getTimelineEventCategories(event)) {
+        types.add(category);
+      }
     }
-    return [...types].sort((left, right) => left.localeCompare(right, 'zh-Hans-CN'));
+    return EVENT_TYPE_LABELS.filter((label) => types.has(label));
   }, [data?.events]);
 
   const filterBounds = useMemo(() => {
@@ -169,11 +185,19 @@ export function MapWorkbench() {
 
   const filteredEvents = useMemo(() => {
     const normalizedKeyword = keyword.trim().toLowerCase();
-    const startBoundary = startYear.trim() === '' ? null : Number(startYear);
-    const endBoundary = endYear.trim() === '' ? null : Number(endYear);
+    const rawStartBoundary = parseOptionalYear(startYear);
+    const rawEndBoundary = parseOptionalYear(endYear);
+    const startBoundary =
+      rawStartBoundary !== null && rawEndBoundary !== null
+        ? Math.min(rawStartBoundary, rawEndBoundary)
+        : rawStartBoundary;
+    const endBoundary =
+      rawStartBoundary !== null && rawEndBoundary !== null
+        ? Math.max(rawStartBoundary, rawEndBoundary)
+        : rawEndBoundary;
 
     return (data?.events ?? []).filter((event: Event) => {
-      const eventType = event.eventType?.trim() || '未分类';
+      const eventCategories = getTimelineEventCategories(event);
       const eventEnd = event.endYear ?? event.startYear;
       const haystack = [event.title, event.description, ...(event.rawLocations ?? [])]
         .filter(Boolean)
@@ -184,7 +208,10 @@ export function MapWorkbench() {
         return false;
       }
 
-      if (selectedEventTypes.length > 0 && !selectedEventTypes.includes(eventType)) {
+      if (
+        selectedEventTypes.length > 0
+        && !eventCategories.some((category) => selectedEventTypes.includes(category))
+      ) {
         return false;
       }
 
@@ -231,7 +258,7 @@ export function MapWorkbench() {
     setStartYear('');
     setEndYear('');
     setSelectedEventTypes([]);
-    setShowAllEvents(false);
+    setShowAllEvents(true);
     clearHistoricalSelection();
   };
 

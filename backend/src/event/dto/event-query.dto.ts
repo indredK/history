@@ -1,6 +1,13 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsOptional, IsInt, Min, IsIn } from 'class-validator';
+import {
+  IsOptional,
+  IsInt,
+  Min,
+  IsString,
+  Matches,
+  MaxLength,
+} from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 export class EventQueryDto extends PaginationQueryDto {
@@ -47,12 +54,16 @@ export class EventQueryDto extends PaginationQueryDto {
   yearRangeEnd?: number;
 
   @ApiPropertyOptional({
-    description: 'Filter by event type',
+    description:
+      'Filter by a single event type tag. Seed data stores multiple tags as comma-separated values, so `war` matches `war,civil_war`.',
     example: 'war',
-    enum: ['war', 'political', 'cultural', 'natural', 'economic', 'other'],
   })
   @IsOptional()
-  @IsIn(['war', 'political', 'cultural', 'natural', 'economic', 'other'])
+  @IsString()
+  @MaxLength(64)
+  @Matches(/^[A-Za-z0-9_'-]+$/, {
+    message: 'eventType 只能包含英文字母、数字、下划线、连字符或英文撇号',
+  })
   eventType?: string;
 
   @ApiPropertyOptional({

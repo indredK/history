@@ -3,6 +3,7 @@ import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { ReligionService } from './religion.service';
 import { ReligionGraphQueryDto } from './dto/religion-query.dto';
 import { ReligionGraphDto } from './dto/religion-graph.dto';
+import { ReligionNodeDto } from './dto/religion-node.dto';
 
 @ApiTags('Religion')
 @Controller('religion')
@@ -64,7 +65,7 @@ export class ReligionsController {
   async getById(
     @Param('id') id: string,
     @Query() query: ReligionGraphQueryDto,
-  ): Promise<{ data: any }> {
+  ): Promise<{ data: ReligionNodeDto | null }> {
     const graph = await this.religionService.getGraph(query);
     const node = graph.nodes.find((n) => n.id === id) || null;
     return { data: node };

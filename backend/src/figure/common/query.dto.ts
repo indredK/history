@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsOptional, IsInt, Min, IsIn } from 'class-validator';
+import { IsOptional, IsInt, Min, IsIn, IsString } from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
 export class FigureQueryDto extends PaginationQueryDto {
@@ -9,6 +9,7 @@ export class FigureQueryDto extends PaginationQueryDto {
     example: 'poet',
   })
   @IsOptional()
+  @IsString()
   role?: string;
 
   @ApiPropertyOptional({
@@ -16,6 +17,7 @@ export class FigureQueryDto extends PaginationQueryDto {
     example: 'early',
   })
   @IsOptional()
+  @IsString()
   period?: string;
 
   @ApiPropertyOptional({
@@ -23,6 +25,7 @@ export class FigureQueryDto extends PaginationQueryDto {
     example: '李',
   })
   @IsOptional()
+  @IsString()
   name?: string;
 
   @ApiPropertyOptional({
@@ -70,5 +73,6 @@ export class SanguoFigureQueryDto extends PaginationQueryDto {
     example: '诸葛',
   })
   @IsOptional()
+  @IsString()
   name?: string;
 }

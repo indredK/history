@@ -40,6 +40,13 @@ export const EVENT_TYPE_MAP: Record<string, TimelineEventCategory> = {
   war: '战争',
   military: '战争',
   battle: '战争',
+  civil_war: '战争',
+  rebellion: '战争',
+  conquest: '战争',
+  invasion: '战争',
+  offensive: '战争',
+  defense: '战争',
+  defensive_war: '战争',
   political_event: '政治',
   political_reform: '政治',
   diplomatic_event: '外交',
@@ -50,6 +57,7 @@ export const EVENT_TYPE_MAP: Record<string, TimelineEventCategory> = {
   political_movement: '政治',
   social_movement: '政治',
   cultural_event: '文化/科技',
+  culture: '文化/科技',
   cultural: '文化/科技',
   cultural_flourishing: '文化/科技',
   engineering: '文化/科技',
@@ -57,25 +65,88 @@ export const EVENT_TYPE_MAP: Record<string, TimelineEventCategory> = {
   invention: '文化/科技',
   economy: '经济',
   economic: '经济',
+  economic_reform: '经济',
+  economic_infrastructure: '经济',
   trade: '经济',
   diplomacy: '外交',
   foreign_affairs: '外交',
+  diplomatic_visit: '外交',
+  diplomatic_expedition: '外交',
 };
 
 export function getTimelineEventCategory(eventType?: string | null): TimelineEventCategory {
-  if (eventType && EVENT_TYPE_LABEL_SET.has(eventType)) {
-    return eventType as TimelineEventCategory;
+  const tokens = splitEventTypeValue(eventType);
+  for (const token of tokens) {
+    if (EVENT_TYPE_LABEL_SET.has(token)) {
+      return token as TimelineEventCategory;
+    }
+
+    const mapped = EVENT_TYPE_MAP[token];
+    if (mapped) {
+      return mapped;
+    }
   }
 
-  return EVENT_TYPE_MAP[eventType ?? ''] ?? '其他';
+  return '其他';
+}
+
+function splitEventTypeValue(value?: string | null): string[] {
+  return (value ?? '')
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+export function getEventTypeTokens(event: Pick<Event, 'eventType' | 'categories'>): string[] {
+  const tokens = new Set<string>();
+
+  for (const token of splitEventTypeValue(event.eventType)) {
+    tokens.add(token);
+  }
+
+  for (const categoryPath of event.categories ?? []) {
+    for (const token of categoryPath) {
+      for (const nestedToken of splitEventTypeValue(token)) {
+        tokens.add(nestedToken);
+      }
+    }
+  }
+
+  return [...tokens];
+}
+
+export function getTimelineEventCategories(
+  event: Pick<Event, 'eventType' | 'categories'>,
+): TimelineEventCategory[] {
+  const categories = new Set<TimelineEventCategory>();
+  const tokens = getEventTypeTokens(event);
+
+  for (const token of tokens) {
+    const category = getTimelineEventCategory(token);
+    if (category !== '其他') {
+      categories.add(category);
+    }
+  }
+
+  if (categories.size === 0) {
+    categories.add('其他');
+  }
+
+  return [...categories];
 }
 
 function normalizeCategory(event: Event): TimelineEventCategory {
-  return getTimelineEventCategory(event.eventType);
+  return getTimelineEventCategories(event)[0] ?? '其他';
 }
 
 function buildSearchText(event: Event): string {
-  return [event.title, event.title_en, event.description, event.eventType]
+  return [
+    event.title,
+    event.title_en,
+    event.description,
+    event.eventType,
+    ...getEventTypeTokens(event),
+  ]
     .filter(Boolean)
     .join(' ')
     .toLowerCase();
@@ -106,7 +177,10 @@ export function filterTimelineEvents(
       return false;
     }
 
-    if (args.selectedEventTypes.length > 0 && !args.selectedEventTypes.includes(event.normalizedCategory)) {
+    if (
+      args.selectedEventTypes.length > 0
+      && !getTimelineEventCategories(event).some((category) => args.selectedEventTypes.includes(category))
+    ) {
       return false;
     }
 

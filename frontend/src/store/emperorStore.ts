@@ -9,6 +9,7 @@
 
 import { create } from 'zustand';
 import type { Emperor } from '@/services/person/emperors/types';
+import { getDynastyOrder } from '@/services/person/emperors/types';
 import { emperorService, type EmperorSortBy } from '@/services/person/emperors';
 
 interface EmperorFilters {
@@ -78,7 +79,8 @@ export const useEmperorStore = create<EmperorState>((set, get) => ({
 
   getDynastyOptions: () => {
     const { emperors } = get();
-    const dynasties = [...new Set(emperors.map(e => e.dynasty))];
+    const dynasties = [...new Set(emperors.map(e => e.dynasty).filter(Boolean))]
+      .sort((left, right) => getDynastyOrder(left) - getDynastyOrder(right));
     return ['全部', ...dynasties];
   },
 }));

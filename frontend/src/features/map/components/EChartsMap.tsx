@@ -45,6 +45,19 @@ interface TooltipPayload {
     | undefined;
 }
 
+function escapeHtml(value: unknown): string {
+  return String(value ?? '').replace(/[&<>"']/g, (char) => {
+    const entities: Record<string, string> = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+    };
+    return entities[char] ?? char;
+  });
+}
+
 /**
  * 修复 GeoJSON 中 Polygon 坐标层级错误
  * 部分数据中 Polygon 实际为 4 层嵌套（[[[[x,y],...]]]），应为 3 层，实为 MultiPolygon
@@ -229,9 +242,9 @@ export function EChartsMap({
           const payload = params as TooltipPayload;
           if (payload.seriesType === 'scatter' && payload.data?.place) {
             const eventLine = payload.data.event?.title
-              ? `<br/>事件：${payload.data.event.title}`
+              ? `<br/>事件：${escapeHtml(payload.data.event.title)}`
               : '';
-            return `<div style="padding:8px;"><strong>${payload.data.place.canonical_name}</strong><br/>事件地点${eventLine}</div>`;
+            return `<div style="padding:8px;"><strong>${escapeHtml(payload.data.place.canonical_name)}</strong><br/>事件地点${eventLine}</div>`;
           }
 
           // 历史疆域特征提示
@@ -240,16 +253,16 @@ export function EChartsMap({
               (item) => item.properties.name === payload.name,
             );
             if (feature) {
-              return `<div style="padding:8px;"><strong>${feature.properties.name}</strong><br/>层级: ${feature.properties.admin_level}<br/>年份: ${feature.properties.year}</div>`;
+              return `<div style="padding:8px;"><strong>${escapeHtml(feature.properties.name)}</strong><br/>层级: ${escapeHtml(feature.properties.admin_level)}<br/>年份: ${escapeHtml(feature.properties.year)}</div>`;
             }
           }
 
           // 现代省份提示
           const province = provinces.find((item) => item.name === payload.name);
           if (province) {
-            return `<div style="padding:8px;"><strong>${province.name}</strong><br/>数值: ${province.value}<br/>行政代码: ${province.adcode || '-'}</div>`;
+            return `<div style="padding:8px;"><strong>${escapeHtml(province.name)}</strong><br/>数值: ${escapeHtml(province.value)}<br/>行政代码: ${escapeHtml(province.adcode || '-')}</div>`;
           }
-          return payload.name ?? '';
+          return escapeHtml(payload.name ?? '');
         },
       },
       geo: {

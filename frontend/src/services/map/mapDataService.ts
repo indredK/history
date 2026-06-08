@@ -22,18 +22,18 @@ import type {
  * 地图数据缓存管理器
  */
 class MapDataCache {
-  private cache = new Map<string, any>();
-  private loadingPromises = new Map<string, Promise<any>>();
+  private cache = new Map<string, unknown>();
+  private loadingPromises = new Map<string, Promise<unknown>>();
 
   async get<T>(key: string, loader: () => Promise<T>): Promise<T> {
     // 如果已缓存，直接返回
     if (this.cache.has(key)) {
-      return this.cache.get(key);
+      return this.cache.get(key) as T;
     }
 
     // 如果正在加载，返回加载Promise
     if (this.loadingPromises.has(key)) {
-      return this.loadingPromises.get(key)!;
+      return this.loadingPromises.get(key)! as Promise<T>;
     }
 
     // 开始加载
@@ -151,22 +151,28 @@ export class MapDataService {
    * 按需加载特定时期的边界数据
    */
   async loadBoundaryData(period: string): Promise<BoundaryGeoJSON | null> {
-    const cacheKey = `boundary-${period}`;
+    const normalizedPeriod = period.trim().toLowerCase();
+    if (!normalizedPeriod) {
+      console.warn('⚠️ 疆域时期不能为空');
+      return null;
+    }
+
+    const cacheKey = `boundary-${normalizedPeriod}`;
     
     return this.cache.get(cacheKey, async () => {
       try {
         const mappings = await this.loadBoundaryMappings();
-        const mapping = mappings.find(m => m.period === period);
+        const mapping = mappings.find(m => m.period === normalizedPeriod);
         
         if (!mapping) {
-          console.warn(`⚠️ 未找到 ${period} 时期的边界数据映射`);
+          console.warn(`⚠️ 未找到 ${normalizedPeriod} 时期的边界数据映射`);
           return null;
         }
 
         const data = await loadJsonData<BoundaryGeoJSON>(`${MAP_BOUNDARIES_DATA_PATH}/${mapping.file}`);
         return data;
       } catch (error) {
-        console.error(`❌ 加载 ${period} 时期边界数据失败:`, error);
+        console.error(`❌ 加载 ${normalizedPeriod} 时期边界数据失败:`, error);
         return null;
       }
     });
@@ -176,6 +182,11 @@ export class MapDataService {
    * 根据年份获取对应的边界数据
    */
   async getBoundaryDataByYear(year: number): Promise<BoundaryGeoJSON | null> {
+    if (!Number.isFinite(year)) {
+      console.warn('⚠️ 疆域年份必须是有效数字');
+      return null;
+    }
+
     const mappings = await this.loadBoundaryMappings();
     const matchedMappings = mappings.filter((mapping) => year >= mapping.validFrom && year <= mapping.validTo);
     const mapping = matchedMappings.sort((left, right) => right.validFrom - left.validFrom)[0] ?? null;
@@ -196,6 +207,8 @@ export class MapDataService {
       this.loadPlaces(),
       this.loadBoundaryMappings(),
       // 预加载几个重要朝代的边界数据
+      this.loadBoundaryData('qin'),
+      this.loadBoundaryData('han'),
       this.loadBoundaryData('tang'),
       this.loadBoundaryData('song'),
       this.loadBoundaryData('ming'),

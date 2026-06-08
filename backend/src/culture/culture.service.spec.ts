@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { CultureService } from './culture.service';
 import { PrismaService } from '../prisma/prisma.service';
 import type { ScholarQueryDto } from './dto/scholar-query.dto';
@@ -48,11 +48,17 @@ describe('CultureService', () => {
       findMany: jest.Mock;
       count: jest.Mock;
       findUnique: jest.Mock;
+      create: jest.Mock;
+      update: jest.Mock;
+      delete: jest.Mock;
     };
     philosophicalSchool: {
       findMany: jest.Mock;
       count: jest.Mock;
       findUnique: jest.Mock;
+      create: jest.Mock;
+      update: jest.Mock;
+      delete: jest.Mock;
     };
   };
 
@@ -62,11 +68,17 @@ describe('CultureService', () => {
         findMany: jest.fn(),
         count: jest.fn(),
         findUnique: jest.fn(),
+        create: jest.fn(),
+        update: jest.fn(),
+        delete: jest.fn(),
       },
       philosophicalSchool: {
         findMany: jest.fn(),
         count: jest.fn(),
         findUnique: jest.fn(),
+        create: jest.fn(),
+        update: jest.fn(),
+        delete: jest.fn(),
       },
     };
 
@@ -312,6 +324,37 @@ describe('CultureService', () => {
     });
   });
 
+  describe('create/update scholar - 保存校验', () => {
+    it('创建学者时姓名不能为空', async () => {
+      await expect(
+        service.createScholar(asQuery({ name: '   ' })),
+      ).rejects.toThrow(BadRequestException);
+    });
+
+    it('创建学者时卒年不能早于生年', async () => {
+      await expect(
+        service.createScholar(asQuery({
+          name: '孔子',
+          birthYear: -479,
+          deathYear: -551,
+        })),
+      ).rejects.toThrow(BadRequestException);
+    });
+
+    it('更新学者时合并旧生卒年后校验', async () => {
+      prisma.scholar.findUnique.mockResolvedValue({
+        id: 'kongzi',
+        name: '孔子',
+        birthYear: -551,
+        deathYear: -479,
+      });
+
+      await expect(
+        service.updateScholar('kongzi', asQuery({ birthYear: -400 })),
+      ).rejects.toThrow(BadRequestException);
+    });
+  });
+
   describe('findAllSchools - where 拼装', () => {
     it('默认 page=1 limit=20 skip=0,where = {}', async () => {
       prisma.philosophicalSchool.findMany.mockResolvedValue([]);
@@ -393,6 +436,25 @@ describe('CultureService', () => {
       await expect(service.findSchoolById('missing')).rejects.toThrow(
         /missing/,
       );
+    });
+  });
+
+  describe('create/update school - 保存校验', () => {
+    it('创建思想流派时名称不能为空', async () => {
+      await expect(
+        service.createSchool(asQuery({ name: '' })),
+      ).rejects.toThrow(BadRequestException);
+    });
+
+    it('更新思想流派时名称不能清空', async () => {
+      prisma.philosophicalSchool.findUnique.mockResolvedValue({
+        id: 'ru',
+        name: '儒家',
+      });
+
+      await expect(
+        service.updateSchool('ru', asQuery({ name: '   ' })),
+      ).rejects.toThrow(BadRequestException);
     });
   });
 

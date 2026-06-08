@@ -70,6 +70,18 @@ type DeleteTarget =
   | { entity: 'school'; item: PhilosophicalSchool }
   | { entity: 'scholar'; item: Scholar };
 
+function toActionError(error: unknown, fallbackMessage: string): Error {
+  if (error instanceof Error) {
+    return new Error(error.message || fallbackMessage);
+  }
+
+  if (typeof error === 'string' && error.trim()) {
+    return new Error(error.trim());
+  }
+
+  return new Error(fallbackMessage);
+}
+
 function CulturePage() {
   const [editor, setEditor] = useState<EditorState>({
     open: false,
@@ -174,6 +186,7 @@ function CulturePage() {
   const closeEditor = () => {
     if (!saving) {
       setEditor((state) => ({ ...state, open: false }));
+      setActionError(null);
     }
   };
 
@@ -194,7 +207,7 @@ function CulturePage() {
       }
       setEditor((state) => ({ ...state, open: false }));
     } catch (error) {
-      setActionError(error as Error);
+      setActionError(toActionError(error, '保存思想流派失败'));
     } finally {
       setSaving(false);
     }
@@ -217,7 +230,7 @@ function CulturePage() {
       }
       setEditor((state) => ({ ...state, open: false }));
     } catch (error) {
-      setActionError(error as Error);
+      setActionError(toActionError(error, '保存文化名人失败'));
     } finally {
       setSaving(false);
     }
@@ -238,7 +251,7 @@ function CulturePage() {
       }
       setDeleteTarget(null);
     } catch (error) {
-      setActionError(error as Error);
+      setActionError(toActionError(error, '删除失败'));
     } finally {
       setSaving(false);
     }
@@ -260,6 +273,56 @@ function CulturePage() {
 
   const handleCloseScholarDetail = () => {
     setSelectedScholar(null);
+  };
+
+  const openCreateSchoolEditor = () => {
+    setActionError(null);
+    setEditor({
+      open: true,
+      entity: 'school',
+      mode: 'create',
+      school: null,
+    });
+  };
+
+  const openEditSchoolEditor = (school: PhilosophicalSchool) => {
+    setActionError(null);
+    setEditor({
+      open: true,
+      entity: 'school',
+      mode: 'edit',
+      school,
+    });
+  };
+
+  const openCreateScholarEditor = () => {
+    setActionError(null);
+    setEditor({
+      open: true,
+      entity: 'scholar',
+      mode: 'create',
+      scholar: null,
+    });
+  };
+
+  const openEditScholarEditor = (scholar: Scholar) => {
+    setActionError(null);
+    setEditor({
+      open: true,
+      entity: 'scholar',
+      mode: 'edit',
+      scholar,
+    });
+  };
+
+  const requestDelete = (target: DeleteTarget) => {
+    setActionError(null);
+    setDeleteTarget(target);
+  };
+
+  const closeDeleteDialog = () => {
+    setDeleteTarget(null);
+    setActionError(null);
   };
 
   const renderActionError = () => actionError && (
@@ -290,14 +353,7 @@ function CulturePage() {
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            onClick={() =>
-              setEditor({
-                open: true,
-                entity: 'school',
-                mode: 'create',
-                school: null,
-              })
-            }
+            onClick={openCreateSchoolEditor}
           >
             新增流派
           </Button>
@@ -307,15 +363,10 @@ function CulturePage() {
         <SchoolsList
           schools={schools}
           onSchoolClick={handleSchoolClick}
-          onSchoolEdit={(school) =>
-            setEditor({
-              open: true,
-              entity: 'school',
-              mode: 'edit',
-              school,
-            })
+          onSchoolEdit={openEditSchoolEditor}
+          onSchoolDelete={(school) =>
+            requestDelete({ entity: 'school', item: school })
           }
-          onSchoolDelete={(school) => setDeleteTarget({ entity: 'school', item: school })}
           loading={schoolsLoading || schoolsRequestLoading}
         />
 
@@ -349,14 +400,7 @@ function CulturePage() {
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            onClick={() =>
-              setEditor({
-                open: true,
-                entity: 'scholar',
-                mode: 'create',
-                scholar: null,
-              })
-            }
+            onClick={openCreateScholarEditor}
           >
             新增名人
           </Button>
@@ -375,16 +419,9 @@ function CulturePage() {
         <ScholarGrid
           scholars={filteredScholars}
           onScholarClick={handleScholarClick}
-          onScholarEdit={(scholar) =>
-            setEditor({
-              open: true,
-              entity: 'scholar',
-              mode: 'edit',
-              scholar,
-            })
-          }
+          onScholarEdit={openEditScholarEditor}
           onScholarDelete={(scholar) =>
-            setDeleteTarget({ entity: 'scholar', item: scholar })
+            requestDelete({ entity: 'scholar', item: scholar })
           }
           loading={scholarLoading || scholarsRequestLoading}
         />
@@ -430,6 +467,7 @@ function CulturePage() {
         scholar={editor.scholar}
         schools={schools}
         saving={saving}
+        error={actionError}
         onClose={closeEditor}
         onSaveSchool={handleSaveSchool}
         onSaveScholar={handleSaveScholar}
@@ -437,7 +475,7 @@ function CulturePage() {
 
       <Dialog
         open={Boolean(deleteTarget)}
-        onClose={saving ? undefined : () => setDeleteTarget(null)}
+        onClose={saving ? undefined : closeDeleteDialog}
         maxWidth="xs"
         fullWidth
         slotProps={{
@@ -458,7 +496,10 @@ function CulturePage() {
             : ''}
         </DialogContent>
         <DialogActions sx={{ px: 3, py: 2 }}>
-          <Button onClick={() => setDeleteTarget(null)} disabled={saving}>
+          <Button
+            onClick={closeDeleteDialog}
+            disabled={saving}
+          >
             取消
           </Button>
           <Button

@@ -229,6 +229,17 @@ function MythologyPage() {
     setPendingDelete(mythology);
   }, []);
 
+  const closeFormDialog = () => {
+    setFormOpen(false);
+    setEditingMythology(null);
+    setMutationError(null);
+  };
+
+  const closeDeleteDialog = () => {
+    setPendingDelete(null);
+    setMutationError(null);
+  };
+
   const renderMythologyContent = () => (
     <Box className="mythology-stories-view">
       <Box className="mythology-action-bar">
@@ -331,16 +342,13 @@ function MythologyPage() {
         mythology={editingMythology}
         saving={saving}
         error={mutationError}
-        onClose={() => {
-          setFormOpen(false);
-          setEditingMythology(null);
-        }}
+        onClose={closeFormDialog}
         onSubmit={saveMythology}
       />
 
       <Dialog
         open={Boolean(pendingDelete)}
-        onClose={deleting ? undefined : () => setPendingDelete(null)}
+        onClose={deleting ? undefined : closeDeleteDialog}
         maxWidth="xs"
         fullWidth
       >
@@ -356,7 +364,7 @@ function MythologyPage() {
           )}
         </DialogContent>
         <DialogActions>
-          <Button disabled={deleting} onClick={() => setPendingDelete(null)}>
+          <Button disabled={deleting} onClick={closeDeleteDialog}>
             取消
           </Button>
           <Button

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 
 interface UseCollectionResourceOptions<T> {
   cacheKey: string;
-  items: T[];
+  items: T[] | null | undefined;
   loading: boolean;
   load: () => Promise<T[]>;
   setItems: (items: T[]) => void;
@@ -24,6 +24,7 @@ export function useCollectionResource<T>({
   const autoLoadKeyRef = useRef<string | null>(null);
   const mountedRef = useRef(false);
   const requestIdRef = useRef(0);
+  const itemCount = Array.isArray(items) ? items.length : 0;
 
   const run = useCallback(async () => {
     const requestId = requestIdRef.current + 1;
@@ -32,11 +33,12 @@ export function useCollectionResource<T>({
 
     try {
       const data = await load();
+      const nextItems = Array.isArray(data) ? data : [];
       if (mountedRef.current && requestIdRef.current === requestId) {
-        setItems(data);
+        setItems(nextItems);
         setError(null);
       }
-      return data;
+      return nextItems;
     } catch (err) {
       if (mountedRef.current && requestIdRef.current === requestId) {
         console.error(errorMessage, err);
@@ -56,20 +58,19 @@ export function useCollectionResource<T>({
       mountedRef.current = false;
       autoLoadKeyRef.current = null;
       requestIdRef.current += 1;
-      setLoading(false);
     };
-  }, [setLoading]);
+  }, []);
 
   useEffect(() => {
     if (
       autoLoadKeyRef.current !== cacheKey &&
-      items.length === 0 &&
+      itemCount === 0 &&
       !loading
     ) {
       autoLoadKeyRef.current = cacheKey;
       void run();
     }
-  }, [cacheKey, items.length, loading, run]);
+  }, [cacheKey, itemCount, loading, run]);
 
   return {
     reload: run,

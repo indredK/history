@@ -4,6 +4,30 @@ export interface SourceRef {
   id: string;
   title?: string;
   url?: string;
+  author?: string;
+}
+
+export interface EventParticipantRef {
+  id?: string;
+  personId: string;
+  role?: string | null;
+  person?: {
+    id: string;
+    name: string;
+    dynasty?: string | null;
+  } | null;
+}
+
+export interface EventLocationRef {
+  id?: string;
+  placeId: string;
+  role?: string | null;
+  place?: {
+    id: string;
+    name: string;
+    latitude?: number | null;
+    longitude?: number | null;
+  } | null;
 }
 
 export interface Event {
@@ -22,6 +46,8 @@ export interface Event {
   categories?: string[][];
   sources?: SourceRef[];
   source_ids?: string[];
+  participants?: EventParticipantRef[];
+  locations?: EventLocationRef[];
   rawLocations?: string[];
   rawParticipants?: string[];
   mapFocusStartYear?: number;
@@ -32,6 +58,23 @@ export interface Event {
   confidence?: number;
   created_at?: string;
   updated_at?: string;
+}
+
+export interface EventInput {
+  title: string;
+  startYear: number;
+  endYear?: number | null;
+  description?: string | null;
+  eventType?: string | null;
+  participants?: Array<{
+    personId: string;
+    role?: string | null;
+  }>;
+  locations?: Array<{
+    placeId: string;
+    role?: string | null;
+  }>;
+  sourceIds?: string[];
 }
 
 export const EventSchema = z.object({
@@ -54,10 +97,46 @@ export const EventSchema = z.object({
         id: z.string(),
         title: z.string().optional(),
         url: z.string().optional(),
+        author: z.string().optional(),
       })
     )
     .optional(),
   source_ids: z.array(z.string()).optional(),
+  participants: z
+    .array(
+      z.object({
+        id: z.string().optional(),
+        personId: z.string(),
+        role: z.string().nullable().optional(),
+        person: z
+          .object({
+            id: z.string(),
+            name: z.string(),
+            dynasty: z.string().nullable().optional(),
+          })
+          .nullable()
+          .optional(),
+      })
+    )
+    .optional(),
+  locations: z
+    .array(
+      z.object({
+        id: z.string().optional(),
+        placeId: z.string(),
+        role: z.string().nullable().optional(),
+        place: z
+          .object({
+            id: z.string(),
+            name: z.string(),
+            latitude: z.number().nullable().optional(),
+            longitude: z.number().nullable().optional(),
+          })
+          .nullable()
+          .optional(),
+      })
+    )
+    .optional(),
   rawLocations: z.array(z.string()).optional(),
   rawParticipants: z.array(z.string()).optional(),
   mapFocusStartYear: z.number().optional(),

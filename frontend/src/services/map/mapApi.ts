@@ -4,34 +4,84 @@ import { mapDataService } from './mapDataService';
 import { MAP_PLACES_PATH } from '@/config/mapDataPaths';
 import type { Place } from './types';
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+function readString(value: unknown): string {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function readNumber(value: unknown): number | undefined {
+  if (typeof value === 'number' && Number.isFinite(value)) return value;
+  if (typeof value === 'string' && value.trim()) {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : undefined;
+  }
+  return undefined;
+}
+
+function readStringArray(value: unknown): string[] {
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => readString(item))
+      .filter(Boolean);
+  }
+
+  const text = readString(value);
+  return text ? text.split(',').map((name) => name.trim()).filter(Boolean) : [];
+}
+
+function readPointLocation(source: Record<string, unknown>): Place['location'] | undefined {
+  const rawLocation = source['location'];
+  if (
+    isRecord(rawLocation)
+    && rawLocation['type'] === 'Point'
+    && Array.isArray(rawLocation['coordinates'])
+  ) {
+    const [longitude, latitude] = rawLocation['coordinates'];
+    if (typeof longitude === 'number' && typeof latitude === 'number') {
+      return {
+        type: 'Point',
+        coordinates: [longitude, latitude],
+      };
+    }
+  }
+
+  const longitude = readNumber(source['longitude']);
+  const latitude = readNumber(source['latitude']);
+  if (longitude !== undefined && latitude !== undefined) {
+    return {
+      type: 'Point',
+      coordinates: [longitude, latitude],
+    };
+  }
+
+  return undefined;
+}
+
 // 数据转换器
-function transformJsonToPlace(jsonPlace: any, index: number): Place {
-  const canonicalName = jsonPlace.canonical_name || jsonPlace.name || `place_${index}`;
-  const altNames = Array.isArray(jsonPlace.alt_names)
-    ? jsonPlace.alt_names
-    : jsonPlace.alt_names
-      ? String(jsonPlace.alt_names).split(',').map((name: string) => name.trim()).filter(Boolean)
-      : [];
-  const location = jsonPlace.location?.type === 'Point' && Array.isArray(jsonPlace.location.coordinates)
-    ? jsonPlace.location
-    : typeof jsonPlace.longitude === 'number' && typeof jsonPlace.latitude === 'number'
-      ? {
-          type: 'Point' as const,
-          coordinates: [jsonPlace.longitude, jsonPlace.latitude] as [number, number],
-        }
-      : undefined;
+function transformJsonToPlace(jsonPlace: unknown, index: number): Place {
+  const source = isRecord(jsonPlace) ? jsonPlace : {};
+  const canonicalName =
+    readString(source['canonical_name']) || readString(source['name']) || `place_${index}`;
+  const altNames = readStringArray(source['alt_names']);
+  const sourceIds = readStringArray(source['source_ids']);
+  const sourceName = readString(source['source']);
+  const location = readPointLocation(source);
 
   const place: Place = {
-    id: jsonPlace.id || `place_${canonicalName.replace(/\s+/g, '_')}_${index}`,
+    id: readString(source['id']) || `place_${canonicalName.replace(/\s+/g, '_')}_${index}`,
     canonical_name: canonicalName,
-    source_ids: jsonPlace.source_ids || (jsonPlace.source ? [`src_${jsonPlace.source}`] : []),
+    source_ids: sourceIds.length > 0 ? sourceIds : sourceName ? [`src_${sourceName}`] : [],
   };
 
   if (altNames.length > 0) {
     place.alt_names = altNames;
   }
-  if (typeof jsonPlace.description === 'string' && jsonPlace.description.trim()) {
-    place.description = jsonPlace.description;
+  const description = readString(source['description']);
+  if (description) {
+    place.description = description;
   }
   if (location) {
     place.location = location;

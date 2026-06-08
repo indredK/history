@@ -111,22 +111,22 @@ function transformJsonToMythology(jsonMythology: unknown, index = 0): Mythology 
   };
 }
 
-function normalizeInput(input: MythologyInput, id: string): Mythology {
-  const source = input.source || input.origin || '';
+function normalizeInput(input: Partial<MythologyInput> | undefined, id: string): Mythology {
+  const source = readString(input?.source) || readString(input?.origin);
 
   return {
     id,
-    title: input.title.trim(),
-    englishTitle: input.englishTitle?.trim() || '',
-    category: input.category,
-    description: input.description.trim(),
-    characters: input.characters || [],
-    period: input.period?.trim() || '',
-    origin: input.origin?.trim() || source,
-    stories: input.stories || [],
-    symbolism: input.symbolism || [],
+    title: readString(input?.title) || `未命名神话 ${id}`,
+    englishTitle: readString(input?.englishTitle),
+    category: normalizeCategory(input?.category),
+    description: readString(input?.description),
+    characters: readStringArray(input?.characters),
+    period: readString(input?.period),
+    origin: readString(input?.origin) || source,
+    stories: readStringArray(input?.stories),
+    symbolism: readStringArray(input?.symbolism),
     source,
-    imageUrl: input.imageUrl?.trim() || '',
+    imageUrl: readString(input?.imageUrl),
     updatedAt: new Date().toISOString(),
   };
 }

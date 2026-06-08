@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import * as echarts from 'echarts';
 import { StateView } from '@/components/ui';
 import { loadJsonData } from '@/utils/services/dataLoaders';
+import { MAP_BOUNDARIES_DATA_PATH } from '@/config/mapDataPaths';
 import type { BoundaryGeoJSON } from '@/services/map/types';
 
 // 朝代配置
@@ -32,6 +33,19 @@ interface DynastyBoundaryMapProps {
   height?: number | string;
   selectedDynastyId?: string | null;
   onDynastyChange?: (dynastyId: string) => void;
+}
+
+function escapeHtml(value: unknown): string {
+  return String(value ?? '').replace(/[&<>"']/g, (char) => {
+    const entities: Record<string, string> = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+    };
+    return entities[char] ?? char;
+  });
 }
 
 /**
@@ -69,13 +83,14 @@ export function DynastyBoundaryMap({
   const [error, setError] = useState<string | null>(null);
   const [boundaryData, setBoundaryData] = useState<Record<string, BoundaryGeoJSON>>({});
   const [selectedDynastyId, setSelectedDynastyId] = useState<string>(selectedDynastyIdProp || 'qin');
+  const [reloadKey, setReloadKey] = useState(0);
 
   // 同步外部传入的 selectedDynastyId
   useEffect(() => {
     if (selectedDynastyIdProp && selectedDynastyIdProp !== selectedDynastyId) {
       setSelectedDynastyId(selectedDynastyIdProp);
     }
-  }, [selectedDynastyIdProp]);
+  }, [selectedDynastyId, selectedDynastyIdProp]);
 
   // 加载所有朝代疆域数据
   useEffect(() => {
@@ -85,17 +100,18 @@ export function DynastyBoundaryMap({
       try {
         setLoading(true);
         setError(null);
+        setBoundaryData({});
 
         const data: Record<string, BoundaryGeoJSON> = {};
 
         for (const dynasty of DYNASTIES) {
           try {
             const geojson = await loadJsonData<BoundaryGeoJSON>(
-              `/data/map/boundaries/${dynasty.file}`,
+              `${MAP_BOUNDARIES_DATA_PATH}/${dynasty.file}`,
             );
             data[dynasty.id] = geojson;
           } catch (err) {
-            console.warn(`Error loading ${dynasty.file}:`, err);
+            console.warn(`疆域文件加载失败 ${dynasty.file}:`, err);
           }
         }
 
@@ -119,6 +135,13 @@ export function DynastyBoundaryMap({
 
     return () => {
       mounted = false;
+    };
+  }, [reloadKey]);
+
+  useEffect(() => {
+    return () => {
+      chartInstance.current?.dispose();
+      chartInstance.current = null;
     };
   }, []);
 
@@ -205,12 +228,12 @@ export function DynastyBoundaryMap({
           const feature = normalizedData.features.find((f) => f.properties.name === p.name);
           if (feature) {
             return `<div style="padding:8px;">
-              <strong>${feature.properties.name}</strong><br/>
+              <strong>${escapeHtml(feature.properties.name)}</strong><br/>
               层级: ${feature.properties.admin_level === 'empire' ? '帝国' : '省份'}<br/>
-              年份: ${feature.properties.year}年
+              年份: ${escapeHtml(feature.properties.year)}年
             </div>`;
           }
-          return p.name || '';
+          return escapeHtml(p.name || '');
         },
       },
       geo: {
@@ -335,7 +358,7 @@ export function DynastyBoundaryMap({
             title="加载失败"
             description={error}
             actionLabel="重试"
-            onAction={() => window.location.reload()}
+            onAction={() => setReloadKey((current) => current + 1)}
           />
         </Box>
       )}

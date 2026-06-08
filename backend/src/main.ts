@@ -68,6 +68,8 @@ async function bootstrap() {
     .addTag('Schools', 'Philosophical school endpoints')
     .addTag('Mythology', 'Mythology-related endpoints')
     .addTag('Religion', 'Religion relationship graph endpoints')
+    .addTag('Places', 'Historical place endpoints')
+    .addTag('Map', 'Historical map boundary endpoints')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

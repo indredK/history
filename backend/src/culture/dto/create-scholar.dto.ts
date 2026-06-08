@@ -1,7 +1,9 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsArray,
   IsInt,
+  IsNotEmpty,
   IsOptional,
   IsString,
   IsUUID,
@@ -11,6 +13,7 @@ import {
 export class CreateScholarDto {
   @ApiProperty({ description: 'Scholar name', example: '孔子' })
   @IsString()
+  @IsNotEmpty()
   name: string;
 
   @ApiPropertyOptional({ description: 'English scholar name', example: 'Confucius' })
@@ -30,12 +33,14 @@ export class CreateScholarDto {
 
   @ApiPropertyOptional({ description: 'Birth year', example: -551 })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   @Min(-3000)
   birthYear?: number | null;
 
   @ApiPropertyOptional({ description: 'Death year', example: -479 })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   @Min(-3000)
   deathYear?: number | null;
@@ -61,11 +66,13 @@ export class CreateScholarDto {
   @ApiPropertyOptional({ description: 'Contributions', type: [String] })
   @IsOptional()
   @IsArray()
+  @IsString({ each: true })
   contributions?: string[];
 
   @ApiPropertyOptional({ description: 'Visible achievements', type: [String] })
   @IsOptional()
   @IsArray()
+  @IsString({ each: true })
   achievements?: string[];
 
   @ApiPropertyOptional({ description: 'Biography' })
@@ -81,5 +88,6 @@ export class CreateScholarDto {
   @ApiPropertyOptional({ description: 'Source names or URLs', type: [String] })
   @IsOptional()
   @IsArray()
+  @IsString({ each: true })
   sources?: string[];
 }

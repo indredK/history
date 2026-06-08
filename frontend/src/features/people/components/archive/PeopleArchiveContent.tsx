@@ -103,12 +103,14 @@ export function PeopleArchiveContent() {
   );
 
   const handleCreate = () => {
+    store.setError(null);
     store.setEditingPerson(null);
     setFormMode('create');
     setFormOpen(true);
   };
 
   const handleEdit = (person: CommonPerson) => {
+    store.setError(null);
     store.setEditingPerson(person);
     setFormMode('edit');
     setFormOpen(true);
@@ -128,7 +130,7 @@ export function PeopleArchiveContent() {
       setFormOpen(false);
       store.setEditingPerson(null);
     } catch (error) {
-      store.setError(error as Error);
+      store.setError(error instanceof Error ? error : new Error('保存人物档案失败'));
     } finally {
       setSaving(false);
     }
@@ -142,7 +144,7 @@ export function PeopleArchiveContent() {
       store.removePerson(deleteTarget.id);
       setDeleteTarget(null);
     } catch (error) {
-      store.setError(error as Error);
+      store.setError(error instanceof Error ? error : new Error('删除人物档案失败'));
     } finally {
       setSaving(false);
     }
@@ -225,9 +227,11 @@ export function PeopleArchiveContent() {
         mode={formMode}
         person={store.editingPerson}
         saving={saving}
+        error={store.error}
         onClose={() => {
           setFormOpen(false);
           store.setEditingPerson(null);
+          store.setError(null);
         }}
         onSave={handleSave}
       />

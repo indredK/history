@@ -32,7 +32,7 @@ export interface EmperorService extends BaseService<Emperor> {
   ): Emperor[];
   formatReignPeriod(emperor: Emperor): string;
   formatEraNames(emperor: Emperor): string;
-  calculateReignYears(emperor: Emperor): number;
+  calculateReignYears(emperor: Emperor): number | null;
 }
 
 // 实现帝王服务的辅助方法
@@ -137,7 +137,10 @@ export const emperorServiceHelper = {
    * 格式化在位时间
    */
   formatReignPeriod(emperor: Emperor): string {
-    const formatYear = (year: number) => {
+    const formatYear = (year: number | null) => {
+      if (year === null) {
+        return '未知';
+      }
       if (year < 0) {
         return `公元前${Math.abs(year)}年`;
       }
@@ -159,7 +162,10 @@ export const emperorServiceHelper = {
   /**
    * 计算在位年数
    */
-  calculateReignYears(emperor: Emperor): number {
+  calculateReignYears(emperor: Emperor): number | null {
+    if (emperor.reignEnd === null) {
+      return null;
+    }
     return emperor.reignEnd - emperor.reignStart;
   }
 };

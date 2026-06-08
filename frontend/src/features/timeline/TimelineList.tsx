@@ -1,10 +1,12 @@
 import './TimelineList.scss';
 import { EChartsTimeline } from './components';
+import { EventManager } from './components/EventManager';
 import { Box } from '@mui/material';
 import { useRequest } from 'ahooks';
 import { StateView } from '@/components/ui';
 import { getDynasties, getEvents } from '@/services/dataClient';
 import type { Dynasty } from '@/services/culture/types';
+import type { Event } from '@/services/timeline/types';
 import { useTimelineStore } from '@/store';
 import { usePerformanceTrace } from '@/utils/performance';
 import {
@@ -43,6 +45,17 @@ export function TimelineList() {
     };
   });
   const [stableTimeRange, setStableTimeRange] = useState<[number, number] | null>(null);
+  const [managedEvents, setManagedEvents] = useState<Event[]>([]);
+  const [managedEventsInitialized, setManagedEventsInitialized] = useState(false);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    setManagedEvents(data.events);
+    setManagedEventsInitialized(true);
+  }, [data]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -53,8 +66,8 @@ export function TimelineList() {
   }, [currentTimeRange]);
 
   const derivedEvents = useMemo(
-    () => deriveTimelineEvents(data?.events ?? []),
-    [data?.events],
+    () => deriveTimelineEvents(managedEventsInitialized ? managedEvents : data?.events ?? []),
+    [data?.events, managedEvents, managedEventsInitialized],
   );
   const filteredEvents = useMemo(
     () =>
@@ -154,22 +167,31 @@ export function TimelineList() {
     }
 
     return (
-      <EChartsTimeline
-        eventsData={densityFilteredEvents}
-        dynastiesData={filteredDynasties}
-        timeRange={currentTimeRange}
-        showCondenseToggle={false}
-        onTimeRangeChange={handleTimeRangeChange}
-        onReset={() => {
-          resetViewState();
-          setStableTimeRange(null);
-        }}
-        clusterData={{
-          yearClusters: [],
-          dynastyClusters,
-          densityMode,
-        }}
-      />
+      <>
+        <EChartsTimeline
+          eventsData={densityFilteredEvents}
+          dynastiesData={filteredDynasties}
+          timeRange={currentTimeRange}
+          showCondenseToggle={false}
+          onTimeRangeChange={handleTimeRangeChange}
+          onReset={() => {
+            resetViewState();
+            setStableTimeRange(null);
+          }}
+          clusterData={{
+            yearClusters: [],
+            dynastyClusters,
+            densityMode,
+          }}
+        />
+        <EventManager
+          events={managedEventsInitialized ? managedEvents : data?.events ?? []}
+          onEventsChange={(nextEvents) => {
+            setManagedEvents(nextEvents);
+            setManagedEventsInitialized(true);
+          }}
+        />
+      </>
     );
   })();
 

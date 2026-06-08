@@ -1,61 +1,68 @@
 import type { SanguoFigureService } from './sanguoService';
 import { createUnifiedService } from '../../base/serviceFactory';
-import type { SanguoFigure } from './types';
+import type { SanguoFigure, SanguoFigureRole, SanguoKingdom } from './types';
 import { sanguoFigureServiceHelper } from './sanguoService';
+import {
+  isRecord,
+  readEvaluations,
+  readEvents,
+  readNumber,
+  readOptionalString,
+  readString,
+  readStringArray,
+} from '../common/figureTransform';
+
+const SANGUO_ROLES: SanguoFigureRole[] = [
+  'ruler',
+  'strategist',
+  'general',
+  'advisor',
+  'official',
+  'other',
+];
+const SANGUO_KINGDOMS: SanguoKingdom[] = ['魏', '蜀', '吴', '其他'];
+
+function normalizeSanguoRole(value: string): SanguoFigureRole {
+  return SANGUO_ROLES.includes(value as SanguoFigureRole)
+    ? (value as SanguoFigureRole)
+    : 'other';
+}
+
+function normalizeSanguoKingdom(value: string): SanguoKingdom {
+  return SANGUO_KINGDOMS.includes(value as SanguoKingdom)
+    ? (value as SanguoKingdom)
+    : '其他';
+}
 
 // 数据转换器
-function transformJsonToSanguoFigure(jsonFigure: any, index: number): SanguoFigure {
-  // 解析角色和阵营
-  const role = jsonFigure.role || 'other';
-  const kingdom = jsonFigure.kingdom || '其他';
+function transformJsonToSanguoFigure(jsonFigure: unknown, index: number): SanguoFigure {
+  const record = isRecord(jsonFigure) ? jsonFigure : {};
+  const name = readString(record, 'name', `人物${index}`);
   
-  // 解析事件
-  const events = jsonFigure.events || [];
-  const formattedEvents = events.map((event: any, i: number) => ({
-    name: event.name || `事件${i + 1}`,
-    year: event.year || 0,
-    role: event.role || '',
-    description: event.description || ''
-  }));
-  
-  // 解析评价
-  const evaluations = jsonFigure.evaluations || [];
-  const formattedEvaluations = evaluations.map((evaluation: any, i: number) => ({
-    source: evaluation.source || `来源${i + 1}`,
-    content: evaluation.content || '',
-    author: evaluation.author
-  }));
-  
-  // 解析成就
-  const achievements = jsonFigure.achievements || [];
-  const formattedAchievements = Array.isArray(achievements) ? achievements : [];
-  
-  // 解析职位
-  const positions = jsonFigure.positions || [];
-  const formattedPositions = Array.isArray(positions) ? positions : [];
-  
-  // 解析来源
-  const sources = jsonFigure.sources || [];
-  const formattedSources = Array.isArray(sources) ? sources : [];
-  
-  return {
-    id: jsonFigure.id || `sanguo_figure_${jsonFigure.name?.replace(/\s+/g, '_') || `figure${index}`}`,
-    name: jsonFigure.name || `人物${index}`,
-    courtesy: jsonFigure.courtesy,
-    birthYear: jsonFigure.birthYear || 0,
-    deathYear: jsonFigure.deathYear || 0,
-    role: role as SanguoFigure['role'],
-    kingdom: kingdom as SanguoFigure['kingdom'],
-    positions: formattedPositions,
-    faction: jsonFigure.faction,
-    biography: jsonFigure.biography || '',
-    politicalViews: jsonFigure.politicalViews,
-    achievements: formattedAchievements,
-    events: formattedEvents,
-    evaluations: formattedEvaluations,
-    portraitUrl: jsonFigure.portraitUrl,
-    sources: formattedSources,
+  const figure: SanguoFigure = {
+    id: readString(record, 'id', `sanguo_figure_${name.replace(/\s+/g, '_') || `figure${index}`}`),
+    name,
+    birthYear: readNumber(record, ['birthYear', 'birth_year']),
+    deathYear: readNumber(record, ['deathYear', 'death_year']),
+    role: normalizeSanguoRole(readString(record, 'role', 'other')),
+    kingdom: normalizeSanguoKingdom(readString(record, 'kingdom', '其他')),
+    positions: readStringArray(record, 'positions'),
+    biography: readString(record, 'biography'),
+    achievements: readStringArray(record, 'achievements'),
+    events: readEvents(record),
+    evaluations: readEvaluations(record),
+    sources: readStringArray(record, 'sources'),
   };
+
+  const courtesy = readOptionalString(record, 'courtesy');
+  const faction = readOptionalString(record, 'faction');
+  const politicalViews = readOptionalString(record, 'politicalViews');
+  const portraitUrl = readOptionalString(record, 'portraitUrl');
+  if (courtesy) figure.courtesy = courtesy;
+  if (faction) figure.faction = faction;
+  if (politicalViews) figure.politicalViews = politicalViews;
+  if (portraitUrl) figure.portraitUrl = portraitUrl;
+  return figure;
 }
 
 // 创建统一服务
@@ -93,4 +100,3 @@ export const getKingdoms = () => sanguoFigureApi.getKingdoms();
 
 // 导出服务辅助方法（保持向后兼容）
 export const sanguoFigureService = sanguoFigureServiceHelper;
-

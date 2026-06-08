@@ -147,6 +147,8 @@ export class PersonService {
     if (!dto.name?.trim()) {
       throw new BadRequestException('人物姓名不能为空');
     }
+    this.assertLifespan(dto.birthYear, dto.deathYear);
+    this.assertConfidence(dto.confidence);
 
     const id = randomUUID();
     const now = new Date();
@@ -183,6 +185,8 @@ export class PersonService {
     if (!next.name?.trim()) {
       throw new BadRequestException('人物姓名不能为空');
     }
+    this.assertLifespan(next.birthYear, next.deathYear);
+    this.assertConfidence(next.confidence);
 
     await this.prisma.client.$executeRaw(Prisma.sql`
       UPDATE persons
@@ -345,6 +349,31 @@ export class PersonService {
     if (typeof value !== 'string') return null;
     const trimmed = value.trim();
     return trimmed.length > 0 ? trimmed : null;
+  }
+
+  private assertLifespan(
+    birthYear?: number | null,
+    deathYear?: number | null,
+  ): void {
+    if (
+      birthYear !== undefined
+      && birthYear !== null
+      && deathYear !== undefined
+      && deathYear !== null
+      && deathYear < birthYear
+    ) {
+      throw new BadRequestException('人物卒年不能早于生年');
+    }
+  }
+
+  private assertConfidence(confidence?: number | null): void {
+    if (
+      confidence !== undefined
+      && confidence !== null
+      && (confidence < 0 || confidence > 1)
+    ) {
+      throw new BadRequestException('人物可信度必须在 0 到 1 之间');
+    }
   }
 
   private like(value: string): string {

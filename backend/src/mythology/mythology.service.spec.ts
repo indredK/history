@@ -1,5 +1,5 @@
 import { Test, type TestingModule } from '@nestjs/testing';
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { MythologyService } from './mythology.service';
 import { PrismaService } from '../prisma/prisma.service';
 import type { MythologyQueryDto } from './dto/mythology-query.dto';
@@ -42,6 +42,9 @@ describe('MythologyService', () => {
       findMany: jest.Mock;
       count: jest.Mock;
       findUnique: jest.Mock;
+      create: jest.Mock;
+      update: jest.Mock;
+      delete: jest.Mock;
     };
   };
 
@@ -51,6 +54,9 @@ describe('MythologyService', () => {
         findMany: jest.fn(),
         count: jest.fn(),
         findUnique: jest.fn(),
+        create: jest.fn(),
+        update: jest.fn(),
+        delete: jest.fn(),
       },
     };
 
@@ -90,7 +96,7 @@ describe('MythologyService', () => {
       );
     });
 
-    it('category 直接 eq', async () => {
+    it('category legacy 别名归一为中文分类后 eq', async () => {
       prisma.mythology.findMany.mockResolvedValue([]);
       prisma.mythology.count.mockResolvedValue(0);
 
@@ -101,7 +107,7 @@ describe('MythologyService', () => {
       const call = getCallArg<{ where: { category?: string } }>(
         prisma.mythology.findMany,
       );
-      expect(call.where.category).toBe('creation');
+      expect(call.where.category).toBe('创世神话');
     });
 
     it('origin / period / name 都走 contains 模糊匹配', async () => {
@@ -150,7 +156,7 @@ describe('MythologyService', () => {
         id: 'pangu',
         title: '盘古开天',
         englishTitle: '',
-        category: 'creation',
+        category: '创世神话',
         description: '盘古劈开混沌',
         source: '上古传说',
         imageUrl: '',
@@ -268,7 +274,7 @@ describe('MythologyService', () => {
       prisma.mythology.findUnique.mockResolvedValue({
         id: 'nuwa',
         name: '女娲造人',
-        category: 'creation',
+        category: '创世神话',
         description: '抟土造人',
         origin: '上古',
         stories: '["女娲","伏羲","共工"]',
@@ -281,7 +287,7 @@ describe('MythologyService', () => {
         id: 'nuwa',
         title: '女娲造人',
         englishTitle: '',
-        category: 'creation',
+        category: '创世神话',
         description: '抟土造人',
         source: '上古',
         imageUrl: '',
@@ -330,6 +336,44 @@ describe('MythologyService', () => {
       expect(result.description).toBe('');
       expect(result.source).toBe('');
       expect(result.characters).toEqual([]);
+    });
+  });
+
+  describe('create/update - 保存校验', () => {
+    it('创建神话时标题不能为空', async () => {
+      await expect(
+        service.create(asQuery({
+          title: '   ',
+          category: '创世神话',
+          description: '描述',
+        })),
+      ).rejects.toThrow(BadRequestException);
+    });
+
+    it('创建神话时分类必须有效', async () => {
+      await expect(
+        service.create(asQuery({
+          title: '盘古开天',
+          category: '未知分类',
+          description: '描述',
+        })),
+      ).rejects.toThrow(BadRequestException);
+    });
+
+    it('更新神话时不能清空描述', async () => {
+      prisma.mythology.findUnique.mockResolvedValue({
+        id: 'pangu',
+        name: '盘古开天',
+        category: '创世神话',
+        description: '盘古劈开混沌',
+        origin: '',
+        stories: null,
+        symbolism: null,
+      });
+
+      await expect(
+        service.update('pangu', asQuery({ description: '   ' })),
+      ).rejects.toThrow(BadRequestException);
     });
   });
 });

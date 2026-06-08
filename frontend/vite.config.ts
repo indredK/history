@@ -7,6 +7,18 @@ const frontendPackage = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, './package.json'), 'utf8'),
 ) as { name?: string; version?: string }
 
+function resolveProxyTarget(rawBaseUrl?: string): string {
+  const fallback = 'http://localhost:3001'
+  const rawValue = rawBaseUrl || fallback
+
+  try {
+    const url = new URL(rawValue)
+    return `${url.protocol}//${url.host}`
+  } catch {
+    return rawValue.replace(/\/api\/v\d+(?:\/.*)?$/, '') || fallback
+  }
+}
+
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const appVersion = frontendPackage.version || '0.0.0'
@@ -14,6 +26,7 @@ export default defineConfig(({ command, mode }) => {
   const commitSha = process.env.GITHUB_SHA || process.env.GIT_SHA || 'local'
   const buildTime = process.env.BUILD_TIME || new Date().toISOString()
   const releaseId = `${appVersion}+${commitSha.slice(0, 7)}`
+  const apiProxyTarget = env.VITE_API_PROXY_TARGET || resolveProxyTarget(env.VITE_API_BASE_URL)
   
   return {
   // 兼容 GitHub Pages (需要 /history/) 和 自有服务器 (需要 /)
@@ -50,7 +63,7 @@ export default defineConfig(({ command, mode }) => {
     host: true,
     proxy: {
       '/api': {
-        target: env.VITE_API_BASE_URL || 'http://localhost:3001',
+        target: apiProxyTarget,
         changeOrigin: true,
       },
     },

@@ -1,8 +1,17 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { existsSync } from 'fs';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import { PlaceDto } from './dto/place.dto';
+import { Prisma } from '../generated/prisma/client';
+import {
+  ACCEPTED_BOUNDARY_PERIODS,
+  BoundaryPeriod,
+} from './dto/boundary-query.dto';
+import { PlaceDto, PlaceQueryDto } from './dto/place.dto';
 import { PrismaService } from '../prisma/prisma.service';
 
 export interface BoundaryDataResponse {
@@ -63,8 +72,10 @@ export class MapService {
   constructor(private readonly prisma: PrismaService) {}
 
   // 获取所有地点
-  async getPlaces(): Promise<PlaceDto[]> {
+  async getPlaces(query: PlaceQueryDto = {}): Promise<PlaceDto[]> {
+    const where = this.buildPlaceWhere(query);
     const places = await this.prisma.place.findMany({
+      where,
       orderBy: { name: 'asc' },
       include: {
         placeSources: true,
@@ -90,10 +101,13 @@ export class MapService {
   }
 
   async loadBoundaryData(period: string): Promise<BoundaryDataResponse> {
-    const mapping = this.boundaryMappings.find((item) => item.period === period);
+    const normalizedPeriod = this.normalizeBoundaryPeriod(period);
+    const mapping = this.boundaryMappings.find(
+      (item) => item.period === normalizedPeriod,
+    );
 
     if (!mapping) {
-      throw new NotFoundException(`未找到 ${period} 对应的疆域边界配置`);
+      throw new NotFoundException(`未找到 ${normalizedPeriod} 对应的疆域边界配置`);
     }
 
     return {
@@ -107,6 +121,10 @@ export class MapService {
   }
 
   async getBoundaryDataByYear(year: number): Promise<BoundaryDataResponse> {
+    if (!Number.isFinite(year)) {
+      throw new BadRequestException('年份必须是有效数字');
+    }
+
     const mapping = this.boundaryMappings
       .filter((item) => year >= item.validFrom && year <= item.validTo)
       .sort((left, right) => right.validFrom - left.validFrom)[0];
@@ -131,6 +149,8 @@ export class MapService {
   async preloadCommonData(): Promise<PreloadResponse> {
     await Promise.all([
       this.getPlaces(),
+      this.loadBoundaryData('qin'),
+      this.loadBoundaryData('han'),
       this.loadBoundaryData('tang'),
       this.loadBoundaryData('song'),
       this.loadBoundaryData('ming'),
@@ -188,5 +208,66 @@ export class MapService {
     }
 
     return matchedPath;
+  }
+
+  private buildPlaceWhere(query: PlaceQueryDto): Prisma.PlaceWhereInput {
+    const and: Prisma.PlaceWhereInput[] = [];
+    const keyword = query.keyword?.trim();
+    const longitudeRange = this.normalizeCoordinateRange(
+      query.lon_range,
+      '经度',
+    );
+    const latitudeRange = this.normalizeCoordinateRange(
+      query.lat_range,
+      '纬度',
+    );
+
+    if (keyword) {
+      and.push({ name: { contains: keyword } });
+    }
+
+    if (longitudeRange) {
+      const [gte, lte] = longitudeRange;
+      and.push({ longitude: { gte, lte } });
+    }
+
+    if (latitudeRange) {
+      const [gte, lte] = latitudeRange;
+      and.push({ latitude: { gte, lte } });
+    }
+
+    return and.length > 0 ? { AND: and } : {};
+  }
+
+  private normalizeCoordinateRange(
+    range: number[] | undefined,
+    label: string,
+  ): [number, number] | null {
+    if (range === undefined) {
+      return null;
+    }
+
+    if (range.length !== 2 || range.some((item) => !Number.isFinite(item))) {
+      throw new BadRequestException(`${label}范围必须包含两个数字`);
+    }
+
+    const [start, end] = range;
+    return start <= end ? [start, end] : [end, start];
+  }
+
+  private normalizeBoundaryPeriod(period: string): BoundaryPeriod {
+    const normalized = period?.trim().toLowerCase();
+
+    if (!normalized) {
+      throw new BadRequestException('疆域时期不能为空');
+    }
+
+    if (
+      !ACCEPTED_BOUNDARY_PERIODS.includes(normalized as BoundaryPeriod)
+    ) {
+      throw new NotFoundException(`未找到 ${normalized} 对应的疆域边界配置`);
+    }
+
+    return normalized as BoundaryPeriod;
   }
 }

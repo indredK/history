@@ -1,7 +1,9 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsArray,
   IsInt,
+  IsNotEmpty,
   IsOptional,
   IsString,
   Min,
@@ -10,6 +12,7 @@ import {
 export class CreatePhilosophicalSchoolDto {
   @ApiProperty({ description: 'School name', example: '儒家' })
   @IsString()
+  @IsNotEmpty()
   name: string;
 
   @ApiPropertyOptional({ description: 'English school name', example: 'Confucianism' })
@@ -29,6 +32,7 @@ export class CreatePhilosophicalSchoolDto {
 
   @ApiPropertyOptional({ description: 'Founding year', example: -551 })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   @Min(-3000)
   foundingYear?: number | null;
@@ -41,11 +45,13 @@ export class CreatePhilosophicalSchoolDto {
   @ApiPropertyOptional({ description: 'Core beliefs', type: [String] })
   @IsOptional()
   @IsArray()
+  @IsString({ each: true })
   coreBeliefs?: string[];
 
   @ApiPropertyOptional({ description: 'Key texts', type: [String] })
   @IsOptional()
   @IsArray()
+  @IsString({ each: true })
   keyTexts?: string[];
 
   @ApiPropertyOptional({ description: 'Representative figures', type: [Object] })
@@ -76,5 +82,6 @@ export class CreatePhilosophicalSchoolDto {
   @ApiPropertyOptional({ description: 'Source names or URLs', type: [String] })
   @IsOptional()
   @IsArray()
+  @IsString({ each: true })
   sources?: string[];
 }

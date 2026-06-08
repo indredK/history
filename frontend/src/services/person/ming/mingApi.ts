@@ -1,7 +1,29 @@
-import type { MingFigure } from './types';
+import type { MingFigure, MingFigureRole } from './types';
 import { createUnifiedService } from '@/utils/services/serviceFactory';
 import type { MingFigureService } from './mingService';
 import { mingFigureServiceHelper } from './mingService';
+import {
+  isRecord,
+  readEvaluations,
+  readEvents,
+  readNumber,
+  readOptionalString,
+  readString,
+  readStringArray,
+} from '../common/figureTransform';
+
+const MING_ROLES: MingFigureRole[] = [
+  'emperor',
+  'cabinet',
+  'general',
+  'official',
+  'eunuch',
+  'other',
+];
+
+function normalizeMingRole(value: string): MingFigureRole {
+  return MING_ROLES.includes(value as MingFigureRole) ? (value as MingFigureRole) : 'other';
+}
 
 // 明朝人物模拟数据 (简化版本)
 const mingFigureMockData: MingFigure[] = [
@@ -86,34 +108,31 @@ const mingFigureMockData: MingFigure[] = [
 ];
 
 // 数据转换器
-function transformJsonToMingFigure(jsonData: any, index: number): MingFigure {
-  // 如果是直接使用已转换的对象且包含必需字段
-  if (jsonData.birthYear !== undefined && jsonData.achievements && Array.isArray(jsonData.achievements)) {
-    return jsonData as MingFigure;
-  }
-  
-  // 处理后端数据或原始 Mock 数据
-  const parseArray = (val: any) => {
-    if (Array.isArray(val)) return val;
-    if (typeof val === 'string') return val.split(',').map(s => s.trim());
-    return [];
-  };
+function transformJsonToMingFigure(jsonData: unknown, index: number): MingFigure {
+  const record = isRecord(jsonData) ? jsonData : {};
+  const name = readString(record, 'name', `明朝人物${index + 1}`);
 
-  return {
-    id: jsonData.id || `ming_figure_${jsonData.name?.replace(/\s+/g, '_')}_${index}`,
-    name: jsonData.name,
-    courtesy: jsonData.courtesy || '',
-    birthYear: jsonData.birthYear ?? jsonData.birth_year,
-    deathYear: jsonData.deathYear ?? jsonData.death_year,
-    role: (jsonData.role as any) || 'other',
-    positions: parseArray(jsonData.positions),
-    biography: jsonData.biography || '',
-    politicalViews: jsonData.politicalViews || jsonData.political_views || '',
-    achievements: parseArray(jsonData.achievements),
-    events: jsonData.events || [],
-    evaluations: jsonData.evaluations || [],
-    sources: jsonData.sources || []
+  const figure: MingFigure = {
+    id: readString(record, 'id', `ming_figure_${name.replace(/\s+/g, '_')}_${index}`),
+    name,
+    birthYear: readNumber(record, ['birthYear', 'birth_year']),
+    deathYear: readNumber(record, ['deathYear', 'death_year']),
+    role: normalizeMingRole(readString(record, 'role', 'other')),
+    positions: readStringArray(record, 'positions'),
+    biography: readString(record, 'biography'),
+    politicalViews: readString(record, ['politicalViews', 'political_views']),
+    achievements: readStringArray(record, 'achievements'),
+    events: readEvents(record),
+    evaluations: readEvaluations(record),
+    sources: readStringArray(record, 'sources'),
   };
+  const courtesy = readOptionalString(record, 'courtesy');
+  const faction = readOptionalString(record, 'faction');
+  const portraitUrl = readOptionalString(record, 'portraitUrl');
+  if (courtesy) figure.courtesy = courtesy;
+  if (faction) figure.faction = faction;
+  if (portraitUrl) figure.portraitUrl = portraitUrl;
+  return figure;
 }
 
 // 创建统一服务
@@ -163,4 +182,3 @@ export const getMingFigures = () => mingFigureApi.getMingFigures();
 export const getMingFigureById = (id: string) => mingFigureApi.getMingFigureById(id);
 export const getRoleTypes = () => mingFigureApi.getRoleTypes();
 export const getFactions = () => mingFigureApi.getFactions();
-

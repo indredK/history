@@ -25,7 +25,10 @@ interface AllEndpointsResult {
  */
 export async function testFrontendProxy(): Promise<TestResult> {
   try {
-    await apiClient.get('/health');
+    const response = await fetch('/api/v1/health');
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
     return { success: true, message: '前端代理连接正常' };
   } catch {
     return { success: false, message: '前端代理连接失败' };

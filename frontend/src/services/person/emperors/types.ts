@@ -15,7 +15,8 @@ import { z } from 'zod';
 export interface EraName {
   name: string;        // 年号名称
   startYear: number;   // 起始年（负数表示公元前）
-  endYear: number;     // 结束年
+  endYear?: number | null; // 结束年
+  description?: string | null;
 }
 
 /**
@@ -24,7 +25,7 @@ export interface EraName {
 export interface HistoricalEvaluation {
   source: string;      // 来源（如《史记》、《资治通鉴》）
   content: string;     // 评价内容
-  author?: string;     // 作者
+  author?: string | null; // 作者
 }
 
 /**
@@ -33,18 +34,18 @@ export interface HistoricalEvaluation {
 export interface Emperor {
   id: string;
   name: string;                        // 姓名
-  templeName?: string;                 // 庙号
-  posthumousName?: string;             // 谥号
+  templeName?: string | null;          // 庙号
+  posthumousName?: string | null;      // 谥号
   dynasty: string;                     // 朝代
-  dynastyPeriod?: string;              // 朝代时期（如西汉、东汉）
+  dynastyPeriod?: string | null;       // 朝代时期（如西汉、东汉）
   reignStart: number;                  // 在位起始年（负数表示公元前）
-  reignEnd: number;                    // 在位结束年
+  reignEnd: number | null;             // 在位结束年
   eraNames: EraName[];                 // 年号列表
   achievements: string[];              // 主要功绩
   failures: string[];                  // 重大失误
   evaluations: HistoricalEvaluation[]; // 历史评价
-  biography?: string;                  // 简介
-  portraitUrl?: string;                // 画像URL
+  biography?: string | null;           // 简介
+  portraitUrl?: string | null;         // 画像URL
   sources: string[];                   // 参考资料
 }
 
@@ -54,7 +55,8 @@ export interface Emperor {
 export const EraNameSchema = z.object({
   name: z.string().min(1, '年号名称不能为空'),
   startYear: z.number(),
-  endYear: z.number(),
+  endYear: z.number().nullable().optional(),
+  description: z.string().nullable().optional(),
 });
 
 /**
@@ -63,7 +65,7 @@ export const EraNameSchema = z.object({
 export const HistoricalEvaluationSchema = z.object({
   source: z.string().min(1, '来源不能为空'),
   content: z.string().min(1, '评价内容不能为空'),
-  author: z.string().optional(),
+  author: z.string().nullable().optional(),
 });
 
 /**
@@ -72,18 +74,18 @@ export const HistoricalEvaluationSchema = z.object({
 export const EmperorSchema = z.object({
   id: z.string().min(1, 'ID不能为空'),
   name: z.string().min(1, '姓名不能为空'),
-  templeName: z.string().optional(),
-  posthumousName: z.string().optional(),
+  templeName: z.string().nullable().optional(),
+  posthumousName: z.string().nullable().optional(),
   dynasty: z.string().min(1, '朝代不能为空'),
-  dynastyPeriod: z.string().optional(),
+  dynastyPeriod: z.string().nullable().optional(),
   reignStart: z.number(),
-  reignEnd: z.number(),
+  reignEnd: z.number().nullable(),
   eraNames: z.array(EraNameSchema),
   achievements: z.array(z.string()),
   failures: z.array(z.string()),
   evaluations: z.array(HistoricalEvaluationSchema),
-  biography: z.string().optional(),
-  portraitUrl: z.string().optional(),
+  biography: z.string().nullable().optional(),
+  portraitUrl: z.string().nullable().optional(),
   sources: z.array(z.string()),
 });
 

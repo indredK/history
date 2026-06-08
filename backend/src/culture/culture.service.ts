@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '../generated/prisma/client';
 import { ScholarQueryDto } from './dto/scholar-query.dto';
@@ -16,6 +20,17 @@ type ScholarWithSchool = Record<string, unknown> & {
 };
 
 type SchoolRecord = Record<string, unknown>;
+type ScholarValidationSnapshot = {
+  id: string;
+  name: string;
+  birthYear: number | null;
+  deathYear: number | null;
+};
+
+type SchoolValidationSnapshot = {
+  id: string;
+  name: string;
+};
 
 @Injectable()
 export class CultureService {
@@ -139,6 +154,9 @@ export class CultureService {
   }
 
   async createScholar(dto: CreateScholarDto): Promise<ScholarDto> {
+    this.assertRequiredName(dto.name, '学者姓名不能为空');
+    this.assertLifespan(dto.birthYear, dto.deathYear, '学者卒年不能早于生年');
+
     const data = await this.buildScholarData(dto);
     const scholar = await this.prisma.scholar.create({
       data: data as never,
@@ -151,7 +169,18 @@ export class CultureService {
   }
 
   async updateScholar(id: string, dto: UpdateScholarDto): Promise<ScholarDto> {
-    await this.ensureScholarExists(id);
+    const current = await this.ensureScholarExists(id);
+    const nextBirthYear = this.hasOwn(dto, 'birthYear')
+      ? dto.birthYear
+      : current.birthYear;
+    const nextDeathYear = this.hasOwn(dto, 'deathYear')
+      ? dto.deathYear
+      : current.deathYear;
+
+    if (this.hasOwn(dto, 'name')) {
+      this.assertRequiredName(dto.name, '学者姓名不能为空');
+    }
+    this.assertLifespan(nextBirthYear, nextDeathYear, '学者卒年不能早于生年');
 
     const data = await this.buildScholarData(dto);
     const scholar = await this.prisma.scholar.update({
@@ -253,6 +282,8 @@ export class CultureService {
   async createSchool(
     dto: CreatePhilosophicalSchoolDto,
   ): Promise<PhilosophicalSchoolDto> {
+    this.assertRequiredName(dto.name, '思想流派名称不能为空');
+
     const school = await this.prisma.philosophicalSchool.create({
       data: this.buildSchoolData(dto) as never,
     });
@@ -265,6 +296,9 @@ export class CultureService {
     dto: UpdatePhilosophicalSchoolDto,
   ): Promise<PhilosophicalSchoolDto> {
     await this.ensureSchoolExists(id);
+    if (this.hasOwn(dto, 'name')) {
+      this.assertRequiredName(dto.name, '思想流派名称不能为空');
+    }
 
     const school = await this.prisma.philosophicalSchool.update({
       where: { id },
@@ -289,21 +323,27 @@ export class CultureService {
     return this.transformSchool(school);
   }
 
-  private async ensureScholarExists(id: string): Promise<void> {
+  private async ensureScholarExists(
+    id: string,
+  ): Promise<ScholarValidationSnapshot> {
     const scholar = await this.prisma.scholar.findUnique({
       where: { id },
-      select: { id: true },
+      select: { id: true, name: true, birthYear: true, deathYear: true },
     });
 
     if (!scholar) {
       throw new NotFoundException(`未找到 ID 为 ${id} 的学者记录`);
     }
+
+    return scholar;
   }
 
-  private async ensureSchoolExists(id: string): Promise<void> {
+  private async ensureSchoolExists(
+    id: string,
+  ): Promise<SchoolValidationSnapshot> {
     const school = await this.prisma.philosophicalSchool.findUnique({
       where: { id },
-      select: { id: true },
+      select: { id: true, name: true },
     });
 
     if (!school) {
@@ -311,6 +351,8 @@ export class CultureService {
         `未找到 ID 为 ${id} 的思想流派记录`,
       );
     }
+
+    return school;
   }
 
   private async buildScholarData(
@@ -388,7 +430,7 @@ export class CultureService {
 
       return {
         id: school.id,
-        name: dto.schoolOfThought ?? school.name,
+        name: this.normalizeOptionalString(dto.schoolOfThought) ?? school.name,
       };
     }
 
@@ -415,6 +457,28 @@ export class CultureService {
     return {};
   }
 
+  private assertRequiredName(value: unknown, message: string): void {
+    if (typeof value !== 'string' || value.trim().length === 0) {
+      throw new BadRequestException(message);
+    }
+  }
+
+  private assertLifespan(
+    birthYear: number | null | undefined,
+    deathYear: number | null | undefined,
+    message: string,
+  ): void {
+    if (
+      birthYear !== undefined &&
+      birthYear !== null &&
+      deathYear !== undefined &&
+      deathYear !== null &&
+      deathYear < birthYear
+    ) {
+      throw new BadRequestException(message);
+    }
+  }
+
   private assignDefined(
     target: Record<string, unknown>,
     key: string,
@@ -431,6 +495,12 @@ export class CultureService {
 
   private isClearedValue(value: unknown): boolean {
     return value === null || (typeof value === 'string' && value.trim() === '');
+  }
+
+  private normalizeOptionalString(value: unknown): string | undefined {
+    if (typeof value !== 'string') return undefined;
+    const normalized = value.trim();
+    return normalized ? normalized : undefined;
   }
 
   private transformScholar(scholar: ScholarWithSchool): ScholarDto {

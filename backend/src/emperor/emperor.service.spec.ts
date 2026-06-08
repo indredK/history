@@ -27,8 +27,8 @@ function asQuery<T>(partial: Partial<T>): T {
  * 覆盖目标:
  * - findAll:where 拼装(dynastyId / reignStart gte / reignEnd lte+null /
  *   name+dynastyName contains)、双 orderBy(reignStart → name)、分页、
- *   include dynasty 关联、返回时剥离 dynasty 并解析 JSON 字段
- * - findOne:命中(剥离 dynasty + 解析 JSON 字段)、未命中抛 NotFoundException
+ *   include dynasty 关联、返回 dynasty/dynastyName 展示字段并解析 JSON 字段
+ * - findOne:命中(保留 dynasty 展示字段 + 解析 JSON 字段)、未命中抛 NotFoundException
  * - safeJsonParse:经由 transform 路径间接验证 string→obj / 非法 JSON 兜底
  */
 describe('EmperorService', () => {
@@ -138,7 +138,7 @@ describe('EmperorService', () => {
       );
     });
 
-    it('返回时剥离 dynasty 字段,且 JSON 字段(string)被解析为对象', async () => {
+    it('返回 dynasty 展示字段,且 JSON 字段(string)被解析为对象', async () => {
       prisma.emperor.findMany.mockResolvedValue([
         {
           id: 'e1',
@@ -153,14 +153,17 @@ describe('EmperorService', () => {
 
       const result = await service.findAll(asQuery<EmperorQueryDto>({}));
 
-      expect(result.data[0]).toEqual({
-        id: 'e1',
-        name: '李世民',
-        eraNames: ['贞观'],
-        achievements: ['贞观之治'],
-        historicalEvaluation: { score: 95 },
-      });
-      expect((result.data[0] as { dynasty?: unknown }).dynasty).toBeUndefined();
+      expect(result.data[0]).toEqual(
+        expect.objectContaining({
+          id: 'e1',
+          name: '李世民',
+          dynasty: { id: 'tang', name: '唐朝' },
+          dynastyName: '唐朝',
+          eraNames: ['贞观'],
+          achievements: ['贞观之治'],
+          historicalEvaluation: { score: 95 },
+        }),
+      );
     });
 
     it('JSON 字段为非法字符串时,safeJsonParse 兜底返回原字符串', async () => {
@@ -198,7 +201,7 @@ describe('EmperorService', () => {
   });
 
   describe('findOne', () => {
-    it('命中时剥离 dynasty 并解析 JSON 字段', async () => {
+    it('命中时保留 dynasty 展示字段并解析 JSON 字段', async () => {
       prisma.emperor.findUnique.mockResolvedValue({
         id: 'libai',
         name: '李白',
@@ -210,7 +213,8 @@ describe('EmperorService', () => {
 
       const result = await service.findOne('libai');
 
-      expect((result as { dynasty?: unknown }).dynasty).toBeUndefined();
+      expect(result.dynasty).toEqual({ id: 'tang', name: '唐朝' });
+      expect(result.dynastyName).toBe('唐朝');
       expect(result.eraNames).toEqual(['开元', '天宝']);
       expect(result.achievements).toEqual(['诗歌']);
       expect(result.historicalEvaluation).toBeNull();

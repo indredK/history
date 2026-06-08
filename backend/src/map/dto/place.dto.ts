@@ -1,5 +1,30 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
+import {
+  ArrayMaxSize,
+  ArrayMinSize,
+  IsArray,
+  IsNumber,
+  IsOptional,
+  IsString,
+  MaxLength,
+} from 'class-validator';
+
+function parseNumberRange(value: unknown): number[] | undefined {
+  if (value === undefined || value === null || value === '') {
+    return undefined;
+  }
+
+  const rawValues = Array.isArray(value) ? value : String(value).split(',');
+  return rawValues.map((item) => {
+    if (typeof item === 'number') {
+      return item;
+    }
+
+    const normalized = String(item).trim();
+    return normalized ? Number(normalized) : Number.NaN;
+  });
+}
 
 class LocationDto {
   @ApiProperty({ description: 'Location type', example: 'Point' })
@@ -45,24 +70,38 @@ export class PlaceDto {
 }
 
 export class PlaceQueryDto {
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'Search keyword',
-    example: 'Beijing',
-    required: false,
+    example: '长安',
   })
+  @IsOptional()
+  @IsString()
+  @MaxLength(80)
   keyword?: string;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'Longitude range',
     example: [116, 117],
-    required: false,
+    type: [Number],
   })
+  @IsOptional()
+  @Transform(({ value }) => parseNumberRange(value))
+  @IsArray()
+  @ArrayMinSize(2)
+  @ArrayMaxSize(2)
+  @IsNumber({}, { each: true })
   lon_range?: number[];
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'Latitude range',
     example: [39, 40],
-    required: false,
+    type: [Number],
   })
+  @IsOptional()
+  @Transform(({ value }) => parseNumberRange(value))
+  @IsArray()
+  @ArrayMinSize(2)
+  @ArrayMaxSize(2)
+  @IsNumber({}, { each: true })
   lat_range?: number[];
 }

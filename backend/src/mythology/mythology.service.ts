@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Prisma } from '../generated/prisma/client';
 import type { MythologyModel } from '../generated/prisma/models/Mythology';
 import { PaginatedResponseDto } from '../common/dto/paginated-response.dto';
@@ -24,6 +28,15 @@ const CATEGORY_ALIASES: Record<string, string> = {
   folklore: '民间传说',
   other: '民间传说',
 };
+
+const VALID_CATEGORIES = [
+  '创世神话',
+  '英雄神话',
+  '自然神话',
+  '爱情神话',
+  '神仙传说',
+  '民间传说',
+];
 
 @Injectable()
 export class MythologyService {
@@ -181,7 +194,7 @@ export class MythologyService {
       title: mythology.name,
       name: mythology.name,
       englishTitle: storyPayload.englishTitle || '',
-      category: mythology.category,
+      category: this.normalizeDisplayCategory(mythology.category),
       origin: mythology.origin || '',
       period: mythology.period || '',
       description: mythology.description || '',
@@ -198,17 +211,21 @@ export class MythologyService {
   private toCreateInput(
     input: CreateMythologyDto,
   ): Prisma.MythologyUncheckedCreateInput {
-    const title = input.title.trim();
+    const title = this.normalizeRequiredString(input.title, '神话标题不能为空');
+    const description = this.normalizeRequiredString(
+      input.description,
+      '神话描述不能为空',
+    );
     const storyPayload = this.buildStoryPayload(input);
     const symbolism = this.normalizeStringArrayInput(input.symbolism);
 
     return {
       ...(input.id ? { id: input.id } : {}),
-      name: (input.name || title).trim(),
-      category: this.normalizeCategory(input.category),
+      name: this.normalizeOptionalString(input.name) || title,
+      category: this.normalizeRequiredCategory(input.category),
       origin: this.normalizeOptionalString(input.origin || input.source),
       period: this.normalizeOptionalString(input.period),
-      description: this.normalizeOptionalString(input.description) || '',
+      description,
       stories: this.hasStoryPayload(storyPayload)
         ? (storyPayload as Prisma.InputJsonValue)
         : undefined,
@@ -224,11 +241,14 @@ export class MythologyService {
 
     if (input.title !== undefined || input.name !== undefined) {
       const nextName = input.name || input.title;
-      data.name = nextName?.trim() || '';
+      data.name = this.normalizeRequiredString(
+        nextName,
+        '神话标题不能为空',
+      );
     }
 
     if (input.category !== undefined) {
-      data.category = this.normalizeCategory(input.category);
+      data.category = this.normalizeRequiredCategory(input.category);
     }
 
     if (input.origin !== undefined || input.source !== undefined) {
@@ -240,7 +260,10 @@ export class MythologyService {
     }
 
     if (input.description !== undefined) {
-      data.description = this.normalizeNullableString(input.description);
+      data.description = this.normalizeRequiredString(
+        input.description,
+        '神话描述不能为空',
+      );
     }
 
     if (
@@ -343,6 +366,37 @@ export class MythologyService {
   private normalizeCategory(category: string): string {
     const trimmed = category.trim();
     return CATEGORY_ALIASES[trimmed] || trimmed;
+  }
+
+  private normalizeDisplayCategory(category: string): string {
+    const normalized = this.normalizeCategory(category);
+    return VALID_CATEGORIES.includes(normalized) ? normalized : '民间传说';
+  }
+
+  private normalizeRequiredCategory(category: unknown): string {
+    if (typeof category !== 'string' || category.trim().length === 0) {
+      throw new BadRequestException('神话分类不能为空');
+    }
+
+    const normalized = this.normalizeCategory(category);
+    if (!VALID_CATEGORIES.includes(normalized)) {
+      throw new BadRequestException('神话分类无效');
+    }
+
+    return normalized;
+  }
+
+  private normalizeRequiredString(value: unknown, message: string): string {
+    if (typeof value !== 'string') {
+      throw new BadRequestException(message);
+    }
+
+    const trimmed = value.trim();
+    if (!trimmed) {
+      throw new BadRequestException(message);
+    }
+
+    return trimmed;
   }
 
   private normalizeNullableString(value?: string | null): string | null {

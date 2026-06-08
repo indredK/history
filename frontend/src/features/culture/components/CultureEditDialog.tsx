@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
+  Alert,
   Box,
   Button,
   Dialog,
@@ -33,6 +34,7 @@ interface CultureEditDialogProps {
   scholar?: Scholar | null;
   schools: PhilosophicalSchool[];
   saving?: boolean;
+  error?: Error | null;
   onClose: () => void;
   onSaveSchool: (
     input: PhilosophicalSchoolMutationInput,
@@ -96,6 +98,40 @@ function clearableNumber(value: string): number | null {
   if (value.trim() === '') return null;
   const next = Number(value);
   return Number.isFinite(next) ? next : null;
+}
+
+function isInvalidNumber(value: string): boolean {
+  return value.trim() !== '' && !Number.isFinite(Number(value));
+}
+
+function validateSchoolForm(form: typeof emptySchoolForm): string | null {
+  if (!form.name.trim()) {
+    return '请填写思想流派名称';
+  }
+
+  if (isInvalidNumber(form.foundingYear)) {
+    return '创立年份必须是有效数字';
+  }
+
+  return null;
+}
+
+function validateScholarForm(form: typeof emptyScholarForm): string | null {
+  if (!form.name.trim()) {
+    return '请填写文化名人姓名';
+  }
+
+  if (isInvalidNumber(form.birthYear) || isInvalidNumber(form.deathYear)) {
+    return '生年和卒年必须是有效数字';
+  }
+
+  const birthYear = clearableNumber(form.birthYear);
+  const deathYear = clearableNumber(form.deathYear);
+  if (birthYear !== null && deathYear !== null && deathYear < birthYear) {
+    return '文化名人卒年不能早于生年';
+  }
+
+  return null;
 }
 
 function schoolToForm(school?: PhilosophicalSchool | null) {
@@ -222,6 +258,7 @@ export function CultureEditDialog({
   scholar,
   schools,
   saving = false,
+  error,
   onClose,
   onSaveSchool,
   onSaveScholar,
@@ -230,11 +267,13 @@ export function CultureEditDialog({
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [schoolForm, setSchoolForm] = useState(emptySchoolForm);
   const [scholarForm, setScholarForm] = useState(emptyScholarForm);
+  const [formError, setFormError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!open) return;
     setSchoolForm(schoolToForm(school));
     setScholarForm(scholarToForm(scholar));
+    setFormError(null);
   }, [open, school, scholar]);
 
   const schoolOptions = useMemo(
@@ -255,6 +294,13 @@ export function CultureEditDialog({
 
   const handleSubmit = async () => {
     if (isSchool) {
+      const validationError = validateSchoolForm(schoolForm);
+      if (validationError) {
+        setFormError(validationError);
+        return;
+      }
+
+      setFormError(null);
       await onSaveSchool(
         {
           name: schoolForm.name.trim(),
@@ -277,6 +323,13 @@ export function CultureEditDialog({
       return;
     }
 
+    const validationError = validateScholarForm(scholarForm);
+    if (validationError) {
+      setFormError(validationError);
+      return;
+    }
+
+    setFormError(null);
     await onSaveScholar(
       {
         name: scholarForm.name.trim(),
@@ -296,6 +349,8 @@ export function CultureEditDialog({
       mode === 'edit' ? scholar?.id : undefined,
     );
   };
+
+  const visibleError = formError || error?.message;
 
   const fieldSx = {
     '& .MuiOutlinedInput-root': {
@@ -324,6 +379,11 @@ export function CultureEditDialog({
         {isSchool ? '思想流派' : '文化名人'}
       </DialogTitle>
       <DialogContent dividers>
+        {visibleError && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {visibleError}
+          </Alert>
+        )}
         <Box
           sx={{
             display: 'grid',
