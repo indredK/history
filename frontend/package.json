@@ -43,7 +43,7 @@
     "react-dom": "^19.2.6",
     "react-map-gl": "^8.1.1",
     "react-router-dom": "^7.15.1",
-    "swiper": "^12.2.0",
+    "swiper": "^14.0.0",
     "three": "^0.184.0",
     "zod": "^4.4.3",
     "@tanstack/react-virtual": "^3.13.26",
