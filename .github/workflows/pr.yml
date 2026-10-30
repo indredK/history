@@ -55,7 +55,7 @@ jobs:
     # 仅作为信号,作者应观察 delta 不上涨
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v5.0.0
+      - uses: actions/checkout@v6.0.2
       - name: Install Bun
         run: |
           curl -fsSL https://bun.sh/install | bash -s -- bun-v1.3.5
@@ -70,7 +70,7 @@ jobs:
     # 历史 130 个 no-unsafe-* / no-unused-vars 错误,清理前不阻塞 PR
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v5.0.0
+      - uses: actions/checkout@v6.0.2
       - name: Install Bun
         run: |
           curl -fsSL https://bun.sh/install | bash -s -- bun-v1.3.5
