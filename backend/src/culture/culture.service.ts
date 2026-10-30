@@ -536,11 +536,9 @@ export class CultureService {
     return {
       ...scholarData,
       dynasty: (scholarData.dynasty ?? scholarData.dynastyPeriod) as
-        | string
-        | null,
+        string | null,
       schoolOfThought: (scholarData.schoolOfThought ?? school?.name ?? null) as
-        | string
-        | null,
+        string | null,
       majorWorks,
       representativeWorks: this.toRepresentativeWorks(majorWorks),
       contributions,

@@ -122,12 +122,8 @@ export class PersonQueryDto extends PaginationQueryDto {
   @IsOptional()
   @IsIn(['birthYear', 'deathYear', 'name', 'dynasty', 'updatedAt', 'createdAt'])
   sortBy?:
-    | 'birthYear'
-    | 'deathYear'
-    | 'name'
-    | 'dynasty'
-    | 'updatedAt'
-    | 'createdAt' = 'birthYear';
+    'birthYear' | 'deathYear' | 'name' | 'dynasty' | 'updatedAt' | 'createdAt' =
+    'birthYear';
 
   @ApiPropertyOptional({
     description: 'Sort direction',
