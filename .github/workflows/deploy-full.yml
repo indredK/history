@@ -46,7 +46,7 @@ jobs:
           tags: type=raw,value=latest
 
       - name: Build and push Backend
-        uses: docker/build-push-action@v7.1.0
+        uses: docker/build-push-action@v7.4.0
         with:
           context: .
           file: ./backend/Dockerfile
@@ -62,7 +62,7 @@ jobs:
           tags: type=raw,value=latest
 
       - name: Build and push Frontend
-        uses: docker/build-push-action@v7.1.0
+        uses: docker/build-push-action@v7.4.0
         with:
           context: .
           file: ./frontend/Dockerfile
